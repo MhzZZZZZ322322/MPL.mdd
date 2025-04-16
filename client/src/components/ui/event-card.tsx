@@ -3,6 +3,7 @@ import { Gamepad, Users, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Event } from '@shared/schema';
 import eventImages from '@/components/sections/EventImages';
+import { Link } from 'wouter';
 
 interface EventCardProps {
   event: Event;
@@ -57,12 +58,14 @@ const EventCard = ({ event }: EventCardProps) => {
             <Wallet className="text-cyan-500 h-4 w-4" /> {event.prize}
           </span>
         </div>
-        <Button
-          variant="outline" 
-          className="mt-4 w-full text-center bg-primary/20 hover:bg-primary/40 text-white px-4 py-2 rounded text-sm font-medium transition-all border border-primary/40"
-        >
-          Detalii & Înscriere
-        </Button>
+        <Link href={`/event/${event.id}`} className="w-full">
+          <Button
+            variant="outline" 
+            className="mt-4 w-full text-center bg-primary/20 hover:bg-primary/40 text-white px-4 py-2 rounded text-sm font-medium transition-all border border-primary/40"
+          >
+            Detalii & Înscriere
+          </Button>
+        </Link>
       </div>
     </motion.div>
   );
