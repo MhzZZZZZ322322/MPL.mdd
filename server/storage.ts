@@ -154,13 +154,24 @@ export class MemStorage implements IStorage {
   private initializeData() {
     // Add events
     this.createEvent({
+      title: "HATOR CS LEAGUE MOLDOVA",
+      description: "Turneu oficial organizat de MPL în parteneriat cu Darwin și Hator Gaming. Participă la una dintre cele mai așteptate competiții CS din Moldova!",
+      date: "15 Mai 2025",
+      platform: "PC",
+      teamSize: "5v5",
+      prize: "10000 MDL + Periferice Hator",
+      status: "În curând",
+      imageUrl: "https://i.ibb.co/1f5rHyK/hator-cs-league.png"
+    });
+    
+    this.createEvent({
       title: "CS:GO 5v5 Tournament",
       description: "Turneu competitiv de Counter-Strike: Global Offensive cu premii și streaming live.",
       date: "12 Aug 2023",
       platform: "PC",
       teamSize: "5v5",
       prize: "5000 MDL",
-      status: "În curând",
+      status: "Încheiat",
       imageUrl: "https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
     });
     
@@ -171,7 +182,7 @@ export class MemStorage implements IStorage {
       platform: "PC",
       teamSize: "5v5",
       prize: "7500 MDL",
-      status: "Activ",
+      status: "Încheiat",
       imageUrl: "https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
     });
     
@@ -182,7 +193,7 @@ export class MemStorage implements IStorage {
       platform: "Console",
       teamSize: "1v1",
       prize: "3000 MDL",
-      status: "În curând",
+      status: "Încheiat",
       imageUrl: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
     });
     
