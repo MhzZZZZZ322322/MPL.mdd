@@ -16,16 +16,26 @@ const EventCard = ({ event }: EventCardProps) => {
       className="bg-darkGray/50 border border-primary/20 rounded-lg overflow-hidden hover:shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 group"
       whileHover={{ y: -5 }}
     >
-      <div className="h-48 overflow-hidden relative">
-        <img 
-          src={eventImages[event.title as keyof typeof eventImages] || (event.imageUrl as string)} 
-          alt={event.title} 
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          onError={(e) => {
-            e.currentTarget.src = "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg";
-            e.currentTarget.onerror = null;
-          }}
-        />
+      <div className="h-60 overflow-hidden relative">
+        {event.title === "HATOR CS LEAGUE MOLDOVA" ? (
+          <div className="bg-black w-full h-full flex items-center justify-center p-2">
+            <img 
+              src="https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg" 
+              alt={event.title} 
+              className="max-h-full w-auto object-contain"
+            />
+          </div>
+        ) : (
+          <img 
+            src={event.imageUrl as string} 
+            alt={event.title} 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            onError={(e) => {
+              e.currentTarget.src = "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg";
+              e.currentTarget.onerror = null;
+            }}
+          />
+        )}
         <div className={`absolute top-0 right-0 ${statusColor} text-white text-sm font-medium px-3 py-1 rounded-bl-lg`}>
           {event.status}
         </div>
