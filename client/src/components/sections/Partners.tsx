@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 import NeonBorder from '@/components/animations/NeonBorder';
+import darwinLogo from '@/assets/darwin-logo.png';
+import hatorLogo from '@/assets/hator-logo.svg';
 
 const Partners = () => {
   // Animation variants
@@ -93,9 +95,25 @@ const Partners = () => {
             </div>
             
             <NeonBorder className="p-6 bg-darkBg/80 rounded-lg">
-              <h4 className="font-rajdhani text-xl text-white mb-6 text-center">Spații rezervate pentru sponsori</h4>
+              <h4 className="font-rajdhani text-xl text-white mb-6 text-center">Partenerii noștri</h4>
               <div className="grid grid-cols-2 gap-6">
-                {[...Array(4)].map((_, i) => (
+                <a 
+                  href="https://darwin.md" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                >
+                  <img src={darwinLogo} alt="Darwin.md Logo" className="max-h-full w-auto object-contain" />
+                </a>
+                <a 
+                  href="https://hator.gg" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                >
+                  <img src={hatorLogo} alt="Hator Logo" className="max-h-full w-auto object-contain" />
+                </a>
+                {[...Array(2)].map((_, i) => (
                   <div 
                     key={i} 
                     className="aspect-video bg-darkGray/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
@@ -105,7 +123,7 @@ const Partners = () => {
                 ))}
               </div>
               <div className="mt-6 text-center text-sm text-gray-400">
-                <p>Devino primul nostru partener oficial</p>
+                <p>Susținut de partenerii noștri principali</p>
               </div>
             </NeonBorder>
           </div>

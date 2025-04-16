@@ -221,6 +221,7 @@ const Contact = () => {
               <p className="mb-6">Fii parte din cea mai mare comunitate de esports din Moldova. Discuții, turnee, evenimente și multe altele.</p>
               <Button
                 className="flex w-full items-center justify-center bg-[#5865F2] hover:bg-[#4752C4] text-white py-3 px-4 rounded-md font-medium transition-all"
+                onClick={() => window.open('https://discord.gg/Ek4qvWE5qB', '_blank')}
               >
                 <FaDiscord className="mr-2 text-xl" />
                 Discord MPL
