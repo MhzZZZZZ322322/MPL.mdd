@@ -71,9 +71,10 @@ const About = () => {
           >
             <div>
               <h3 className="font-orbitron text-2xl mb-4 text-white">Povestea noastră</h3>
-              <p className="mb-4">MPL a început ca o inițiativă grassroots în 2022, când un grup de pasionați de esports din Moldova au decis să creeze o platformă pentru organizarea de turnee competitive.</p>
-              <p className="mb-4">Fără finanțări externe sau sprijin instituțional, am construit cărămidă cu cărămidă o comunitate unită prin pasiunea pentru gaming competitiv.</p>
-              <p>Astăzi, MPL organizează turnee regulate pentru jocuri populare și lucrează la dezvoltarea scenei esports din Moldova.</p>
+              <p className="mb-4">MPL (Moldova Pro League) este o comunitate independentă, născută din pasiune pură pentru gaming și dorința de a construi un ecosistem de cybersport autentic în Republica Moldova.</p>
+              <p className="mb-4">Suntem o organizație fără bugete, fără sponsori și fără promisiuni goale – dar cu o echipă de oameni dedicați care cred că e-sportul merită un loc de cinste și recunoaștere în Moldova. Tot ce am făcut până acum – am făcut din proprie inițiativă, în timpul nostru liber, cu resurse minime, dar cu un scop clar: să aducem jucătorii împreună și să punem Moldova pe harta internațională a e-sportului.</p>
+              <p className="mb-4">Organizăm turnee, ligă proprie și evenimente online, susținem creatorii locali și ne implicăm activ în creșterea comunității – de la casual players la profesioniști. MPL nu este doar despre competiție. Este despre comunitate, prietenie și oportunități reale.</p>
+              <p>Dacă și tu visezi la o Moldovă unde gamingul este luat în serios – alătură-te nouă. MPL e deschisă tuturor: jucători, streameri, voluntari, sau pur și simplu fani ai e-sportului. Împreună putem construi ceva măreț. Chiar de la zero.</p>
             </div>
             
             <NeonBorder className="rounded-lg overflow-hidden">

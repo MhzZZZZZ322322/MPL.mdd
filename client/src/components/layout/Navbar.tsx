@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Glitch from "@/components/animations/Glitch";
+import mplLogo from "@/assets/mpl-logo.png";
 
 interface NavItem {
   label: string;
@@ -59,13 +60,9 @@ const Navbar = () => {
     )}>
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center group" onClick={() => setMobileMenuOpen(false)}>
-          <Glitch>
-            <span className="text-2xl font-orbitron font-bold text-white">
-              <span className="text-secondary">M</span>
-              <span className="text-accent">P</span>
-              <span className="text-blue-500">L</span>
-            </span>
-          </Glitch>
+          <div className="h-10 flex items-center">
+            <img src={mplLogo} alt="MPL Logo" className="h-8 w-auto" />
+          </div>
           <span className="ml-2 hidden md:block text-sm font-medium">Moldova Pro League</span>
         </Link>
         
