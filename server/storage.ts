@@ -161,7 +161,7 @@ export class MemStorage implements IStorage {
       teamSize: "5v5",
       prize: "10000 MDL + Periferice Hator",
       status: "În curând",
-      imageUrl: "https://i.ibb.co/1f5rHyK/hator-cs-league.png"
+      imageUrl: "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg"
     });
     
     this.createEvent({

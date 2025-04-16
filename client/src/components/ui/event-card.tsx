@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Gamepad, Users, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Event } from '@shared/schema';
+import eventImages from '@/components/sections/EventImages';
 
 interface EventCardProps {
   event: Event;
@@ -17,9 +18,13 @@ const EventCard = ({ event }: EventCardProps) => {
     >
       <div className="h-48 overflow-hidden relative">
         <img 
-          src={event.imageUrl} 
+          src={eventImages[event.title as keyof typeof eventImages] || (event.imageUrl as string)} 
           alt={event.title} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          onError={(e) => {
+            e.currentTarget.src = "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg";
+            e.currentTarget.onerror = null;
+          }}
         />
         <div className={`absolute top-0 right-0 ${statusColor} text-white text-sm font-medium px-3 py-1 rounded-bl-lg`}>
           {event.status}
