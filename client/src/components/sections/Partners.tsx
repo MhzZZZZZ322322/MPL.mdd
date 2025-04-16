@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 import NeonBorder from '@/components/animations/NeonBorder';
 import darwinLogo from '@/assets/darwin-logo.png';
-import hatorLogo from '@/assets/hator-logo-new.svg';
+import hatorLogo from '@/assets/hator-logo-yellow.png';
 
 const Partners = () => {
   // Animation variants
@@ -109,9 +109,9 @@ const Partners = () => {
                   href="https://hator.gg/keyboards/skyfall-tkl-pro-wireless/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                  className="aspect-video bg-darkBg rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
                 >
-                  <img src={hatorLogo} alt="Hator Logo" className="max-h-full w-auto object-contain" />
+                  <img src={hatorLogo} alt="Hator Logo" className="max-h-10 w-auto object-contain" />
                 </a>
                 {[...Array(2)].map((_, i) => (
                   <div 
