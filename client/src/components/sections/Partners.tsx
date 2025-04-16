@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 import NeonBorder from '@/components/animations/NeonBorder';
 import darwinLogo from '@/assets/darwin-logo.png';
-import hatorLogo from '@/assets/hator-logo.svg';
+import hatorLogo from '@/assets/hator-logo-new.svg';
 
 const Partners = () => {
   // Animation variants
@@ -106,7 +106,7 @@ const Partners = () => {
                   <img src={darwinLogo} alt="Darwin.md Logo" className="max-h-full w-auto object-contain" />
                 </a>
                 <a 
-                  href="https://hator.gg" 
+                  href="https://hator.gg/keyboards/skyfall-tkl-pro-wireless/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
