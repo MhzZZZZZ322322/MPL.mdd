@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
-import { FaTwitter, FaFacebook, FaInstagram, FaYoutube, FaDiscord } from "react-icons/fa";
+import { FaTwitter, FaFacebook, FaInstagram, FaYoutube, FaDiscord, FaTwitch } from "react-icons/fa";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
@@ -17,9 +17,26 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
   </li>
 );
 
-const SocialIcon = ({ href, icon: Icon }: { href: string; icon: React.ElementType }) => (
-  <a href={href} className="text-gray-400 hover:text-secondary transition-colors">
-    <Icon />
+interface SocialIconProps {
+  href: string;
+  icon: React.ElementType;
+  target?: string;
+  rel?: string;
+}
+
+const SocialIcon: React.FC<SocialIconProps> = ({ 
+  href, 
+  icon: Icon, 
+  target, 
+  rel 
+}) => (
+  <a 
+    href={href} 
+    className="text-gray-400 hover:text-secondary transition-colors"
+    target={target}
+    rel={rel}
+  >
+    <Icon size={20} />
   </a>
 );
 
@@ -56,11 +73,11 @@ const Footer = () => {
               Moldova Pro League este comunitatea independentă de esports, creată din pasiunea pentru gaming competitiv.
             </p>
             <div className="flex space-x-4">
-              <SocialIcon href="#" icon={FaTwitter} />
+              <SocialIcon href="https://www.twitch.tv/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaTwitch} />
+              <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
+              <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
               <SocialIcon href="#" icon={FaFacebook} />
               <SocialIcon href="#" icon={FaInstagram} />
-              <SocialIcon href="#" icon={FaYoutube} />
-              <SocialIcon href="#" icon={FaDiscord} />
             </div>
           </div>
           
@@ -93,16 +110,30 @@ const Footer = () => {
           <FooterSection title="Contact">
             <ul className="space-y-2 text-sm">
               <li className="flex items-start">
-                <i className="fas fa-envelope text-secondary mt-1 mr-2"></i>
+                <span className="text-secondary mt-1 mr-2"><FaDiscord /></span>
+                <a href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                  Discord
+                </a>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mt-1 mr-2"><FaTwitch /></span>
+                <a href="https://www.twitch.tv/MoldovaProLeague" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                  Twitch
+                </a>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mt-1 mr-2"><FaYoutube /></span>
+                <a href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                  YouTube
+                </a>
+              </li>
+              <li className="flex items-start">
+                <span className="text-secondary mt-1 mr-2">📧</span>
                 <span>contact@moldovaproleague.md</span>
               </li>
               <li className="flex items-start">
-                <i className="fas fa-map-marker-alt text-secondary mt-1 mr-2"></i>
+                <span className="text-secondary mt-1 mr-2">📍</span>
                 <span>Chișinău, Republica Moldova</span>
-              </li>
-              <li className="flex items-start">
-                <i className="fab fa-discord text-secondary mt-1 mr-2"></i>
-                <span>discord.gg/moldovaproleague</span>
               </li>
             </ul>
           </FooterSection>
@@ -110,7 +141,7 @@ const Footer = () => {
         
         {/* Footer bottom */}
         <div className="border-t border-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2023 Moldova Pro League. Toate drepturile rezervate.</p>
+          <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2025 Moldova Pro League. Toate drepturile rezervate.</p>
           <div className="flex space-x-4 text-sm">
             <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Termeni și condiții</a>
             <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Politica de confidențialitate</a>
