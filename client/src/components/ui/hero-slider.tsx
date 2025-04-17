@@ -76,11 +76,11 @@ export const HeroSlider = () => {
         <Swiper
           modules={[EffectFade, Autoplay, Navigation, Pagination]}
           effect="fade"
-          speed={1000}
+          speed={800} // Am redus timpul de tranziție pentru o schimbare mai rapidă
           slidesPerView={1}
           loop={true}
           autoplay={{
-            delay: 5000,
+            delay: 3000, // Am redus timpul de așteptare de la 5000ms la 3000ms
             disableOnInteraction: false,
           }}
           pagination={{
@@ -105,7 +105,7 @@ export const HeroSlider = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
+                  transition={{ duration: 0.3, delay: 0.1 }} // Am redus durata animației textului
                   className="max-w-3xl"
                 >
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-rajdhani [text-shadow:_0_1px_5px_rgb(0_0_0_/_50%)]">
