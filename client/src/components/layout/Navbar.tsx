@@ -56,7 +56,7 @@ const Navbar = () => {
   return (
     <header className={cn(
       "fixed top-0 w-full z-50 transition-all duration-300",
-      scrolled ? "bg-darkBg/95 backdrop-blur-md border-b border-primary/30" : "bg-darkBg/90 backdrop-blur-sm"
+      scrolled ? "bg-black border-b border-primary/30" : "bg-black"
     )}>
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center group" onClick={() => setMobileMenuOpen(false)}>
@@ -97,7 +97,7 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       <div className={cn(
-        "md:hidden bg-darkBg/95 backdrop-blur-md absolute top-full left-0 w-full border-b border-primary/30 transition-all duration-300 shadow-lg",
+        "md:hidden bg-black absolute top-full left-0 w-full border-b border-primary/30 transition-all duration-300 shadow-lg",
         mobileMenuOpen ? "block" : "hidden"
       )}>
         <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
