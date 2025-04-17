@@ -37,9 +37,9 @@ function App() {
   };
   
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-hidden">
       {!isAdminPage() && <Navbar />}
-      <main className="flex-grow">
+      <main className="flex-grow overflow-hidden">
         <Router />
       </main>
       {!isAdminPage() && <Footer />}

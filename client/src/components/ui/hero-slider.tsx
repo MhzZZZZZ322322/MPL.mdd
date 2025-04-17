@@ -71,7 +71,7 @@ export const HeroSlider = () => {
   ];
 
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen overflow-hidden">
       {isLoaded && (
         <Swiper
           modules={[EffectFade, Autoplay, Navigation, Pagination]}
@@ -87,10 +87,10 @@ export const HeroSlider = () => {
             clickable: true,
           }}
           navigation={true}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full max-w-[100vw]"
         >
           {slides.map((slide, index) => (
-            <SwiperSlide key={index} className="relative">
+            <SwiperSlide key={index} className="relative overflow-hidden">
               {/* Background Image with Gradient Overlay */}
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -155,6 +155,12 @@ export const HeroSlider = () => {
       {/* Custom Style for Swiper Pagination */}
       <style>
         {`
+          .swiper-container, .swiper-wrapper, .swiper-slide {
+            overflow: hidden !important;
+            max-width: 100vw !important;
+            width: 100% !important;
+          }
+          
           .swiper-pagination-bullet {
             width: 10px;
             height: 10px;
