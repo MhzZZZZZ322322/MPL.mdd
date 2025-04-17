@@ -39,15 +39,17 @@ export const HeroSlider = () => {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden">
-      {/* Background Image with Gradient Overlay */}
+    <div 
+      className="relative h-screen overflow-hidden bg-black"
+    >
+      {/* Background Image cu overlay negru pentru a evita orice artifact vizual */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
         style={{ backgroundImage: `url(${heroContent.image})` }}
       >
-        {/* Eliminăm gradientul orizontal care cauzează linia violetă pe mobile și ajustăm cel vertical */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
       </div>
+      {/* Overlay negru simplu, fără gradient - elimină orice problemă vizuală */}
+      <div className="absolute inset-0 bg-black/40"></div>
       
       {/* Content */}
       {isLoaded && (
