@@ -55,6 +55,7 @@ type AnalyticsSetting = {
   robotsTxt: string;
   sitemapXml: string;
   customHeaderScripts: string;
+  siteIndexingEnabled: boolean; // Controleaza indexarea globala a site-ului
   updatedAt: Date;
 };
 
@@ -100,6 +101,7 @@ const EMPTY_ANALYTICS_SETTING: Omit<AnalyticsSetting, 'id' | 'updatedAt'> = {
   </url>
 </urlset>`,
   customHeaderScripts: '<!-- Adaugă aici script-uri custom pentru header -->',
+  siteIndexingEnabled: true, // Implicit site-ul este indexabil
 };
 
 const SeoManager = () => {
@@ -198,6 +200,7 @@ const SeoManager = () => {
         robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://moldovaproleague.md/sitemap.xml',
         sitemapXml: '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://moldovaproleague.md/</loc>\n    <lastmod>2025-04-01</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>',
         customHeaderScripts: '<!-- Script-uri custom pentru header -->',
+        siteIndexingEnabled: true, // Implicit site-ul este indexabil
         updatedAt: new Date(),
       };
       
@@ -216,7 +219,7 @@ const SeoManager = () => {
     setCurrentSeoSetting(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleAnalyticsSettingChange = (field: keyof Omit<AnalyticsSetting, 'id' | 'updatedAt'>, value: string) => {
+  const handleAnalyticsSettingChange = (field: keyof Omit<AnalyticsSetting, 'id' | 'updatedAt'>, value: string | boolean) => {
     if (analyticsSetting) {
       setAnalyticsSetting(prev => prev ? { ...prev, [field]: value } : null);
     }
@@ -617,6 +620,42 @@ ${sitemapItems}
                   <CardDescription>Configurează fișierele pentru crawlere</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="siteIndexingEnabled" className="text-white font-medium">Indexare globală a site-ului</Label>
+                        <p className="text-xs text-gray-400">Această setare controlează indexarea globală a site-ului, superior tag-ului robots</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="siteIndexingEnabled" className={`text-sm ${analyticsSetting?.siteIndexingEnabled ? 'text-green-500' : 'text-red-500'}`}>
+                          {analyticsSetting?.siteIndexingEnabled ? 'Activat' : 'Dezactivat'}
+                        </Label>
+                        <Label className="cursor-pointer relative inline-flex items-center">
+                          <input
+                            type="checkbox"
+                            id="siteIndexingEnabled"
+                            className="sr-only"
+                            checked={analyticsSetting?.siteIndexingEnabled}
+                            onChange={(e) => handleAnalyticsSettingChange('siteIndexingEnabled', e.target.checked)}
+                          />
+                          <div className={`w-11 h-6 rounded-full transition ${analyticsSetting?.siteIndexingEnabled ? 'bg-primary' : 'bg-gray-700'}`}>
+                            <div className={`w-5 h-5 rounded-full transition transform bg-white ${analyticsSetting?.siteIndexingEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
+                          </div>
+                        </Label>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-darkGray/40 rounded-md p-4 border border-gray-700 mt-2">
+                      <h4 className="text-white text-sm font-medium mb-2">Efectele dezactivării indexării globale:</h4>
+                      <ul className="text-xs text-gray-300 space-y-1 list-disc list-inside">
+                        <li>Adaugă X-Robots-Tag: noindex, nofollow la toate răspunsurile HTTP</li>
+                        <li>Actualizează robots.txt pentru a bloca toți agenții</li>
+                        <li>Funcționează superior și înlocuiește setările meta robots individuale</li>
+                        <li>Folosește pentru a preveni indexarea site-urilor aflate în dezvoltare</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <div className="flex justify-between">
