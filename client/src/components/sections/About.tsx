@@ -105,9 +105,6 @@ const About = () => {
             </div>
             
             <div className="relative">
-              {/* Timeline Center Line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-[1px] h-full bg-primary/30 z-0 mt-4"></div>
-              
               {/* Timeline Items */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {timeline.map((item, index) => (
