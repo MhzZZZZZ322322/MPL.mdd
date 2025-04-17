@@ -445,7 +445,12 @@ export class MemStorage implements IStorage {
       realName: "Alexandru G.",
       team: "Valhalla",
       game: "CS:GO",
-      score: 1458
+      score: 1458,
+      country: "Moldova",
+      profileImage: "https://robohash.org/AlexGG?set=set4&bgset=bg1",
+      socialLinks: "https://twitter.com/alexgg, https://instagram.com/alexgg",
+      achievements: "Campion MPL Winter Cup 2023, Locul 2 la Regional Masters",
+      stats: "KD: 1.45, HS%: 68%, ADR: 88.5"
     });
     
     this.createPlayer({
@@ -453,7 +458,12 @@ export class MemStorage implements IStorage {
       realName: "Victor M.",
       team: "Nexus",
       game: "CS:GO",
-      score: 1395
+      score: 1395,
+      country: "Moldova",
+      profileImage: "https://robohash.org/ProdigyMD?set=set4&bgset=bg2",
+      socialLinks: "https://twitter.com/prodigymd",
+      achievements: "Locul 3 MPL Summer Cup 2023",
+      stats: "KD: 1.28, HS%: 61%, ADR: 80.2"
     });
     
     this.createPlayer({
@@ -461,7 +471,12 @@ export class MemStorage implements IStorage {
       realName: "Ion C.",
       team: "Phoenix",
       game: "CS:GO",
-      score: 1287
+      score: 1287,
+      country: "Moldova",
+      profileImage: "https://robohash.org/MDSniper?set=set4&bgset=bg1",
+      socialLinks: "https://instagram.com/mdsniper",
+      achievements: "MVP MPL Qualifier 2023",
+      stats: "KD: 1.15, HS%: 58%, ADR: 75.0"
     });
     
     // Add players for LoL
@@ -470,7 +485,12 @@ export class MemStorage implements IStorage {
       realName: "Andrei T.",
       team: "Dragons",
       game: "LoL",
-      score: 2145
+      score: 2145,
+      country: "Moldova",
+      profileImage: "https://robohash.org/MoldLegend?set=set4&bgset=bg2",
+      socialLinks: "https://twitter.com/moldlegend",
+      achievements: "Campion MPL LoL Cup 2023",
+      stats: "KDA: 4.2, CS/min: 8.5, Vision Score: 35+"
     });
     
     this.createPlayer({
@@ -478,7 +498,12 @@ export class MemStorage implements IStorage {
       realName: "Dorin R.",
       team: "Titans",
       game: "LoL",
-      score: 1983
+      score: 1983,
+      country: "Moldova",
+      profileImage: "https://robohash.org/KingMidMD?set=set4&bgset=bg1",
+      socialLinks: "https://instagram.com/kingmidmd",
+      achievements: "All-Stars MPL 2023",
+      stats: "KDA: 3.8, CS/min: 8.2, Vision Score: 32"
     });
     
     this.createPlayer({
@@ -486,7 +511,12 @@ export class MemStorage implements IStorage {
       realName: "Maria S.",
       team: "Dragons",
       game: "LoL",
-      score: 1865
+      score: 1865,
+      country: "Moldova",
+      profileImage: "https://robohash.org/SupportGod?set=set4&bgset=bg2",
+      socialLinks: "https://twitter.com/supportgod",
+      achievements: "Best Support MPL 2023",
+      stats: "KDA: 5.1, Vision Score: 42, Survival rate: 75%"
     });
     
     // Add FAQs

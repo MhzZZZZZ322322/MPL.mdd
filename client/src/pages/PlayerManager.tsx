@@ -56,6 +56,7 @@ import {
 const playerFormSchema = insertPlayerSchema.extend({
   profileImage: z.string().min(1, { message: 'URL-ul imaginii este obligatoriu' }),
   game: z.string().min(1, { message: 'Jocul este obligatoriu' }),
+  score: z.coerce.number().default(0),
 });
 
 type PlayerFormValues = z.infer<typeof playerFormSchema>;
@@ -87,6 +88,7 @@ const PlayerManager = () => {
       socialLinks: '',
       achievements: '',
       stats: '',
+      score: 0,
     },
   });
 
@@ -191,10 +193,11 @@ const PlayerManager = () => {
       game: player.game,
       team: player.team || '',
       country: player.country || 'Moldova',
-      profileImage: player.profileImage,
+      profileImage: player.profileImage || '',
       socialLinks: player.socialLinks || '',
       achievements: player.achievements || '',
       stats: player.stats || '',
+      score: player.score || 0,
     });
   };
 
