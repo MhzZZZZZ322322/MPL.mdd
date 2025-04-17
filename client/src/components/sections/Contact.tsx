@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -76,8 +76,17 @@ const Contact = () => {
   });
 
   const onSubmit = (data: InsertContact) => {
+    console.log('Form data being submitted:', data);
     mutation.mutate(data);
   };
+  
+  // Log form errors for debugging
+  const formErrors = form.formState.errors;
+  useEffect(() => {
+    if (Object.keys(formErrors).length > 0) {
+      console.log('Form validation errors:', formErrors);
+    }
+  }, [formErrors]);
 
   // Social media links
   const socialLinks = [
