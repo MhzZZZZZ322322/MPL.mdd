@@ -27,6 +27,7 @@ interface SlideContent {
 
 export const HeroSlider = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -76,16 +77,17 @@ export const HeroSlider = () => {
         <Swiper
           modules={[EffectFade, Autoplay, Navigation, Pagination]}
           effect="fade"
-          speed={800} // Timpul de tranziție pentru o schimbare mai rapidă
+          speed={1000} // Am mărit timpul pentru a permite tranziție completă
           slidesPerView={1}
           loop={true}
           autoplay={{
-            delay: 3000, // Timpul de așteptare redus 
+            delay: 4000, // Am mărit timpul între slide-uri pentru a asigura tranziție completă
             disableOnInteraction: false,
           }}
           fadeEffect={{
-            crossFade: true // Activăm cross-fade pentru a preveni suprapunerea conținutului
+            crossFade: true // Activăm cross-fade pentru tranziție uniformă
           }}
+          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
           pagination={{
             clickable: true,
           }}
@@ -93,7 +95,7 @@ export const HeroSlider = () => {
           className="absolute inset-0 w-full h-full max-w-[100vw] z-0"
         >
           {slides.map((slide, index) => (
-            <SwiperSlide key={index} className="relative overflow-hidden">
+            <SwiperSlide key={index} className="relative overflow-hidden will-change-transform isolation-auto">
               {/* Background Image with Gradient Overlay */}
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -106,10 +108,13 @@ export const HeroSlider = () => {
               {/* Content */}
               <div className="relative h-full flex flex-col justify-center items-start px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-10">
                 <motion.div
-                  key={index} // Cheia unică asigură că fiecare slide are propria tranziție
+                  key={`slide-${index}-${activeIndex === index ? 'active' : 'inactive'}`}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
+                  animate={{ opacity: activeIndex === index ? 1 : 0, y: activeIndex === index ? 0 : 20 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: activeIndex === index ? 0.3 : 0  // Delay pentru a se asigura că apare doar după tranziție
+                  }}
                   className="max-w-3xl"
                 >
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-rajdhani [text-shadow:_0_1px_5px_rgb(0_0_0_/_50%)]">
@@ -163,6 +168,18 @@ export const HeroSlider = () => {
             overflow: hidden !important;
             max-width: 100vw !important;
             width: 100% !important;
+            position: relative !important;
+            isolation: isolate !important;
+          }
+          
+          .swiper-slide-active {
+            z-index: 2 !important;
+          }
+          
+          .swiper-slide-prev, .swiper-slide-next {
+            z-index: 1 !important;
+            opacity: 0 !important;
+            transition: opacity 1s ease-out !important;
           }
           
           .swiper-pagination-bullet {
