@@ -236,6 +236,30 @@ export class MemStorage implements IStorage {
     return faq;
   }
   
+  async updateFaq(id: number, updateData: Partial<InsertFaq>): Promise<Faq> {
+    const existingFaq = this.faqs.get(id);
+    
+    if (!existingFaq) {
+      throw new Error(`FAQ with id ${id} not found`);
+    }
+    
+    const updatedFaq: Faq = {
+      ...existingFaq,
+      ...updateData
+    };
+    
+    this.faqs.set(id, updatedFaq);
+    return updatedFaq;
+  }
+  
+  async deleteFaq(id: number): Promise<void> {
+    if (!this.faqs.has(id)) {
+      throw new Error(`FAQ with id ${id} not found`);
+    }
+    
+    this.faqs.delete(id);
+  }
+  
   // Site Content methods
   async getSiteContents(): Promise<SiteContent[]> {
     return Array.from(this.siteContents.values());

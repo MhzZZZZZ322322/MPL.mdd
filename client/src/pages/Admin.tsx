@@ -98,6 +98,12 @@ const Admin = () => {
             >
               Editor Conținut
             </a>
+            <a 
+              href="/admin/events"
+              className="px-4 py-2 bg-secondary hover:bg-secondary/80 text-white rounded-md transition-colors flex items-center gap-2"
+            >
+              Gestionare Evenimente
+            </a>
             <button 
               className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors" 
               onClick={() => {

@@ -158,6 +158,101 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // Get specific FAQ
+  app.get("/api/faqs/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid FAQ ID" });
+      }
+      
+      const faq = await storage.getFaq(id);
+      if (!faq) {
+        return res.status(404).json({ message: "FAQ not found" });
+      }
+      
+      res.json(faq);
+    } catch (error) {
+      console.error("Error fetching FAQ:", error);
+      res.status(500).json({ message: "Failed to fetch FAQ" });
+    }
+  });
+  
+  // Create FAQ
+  app.post("/api/faqs", async (req, res) => {
+    try {
+      // Using safeParse to handle validation
+      const result = insertFaqSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      const faq = await storage.createFaq(result.data);
+      res.status(201).json(faq);
+    } catch (error) {
+      console.error("Error creating FAQ:", error);
+      res.status(500).json({ message: "Failed to create FAQ" });
+    }
+  });
+  
+  // Update FAQ
+  app.patch("/api/faqs/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid FAQ ID" });
+      }
+      
+      // Using safeParse to handle validation
+      const result = insertFaqSchema.partial().safeParse(req.body);
+      
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      // First check if FAQ exists
+      const existingFaq = await storage.getFaq(id);
+      if (!existingFaq) {
+        return res.status(404).json({ message: "FAQ not found" });
+      }
+      
+      // Update FAQ
+      const updatedFaq = await storage.updateFaq(id, result.data);
+      res.json(updatedFaq);
+    } catch (error) {
+      console.error("Error updating FAQ:", error);
+      res.status(500).json({ message: "Failed to update FAQ" });
+    }
+  });
+  
+  // Delete FAQ
+  app.delete("/api/faqs/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid FAQ ID" });
+      }
+      
+      // First check if FAQ exists
+      const existingFaq = await storage.getFaq(id);
+      if (!existingFaq) {
+        return res.status(404).json({ message: "FAQ not found" });
+      }
+      
+      // Delete FAQ
+      await storage.deleteFaq(id);
+      res.status(200).json({ message: "FAQ deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting FAQ:", error);
+      res.status(500).json({ message: "Failed to delete FAQ" });
+    }
+  });
+  
   // Get all contact submissions
   app.get("/api/contact", async (req, res) => {
     try {

@@ -8,6 +8,9 @@ import ContentEditor from "@/pages/ContentEditor";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+// Importăm paginile de administrare
+import EventManager from "@/pages/EventManager";
+
 function Router() {
   return (
     <Switch>
@@ -15,6 +18,7 @@ function Router() {
       <Route path="/event/:id" component={EventDetails} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={ContentEditor} />
+      <Route path="/admin/events" component={EventManager} />
       <Route component={NotFound} />
     </Switch>
   );
