@@ -5,6 +5,14 @@
 /* Stilizare globală pentru input-uri, textarea și selecturi */
 input, textarea, select {
   color: white !important;
+  background-color: #121212 !important; 
+  border: 1px solid rgba(138, 75, 175, 0.3) !important;
+}
+
+/* Stilizare focus pentru input-uri */
+input:focus, textarea:focus, select:focus {
+  border-color: #9333ea !important;
+  outline: none !important;
 }
 
 /* Stilizare pentru date picker în modul dark */
