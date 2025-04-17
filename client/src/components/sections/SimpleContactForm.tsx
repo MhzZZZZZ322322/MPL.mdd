@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from '@/hooks/use-toast';
 import { 
   FaDiscord, 
@@ -190,13 +188,13 @@ const SimpleContactForm = () => {
                   
                   <div className="p-6">
                     <p className="mb-6">Fii parte din cea mai mare comunitate de esports din Moldova. Discuții, turnee, evenimente și multe altele.</p>
-                    <Button
+                    <button
                       className="flex w-full items-center justify-center bg-[#5865F2] hover:bg-[#4752C4] text-white py-3 px-4 rounded-md font-medium transition-all"
                       onClick={() => window.open('https://discord.gg/Ek4qvWE5qB', '_blank')}
                     >
                       <FaDiscord className="mr-2 text-xl" />
                       Discord MPL
-                    </Button>
+                    </button>
                   </div>
                 </div>
                 
@@ -258,26 +256,26 @@ const SimpleContactForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-white mb-2">Nume</label>
-                      <Input
+                      <input
                         type="text"
                         name="name"
                         value={formState.name}
                         onChange={handleChange}
                         placeholder="Numele tău"
-                        className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
+                        className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
                       />
                       {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                     </div>
                     
                     <div>
                       <label className="block text-white mb-2">Email</label>
-                      <Input
+                      <input
                         type="email"
                         name="email"
                         value={formState.email}
                         onChange={handleChange}
                         placeholder="emailul@tau.com"
-                        className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
+                        className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
                       />
                       {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                     </div>
@@ -301,24 +299,24 @@ const SimpleContactForm = () => {
                   
                   <div>
                     <label className="block text-white mb-2">Mesaj</label>
-                    <Textarea
+                    <textarea
                       name="message"
                       value={formState.message}
                       onChange={handleChange}
                       placeholder="Mesajul tău..."
-                      className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
+                      className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
                       rows={5}
                     />
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
                   </div>
                   
-                  <Button
+                  <button
                     type="submit"
                     className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white py-3 px-4 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(139,92,246,0.4)]"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? 'Se trimite...' : 'Trimite mesajul'}
-                  </Button>
+                  </button>
                 </form>
               </div>
             </div>
