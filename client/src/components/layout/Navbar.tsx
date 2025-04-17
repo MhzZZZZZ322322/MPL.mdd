@@ -34,6 +34,20 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  // Disable scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    
+    // Cleanup function to ensure we don't leave the body with overflow: hidden
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [mobileMenuOpen]);
 
   const handleNavLinkClick = (href: string) => {
     setMobileMenuOpen(false);
@@ -97,22 +111,22 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       <div className={cn(
-        "md:hidden bg-black absolute top-full left-0 w-full border-b border-primary/30 transition-all duration-300 shadow-lg",
+        "md:hidden bg-black fixed top-[72px] left-0 w-full h-[calc(100vh-72px)] overflow-auto border-b border-primary/30 transition-all duration-300 shadow-lg",
         mobileMenuOpen ? "block" : "hidden"
       )}>
-        <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <div className="container mx-auto px-4 py-6 flex flex-col space-y-5">
           {navItems.map((item) => (
             <button
               key={item.label}
               onClick={() => handleNavLinkClick(item.href)}
-              className="py-2 hover:text-secondary transition-colors border-b border-gray-700/50"
+              className="py-3 text-lg font-medium hover:text-secondary transition-colors border-b border-gray-800"
             >
               {item.label}
             </button>
           ))}
           <Button 
             onClick={() => handleNavLinkClick('#contact')}
-            className="w-full bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded text-center font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
+            className="w-full mt-4 bg-primary hover:bg-primary/80 text-white px-4 py-3 rounded text-center font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
             Alătură-te
           </Button>
