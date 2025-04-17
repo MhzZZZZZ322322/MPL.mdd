@@ -136,33 +136,35 @@ export const HeroSlider = () => {
       )}
       
       {/* Custom Style for Swiper Pagination */}
-      <style jsx global>{`
-        .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
-          background: rgba(255, 255, 255, 0.5);
-          opacity: 1;
-        }
-        .swiper-pagination-bullet-active {
-          background: var(--color-primary);
-          transform: scale(1.2);
-        }
-        .swiper-button-next,
-        .swiper-button-prev {
-          color: white;
-          background: rgba(0, 0, 0, 0.3);
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .swiper-button-next:after,
-        .swiper-button-prev:after {
-          font-size: 18px;
-        }
-      `}</style>
+      <style>
+        {`
+          .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+          }
+          .swiper-pagination-bullet-active {
+            background: var(--color-primary);
+            transform: scale(1.2);
+          }
+          .swiper-button-next,
+          .swiper-button-prev {
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .swiper-button-next:after,
+          .swiper-button-prev:after {
+            font-size: 18px;
+          }
+        `}
+      </style>
     </div>
   );
 };
