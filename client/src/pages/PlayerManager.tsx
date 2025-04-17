@@ -7,7 +7,12 @@ import { useToast } from '@/hooks/use-toast';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { apiRequest, getQueryFn, queryClient } from '@/lib/queryClient';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input, type InputProps } from '@/components/ui/input';
+
+// Extend InputProps type to fix null/undefined issues
+type SafeInputProps = Omit<InputProps, 'value'> & {
+  value?: string | number | null | undefined;
+};
 import AdminLogin from '@/components/ui/admin-login';
 import {
   Form,
@@ -69,7 +74,7 @@ const PlayerManager = () => {
   const { toast } = useToast();
 
   // Query to fetch all players
-  const { data: players, isLoading, isError } = useQuery({
+  const { data: players = [], isLoading, isError } = useQuery<Player[]>({
     queryKey: ['/api/players'],
     queryFn: getQueryFn({ on401: 'throw' }),
     enabled: isLoggedIn,
@@ -187,17 +192,18 @@ const PlayerManager = () => {
   const handleEditPlayer = (player: Player) => {
     setIsEditingPlayerId(player.id);
     
+    // Convertim toate valorile null la string gol pentru a evita erorile de tipuri
     form.reset({
       nickname: player.nickname,
       realName: player.realName,
       game: player.game,
       team: player.team || '',
-      country: player.country || 'Moldova',
-      profileImage: player.profileImage || '',
-      socialLinks: player.socialLinks || '',
-      achievements: player.achievements || '',
-      stats: player.stats || '',
-      score: player.score || 0,
+      country: player.country !== null ? player.country : 'Moldova',
+      profileImage: player.profileImage,
+      socialLinks: player.socialLinks !== null ? player.socialLinks : '',
+      achievements: player.achievements !== null ? player.achievements : '',
+      stats: player.stats !== null ? player.stats : '',
+      score: player.score,
     });
   };
 

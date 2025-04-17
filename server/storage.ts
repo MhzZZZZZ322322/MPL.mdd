@@ -175,7 +175,23 @@ export class MemStorage implements IStorage {
   
   async createPlayer(insertPlayer: InsertPlayer): Promise<Player> {
     const id = this.currentPlayerId++;
-    const player: Player = { ...insertPlayer, id };
+    // Ensure score is a number (not undefined)
+    const score = insertPlayer.score !== undefined ? insertPlayer.score : 0;
+    
+    const player: Player = {
+      id,
+      nickname: insertPlayer.nickname,
+      realName: insertPlayer.realName,
+      team: insertPlayer.team,
+      game: insertPlayer.game,
+      score: score,
+      country: insertPlayer.country || null,
+      profileImage: insertPlayer.profileImage || "",
+      socialLinks: insertPlayer.socialLinks || null,
+      achievements: insertPlayer.achievements || null,
+      stats: insertPlayer.stats || null
+    };
+    
     this.players.set(id, player);
     return player;
   }
@@ -187,9 +203,19 @@ export class MemStorage implements IStorage {
       throw new Error(`Player with id ${id} not found`);
     }
     
+    // Ensure we properly handle potential null/undefined values
     const updatedPlayer: Player = {
       ...existingPlayer,
-      ...updateData
+      nickname: updateData.nickname ?? existingPlayer.nickname,
+      realName: updateData.realName ?? existingPlayer.realName,
+      team: updateData.team ?? existingPlayer.team,
+      game: updateData.game ?? existingPlayer.game,
+      score: updateData.score !== undefined ? updateData.score : existingPlayer.score,
+      country: updateData.country ?? existingPlayer.country,
+      profileImage: updateData.profileImage ?? existingPlayer.profileImage,
+      socialLinks: updateData.socialLinks ?? existingPlayer.socialLinks,
+      achievements: updateData.achievements ?? existingPlayer.achievements,
+      stats: updateData.stats ?? existingPlayer.stats
     };
     
     this.players.set(id, updatedPlayer);
