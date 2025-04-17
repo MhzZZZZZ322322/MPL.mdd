@@ -103,7 +103,7 @@ const Partners = () => {
                   rel="noopener noreferrer"
                   className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
                 >
-                  <img src={darwinLogo} alt="Darwin.md Logo" className="max-h-full w-auto object-contain" />
+                  <img src={darwinLogo} alt="Darwin.md Logo" className="max-h-10 w-auto object-contain" />
                 </a>
                 <a 
                   href="https://hator.gg/keyboards/skyfall-tkl-pro-wireless/" 
