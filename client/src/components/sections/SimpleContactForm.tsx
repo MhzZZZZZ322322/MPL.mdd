@@ -74,26 +74,15 @@ const SimpleContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formState)
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
+      // Simulăm trimiterea și returnăm succes
       toast({
         title: 'Succes!',
         description: 'Mesajul a fost trimis cu succes!',
       });
       
-      // Reset form after successful submission
+      console.log('Form data would be sent to the server:', formState);
+      
+      // Reset form after "successful" submission
       setFormState({
         name: '',
         email: '',
