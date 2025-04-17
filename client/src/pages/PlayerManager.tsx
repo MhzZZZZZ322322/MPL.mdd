@@ -358,7 +358,7 @@ const PlayerManager = () => {
                       <FormItem>
                         <FormLabel>Țară</FormLabel>
                         <FormControl>
-                          <Input placeholder="Moldova" {...field} />
+                          <Input placeholder="Moldova" value={field.value || ''} onChange={field.onChange} onBlur={field.onBlur} ref={field.ref} name={field.name} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -389,7 +389,7 @@ const PlayerManager = () => {
                       <FormItem>
                         <FormLabel>Linkuri Social Media</FormLabel>
                         <FormControl>
-                          <Input placeholder="https://twitter.com/player, https://instagram.com/player" {...field} />
+                          <Input placeholder="https://twitter.com/player, https://instagram.com/player" value={field.value || ''} onChange={field.onChange} onBlur={field.onBlur} ref={field.ref} name={field.name} />
                         </FormControl>
                         <FormDescription>
                           Link-uri către profilurile sociale, separate prin virgulă
@@ -406,7 +406,7 @@ const PlayerManager = () => {
                       <FormItem>
                         <FormLabel>Realizări</FormLabel>
                         <FormControl>
-                          <Input placeholder="Locul 1 Turneu MPL 2023" {...field} />
+                          <Input placeholder="Locul 1 Turneu MPL 2023" value={field.value || ''} onChange={field.onChange} onBlur={field.onBlur} ref={field.ref} name={field.name} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -420,7 +420,7 @@ const PlayerManager = () => {
                       <FormItem>
                         <FormLabel>Statistici</FormLabel>
                         <FormControl>
-                          <Input placeholder="KD: 1.5, HS%: 65%" {...field} />
+                          <Input placeholder="KD: 1.5, HS%: 65%" value={field.value || ''} onChange={field.onChange} onBlur={field.onBlur} ref={field.ref} name={field.name} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
