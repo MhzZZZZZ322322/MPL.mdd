@@ -285,7 +285,8 @@ const EventManager = () => {
                     <label className="block text-white mb-2">Titlu</label>
                     <input
                       {...form.register('title')}
-                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary"
+                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary placeholder-gray-400"
+                      placeholder="Titlul evenimentului"
                     />
                     {form.formState.errors.title && (
                       <p className="text-red-500 text-sm mt-1">{form.formState.errors.title.message}</p>
@@ -297,7 +298,7 @@ const EventManager = () => {
                     <input
                       type="date"
                       {...form.register('date')}
-                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary"
+                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary [color-scheme:dark]"
                     />
                     {form.formState.errors.date && (
                       <p className="text-red-500 text-sm mt-1">{form.formState.errors.date.message}</p>
@@ -308,7 +309,8 @@ const EventManager = () => {
                     <label className="block text-white mb-2">Locație</label>
                     <input
                       {...form.register('location')}
-                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary"
+                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary placeholder-gray-400"
+                      placeholder="Locația evenimentului"
                     />
                     {form.formState.errors.location && (
                       <p className="text-red-500 text-sm mt-1">{form.formState.errors.location.message}</p>
@@ -319,7 +321,8 @@ const EventManager = () => {
                     <label className="block text-white mb-2">URL Imagine (opțional)</label>
                     <input
                       {...form.register('imageUrl')}
-                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary"
+                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary placeholder-gray-400"
+                      placeholder="URL către imagine (ex: https://example.com/image.jpg)"
                     />
                   </div>
                   
@@ -327,7 +330,8 @@ const EventManager = () => {
                     <label className="block text-white mb-2">Link Înregistrare (opțional)</label>
                     <input
                       {...form.register('registrationLink')}
-                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary"
+                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary placeholder-gray-400"
+                      placeholder="URL pentru înregistrare (ex: https://forms.example.com)"
                     />
                   </div>
                 </div>
@@ -338,7 +342,8 @@ const EventManager = () => {
                     <textarea
                       {...form.register('description')}
                       rows={12}
-                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary"
+                      className="w-full bg-darkBg border border-primary/30 rounded-md p-3 text-white focus:outline-none focus:border-secondary placeholder-gray-400"
+                      placeholder="Descrierea evenimentului..."
                     />
                     {form.formState.errors.description && (
                       <p className="text-red-500 text-sm mt-1">{form.formState.errors.description.message}</p>
