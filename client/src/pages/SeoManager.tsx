@@ -1135,7 +1135,7 @@ ${sitemapItems}
                       // Am putea deschide o previzualizare a paginii 404 aici
                     }}
                   >
-                    <Eye className="w-4 h-4 mr-2" /> Previzualizare
+                    <FileText className="w-4 h-4 mr-2" /> Previzualizare
                   </Button>
                   <Button 
                     disabled={loading} 
