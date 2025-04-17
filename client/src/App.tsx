@@ -21,13 +21,18 @@ function Router() {
 }
 
 function App() {
+  // Pentru a verifica dacă suntem pe o pagină de admin
+  const isAdminPage = () => {
+    return window.location.pathname.startsWith('/admin');
+  };
+  
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      {!isAdminPage() && <Navbar />}
       <main className="flex-grow">
         <Router />
       </main>
-      <Footer />
+      {!isAdminPage() && <Footer />}
       <Toaster />
     </div>
   );
