@@ -16,13 +16,39 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Link } from 'wouter';
 import { Switch } from '@/components/ui/switch';
 
-const pages = [
+// Lista de pagini prestabilite
+const defaultPages = [
   { url: '/', title: 'Pagina Principală' },
   { url: '/events', title: 'Evenimente' },
   { url: '/rankings', title: 'Clasamente' },
   { url: '/community', title: 'Comunitate' },
   { url: '/event/:id', title: 'Detalii Eveniment (șablon)' },
 ];
+
+// Funcția de detectare și compilare a tuturor paginilor disponibile
+const detectAllPages = (existingSettings: SeoSetting[] = []): { url: string, title: string }[] => {
+  // Combinăm paginile prestabilite cu cele detectate din setări
+  const detectedUrls = new Set(defaultPages.map(p => p.url));
+  const detectedPages = [...defaultPages];
+  
+  // Adăugăm orice pagină care există în setări dar nu este în lista prestabilită
+  existingSettings.forEach(setting => {
+    if (!detectedUrls.has(setting.pageUrl)) {
+      detectedPages.push({ 
+        url: setting.pageUrl, 
+        title: setting.title.replace(' | Moldova Pro League', '') || `Pagină ${setting.pageUrl}` 
+      });
+      detectedUrls.add(setting.pageUrl);
+    }
+  });
+  
+  // Sortăm paginile cu pagina principală prima, apoi alfabetic
+  return detectedPages.sort((a, b) => {
+    if (a.url === '/') return -1;
+    if (b.url === '/') return 1;
+    return a.title.localeCompare(b.title);
+  });
+};
 
 // Tipuri de date pentru SEO și Analytics
 // Interfața pentru un fragment de date structurate
@@ -148,7 +174,7 @@ const SeoManager = () => {
       // setSeoSettings(data);
       
       // Pentru moment, folosim date fictive 
-      const mockSeoSettings = pages.map((page, index) => ({
+      const mockSeoSettings = defaultPages.map((page, index) => ({
         id: index + 1,
         pageUrl: page.url,
         title: `${page.title} | Moldova Pro League`,
@@ -426,7 +452,8 @@ ${sitemapItems}
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    {pages.map((page) => (
+                    {/* Folosim lista de pagini detectate automat pentru a afișa toate paginile, inclusiv cele noi */}
+                    {detectAllPages(seoSettings).map((page) => (
                       <Button 
                         key={page.url} 
                         variant={currentSeoPage === page.url ? "default" : "outline"} 
@@ -445,7 +472,7 @@ ${sitemapItems}
                 <CardHeader>
                   <CardTitle className="text-white flex items-center">
                     <Globe className="w-5 h-5 mr-2" />
-                    Setări SEO pentru {pages.find(p => p.url === currentSeoPage)?.title || currentSeoPage}
+                    Setări SEO pentru {detectAllPages(seoSettings).find(p => p.url === currentSeoPage)?.title || currentSeoPage}
                   </CardTitle>
                   <CardDescription>
                     Editează meta title, description și alte setări SEO pentru această pagină
