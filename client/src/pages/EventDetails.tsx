@@ -8,6 +8,7 @@ import { Link } from 'wouter';
 import { Event } from '@shared/schema';
 import { motion } from 'framer-motion';
 import eventImages from '@/components/sections/EventImages';
+import { getQueryFn } from '@/lib/queryClient';
 
 const EventDetails = () => {
   const [, params] = useRoute('/event/:id');
@@ -15,6 +16,10 @@ const EventDetails = () => {
   
   const { data: event, isLoading, error } = useQuery<Event>({
     queryKey: ['/api/events', eventId],
+    queryFn: () => fetch(`/api/events/${eventId}`).then(res => {
+      if (!res.ok) throw new Error('Evenimentul nu a putut fi găsit');
+      return res.json();
+    }),
     enabled: !!eventId,
   });
 
@@ -55,9 +60,10 @@ const EventDetails = () => {
   
   // Alternate background images based on the game/platform
   const getBgClass = () => {
-    if (event.title.includes('CS')) return 'bg-[url(https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&q=85)]';
-    if (event.title.includes('LoL')) return 'bg-[url(https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&q=85)]';
-    if (event.title.includes('FIFA')) return 'bg-[url(https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&q=85)]';
+    const title = event.title || '';
+    if (title.includes('CS')) return 'bg-[url(https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&q=85)]';
+    if (title.includes('LoL')) return 'bg-[url(https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&q=85)]';
+    if (title.includes('FIFA')) return 'bg-[url(https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&q=85)]';
     return 'bg-[url(https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&q=85)]';
   };
 
@@ -146,7 +152,7 @@ const EventDetails = () => {
                       <Info className="h-5 w-5 mr-3 text-primary shrink-0 mt-0.5" />
                       <span>Toate deciziile arbitrilor sunt finale</span>
                     </li>
-                    {event.title.includes('HATOR') && (
+                    {event.title && event.title.includes('HATOR') && (
                       <li className="flex items-start">
                         <Info className="h-5 w-5 mr-3 text-yellow-400 shrink-0 mt-0.5" />
                         <span>Câștigătorii vor primi periferice gaming Hator</span>
@@ -165,7 +171,7 @@ const EventDetails = () => {
                   Participanții vor concura în mai multe etape, începând cu faza grupelor, urmată de playoff-uri și marea finală.
                   Toate meciurile vor fi transmise live pe canalele noastre de Twitch și YouTube.
                 </p>
-                {event.title.includes('HATOR') && (
+                {event.title && event.title.includes('HATOR') && (
                   <div className="mt-6 p-4 bg-yellow-900/20 border border-yellow-700/30 rounded-lg">
                     <h4 className="text-lg font-semibold text-yellow-400 mb-2 flex items-center">
                       <ExternalLink className="h-5 w-5 mr-2" /> Sponsorizat de Hator
@@ -184,7 +190,7 @@ const EventDetails = () => {
             <div className="sticky top-24">
               <div className="bg-darkGray/50 border border-primary/20 rounded-lg overflow-hidden">
                 <div className="h-64 overflow-hidden">
-                  {event.title === "HATOR CS LEAGUE MOLDOVA" ? (
+                  {event.title && event.title === "HATOR CS LEAGUE MOLDOVA" ? (
                     <div className="bg-black w-full h-full flex items-center justify-center p-2">
                       <img 
                         src="https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg" 
@@ -194,8 +200,8 @@ const EventDetails = () => {
                     </div>
                   ) : (
                     <img 
-                      src={eventImages[event.title as keyof typeof eventImages] || (event.imageUrl as string)} 
-                      alt={event.title} 
+                      src={(event.title && eventImages[event.title as keyof typeof eventImages]) || (event.imageUrl as string) || "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg"} 
+                      alt={event.title || "Event image"} 
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         e.currentTarget.src = "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg";
