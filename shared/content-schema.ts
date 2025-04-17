@@ -6,10 +6,10 @@ import { z } from "zod";
 export const siteContent = pgTable("site_content", {
   id: serial("id").primaryKey(),
   contentKey: varchar("content_key", { length: 100 }).notNull().unique(),
-  contentName: varchar("content_name", { length: 255 }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
   contentType: varchar("content_type", { length: 50 }).notNull(),
-  contentValue: text("content_value").notNull(),
-  description: text("description"),
+  imageUrl: text("image_url").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow()
 });
