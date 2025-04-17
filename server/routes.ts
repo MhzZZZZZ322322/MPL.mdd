@@ -81,6 +81,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch FAQs" });
     }
   });
+  
+  // Get all contact submissions
+  app.get("/api/contact", async (req, res) => {
+    try {
+      const contactSubmissions = await storage.getContactSubmissions();
+      res.json(contactSubmissions);
+    } catch (error) {
+      console.error("Error fetching contact submissions:", error);
+      res.status(500).json({ message: "Failed to fetch contact submissions" });
+    }
+  });
 
   // Create contact submission
   app.post("/api/contact", async (req, res) => {

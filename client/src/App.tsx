@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import EventDetails from "@/pages/EventDetails";
+import Admin from "@/pages/Admin";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 

@@ -72,25 +72,33 @@ const SimpleContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulăm trimiterea și returnăm succes - delay simulat
-      setTimeout(() => {
-        toast({
-          title: 'Succes!',
-          description: 'Mesajul a fost trimis cu succes!',
-        });
-        
-        console.log('Form data would be sent to the server:', formState);
-        
-        // Reset form after "successful" submission
-        setFormState({
-          name: '',
-          email: '',
-          subject: 'general',
-          message: ''
-        });
-        
-        setIsSubmitting(false);
-      }, 1000);
+      // Trimitem datele la server prin API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Eroare la trimiterea formularului');
+      }
+      
+      toast({
+        title: 'Succes!',
+        description: 'Mesajul a fost trimis cu succes!',
+      });
+      
+      console.log('Form data sent to the server:', formState);
+      
+      // Reset form after successful submission
+      setFormState({
+        name: '',
+        email: '',
+        subject: 'general',
+        message: ''
+      });
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
@@ -98,6 +106,7 @@ const SimpleContactForm = () => {
         description: 'A apărut o eroare. Încercați din nou mai târziu.',
         variant: 'destructive',
       });
+    } finally {
       setIsSubmitting(false);
     }
   };
