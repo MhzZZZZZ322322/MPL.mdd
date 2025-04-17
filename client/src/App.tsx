@@ -13,6 +13,7 @@ import CommunityPage from "@/pages/CommunityPage";
 
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
+import SeoManager from "@/pages/SeoManager";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />
+      <Route path="/admin/seo" component={SeoManager} />
       <Route component={NotFound} />
     </Switch>
   );

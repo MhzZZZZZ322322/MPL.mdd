@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Contact } from '@shared/schema';
 import { useToast } from '@/hooks/use-toast';
-import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft } from 'lucide-react';
+import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, Globe } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ro } from 'date-fns/locale';
 import AdminLogin from '@/components/ui/admin-login';
