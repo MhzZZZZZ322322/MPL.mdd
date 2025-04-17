@@ -40,16 +40,9 @@ export const HeroSlider = () => {
 
   return (
     <div 
-      className="relative h-screen overflow-hidden bg-black"
+      className="relative h-screen overflow-hidden bg-gradient-to-br from-black via-[#4a1d96]/90 to-black"
     >
-      {/* Background Image cu overlay negru pentru a evita orice artifact vizual */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
-        style={{ backgroundImage: `url(${heroContent.image})` }}
-      >
-      </div>
-      {/* Overlay negru simplu, fără gradient - elimină orice problemă vizuală */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      {/* Am eliminat complet imaginea și folosim doar un fundal cu gradient pentru a evita orice problemă */}
       
       {/* Content */}
       {isLoaded && (
