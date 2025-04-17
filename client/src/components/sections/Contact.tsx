@@ -156,7 +156,7 @@ const Contact = () => {
                 <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg overflow-hidden transition-all hover:shadow-[0_0_25px_rgba(139,92,246,0.15)]">
                   <div className="relative h-40 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-[#5865F2]/80 to-[#4752C4]/80"></div>
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-50"></div>
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1603481588273-2f908a9a7a1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-50"></div>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <FaDiscord className="text-7xl text-white opacity-20" />
                     </div>

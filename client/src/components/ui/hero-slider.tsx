@@ -34,7 +34,7 @@ export const HeroSlider = () => {
 
   const slides: SlideContent[] = [
     {
-      image: 'https://images.unsplash.com/photo-1542751371-adc38448a8df?auto=format&fit=crop&q=80&w=2070',
+      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=2070',
       title: 'MOLDOVA PRO LEAGUE',
       subtitle: 'Gaming din pasiune. Competitiv din ADN.',
       primaryBtn: {
@@ -47,7 +47,7 @@ export const HeroSlider = () => {
       },
     },
     {
-      image: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&q=80&w=2070',
+      image: 'https://images.unsplash.com/photo-1627856014754-2907e2355d34?auto=format&fit=crop&q=80&w=2070',
       title: 'HATOR CS LEAGUE MOLDOVA',
       subtitle: 'Cel mai mare turneu CS:GO din Moldova cu premii de 10,000 MDL',
       primaryBtn: {
@@ -56,12 +56,12 @@ export const HeroSlider = () => {
       },
     },
     {
-      image: 'https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&q=80&w=2070',
+      image: 'https://images.unsplash.com/photo-1542751371-6533d14d821b?auto=format&fit=crop&q=80&w=2070',
       title: 'ALĂTURĂ-TE COMUNITĂȚII',
       subtitle: 'Intră pe Discord-ul nostru și rămâi conectat la evenimentele MPL',
       primaryBtn: {
         text: 'Discord',
-        link: 'https://discord.gg/moldovaproleague',
+        link: 'https://discord.gg/Ek4qvWE5qB',
       },
       secondaryBtn: {
         text: 'Tournament Schedule',
@@ -115,17 +115,34 @@ export const HeroSlider = () => {
                     {slide.subtitle}
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Link href={slide.primaryBtn.link}>
-                      <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium">
-                        {slide.primaryBtn.text}
-                      </Button>
-                    </Link>
-                    {slide.secondaryBtn && (
-                      <Link href={slide.secondaryBtn.link}>
-                        <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                          {slide.secondaryBtn.text}
+                    {slide.primaryBtn.link.startsWith('http') ? (
+                      <a href={slide.primaryBtn.link} target="_blank" rel="noopener noreferrer">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium">
+                          {slide.primaryBtn.text}
+                        </Button>
+                      </a>
+                    ) : (
+                      <Link href={slide.primaryBtn.link}>
+                        <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium">
+                          {slide.primaryBtn.text}
                         </Button>
                       </Link>
+                    )}
+                    
+                    {slide.secondaryBtn && (
+                      slide.secondaryBtn.link.startsWith('http') ? (
+                        <a href={slide.secondaryBtn.link} target="_blank" rel="noopener noreferrer">
+                          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                            {slide.secondaryBtn.text}
+                          </Button>
+                        </a>
+                      ) : (
+                        <Link href={slide.secondaryBtn.link}>
+                          <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                            {slide.secondaryBtn.text}
+                          </Button>
+                        </Link>
+                      )
                     )}
                   </div>
                 </motion.div>
