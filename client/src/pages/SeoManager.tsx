@@ -6,7 +6,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { LoaderCircle, Info, AlertTriangle, Globe, Tag, Bot, Link as LinkIcon, Code, Twitter, Facebook, ChevronLeft, Copy, Save } from 'lucide-react';
+import { 
+  LoaderCircle, Info, AlertTriangle, Globe, Tag, Bot, Link as LinkIcon, 
+  Code, Twitter, Facebook, ChevronLeft, Copy, Save, Plus, Trash2, 
+  FileText, ShoppingCart, CalendarDays, Building, User, Briefcase
+} from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
 
 const pages = [
@@ -18,6 +23,13 @@ const pages = [
 ];
 
 // Tipuri de date pentru SEO și Analytics
+// Interfața pentru un fragment de date structurate
+interface StructuredDataItem {
+  id: string;
+  type: string; // "WebPage", "Event", "Article", "Person", "Organization", etc.
+  data: string; // JSON-LD ca string
+}
+
 type SeoSetting = {
   id: number;
   pageUrl: string;
@@ -27,6 +39,7 @@ type SeoSetting = {
   metaRobots: string;
   canonicalUrl: string;
   structuredData: string;
+  structuredDataItems: StructuredDataItem[]; // Array de fragmente de date structurate
   openGraph: string;
   twitterCard: string;
   updatedAt: Date;
@@ -44,6 +57,15 @@ type AnalyticsSetting = {
   updatedAt: Date;
 };
 
+// Date structurate predefinite pentru diferite tipuri
+const STRUCTURED_DATA_TEMPLATES = {
+  WebPage: '{\n  "@context": "https://schema.org",\n  "@type": "WebPage",\n  "name": "Titlul paginii",\n  "description": "Descrierea paginii"\n}',
+  Event: '{\n  "@context": "https://schema.org",\n  "@type": "Event",\n  "name": "Numele evenimentului",\n  "startDate": "Data",\n  "endDate": "Data",\n  "location": {\n    "@type": "Place",\n    "name": "Locația",\n    "address": "Adresa"\n  },\n  "description": "Descrierea evenimentului"\n}',
+  Article: '{\n  "@context": "https://schema.org",\n  "@type": "Article",\n  "headline": "Titlul articolului",\n  "author": {\n    "@type": "Person",\n    "name": "Autor"\n  },\n  "publisher": {\n    "@type": "Organization",\n    "name": "Moldova Pro League",\n    "logo": {\n      "@type": "ImageObject",\n      "url": "URL logo"\n    }\n  },\n  "datePublished": "Data publicării",\n  "dateModified": "Data modificării",\n  "description": "Descrierea articolului"\n}',
+  Organization: '{\n  "@context": "https://schema.org",\n  "@type": "Organization",\n  "name": "Moldova Pro League",\n  "url": "https://moldovaproleague.md",\n  "logo": "URL logo",\n  "description": "Descrierea organizației"\n}',
+  Person: '{\n  "@context": "https://schema.org",\n  "@type": "Person",\n  "name": "Nume persoană",\n  "jobTitle": "Titlu job",\n  "description": "Descriere"\n}'
+};
+
 const EMPTY_SEO_SETTING: Omit<SeoSetting, 'id' | 'updatedAt'> = {
   pageUrl: '',
   title: '',
@@ -51,7 +73,8 @@ const EMPTY_SEO_SETTING: Omit<SeoSetting, 'id' | 'updatedAt'> = {
   metaKeywords: '',
   metaRobots: 'index, follow',
   canonicalUrl: '',
-  structuredData: '{\n  "@context": "https://schema.org",\n  "@type": "WebPage",\n  "name": "Titlul paginii",\n  "description": "Descrierea paginii"\n}',
+  structuredData: STRUCTURED_DATA_TEMPLATES.WebPage,
+  structuredDataItems: [], // Array gol inițial
   openGraph: '{\n  "og:title": "Titlul paginii",\n  "og:description": "Descrierea paginii",\n  "og:type": "website",\n  "og:image": "URL imagine"\n}',
   twitterCard: '{\n  "twitter:card": "summary_large_image",\n  "twitter:title": "Titlul paginii",\n  "twitter:description": "Descrierea paginii",\n  "twitter:image": "URL imagine"\n}',
 };
@@ -61,8 +84,19 @@ const EMPTY_ANALYTICS_SETTING: Omit<AnalyticsSetting, 'id' | 'updatedAt'> = {
   googleAnalyticsId: '',
   googleSearchConsoleVerification: '',
   facebookPixelId: '',
-  robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://example.com/sitemap.xml',
-  sitemapXml: '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://example.com/</loc>\n    <lastmod>2025-04-01</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>',
+  robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://moldovaproleague.md/sitemap.xml',
+  sitemapXml: `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://moldovaproleague.md/</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`,
   customHeaderScripts: '<!-- Adaugă aici script-uri custom pentru header -->',
 };
 
@@ -107,6 +141,7 @@ const SeoManager = () => {
         metaRobots: 'index, follow',
         canonicalUrl: `https://moldovaproleague.md${page.url}`,
         structuredData: '{\n  "@context": "https://schema.org",\n  "@type": "WebPage",\n  "name": "Titlul paginii",\n  "description": "Descrierea paginii"\n}',
+        structuredDataItems: [], // Array gol inițial
         openGraph: '{\n  "og:title": "Titlul paginii",\n  "og:description": "Descrierea paginii",\n  "og:type": "website",\n  "og:image": "URL imagine"\n}',
         twitterCard: '{\n  "twitter:card": "summary_large_image",\n  "twitter:title": "Titlul paginii",\n  "twitter:description": "Descrierea paginii",\n  "twitter:image": "URL imagine"\n}',
         updatedAt: new Date(),
@@ -273,12 +308,28 @@ const SeoManager = () => {
   };
 
   const generateSitemap = () => {
-    // Generează sitemap.xml din seoSettings
-    const sitemapItems = seoSettings.map(setting => 
-      `  <url>\n    <loc>https://moldovaproleague.md${setting.pageUrl.replace(':id', '1')}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${setting.pageUrl === '/' ? '1.0' : '0.8'}</priority>\n  </url>`
-    ).join('\n');
+    // Generează sitemap.xml din seoSettings cu o structură XML îmbunătățită
+    const sitemapItems = seoSettings.map(setting => {
+      // Formatăm data în formatul ISO complet pentru o mai bună compatibilitate
+      const lastModified = new Date().toISOString();
+      const priority = setting.pageUrl === '/' ? '1.0' : '0.8';
+      // Folosim indentare mai clară și separate pe linii pentru a îmbunătăți lizibilitatea
+      return `  <url>
+    <loc>https://moldovaproleague.md${setting.pageUrl.replace(':id', '1')}</loc>
+    <lastmod>${lastModified}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+    }).join('\n');
     
-    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapItems}\n</urlset>`;
+    // Adăugăm doctype și namespaces specifice pentru sitemap
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+${sitemapItems}
+</urlset>`;
     
     if (analyticsSetting) {
       handleAnalyticsSettingChange('sitemapXml', sitemap);
@@ -286,7 +337,7 @@ const SeoManager = () => {
     
     toast({
       title: 'Succes',
-      description: 'Sitemap-ul a fost generat automat.',
+      description: 'Sitemap-ul a fost generat cu etichete conforme standardelor.',
     });
   };
 
