@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Glitch from '@/components/animations/Glitch';
+import HeroSlider from '@/components/ui/hero-slider';
 
 const Hero = () => {
   const handleScrollToSection = (sectionId: string) => {
@@ -13,87 +14,53 @@ const Hero = () => {
     }
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-darkBg"></div>
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1542751371-adc38448a05e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDZ8fGVzcG9ydHN8ZW58MHx8fHwxNjI1ODQ0NTE4&ixlib=rb-4.0.3&q=80&w=2000")', 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            filter: 'grayscale(50%)'
-          }}
-        ></div>
-      </div>
+    <section id="hero" className="overflow-hidden">
+      {/* New Hero with Swiper Slider */}
+      <HeroSlider />
       
-      <motion.div 
-        className="container mx-auto px-4 relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.h1 
-            className="font-rajdhani font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white"
-            variants={itemVariants}
+      {/* Additional Content Section with AOS animations */}
+      <div className="bg-darkBg border-b border-primary/10 py-10 relative">
+        <div 
+          className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10"
+        >
+          <div 
+            className="flex flex-col items-center text-center bg-darkGray/40 rounded-xl p-6 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300 border border-primary/10"
+            data-aos="fade-up"
+            data-aos-delay="100"
           >
-            <Glitch className="block mb-2">Gaming din pasiune.</Glitch>
-            <span className="text-secondary animate-pulse">Competitiv din ADN.</span>
-          </motion.h1>
+            <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+              <i className="fas fa-trophy text-2xl text-primary"></i>
+            </div>
+            <h3 className="text-xl font-bold mb-2 font-rajdhani">Turnee Regulate</h3>
+            <p className="text-gray-400">Organizăm turnee și competiții pentru jucători de toate nivelurile, în diverse jocuri populare.</p>
+          </div>
           
-          <motion.p 
-            className="text-lg md:text-xl mb-8 font-light leading-relaxed"
-            variants={itemVariants}
+          <div 
+            className="flex flex-col items-center text-center bg-darkGray/40 rounded-xl p-6 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300 border border-primary/10"
+            data-aos="fade-up"
+            data-aos-delay="200"
           >
-            Moldova Pro League este comunitatea independentă de esports creată din pasiunea pentru gaming competitiv. Fără finanțări externe, dar cu o viziune clară: facem esportul mare în Moldova.
-          </motion.p>
+            <div className="w-14 h-14 bg-secondary/20 rounded-full flex items-center justify-center mb-4">
+              <i className="fas fa-users text-2xl text-secondary"></i>
+            </div>
+            <h3 className="text-xl font-bold mb-2 font-rajdhani">Comunitate Unită</h3>
+            <p className="text-gray-400">O comunitate dedicată pasionaților de gaming competitiv din toată Moldova, cu Discord activ.</p>
+          </div>
           
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            variants={itemVariants}
+          <div 
+            className="flex flex-col items-center text-center bg-darkGray/40 rounded-xl p-6 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300 border border-primary/10"
+            data-aos="fade-up"
+            data-aos-delay="300"
           >
-            <Button 
-              onClick={() => handleScrollToSection('events')}
-              className="bg-primary hover:bg-primary/80 text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(139,92,246,0.6)] relative overflow-hidden group"
-            >
-              <span className="relative z-10">Vezi turnee</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            </Button>
-            <Button 
-              onClick={() => handleScrollToSection('contact')}
-              variant="outline"
-              className="bg-transparent border-2 border-secondary hover:border-accent text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(236,72,153,0.6)]"
-            >
-              Alătură-te comunității
-            </Button>
-          </motion.div>
+            <div className="w-14 h-14 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
+              <i className="fas fa-broadcast-tower text-2xl text-cyan-500"></i>
+            </div>
+            <h3 className="text-xl font-bold mb-2 font-rajdhani">Transmisiuni Live</h3>
+            <p className="text-gray-400">Toate evenimentele importante sunt transmise în direct pe platformele noastre Twitch și YouTube.</p>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

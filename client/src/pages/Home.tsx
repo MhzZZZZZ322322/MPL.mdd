@@ -7,6 +7,8 @@ import Partners from '@/components/sections/Partners';
 import FAQ from '@/components/sections/FAQ';
 import Contact from '@/components/sections/Contact';
 import { Helmet } from 'react-helmet';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
   useEffect(() => {
@@ -21,6 +23,15 @@ const Home = () => {
     fontAwesome.rel = 'stylesheet';
     fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css';
     document.head.appendChild(fontAwesome);
+
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out',
+      once: true,
+      offset: 50,
+      delay: 100,
+    });
 
     return () => {
       document.head.removeChild(linkElement);
