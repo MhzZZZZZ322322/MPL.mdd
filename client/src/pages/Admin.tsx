@@ -4,41 +4,50 @@ import { useToast } from '@/hooks/use-toast';
 import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ro } from 'date-fns/locale';
+import AdminLogin from '@/components/ui/admin-login';
 
 const Admin = () => {
   const [contactMessages, setContactMessages] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
   
   useEffect(() => {
-    // Verificăm dacă utilizatorul este admin (ar trebui să existe o logică mai complexă aici)
-    const getContactMessages = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/contact');
-        
-        if (!response.ok) {
-          throw new Error('Eroare la încărcarea mesajelor');
-        }
-        
-        const data = await response.json();
-        setContactMessages(data);
-      } catch (error) {
-        console.error('Error fetching contact messages:', error);
-        setError('Nu s-au putut încărca mesajele. Te rugăm încearcă din nou.');
-        toast({
-          title: 'Eroare',
-          description: 'Nu s-au putut încărca mesajele. Te rugăm încearcă din nou.',
-          variant: 'destructive',
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Verificăm dacă utilizatorul este autentificat
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    setIsAuthenticated(isAdmin);
     
-    getContactMessages();
-  }, [toast]);
+    if (isAdmin) {
+      getContactMessages();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+  
+  const getContactMessages = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/contact');
+      
+      if (!response.ok) {
+        throw new Error('Eroare la încărcarea mesajelor');
+      }
+      
+      const data = await response.json();
+      setContactMessages(data);
+    } catch (error) {
+      console.error('Error fetching contact messages:', error);
+      setError('Nu s-au putut încărca mesajele. Te rugăm încearcă din nou.');
+      toast({
+        title: 'Eroare',
+        description: 'Nu s-au putut încărca mesajele. Te rugăm încearcă din nou.',
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   
   if (loading) {
     return (
@@ -64,12 +73,33 @@ const Admin = () => {
     );
   }
 
+  // Dacă utilizatorul nu este autentificat, afișăm pagina de login
+  if (!isAuthenticated) {
+    return (
+      <AdminLogin onLogin={() => {
+        setIsAuthenticated(true);
+        getContactMessages();
+      }} />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-darkBg">
       <div className="container mx-auto px-4 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-rajdhani font-bold text-white mb-2">Panou de administrare</h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-rajdhani font-bold text-white mb-2">Panou de administrare</h1>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary"></div>
+          </div>
+          <button 
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors" 
+            onClick={() => {
+              localStorage.removeItem('isAdmin');
+              setIsAuthenticated(false);
+            }}
+          >
+            Deconectare
+          </button>
         </div>
         
         <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-6">
