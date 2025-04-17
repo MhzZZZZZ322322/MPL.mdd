@@ -13,12 +13,13 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "Acasă", href: "/" },
-  { label: "Despre noi", href: "#about" },
-  { label: "Evenimente", href: "#events" },
-  { label: "Clasamente", href: "#rankings" },
-  { label: "Parteneriate", href: "#partners" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Despre noi", href: "/#about" },
+  { label: "Evenimente", href: "/events" },
+  { label: "Clasamente", href: "/rankings" },
+  { label: "Comunitate", href: "/community" },
+  { label: "Parteneriate", href: "/#partners" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -61,6 +62,19 @@ const Navbar = () => {
           behavior: 'smooth'
         });
       }
+    } else if (href.startsWith('/#')) {
+      // Handle anchor links on homepage
+      setLocation('/');
+      setTimeout(() => {
+        const anchorId = href.substring(2); // Remove the '/#' to get the ID
+        const element = document.getElementById(anchorId);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      }, 100); // Small delay to ensure page navigation completes
     } else {
       // Handle regular links
       setLocation(href);
@@ -101,7 +115,7 @@ const Navbar = () => {
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <Button 
-            onClick={() => handleNavLinkClick('#contact')}
+            onClick={() => handleNavLinkClick('/community')}
             className="hidden md:flex bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded text-sm font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
             Alătură-te
@@ -125,7 +139,7 @@ const Navbar = () => {
             </button>
           ))}
           <Button 
-            onClick={() => handleNavLinkClick('#contact')}
+            onClick={() => handleNavLinkClick('/community')}
             className="w-full mt-4 bg-primary hover:bg-primary/80 text-white px-4 py-3 rounded text-center font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
             Alătură-te

@@ -65,7 +65,7 @@ export const HeroSlider = () => {
       },
       secondaryBtn: {
         text: 'Tournament Schedule',
-        link: '/#events',
+        link: '/events',
       },
     },
   ];
