@@ -150,6 +150,21 @@ const SeoManager = () => {
     toPath: '',
     type: '301'
   });
+  
+  // State pentru pagina 404 personalizată
+  const [custom404, setCustom404] = useState({
+    enable404tracking: true,
+    enable404suggestions: true,
+    errorPageMessage: 'Oops! Pagina pe care o cauți nu există. Iată câteva pagini care te-ar putea interesa...',
+    errorReturnLink: '/',
+    errorMaxSuggestions: 3,
+    errorImage: '', // Imagine personalizată pentru pagina 404
+  });
+  
+  // Funcție pentru actualizarea setărilor paginii 404
+  const handleCustom404Change = (field: string, value: string | boolean | number) => {
+    setCustom404(prev => ({ ...prev, [field]: value }));
+  };
   const { toast } = useToast();
 
   useEffect(() => {
@@ -982,7 +997,8 @@ ${sitemapItems}
                     <div className="flex items-center space-x-2">
                       <Switch 
                         id="enable404tracking" 
-                        checked={true}
+                        checked={custom404.enable404tracking}
+                        onCheckedChange={(checked) => handleCustom404Change('enable404tracking', checked)}
                       />
                       <Label htmlFor="enable404tracking" className="text-white">Activează monitorizarea 404</Label>
                     </div>
@@ -993,7 +1009,8 @@ ${sitemapItems}
                     <div className="flex items-center space-x-2">
                       <Switch 
                         id="enable404suggestions" 
-                        checked={true}
+                        checked={custom404.enable404suggestions}
+                        onCheckedChange={(checked) => handleCustom404Change('enable404suggestions', checked)}
                       />
                       <Label htmlFor="enable404suggestions" className="text-white">Activează sugestii automate</Label>
                     </div>
@@ -1005,6 +1022,8 @@ ${sitemapItems}
                     <Textarea 
                       id="errorPageMessage" 
                       placeholder="Oops! Pagina pe care o cauți nu există. Iată câteva pagini care te-ar putea interesa..."
+                      value={custom404.errorPageMessage}
+                      onChange={(e) => handleCustom404Change('errorPageMessage', e.target.value)}
                       className="border-primary/20 bg-darkGray/60 text-white focus:border-primary min-h-[80px]"
                     />
                   </div>
@@ -1015,6 +1034,8 @@ ${sitemapItems}
                       <Input 
                         id="errorReturnLink" 
                         placeholder="/" 
+                        value={custom404.errorReturnLink}
+                        onChange={(e) => handleCustom404Change('errorReturnLink', e.target.value)}
                         className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
                       />
                       <p className="text-xs text-gray-400">De obicei pagina principală sau harta site-ului</p>
@@ -1026,10 +1047,43 @@ ${sitemapItems}
                         id="errorMaxSuggestions" 
                         placeholder="3" 
                         type="number"
+                        value={custom404.errorMaxSuggestions.toString()}
+                        onChange={(e) => handleCustom404Change('errorMaxSuggestions', parseInt(e.target.value) || 3)}
                         className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
                       />
                       <p className="text-xs text-gray-400">Numărul maxim de pagini similare sugerate</p>
                     </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="errorImage" className="text-white flex items-center">
+                      <Image className="w-4 h-4 mr-2" /> Imagine personalizată pentru pagina 404
+                    </Label>
+                    <div className="grid md:grid-cols-12 gap-2">
+                      <div className="md:col-span-10">
+                        <Input 
+                          id="errorImage" 
+                          placeholder="URL imagine (ex: /images/404.svg)" 
+                          value={custom404.errorImage}
+                          onChange={(e) => handleCustom404Change('errorImage', e.target.value)}
+                          className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
+                        />
+                      </div>
+                      <div className="md:col-span-2">
+                        <Button
+                          variant="outline"
+                          className="w-full text-white border-gray-600 hover:bg-darkGray"
+                          onClick={() => toast({
+                            title: 'Funcționalitate în dezvoltare',
+                            description: 'Încărcarea imaginilor va fi disponibilă curând.',
+                            variant: 'default',
+                          })}
+                        >
+                          Încarcă
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-400">Imagine personalizată pentru pagina de eroare 404 (recomandă format SVG sau PNG transparent)</p>
                   </div>
                 </CardContent>
                 <CardFooter className="justify-end gap-2 border-t border-gray-800 pt-4">
