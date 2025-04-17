@@ -18,7 +18,6 @@ const navItems: NavItem[] = [
   { label: "Clasamente", href: "/rankings" },
   { label: "Comunitate", href: "/community" },
   { label: "Parteneriate", href: "/#partners" },
-  { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
 ];
 
