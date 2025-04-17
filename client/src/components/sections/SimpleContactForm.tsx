@@ -72,22 +72,25 @@ const SimpleContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Simulăm trimiterea și returnăm succes
-      toast({
-        title: 'Succes!',
-        description: 'Mesajul a fost trimis cu succes!',
-      });
-      
-      console.log('Form data would be sent to the server:', formState);
-      
-      // Reset form after "successful" submission
-      setFormState({
-        name: '',
-        email: '',
-        subject: 'general',
-        message: ''
-      });
-      
+      // Simulăm trimiterea și returnăm succes - delay simulat
+      setTimeout(() => {
+        toast({
+          title: 'Succes!',
+          description: 'Mesajul a fost trimis cu succes!',
+        });
+        
+        console.log('Form data would be sent to the server:', formState);
+        
+        // Reset form after "successful" submission
+        setFormState({
+          name: '',
+          email: '',
+          subject: 'general',
+          message: ''
+        });
+        
+        setIsSubmitting(false);
+      }, 1000);
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
@@ -95,7 +98,6 @@ const SimpleContactForm = () => {
         description: 'A apărut o eroare. Încercați din nou mai târziu.',
         variant: 'destructive',
       });
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -262,7 +264,8 @@ const SimpleContactForm = () => {
                         value={formState.name}
                         onChange={handleChange}
                         placeholder="Numele tău"
-                        className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
+                        style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
+                        className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors placeholder-gray-500"
                       />
                       {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                     </div>
@@ -275,7 +278,8 @@ const SimpleContactForm = () => {
                         value={formState.email}
                         onChange={handleChange}
                         placeholder="emailul@tau.com"
-                        className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
+                        style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
+                        className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors placeholder-gray-500"
                       />
                       {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                     </div>
@@ -287,7 +291,8 @@ const SimpleContactForm = () => {
                       name="subject"
                       value={formState.subject}
                       onChange={handleChange}
-                      className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
+                      style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
+                      className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
                     >
                       <option value="general">Întrebare generală</option>
                       <option value="tournaments">Informații turnee</option>
@@ -304,7 +309,8 @@ const SimpleContactForm = () => {
                       value={formState.message}
                       onChange={handleChange}
                       placeholder="Mesajul tău..."
-                      className="w-full bg-darkBg/70 border border-primary/30 rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors text-white"
+                      style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
+                      className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors placeholder-gray-500"
                       rows={5}
                     />
                     {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
