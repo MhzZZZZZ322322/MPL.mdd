@@ -522,9 +522,64 @@ ${sitemapItems}
           
           <TabsContent value="analytics">
             <div className="space-y-6">
+              <Card className="bg-darkBg border-primary/20 mb-6">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center">
+                    <Bot className="w-5 h-5 mr-2" />
+                    Indexare Globală
+                  </CardTitle>
+                  <CardDescription>Control superior pentru indexarea în motoarele de căutare</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-white font-medium">Indexare globală a site-ului</h3>
+                        <p className="text-sm text-gray-400">Această setare controlează indexarea globală a site-ului, superior tag-ului robots</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Label htmlFor="siteIndexingEnabled" className={`text-sm ${analyticsSetting?.siteIndexingEnabled ? 'text-green-500' : 'text-red-500'} font-medium`}>
+                          {analyticsSetting?.siteIndexingEnabled ? 'Activat' : 'Dezactivat'}
+                        </Label>
+                        <Label className="cursor-pointer relative inline-flex items-center">
+                          <input
+                            type="checkbox"
+                            id="siteIndexingEnabled"
+                            className="sr-only"
+                            checked={analyticsSetting?.siteIndexingEnabled}
+                            onChange={(e) => handleAnalyticsSettingChange('siteIndexingEnabled', e.target.checked)}
+                          />
+                          <div className={`w-11 h-6 rounded-full transition ${analyticsSetting?.siteIndexingEnabled ? 'bg-primary' : 'bg-gray-700'}`}>
+                            <div className={`w-5 h-5 rounded-full transition transform bg-white ${analyticsSetting?.siteIndexingEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
+                          </div>
+                        </Label>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-darkGray/40 rounded-md p-4 border border-gray-700 mt-2">
+                      <h4 className="text-white text-sm font-medium mb-2">Efectele dezactivării indexării globale:</h4>
+                      <ul className="text-xs text-gray-300 space-y-1 list-disc list-inside">
+                        <li>Adaugă X-Robots-Tag: noindex, nofollow la toate răspunsurile HTTP</li>
+                        <li>Actualizează robots.txt pentru a bloca toți agenții</li>
+                        <li>Funcționează superior și înlocuiește setările meta robots individuale</li>
+                        <li>Folosește pentru a preveni indexarea site-urilor aflate în dezvoltare</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter className="border-t border-gray-800 pt-4">
+                  <Button variant="ghost" size="sm" className="text-xs text-gray-400 hover:text-white ml-auto">
+                    Ajutor
+                  </Button>
+                </CardFooter>
+              </Card>
+
               <Card className="bg-darkBg border-primary/20">
                 <CardHeader>
-                  <CardTitle className="text-white">Integrări Analytics</CardTitle>
+                  <CardTitle className="text-white flex items-center">
+                    <BarChart className="w-5 h-5 mr-2" />
+                    Integrări Analytics
+                  </CardTitle>
                   <CardDescription>Configurează serviciile de analiză și urmărire</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -620,41 +675,7 @@ ${sitemapItems}
                   <CardDescription>Configurează fișierele pentru crawlere</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="space-y-4 mb-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Label htmlFor="siteIndexingEnabled" className="text-white font-medium">Indexare globală a site-ului</Label>
-                        <p className="text-xs text-gray-400">Această setare controlează indexarea globală a site-ului, superior tag-ului robots</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Label htmlFor="siteIndexingEnabled" className={`text-sm ${analyticsSetting?.siteIndexingEnabled ? 'text-green-500' : 'text-red-500'}`}>
-                          {analyticsSetting?.siteIndexingEnabled ? 'Activat' : 'Dezactivat'}
-                        </Label>
-                        <Label className="cursor-pointer relative inline-flex items-center">
-                          <input
-                            type="checkbox"
-                            id="siteIndexingEnabled"
-                            className="sr-only"
-                            checked={analyticsSetting?.siteIndexingEnabled}
-                            onChange={(e) => handleAnalyticsSettingChange('siteIndexingEnabled', e.target.checked)}
-                          />
-                          <div className={`w-11 h-6 rounded-full transition ${analyticsSetting?.siteIndexingEnabled ? 'bg-primary' : 'bg-gray-700'}`}>
-                            <div className={`w-5 h-5 rounded-full transition transform bg-white ${analyticsSetting?.siteIndexingEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
-                          </div>
-                        </Label>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-darkGray/40 rounded-md p-4 border border-gray-700 mt-2">
-                      <h4 className="text-white text-sm font-medium mb-2">Efectele dezactivării indexării globale:</h4>
-                      <ul className="text-xs text-gray-300 space-y-1 list-disc list-inside">
-                        <li>Adaugă X-Robots-Tag: noindex, nofollow la toate răspunsurile HTTP</li>
-                        <li>Actualizează robots.txt pentru a bloca toți agenții</li>
-                        <li>Funcționează superior și înlocuiește setările meta robots individuale</li>
-                        <li>Folosește pentru a preveni indexarea site-urilor aflate în dezvoltare</li>
-                      </ul>
-                    </div>
-                  </div>
+
                   
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
