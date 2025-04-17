@@ -85,14 +85,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create contact submission
   app.post("/api/contact", async (req, res) => {
     try {
+      console.log("Contact form submission received:", req.body);
+      
+      // Using safeParse to handle validation
       const result = insertContactSchema.safeParse(req.body);
       
       if (!result.success) {
         const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
         return res.status(400).json({ message: errorMessage });
       }
       
       const submission = await storage.createContactSubmission(result.data);
+      console.log("Contact form submission created:", submission.id);
+      
       res.status(201).json({ 
         message: "Mesajul a fost trimis cu succes!",
         id: submission.id 

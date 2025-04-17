@@ -56,20 +56,20 @@ const Contact = () => {
 
   const mutation = useMutation({
     mutationFn: async (data: InsertContact) => {
-      const response = await apiRequest('POST', '/api/contact', data);
-      return await response.json();
+      return await apiRequest('POST', '/api/contact', data);
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
         title: 'Succes!',
-        description: data.message || 'Mesajul a fost trimis cu succes!',
+        description: 'Mesajul a fost trimis cu succes!',
       });
       form.reset();
     },
     onError: (error: Error) => {
+      console.error('Error submitting form:', error);
       toast({
         title: 'Eroare',
-        description: error.message || 'A apărut o eroare. Încercați din nou mai târziu.',
+        description: 'A apărut o eroare. Încercați din nou mai târziu.',
         variant: 'destructive',
       });
     },
