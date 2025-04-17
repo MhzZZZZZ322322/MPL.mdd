@@ -45,7 +45,12 @@ export const players = pgTable("players", {
   realName: text("real_name").notNull(),
   team: text("team").notNull(),
   game: text("game").notNull(),
-  score: integer("score").notNull(),
+  score: integer("score").notNull().default(0),
+  country: text("country").default("Moldova"),
+  profileImage: text("profile_image").notNull().default(""),
+  socialLinks: text("social_links").default(""),
+  achievements: text("achievements").default(""),
+  stats: text("stats").default(""),
 });
 
 export const insertPlayerSchema = createInsertSchema(players).omit({

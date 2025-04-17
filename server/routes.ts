@@ -147,6 +147,81 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Create player
+  app.post("/api/players", async (req, res) => {
+    try {
+      // Using safeParse to handle validation
+      const result = insertPlayerSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      const player = await storage.createPlayer(result.data);
+      res.status(201).json(player);
+    } catch (error) {
+      console.error("Error creating player:", error);
+      res.status(500).json({ message: "Failed to create player" });
+    }
+  });
+  
+  // Update player
+  app.patch("/api/players/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid player ID" });
+      }
+      
+      // Using safeParse to handle validation
+      const result = insertPlayerSchema.partial().safeParse(req.body);
+      
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      // First check if player exists
+      const existingPlayer = await storage.getPlayer(id);
+      if (!existingPlayer) {
+        return res.status(404).json({ message: "Player not found" });
+      }
+      
+      // Update player
+      const updatedPlayer = await storage.updatePlayer(id, result.data);
+      res.json(updatedPlayer);
+    } catch (error) {
+      console.error("Error updating player:", error);
+      res.status(500).json({ message: "Failed to update player" });
+    }
+  });
+  
+  // Delete player
+  app.delete("/api/players/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid player ID" });
+      }
+      
+      // First check if player exists
+      const existingPlayer = await storage.getPlayer(id);
+      if (!existingPlayer) {
+        return res.status(404).json({ message: "Player not found" });
+      }
+      
+      // Delete player
+      await storage.deletePlayer(id);
+      res.status(200).json({ message: "Player deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting player:", error);
+      res.status(500).json({ message: "Failed to delete player" });
+    }
+  });
+
   // Get all FAQs
   app.get("/api/faqs", async (req, res) => {
     try {
