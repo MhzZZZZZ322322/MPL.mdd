@@ -76,18 +76,21 @@ export const HeroSlider = () => {
         <Swiper
           modules={[EffectFade, Autoplay, Navigation, Pagination]}
           effect="fade"
-          speed={800} // Am redus timpul de tranziție pentru o schimbare mai rapidă
+          speed={800} // Timpul de tranziție pentru o schimbare mai rapidă
           slidesPerView={1}
           loop={true}
           autoplay={{
-            delay: 3000, // Am redus timpul de așteptare de la 5000ms la 3000ms
+            delay: 3000, // Timpul de așteptare redus 
             disableOnInteraction: false,
+          }}
+          fadeEffect={{
+            crossFade: true // Activăm cross-fade pentru a preveni suprapunerea conținutului
           }}
           pagination={{
             clickable: true,
           }}
           navigation={true}
-          className="absolute inset-0 w-full h-full max-w-[100vw]"
+          className="absolute inset-0 w-full h-full max-w-[100vw] z-0"
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index} className="relative overflow-hidden">
@@ -101,11 +104,12 @@ export const HeroSlider = () => {
               </div>
               
               {/* Content */}
-              <div className="relative h-full flex flex-col justify-center items-start px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto">
+              <div className="relative h-full flex flex-col justify-center items-start px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-10">
                 <motion.div
+                  key={index} // Cheia unică asigură că fiecare slide are propria tranziție
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 }} // Am redus durata animației textului
+                  transition={{ duration: 0.3, delay: 0.1 }}
                   className="max-w-3xl"
                 >
                   <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-rajdhani [text-shadow:_0_1px_5px_rgb(0_0_0_/_50%)]">
