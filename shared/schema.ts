@@ -26,7 +26,7 @@ export const events = pgTable("events", {
   teamSize: text("team_size").notNull(),
   prize: text("prize").notNull(),
   status: text("status").notNull(),
-  imageUrl: text("image_url"),
+  imageUrl: text("image_url").notNull().default(""),
 });
 
 export const insertEventSchema = createInsertSchema(events).omit({

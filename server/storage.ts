@@ -9,7 +9,7 @@ import {
 // modify the interface with any CRUD methods
 // you might need
 
-import { SiteContent, InsertSiteContent } from './content-schema';
+import { SiteContent, InsertSiteContent } from '@shared/content-schema';
 
 export interface IStorage {
   // User methods
@@ -48,12 +48,14 @@ export class MemStorage implements IStorage {
   private players: Map<number, Player>;
   private contactSubmissions: Map<number, Contact>;
   private faqs: Map<number, Faq>;
+  private siteContents: Map<number, SiteContent>;
   
   currentUserId: number;
   currentEventId: number;
   currentPlayerId: number;
   currentContactId: number;
   currentFaqId: number;
+  currentSiteContentId: number;
 
   constructor() {
     this.users = new Map();
@@ -61,12 +63,14 @@ export class MemStorage implements IStorage {
     this.players = new Map();
     this.contactSubmissions = new Map();
     this.faqs = new Map();
+    this.siteContents = new Map();
     
     this.currentUserId = 1;
     this.currentEventId = 1;
     this.currentPlayerId = 1;
     this.currentContactId = 1;
     this.currentFaqId = 1;
+    this.currentSiteContentId = 1;
     
     // Initialize with sample data
     this.initializeData();
@@ -101,7 +105,12 @@ export class MemStorage implements IStorage {
   
   async createEvent(insertEvent: InsertEvent): Promise<Event> {
     const id = this.currentEventId++;
-    const event: Event = { ...insertEvent, id };
+    // Ensure imageUrl is always a string, setting a default if undefined
+    const eventData = {
+      ...insertEvent,
+      imageUrl: insertEvent.imageUrl || "",
+    };
+    const event: Event = { ...eventData, id };
     this.events.set(id, event);
     return event;
   }
@@ -158,7 +167,140 @@ export class MemStorage implements IStorage {
     return faq;
   }
   
+  // Site Content methods
+  async getSiteContents(): Promise<SiteContent[]> {
+    return Array.from(this.siteContents.values());
+  }
+  
+  async getSiteContentByKey(key: string): Promise<SiteContent | undefined> {
+    return Array.from(this.siteContents.values()).find(
+      (content) => content.contentKey === key
+    );
+  }
+  
+  async updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent> {
+    const existingContent = this.siteContents.get(id);
+    
+    if (!existingContent) {
+      throw new Error(`Site content with id ${id} not found`);
+    }
+    
+    const updatedContent: SiteContent = {
+      ...existingContent,
+      ...content,
+      updatedAt: new Date()
+    };
+    
+    this.siteContents.set(id, updatedContent);
+    return updatedContent;
+  }
+  
   private initializeData() {
+    // Initialize site content
+    // Hero section
+    const heroContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "hero",
+      title: "Moldova Pro League",
+      content: "Prima comunitate esports din Moldova",
+      contentType: "hero",
+      imageUrl: "/assets/MPL logo black-white.png",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(heroContent.id, heroContent);
+    
+    // About section
+    const aboutContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "about",
+      title: "Despre Noi",
+      content: "Moldova Pro League (MPL) este prima comunitate de esports din Moldova, creată cu scopul de a dezvolta scena competitivă de jocuri video în țara noastră. Fondată în 2018 de către un grup de pasionați, MPL a crescut de la un mic turneu local la o organizație recunoscută la nivel național care găzduiește competiții pentru multiple jocuri precum CS:GO, League of Legends și FIFA.",
+      contentType: "text",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(aboutContent.id, aboutContent);
+    
+    // Mission section
+    const missionContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "mission",
+      title: "Misiunea Noastră",
+      content: "Ne dedicăm dezvoltării ecosistemului esports din Moldova prin organizarea de turnee competitive, crearea oportunităților pentru jucătorii talentați și construirea unei comunități puternice și incluzive.",
+      contentType: "text",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(missionContent.id, missionContent);
+    
+    // Events section title
+    const eventsHeaderContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "events-header",
+      title: "Turnee & Evenimente",
+      content: "Descoperă toate evenimentele organizate de MPL. De la competiții online la evenimente LAN, suntem dedicați să oferim cea mai bună experiență pentru comunitatea esports din Moldova.",
+      contentType: "section-title",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(eventsHeaderContent.id, eventsHeaderContent);
+    
+    // Rankings section title
+    const rankingsHeaderContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "rankings-header",
+      title: "Clasamente Jucători",
+      content: "Cei mai buni jucători din cadrul competițiilor noastre. Clasamentele sunt actualizate după fiecare turneu oficial MPL.",
+      contentType: "section-title",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(rankingsHeaderContent.id, rankingsHeaderContent);
+    
+    // Partners section title
+    const partnersHeaderContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "partners-header",
+      title: "Partenerii Noștri",
+      content: "Companiile care susțin dezvoltarea esports în Moldova alături de noi. Datorită acestor parteneriate putem oferi premii valoroase și organizăm turnee de calitate.",
+      contentType: "section-title",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(partnersHeaderContent.id, partnersHeaderContent);
+    
+    // FAQ section title
+    const faqHeaderContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "faq-header",
+      title: "Întrebări Frecvente",
+      content: "Găsește răspunsuri la cele mai comune întrebări despre MPL și evenimentele noastre.",
+      contentType: "section-title",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(faqHeaderContent.id, faqHeaderContent);
+    
+    // Contact section title
+    const contactHeaderContent: SiteContent = {
+      id: this.currentSiteContentId++,
+      contentKey: "contact-header",
+      title: "Contactează-ne",
+      content: "Ai întrebări sau sugestii? Vrei să participi la turnee sau să devii partener? Completează formularul și te vom contacta în cel mai scurt timp.",
+      contentType: "section-title",
+      imageUrl: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.siteContents.set(contactHeaderContent.id, contactHeaderContent);
+    
     // Add events
     this.createEvent({
       title: "HATOR CS LEAGUE MOLDOVA",

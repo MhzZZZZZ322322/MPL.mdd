@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema } from "@shared/schema";
-import { insertSiteContentSchema } from "./content-schema";
+import { insertSiteContentSchema } from "@shared/content-schema";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -91,6 +91,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching contact submissions:", error);
       res.status(500).json({ message: "Failed to fetch contact submissions" });
+    }
+  });
+  
+  // Site content routes
+  app.get("/api/content", async (req, res) => {
+    try {
+      const contents = await storage.getSiteContents();
+      res.json(contents);
+    } catch (error) {
+      console.error("Error fetching site contents:", error);
+      res.status(500).json({ message: "Failed to fetch site contents" });
+    }
+  });
+  
+  app.get("/api/content/:key", async (req, res) => {
+    try {
+      const key = req.params.key;
+      const content = await storage.getSiteContentByKey(key);
+      
+      if (!content) {
+        return res.status(404).json({ message: "Content not found" });
+      }
+      
+      res.json(content);
+    } catch (error) {
+      console.error("Error fetching content:", error);
+      res.status(500).json({ message: "Failed to fetch content" });
+    }
+  });
+  
+  app.patch("/api/content/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid content ID" });
+      }
+      
+      // Using safeParse to handle validation
+      const result = insertSiteContentSchema.partial().safeParse(req.body);
+      
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      const updatedContent = await storage.updateSiteContent(id, result.data);
+      res.json(updatedContent);
+    } catch (error) {
+      console.error("Error updating content:", error);
+      if (error instanceof Error && error.message.includes("not found")) {
+        return res.status(404).json({ message: error.message });
+      }
+      res.status(500).json({ message: "Failed to update content" });
     }
   });
 
