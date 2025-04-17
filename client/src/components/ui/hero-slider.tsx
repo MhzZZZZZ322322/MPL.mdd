@@ -45,8 +45,8 @@ export const HeroSlider = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroContent.image})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+        {/* Eliminăm gradientul orizontal care cauzează linia violetă pe mobile și ajustăm cel vertical */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
       </div>
       
       {/* Content */}
