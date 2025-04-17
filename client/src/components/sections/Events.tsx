@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { Link } from 'wouter';
 import EventCard from '@/components/ui/event-card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -88,11 +89,13 @@ const Events = () => {
         )}
         
         <motion.div className="text-center" variants={itemVariants}>
-          <Button 
-            className="inline-block bg-primary hover:bg-primary/80 text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]"
-          >
-            Vezi toate evenimentele <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/events">
+            <Button 
+              className="inline-block bg-primary hover:bg-primary/80 text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]"
+            >
+              Vezi toate evenimentele <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

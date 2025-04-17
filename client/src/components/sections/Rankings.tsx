@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import PlayerRanking from '@/components/ui/player-ranking';
@@ -175,12 +176,14 @@ const Rankings = () => {
         </motion.div>
         
         <motion.div className="text-center" variants={itemVariants}>
-          <Button 
-            variant="outline"
-            className="inline-block bg-transparent border-2 border-secondary hover:border-accent text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(236,72,153,0.6)]"
-          >
-            Vezi toate clasamentele <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/rankings">
+            <Button 
+              variant="outline"
+              className="inline-block bg-transparent border-2 border-secondary hover:border-accent text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(236,72,153,0.6)]"
+            >
+              Vezi toate clasamentele <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </motion.div>
       </motion.div>
     </section>
