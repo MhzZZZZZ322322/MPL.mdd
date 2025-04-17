@@ -5,6 +5,7 @@ import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, 
 import { formatDistanceToNow } from 'date-fns';
 import { ro } from 'date-fns/locale';
 import AdminLogin from '@/components/ui/admin-login';
+import AdminCard from '@/components/ui/admin-card';
 
 const Admin = () => {
   const [contactMessages, setContactMessages] = useState<Contact[]>([]);
@@ -91,21 +92,9 @@ const Admin = () => {
             <h1 className="text-3xl font-rajdhani font-bold text-white mb-2">Panou de administrare</h1>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary"></div>
           </div>
-          <div className="flex gap-4">
-            <a 
-              href="/admin/content"
-              className="px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-md transition-colors flex items-center gap-2"
-            >
-              Editor Conținut
-            </a>
-            <a 
-              href="/admin/events"
-              className="px-4 py-2 bg-secondary hover:bg-secondary/80 text-white rounded-md transition-colors flex items-center gap-2"
-            >
-              Gestionare Evenimente
-            </a>
+          <div>
             <button 
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors" 
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors flex items-center gap-2" 
               onClick={() => {
                 localStorage.removeItem('isAdmin');
                 setIsAuthenticated(false);
@@ -116,6 +105,42 @@ const Admin = () => {
           </div>
         </div>
         
+        {/* Grid de carduri admin */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {/* Content Editor */}
+          <AdminCard 
+            title="Editor Conținut" 
+            description="Editează conținutul paginilor și secțiunilor" 
+            icon={FileEdit} 
+            href="/admin/content"
+          />
+
+          {/* Event Management */}
+          <AdminCard 
+            title="Manager Evenimente" 
+            description="Adaugă, editează sau șterge evenimente și turnee" 
+            icon={Calendar} 
+            href="/admin/events"
+          />
+          
+          {/* Player Management */}
+          <AdminCard 
+            title="Manager Jucători" 
+            description="Administrare jucători și clasamente" 
+            icon={Users2} 
+            href="/admin/players"
+          />
+          
+          {/* SEO & Analytics Management */}
+          <AdminCard 
+            title="SEO & Analytics" 
+            description="Gestionare setări SEO și analytics" 
+            icon={Globe} 
+            href="/admin/seo"
+          />
+        </div>
+
+        {/* Mesaje de contact */}
         <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-rajdhani font-bold text-white">Mesaje de contact</h2>
