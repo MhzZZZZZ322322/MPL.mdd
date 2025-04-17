@@ -22,11 +22,13 @@ export const events = pgTable("events", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   date: text("date").notNull(),
-  platform: text("platform").notNull(),
-  teamSize: text("team_size").notNull(),
-  prize: text("prize").notNull(),
-  status: text("status").notNull(),
+  location: text("location").notNull().default(""),
+  platform: text("platform").notNull().default(""),
+  teamSize: text("team_size").notNull().default(""),
+  prize: text("prize").notNull().default(""),
+  status: text("status").notNull().default("upcoming"),
   imageUrl: text("image_url").notNull().default(""),
+  registrationLink: text("registration_link").default(""),
 });
 
 export const insertEventSchema = createInsertSchema(events).omit({

@@ -21,11 +21,15 @@ export interface IStorage {
   getEvents(): Promise<Event[]>;
   getEvent(id: number): Promise<Event | undefined>;
   createEvent(event: InsertEvent): Promise<Event>;
+  updateEvent(id: number, event: Partial<InsertEvent>): Promise<Event>;
+  deleteEvent(id: number): Promise<void>;
   
   // Player methods
   getPlayers(game?: string): Promise<Player[]>;
   getPlayer(id: number): Promise<Player | undefined>;
   createPlayer(player: InsertPlayer): Promise<Player>;
+  updatePlayer(id: number, player: Partial<InsertPlayer>): Promise<Player>;
+  deletePlayer(id: number): Promise<void>;
   
   // Contact methods
   createContactSubmission(submission: InsertContact): Promise<Contact>;
@@ -35,6 +39,8 @@ export interface IStorage {
   getFaqs(): Promise<Faq[]>;
   getFaq(id: number): Promise<Faq | undefined>;
   createFaq(faq: InsertFaq): Promise<Faq>;
+  updateFaq(id: number, faq: Partial<InsertFaq>): Promise<Faq>;
+  deleteFaq(id: number): Promise<void>;
   
   // Site Content methods
   getSiteContents(): Promise<SiteContent[]>;
@@ -109,10 +115,49 @@ export class MemStorage implements IStorage {
     const eventData = {
       ...insertEvent,
       imageUrl: insertEvent.imageUrl || "",
+      location: insertEvent.location || "",
+      platform: insertEvent.platform || "",
+      teamSize: insertEvent.teamSize || "",
+      prize: insertEvent.prize || "",
+      status: insertEvent.status || "upcoming",
+      registrationLink: insertEvent.registrationLink || null
     };
     const event: Event = { ...eventData, id };
     this.events.set(id, event);
     return event;
+  }
+  
+  async updateEvent(id: number, updateData: Partial<InsertEvent>): Promise<Event> {
+    const existingEvent = this.events.get(id);
+    
+    if (!existingEvent) {
+      throw new Error(`Event with id ${id} not found`);
+    }
+    
+    const updatedEvent: Event = {
+      ...existingEvent,
+      ...updateData,
+      // Ensure these fields remain strings if they're undefined in the update
+      imageUrl: updateData.imageUrl !== undefined ? updateData.imageUrl : existingEvent.imageUrl,
+      location: updateData.location !== undefined ? updateData.location : existingEvent.location,
+      platform: updateData.platform !== undefined ? updateData.platform : existingEvent.platform,
+      teamSize: updateData.teamSize !== undefined ? updateData.teamSize : existingEvent.teamSize,
+      prize: updateData.prize !== undefined ? updateData.prize : existingEvent.prize,
+      status: updateData.status !== undefined ? updateData.status : existingEvent.status,
+      // Keep registrationLink as is if not updated
+      registrationLink: updateData.registrationLink !== undefined ? updateData.registrationLink : existingEvent.registrationLink
+    };
+    
+    this.events.set(id, updatedEvent);
+    return updatedEvent;
+  }
+  
+  async deleteEvent(id: number): Promise<void> {
+    if (!this.events.has(id)) {
+      throw new Error(`Event with id ${id} not found`);
+    }
+    
+    this.events.delete(id);
   }
   
   // Player methods
@@ -133,6 +178,30 @@ export class MemStorage implements IStorage {
     const player: Player = { ...insertPlayer, id };
     this.players.set(id, player);
     return player;
+  }
+  
+  async updatePlayer(id: number, updateData: Partial<InsertPlayer>): Promise<Player> {
+    const existingPlayer = this.players.get(id);
+    
+    if (!existingPlayer) {
+      throw new Error(`Player with id ${id} not found`);
+    }
+    
+    const updatedPlayer: Player = {
+      ...existingPlayer,
+      ...updateData
+    };
+    
+    this.players.set(id, updatedPlayer);
+    return updatedPlayer;
+  }
+  
+  async deletePlayer(id: number): Promise<void> {
+    if (!this.players.has(id)) {
+      throw new Error(`Player with id ${id} not found`);
+    }
+    
+    this.players.delete(id);
   }
   
   // Contact methods
