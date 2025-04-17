@@ -92,3 +92,47 @@ export const insertFaqSchema = createInsertSchema(faqs).omit({
 
 export type InsertFaq = z.infer<typeof insertFaqSchema>;
 export type Faq = typeof faqs.$inferSelect;
+
+// SEO schema
+export const seoSettings = pgTable("seo_settings", {
+  id: serial("id").primaryKey(),
+  pageUrl: text("page_url").notNull().unique(),
+  title: text("title").notNull(),
+  metaDescription: text("meta_description").notNull(),
+  metaKeywords: text("meta_keywords").default(""),
+  metaRobots: text("meta_robots").default("index, follow"),
+  canonicalUrl: text("canonical_url").default(""),
+  structuredData: text("structured_data").default(""),
+  openGraph: text("open_graph").default(""),
+  twitterCard: text("twitter_card").default(""),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertSeoSchema = createInsertSchema(seoSettings).omit({
+  id: true,
+  updatedAt: true,
+});
+
+export type InsertSeo = z.infer<typeof insertSeoSchema>;
+export type SeoSettings = typeof seoSettings.$inferSelect;
+
+// Analytics settings schema
+export const analyticsSettings = pgTable("analytics_settings", {
+  id: serial("id").primaryKey(),
+  googleTagManagerId: text("google_tag_manager_id").default(""),
+  googleAnalyticsId: text("google_analytics_id").default(""),
+  googleSearchConsoleVerification: text("google_search_console_verification").default(""),
+  facebookPixelId: text("facebook_pixel_id").default(""),
+  robotsTxt: text("robots_txt").default("User-agent: *\nAllow: /"),
+  sitemapXml: text("sitemap_xml").default(""),
+  customHeaderScripts: text("custom_header_scripts").default(""),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertAnalyticsSchema = createInsertSchema(analyticsSettings).omit({
+  id: true,
+  updatedAt: true,
+});
+
+export type InsertAnalytics = z.infer<typeof insertAnalyticsSchema>;
+export type AnalyticsSettings = typeof analyticsSettings.$inferSelect;

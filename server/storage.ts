@@ -46,6 +46,17 @@ export interface IStorage {
   getSiteContents(): Promise<SiteContent[]>;
   getSiteContentByKey(key: string): Promise<SiteContent | undefined>;
   updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent>;
+  
+  // SEO Settings methods
+  getSeoSettings(): Promise<SeoSettings[]>;
+  getSeoSettingByUrl(pageUrl: string): Promise<SeoSettings | undefined>;
+  createSeoSetting(seo: InsertSeo): Promise<SeoSettings>;
+  updateSeoSetting(id: number, seo: Partial<InsertSeo>): Promise<SeoSettings>;
+  
+  // Analytics Settings methods
+  getAnalyticsSettings(): Promise<AnalyticsSettings | undefined>;
+  updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings>;
+  createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings>;
 }
 
 export class MemStorage implements IStorage {
@@ -55,6 +66,8 @@ export class MemStorage implements IStorage {
   private contactSubmissions: Map<number, Contact>;
   private faqs: Map<number, Faq>;
   private siteContents: Map<number, SiteContent>;
+  private seoSettings: Map<number, SeoSettings>;
+  private analyticsSettings: Map<number, AnalyticsSettings>;
   
   currentUserId: number;
   currentEventId: number;
@@ -62,6 +75,8 @@ export class MemStorage implements IStorage {
   currentContactId: number;
   currentFaqId: number;
   currentSiteContentId: number;
+  currentSeoId: number;
+  currentAnalyticsId: number;
 
   constructor() {
     this.users = new Map();
