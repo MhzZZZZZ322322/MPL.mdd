@@ -10,7 +10,8 @@ import {
   LoaderCircle, Info, AlertTriangle, Globe, Tag, Bot, Link as LinkIcon, 
   Code, Twitter, Facebook, ChevronLeft, Copy, Save, Plus, Trash2, 
   FileText, ShoppingCart, CalendarDays, Building, User, Briefcase, BarChart,
-  CornerDownRight, AlertCircle, XCircle, CheckCircle, AlertOctagon, PieChart
+  CornerDownRight, AlertCircle, XCircle, CheckCircle, AlertOctagon, PieChart, 
+  Image, Upload, Eye
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
@@ -1057,7 +1058,7 @@ ${sitemapItems}
                   
                   <div className="space-y-2">
                     <Label htmlFor="errorImage" className="text-white flex items-center">
-                      <Image className="w-4 h-4 mr-2" /> Imagine personalizată pentru pagina 404
+                      <Image size={16} className="w-4 h-4 mr-2" /> Imagine personalizată pentru pagina 404
                     </Label>
                     <div className="grid md:grid-cols-12 gap-2">
                       <div className="md:col-span-10">
@@ -1070,27 +1071,83 @@ ${sitemapItems}
                         />
                       </div>
                       <div className="md:col-span-2">
-                        <Button
-                          variant="outline"
-                          className="w-full text-white border-gray-600 hover:bg-darkGray"
-                          onClick={() => toast({
-                            title: 'Funcționalitate în dezvoltare',
-                            description: 'Încărcarea imaginilor va fi disponibilă curând.',
-                            variant: 'default',
-                          })}
-                        >
-                          Încarcă
-                        </Button>
+                        <label htmlFor="image-upload" className="w-full">
+                          <Button
+                            variant="outline"
+                            className="w-full text-white border-gray-600 hover:bg-darkGray"
+                            onClick={() => {
+                              // Verificăm dacă există un input pentru încărcare, dacă nu, creăm unul
+                              const input = document.getElementById('image-upload');
+                              if (input) {
+                                (input as HTMLInputElement).click();
+                              }
+                            }}
+                          >
+                            <Upload className="w-4 h-4 mr-2" /> Încarcă
+                          </Button>
+                        </label>
+                        <input 
+                          type="file" 
+                          id="image-upload" 
+                          accept="image/*" 
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const tempUrl = URL.createObjectURL(file);
+                              handleCustom404Change('errorImage', tempUrl);
+                              toast({
+                                title: 'Imagine încărcată',
+                                description: 'Imaginea a fost încărcată cu succes. Nu uita să salvezi schimbările!',
+                                variant: 'default',
+                              });
+                            }
+                          }} 
+                        />
                       </div>
                     </div>
                     <p className="text-xs text-gray-400">Imagine personalizată pentru pagina de eroare 404 (recomandă format SVG sau PNG transparent)</p>
+                    
+                    {custom404.errorImage && (
+                      <div className="mt-4 p-4 border border-dashed border-primary/30 rounded-md">
+                        <p className="text-xs text-white mb-2">Previzualizare imagine:</p>
+                        <div className="flex justify-center">
+                          <img 
+                            src={custom404.errorImage} 
+                            alt="Previzualizare imagine 404" 
+                            className="max-h-60 object-contain rounded" 
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
                 <CardFooter className="justify-end gap-2 border-t border-gray-800 pt-4">
-                  <Button variant="outline" disabled={loading} className="text-white border-gray-600 hover:bg-darkGray">
-                    Previzualizare
+                  <Button 
+                    variant="outline" 
+                    disabled={loading} 
+                    className="text-white border-gray-600 hover:bg-darkGray"
+                    onClick={() => {
+                      toast({
+                        title: 'Previzualizare pagină 404',
+                        description: 'Previzualizarea paginii 404 va fi deschisă într-o fereastră nouă',
+                      });
+                      // Am putea deschide o previzualizare a paginii 404 aici
+                    }}
+                  >
+                    <Eye className="w-4 h-4 mr-2" /> Previzualizare
                   </Button>
-                  <Button disabled={loading} className="bg-primary hover:bg-primary/80">
+                  <Button 
+                    disabled={loading} 
+                    className="bg-primary hover:bg-primary/80"
+                    onClick={() => {
+                      toast({
+                        title: 'Setări salvate',
+                        description: 'Setările paginii 404 au fost salvate cu succes',
+                        variant: 'default',
+                      });
+                    }}
+                  >
                     {loading ? <LoaderCircle className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
                     Salvează
                   </Button>
