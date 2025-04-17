@@ -65,9 +65,9 @@ export const HeroSlider = () => {
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-rajdhani [text-shadow:_0_1px_5px_rgb(0_0_0_/_50%)]">
               {heroContent.title}
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-200 mb-8 max-w-xl [text-shadow:_0_1px_3px_rgb(0_0_0_/_80%)]">
+            <h2 className="text-xl sm:text-2xl text-gray-200 mb-8 max-w-xl [text-shadow:_0_1px_3px_rgb(0_0_0_/_80%)]">
               {heroContent.subtitle}
-            </p>
+            </h2>
             <div className="flex flex-wrap gap-4">
               {heroContent.primaryBtn.link.startsWith('http') ? (
                 <a href={heroContent.primaryBtn.link} target="_blank" rel="noopener noreferrer">
