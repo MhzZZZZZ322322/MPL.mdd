@@ -89,7 +89,7 @@ const About = () => {
               <NeonBorder className="rounded-lg overflow-hidden">
                 <div className="rounded-lg overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                    src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" 
                     alt="MPL Community Event" 
                     className="w-full h-80 object-cover rounded-lg"
                   />
