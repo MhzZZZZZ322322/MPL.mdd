@@ -9,10 +9,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { 
   LoaderCircle, Info, AlertTriangle, Globe, Tag, Bot, Link as LinkIcon, 
   Code, Twitter, Facebook, ChevronLeft, Copy, Save, Plus, Trash2, 
-  FileText, ShoppingCart, CalendarDays, Building, User, Briefcase, BarChart
+  FileText, ShoppingCart, CalendarDays, Building, User, Briefcase, BarChart,
+  CornerDownRight, AlertCircle, XCircle, CheckCircle, AlertOctagon, PieChart
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
+import { Switch } from '@/components/ui/switch';
 
 const pages = [
   { url: '/', title: 'Pagina Principală' },
@@ -114,6 +116,14 @@ const SeoManager = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [structuredDataItems, setStructuredDataItems] = useState<StructuredDataItem[]>([]);
   const [editingItemIndex, setEditingItemIndex] = useState<number | null>(null);
+  
+  // State pentru redirectări
+  const [redirects, setRedirects] = useState<{id: number, fromPath: string, toPath: string, type: '301' | '302', active: boolean}[]>([]);
+  const [newRedirect, setNewRedirect] = useState<{fromPath: string, toPath: string, type: '301' | '302'}>({
+    fromPath: '',
+    toPath: '',
+    type: '301'
+  });
   const { toast } = useToast();
 
   useEffect(() => {
@@ -401,9 +411,10 @@ ${sitemapItems}
         </div>
         
         <Tabs defaultValue="pageSeo" className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-6">
-          <TabsList className="grid grid-cols-2 mb-6">
+          <TabsList className="grid grid-cols-3 mb-6">
             <TabsTrigger value="pageSeo">SEO pentru pagini</TabsTrigger>
             <TabsTrigger value="analytics">Analytics & Site-wide SEO</TabsTrigger>
+            <TabsTrigger value="redirects">Redirectări & 404</TabsTrigger>
           </TabsList>
           
           <TabsContent value="pageSeo">
@@ -719,6 +730,286 @@ ${sitemapItems}
                     Resetează
                   </Button>
                   <Button onClick={saveAnalyticsSetting} disabled={loading} className="bg-primary hover:bg-primary/80">
+                    {loading ? <LoaderCircle className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+                    Salvează
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="redirects">
+            <div className="space-y-6">
+              <Card className="bg-darkBg border-primary/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center">
+                    <CornerDownRight className="w-5 h-5 mr-2" />
+                    Gestionare Redirectări
+                  </CardTitle>
+                  <CardDescription>Adaugă și administrează redirectări 301 și 302 pentru a nu pierde trafic</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="bg-darkGray/40 rounded-md p-4 border border-gray-700 mb-4">
+                    <div className="flex items-center mb-2">
+                      <AlertCircle className="w-4 h-4 text-yellow-500 mr-2" />
+                      <h4 className="text-white text-sm font-medium">Importanța redirectărilor</h4>
+                    </div>
+                    <p className="text-xs text-gray-300 mb-2">
+                      Redirectările sunt esențiale pentru a păstra autoritatea SEO și a nu pierde trafic atunci când modifici structura site-ului:
+                    </p>
+                    <ul className="text-xs text-gray-300 space-y-1 list-disc list-inside">
+                      <li><span className="font-medium text-primary">301 (Permanent)</span> - Pentru pagini mutate definitiv</li>
+                      <li><span className="font-medium text-blue-400">302 (Temporar)</span> - Pentru pagini temporar indisponibile</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <h3 className="text-white font-medium">Adaugă redirectare nouă</h3>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="fromPath" className="text-white">URL sursă</Label>
+                        <Input 
+                          id="fromPath" 
+                          placeholder="/pagina-veche" 
+                          value={newRedirect.fromPath}
+                          onChange={(e) => setNewRedirect({...newRedirect, fromPath: e.target.value})}
+                          className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
+                        />
+                        <p className="text-xs text-gray-400">Calea URL care nu mai există</p>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="toPath" className="text-white">URL destinație</Label>
+                        <Input 
+                          id="toPath" 
+                          placeholder="/pagina-noua" 
+                          value={newRedirect.toPath}
+                          onChange={(e) => setNewRedirect({...newRedirect, toPath: e.target.value})}
+                          className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
+                        />
+                        <p className="text-xs text-gray-400">Calea URL către care se face redirectarea</p>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="redirectType" className="text-white">Tip redirectare</Label>
+                        <Select 
+                          value={newRedirect.type} 
+                          onValueChange={(value: '301' | '302') => setNewRedirect({...newRedirect, type: value})}
+                        >
+                          <SelectTrigger className="border-primary/20 bg-darkGray/60 text-white">
+                            <SelectValue placeholder="Selectează tip" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="301">301 - Permanent</SelectItem>
+                            <SelectItem value="302">302 - Temporar</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-end">
+                      <Button 
+                        className="bg-primary hover:bg-primary/80"
+                        disabled={!newRedirect.fromPath || !newRedirect.toPath}
+                        onClick={() => {
+                          // Adaugă o nouă redirectare
+                          const newId = redirects.length > 0 ? Math.max(...redirects.map(r => r.id)) + 1 : 1;
+                          setRedirects([...redirects, {
+                            id: newId,
+                            fromPath: newRedirect.fromPath,
+                            toPath: newRedirect.toPath,
+                            type: newRedirect.type,
+                            active: true
+                          }]);
+                          
+                          // Resetează formularul
+                          setNewRedirect({
+                            fromPath: '',
+                            toPath: '',
+                            type: '301'
+                          });
+                          
+                          toast({
+                            title: 'Succes',
+                            description: 'Redirectarea a fost adăugată cu succes.',
+                          });
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Adaugă redirectare
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <h3 className="text-white font-medium mb-4">Redirectări active</h3>
+                    {redirects.length === 0 ? (
+                      <div className="text-center bg-darkGray/40 rounded-md p-8 border border-gray-700">
+                        <CornerDownRight className="w-12 h-12 text-gray-500 mx-auto mb-3" />
+                        <p className="text-gray-400">Nu există redirectări configurate</p>
+                        <p className="text-xs text-gray-500 mt-2">Adaugă prima redirectare pentru a gestiona traficul către URL-uri indisponibile</p>
+                      </div>
+                    ) : (
+                      <div className="bg-darkGray/40 rounded-md border border-gray-700 overflow-hidden">
+                        <table className="w-full text-sm text-left">
+                          <thead className="text-xs text-gray-400 uppercase bg-darkGray">
+                            <tr>
+                              <th className="px-6 py-3">Stare</th>
+                              <th className="px-6 py-3">De la URL</th>
+                              <th className="px-6 py-3">Către URL</th>
+                              <th className="px-6 py-3">Tip</th>
+                              <th className="px-6 py-3 text-right">Acțiuni</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {redirects.map((redirect) => (
+                              <tr key={redirect.id} className="border-t border-gray-700">
+                                <td className="px-6 py-4">
+                                  <div className="flex items-center">
+                                    <div className={`w-3 h-3 rounded-full mr-2 ${redirect.active ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                                    <span className="text-xs text-gray-300">{redirect.active ? 'Activ' : 'Inactiv'}</span>
+                                  </div>
+                                </td>
+                                <td className="px-6 py-4 font-mono text-gray-300">{redirect.fromPath}</td>
+                                <td className="px-6 py-4 font-mono text-gray-300">{redirect.toPath}</td>
+                                <td className="px-6 py-4">
+                                  <span className={`text-xs font-medium px-2 py-1 rounded ${redirect.type === '301' ? 'bg-primary/20 text-primary' : 'bg-blue-500/20 text-blue-400'}`}>
+                                    {redirect.type}
+                                  </span>
+                                </td>
+                                <td className="px-6 py-4 text-right">
+                                  <div className="flex items-center justify-end gap-2">
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm" 
+                                      className="text-gray-400 hover:text-white"
+                                      onClick={() => {
+                                        // Toggle starea active/inactive
+                                        setRedirects(redirects.map(r => 
+                                          r.id === redirect.id ? {...r, active: !r.active} : r
+                                        ));
+                                      }}
+                                    >
+                                      {redirect.active ? 
+                                        <XCircle className="w-4 h-4" /> : 
+                                        <CheckCircle className="w-4 h-4" />
+                                      }
+                                    </Button>
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm" 
+                                      className="text-red-400 hover:text-red-300"
+                                      onClick={() => {
+                                        // Șterge redirectarea
+                                        setRedirects(redirects.filter(r => r.id !== redirect.id));
+                                        toast({
+                                          title: 'Succes',
+                                          description: 'Redirectarea a fost ștearsă cu succes.',
+                                        });
+                                      }}
+                                    >
+                                      <Trash2 className="w-4 h-4" />
+                                    </Button>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+                <CardFooter className="justify-between gap-2 border-t border-gray-800 pt-4">
+                  <Button variant="outline" className="text-white border-gray-600 hover:bg-darkGray">
+                    Exportă redirectări
+                  </Button>
+                  <Button className="bg-primary hover:bg-primary/80">
+                    <Save className="w-4 h-4 mr-2" />
+                    Salvează toate redirectările
+                  </Button>
+                </CardFooter>
+              </Card>
+              
+              <Card className="bg-darkBg border-primary/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center">
+                    <AlertOctagon className="w-5 h-5 mr-2" />
+                    Pagină 404 Personalizată
+                  </CardTitle>
+                  <CardDescription>Configurează pagina de eroare 404 cu redirectări automate</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="bg-darkGray/40 rounded-md p-4 border border-gray-700 mb-4">
+                    <div className="flex items-center mb-2">
+                      <PieChart className="w-4 h-4 text-yellow-500 mr-2" />
+                      <h4 className="text-white text-sm font-medium">Sugestii inteligente pentru pagini 404</h4>
+                    </div>
+                    <p className="text-xs text-gray-300">
+                      Sistemul poate sugera vizitatorilor pagini similare atunci când aceștia ajung la o pagină inexistentă, 
+                      bazându-se pe calea URL și potrivirea de cuvinte cheie.
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Switch 
+                        id="enable404tracking" 
+                        checked={true}
+                      />
+                      <Label htmlFor="enable404tracking" className="text-white">Activează monitorizarea 404</Label>
+                    </div>
+                    <p className="text-xs text-gray-400 ml-7">Urmărește și înregistrează toate erorile 404 pentru a optimiza redirectările</p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Switch 
+                        id="enable404suggestions" 
+                        checked={true}
+                      />
+                      <Label htmlFor="enable404suggestions" className="text-white">Activează sugestii automate</Label>
+                    </div>
+                    <p className="text-xs text-gray-400 ml-7">Oferă sugestii de pagini similare pentru vizitatori</p>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="errorPageMessage" className="text-white">Mesaj personalizat pentru pagina 404</Label>
+                    <Textarea 
+                      id="errorPageMessage" 
+                      placeholder="Oops! Pagina pe care o cauți nu există. Iată câteva pagini care te-ar putea interesa..."
+                      className="border-primary/20 bg-darkGray/60 text-white focus:border-primary min-h-[80px]"
+                    />
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="errorReturnLink" className="text-white">Link principal de redirecționare</Label>
+                      <Input 
+                        id="errorReturnLink" 
+                        placeholder="/" 
+                        className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
+                      />
+                      <p className="text-xs text-gray-400">De obicei pagina principală sau harta site-ului</p>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="errorMaxSuggestions" className="text-white">Număr maxim de sugestii</Label>
+                      <Input 
+                        id="errorMaxSuggestions" 
+                        placeholder="3" 
+                        type="number"
+                        className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
+                      />
+                      <p className="text-xs text-gray-400">Numărul maxim de pagini similare sugerate</p>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter className="justify-end gap-2 border-t border-gray-800 pt-4">
+                  <Button variant="outline" disabled={loading} className="text-white border-gray-600 hover:bg-darkGray">
+                    Previzualizare
+                  </Button>
+                  <Button disabled={loading} className="bg-primary hover:bg-primary/80">
                     {loading ? <LoaderCircle className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
                     Salvează
                   </Button>
