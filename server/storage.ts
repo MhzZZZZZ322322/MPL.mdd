@@ -9,6 +9,8 @@ import {
 // modify the interface with any CRUD methods
 // you might need
 
+import { SiteContent, InsertSiteContent } from './content-schema';
+
 export interface IStorage {
   // User methods
   getUser(id: number): Promise<User | undefined>;
@@ -33,6 +35,11 @@ export interface IStorage {
   getFaqs(): Promise<Faq[]>;
   getFaq(id: number): Promise<Faq | undefined>;
   createFaq(faq: InsertFaq): Promise<Faq>;
+  
+  // Site Content methods
+  getSiteContents(): Promise<SiteContent[]>;
+  getSiteContentByKey(key: string): Promise<SiteContent | undefined>;
+  updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent>;
 }
 
 export class MemStorage implements IStorage {

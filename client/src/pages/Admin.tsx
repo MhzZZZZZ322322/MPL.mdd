@@ -91,15 +91,23 @@ const Admin = () => {
             <h1 className="text-3xl font-rajdhani font-bold text-white mb-2">Panou de administrare</h1>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary"></div>
           </div>
-          <button 
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors" 
-            onClick={() => {
-              localStorage.removeItem('isAdmin');
-              setIsAuthenticated(false);
-            }}
-          >
-            Deconectare
-          </button>
+          <div className="flex gap-4">
+            <a 
+              href="/admin/content"
+              className="px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-md transition-colors flex items-center gap-2"
+            >
+              Editor Conținut
+            </a>
+            <button 
+              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors" 
+              onClick={() => {
+                localStorage.removeItem('isAdmin');
+                setIsAuthenticated(false);
+              }}
+            >
+              Deconectare
+            </button>
+          </div>
         </div>
         
         <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-6">

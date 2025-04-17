@@ -4,6 +4,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import EventDetails from "@/pages/EventDetails";
 import Admin from "@/pages/Admin";
+import ContentEditor from "@/pages/ContentEditor";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -13,6 +14,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/event/:id" component={EventDetails} />
       <Route path="/admin" component={Admin} />
+      <Route path="/admin/content" component={ContentEditor} />
       <Route component={NotFound} />
     </Switch>
   );
