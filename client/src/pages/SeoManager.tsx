@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { 
   LoaderCircle, Info, AlertTriangle, Globe, Tag, Bot, Link as LinkIcon, 
   Code, Twitter, Facebook, ChevronLeft, Copy, Save, Plus, Trash2, 
-  FileText, ShoppingCart, CalendarDays, Building, User, Briefcase
+  FileText, ShoppingCart, CalendarDays, Building, User, Briefcase, BarChart
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
@@ -51,6 +51,7 @@ type AnalyticsSetting = {
   googleAnalyticsId: string;
   googleSearchConsoleVerification: string;
   facebookPixelId: string;
+  microsoftClarityId: string; // ID Microsoft Clarity
   robotsTxt: string;
   sitemapXml: string;
   customHeaderScripts: string;
@@ -84,6 +85,7 @@ const EMPTY_ANALYTICS_SETTING: Omit<AnalyticsSetting, 'id' | 'updatedAt'> = {
   googleAnalyticsId: '',
   googleSearchConsoleVerification: '',
   facebookPixelId: '',
+  microsoftClarityId: '', // ID Microsoft Clarity
   robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://moldovaproleague.md/sitemap.xml',
   sitemapXml: `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
@@ -108,6 +110,8 @@ const SeoManager = () => {
   const [currentSeoPage, setCurrentSeoPage] = useState<string>('/');
   const [currentSeoSetting, setCurrentSeoSetting] = useState<Omit<SeoSetting, 'id' | 'updatedAt'>>(EMPTY_SEO_SETTING);
   const [isEditing, setIsEditing] = useState(false);
+  const [structuredDataItems, setStructuredDataItems] = useState<StructuredDataItem[]>([]);
+  const [editingItemIndex, setEditingItemIndex] = useState<number | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -159,6 +163,7 @@ const SeoManager = () => {
           metaRobots: mockSeoSettings[0].metaRobots,
           canonicalUrl: mockSeoSettings[0].canonicalUrl,
           structuredData: mockSeoSettings[0].structuredData,
+          structuredDataItems: mockSeoSettings[0].structuredDataItems || [],
           openGraph: mockSeoSettings[0].openGraph,
           twitterCard: mockSeoSettings[0].twitterCard,
         });
@@ -189,6 +194,7 @@ const SeoManager = () => {
         googleAnalyticsId: 'G-XXXXXXXXXX',
         googleSearchConsoleVerification: '<meta name="google-site-verification" content="XXXXXXXXXXXXXXXXXXXXXXXXX" />',
         facebookPixelId: 'XXXXXXXXXXXXXXXXXX',
+        microsoftClarityId: 'XXXXXXXXXX', // ID Microsoft Clarity
         robotsTxt: 'User-agent: *\nAllow: /\nSitemap: https://moldovaproleague.md/sitemap.xml',
         sitemapXml: '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://moldovaproleague.md/</loc>\n    <lastmod>2025-04-01</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>',
         customHeaderScripts: '<!-- Script-uri custom pentru header -->',
@@ -296,14 +302,19 @@ const SeoManager = () => {
         metaRobots: selectedSetting.metaRobots,
         canonicalUrl: selectedSetting.canonicalUrl,
         structuredData: selectedSetting.structuredData,
+        structuredDataItems: selectedSetting.structuredDataItems || [],
         openGraph: selectedSetting.openGraph,
         twitterCard: selectedSetting.twitterCard,
       });
+      
+      // Actualizăm starea locală pentru datele structurate
+      setStructuredDataItems(selectedSetting.structuredDataItems || []);
     } else {
       setCurrentSeoSetting({
         ...EMPTY_SEO_SETTING,
         pageUrl: pageUrl,
       });
+      setStructuredDataItems([]);
     }
   };
 
@@ -495,50 +506,8 @@ ${sitemapItems}
                       <p className="text-xs text-gray-400">URL-ul canonic complet</p>
                     </div>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="structuredData" className="text-white flex items-center">
-                      <Code className="w-4 h-4 mr-2" /> Date Structurate (JSON-LD)
-                    </Label>
-                    <Textarea 
-                      id="structuredData" 
-                      value={currentSeoSetting.structuredData} 
-                      onChange={(e) => handleSeoSettingChange('structuredData', e.target.value)}
-                      className="border-primary/20 bg-darkGray/60 text-white focus:border-primary font-mono text-sm min-h-[150px]"
-                    />
-                    <p className="text-xs text-gray-400">Format JSON pentru Schema.org</p>
-                  </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="openGraph" className="text-white flex items-center">
-                        <Facebook className="w-4 h-4 mr-2" /> Open Graph (Meta/Facebook)
-                      </Label>
-                      <Textarea 
-                        id="openGraph" 
-                        value={currentSeoSetting.openGraph} 
-                        onChange={(e) => handleSeoSettingChange('openGraph', e.target.value)}
-                        className="border-primary/20 bg-darkGray/60 text-white focus:border-primary font-mono text-sm min-h-[150px]"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="twitterCard" className="text-white flex items-center">
-                        <Twitter className="w-4 h-4 mr-2" /> Twitter Card
-                      </Label>
-                      <Textarea 
-                        id="twitterCard" 
-                        value={currentSeoSetting.twitterCard} 
-                        onChange={(e) => handleSeoSettingChange('twitterCard', e.target.value)}
-                        className="border-primary/20 bg-darkGray/60 text-white focus:border-primary font-mono text-sm min-h-[150px]"
-                      />
-                    </div>
-                  </div>
                 </CardContent>
                 <CardFooter className="justify-end gap-2 border-t border-gray-800 pt-4">
-                  <Button variant="outline" disabled={loading} className="text-white border-gray-600 hover:bg-darkGray">
-                    Anulează
-                  </Button>
                   <Button onClick={saveSeoSetting} disabled={loading} className="bg-primary hover:bg-primary/80">
                     {loading ? <LoaderCircle className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
                     Salvează
@@ -552,10 +521,10 @@ ${sitemapItems}
             <div className="space-y-6">
               <Card className="bg-darkBg border-primary/20">
                 <CardHeader>
-                  <CardTitle className="text-white">Servicii Analytics & Tag Management</CardTitle>
-                  <CardDescription>Conectează site-ul la servicii de analytics și urmărire</CardDescription>
+                  <CardTitle className="text-white">Integrări Analytics</CardTitle>
+                  <CardDescription>Configurează serviciile de analiză și urmărire</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="googleTagManagerId" className="text-white">Google Tag Manager ID</Label>
@@ -602,6 +571,20 @@ ${sitemapItems}
                         placeholder="XXXXXXXXXXXXXXXXXX"
                       />
                     </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="microsoftClarityId" className="text-white flex items-center">
+                      <BarChart className="w-4 h-4 mr-2" /> Microsoft Clarity ID
+                    </Label>
+                    <Input 
+                      id="microsoftClarityId" 
+                      value={analyticsSetting?.microsoftClarityId || ''} 
+                      onChange={(e) => handleAnalyticsSettingChange('microsoftClarityId', e.target.value)}
+                      className="border-primary/20 bg-darkGray/60 text-white focus:border-primary"
+                      placeholder="XXXXXXXXXX"
+                    />
+                    <p className="text-xs text-gray-400">ID-ul pentru Microsoft Clarity - instrumentul de analiză comportamentală a vizitatorilor</p>
                   </div>
                   
                   <div className="space-y-2">
