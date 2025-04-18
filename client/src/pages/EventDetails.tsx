@@ -3,11 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useRoute } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Helmet } from 'react-helmet';
-import { ArrowLeft, Calendar, Gamepad, Users, Trophy, Info, ExternalLink, MapPin, DollarSign, Shield, Clock, Award, TrendingUp } from 'lucide-react';
+import { 
+  ArrowLeft, Calendar, Gamepad, Users, Trophy, Info, ExternalLink, 
+  MapPin, DollarSign, Shield, Clock, Award, TrendingUp, CheckCircle2, 
+  Hourglass, Flag, Laptop2
+} from 'lucide-react';
 import { Link } from 'wouter';
 import { Event } from '@shared/schema';
 import { motion } from 'framer-motion';
-import eventImages from '@/components/sections/EventImages';
 import { getQueryFn } from '@/lib/queryClient';
 import { Badge } from '@/components/ui/badge';
 import csHeroImg from '@assets/image_1744965966423.png';
@@ -77,7 +80,8 @@ const EventDetails = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <div className="relative h-[60vh] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${getEventBackground()})` }}>
+      <div className="relative h-[60vh] bg-cover bg-center bg-no-repeat" 
+           style={{ backgroundImage: `url(${event.imageUrl || getEventBackground()})` }}>
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="container mx-auto px-4 relative h-full flex flex-col justify-end pb-8">
           <div className="absolute top-4 left-4 z-10">
@@ -198,7 +202,7 @@ const EventDetails = () => {
                     </div>
                   ) : (
                     <img 
-                      src={(event.title && eventImages[event.title as keyof typeof eventImages]) || (event.imageUrl as string) || "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg"} 
+                      src={event.imageUrl || "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg"} 
                       alt={event.title || "Event image"} 
                       className="w-full h-full object-cover"
                       onError={(e) => {
