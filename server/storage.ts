@@ -87,6 +87,8 @@ export class MemStorage implements IStorage {
     this.contactSubmissions = new Map();
     this.faqs = new Map();
     this.siteContents = new Map();
+    this.seoSettings = new Map();
+    this.analyticsSettings = new Map();
     
     this.currentUserId = 1;
     this.currentEventId = 1;
@@ -94,6 +96,8 @@ export class MemStorage implements IStorage {
     this.currentContactId = 1;
     this.currentFaqId = 1;
     this.currentSiteContentId = 1;
+    this.currentSeoId = 1;
+    this.currentAnalyticsId = 1;
     
     // Initialize with sample data
     this.initializeData();

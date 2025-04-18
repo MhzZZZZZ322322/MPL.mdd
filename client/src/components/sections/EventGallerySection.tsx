@@ -9,55 +9,72 @@ export interface GalleryItem {
   category: string;
 }
 
-// Imagini de eveniment predefinite pentru galerie
+// Importăm imaginile din fișierele încărcate de client
+import imgEvent1 from '@assets/image_1744903164189.png';
+import imgEvent2 from '@assets/image_1744903541752.png';
+import imgEvent3 from '@assets/image_1744907275538.png';
+import imgEvent4 from '@assets/image_1744912866382.png';
+import imgEvent5 from '@assets/image_1744913294009.png';
+import imgEvent6 from '@assets/image_1744920831388.png';
+import imgEvent7 from '@assets/image_1744965966423.png';
+import imgEvent8 from '@assets/IMG_0006.png';
+import imgEvent9 from '@assets/Screenshot_20250417_215021.jpeg';
+
+// Imagini de eveniment pentru galerie
 const eventImages: GalleryItem[] = [
   {
     id: 1,
-    src: 'https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg',
-    alt: 'HATOR CS2 LEAGUE 2025',
+    src: imgEvent5,
+    alt: 'HATOR CS2 LEAGUE MOLDOVA - SEZONUL 1',
     category: 'Counter-Strike'
   },
   {
     id: 2,
-    src: 'https://cdn.midjourney.com/4bd0f169-d6df-45fc-a8b7-d21b3cff9e59/0_2.webp',
-    alt: 'MPL League of Legends Tournament 2024',
-    category: 'LoL'
+    src: imgEvent1,
+    alt: 'Competiție MPL Counter-Strike 2',
+    category: 'Counter-Strike'
   },
   {
     id: 3,
-    src: 'https://cdn.midjourney.com/f0a8a4ca-9384-431b-be2c-05ccb2dd911d/0_3.webp',
-    alt: 'MPL Summer Cup 2024',
+    src: imgEvent2,
+    alt: 'Finala HATOR CS2 League',
     category: 'Counter-Strike'
   },
   {
     id: 4,
-    src: 'https://cdn.midjourney.com/0afefa62-d1a4-4b16-9dc2-abd5e2d1903c/0_1.webp',
-    alt: 'League of Legends Finals Moldova 2024',
-    category: 'LoL'
+    src: imgEvent3,
+    alt: 'MPL Community Event',
+    category: 'Community'
   },
   {
     id: 5,
-    src: 'https://cdn.midjourney.com/ba6b2c32-b10a-4d74-a277-03821d44cca5/0_1.webp',
-    alt: 'CS:GO Winter Championship Chișinău',
-    category: 'Counter-Strike'
+    src: imgEvent4,
+    alt: 'MPL Game Night',
+    category: 'Community'
   },
   {
     id: 6,
-    src: 'https://cdn.midjourney.com/e06e97ad-3d5a-4f8a-9bff-4f8462aa3823/0_0.webp',
-    alt: 'FIFA 23 Tournament Moldova',
-    category: 'FIFA'
+    src: imgEvent6,
+    alt: 'MPL Tournament Setup',
+    category: 'Organizare'
   },
   {
     id: 7,
-    src: 'https://cdn.midjourney.com/3fcd6030-cd72-4974-95a8-b0ec85b2da32/0_2.webp',
-    alt: 'MPL League Gaming Session',
-    category: 'Community'
+    src: imgEvent7,
+    alt: 'MPL Team Competition',
+    category: 'Counter-Strike'
   },
   {
     id: 8,
-    src: 'https://cdn.midjourney.com/e4e6b7ba-d359-4dbb-9af4-ef252b511e68/0_1.webp',
-    alt: 'MPL Event Setup',
-    category: 'Community'
+    src: imgEvent8,
+    alt: 'Premii HATOR CS2 League',
+    category: 'Premii'
+  },
+  {
+    id: 9,
+    src: imgEvent9,
+    alt: 'Streaming MPL Events',
+    category: 'Streaming'
   }
 ];
 
@@ -104,10 +121,10 @@ const EventGallerySection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
-            MPL Event Gallery
+            <span className="text-primary">Galeria</span> Evenimentelor
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Explorează cele mai importante momente din cadrul evenimentelor Moldova Pro League
+            Explorează cele mai importante momente din cadrul turneelor și evenimentelor organizate de Moldova Pro League
           </p>
         </div>
 
