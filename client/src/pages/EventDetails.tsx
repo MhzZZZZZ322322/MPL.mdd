@@ -135,7 +135,7 @@ const EventDetails = () => {
                     </li>
                     <li className="flex items-center text-gray-300">
                       <Trophy className="h-5 w-5 mr-3 text-yellow-500" />
-                      <span>Premii: <span className="text-white font-medium">{event.prize}</span></span>
+                      <span>Premii: <span className="text-white font-medium">Echipamente Gaming Hator</span></span>
                     </li>
                   </ul>
                 </div>
@@ -154,7 +154,7 @@ const EventDetails = () => {
                       <Info className="h-5 w-5 mr-3 text-primary shrink-0 mt-0.5" />
                       <span>Toate deciziile arbitrilor sunt finale</span>
                     </li>
-                    {event.title && event.title.includes('HATOR') && (
+                    {event.title && (event.title.includes('HATOR') || event.title.includes('Hator')) && (
                       <li className="flex items-start">
                         <Info className="h-5 w-5 mr-3 text-yellow-400 shrink-0 mt-0.5" />
                         <span>Câștigătorii vor primi periferice gaming Hator</span>
