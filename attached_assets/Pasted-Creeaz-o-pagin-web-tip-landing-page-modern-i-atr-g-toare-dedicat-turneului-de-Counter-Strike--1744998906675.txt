@@ -1,0 +1,96 @@
+Creează o pagină web tip landing page, modernă și atrăgătoare, dedicată turneului de Counter-Strike 2 – Hator CS2 League Moldova – Sezonul 1, organizat de comunitatea MPL (Moldova Pro League), în parteneriat cu brandul HATOR și susținut de rețeaua de magazine Darwin.
+
+🔵 Stil vizual: design modern, dinamic, cu accente violet și negru, stil esports. Folosește fonturi mari, secțiuni cu carduri, butoane CTA evidente și bannere mari.
+🔵 Structură:
+
+🔥 Hero Section (partea de sus):
+Titlu mare: „🏆 Hator CS2 League Moldova – Sezonul 1”
+
+Subtitlu: „Cel mai tare turneu online de Counter-Strike 2 din Moldova și România”
+
+Perioadă: Mai – Iunie 2025
+
+Buton mare: „Înregistrează-te acum” care duce spre formularul Discord/Faceit
+
+Fundal: imagine de acțiune CS2 + logo HATOR + logo MPL
+
+📋 Descriere generală eveniment:
+Text:
+„MPL, cea mai mare comunitate CS din Moldova, în parteneriat cu HATOR, organizează primul sezon al turneului Hator CS2 League Moldova. Primul sezon promite un spectacol de neuitat – sute de jucători, zeci de meciuri, transmisiuni live, premii impresionante și o comunitate activă în Discord!”
+
+🎮 Formatul Turneului:
+Platforma: FACEIT
+
+Număr echipe: până la 128
+
+Faza de grupă + Playoff
+
+Format 5v5 clasic
+
+Participarea este GRATUITĂ
+
+Condiții: cont FACEIT cu nivel minim + rezidența în Moldova sau România
+
+Perioadă: Mai – Iunie
+
+1 lună de înscriere și promovare
+
+1 lună de meciuri zilnice
+
+🏆 Premii HATOR:
+
+Loc	Premiu	Model
+🥇 Locul 1	5x Scaune gaming HATOR Sport Light 2	HTC-1101
+🥈 Locul 2	5x Microfoane HATOR Signify RGB PRO	HTA-515
+🥉 Locul 3	5x Căști HATOR Hypergang 2 USB 7.1	HTA-945
+🎯 ACE BONUS	3x Mousepad-uri Tonn eSport 3XL MONTE	HTP044
+Cele mai spectaculoase 3 momente ACE vor fi premiate separat!
+
+📡 Transmisiuni & Media:
+Transmisiuni live pe TikTok, YouTube, Twitch
+
+Streameri parteneri: @domnukrot, @faceofmadness, @rage.md, @catalinciobanu
+
+Interviuri exclusive, momente epice, giveaways live
+
+After-show cu highlights și top faze
+
+🤝 Parteneri și Susținere:
+Organizator: MPL (Moldova Pro League) – Discord oficial
+
+Brand principal: HATOR
+
+Rețea de retail: Darwin
+
+Colaborări media: influenceri + streameri locali
+
+🛒 Promoții & Beneficii:
+Fiecare echipă primește coduri promoționale HATOR
+
+Discounturi exclusive pentru spectatori
+
+Campanii de tip „Player of the Week”
+
+Brand-ul HATOR integrat vizual în meciuri și streamuri
+
+💬 Comunitate & Discord:
+Server Discord dedicat turneului
+
+Camere vocale pe etape/meciuri
+
+Roli speciale pentru participanți și câștigători
+
+Feedback și formulare de sugestii
+
+📢 Call-to-Action final:
+Text:
+„Ești gata să cucerești Moldova cu echipa ta? Intră acum pe serverul nostru de Discord, formează-ți echipa și pregătește-te de luptă!”
+
+Buton: „Mergi pe Discord” + „Vezi regulamentul”
+
+🔗 Footer:
+Logo HATOR + MPL
+
+Linkuri utile: Regulament complet | Întrebări frecvente | Contact
+
+Social media icons (TikTok, YouTube, Discord, Instagram)

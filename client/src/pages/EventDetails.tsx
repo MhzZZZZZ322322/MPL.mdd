@@ -3,12 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useRoute } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Helmet } from 'react-helmet';
-import { ArrowLeft, Calendar, Gamepad, Users, Trophy, Info, ExternalLink } from 'lucide-react';
+import { ArrowLeft, Calendar, Gamepad, Users, Trophy, Info, ExternalLink, MapPin, DollarSign, Shield, Clock, Award, TrendingUp } from 'lucide-react';
 import { Link } from 'wouter';
 import { Event } from '@shared/schema';
 import { motion } from 'framer-motion';
 import eventImages from '@/components/sections/EventImages';
 import { getQueryFn } from '@/lib/queryClient';
+import { Badge } from '@/components/ui/badge';
+import csHeroImg from '@assets/image_1744965966423.png';
 
 const EventDetails = () => {
   const [, params] = useRoute('/event/:id');
@@ -58,13 +60,9 @@ const EventDetails = () => {
   // Determine if event is accepting registrations
   const isActive = event.status === 'În curând' || event.status === 'Activ';
   
-  // Alternate background images based on the game/platform
-  const getBgClass = () => {
-    const title = event.title || '';
-    if (title.includes('CS')) return 'bg-[url(https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&q=85)]';
-    if (title.includes('LoL')) return 'bg-[url(https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&q=85)]';
-    if (title.includes('FIFA')) return 'bg-[url(https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&q=85)]';
-    return 'bg-[url(https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&q=85)]';
+  // Use a proper gaming background
+  const getEventBackground = () => {
+    return csHeroImg;
   };
 
   const handleRegistration = () => {
@@ -79,7 +77,7 @@ const EventDetails = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <div className={`relative h-[40vh] ${getBgClass()} bg-cover bg-center bg-no-repeat`}>
+      <div className="relative h-[60vh] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${getEventBackground()})` }}>
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="container mx-auto px-4 relative h-full flex flex-col justify-end pb-8">
           <div className="absolute top-4 left-4 z-10">
