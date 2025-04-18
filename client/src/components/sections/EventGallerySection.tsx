@@ -100,7 +100,7 @@ const EventGallerySection: React.FC = () => {
   };
 
   return (
-    <div className="py-16 md:py-24 bg-darkBg relative">
+    <section id="gallery" className="py-16 md:py-24 bg-darkBg relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
@@ -196,7 +196,7 @@ const EventGallerySection: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

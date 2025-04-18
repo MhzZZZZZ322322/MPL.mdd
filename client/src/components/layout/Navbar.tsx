@@ -14,10 +14,13 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Acasă", href: "/" },
   { label: "Despre noi", href: "/#about" },
+  { label: "Statistici", href: "/#stats" },
   { label: "Evenimente", href: "/events" },
+  { label: "Galerie", href: "/#gallery" },
   { label: "Clasamente", href: "/rankings" },
   { label: "Comunitate", href: "/community" },
   { label: "Parteneriate", href: "/#partners" },
+  { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
 ];
 
