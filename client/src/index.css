@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --shadow-glow-sm: 0 0 15px;
+  --shadow-glow-md: 0 0 25px;
+  --shadow-glow-lg: 0 0 35px;
+  --color-primary: #8c52ff;
+  --color-darkBg: #0a0a0c;
+  --color-darkGray: #1a1a1a;
+}
+
+.shadow-glow-sm {
+  box-shadow: var(--shadow-glow-sm) var(--shadow-color);
+}
+
+.shadow-primary\/30 {
+  --shadow-color: rgba(140, 82, 255, 0.3);
+}
+
+.bg-darkBg {
+  background-color: var(--color-darkBg);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-darkGray\/60 {
+  background-color: rgba(26, 26, 26, 0.6);
+}
+
+.hover\:bg-primary\/20:hover {
+  background-color: rgba(140, 82, 255, 0.2);
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-gray-300 {
+  color: #d1d5db;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
 /* Stilizare globală pentru input-uri, textarea și selecturi */
 input, textarea, select {
   color: white !important;

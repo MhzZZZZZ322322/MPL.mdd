@@ -19,43 +19,43 @@ const eventImages: GalleryItem[] = [
   },
   {
     id: 2,
-    src: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?q=80&w=1000',
-    alt: 'MPL League of Legends Tournament',
+    src: 'https://cdn.midjourney.com/4bd0f169-d6df-45fc-a8b7-d21b3cff9e59/0_2.webp',
+    alt: 'MPL League of Legends Tournament 2024',
     category: 'LoL'
   },
   {
     id: 3,
-    src: 'https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    src: 'https://cdn.midjourney.com/f0a8a4ca-9384-431b-be2c-05ccb2dd911d/0_3.webp',
     alt: 'MPL Summer Cup 2024',
     category: 'Counter-Strike'
   },
   {
     id: 4,
-    src: 'https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    alt: 'League of Legends Final',
+    src: 'https://cdn.midjourney.com/0afefa62-d1a4-4b16-9dc2-abd5e2d1903c/0_1.webp',
+    alt: 'League of Legends Finals Moldova 2024',
     category: 'LoL'
   },
   {
     id: 5,
-    src: 'https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    alt: 'CS:GO Winter Championship',
+    src: 'https://cdn.midjourney.com/ba6b2c32-b10a-4d74-a277-03821d44cca5/0_1.webp',
+    alt: 'CS:GO Winter Championship Chișinău',
     category: 'Counter-Strike'
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-    alt: 'FIFA 23 Tournament',
+    src: 'https://cdn.midjourney.com/e06e97ad-3d5a-4f8a-9bff-4f8462aa3823/0_0.webp',
+    alt: 'FIFA 23 Tournament Moldova',
     category: 'FIFA'
   },
   {
     id: 7,
-    src: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    src: 'https://cdn.midjourney.com/3fcd6030-cd72-4974-95a8-b0ec85b2da32/0_2.webp',
     alt: 'MPL League Gaming Session',
     category: 'Community'
   },
   {
     id: 8,
-    src: 'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    src: 'https://cdn.midjourney.com/e4e6b7ba-d359-4dbb-9af4-ef252b511e68/0_1.webp',
     alt: 'MPL Event Setup',
     category: 'Community'
   }
