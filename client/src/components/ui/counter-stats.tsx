@@ -1,161 +1,111 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
-interface CounterItem {
-  value: number;
-  label: string;
-  icon?: React.ReactNode;
-  suffix?: string;
+interface CounterProps {
+  endValue: number;
+  duration?: number; // în milisecunde
   prefix?: string;
-  delay?: number;
-}
-
-interface CounterStatsProps {
-  items: CounterItem[];
-  title?: string;
-  subtitle?: string;
+  suffix?: string;
+  decimals?: number;
   className?: string;
 }
 
-const CounterStats: React.FC<CounterStatsProps> = ({
-  items,
-  title,
-  subtitle,
-  className = '',
+export const Counter: React.FC<CounterProps> = ({ 
+  endValue, 
+  duration = 2000, 
+  prefix = '', 
+  suffix = '', 
+  decimals = 0,
+  className = ''
 }) => {
-  const [isInView, setIsInView] = useState(false);
-  const [counters, setCounters] = useState<number[]>(items.map(() => 0));
-  const ref = useRef<HTMLDivElement>(null);
-
-  // Function to check if element is in viewport
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const counterRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let startTime: number;
+          const startValue = 0;
+          
+          const step = (timestamp: number) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const easedProgress = easeOutQuart(progress);
+            setCount(startValue + easedProgress * (endValue - startValue));
+            
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            }
+          };
+          
+          window.requestAnimationFrame(step);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.2 }
     );
-
-    if (ref.current) {
-      observer.observe(ref.current);
+    
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
     }
-
+    
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (counterRef.current) {
+        observer.unobserve(counterRef.current);
       }
     };
-  }, []);
-
-  // Animation for counting up
-  useEffect(() => {
-    if (!isInView) return;
-
-    const intervals = items.map((item, index) => {
-      const delay = item.delay || 0;
-      const duration = 2000; // 2 seconds animation
-      const steps = 30; // Number of steps for the animation
-      const stepValue = item.value / steps;
-      let currentStep = 0;
-
-      // Wait for the delay
-      const timeout = setTimeout(() => {
-        const interval = setInterval(() => {
-          if (currentStep < steps) {
-            setCounters(prev => {
-              const newCounters = [...prev];
-              newCounters[index] = Math.min(
-                Math.round(stepValue * currentStep),
-                item.value
-              );
-              return newCounters;
-            });
-            currentStep++;
-          } else {
-            setCounters(prev => {
-              const newCounters = [...prev];
-              newCounters[index] = item.value;
-              return newCounters;
-            });
-            clearInterval(interval);
-          }
-        }, duration / steps);
-        
-        return interval;
-      }, delay);
-
-      return { timeout, interval: null };
-    });
-
-    return () => {
-      intervals.forEach(({ timeout }) => {
-        clearTimeout(timeout);
-      });
-    };
-  }, [isInView, items]);
-
+    
+  }, [endValue, duration, hasAnimated]);
+  
+  // easing function pentru animație mai naturală
+  const easeOutQuart = (x: number): number => {
+    return 1 - Math.pow(1 - x, 4);
+  };
+  
+  // formatare număr cu virgulă și decimale
+  const formattedCount = count.toLocaleString('ro-RO', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+  
   return (
-    <div className={`py-16 md:py-24 ${className}`} ref={ref}>
-      <div className="container mx-auto px-4">
-        {(title || subtitle) && (
-          <div className="text-center mb-16">
-            {title && (
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6 }}
-                className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani"
-              >
-                {title}
-              </motion.h2>
-            )}
-            {subtitle && (
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-gray-400 max-w-2xl mx-auto"
-              >
-                {subtitle}
-              </motion.p>
-            )}
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {items.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{
-                duration: 0.6,
-                delay: 0.1 * index + 0.3,
-                ease: "easeOut",
-              }}
-              className="bg-darkGray/40 border border-primary/10 rounded-lg p-6 text-center hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300"
-            >
-              {item.icon && (
-                <div className="flex justify-center mb-4">
-                  <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                    {item.icon}
-                  </div>
-                </div>
-              )}
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                {item.prefix && <span>{item.prefix}</span>}
-                {counters[index].toLocaleString()}
-                {item.suffix && <span>{item.suffix}</span>}
-              </h3>
-              <p className="text-gray-400">{item.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+    <div ref={counterRef} className={cn("transition-all", className)}>
+      {prefix}{formattedCount}{suffix}
     </div>
   );
 };
 
-export default CounterStats;
+interface StatItemProps {
+  value: number;
+  label: string;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+  icon?: React.ReactNode;
+  className?: string;
+}
+
+export const StatItem = ({ 
+  value, 
+  label, 
+  prefix, 
+  suffix, 
+  decimals = 0,
+  icon,
+  className = '' 
+}: StatItemProps) => {
+  return (
+    <div className={cn("flex flex-col items-center justify-center p-6", className)}>
+      {icon && <div className="mb-4 text-primary">{icon}</div>}
+      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+        <Counter endValue={value} prefix={prefix} suffix={suffix} decimals={decimals} />
+      </div>
+      <div className="text-sm text-gray-400 uppercase tracking-wide text-center">{label}</div>
+    </div>
+  );
+};
+
+export default Counter;
