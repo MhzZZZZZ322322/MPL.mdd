@@ -439,14 +439,16 @@ export class MemStorage implements IStorage {
     
     // Add events
     this.createEvent({
-      title: "HATOR CS LEAGUE MOLDOVA",
-      description: "Turneu oficial organizat de MPL în parteneriat cu Darwin și Hator Gaming. Participă la una dintre cele mai așteptate competiții CS din Moldova!",
-      date: "15 Mai 2025",
-      platform: "PC",
-      teamSize: "5v5",
-      prize: "10000 MDL + Periferice Hator",
+      title: "HATOR CS2 LEAGUE MOLDOVA - SEZONUL 1",
+      description: "Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de MPL în parteneriat cu HATOR și susținut de Darwin.",
+      date: "Mai - Iunie 2025",
+      platform: "FACEIT",
+      teamSize: "5v5 Clasic",
+      prize: "5x Scaune gaming HATOR + Periferice Gaming",
       status: "În curând",
-      imageUrl: "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg"
+      imageUrl: "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg",
+      location: "Online",
+      registrationLink: "https://discord.gg/moldovaproleague"
     });
     
     this.createEvent({
