@@ -39,17 +39,45 @@ function App() {
   const isAdminPage = () => {
     return window.location.pathname.startsWith('/admin');
   };
-
+  
   // State pentru pagina Coming Soon
   const [comingSoonEnabled, setComingSoonEnabled] = useState(true);
   
+  // Preluăm starea din localStorage
   useEffect(() => {
-    // Preluăm starea din localStorage (dacă există)
     const comingSoonState = localStorage.getItem('comingSoonEnabled');
     if (comingSoonState !== null) {
       setComingSoonEnabled(comingSoonState === 'true');
     }
   }, []);
+  
+  // Adăugăm o metodă de acces la pagina de admin prin tastarea secvenței 'mpl'
+  useEffect(() => {
+    // Secvența de taste pentru acces admin: 'mpl' ('m', 'p', 'l')
+    let keys: string[] = [];
+    const adminKeys = ['m', 'p', 'l'];
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Adaugă tasta apăsată în array
+      keys.push(e.key.toLowerCase());
+      
+      // Păstrăm doar ultimele 3 taste apăsate
+      if (keys.length > 3) {
+        keys = keys.slice(-3);
+      }
+      
+      // Verificăm dacă ultimele 3 taste apăsate sunt 'm', 'p', 'l'
+      if (keys.join('') === adminKeys.join('') && comingSoonEnabled) {
+        window.location.href = '/admin';
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [comingSoonEnabled]);
   
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-black">

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'wouter';
 import comingSoonImg from '@assets/image_1744965966423.png';
 
 interface ComingSoonProps {
@@ -7,44 +6,9 @@ interface ComingSoonProps {
 }
 
 const ComingSoon = ({ enabled }: ComingSoonProps) => {
-  const [, setLocation] = useLocation();
-  
-  // Dacă pagina "Coming Soon" nu este activată, nu afișăm nimic
-  if (!enabled) return null;
-  
-  // Verificăm dacă suntem în pagina de admin 
+  // Dacă pagina "Coming Soon" nu este activată, sau dacă suntem pe pagina admin, nu afișăm nimic
   const isAdminPage = window.location.pathname.includes('/admin');
-  
-  // Nu blocăm accesul la pagina de admin
-  if (isAdminPage) return null;
-  
-  // Adăugăm o metodă de acces la pagina de admin prin tastarea unei combinații de taste
-  React.useEffect(() => {
-    // Secvența de taste pentru acces admin: 'mpl' ('m', 'p', 'l')
-    let keys: string[] = [];
-    const adminKeys = ['m', 'p', 'l'];
-    
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Adaugă tasta apăsată în array
-      keys.push(e.key.toLowerCase());
-      
-      // Păstrăm doar ultimele 3 taste apăsate
-      if (keys.length > 3) {
-        keys = keys.slice(-3);
-      }
-      
-      // Verificăm dacă ultimele 3 taste apăsate sunt 'm', 'p', 'l'
-      if (keys.join('') === adminKeys.join('')) {
-        setLocation('/admin');
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyDown);
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [setLocation]);
+  if (!enabled || isAdminPage) return null;
   
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black">
