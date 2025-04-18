@@ -3,7 +3,9 @@ import {
   events, type Event, type InsertEvent,
   players, type Player, type InsertPlayer,
   contactSubmissions, type Contact, type InsertContact,
-  faqs, type Faq, type InsertFaq
+  faqs, type Faq, type InsertFaq,
+  seoSettings, type SeoSettings, type InsertSeo,
+  analyticsSettings, type AnalyticsSettings, type InsertAnalytics
 } from "@shared/schema";
 
 // modify the interface with any CRUD methods
