@@ -167,20 +167,78 @@ const EventDetails = () => {
               <div className="mt-8">
                 <h3 className="text-xl font-semibold mb-4 text-white">Descriere Detaliată</h3>
                 <p className="text-gray-300 mb-4">
-                  {event.description} Acest turneu oferă o experiență competitivă de top pentru toți jucătorii pasionați din Moldova.
+                  {event.description} Acest turneu oferă o experiență competitivă de top pentru toți jucătorii pasionați din Moldova și România.
                 </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mb-8">
+                  <div className="bg-darkGray/30 border border-primary/10 rounded-lg p-5">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
+                      <Trophy className="h-5 w-5 mr-2 text-yellow-400" /> Premii HATOR
+                    </h4>
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
+                        <span>🥇 Locul 1: 5x Scaune gaming HATOR Sport Light 2</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
+                        <span>🥈 Locul 2: 5x Microfoane HATOR Signify RGB PRO</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
+                        <span>🥉 Locul 3: 5x Căști HATOR Hypergang 2 USB 7.1</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
+                        <span>🎯 ACE BONUS: 3x Mousepad-uri Tonn eSport 3XL MONTE</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-darkGray/30 border border-primary/10 rounded-lg p-5">
+                    <h4 className="text-lg font-semibold text-white mb-3 flex items-center">
+                      <Laptop2 className="h-5 w-5 mr-2 text-blue-400" /> Format Turneu
+                    </h4>
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-start">
+                        <Hourglass className="h-5 w-5 mr-2 text-blue-500 shrink-0 mt-0.5" />
+                        <span>Perioada: 1 lună înscriere + 1 lună meciuri zilnice</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Users className="h-5 w-5 mr-2 text-blue-500 shrink-0 mt-0.5" />
+                        <span>Până la 128 echipe participante</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Flag className="h-5 w-5 mr-2 text-blue-500 shrink-0 mt-0.5" />
+                        <span>Fază de grupe + playoff + finală</span>
+                      </li>
+                      <li className="flex items-start">
+                        <Info className="h-5 w-5 mr-2 text-blue-500 shrink-0 mt-0.5" />
+                        <span>Participarea este gratuită cu cont FACEIT</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
                 <p className="text-gray-300 mb-4">
                   Participanții vor concura în mai multe etape, începând cu faza grupelor, urmată de playoff-uri și marea finală.
-                  Toate meciurile vor fi transmise live pe canalele noastre de Twitch și YouTube.
+                  Toate meciurile vor fi transmise live pe canalele noastre de Twitch și YouTube de către streameri parteneri precum
+                  @domnukrot, @faceofmadness, @rage.md și @catalinciobanu.
                 </p>
-                {event.title && event.title.includes('HATOR') && (
+                
+                {event.title && (event.title.includes('HATOR') || event.title.includes('Hator')) && (
                   <div className="mt-6 p-4 bg-yellow-900/20 border border-yellow-700/30 rounded-lg">
                     <h4 className="text-lg font-semibold text-yellow-400 mb-2 flex items-center">
                       <ExternalLink className="h-5 w-5 mr-2" /> Sponsorizat de Hator
                     </h4>
+                    <p className="text-gray-300 mb-3">
+                      MPL, cea mai mare comunitate CS din Moldova, în parteneriat cu HATOR și susținut de rețeaua Darwin, 
+                      organizează primul sezon al turneului Hator CS2 League Moldova. Primul sezon promite un spectacol de neuitat – 
+                      sute de jucători, zeci de meciuri, transmisiuni live și premii impresionante.
+                    </p>
                     <p className="text-gray-300">
-                      Turneul este sponsorizat de Hator, brand de echipamente gaming de top. 
-                      Câștigătorii vor primi premii în bani și periferice gaming Hator de ultimă generație.
+                      Participanții și spectatorii vor primi coduri promoționale exclusive pentru produsele HATOR, 
+                      disponibile în magazinele Darwin.
                     </p>
                   </div>
                 )}
@@ -192,7 +250,7 @@ const EventDetails = () => {
             <div className="sticky top-24">
               <div className="bg-darkGray/50 border border-primary/20 rounded-lg overflow-hidden">
                 <div className="h-64 overflow-hidden">
-                  {event.title && event.title === "HATOR CS LEAGUE MOLDOVA" ? (
+                  {event.title && (event.title.includes("HATOR") || event.title.includes("Hator")) ? (
                     <div className="bg-black w-full h-full flex items-center justify-center p-2">
                       <img 
                         src="https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg" 
