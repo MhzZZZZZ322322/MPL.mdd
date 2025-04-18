@@ -6,7 +6,6 @@ import Rankings from '@/components/sections/Rankings';
 import Partners from '@/components/sections/Partners';
 import FAQ from '@/components/sections/FAQ';
 import SimpleContactForm from '@/components/sections/SimpleContactForm';
-import EventGallerySection from '@/components/sections/EventGallerySection';
 import { Helmet } from 'react-helmet';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -49,7 +48,6 @@ const Home = () => {
       <Hero />
       <About />
       <Events />
-      <EventGallerySection />
       <Rankings />
       <Partners />
       <FAQ />
