@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Contact } from '@shared/schema';
 import { useToast } from '@/hooks/use-toast';
-import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, Globe } from 'lucide-react';
+import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, Globe, EyeOff, Eye } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ro } from 'date-fns/locale';
 import AdminLogin from '@/components/ui/admin-login';
@@ -12,12 +12,19 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [comingSoonEnabled, setComingSoonEnabled] = useState(true);
   const { toast } = useToast();
   
   useEffect(() => {
     // Verificăm dacă utilizatorul este autentificat
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     setIsAuthenticated(isAdmin);
+    
+    // Verificăm starea paginii Coming Soon
+    const comingSoonState = localStorage.getItem('comingSoonEnabled');
+    if (comingSoonState !== null) {
+      setComingSoonEnabled(comingSoonState === 'true');
+    }
     
     if (isAdmin) {
       getContactMessages();
@@ -87,12 +94,12 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-darkBg">
       <div className="container mx-auto px-4 py-12">
-        <div className="mb-8 flex justify-between items-center">
+        <div className="mb-6 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-rajdhani font-bold text-white mb-2">Panou de administrare</h1>
             <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary"></div>
           </div>
-          <div>
+          <div className="flex gap-2">
             <button 
               className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors flex items-center gap-2" 
               onClick={() => {
@@ -102,6 +109,48 @@ const Admin = () => {
             >
               Deconectare
             </button>
+          </div>
+        </div>
+        
+        {/* Coming Soon toggle */}
+        <div className="mb-8 p-4 bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg">
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="text-xl font-medium text-white mb-1 flex items-center">
+                {comingSoonEnabled ? <EyeOff className="w-5 h-5 mr-2 text-amber-500" /> : <Eye className="w-5 h-5 mr-2 text-green-500" />}
+                Mod "Coming Soon"
+              </h3>
+              <p className="text-sm text-gray-400">
+                {comingSoonEnabled 
+                  ? "Site-ul este momentan acoperit cu pagina Coming Soon" 
+                  : "Site-ul este vizibil pentru toți utilizatorii"}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button 
+                className={`px-4 py-2 rounded-md transition-colors ${
+                  comingSoonEnabled 
+                    ? 'bg-green-600 hover:bg-green-700 text-white' 
+                    : 'bg-amber-600 hover:bg-amber-700 text-white'
+                }`}
+                onClick={() => {
+                  const newValue = !comingSoonEnabled;
+                  setComingSoonEnabled(newValue);
+                  localStorage.setItem('comingSoonEnabled', String(newValue));
+                  toast({
+                    title: newValue 
+                      ? 'Pagina Coming Soon activată' 
+                      : 'Pagina Coming Soon dezactivată',
+                    description: newValue 
+                      ? 'Site-ul este acum acoperit cu pagina Coming Soon' 
+                      : 'Site-ul este acum vizibil pentru toți utilizatorii',
+                    variant: 'default',
+                  });
+                }}
+              >
+                {comingSoonEnabled ? 'Dezactivează' : 'Activează'}
+              </button>
+            </div>
           </div>
         </div>
         

@@ -10,10 +10,12 @@ import Footer from "@/components/layout/Footer";
 import AllEvents from "@/pages/AllEvents";
 import AllRankings from "@/pages/AllRankings";
 import CommunityPage from "@/pages/CommunityPage";
+import ComingSoon from "@/pages/ComingSoon";
 
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
 import SeoManager from "@/pages/SeoManager";
+import { useState, useEffect } from "react";
 
 function Router() {
   return (
@@ -37,9 +39,23 @@ function App() {
   const isAdminPage = () => {
     return window.location.pathname.startsWith('/admin');
   };
+
+  // State pentru pagina Coming Soon
+  const [comingSoonEnabled, setComingSoonEnabled] = useState(true);
+  
+  useEffect(() => {
+    // Preluăm starea din localStorage (dacă există)
+    const comingSoonState = localStorage.getItem('comingSoonEnabled');
+    if (comingSoonState !== null) {
+      setComingSoonEnabled(comingSoonState === 'true');
+    }
+  }, []);
   
   return (
     <div className="flex flex-col min-h-screen overflow-hidden bg-black">
+      {/* Afișăm pagina Coming Soon peste conținut */}
+      <ComingSoon enabled={comingSoonEnabled} />
+      
       {!isAdminPage() && <Navbar />}
       <main className="flex-grow overflow-hidden bg-black">
         <Router />
