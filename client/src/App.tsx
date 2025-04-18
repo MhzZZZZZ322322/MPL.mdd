@@ -56,11 +56,12 @@ function App() {
       {/* Afișăm pagina Coming Soon peste conținut */}
       <ComingSoon enabled={comingSoonEnabled} />
       
-      {!isAdminPage() && <Navbar />}
+      {/* Nu afișăm navbar și footer când Coming Soon este activ */}
+      {!isAdminPage() && !comingSoonEnabled && <Navbar />}
       <main className="flex-grow overflow-hidden bg-black">
         <Router />
       </main>
-      {!isAdminPage() && <Footer />}
+      {!isAdminPage() && !comingSoonEnabled && <Footer />}
       <Toaster />
     </div>
   );

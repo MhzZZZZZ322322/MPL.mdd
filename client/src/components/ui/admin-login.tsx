@@ -28,7 +28,7 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
     // Verificare simplă - în producție, utilizează un sistem de autentificare securizat
     // Aceasta este doar o soluție temporară pentru demo
     setTimeout(() => {
-      if (username === 'admin' && password === 'admin123') {
+      if (username === 'admin' && password === 'mpl2025') {
         // În realitate, ar trebui să setăm un token JWT sau altă formă de autentificare securizată
         localStorage.setItem('isAdmin', 'true');
         toast({
@@ -104,11 +104,7 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
             {isLoading ? 'Autentificare...' : 'Autentificare'}
           </button>
           
-          <div className="text-sm text-center text-gray-500">
-            <p>Pentru demo, folosește:</p>
-            <p>Utilizator: <span className="text-primary">admin</span></p>
-            <p>Parolă: <span className="text-primary">admin123</span></p>
-          </div>
+          {/* Am eliminat credențialele vizibile din interfață */}
         </form>
       </div>
     </div>
