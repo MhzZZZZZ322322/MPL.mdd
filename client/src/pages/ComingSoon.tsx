@@ -34,7 +34,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
               </h1>
               <div className="text-6xl font-bold mb-6 text-center text-white">MPL</div>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-                Primul turneu profesionist de Counter-Strike 2 din Moldova
+                Primul turneu profesionist de Counter-Strike 2 din Moldova organizat de MPL în parteneriat cu HATOR. Sezonul 1 - Mai-Iunie 2025
               </p>
               
               {/* Call to action buttons */}
@@ -56,23 +56,23 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
               <div className="bg-black/50 backdrop-blur-sm p-6 rounded-xl inline-block mb-8">
                 <div className="text-xl text-white mb-4 flex items-center justify-center gap-2">
                   <CalendarClock className="w-6 h-6 text-amber-500" />
-                  <span>Turneul începe în curând</span>
+                  <span>Turneul începe în Mai 2025</span>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-white">00</div>
+                    <div className="text-4xl font-bold text-white">42</div>
                     <div className="text-xs text-gray-400">Zile</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-white">00</div>
+                    <div className="text-4xl font-bold text-white">08</div>
                     <div className="text-xs text-gray-400">Ore</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-white">00</div>
+                    <div className="text-4xl font-bold text-white">23</div>
                     <div className="text-xs text-gray-400">Minute</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-4xl font-bold text-white">00</div>
+                    <div className="text-4xl font-bold text-white">17</div>
                     <div className="text-xs text-gray-400">Secunde</div>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Premii</h3>
                 <p className="text-gray-300">
-                  Fond de premiere atractiv pentru cele mai bune echipe de Counter-Strike 2 din Moldova.
+                  Premii valoroase oferite de HATOR: scaune gaming pentru locul 1, microfoane pentru locul 2, căști pentru locul 3 și mousepad-uri pentru cele mai spectaculoase momente ACE.
                 </p>
               </div>
               
@@ -104,7 +104,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Participanți</h3>
                 <p className="text-gray-300">
-                  Echipe de top din Moldova se vor întrece pentru titlul de campion.
+                  Până la 128 de echipe de top din Moldova și România vor concura pentru titlul de campion. Participarea este gratuită.
                 </p>
               </div>
               
@@ -112,9 +112,9 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
                 <div className="text-amber-500 mb-4">
                   <MapPin className="w-12 h-12" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Locație</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Platformă</h3>
                 <p className="text-gray-300">
-                  Turneul se va desfășura în Chișinău, cu finala transmisă live.
+                  Turneul se va desfășura online pe platforma FACEIT, cu transmisiuni live pe TikTok, YouTube și Twitch.
                 </p>
               </div>
               
@@ -124,7 +124,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Program</h3>
                 <p className="text-gray-300">
-                  Calificări online urmate de etapele finale desfășurate în format LAN.
+                  Turneul se va desfășura la sfârșitul lunii mai și începutul lunii iunie 2025, cu meciuri zilnice.
                 </p>
               </div>
               
@@ -134,7 +134,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Format</h3>
                 <p className="text-gray-300">
-                  Format competitiv cu faze de grupe și eliminare directă.
+                  Format competitiv clasic 5v5, cu sistem de grupe urmat de meciuri eliminatorii directe.
                 </p>
               </div>
               
@@ -144,9 +144,9 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"></path>
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Sponsori</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Parteneri</h3>
                 <p className="text-gray-300">
-                  Turneu susținut de HATOR și alți sponsori importanți din industrie.
+                  Turneu organizat de MPL (Moldova Pro League) în parteneriat cu HATOR și sprijinit de influenceri și streameri locali.
                 </p>
               </div>
             </div>
