@@ -444,7 +444,7 @@ export class MemStorage implements IStorage {
       date: "Mai - Iunie 2025",
       platform: "FACEIT",
       teamSize: "5v5 Clasic",
-      prize: "5x Scaune gaming HATOR + Periferice Gaming",
+      prize: "5x Gaming Chair HATOR Arc 2 XL + 5x Mouse HATOR Quasar 3 ULTRA 8K + 5x Căști HATOR Hypergang 2 USB 7.1 + 3x Mousepad HATOR Tonn eSport 3XL MONTE",
       status: "În curând",
       imageUrl: "https://i.postimg.cc/pVq0T0jz/hator-cs-league.jpg",
       location: "Online",

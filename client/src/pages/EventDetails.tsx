@@ -178,19 +178,19 @@ const EventDetails = () => {
                     <ul className="space-y-3 text-gray-300">
                       <li className="flex items-start">
                         <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
-                        <span>🥇 Locul 1: 5x Scaune gaming HATOR Sport Light 2</span>
+                        <span>🥇 Locul 1: 5x Gaming Chair HATOR Arc 2 XL</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
-                        <span>🥈 Locul 2: 5x Microfoane HATOR Signify RGB PRO</span>
+                        <span>🥈 Locul 2: 5x Mouse HATOR Quasar 3 ULTRA 8K wireless</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
-                        <span>🥉 Locul 3: 5x Căști HATOR Hypergang 2 USB 7.1</span>
+                        <span>🥉 Locul 3: 5x Căști HATOR Hypergang 2 USB 7.1 Titanium Edition</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-5 w-5 mr-2 text-yellow-500 shrink-0 mt-0.5" />
-                        <span>🎯 ACE BONUS: 3x Mousepad-uri Tonn eSport 3XL MONTE</span>
+                        <span>🎯 ACE BONUS: 3x Mousepad HATOR Tonn eSport 3XL MONTE</span>
                       </li>
                     </ul>
                   </div>
