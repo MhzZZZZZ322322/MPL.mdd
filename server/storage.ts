@@ -335,6 +335,111 @@ export class MemStorage implements IStorage {
     return updatedContent;
   }
   
+  // SEO Settings methods
+  async getSeoSettings(): Promise<SeoSettings[]> {
+    return Array.from(this.seoSettings.values());
+  }
+  
+  async getSeoSettingByUrl(pageUrl: string): Promise<SeoSettings | undefined> {
+    return Array.from(this.seoSettings.values()).find(
+      (setting) => setting.pageUrl === pageUrl
+    );
+  }
+  
+  async createSeoSetting(seo: InsertSeo): Promise<SeoSettings> {
+    const id = this.currentSeoId++;
+    const seoSetting: SeoSettings = {
+      id,
+      title: seo.title,
+      pageUrl: seo.pageUrl,
+      metaDescription: seo.metaDescription,
+      metaKeywords: seo.metaKeywords || null,
+      metaRobots: seo.metaRobots || null,
+      canonicalUrl: seo.canonicalUrl || null,
+      structuredData: seo.structuredData || null,
+      openGraph: seo.openGraph || null,
+      twitterCard: seo.twitterCard || null,
+      updatedAt: new Date()
+    };
+    this.seoSettings.set(id, seoSetting);
+    return seoSetting;
+  }
+  
+  async updateSeoSetting(id: number, seo: Partial<InsertSeo>): Promise<SeoSettings> {
+    const existingSetting = this.seoSettings.get(id);
+    
+    if (!existingSetting) {
+      throw new Error(`SEO setting with id ${id} not found`);
+    }
+    
+    const updatedSetting: SeoSettings = {
+      ...existingSetting,
+      title: seo.title ?? existingSetting.title,
+      pageUrl: seo.pageUrl ?? existingSetting.pageUrl,
+      metaDescription: seo.metaDescription ?? existingSetting.metaDescription,
+      metaKeywords: seo.metaKeywords ?? existingSetting.metaKeywords,
+      metaRobots: seo.metaRobots ?? existingSetting.metaRobots,
+      canonicalUrl: seo.canonicalUrl ?? existingSetting.canonicalUrl,
+      structuredData: seo.structuredData ?? existingSetting.structuredData,
+      openGraph: seo.openGraph ?? existingSetting.openGraph,
+      twitterCard: seo.twitterCard ?? existingSetting.twitterCard,
+      updatedAt: new Date()
+    };
+    
+    this.seoSettings.set(id, updatedSetting);
+    return updatedSetting;
+  }
+  
+  // Analytics Settings methods
+  async getAnalyticsSettings(): Promise<AnalyticsSettings | undefined> {
+    const settings = Array.from(this.analyticsSettings.values());
+    return settings.length > 0 ? settings[0] : undefined;
+  }
+  
+  async updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings> {
+    const existingSettings = this.analyticsSettings.get(id);
+    
+    if (!existingSettings) {
+      throw new Error(`Analytics settings with id ${id} not found`);
+    }
+    
+    const updatedSettings: AnalyticsSettings = {
+      ...existingSettings,
+      googleTagManagerId: settings.googleTagManagerId ?? existingSettings.googleTagManagerId,
+      googleAnalyticsId: settings.googleAnalyticsId ?? existingSettings.googleAnalyticsId,
+      googleSearchConsoleVerification: settings.googleSearchConsoleVerification ?? existingSettings.googleSearchConsoleVerification,
+      facebookPixelId: settings.facebookPixelId ?? existingSettings.facebookPixelId,
+      microsoftClarityId: settings.microsoftClarityId ?? existingSettings.microsoftClarityId,
+      robotsTxt: settings.robotsTxt ?? existingSettings.robotsTxt,
+      sitemapXml: settings.sitemapXml ?? existingSettings.sitemapXml,
+      customHeaderScripts: settings.customHeaderScripts ?? existingSettings.customHeaderScripts,
+      siteIndexingEnabled: settings.siteIndexingEnabled ?? existingSettings.siteIndexingEnabled,
+      updatedAt: new Date()
+    };
+    
+    this.analyticsSettings.set(id, updatedSettings);
+    return updatedSettings;
+  }
+  
+  async createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings> {
+    const id = this.currentAnalyticsId++;
+    const analyticsSetting: AnalyticsSettings = {
+      id,
+      googleTagManagerId: settings.googleTagManagerId || null,
+      googleAnalyticsId: settings.googleAnalyticsId || null,
+      googleSearchConsoleVerification: settings.googleSearchConsoleVerification || null,
+      facebookPixelId: settings.facebookPixelId || null,
+      microsoftClarityId: settings.microsoftClarityId || null,
+      robotsTxt: settings.robotsTxt || null,
+      sitemapXml: settings.sitemapXml || null,
+      customHeaderScripts: settings.customHeaderScripts || null,
+      siteIndexingEnabled: settings.siteIndexingEnabled || true,
+      updatedAt: new Date()
+    };
+    this.analyticsSettings.set(id, analyticsSetting);
+    return analyticsSetting;
+  }
+  
   private initializeData() {
     // Initialize site content
     // Hero section
