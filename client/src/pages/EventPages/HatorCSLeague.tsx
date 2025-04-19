@@ -42,7 +42,7 @@ const HatorCSLeague = () => {
               
               <div className="flex items-center mb-6 text-gray-300">
                 <Calendar className="mr-2 h-4 w-4 text-primary" />
-                <span className="mr-4">Mai-Iunie 2025</span>
+                <span className="mr-4">Aprilie-Iunie 2025</span>
                 
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
                 <span>Online (FACEIT)</span>
@@ -185,9 +185,9 @@ const HatorCSLeague = () => {
                 </p>
                 <ul>
                   <li><strong>Start înscrieri</strong>: 21 Aprilie 2025</li>
-                  <li><strong>Închidere înscrieri</strong>: 30 Aprilie 2025</li>
-                  <li><strong>Validare echipe</strong>: 1-5 Mai 2025</li>
-                  <li><strong>Start turneu</strong>: 10 Mai 2025</li>
+                  <li><strong>Închidere înscrieri</strong>: 25 Mai 2025</li>
+                  <li><strong>Validare echipe</strong>: 26 Mai - 1 Iunie 2025</li>
+                  <li><strong>Start turneu</strong>: 2 Iunie 2025</li>
                 </ul>
               </div>
               
@@ -241,7 +241,7 @@ const HatorCSLeague = () => {
                   <div className="flex items-start">
                     <Calendar className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">Mai-Iunie 2025</div>
+                      <div className="font-semibold text-white">Aprilie-Iunie 2025</div>
                       <div className="text-sm">Weekenduri: 10:00 - 22:00 EEST</div>
                     </div>
                   </div>
