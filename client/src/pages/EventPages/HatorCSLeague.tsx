@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
@@ -84,7 +84,7 @@ const HatorCSLeague = () => {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-white mb-8 font-rajdhani text-center">Premii în Valoare de 65.000 Lei</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
               <a 
                 href="https://darwin.md/scaun-gaming-hator-arc-2-xl-black-htc2000.html" 
                 target="_blank"
@@ -139,7 +139,7 @@ const HatorCSLeague = () => {
                 href="https://darwin.md/casti-hator-hypergang-2-usb-71-cu-fir-matte-titanium.html" 
                 target="_blank"
                 rel="nofollow noopener noreferrer"
-                className="group block md:col-span-2 lg:col-span-1 md:max-w-md lg:max-w-full md:mx-auto lg:mx-0"
+                className="group block"
               >
                 <div className="bg-gradient-to-br from-amber-700/20 to-amber-800/20 p-4 sm:p-6 rounded-lg border border-amber-700/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-700/20 h-full flex flex-col">
                   <div className="flex items-center mb-4">
@@ -159,6 +159,22 @@ const HatorCSLeague = () => {
                   <p className="text-white text-center text-base sm:text-lg">5x Căști HATOR Hypergang 2 USB 7.1</p>
                 </div>
               </a>
+
+              <div className="group block md:col-span-2 lg:col-span-1 md:max-w-md lg:max-w-full md:mx-auto lg:mx-0">
+                <div className="bg-gradient-to-br from-purple-500/30 to-purple-700/30 p-4 sm:p-6 rounded-lg border border-purple-500/40 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <Gift className="text-purple-400 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
+                    <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">Premiu Secret</h3>
+                  </div>
+                  <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow flex items-center justify-center bg-darkGray/60">
+                    <Sparkles className="text-purple-300 h-20 w-20 opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-8">
+                      <p className="text-purple-300 text-lg sm:text-xl font-semibold">Va fi dezvăluit în timpul turneului</p>
+                    </div>
+                  </div>
+                  <p className="text-white text-center text-base sm:text-lg">Surpriză specială pentru participanți</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
