@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
-import { FaTwitter, FaFacebook, FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
+import logoColor from "@assets/image_1745065888403.png";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
@@ -61,12 +62,8 @@ const Footer = () => {
           {/* Brand section */}
           <div>
             <div className="mb-4">
-              <Link href="/" className="flex items-center">
-                <span className="text-2xl font-orbitron font-bold text-white">
-                  <span className="text-secondary">M</span>
-                  <span className="text-accent">P</span>
-                  <span className="text-blue-500">L</span>
-                </span>
+              <Link href="/" className="block">
+                <img src={logoColor} alt="Moldova Pro League" className="h-20 w-auto" />
               </Link>
             </div>
             <p className="text-sm mb-6">
@@ -77,7 +74,7 @@ const Footer = () => {
               <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
               <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
               <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
-              <SocialIcon href="#" icon={FaFacebook} />
+              <SocialIcon href="https://www.facebook.com/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaFacebook} />
             </div>
           </div>
           
@@ -135,7 +132,9 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2">📧</span>
-                <span>proleaguemoldova@gmail.com</span>
+                <a href="mailto:proleaguemoldova@gmail.com" className="hover:text-secondary transition-colors">
+                  proleaguemoldova@gmail.com
+                </a>
               </li>
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2">📍</span>
