@@ -242,7 +242,7 @@ const HatorCSLeague = () => {
                     <a 
                       href="https://hator.gg" 
                       target="_blank" 
-                      rel="noopener noreferrer"
+                      rel="nofollow noopener noreferrer"
                       className="block hover:opacity-80 transition-opacity"
                     >
                       <img src="/attached_assets/vert blackAsset 4.png" alt="HATOR" className="h-12" />

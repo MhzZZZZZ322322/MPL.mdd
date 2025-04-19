@@ -221,7 +221,7 @@ const MPLPilotCup = () => {
                     <a 
                       href="https://hator.gg" 
                       target="_blank" 
-                      rel="noopener noreferrer"
+                      rel="nofollow noopener noreferrer"
                       className="text-white text-xl hover:text-primary transition-colors"
                     >
                       HATOR
@@ -233,7 +233,7 @@ const MPLPilotCup = () => {
                     <a 
                       href="https://darwin.md" 
                       target="_blank" 
-                      rel="noopener noreferrer"
+                      rel="nofollow noopener noreferrer"
                       className="text-white text-xl hover:text-primary transition-colors"
                     >
                       DARWIN

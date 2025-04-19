@@ -86,7 +86,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
           <a 
             href="https://hator.gg" 
             target="_blank" 
-            rel="noopener noreferrer" 
+            rel="nofollow noopener noreferrer" 
             className="flex items-center opacity-80 hover:opacity-100 transition-opacity"
           >
             <img 
@@ -98,7 +98,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
           <a 
             href="https://darwin.md" 
             target="_blank" 
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
             className="flex items-center opacity-80 hover:opacity-100 transition-opacity"
           >
             <img 
