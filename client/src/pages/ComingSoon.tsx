@@ -40,18 +40,18 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
   
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black">
-      {/* Imaginea de fundal - mai întunecată */}
+      {/* Imaginea de fundal - și mai întunecată */}
       <div className="absolute inset-0" 
            style={{
              backgroundImage: `url(${comingSoonBg})`, 
              backgroundSize: 'cover', 
              backgroundPosition: 'center',
-             opacity: 0.3 /* Opacitate redusă pentru imagine */
+             opacity: 0.15 /* Opacitate foarte redusă pentru imagine */
            }}>
       </div>
       
       {/* Overlay pentru un contrast și mai bun */}
-      <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+      <div className="absolute inset-0 bg-black opacity-75 z-10"></div>
       
       {/* Conținut centrat */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 max-w-2xl mx-auto">
@@ -99,7 +99,6 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
               alt="HATOR" 
               className="h-8"
             />
-            <span className="text-white ml-2 text-sm">GAMING</span>
           </a>
           <a 
             href="https://darwin.md" 
