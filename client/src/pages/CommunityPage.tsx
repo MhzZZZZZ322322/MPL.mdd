@@ -12,6 +12,7 @@ const CommunityPage = () => {
     <>
       <Helmet>
         <title>Comunitate | Moldova Pro League</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
       <Navbar />

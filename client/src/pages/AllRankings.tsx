@@ -27,6 +27,7 @@ const AllRankings = () => {
     <>
       <Helmet>
         <title>Clasamente Jucători | Moldova Pro League</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
       <Navbar />

@@ -10,6 +10,7 @@ const MPLPilotCup = () => {
       <Helmet>
         <title>MPL Pilot Cup | Moldova Pro League</title>
         <meta name="description" content="MPL Pilot Cup - Turneul inaugural dedicat jucătorilor din Moldova și România, 22-23 Martie 2025." />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       <div className="bg-black min-h-screen">
