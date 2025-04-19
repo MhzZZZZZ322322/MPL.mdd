@@ -21,7 +21,7 @@ export function MefPopup({ buttonText = "POP 🎮" }: MefPopupProps) {
         variant="ghost" 
         className="bg-primary/10 hover:bg-primary/20 text-primary rounded-full px-4 py-2 text-sm font-bold flex items-center gap-1"
       >
-        MEF <span className="text-lg">🎮</span>
+        MEF <span className="text-lg">💩</span>
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
