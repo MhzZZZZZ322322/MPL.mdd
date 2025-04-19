@@ -77,7 +77,6 @@ const Footer = () => {
               <FooterLink href="/">Acasă</FooterLink>
               <FooterLink href="#about">Despre noi</FooterLink>
               <FooterLink href="#events">Evenimente & Turnee</FooterLink>
-              <FooterLink href="#rankings">Clasamente & Jucători</FooterLink>
               <FooterLink href="#partners">Parteneriate</FooterLink>
               <FooterLink href="#faq">FAQ</FooterLink>
               <FooterLink href="#contact">Contact</FooterLink>
@@ -87,12 +86,13 @@ const Footer = () => {
           {/* Tournaments */}
           <FooterSection title="Turnee">
             <ul className="space-y-2 text-sm">
-              <FooterLink href="#">CS:GO</FooterLink>
-              <FooterLink href="#">League of Legends</FooterLink>
-              <FooterLink href="#">FIFA</FooterLink>
-              <FooterLink href="#">Dota 2</FooterLink>
-              <FooterLink href="#">Valorant</FooterLink>
-              <FooterLink href="#">Mobile Legends</FooterLink>
+              <FooterLink href="/events/mpl-pilot-cup">CS2</FooterLink>
+              <li className="text-xs text-gray-500 mt-3 mb-1">În curând</li>
+              <li className="text-sm text-gray-400">Dota 2</li>
+              <li className="text-sm text-gray-400">PUBG</li>
+              <li className="text-sm text-gray-400">League of Legends</li>
+              <li className="text-sm text-gray-400">Valorant</li>
+              <li className="text-sm text-gray-400">Mobile Legends</li>
             </ul>
           </FooterSection>
           
