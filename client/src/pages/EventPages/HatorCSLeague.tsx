@@ -79,7 +79,7 @@ const HatorCSLeague = () => {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-white mb-8 font-rajdhani text-center">Premii Impresionante</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="flex flex-col gap-10 max-w-2xl mx-auto">
               <a 
                 href="https://darwin.md/scaun-gaming-hator-arc-2-xl-black-htc2000.html" 
                 target="_blank"
@@ -87,18 +87,18 @@ const HatorCSLeague = () => {
                 className="group block"
               >
                 <div className="bg-gradient-to-br from-amber-500/20 to-amber-600/20 p-6 rounded-lg border border-amber-500/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/20">
-                  <div className="flex items-center mb-4">
-                    <Award className="text-amber-500 h-8 w-8 mr-2" />
-                    <h3 className="text-amber-500 text-xl font-bold">Locul 1</h3>
+                  <div className="flex items-center mb-6">
+                    <Award className="text-amber-500 h-10 w-10 mr-3" />
+                    <h3 className="text-amber-500 text-2xl font-bold">Locul 1</h3>
                   </div>
-                  <div className="relative h-48 overflow-hidden rounded mb-4 bg-yellow-400">
+                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
                     <img 
                       src="/attached_assets/image_1745057966144.png" 
                       alt="5x Scaune gaming HATOR Arc 2 XL" 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-white text-center">5x Scaune gaming HATOR Arc 2 XL</p>
+                  <p className="text-white text-center text-xl">5x Scaune gaming HATOR Arc 2 XL</p>
                 </div>
               </a>
               
@@ -109,18 +109,18 @@ const HatorCSLeague = () => {
                 className="group block"
               >
                 <div className="bg-gradient-to-br from-slate-400/20 to-slate-500/20 p-6 rounded-lg border border-slate-400/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20">
-                  <div className="flex items-center mb-4">
-                    <Award className="text-slate-400 h-8 w-8 mr-2" />
-                    <h3 className="text-slate-400 text-xl font-bold">Locul 2</h3>
+                  <div className="flex items-center mb-6">
+                    <Award className="text-slate-400 h-10 w-10 mr-3" />
+                    <h3 className="text-slate-400 text-2xl font-bold">Locul 2</h3>
                   </div>
-                  <div className="relative h-48 overflow-hidden rounded mb-4 bg-yellow-400">
+                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
                     <img 
                       src="/attached_assets/image_1745059215270.png" 
                       alt="5x Mouse HATOR Quasar 3 ULTRA 8K" 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-white text-center">5x Mouse HATOR Quasar 3 ULTRA 8K</p>
+                  <p className="text-white text-center text-xl">5x Mouse HATOR Quasar 3 ULTRA 8K</p>
                 </div>
               </a>
               
@@ -131,18 +131,18 @@ const HatorCSLeague = () => {
                 className="group block"
               >
                 <div className="bg-gradient-to-br from-amber-700/20 to-amber-800/20 p-6 rounded-lg border border-amber-700/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-700/20">
-                  <div className="flex items-center mb-4">
-                    <Award className="text-amber-700 h-8 w-8 mr-2" />
-                    <h3 className="text-amber-700 text-xl font-bold">Locul 3</h3>
+                  <div className="flex items-center mb-6">
+                    <Award className="text-amber-700 h-10 w-10 mr-3" />
+                    <h3 className="text-amber-700 text-2xl font-bold">Locul 3</h3>
                   </div>
-                  <div className="relative h-48 overflow-hidden rounded mb-4 bg-yellow-400">
+                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
                     <img 
                       src="/attached_assets/image_1745060726522.png" 
                       alt="5x Căști HATOR Hypergang 2 USB 7.1" 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="text-white text-center">5x Căști HATOR Hypergang 2 USB 7.1</p>
+                  <p className="text-white text-center text-xl">5x Căști HATOR Hypergang 2 USB 7.1</p>
                 </div>
               </a>
             </div>
