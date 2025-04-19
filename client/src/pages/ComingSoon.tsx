@@ -1,6 +1,4 @@
-import React from 'react';
-import comingSoonImg from '@assets/image_1744965966423.png';
-import { CalendarClock, Trophy, Users, MapPin, Clock, Gamepad2 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 interface ComingSoonProps {
   enabled: boolean;
@@ -11,169 +9,92 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
   const isAdminPage = window.location.pathname.includes('/admin');
   if (!enabled || isAdminPage) return null;
   
+  // Easter Egg pentru accesare secretă admin
+  const [keys, setKeys] = useState<string[]>([]);
+  
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      setKeys(prevKeys => {
+        const newKeys = [...prevKeys, e.key.toLowerCase()];
+        // Păstrăm doar ultimele 3 taste apăsate
+        if (newKeys.length > 3) {
+          return newKeys.slice(newKeys.length - 3);
+        }
+        return newKeys;
+      });
+    };
+    
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+  
+  // Verificăm dacă s-a tastat secvența "mpl"
+  useEffect(() => {
+    if (keys.length === 3 && keys.join('') === 'mpl') {
+      window.location.href = '/admin';
+    }
+  }, [keys]);
+  
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center overflow-auto bg-black">
-      <div className="relative w-full min-h-screen">
-        {/* Imaginea de fundal poziționată */}
-        <div className="fixed inset-0 bg-gradient-to-b from-black via-black/80 to-black/40 z-10"></div>
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black">
+      {/* Gradient overlay pentru fundalul întunecat */}
+      <div className="absolute inset-0 opacity-40" 
+           style={{
+             backgroundImage: `url('https://i.postimg.cc/FMrWmrpv/bg-dark-darwin-hator.jpg')`, 
+             backgroundSize: 'cover', 
+             backgroundPosition: 'center'
+           }}>
+      </div>
+      
+      {/* Overlay pentru transparență */}
+      <div className="absolute inset-0 bg-black opacity-70 z-10"></div>
+      
+      {/* Conținut centrat */}
+      <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 max-w-2xl mx-auto">
+        <h1 className="text-5xl md:text-6xl font-bold mb-3 text-white">
+          COMING SOON
+        </h1>
+        <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-amber-500">
+          HATOR CS LEAGUE MOLDOVA
+        </h2>
+        <h3 className="text-3xl md:text-4xl font-bold mb-10 text-white">
+          MPL
+        </h3>
         
-        <img
-          src={comingSoonImg}
-          alt="Moldova Pro League - Coming Soon"
-          className="fixed inset-0 w-full h-full object-cover opacity-20"
-        />
+        <p className="text-lg text-gray-300 mb-10">
+          Website-ul nostru este în construcție dar va fi disponibil în curând.
+        </p>
         
-        {/* Container principal */}
-        <div className="relative z-20 container mx-auto px-4">
+        <a 
+          href="https://discord.gg/moldovaproleague" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="py-3 px-6 rounded-lg bg-[#5865F2] hover:bg-[#4752c4] text-white flex items-center gap-2 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+          </svg>
+          <span>Alătură-te pe Discord</span>
+        </a>
         
-          {/* Hero section */}
-          <section className="py-20 flex flex-col items-center justify-center min-h-screen">
-            <div className="text-center mb-8">
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 text-center text-white">
-                HATOR <span className="text-amber-500">CS LEAGUE</span> MOLDOVA
-              </h1>
-              <div className="text-6xl font-bold mb-6 text-center text-white">MPL</div>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-                Primul turneu profesionist de Counter-Strike 2 din Moldova organizat de MPL în parteneriat cu HATOR. Sezonul 1 - Mai-Iunie 2025
-              </p>
-              
-              {/* Call to action buttons */}
-              <div className="flex flex-wrap justify-center gap-4 mb-10">
-                <a 
-                  href="https://discord.gg/GUNbVdwm" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="py-3 px-6 rounded-lg bg-[#5865F2] hover:bg-[#4752c4] text-white flex items-center gap-2 transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
-                  </svg>
-                  <span>Alătură-te pe Discord</span>
-                </a>
-              </div>
-              
-              {/* Tournament date countdown */}
-              <div className="bg-black/50 backdrop-blur-sm p-6 rounded-xl inline-block mb-8">
-                <div className="text-xl text-white mb-4 flex items-center justify-center gap-2">
-                  <CalendarClock className="w-6 h-6 text-amber-500" />
-                  <span>Turneul începe în Mai 2025</span>
-                </div>
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-white">42</div>
-                    <div className="text-xs text-gray-400">Zile</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-white">08</div>
-                    <div className="text-xs text-gray-400">Ore</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-white">23</div>
-                    <div className="text-xs text-gray-400">Minute</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-white">17</div>
-                    <div className="text-xs text-gray-400">Secunde</div>
-                  </div>
-                </div>
-              </div>
+        {/* Logouri parteneri la partea de jos, cu opacitate redusă */}
+        <div className="fixed bottom-0 left-0 right-0 p-8 flex justify-center opacity-30">
+          <div className="max-w-5xl mx-auto grid grid-cols-2 gap-8">
+            <div className="flex items-center justify-center">
+              <img 
+                src="https://hator.gg/wp-content/uploads/2023/06/hator-logo.svg" 
+                alt="HATOR" 
+                className="h-12 md:h-16"
+              />
             </div>
-          </section>
-          
-          {/* Tournament info */}
-          <section className="py-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Despre Turneu</h2>
-              <div className="w-24 h-1 bg-amber-500 mx-auto"></div>
+            <div className="flex items-center justify-center">
+              <img 
+                src="https://darwin.md/assets/img/darwin-logo-white.svg" 
+                alt="Darwin" 
+                className="h-12 md:h-14"
+              />
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <div className="bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-amber-500/20 hover:border-amber-500/50 transition-all">
-                <div className="text-amber-500 mb-4">
-                  <Trophy className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Premii</h3>
-                <p className="text-gray-300">
-                  Premii valoroase oferite de HATOR: scaune gaming pentru locul 1, microfoane pentru locul 2, căști pentru locul 3 și mousepad-uri pentru cele mai spectaculoase momente ACE.
-                </p>
-              </div>
-              
-              <div className="bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-amber-500/20 hover:border-amber-500/50 transition-all">
-                <div className="text-amber-500 mb-4">
-                  <Users className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Participanți</h3>
-                <p className="text-gray-300">
-                  Până la 128 de echipe de top din Moldova și România vor concura pentru titlul de campion. Participarea este gratuită.
-                </p>
-              </div>
-              
-              <div className="bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-amber-500/20 hover:border-amber-500/50 transition-all">
-                <div className="text-amber-500 mb-4">
-                  <MapPin className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Platformă</h3>
-                <p className="text-gray-300">
-                  Turneul se va desfășura online pe platforma FACEIT, cu transmisiuni live pe TikTok, YouTube și Twitch.
-                </p>
-              </div>
-              
-              <div className="bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-amber-500/20 hover:border-amber-500/50 transition-all">
-                <div className="text-amber-500 mb-4">
-                  <Clock className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Program</h3>
-                <p className="text-gray-300">
-                  Turneul se va desfășura la sfârșitul lunii mai și începutul lunii iunie 2025, cu meciuri zilnice.
-                </p>
-              </div>
-              
-              <div className="bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-amber-500/20 hover:border-amber-500/50 transition-all">
-                <div className="text-amber-500 mb-4">
-                  <Gamepad2 className="w-12 h-12" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Format</h3>
-                <p className="text-gray-300">
-                  Format competitiv clasic 5v5, cu sistem de grupe urmat de meciuri eliminatorii directe.
-                </p>
-              </div>
-              
-              <div className="bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-amber-500/20 hover:border-amber-500/50 transition-all">
-                <div className="text-amber-500 mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">Parteneri</h3>
-                <p className="text-gray-300">
-                  Turneu organizat de MPL (Moldova Pro League) în parteneriat cu HATOR și sprijinit de influenceri și streameri locali.
-                </p>
-              </div>
-            </div>
-          </section>
-          
-          {/* Call to action */}
-          <section className="py-16 mb-16">
-            <div className="bg-gradient-to-r from-amber-500/20 to-amber-700/20 backdrop-blur-sm p-8 rounded-2xl max-w-4xl mx-auto border border-amber-500/30">
-              <h2 className="text-3xl font-bold text-white mb-4 text-center">Pregătit să te alături competiției?</h2>
-              <p className="text-xl text-gray-200 mb-8 text-center">
-                Urmărește-ne pe Discord pentru ultimele noutăți și data oficială de începere a turneului.
-              </p>
-              <div className="flex justify-center">
-                <a 
-                  href="https://discord.gg/GUNbVdwm" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="py-4 px-8 rounded-lg bg-[#5865F2] hover:bg-[#4752c4] text-white flex items-center gap-2 transition-colors text-lg font-medium"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
-                  </svg>
-                  <span>Alătură-te pe Discord</span>
-                </a>
-              </div>
-            </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>
