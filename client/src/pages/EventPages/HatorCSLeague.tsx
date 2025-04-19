@@ -324,7 +324,7 @@ const HatorCSLeague = () => {
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
                     <a 
-                      href="https://youtube.com/moldovaproleague" 
+                      href="https://www.youtube.com/@MoldovaProLeague" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-white hover:text-primary transition-colors"
