@@ -107,7 +107,7 @@ const MPLPilotCup = () => {
                         <h3 className="text-xl font-bold text-white">LitEnergy</h3>
                       </div>
                       <img 
-                        src="/image_1745068779707.png" 
+                        src="/img_0402_1.jpg" 
                         alt="Câștigător MPL Pilot Cup cu premii" 
                         className="w-full h-64 object-cover rounded mb-4"
                         loading="lazy"
