@@ -28,28 +28,16 @@ const About = () => {
 
   const timeline = [
     {
-      year: "2022",
-      title: "Înființarea MPL",
-      description: "Primele discuții și formarea comunității inițiale de gameri.",
-      icon: <History />
-    },
-    {
-      year: "2022",
-      title: "Primul Turneu",
-      description: "Organizarea primului turneu de CS:GO cu doar 8 echipe.",
+      year: "22-23 Martie 2025",
+      title: "MPL Pilot Cup",
+      description: "Turneul inaugural dedicat jucătorilor din Moldova și România",
       icon: <Trophy />
     },
     {
-      year: "2023",
-      title: "Comunitate în creștere",
-      description: "Atingerea pragului de 500 de membri în comunitate.",
-      icon: <Users />
-    },
-    {
-      year: "2023",
-      title: "Parteneriatul cu Hator",
-      description: "Primul parteneriat major pentru sponsorizarea turneelor.",
-      icon: <Sparkles />
+      year: "Mai-Iunie 2025",
+      title: "HATOR CS2 LEAGUE MOLDOVA",
+      description: "Primul turneu major sponsorizat de HATOR cu premii substanțiale",
+      icon: <Medal />
     }
   ];
 
