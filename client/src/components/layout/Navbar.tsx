@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Glitch from "@/components/animations/Glitch";
 import mplLogo from "@/assets/mpl-logo.png";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface NavItem {
   label: string;
@@ -17,6 +24,19 @@ const navItems: NavItem[] = [
   { label: "Parteneriate", href: "/#partners" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
+];
+
+// Jocurile disponibile și în curând
+const currentGames = [
+  { name: "CS2", link: "/events/mpl-pilot-cup" },
+];
+
+const upcomingGames = [
+  { name: "Dota 2", link: "#" },
+  { name: "PUBG", link: "#" },
+  { name: "League of Legends", link: "#" },
+  { name: "Valorant", link: "#" },
+  { name: "Mobile Legends", link: "#" },
 ];
 
 const Navbar = () => {
@@ -92,6 +112,33 @@ const Navbar = () => {
         </Link>
         
         <div className="hidden md:flex space-x-6 text-sm">
+          {/* Jocuri Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center hover:text-secondary transition-colors">
+                Jocuri <ChevronDown className="ml-1 h-3 w-3" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="bg-black/90 border border-primary/30 text-white">
+              {currentGames.map((game) => (
+                <DropdownMenuItem key={game.name} className="hover:bg-primary/20">
+                  <Link href={game.link} className="w-full">{game.name}</Link>
+                </DropdownMenuItem>
+              ))}
+              {upcomingGames.length > 0 && (
+                <>
+                  <DropdownMenuSeparator className="bg-gray-700/50" />
+                  <div className="px-2 py-1 text-xs text-gray-400">În curând</div>
+                  {upcomingGames.map((game) => (
+                    <DropdownMenuItem key={game.name} className="text-gray-400 cursor-not-allowed">
+                      {game.name}
+                    </DropdownMenuItem>
+                  ))}
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
           {navItems.map((item) => (
             <button
               key={item.label}
@@ -126,6 +173,30 @@ const Navbar = () => {
         mobileMenuOpen ? "block" : "hidden"
       )}>
         <div className="container mx-auto px-4 py-6 flex flex-col space-y-5">
+          {/* Jocuri section */}
+          <div className="py-3 text-lg font-medium hover:text-secondary border-b border-gray-800">
+            <p className="mb-2">Jocuri</p>
+            <div className="ml-4 mt-3 space-y-2">
+              {currentGames.map(game => (
+                <Link key={game.name} href={game.link} className="block py-2 text-base">
+                  {game.name}
+                </Link>
+              ))}
+              
+              {upcomingGames.length > 0 && (
+                <>
+                  <p className="text-sm text-gray-500 mt-3 mb-1">În curând</p>
+                  {upcomingGames.map(game => (
+                    <p key={game.name} className="block py-1 text-sm text-gray-400">
+                      {game.name}
+                    </p>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+          
+          {/* Regular links */}
           {navItems.map((item) => (
             <button
               key={item.label}
