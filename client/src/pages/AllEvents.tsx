@@ -18,6 +18,7 @@ const AllEvents = () => {
     <>
       <Helmet>
         <title>Toate Evenimentele | Moldova Pro League</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
       <Navbar />

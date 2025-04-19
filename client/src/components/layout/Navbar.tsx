@@ -14,11 +14,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Acasă", href: "/" },
   { label: "Despre noi", href: "/#about" },
-  { label: "Statistici", href: "/#stats" },
-  { label: "Evenimente", href: "/events" },
-  { label: "Galerie", href: "/#gallery" },
-  { label: "Clasamente", href: "/rankings" },
-  { label: "Comunitate", href: "/community" },
   { label: "Parteneriate", href: "/#partners" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },
@@ -117,7 +112,7 @@ const Navbar = () => {
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <Button 
-            onClick={() => handleNavLinkClick('/community')}
+            onClick={() => handleNavLinkClick('/#contact')}
             className="hidden md:flex bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded text-sm font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
             Alătură-te
@@ -141,7 +136,7 @@ const Navbar = () => {
             </button>
           ))}
           <Button 
-            onClick={() => handleNavLinkClick('/community')}
+            onClick={() => handleNavLinkClick('/#contact')}
             className="w-full mt-4 bg-primary hover:bg-primary/80 text-white px-4 py-3 rounded text-center font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
             Alătură-te
