@@ -224,19 +224,30 @@ const HatorCSLeague = () => {
                 <h4 className="mt-4 mb-2 text-primary font-semibold">Etapa 2: Play-off (Eliminatoriu)</h4>
                 <ul className="mb-4">
                   <li><strong>Echipe calificate</strong>: 48 din faza grupelor</li>
-                  <li><strong>Structură</strong>:
+                  <li>
+                    <strong>Structură</strong>:
                     <ul className="ml-6 mt-2 mb-2 list-disc">
                       <li>Runda 1 (Top 48 → Top 32): participă locurile 2 și 3 din grupe (32 echipe) - meciuri Bo1</li>
                       <li>Runda 2 (Top 32 → Top 24): echipele câștigătoare din R1 + echipele clasate pe locul 1 în grupe - meciuri Bo1</li>
-                      <li>De la Top 12 încolo (optimi, sferturi, semifinale și finală) - meciuri Bo3</li>
+                      <li>Runda 3 (Top 24 → Top 12): se joacă 12 meciuri Bo1</li>
+                      <li>Etapa finală: optimi, sferturi, semifinale și finală - toate meciuri Bo3</li>
                     </ul>
+                    <div className="mt-2 ml-6">
+                      <a 
+                        href="/docs/Explicatie_Etapa2_Playoff_Curat.pdf" 
+                        target="_blank"
+                        className="text-primary hover:text-primary/80 underline flex items-center"
+                      >
+                        <FileIcon className="w-4 h-4 mr-1" /> Explicație detaliată Play-off
+                      </a>
+                    </div>
                   </li>
                 </ul>
                 
                 <h4 className="mt-4 mb-2 text-primary font-semibold">Format Meciuri</h4>
                 <ul className="mb-4">
-                  <li><strong>Bo1</strong>: Un singur meci decide câștigătorul (grupe și primele 2 runde din Play-off)</li>
-                  <li><strong>Bo3</strong>: Cele mai bune din 3 hărți (din optimi până în finală)</li>
+                  <li><strong>Bo1</strong>: Un singur meci decide câștigătorul (grupe și primele 3 runde din Play-off)</li>
+                  <li><strong>Bo3</strong>: Cele mai bune din 3 hărți (etapa finală din Top 12 până în finală)</li>
                 </ul>
                 
                 <h4 className="mt-4 mb-2 text-primary font-semibold">Alegere Hărți - Bo3</h4>
