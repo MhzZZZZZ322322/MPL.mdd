@@ -168,9 +168,9 @@ const MPLPilotCup = () => {
                       href="https://hator.gg" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="block hover:opacity-80 transition-opacity"
+                      className="text-white text-xl hover:text-primary transition-colors"
                     >
-                      <img src="/attached_assets/image_1745053544763.png" alt="HATOR" className="h-12" />
+                      HATOR
                     </a>
                   </div>
                   
@@ -180,9 +180,9 @@ const MPLPilotCup = () => {
                       href="https://darwin.md" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="block hover:opacity-80 transition-opacity"
+                      className="text-white text-xl hover:text-primary transition-colors"
                     >
-                      <img src="/attached_assets/image_1745053544763.png" alt="Darwin" className="h-10" />
+                      DARWIN
                     </a>
                   </div>
                 </div>
