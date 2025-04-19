@@ -70,7 +70,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
         </p>
         
         <a 
-          href="https://discord.gg/moldovaproleague" 
+          href="https://discord.gg/Ek4qvWE5qB" 
           target="_blank" 
           rel="noopener noreferrer"
           className="py-3 px-6 rounded-lg bg-[#5865F2] hover:bg-[#4752c4] text-white flex items-center gap-2 transition-colors shadow-md"
