@@ -81,11 +81,6 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
           <span>Alătură-te pe Discord</span>
         </a>
         
-        {/* Organizat de text */}
-        <p className="text-gray-300 mt-8 text-sm opacity-70">
-          ORGANIZAT DE
-        </p>
-        
         {/* Logouri parteneri - aceeași mărime pentru ambele */}
         <div className="fixed bottom-10 left-0 right-0 flex justify-center items-center gap-12">
           <a 
