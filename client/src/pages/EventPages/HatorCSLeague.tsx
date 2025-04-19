@@ -93,7 +93,7 @@ const HatorCSLeague = () => {
                   </div>
                   <div className="relative h-80 overflow-hidden rounded mb-6">
                     <img 
-                      src="/image_1745061420798.png" 
+                      src="/image_1745061482498.png" 
                       alt="5x Scaune gaming HATOR Arc 2 XL" 
                       className="w-full h-full object-cover"
                     />
