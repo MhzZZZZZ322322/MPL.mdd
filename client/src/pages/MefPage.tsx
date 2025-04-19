@@ -1,9 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { Helmet } from "react-helmet";
+import { useEffect } from "react";
 
 export default function MefPage() {
   const [_, setLocation] = useLocation();
+  
+  useEffect(() => {
+    // Încarcă scriptul Tenor când componenta este montată
+    const script = document.createElement('script');
+    script.src = 'https://tenor.com/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Curățare la demontare
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <>
@@ -26,12 +40,11 @@ export default function MefPage() {
           </div>
           
           <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="w-full md:w-1/2 rounded-lg overflow-hidden border border-primary/30">
-              <img 
-                src="/images/gerara.gif" 
-                alt="MEF - Gerara Here" 
-                className="w-full h-auto"
-                loading="eager"
+            <div className="w-full md:w-1/2 rounded-lg overflow-hidden border border-primary/30 bg-black/70">
+              <div 
+                dangerouslySetInnerHTML={{ 
+                  __html: `<div class="tenor-gif-embed p-2" data-postid="17883423" data-share-method="host" data-aspect-ratio="1.17647" data-width="100%"><a href="https://tenor.com/view/get-rara-here-gif-17883423">Get Rara Here GIF</a></div>` 
+                }} 
               />
             </div>
             
