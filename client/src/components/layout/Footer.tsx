@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
+import { MefPopup } from "@/components/ui/mef-popup";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
@@ -63,11 +64,14 @@ const Footer = () => {
             <p className="text-sm mb-6">
               Moldova Pro League este comunitatea independentă de esports, creată din pasiunea pentru gaming competitiv.
             </p>
-            <div className="flex space-x-4">
-              <SocialIcon href="https://www.twitch.tv/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaTwitch} />
-              <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
-              <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
-              <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
+            <div className="flex items-center mb-4">
+              <div className="flex space-x-4 mr-4">
+                <SocialIcon href="https://www.twitch.tv/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaTwitch} />
+                <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
+                <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
+                <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
+              </div>
+              <MefPopup />
             </div>
           </div>
           

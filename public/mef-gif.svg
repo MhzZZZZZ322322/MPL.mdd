@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <style>
+    .text {
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      fill: white;
+      text-anchor: middle;
+    }
+    .bg {
+      fill: #000;
+    }
+    .mef {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-size: 32px;
+      fill: #ff6600;
+      text-anchor: middle;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .animated-text {
+      animation: bounce 2s infinite;
+    }
+  </style>
+  <rect class="bg" width="300" height="300" rx="10" />
+  <g class="animated-text" transform="translate(150, 150)">
+    <text class="mef" x="0" y="-50">MEF</text>
+    <text class="text" x="0" y="0">Gerara Here!</text>
+    <text class="text" x="0" y="40" font-size="16">Gotta count on someone else man!</text>
+  </g>
+</svg>
