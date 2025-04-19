@@ -26,7 +26,7 @@ const MPLPilotCup = () => {
               width="1920"
               height="1080"
             />
-            <div className="absolute inset-0 bg-black/70 z-0"></div>
+            <div className="absolute inset-0 bg-black/40 z-0"></div>
           </div>
 
           {/* Content */}
