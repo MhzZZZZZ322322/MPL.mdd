@@ -1,0 +1,21 @@
+{
+  "name": "Moldova Pro League",
+  "short_name": "MPL",
+  "description": "Platforma oficială a Moldova Pro League - Esports din inima Moldovei",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#8c52ff",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
