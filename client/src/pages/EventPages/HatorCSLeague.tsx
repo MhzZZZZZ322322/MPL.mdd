@@ -58,9 +58,11 @@ const HatorCSLeague = () => {
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-primary hover:bg-primary/90">
-                  Înregistrare echipă
-                </Button>
+                <a href="https://discord.gg/KgXXUebhVM" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-primary hover:bg-primary/90">
+                    Înregistrare echipă
+                  </Button>
+                </a>
                 <Button variant="outline" className="border-white text-white hover:bg-white/10">
                   Regulament
                 </Button>
