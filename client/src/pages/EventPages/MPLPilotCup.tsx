@@ -52,12 +52,7 @@ const MPLPilotCup = () => {
               </p>
               
               <div className="flex flex-wrap gap-4">
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Galerie foto
-                </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Rezultate
-                </Button>
+                {/* Butoanele au fost eliminate */}
               </div>
             </div>
           </div>
@@ -97,15 +92,6 @@ const MPLPilotCup = () => {
               </div>
               
               <div className="mt-12">
-                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Imagine Eveniment</h2>
-                
-                <div className="bg-darkGray/50 rounded-lg overflow-hidden border border-primary/10 hover:border-primary/20 transition-colors p-6 flex flex-col items-center mb-12">
-                  <img 
-                    src="/mpl_pilot_cup_logo.svg" 
-                    alt="MPL Pilot Cup Logo" 
-                    className="max-w-full h-auto max-h-80"
-                  />
-                </div>
                 
                 <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Câștigătorii</h2>
                 
