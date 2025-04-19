@@ -106,15 +106,25 @@ const MPLPilotCup = () => {
                         <span className="bg-gradient-to-r from-yellow-500 to-amber-300 text-black font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 1</span>
                         <h3 className="text-xl font-bold text-white">LitEnergy</h3>
                       </div>
-                      <img 
-                        src="/attached_assets/image_1745068317067.png" 
-                        alt="Echipa LitEnergy" 
-                        className="w-full h-64 object-cover rounded mb-4"
-                        loading="lazy"
-                        width="400"
-                        height="300"
-                      />
-                      <p className="text-gray-300">
+                      <div className="grid grid-cols-1 gap-4">
+                        <img 
+                          src="/image_1745068800211.png" 
+                          alt="Echipa LitEnergy" 
+                          className="w-full object-cover rounded"
+                          loading="lazy"
+                          width="400"
+                          height="300"
+                        />
+                        <img 
+                          src="/image_1745068779707.png" 
+                          alt="Câștigător MPL Pilot Cup cu premii" 
+                          className="w-full h-64 object-cover rounded"
+                          loading="lazy"
+                          width="400"
+                          height="300"
+                        />
+                      </div>
+                      <p className="text-gray-300 mt-4">
                         Felicitări, LitEnergy! 🏆 Echipa a demonstrat că talentul, determinarea și munca în echipă sunt cheia succesului! Printr-un parcurs spectaculos și momente de joc electrizante, au reușit să cucerească titlul de campioni ai turneului.
                       </p>
                     </div>
