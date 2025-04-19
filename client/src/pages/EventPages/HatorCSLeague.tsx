@@ -181,7 +181,7 @@ const HatorCSLeague = () => {
                 <h3>Format</h3>
                 <ul>
                   <li><strong>Capacitate maximă</strong>: 128 echipe din Moldova și România</li>
-                  <li><strong>Faza de grupe</strong>: </li>
+                  <li><strong>Faza de grupe</strong>: 16 grupe a câte 8 echipe</li>
                   <li><strong>Fazele eliminatorii</strong>: Bracket simplu cu 64 echipe, single elimination</li>
                   <li><strong>Format meciuri</strong>: Bo1 în grupe, Bo1 în primele runde eliminatorii, Bo3 în optimi, sferturi, semifinale și finală</li>
                 </ul>
