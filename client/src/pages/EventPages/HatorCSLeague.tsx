@@ -91,11 +91,12 @@ const HatorCSLeague = () => {
                     <Award className="text-amber-500 h-10 w-10 mr-3" />
                     <h3 className="text-amber-500 text-2xl font-bold">Locul 1</h3>
                   </div>
-                  <div className="relative h-80 overflow-hidden rounded mb-6">
+                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center p-4">
                     <img 
                       src="/image_1745057966144.png" 
                       alt="5x Scaune gaming HATOR Arc 2 XL" 
-                      className="w-full h-full object-contain"
+                      className="max-w-full max-h-full object-contain"
+                      style={{ maxHeight: "90%" }}
                     />
                   </div>
                   <p className="text-white text-center text-xl">5x Scaune gaming HATOR Arc 2 XL</p>
@@ -113,11 +114,12 @@ const HatorCSLeague = () => {
                     <Award className="text-slate-400 h-10 w-10 mr-3" />
                     <h3 className="text-slate-400 text-2xl font-bold">Locul 2</h3>
                   </div>
-                  <div className="relative h-80 overflow-hidden rounded mb-6">
+                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center p-4">
                     <img 
                       src="/image_1745059215270.png" 
                       alt="5x Mouse HATOR Quasar 3 ULTRA 8K" 
-                      className="w-full h-full object-cover"
+                      className="max-w-full max-h-full object-contain"
+                      style={{ maxHeight: "90%" }}
                     />
                   </div>
                   <p className="text-white text-center text-xl">5x Mouse HATOR Quasar 3 ULTRA 8K</p>
@@ -135,11 +137,12 @@ const HatorCSLeague = () => {
                     <Award className="text-amber-700 h-10 w-10 mr-3" />
                     <h3 className="text-amber-700 text-2xl font-bold">Locul 3</h3>
                   </div>
-                  <div className="relative h-80 overflow-hidden rounded mb-6">
+                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center p-4">
                     <img 
                       src="/image_1745060726522.png" 
                       alt="5x Căști HATOR Hypergang 2 USB 7.1" 
-                      className="w-full h-full object-cover"
+                      className="max-w-full max-h-full object-contain"
+                      style={{ maxHeight: "90%" }}
                     />
                   </div>
                   <p className="text-white text-center text-xl">5x Căști HATOR Hypergang 2 USB 7.1</p>
