@@ -108,7 +108,7 @@ const MPLPilotCup = () => {
                         <h3 className="text-xl font-bold text-white">LitEnergy</h3>
                       </div>
                       <img 
-                        src="/attached_assets/image_1745053960053.png" 
+                        src="/image_1745053960053.png" 
                         alt="Echipa LitEnergy" 
                         className="w-full h-64 object-cover rounded mb-4"
                       />
@@ -126,7 +126,7 @@ const MPLPilotCup = () => {
                         <h3 className="text-xl font-bold text-white">R5Team</h3>
                       </div>
                       <img 
-                        src="/attached_assets/image_1745053980568.png" 
+                        src="/image_1745053980568.png" 
                         alt="Echipa R5Team" 
                         className="w-full h-64 object-cover rounded mb-4"
                       />
@@ -144,7 +144,7 @@ const MPLPilotCup = () => {
                         <h3 className="text-xl font-bold text-white">K9 TEAM</h3>
                       </div>
                       <img 
-                        src="/attached_assets/image_1745053990322.png" 
+                        src="/image_1745053990322.png" 
                         alt="Echipa K9 TEAM" 
                         className="w-full h-64 object-cover rounded mb-4"
                       />
