@@ -43,7 +43,7 @@ export default function MefPage() {
             <div className="w-full md:w-1/2 rounded-lg overflow-hidden border border-primary/30 bg-black/70">
               <div 
                 dangerouslySetInnerHTML={{ 
-                  __html: `<div class="tenor-gif-embed p-2" data-postid="17883423" data-share-method="host" data-aspect-ratio="1.17647" data-width="100%"><a href="https://tenor.com/view/get-rara-here-gif-17883423">Get Rara Here GIF</a></div>` 
+                  __html: `<div class="tenor-gif-embed p-2" data-postid="16947551" data-share-method="host" data-aspect-ratio="1.36752" data-width="100%"><a href="https://tenor.com/view/gerara-give-me-a-favor-get-out-of-here-go-away-mad-gif-16947551">Gerara Give Me A Favor GIF</a></div>` 
                 }} 
               />
             </div>
