@@ -63,9 +63,14 @@ const HatorCSLeague = () => {
                     Înregistrare echipă
                   </Button>
                 </a>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Regulament
-                </Button>
+                <a href="#rules" onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('rules')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                    Regulament
+                  </Button>
+                </a>
                 <a href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="border-[#5865F2] text-[#5865F2] hover:bg-[#5865F2]/10">
                     Discord MPL
@@ -194,7 +199,7 @@ const HatorCSLeague = () => {
               </div>
               
               <div className="mt-12">
-                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Reguli importante</h2>
+                <h2 id="rules" className="text-3xl font-bold text-white mb-6 font-rajdhani">Reguli importante</h2>
                 
                 <div className="prose prose-invert max-w-none">
                   <h3>Anti-cheat și Fair Play</h3>
