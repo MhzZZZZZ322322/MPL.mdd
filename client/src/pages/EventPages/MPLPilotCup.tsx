@@ -22,6 +22,9 @@ const MPLPilotCup = () => {
               src="/attached_assets/image_1744965966423.png" 
               alt="MPL Pilot Cup" 
               className="w-full h-full object-cover opacity-60"
+              fetchpriority="high"
+              width="1920"
+              height="1080"
             />
             <div className="absolute inset-0 bg-black/50 z-0"></div>
           </div>
@@ -104,9 +107,12 @@ const MPLPilotCup = () => {
                         <h3 className="text-xl font-bold text-white">LitEnergy</h3>
                       </div>
                       <img 
-                        src="/image_1745053960053.png" 
+                        src="/attached_assets/image_1745068317067.png" 
                         alt="Echipa LitEnergy" 
                         className="w-full h-64 object-cover rounded mb-4"
+                        loading="lazy"
+                        width="400"
+                        height="300"
                       />
                       <p className="text-gray-300">
                         Felicitări, LitEnergy! 🏆 Echipa a demonstrat că talentul, determinarea și munca în echipă sunt cheia succesului! Printr-un parcurs spectaculos și momente de joc electrizante, au reușit să cucerească titlul de campioni ai turneului.
@@ -125,6 +131,9 @@ const MPLPilotCup = () => {
                         src="/image_1745053980568.png" 
                         alt="Echipa R5Team" 
                         className="w-full h-64 object-cover rounded mb-4"
+                        loading="lazy"
+                        width="400" 
+                        height="300"
                       />
                       <p className="text-gray-300">
                         Respect, R5Team! Echipa a demonstrat curaj, determinare și un joc de înaltă clasă în turneu! Au luptat până la capăt și au arătat de ce sunt una dintre cele mai puternice echipe din competiție.
@@ -143,6 +152,9 @@ const MPLPilotCup = () => {
                         src="/image_1745053990322.png" 
                         alt="Echipa K9 TEAM" 
                         className="w-full h-64 object-cover rounded mb-4"
+                        loading="lazy"
+                        width="400" 
+                        height="300"
                       />
                       <p className="text-gray-300">
                         Felicitări, K9 TEAM! Echipa a demonstrat ambiție, spirit de luptă și skill-uri impresionante în turneu! Printr-un parcurs plin de emoții și meciuri spectaculoase, au reușit să urce pe podium.
