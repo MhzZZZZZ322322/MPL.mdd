@@ -55,9 +55,10 @@ const HatorCSLeague = () => {
                 Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de comunitatea MPL în parteneriat cu HATOR.
               </p>
               
-              {/* Countdown timer */}
+              {/* Countdown timer până la începerea jocurilor */}
               <div className="mb-8">
-                <CountdownTimer targetDate="2025-05-15T18:00:00" className="max-w-3xl" />
+                <p className="text-center text-white mb-2">Până la începerea turneului:</p>
+                <CountdownTimer targetDate="2025-06-02T20:00:00" className="max-w-3xl" />
               </div>
               
               <div className="flex flex-wrap gap-4">
