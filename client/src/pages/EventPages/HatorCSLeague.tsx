@@ -276,12 +276,14 @@ const HatorCSLeague = () => {
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
                 <h3 className="text-xl font-bold text-white mb-4">Organizat de</h3>
                 <div className="flex flex-col space-y-4">
-                  <a 
-                    href="/" 
-                    className="block hover:opacity-80 transition-opacity mb-4"
-                  >
-                    <img src="/attached_assets/MPL logo black-white.png" alt="Moldova Pro League" className="h-10" />
-                  </a>
+                  <div className="mb-4">
+                    <a 
+                      href="/" 
+                      className="text-white text-xl font-medium hover:text-primary transition-colors"
+                    >
+                      Moldova Pro League
+                    </a>
+                  </div>
                   
                   <hr className="border-gray-700" />
                   
@@ -291,9 +293,9 @@ const HatorCSLeague = () => {
                       href="https://hator.gg" 
                       target="_blank" 
                       rel="nofollow noopener noreferrer"
-                      className="block hover:opacity-80 transition-opacity"
+                      className="text-white text-xl font-medium hover:text-primary transition-colors"
                     >
-                      <img src="/attached_assets/vert blackAsset 4.png" alt="HATOR" className="h-12" />
+                      HATOR
                     </a>
                   </div>
                 </div>
