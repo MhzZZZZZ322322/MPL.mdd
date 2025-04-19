@@ -13,6 +13,7 @@ import CommunityPage from "@/pages/CommunityPage";
 import ComingSoon from "@/pages/ComingSoon";
 import MPLPilotCup from "@/pages/EventPages/MPLPilotCup";
 import HatorCSLeague from "@/pages/EventPages/HatorCSLeague";
+import MefPage from "@/pages/MefPage";
 
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/events/hator-cs-league" component={HatorCSLeague} />
       <Route path="/rankings" component={AllRankings} />
       <Route path="/community" component={CommunityPage} />
+      <Route path="/mef" component={MefPage} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />
