@@ -167,17 +167,16 @@ const HatorCSLeague = () => {
                 <h3>Format</h3>
                 <ul>
                   <li><strong>Capacitate maximă</strong>: 128 echipe din Moldova și România</li>
-                  <li><strong>Faza de grupe</strong>: 32 grupe a câte 4 echipe, format round-robin (fiecare cu fiecare), primele 2 echipe avansează</li>
+                  <li><strong>Faza de grupe</strong>: </li>
                   <li><strong>Fazele eliminatorii</strong>: Bracket simplu cu 64 echipe, single elimination</li>
-                  <li><strong>Format meciuri</strong>: Bo1 (Best of 1) în grupe, Bo1 în primele runde eliminatorii, Bo3 (Best of 3) în optimi, sferturi, semifinale și finală</li>
+                  <li><strong>Format meciuri</strong>: Bo1 în grupe, Bo1 în primele runde eliminatorii, Bo3 în optimi, sferturi, semifinale și finală</li>
                 </ul>
                 
                 <h3>Eligibilitate</h3>
                 <ul>
                   <li>Echipele trebuie să aibă minimum 5 jucători și maximum 7 (5 titulari + 2 rezerve)</li>
                   <li>Toți jucătorii trebuie să dețină un cont FACEIT verificat</li>
-                  <li>Cel puțin 3 jucători din echipă trebuie să fie din Moldova sau România</li>
-                  <li>Jucătorii trebuie să aibă FACEIT Rank minim 4 pentru a participa</li>
+                  <li>Cel puțin 4 jucători din echipă trebuie să fie din Moldova, din Romania maxim 1 jucator</li>
                 </ul>
                 
                 <h3>Înscriere</h3>
@@ -185,7 +184,7 @@ const HatorCSLeague = () => {
                   Înscrierea echipelor se va face exclusiv pe platforma FACEIT și Discord MPL, conform următorului calendar:
                 </p>
                 <ul>
-                  <li><strong>Start înscrieri</strong>: 15 Aprilie 2025</li>
+                  <li><strong>Start înscrieri</strong>: 21 Aprilie 2025</li>
                   <li><strong>Închidere înscrieri</strong>: 30 Aprilie 2025</li>
                   <li><strong>Validare echipe</strong>: 1-5 Mai 2025</li>
                   <li><strong>Start turneu</strong>: 10 Mai 2025</li>
@@ -358,10 +357,10 @@ const HatorCSLeague = () => {
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
                     <a 
-                      href="mailto:contact@moldovaproleague.com" 
+                      href="mailto:proleaguemoldova@gmail.com" 
                       className="text-white hover:text-primary transition-colors"
                     >
-                      contact@moldovaproleague.com
+                      proleaguemoldova@gmail.com
                     </a>
                   </div>
                 </div>

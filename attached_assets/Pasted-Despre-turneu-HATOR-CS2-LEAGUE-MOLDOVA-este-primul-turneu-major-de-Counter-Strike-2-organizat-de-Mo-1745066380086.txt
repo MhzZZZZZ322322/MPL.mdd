@@ -1,0 +1,53 @@
+Despre turneu
+HATOR CS2 LEAGUE MOLDOVA este primul turneu major de Counter-Strike 2 organizat de Moldova Pro League în parteneriat cu HATOR - unul dintre cei mai importanți producători de periferice de gaming din regiune.
+
+Acest turneu reprezintă un pas important în dezvoltarea scenei de esports din Moldova, oferind jucătorilor locali șansa de a concura la un nivel înalt, cu premii substanțiale și vizibilitate internațională.
+
+Format
+Capacitate maximă: 128 echipe din Moldova și România
+Faza de grupe: 
+Fazele eliminatorii: Bracket simplu cu 64 echipe, single elimination
+Format meciuri: Bo1 în grupe, Bo1 în primele runde eliminatorii, Bo3 în optimi, sferturi, semifinale și finală
+
+
+Eligibilitate
+Echipele trebuie să aibă minimum 5 jucători și maximum 7 (5 titulari + 2 rezerve)
+Toți jucătorii trebuie să dețină un cont FACEIT verificat
+Cel puțin 4 jucători din echipă trebuie să fie din Moldova, din Romania maxim 1 jucator
+
+
+Înscriere:
+Înscrierea echipelor se va face exclusiv pe platforma FACEIT și Discord MPL, conform următorului calendar:
+
+Timing
+Start înscrieri: 21 Aprilie 2025
+Închidere înscrieri: 30 Aprilie 2025
+Validare echipe: 1-5 Mai 2025
+Start turneu: 10 Mai 2025
+
+Reguli 
+Anti-cheat și Fair Play
+Toți jucătorii sunt obligați să folosească FACEIT Anti-Cheat pe durata turneului
+Utilizarea oricărui tip de cheat/hack, exploit, sau script neautorizat va duce la descalificarea imediată a echipei
+
+Conduită
+Jucătorii trebuie să manifeste respect față de adversari, spectatori și administratori
+Comportamentul toxic, limbajul abuziv, rasist sau discriminatoriu nu sunt tolerat
+Nerespectarea regulilor de conduită poate duce la avertismente, penalizări sau descalificare
+
+Technical Pause
+Fiecare echipă are dreptul la maximum 2 pauze tehnice, timp de un joc, de maximum 5 minute pe meci
+Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare
+
+
+Reguli obligatorii pentru participanți
+Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):
+
+Nickname adecvat – un nickname provocator, care instigă la ură națională, rasism, misoginie și alte forme de discriminare, este absolut INTERZIS.
+Skinuri indecente – se interzice folosirea skinurilor care conțin combinații de stickere indecente sau name tag-uri provocatoare. Dacă este depistată utilizarea unui skin indecent, se va aplica o avertizare; la a doua abatere, echipa va fi descalificată.
+Agenții trebuie să aibă skin-ul default.
+Provocarea și alte forme de batjocură sunt permise doar dacă ambele echipe sunt de acord cu trash talk-ul; în caz contrar, se aplică avertizare, urmată de descalificare.
+Bug-uri – folosirea bug-urilor cu ajutorul aplicațiilor externe este echivalentă cu folosirea de cheats. Bug-urile din joc sunt permise doar dacă nu oferă un avantaj semnificativ (ex: bug cu WH sau macro/exploit pentru Auto-Aim sunt interzise).
+PFP (profile picture) – poza de profil trebuie să conțină un conținut adecvat.
+Smurfing – conturile suspecte de smurfing vor fi investigate până la demonstrarea clară a smurfingului sau, în caz contrar, până la infirmarea acestuia. Se admite folosirea unui alt cont (decât cel principal) doar dacă acel cont principal are un ban temporar. Conturile cu ban pentru smurfing sau cheating nu sunt admise. Dacă jucătorul nu deține contul original, este obligat să informeze moderatorii sau organizatorii turneului.
+Streamsniping – este interzisă vizionarea jocului atât timp cât jucătorul se află în meci, indiferent de delay.
