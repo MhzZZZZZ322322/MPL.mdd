@@ -44,15 +44,13 @@ function App() {
     return window.location.pathname.startsWith('/admin');
   };
   
-  // State pentru pagina Coming Soon
-  const [comingSoonEnabled, setComingSoonEnabled] = useState(true);
+  // State pentru pagina Coming Soon - setat la false pentru a fi dezactivat
+  const [comingSoonEnabled, setComingSoonEnabled] = useState(false);
   
-  // Preluăm starea din localStorage
+  // Preluăm starea din localStorage - am dezactivat comportamentul fiind întotdeauna false
   useEffect(() => {
-    const comingSoonState = localStorage.getItem('comingSoonEnabled');
-    if (comingSoonState !== null) {
-      setComingSoonEnabled(comingSoonState === 'true');
-    }
+    // Setăm explicit Coming Soon la false în localStorage
+    localStorage.setItem('comingSoonEnabled', 'false');
   }, []);
   
   // Adăugăm o metodă de acces la pagina de admin prin tastarea secvenței 'mpl'
@@ -71,7 +69,7 @@ function App() {
       }
       
       // Verificăm dacă ultimele 3 taste apăsate sunt 'm', 'p', 'l'
-      if (keys.join('') === adminKeys.join('') && comingSoonEnabled) {
+      if (keys.join('') === adminKeys.join('')) {
         window.location.href = '/admin';
       }
     };
