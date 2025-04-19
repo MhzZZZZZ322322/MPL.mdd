@@ -7,6 +7,7 @@ import {
   LucideTerminal,
   History,
   Sparkles,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -155,7 +156,7 @@ const About = () => {
                 {timeline.map((item, index) => (
                   <div
                     key={index}
-                    className={`relative flex ${index % 2 === 0 ? "md:justify-end" : "md:justify-start"} ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}
+                    className="relative flex md:justify-start text-left"
                     data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
                     data-aos-delay={100 * (index + 1)}
                   >
@@ -170,6 +171,13 @@ const About = () => {
                         {item.title}
                       </h4>
                       <p className="text-gray-400">{item.description}</p>
+                      <div className="mt-4">
+                        <Link href={index === 0 ? "/events/mpl-pilot-cup" : "/events/hator-cs-league"}>
+                          <Button variant="outline" size="sm" className="text-primary border-primary hover:bg-primary/10">
+                            Detalii eveniment <ChevronRight className="ml-1 h-4 w-4" />
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 ))}

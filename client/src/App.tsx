@@ -11,6 +11,8 @@ import AllEvents from "@/pages/AllEvents";
 import AllRankings from "@/pages/AllRankings";
 import CommunityPage from "@/pages/CommunityPage";
 import ComingSoon from "@/pages/ComingSoon";
+import MPLPilotCup from "@/pages/EventPages/MPLPilotCup";
+import HatorCSLeague from "@/pages/EventPages/HatorCSLeague";
 
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
