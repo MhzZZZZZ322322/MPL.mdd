@@ -71,11 +71,6 @@ const HatorCSLeague = () => {
                     Regulament
                   </Button>
                 </a>
-                <a href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="border-[#5865F2] text-[#5865F2] hover:bg-[#5865F2]/10">
-                    Discord MPL
-                  </Button>
-                </a>
               </div>
             </div>
           </div>
