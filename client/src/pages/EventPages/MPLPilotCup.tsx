@@ -41,22 +41,22 @@ const MPLPilotCup = () => {
               
               <div className="flex items-center mb-6 text-gray-300">
                 <Calendar className="mr-2 h-4 w-4 text-primary" />
-                <span className="mr-4">22-23 Martie 2025</span>
+                <span className="mr-4">10-23 Martie 2025</span>
                 
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
                 <span>Online (FACEIT)</span>
               </div>
               
               <p className="text-lg text-gray-100 max-w-2xl mb-8">
-                Turneul inaugural organizat de Moldova Pro League, dedicat jucătorilor de Counter-Strike 2 din Moldova și România, sprijinit de Darwin și HATOR.
+                Turneul inaugural organizat de Moldova Pro League, dedicat jucătorilor de Counter-Strike 2 din Moldova, a fost un succes cu o participare record și meciuri intense.
               </p>
               
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-primary hover:bg-primary/90">
-                  Înregistrare echipă
+                <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                  Galerie foto
                 </Button>
                 <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                  Regulament
+                  Rezultate
                 </Button>
               </div>
             </div>
@@ -71,29 +71,28 @@ const MPLPilotCup = () => {
               
               <div className="prose prose-invert max-w-none">
                 <p>
-                  <strong>MPL Pilot Cup</strong> este turneul pilot prin care Moldova Pro League inaugurează seria sa de competiții oficiale pentru Counter-Strike 2. Acest turneu este conceput special pentru jucătorii din Moldova și România, indiferent de nivelul lor de abilitate, oferind o platformă inclusivă unde echipele pot concura într-un mediu profesionist.
+                  <strong>MPL Pilot Cup</strong> a fost turneul pilot prin care Moldova Pro League a inaugurat seria sa de competiții oficiale pentru Counter-Strike 2. Acest turneu a fost conceput special pentru jucătorii din Moldova, indiferent de nivelul lor de abilitate, oferind o platformă inclusivă unde echipele au concurat într-un mediu profesionist.
                 </p>
                 
                 <p>
-                  Turneul este organizat exclusiv online pe platforma FACEIT, eliminând astfel barierele geografice și facilitând participarea echipelor din ambele țări. MPL Pilot Cup nu este doar despre competiție, ci și despre construirea unei comunități unite în jurul pasiunii pentru Counter-Strike.
+                  Turneul a fost organizat exclusiv online pe platforma FACEIT, eliminând astfel barierele geografice și facilitând participarea echipelor. MPL Pilot Cup nu a fost doar despre competiție, ci și despre construirea unei comunități unite în jurul pasiunii pentru Counter-Strike.
                 </p>
                 
                 <h3>Format</h3>
                 <ul>
-                  <li><strong>Faza de grupe</strong>: 16 echipe împărțite în 4 grupe de câte 4 echipe, format round-robin (fiecare cu fiecare). Primele două echipe din fiecare grupă avansează în faza eliminatorie.</li>
-                  <li><strong>Faza eliminatorie</strong>: 8 echipe într-un bracket simplu, meciuri eliminatorii (single elimination).</li>
-                  <li><strong>Format meciuri</strong>: Bo1 (Best of 1) în grupe, Bo3 (Best of 3) în semifinale și finală.</li>
+                  <li><strong>Faza eliminatorie</strong>: 64 echipe într-un bracket simplu, meciuri eliminatorii (single elimination).</li>
+                  <li><strong>Format meciuri</strong>: Bo1 (Best of 1) pentru majoritatea meciurilor, Bo3 (Best of 3) pentru ultimele 4 echipe.</li>
                 </ul>
                 
                 <h3>Premii</h3>
                 <p>
-                  MPL Pilot Cup oferă premii speciale pentru echipele câștigătoare, furnizate de sponsorii noștri Darwin și HATOR:
+                  MPL Pilot Cup a oferit premii valoroase pentru echipele câștigătoare, furnizate de sponsorii noștri Darwin și HATOR:
                 </p>
                 <ul>
-                  <li><strong>Locul 1</strong>: 5x Căști HATOR Hypergang</li>
-                  <li><strong>Locul 2</strong>: 5x Mousepad HATOR Tonn</li>
-                  <li><strong>Locul 3</strong>: 5x Tricouri personalizate MPL</li>
-                  <li><strong>MVP al turneului</strong>: Mouse HATOR Quasar</li>
+                  <li><strong>Locul 1</strong>: 5x Mouse sau Tastatură (la alegere): Tastatură Hator Gravity TKL White sau Mouse Hator Quasar 2 Ultra 4K Black</li>
+                  <li><strong>Locul 2</strong>: 5x Mouse sau Tastatură (în funcție de alegerea echipei câștigătoare)</li>
+                  <li><strong>Locul 3</strong>: 5x Căști gaming Hator Hypergang 2 USB 7.1</li>
+                  <li><strong>Locul 4</strong>: 5x Mousepad Hator Tonn EVO L Black</li>
                 </ul>
               </div>
               
@@ -103,18 +102,18 @@ const MPLPilotCup = () => {
                 <div className="prose prose-invert max-w-none">
                   <h3>Eligibilitate</h3>
                   <ul>
-                    <li>Echipele trebuie să aibă minim 5 jucători și maximum 7 (5 titulari + 2 rezerve)</li>
-                    <li>Toți jucătorii trebuie să dețină un cont FACEIT verificat</li>
-                    <li>Cel puțin 3 jucători din echipă trebuie să fie din Republica Moldova sau România</li>
+                    <li>Echipele au trebuit să aibă minim 5 jucători și maximum 7 (5 titulari + 2 rezerve)</li>
+                    <li>Toți jucătorii au trebuit să dețină un cont FACEIT verificat</li>
+                    <li>Cel puțin 3 jucători din echipă au trebuit să fie din Republica Moldova</li>
                   </ul>
                   
                   <h3>Reguli generale</h3>
                   <ul>
-                    <li>Utilizarea oricărui tip de cheat/hack este strict interzisă și va rezulta în descalificarea imediată</li>
-                    <li>Comportamentul toxic, rasist sau discriminatoriu nu va fi tolerat</li>
-                    <li>Hărțile se vor alege prin sistemul de veto înainte de fiecare meci</li>
-                    <li>Toate meciurile vor fi monitorizate de administratori oficiali MPL</li>
-                    <li>Orice dispută va fi rezolvată de administratorii turneului, iar decizia lor este finală</li>
+                    <li>Utilizarea oricărui tip de cheat/hack a fost strict interzisă și a rezultat în descalificarea imediată</li>
+                    <li>Comportamentul toxic, rasist sau discriminatoriu nu a fost tolerat</li>
+                    <li>Hărțile s-au ales prin sistemul de veto înainte de fiecare meci</li>
+                    <li>Toate meciurile au fost monitorizate de administratori oficiali MPL</li>
+                    <li>Orice dispută a fost rezolvată de administratorii turneului, iar decizia lor a fost finală</li>
                   </ul>
                 </div>
               </div>
@@ -128,8 +127,8 @@ const MPLPilotCup = () => {
                   <div className="flex items-start">
                     <Calendar className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">22-23 Martie 2025</div>
-                      <div className="text-sm">10:00 - 22:00 EEST</div>
+                      <div className="font-semibold text-white">10-23 Martie 2025</div>
+                      <div className="text-sm">15:00 - 22:00 EEST</div>
                     </div>
                   </div>
                   
@@ -144,7 +143,7 @@ const MPLPilotCup = () => {
                   <div className="flex items-start">
                     <Users className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">16 echipe</div>
+                      <div className="font-semibold text-white">64 echipe</div>
                       <div className="text-sm">Format 5v5</div>
                     </div>
                   </div>
