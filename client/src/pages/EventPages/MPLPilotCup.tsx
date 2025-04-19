@@ -170,7 +170,7 @@ const MPLPilotCup = () => {
                       rel="noopener noreferrer"
                       className="block hover:opacity-80 transition-opacity"
                     >
-                      <img src="/attached_assets/image_1745053135516.png" alt="HATOR" className="h-12" />
+                      <img src="/attached_assets/Yellow_vector.png" alt="HATOR" className="h-12" />
                     </a>
                   </div>
                   
@@ -182,7 +182,7 @@ const MPLPilotCup = () => {
                       rel="noopener noreferrer"
                       className="block hover:opacity-80 transition-opacity"
                     >
-                      <img src="/attached_assets/Yellow_png.png" alt="Darwin" className="h-10" />
+                      <img src="/attached_assets/whiteAsset 7.png" alt="Darwin" className="h-10" />
                     </a>
                   </div>
                 </div>
