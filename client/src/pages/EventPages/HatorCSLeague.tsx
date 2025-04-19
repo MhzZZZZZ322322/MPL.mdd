@@ -20,7 +20,7 @@ const HatorCSLeague = () => {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/image_1745062334204.png" 
+              src="/upscalemedia-transformed.jpeg" 
               alt="HATOR CS2 LEAGUE MOLDOVA" 
               className="w-full h-full object-cover opacity-70"
             />

@@ -22,7 +22,7 @@ export const HeroSlider = () => {
   }, []);
 
   const heroContent: HeroContent = {
-    image: '/image_1745062334204.png',
+    image: '/upscalemedia-transformed.jpeg',
     title: 'HATOR CS2 LEAGUE MOLDOVA',
     subtitle: 'Sezonul 1 - Mai-Iunie 2025',
     primaryBtn: {
