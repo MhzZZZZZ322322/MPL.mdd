@@ -28,7 +28,7 @@ export default function MefPage() {
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="w-full md:w-1/2 rounded-lg overflow-hidden border border-primary/30">
               <img 
-                src="/images/mef-image.png" 
+                src="/images/gerara.gif" 
                 alt="MEF - Gerara Here" 
                 className="w-full h-auto"
                 loading="eager"
