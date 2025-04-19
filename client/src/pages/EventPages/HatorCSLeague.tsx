@@ -187,7 +187,7 @@ const HatorCSLeague = () => {
               
               <div className="prose prose-invert max-w-none">
                 <p>
-                  <strong>HATOR CS2 LEAGUE MOLDOVA</strong> este primul turneu major de Counter-Strike 2 organizat de Moldova Pro League în parteneriat cu HATOR - unul dintre cei mai importanți producători de periferice de gaming din regiune.
+                  <strong>HATOR CS2 LEAGUE MOLDOVA</strong> este primul turneu major de Counter-Strike 2 organizat de Moldova Pro League în parteneriat cu HATOR - unul dintre cei mai importanți producători de periferice de gaming din regiune și Darwin.md - cel mai mare retailer de electronice și IT din Moldova.
                 </p>
                 
                 <p>
@@ -362,14 +362,22 @@ const HatorCSLeague = () => {
                   <hr className="border-gray-700" />
                   
                   <div>
-                    <div className="font-semibold text-white mb-2">Title Sponsor</div>
+                    <div className="font-semibold text-white mb-2">Sponsori Principali</div>
                     <a 
                       href="https://hator.gg" 
                       target="_blank" 
                       rel="nofollow noopener noreferrer"
-                      className="text-white text-xl font-medium hover:text-primary transition-colors"
+                      className="text-white text-xl font-medium hover:text-primary transition-colors mb-2 block"
                     >
                       HATOR
+                    </a>
+                    <a 
+                      href="https://darwin.md" 
+                      target="_blank" 
+                      rel="nofollow noopener noreferrer"
+                      className="text-white text-xl font-medium hover:text-primary transition-colors"
+                    >
+                      Darwin.md
                     </a>
                   </div>
                 </div>
