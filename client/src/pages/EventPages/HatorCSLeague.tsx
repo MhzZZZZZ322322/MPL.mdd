@@ -178,12 +178,57 @@ const HatorCSLeague = () => {
                   Acest turneu reprezintă un pas important în dezvoltarea scenei de esports din Moldova, oferind jucătorilor locali șansa de a concura la un nivel înalt, cu premii substanțiale și vizibilitate internațională.
                 </p>
                 
-                <h3>Format</h3>
-                <ul>
+                <h3>Format Oficial Turneu</h3>
+                
+                <h4 className="mt-4 mb-2 text-primary font-semibold">Etapa 1: Grupe (Swiss Format)</h4>
+                <ul className="mb-4">
                   <li><strong>Capacitate maximă</strong>: 128 echipe din Moldova și România</li>
-                  <li><strong>Faza de grupe</strong>: 16 grupe a câte 8 echipe</li>
-                  <li><strong>Fazele eliminatorii</strong>: Bracket simplu cu 64 echipe, single elimination</li>
-                  <li><strong>Format meciuri</strong>: Bo1 în grupe, Bo1 în primele runde eliminatorii, Bo3 în optimi, sferturi, semifinale și finală</li>
+                  <li><strong>Structură</strong>: 16 grupe a câte 8 echipe</li>
+                  <li><strong>Sistem</strong>: Swiss Style Bo1 - echipele joacă meciuri până acumulează:
+                    <ul className="ml-6 mt-2 mb-2 list-disc">
+                      <li>2 victorii - se califică automat în play-off</li>
+                      <li>2 înfrângeri - sunt eliminate</li>
+                    </ul>
+                  </li>
+                  <li><strong>Calificare</strong>: Primele 3 echipe din fiecare grupă (cele cu rezultate 2-0, 2-1 sau 1-2) avansează în faza Play-off</li>
+                  <li><strong>Bonus seeding</strong>: Echipele clasate pe locul 1 din cele 16 grupe avansează direct în Top 24, fără a juca primul meci din Play-off</li>
+                </ul>
+                
+                <h4 className="mt-4 mb-2 text-primary font-semibold">Etapa 2: Play-off (Eliminatoriu)</h4>
+                <ul className="mb-4">
+                  <li><strong>Echipe calificate</strong>: 48 din faza grupelor</li>
+                  <li><strong>Structură</strong>:
+                    <ul className="ml-6 mt-2 mb-2 list-disc">
+                      <li>Runda 1 (Top 48 → Top 32): participă locurile 2 și 3 din grupe (32 echipe) - meciuri Bo1</li>
+                      <li>Runda 2 (Top 32 → Top 24): echipele câștigătoare din R1 + echipele clasate pe locul 1 în grupe - meciuri Bo1</li>
+                      <li>De la Top 12 încolo (optimi, sferturi, semifinale și finală) - meciuri Bo3</li>
+                    </ul>
+                  </li>
+                </ul>
+                
+                <h4 className="mt-4 mb-2 text-primary font-semibold">Format Meciuri</h4>
+                <ul className="mb-4">
+                  <li><strong>Bo1</strong>: Un singur meci decide câștigătorul (grupe și primele 2 runde din Play-off)</li>
+                  <li><strong>Bo3</strong>: Cele mai bune din 3 hărți (din optimi până în finală)</li>
+                </ul>
+                
+                <h4 className="mt-4 mb-2 text-primary font-semibold">Alegere Hărți - Bo3</h4>
+                <ul>
+                  <li><strong>Coinflip</strong>: Determinarea echipelor A și B</li>
+                  <li><strong>Pași alegere hartă</strong>:
+                    <ol className="ml-6 mt-2 list-decimal">
+                      <li>Echipa A elimină 1 hartă</li>
+                      <li>Echipa B elimină 1 hartă</li>
+                      <li>Echipa A alege harta 1 (care va fi jucată prima)</li>
+                      <li>Echipa B alege partea (CT/T) pentru harta 1</li>
+                      <li>Echipa B alege harta 2 (care va fi jucată a doua)</li>
+                      <li>Echipa A alege partea (CT/T) pentru harta 2</li>
+                      <li>Echipa A elimină 1 hartă</li>
+                      <li>Echipa B elimină 1 hartă</li>
+                      <li>Harta rămasă devine harta 3 (decisivă dacă scorul e 1-1)</li>
+                      <li>Echipa A alege partea (CT/T) pentru harta 3</li>
+                    </ol>
+                  </li>
                 </ul>
                 
                 <h3>Eligibilitate</h3>

@@ -1,0 +1,60 @@
+🏆 Format Oficial Turneu
+🔹 Etapa 1: Grupe (Swiss Format în grupe de 8 echipe)
+Turneul începe cu 16 grupe a câte 8 echipe.
+
+În fiecare grupă se aplică sistemul "Swiss style" Bo1: echipele joacă meciuri până acumulează:
+
+2 victorii – se califică automat în play-off.
+
+2 înfrângeri – sunt eliminate.
+
+La finalul grupei, primele 3 echipe (cele care obțin 2-0, 2-1 sau 1-2) se califică mai departe în Play-off.
+
+Acest sistem asigură meciuri echilibrate și oferă șanse multiple echipelor să-și dovedească valoarea.
+
+🟨 Bonus seeding pentru locul 1 din fiecare grupă:
+Echipele clasate pe locul 1 din cele 16 grupe avansează direct în Top 24, fără a juca primul meci din Play-off.
+Astfel, vor începe direct din a doua rundă eliminatorie, ca recompensă pentru performanța în faza grupelor.
+
+🔹 Etapa 2: Play-off (Eliminatoriu)
+Se califică 48 de echipe din faza grupelor.
+
+Structura este:
+
+Runda 1 (Top 48 → Top 32) – participă doar locurile 2 și 3 din grupe (32 echipe) – meciuri Bo1
+
+Runda 2 (Top 32 → Top 24) – echipele câștigătoare din R1 + echipele clasate pe locul 1 în grupe (seedate) – meciuri Bo1
+
+De la Top 12 încolo (optimi, sferturi, semifinale și finală) – meciuri Bo3
+
+🎮 Formatul meciurilor
+Bo1: un singur meci decide câștigătorul (grupe și primele 2 runde din Play-off).
+
+Bo3: cele mai bune din 3 hărți (din optimi până în finală).
+
+🗺️ Format alegere hărți – Bo3 (Best of 3)
+Coinflip – determinarea echipelor A și B
+Înainte de meci, se efectuează un coinflip (aruncare monedă digitală).
+
+Câștigătorul coinflip-ului va fi Echipa A și va începe procesul de eliminare/alegere a hărților.
+
+Pași alegere hartă:
+Echipa A elimină 1 hartă
+
+Echipa B elimină 1 hartă
+
+Echipa A alege harta 1 (care va fi jucată prima)
+
+Echipa B alege partea (CT/T) pentru harta 1
+
+Echipa B alege harta 2 (care va fi jucată a doua)
+
+Echipa A alege partea (CT/T) pentru harta 2
+
+Echipa A elimină 1 hartă
+
+Echipa B elimină 1 hartă
+
+Harta rămasă devine harta 3 (decisivă dacă scorul e 1-1)
+
+Echipa A alege partea (CT/T) pentru harta 3
