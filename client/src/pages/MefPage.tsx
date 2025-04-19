@@ -27,12 +27,16 @@ export default function MefPage() {
           
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="w-full md:w-1/2 rounded-lg overflow-hidden border border-primary/30">
-              <img 
-                src="/images/gerara.gif" 
-                alt="MEF - Gerara Here" 
-                className="w-full h-auto"
-                loading="eager"
-              />
+              <div className="relative" style={{ paddingBottom: '56.25%', height: 0 }}>
+                <iframe
+                  src="https://www.youtube.com/embed/iOo4eMHFS5M"
+                  title="MEF - Gerara here"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                  loading="lazy"
+                ></iframe>
+              </div>
             </div>
             
             <div className="w-full md:w-1/2">
