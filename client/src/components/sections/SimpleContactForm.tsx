@@ -127,7 +127,7 @@ const SimpleContactForm = () => {
     },
     { 
       name: 'YouTube', 
-      url: '#', 
+      url: 'https://www.youtube.com/@MoldovaProLeague', 
       icon: <FaYoutube className="mr-2 text-xl" />,
       className: 'bg-[#FF0000]/10 hover:bg-[#FF0000]/30 border-[#FF0000]/30 hover:border-[#FF0000]/50'
     },
@@ -144,8 +144,8 @@ const SimpleContactForm = () => {
     {
       icon: <Mail className="w-5 h-5 text-primary" />,
       title: 'Email',
-      content: 'info@moldovaproleague.md',
-      link: 'mailto:info@moldovaproleague.md'
+      content: 'proleaguemoldova@gmail.com',
+      link: 'mailto:proleaguemoldova@gmail.com'
     },
     {
       icon: <MapPin className="w-5 h-5 text-secondary" />,
