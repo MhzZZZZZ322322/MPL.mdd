@@ -19,14 +19,14 @@ const MPLPilotCup = () => {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/attached_assets/image_1744965966423.png" 
+              src="/attached_assets/image_1745068400330.png" 
               alt="MPL Pilot Cup" 
-              className="w-full h-full object-cover opacity-60"
+              className="w-full h-full object-cover opacity-45"
               fetchpriority="high"
               width="1920"
               height="1080"
             />
-            <div className="absolute inset-0 bg-black/50 z-0"></div>
+            <div className="absolute inset-0 bg-black/70 z-0"></div>
           </div>
 
           {/* Content */}
