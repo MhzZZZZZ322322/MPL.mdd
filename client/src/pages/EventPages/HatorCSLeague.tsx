@@ -274,6 +274,7 @@ const HatorCSLeague = () => {
                   <li>Echipele trebuie să aibă minimum 5 jucători și maximum 7 (5 titulari + 2 rezerve)</li>
                   <li>Toți jucătorii trebuie să dețină un cont FACEIT verificat</li>
                   <li>Cel puțin 4 jucători care vor juca - fără rezerve - din echipă trebuie să fie din Moldova, din Romania maxim 1 jucator</li>
+                  <li>Fiecare echipă trebuie să aibă <strong>obligatoriu</strong> un TEG (tag) și un logotip oficial pe platformă</li>
                 </ul>
                 
                 <h3>Înscriere</h3>
