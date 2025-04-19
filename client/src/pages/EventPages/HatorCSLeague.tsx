@@ -22,9 +22,9 @@ const HatorCSLeague = () => {
             <img 
               src="/upscalemedia-transformed.jpeg" 
               alt="HATOR CS2 LEAGUE MOLDOVA" 
-              className="w-full h-full object-cover opacity-70"
+              className="w-full h-full object-cover opacity-50"
             />
-            <div className="absolute inset-0 bg-black/40 z-0"></div>
+            <div className="absolute inset-0 bg-black/70 z-0"></div>
           </div>
 
           {/* Content */}

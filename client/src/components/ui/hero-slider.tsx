@@ -36,7 +36,7 @@ export const HeroSlider = () => {
       {/* Background Image */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
+        animate={{ opacity: 0.4 }}
         transition={{ duration: 1 }}
         className="absolute inset-0"
       >
@@ -48,7 +48,7 @@ export const HeroSlider = () => {
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-black opacity-40"></div>
+      <div className="absolute inset-0 bg-black opacity-60"></div>
       
       {/* Gradient overlay bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
