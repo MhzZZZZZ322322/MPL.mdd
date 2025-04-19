@@ -4,14 +4,14 @@ import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-darkBg text-white px-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-black text-white px-4">
       <div className="max-w-3xl w-full flex flex-col items-center justify-center gap-6">
         <img 
           src="/404-error.png" 
           alt="Eroare 404 - Moldova Pro League" 
-          className="w-full max-w-lg mx-auto"
-          width="800"
-          height="800"
+          className="w-full max-w-md mx-auto"
+          width="1024"
+          height="768"
           loading="eager"
         />
         
