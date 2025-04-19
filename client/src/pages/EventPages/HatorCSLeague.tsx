@@ -23,6 +23,9 @@ const HatorCSLeague = () => {
               src="/upscalemedia-transformed.jpeg" 
               alt="HATOR CS2 LEAGUE MOLDOVA" 
               className="w-full h-full object-cover opacity-45"
+              fetchpriority="high"
+              width="1920"
+              height="1080"
             />
             <div className="absolute inset-0 bg-black/70 z-0"></div>
           </div>
@@ -98,6 +101,9 @@ const HatorCSLeague = () => {
                       src="/image_1745061600248.png" 
                       alt="5x Scaune gaming HATOR Arc 2 XL" 
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      width="600"
+                      height="450"
                     />
                   </div>
                   <p className="text-white text-center text-xl">5x Scaune gaming HATOR Arc 2 XL</p>
@@ -120,6 +126,9 @@ const HatorCSLeague = () => {
                       src="/image_1745059215270.png" 
                       alt="5x Mouse HATOR Quasar 3 ULTRA 8K" 
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      width="600"
+                      height="450"
                     />
                   </div>
                   <p className="text-white text-center text-xl">5x Mouse HATOR Quasar 3 ULTRA 8K</p>
@@ -142,6 +151,9 @@ const HatorCSLeague = () => {
                       src="/image_1745060726522.png" 
                       alt="5x Căști HATOR Hypergang 2 USB 7.1" 
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      width="600"
+                      height="450"
                     />
                   </div>
                   <p className="text-white text-center text-xl">5x Căști HATOR Hypergang 2 USB 7.1</p>
