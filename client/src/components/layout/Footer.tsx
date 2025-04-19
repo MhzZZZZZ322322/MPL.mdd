@@ -76,6 +76,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               <FooterLink href="/">Acasă</FooterLink>
               <FooterLink href="#about">Despre noi</FooterLink>
+              <FooterLink href="/cronologia-mpl">Cronologia MPL</FooterLink>
               <FooterLink href="#events">Evenimente & Turnee</FooterLink>
               <FooterLink href="#partners">Parteneriate</FooterLink>
               <FooterLink href="#faq">FAQ</FooterLink>
