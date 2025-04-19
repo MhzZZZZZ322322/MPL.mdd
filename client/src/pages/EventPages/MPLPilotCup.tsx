@@ -170,7 +170,7 @@ const MPLPilotCup = () => {
                       rel="noopener noreferrer"
                       className="block hover:opacity-80 transition-opacity"
                     >
-                      <img src="/src/image_1745053379246.png" alt="HATOR" className="h-12" />
+                      <img src="/attached_assets/image_1745053544763.png" alt="HATOR" className="h-12" />
                     </a>
                   </div>
                   
