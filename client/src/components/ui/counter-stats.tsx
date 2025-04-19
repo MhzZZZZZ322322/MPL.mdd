@@ -84,6 +84,7 @@ interface StatItemProps {
   prefix?: string;
   suffix?: string;
   decimals?: number;
+  duration?: number;
   icon?: React.ReactNode;
   className?: string;
 }
@@ -94,6 +95,7 @@ export const StatItem = ({
   prefix, 
   suffix, 
   decimals = 0,
+  duration = 2000,
   icon,
   className = '' 
 }: StatItemProps) => {
@@ -101,7 +103,13 @@ export const StatItem = ({
     <div className={cn("flex flex-col items-center justify-center p-6", className)}>
       {icon && <div className="mb-4 text-primary">{icon}</div>}
       <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
-        <Counter endValue={value} prefix={prefix} suffix={suffix} decimals={decimals} />
+        <Counter 
+          endValue={value} 
+          prefix={prefix} 
+          suffix={suffix} 
+          decimals={decimals} 
+          duration={duration} 
+        />
       </div>
       <div className="text-sm text-gray-400 uppercase tracking-wide text-center">{label}</div>
     </div>
