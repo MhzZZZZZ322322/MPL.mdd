@@ -40,13 +40,14 @@ const About = () => {
     {
       year: "22-23 Martie 2025",
       title: "MPL Pilot Cup",
-      description: "Turneul inaugural dedicat jucătorilor din Moldova și România",
+      description: "Turneul inaugural dedicat jucătorilor din Moldova și România cu susținerea oferită de Darwin și HATOR.",
       icon: <Trophy />,
     },
     {
       year: "Mai-Iunie 2025",
       title: "HATOR CS2 LEAGUE MOLDOVA",
-      description: "Un turneu major sponsorizat de HATOR cu premii substanțiale, marcând un moment cheie pentru scena din Moldova.",
+      description:
+        "Un turneu major sponsorizat de HATOR cu premii substanțiale, marcând un moment cheie pentru scena competitivă  din Moldova.",
       icon: <Medal />,
     },
   ];
