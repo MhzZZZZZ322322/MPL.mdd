@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import comingSoonBg from '@assets/image_1745037639280.png';
-import darwinLogo from '@assets/vert blackAsset 4.png';
+import darwinLogo from '@assets/ whiteAsset 7.png';
 import hatorLogo from '@assets/Yellow_vector.png';
 
 interface ComingSoonProps {
@@ -40,28 +40,28 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
   
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black">
-      {/* Imaginea de fundal */}
+      {/* Imaginea de fundal - mai întunecată */}
       <div className="absolute inset-0" 
            style={{
              backgroundImage: `url(${comingSoonBg})`, 
              backgroundSize: 'cover', 
              backgroundPosition: 'center',
-             opacity: 0.6
+             opacity: 0.3 /* Opacitate redusă pentru imagine */
            }}>
       </div>
       
-      {/* Overlay pentru un contrast mai bun */}
-      <div className="absolute inset-0 bg-black opacity-30 z-10"></div>
+      {/* Overlay pentru un contrast și mai bun */}
+      <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
       
       {/* Conținut centrat */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-4 max-w-2xl mx-auto">
-        <h1 className="text-5xl md:text-6xl font-bold mb-3 text-white drop-shadow-lg">
+        <h1 className="text-5xl md:text-7xl font-bold mb-3 text-white drop-shadow-lg">
           COMING SOON
         </h1>
-        <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-amber-500 drop-shadow-lg">
+        <h2 className="text-2xl md:text-4xl font-semibold mb-6 text-amber-500 drop-shadow-lg">
           HATOR CS LEAGUE MOLDOVA
         </h2>
-        <h3 className="text-3xl md:text-4xl font-bold mb-10 text-white drop-shadow-lg">
+        <h3 className="text-3xl md:text-5xl font-bold mb-10 text-white drop-shadow-lg">
           MPL
         </h3>
         
@@ -86,8 +86,8 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
           ORGANIZAT DE
         </p>
         
-        {/* Logouri parteneri */}
-        <div className="fixed bottom-10 left-0 right-0 flex justify-center items-center gap-10">
+        {/* Logouri parteneri - aceeași mărime pentru ambele */}
+        <div className="fixed bottom-10 left-0 right-0 flex justify-center items-center gap-12">
           <a 
             href="https://hator.gg" 
             target="_blank" 
@@ -97,7 +97,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
             <img 
               src={hatorLogo} 
               alt="HATOR" 
-              className="h-8 md:h-10"
+              className="h-8"
             />
             <span className="text-white ml-2 text-sm">GAMING</span>
           </a>
@@ -110,7 +110,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
             <img 
               src={darwinLogo} 
               alt="Darwin" 
-              className="h-8 md:h-10"
+              className="h-8"
             />
           </a>
         </div>
