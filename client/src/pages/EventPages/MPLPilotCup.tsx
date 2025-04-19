@@ -97,6 +97,64 @@ const MPLPilotCup = () => {
               </div>
               
               <div className="mt-12">
+                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Câștigătorii</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                  {/* Locul 1 */}
+                  <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-primary/30 hover:border-primary transition-colors">
+                    <div className="p-4">
+                      <div className="flex items-center mb-3">
+                        <span className="bg-gradient-to-r from-yellow-500 to-amber-300 text-black font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 1</span>
+                        <h3 className="text-xl font-bold text-white">LitEnergy</h3>
+                      </div>
+                      <img 
+                        src="/attached_assets/image_1745053960053.png" 
+                        alt="Echipa LitEnergy" 
+                        className="w-full h-64 object-cover rounded mb-4"
+                      />
+                      <p className="text-gray-300">
+                        Felicitări, LitEnergy! 🏆 Echipa a demonstrat că talentul, determinarea și munca în echipă sunt cheia succesului! Printr-un parcurs spectaculos și momente de joc electrizante, au reușit să cucerească titlul de campioni ai turneului.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Locul 2 */}
+                  <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-gray-700 hover:border-gray-500 transition-colors">
+                    <div className="p-4">
+                      <div className="flex items-center mb-3">
+                        <span className="bg-gradient-to-r from-gray-200 to-gray-400 text-black font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 2</span>
+                        <h3 className="text-xl font-bold text-white">R5Team</h3>
+                      </div>
+                      <img 
+                        src="/attached_assets/image_1745053980568.png" 
+                        alt="Echipa R5Team" 
+                        className="w-full h-64 object-cover rounded mb-4"
+                      />
+                      <p className="text-gray-300">
+                        Respect, R5Team! Echipa a demonstrat curaj, determinare și un joc de înaltă clasă în turneu! Au luptat până la capăt și au arătat de ce sunt una dintre cele mai puternice echipe din competiție.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Locul 3 */}
+                  <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-amber-800/50 hover:border-amber-700 transition-colors">
+                    <div className="p-4">
+                      <div className="flex items-center mb-3">
+                        <span className="bg-gradient-to-r from-amber-700 to-amber-500 text-white font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 3</span>
+                        <h3 className="text-xl font-bold text-white">K9 TEAM</h3>
+                      </div>
+                      <img 
+                        src="/attached_assets/image_1745053990322.png" 
+                        alt="Echipa K9 TEAM" 
+                        className="w-full h-64 object-cover rounded mb-4"
+                      />
+                      <p className="text-gray-300">
+                        Felicitări, K9 TEAM! Echipa a demonstrat ambiție, spirit de luptă și skill-uri impresionante în turneu! Printr-un parcurs plin de emoții și meciuri spectaculoase, au reușit să urce pe podium.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Regulament</h2>
                 
                 <div className="prose prose-invert max-w-none">
