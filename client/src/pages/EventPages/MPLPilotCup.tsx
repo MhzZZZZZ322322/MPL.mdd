@@ -97,6 +97,16 @@ const MPLPilotCup = () => {
               </div>
               
               <div className="mt-12">
+                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Imagine Eveniment</h2>
+                
+                <div className="bg-darkGray/50 rounded-lg overflow-hidden border border-primary/10 hover:border-primary/20 transition-colors p-6 flex flex-col items-center mb-12">
+                  <img 
+                    src="/mpl_pilot_cup_logo.svg" 
+                    alt="MPL Pilot Cup Logo" 
+                    className="max-w-full h-auto max-h-80"
+                  />
+                </div>
+                
                 <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Câștigătorii</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
