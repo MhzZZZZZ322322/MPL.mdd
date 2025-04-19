@@ -175,7 +175,7 @@ const HatorCSLeague = () => {
                 </p>
                 
                 <p>
-                  Acest turneu reprezintă un pas important în dezvoltarea scenei de esports din Moldova, oferind jucătorilor locali șansa de a concura la un nivel înalt, cu premii substanțiale și vizibilitate internațională.
+                  Acest turneu reprezintă un pas important în dezvoltarea scenei de esports din Moldova, oferind jucătorilor locali șansa de a concura la un nivel înalt, cu premii în valoare de 65.000 lei și vizibilitate internațională.
                 </p>
                 
                 <h3>Format Oficial Turneu</h3>
@@ -324,7 +324,7 @@ const HatorCSLeague = () => {
                   <div className="flex items-start">
                     <Trophy className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">Premii substanțiale</div>
+                      <div className="font-semibold text-white">Premii în valoare de 65.000 lei</div>
                       <div className="text-sm">Echipament HATOR premium</div>
                     </div>
                   </div>
