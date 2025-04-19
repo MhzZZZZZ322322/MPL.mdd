@@ -22,7 +22,7 @@ const MPLPilotCup = () => {
               src="/image_1745068400330.png" 
               alt="MPL Pilot Cup" 
               className="w-full h-full object-cover opacity-45"
-              fetchPriority="high"
+              fetchpriority="high"
               width="1920"
               height="1080"
             />
