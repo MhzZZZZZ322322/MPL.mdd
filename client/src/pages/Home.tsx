@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
-import Events from '@/components/sections/Events';
-import Rankings from '@/components/sections/Rankings';
 import Partners from '@/components/sections/Partners';
 import FAQ from '@/components/sections/FAQ';
 import SimpleContactForm from '@/components/sections/SimpleContactForm';
@@ -47,8 +45,6 @@ const Home = () => {
       </Helmet>
       <Hero />
       <About />
-      <Events />
-      <Rankings />
       <Partners />
       <FAQ />
       <SimpleContactForm />
