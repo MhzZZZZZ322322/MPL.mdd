@@ -135,7 +135,7 @@ const HatorCSLeague = () => {
                     <Award className="text-amber-700 h-10 w-10 mr-3" />
                     <h3 className="text-amber-700 text-2xl font-bold">Locul 3</h3>
                   </div>
-                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
+                  <div className="relative h-80 overflow-hidden rounded mb-6">
                     <img 
                       src="/image_1745060726522.png" 
                       alt="5x Căști HATOR Hypergang 2 USB 7.1" 
