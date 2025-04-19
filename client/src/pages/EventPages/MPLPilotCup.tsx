@@ -170,7 +170,7 @@ const MPLPilotCup = () => {
                       rel="noopener noreferrer"
                       className="block hover:opacity-80 transition-opacity"
                     >
-                      <img src="/attached_assets/vert blackAsset 4.png" alt="HATOR" className="h-12" />
+                      <img src="/attached_assets/image_1745053135516.png" alt="HATOR" className="h-12" />
                     </a>
                   </div>
                   
@@ -182,7 +182,7 @@ const MPLPilotCup = () => {
                       rel="noopener noreferrer"
                       className="block hover:opacity-80 transition-opacity"
                     >
-                      <img src="/attached_assets/Yellow_vector.png" alt="Darwin" className="h-10" />
+                      <img src="/attached_assets/Yellow_png.png" alt="Darwin" className="h-10" />
                     </a>
                   </div>
                 </div>
@@ -211,10 +211,10 @@ const MPLPilotCup = () => {
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
                     <a 
-                      href="mailto:contact@moldovaproleague.com" 
+                      href="mailto:proleaguemoldova@gmail.com" 
                       className="text-white hover:text-primary transition-colors"
                     >
-                      contact@moldovaproleague.com
+                      proleaguemoldova@gmail.com
                     </a>
                   </div>
                 </div>
