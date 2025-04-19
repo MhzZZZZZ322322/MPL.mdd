@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
@@ -201,11 +201,21 @@ const HatorCSLeague = () => {
                 <ul className="mb-4">
                   <li><strong>Capacitate maximă</strong>: 128 echipe din Moldova și România</li>
                   <li><strong>Structură</strong>: 16 grupe a câte 8 echipe</li>
-                  <li><strong>Sistem</strong>: Swiss Style Bo1 - echipele joacă meciuri până acumulează:
+                  <li>
+                    <strong>Sistem</strong>: Swiss Style Bo1 - echipele joacă meciuri până acumulează:
                     <ul className="ml-6 mt-2 mb-2 list-disc">
                       <li>2 victorii - se califică automat în play-off</li>
                       <li>2 înfrângeri - sunt eliminate</li>
                     </ul>
+                    <div className="mt-2 ml-6">
+                      <a 
+                        href="/docs/Explicatie_Swiss_Grupa_8_Final.pdf" 
+                        target="_blank"
+                        className="text-primary hover:text-primary/80 underline flex items-center"
+                      >
+                        <FileIcon className="w-4 h-4 mr-1" /> Explicație detaliată Swiss Format
+                      </a>
+                    </div>
                   </li>
                   <li><strong>Calificare</strong>: Primele 3 echipe din fiecare grupă (cele cu rezultate 2-0, 2-1 sau 1-2) avansează în faza Play-off</li>
                   <li><strong>Bonus seeding</strong>: Echipele clasate pe locul 1 din cele 16 grupe avansează direct în Top 24, fără a juca primul meci din Play-off</li>
