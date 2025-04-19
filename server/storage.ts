@@ -12,6 +12,8 @@ import {
 // you might need
 
 import { SiteContent, InsertSiteContent } from '@shared/content-schema';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export interface IStorage {
   // User methods
@@ -98,6 +100,9 @@ export class MemStorage implements IStorage {
     this.currentSiteContentId = 1;
     this.currentSeoId = 1;
     this.currentAnalyticsId = 1;
+    
+    // Load contact submissions from file first
+    this.loadContactsFromFile();
     
     // Initialize with sample data
     this.initializeData();
@@ -251,8 +256,56 @@ export class MemStorage implements IStorage {
     this.players.delete(id);
   }
   
-  // Contact methods
+  // Contact methods with persistence
+  private contactsFilePath = path.join(process.cwd(), 'contact_data.json');
+
+  // Load contact submissions from file
+  private loadContactsFromFile(): void {
+    try {
+      if (fs.existsSync(this.contactsFilePath)) {
+        const fileData = fs.readFileSync(this.contactsFilePath, 'utf8');
+        const contactData = JSON.parse(fileData);
+        
+        // Clear current Map and populate with file data
+        this.contactSubmissions.clear();
+        for (const contact of contactData.contacts) {
+          // Ensure createdAt is a Date object
+          contact.createdAt = new Date(contact.createdAt);
+          this.contactSubmissions.set(contact.id, contact);
+        }
+        
+        // Set the current ID to be higher than any existing ID
+        if (contactData.contacts.length > 0) {
+          const maxId = Math.max(...contactData.contacts.map((c: Contact) => c.id));
+          this.currentContactId = maxId + 1;
+        }
+
+        console.log(`Loaded ${this.contactSubmissions.size} contact submissions from file`);
+      }
+    } catch (error) {
+      console.error('Error loading contact data from file:', error);
+    }
+  }
+
+  // Save contact submissions to file
+  private saveContactsToFile(): void {
+    try {
+      const contacts = Array.from(this.contactSubmissions.values());
+      const data = { 
+        contacts, 
+        lastUpdated: new Date().toISOString() 
+      };
+      fs.writeFileSync(this.contactsFilePath, JSON.stringify(data, null, 2), 'utf8');
+      console.log(`Saved ${contacts.length} contact submissions to file`);
+    } catch (error) {
+      console.error('Error saving contact data to file:', error);
+    }
+  }
+
   async createContactSubmission(insertSubmission: InsertContact): Promise<Contact> {
+    // Load existing contacts first to ensure we have the latest data
+    this.loadContactsFromFile();
+    
     const id = this.currentContactId++;
     const submission: Contact = { 
       ...insertSubmission, 
@@ -260,10 +313,15 @@ export class MemStorage implements IStorage {
       createdAt: new Date() 
     };
     this.contactSubmissions.set(id, submission);
+    
+    // Save to file for persistence
+    this.saveContactsToFile();
     return submission;
   }
   
   async getContactSubmissions(): Promise<Contact[]> {
+    // Load from file to get the latest data
+    this.loadContactsFromFile();
     return Array.from(this.contactSubmissions.values());
   }
   

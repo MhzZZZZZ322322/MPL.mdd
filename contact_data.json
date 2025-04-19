@@ -1,0 +1,21 @@
+{
+  "contacts": [
+    {
+      "name": "Test User 1",
+      "email": "test1@test.com",
+      "subject": "general",
+      "message": "Acesta este primul mesaj de test",
+      "id": 1,
+      "createdAt": "2025-04-19T12:24:59.752Z"
+    },
+    {
+      "name": "Test User 2",
+      "email": "test2@test.com",
+      "subject": "feedback",
+      "message": "Acesta este al doilea mesaj de test",
+      "id": 2,
+      "createdAt": "2025-04-19T12:25:43.196Z"
+    }
+  ],
+  "lastUpdated": "2025-04-19T12:25:43.196Z"
+}
