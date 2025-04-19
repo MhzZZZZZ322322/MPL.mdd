@@ -4,9 +4,9 @@ import { useToast } from '@/hooks/use-toast';
 import { 
   FaDiscord, 
   FaFacebook, 
-  FaInstagram, 
   FaYoutube,
-  FaTwitch
+  FaTwitch,
+  FaTiktok
 } from 'react-icons/fa';
 import { Mail, MapPin } from 'lucide-react';
 
@@ -132,10 +132,10 @@ const SimpleContactForm = () => {
       className: 'bg-[#FF0000]/10 hover:bg-[#FF0000]/30 border-[#FF0000]/30 hover:border-[#FF0000]/50'
     },
     { 
-      name: 'Instagram', 
-      url: '#', 
-      icon: <FaInstagram className="mr-2 text-xl" />,
-      className: 'bg-gradient-to-r from-[#405DE6]/10 to-[#E1306C]/10 hover:from-[#405DE6]/30 hover:to-[#E1306C]/30 border-[#E1306C]/30 hover:border-[#E1306C]/50'
+      name: 'TikTok', 
+      url: 'https://www.tiktok.com/@domnukrot', 
+      icon: <FaTiktok className="mr-2 text-xl" />,
+      className: 'bg-[#000000]/10 hover:bg-[#000000]/30 border-[#000000]/30 hover:border-[#000000]/50'
     }
   ];
 
