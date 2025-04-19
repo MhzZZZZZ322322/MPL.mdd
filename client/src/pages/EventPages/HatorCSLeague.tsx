@@ -216,6 +216,20 @@ const HatorCSLeague = () => {
                     <li>Fiecare echipă are dreptul la maximum 2 pauze tehnice de maximum 5 minute pe meci</li>
                     <li>Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare</li>
                   </ul>
+                  
+                  <h3>Reguli obligatorii pentru participanți</h3>
+                  <p className="text-red-400 font-semibold">Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):</p>
+                  <ol className="space-y-2">
+                    <li><strong>Nickname adecvat</strong> – un nickname provocator, care instigă la ură națională, rasism, misoginie și alte forme de discriminare, este absolut INTERZIS.</li>
+                    <li><strong>Skinuri indecente</strong> – se interzice folosirea skinurilor care conțin combinații de stickere indecente sau name tag-uri provocatoare. Dacă este depistată utilizarea unui skin indecent, se va aplica o avertizare; la a doua abatere, echipa va fi descalificată.</li>
+                    <li><strong>Agenții</strong> trebuie să aibă skin-ul default.</li>
+                    <li><strong>Provocarea</strong> și alte forme de batjocură sunt permise doar dacă ambele echipe sunt de acord cu trash talk-ul; în caz contrar, se aplică avertizare, urmată de descalificare.</li>
+                    <li><strong>Bug-uri</strong> – folosirea bug-urilor cu ajutorul aplicațiilor externe este echivalentă cu folosirea de cheats. Bug-urile din joc sunt permise doar dacă nu oferă un avantaj semnificativ (ex: bug cu WH sau macro/exploit pentru Auto-Aim sunt interzise).</li>
+                    <li><strong>PFP (profile picture)</strong> – poza de profil trebuie să conțină un conținut adecvat.</li>
+                    <li><strong>Smurfing</strong> – conturile suspecte de smurfing vor fi investigate până la demonstrarea clară a smurfingului sau, în caz contrar, până la infirmarea acestuia. Se admite folosirea unui alt cont (decât cel principal) doar dacă acel cont principal are un ban temporar. Conturile cu ban pentru smurfing sau cheating nu sunt admise. Dacă jucătorul nu deține contul original, este obligat să informeze moderatorii sau organizatorii turneului.</li>
+                    <li><strong>Streamsniping</strong> – este interzisă vizionarea jocului atât timp cât jucătorul se află în meci, indiferent de delay.</li>
+                    <li><strong>Folosirea Discordului</strong> – Discord turneului este platforma oficială de comunicare și trebuie utilizată pentru coordonare.</li>
+                  </ol>
                 </div>
               </div>
             </div>
