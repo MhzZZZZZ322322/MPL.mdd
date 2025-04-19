@@ -23,7 +23,7 @@ const HatorCSLeague = () => {
               src="/upscalemedia-transformed.jpeg" 
               alt="HATOR CS2 LEAGUE MOLDOVA" 
               className="w-full h-full object-cover opacity-45"
-              fetchPriority="high"
+              fetchpriority="high"
               width="1920"
               height="1080"
             />
