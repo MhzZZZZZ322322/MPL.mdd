@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
-import { FaFacebook, FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
-import logoColor from "@assets/image_1745065888403.png";
+import { FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
@@ -61,11 +60,6 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
           {/* Brand section */}
           <div>
-            <div className="mb-4">
-              <Link href="/" className="block">
-                <img src={logoColor} alt="Moldova Pro League" className="h-20 w-auto" />
-              </Link>
-            </div>
             <p className="text-sm mb-6">
               Moldova Pro League este comunitatea independentă de esports, creată din pasiunea pentru gaming competitiv.
             </p>
@@ -74,7 +68,6 @@ const Footer = () => {
               <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
               <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
               <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
-              <SocialIcon href="https://www.facebook.com/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaFacebook} />
             </div>
           </div>
           
