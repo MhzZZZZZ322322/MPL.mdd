@@ -25,6 +25,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/event/:id" component={EventDetails} />
       <Route path="/events" component={AllEvents} />
+      <Route path="/events/mpl-pilot-cup" component={MPLPilotCup} />
+      <Route path="/events/hator-cs-league" component={HatorCSLeague} />
       <Route path="/rankings" component={AllRankings} />
       <Route path="/community" component={CommunityPage} />
       <Route path="/admin" component={Admin} />
