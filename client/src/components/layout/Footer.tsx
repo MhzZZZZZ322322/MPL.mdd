@@ -142,8 +142,20 @@ const Footer = () => {
         <div className="border-t border-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2025 Moldova Pro League. Toate drepturile rezervate.</p>
           <div className="flex space-x-4 text-sm">
-            <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Termeni și condiții</a>
-            <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Politica de confidențialitate</a>
+            <a 
+              href="/docs/Terms_Privacy_MPL_RO_EN_RU_FINAL.pdf" 
+              target="_blank"
+              className="text-gray-400 hover:text-secondary transition-colors"
+            >
+              Termeni și condiții
+            </a>
+            <a 
+              href="/docs/Terms_Privacy_MPL_RO_EN_RU_FINAL.pdf#page=6" 
+              target="_blank"
+              className="text-gray-400 hover:text-secondary transition-colors"
+            >
+              Politica de confidențialitate
+            </a>
           </div>
         </div>
       </div>
