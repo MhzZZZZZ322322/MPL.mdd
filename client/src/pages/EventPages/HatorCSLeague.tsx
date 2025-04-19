@@ -91,9 +91,9 @@ const HatorCSLeague = () => {
                     <Award className="text-amber-500 h-10 w-10 mr-3" />
                     <h3 className="text-amber-500 text-2xl font-bold">Locul 1</h3>
                   </div>
-                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
+                  <div className="relative h-80 overflow-hidden rounded mb-6">
                     <img 
-                      src="/attached_assets/image_1745057966144.png" 
+                      src="/image_1745057966144.png" 
                       alt="5x Scaune gaming HATOR Arc 2 XL" 
                       className="w-full h-full object-cover"
                     />
@@ -113,9 +113,9 @@ const HatorCSLeague = () => {
                     <Award className="text-slate-400 h-10 w-10 mr-3" />
                     <h3 className="text-slate-400 text-2xl font-bold">Locul 2</h3>
                   </div>
-                  <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
+                  <div className="relative h-80 overflow-hidden rounded mb-6">
                     <img 
-                      src="/attached_assets/image_1745059215270.png" 
+                      src="/image_1745059215270.png" 
                       alt="5x Mouse HATOR Quasar 3 ULTRA 8K" 
                       className="w-full h-full object-cover"
                     />
@@ -137,7 +137,7 @@ const HatorCSLeague = () => {
                   </div>
                   <div className="relative h-80 overflow-hidden rounded mb-6 bg-yellow-400">
                     <img 
-                      src="/attached_assets/image_1745060726522.png" 
+                      src="/image_1745060726522.png" 
                       alt="5x Căști HATOR Hypergang 2 USB 7.1" 
                       className="w-full h-full object-cover"
                     />
