@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
-import { FaTwitter, FaFacebook, FaInstagram, FaYoutube, FaDiscord, FaTwitch } from "react-icons/fa";
+import { FaTwitter, FaFacebook, FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
@@ -76,8 +76,8 @@ const Footer = () => {
               <SocialIcon href="https://www.twitch.tv/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaTwitch} />
               <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
               <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
+              <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
               <SocialIcon href="#" icon={FaFacebook} />
-              <SocialIcon href="#" icon={FaInstagram} />
             </div>
           </div>
           
@@ -129,7 +129,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2">📧</span>
-                <span>contact@moldovaproleague.md</span>
+                <span>proleaguemoldova@gmail.com</span>
               </li>
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2">📍</span>
