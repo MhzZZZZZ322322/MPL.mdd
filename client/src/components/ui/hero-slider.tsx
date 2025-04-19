@@ -64,7 +64,7 @@ export const HeroSlider = () => {
           format: '5v5',
           platform: 'FACEIT'
         },
-        countdown: '2025-05-15T18:00:00'
+        countdown: '2025-08-15T18:00:00'
       },
       primaryBtn: {
         text: 'Detalii Turneu',

@@ -24,16 +24,18 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           <div data-aos="fade-up" data-aos-delay="150" className="bg-darkBg rounded-xl overflow-hidden border border-primary/10 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300">
             <StatItem 
-              value={500000} 
+              value={538250} 
               label="Impresii în social media"
+              duration={2500}
               icon={<Eye size={28} />}
             />
           </div>
           
           <div data-aos="fade-up" data-aos-delay="200" className="bg-darkBg rounded-xl overflow-hidden border border-primary/10 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300">
             <StatItem 
-              value={128} 
+              value={128}
               label="Echipe participante"
+              duration={1500}
               icon={<Users size={28} />}
             />
           </div>
@@ -42,6 +44,7 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
             <StatItem 
               value={640} 
               label="Jucători"
+              duration={1800}
               icon={<Gamepad2 size={28} />}
             />
           </div>
@@ -50,6 +53,7 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
             <StatItem 
               value={18} 
               label="Premii oferite"
+              duration={1200}
               icon={<Trophy size={28} />}
             />
           </div>
@@ -58,6 +62,7 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
             <StatItem 
               value={30} 
               label="Zile de competiție"
+              duration={1300}
               icon={<Calendar size={28} />}
             />
           </div>
@@ -65,7 +70,8 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
           <div data-aos="fade-up" data-aos-delay="400" className="bg-darkBg rounded-xl overflow-hidden border border-primary/10 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all duration-300">
             <StatItem 
               value={3} 
-              label="Ace Bonus-uri"
+              label="Ace Bonus-uri" 
+              duration={800}
               icon={<Award size={28} />}
             />
           </div>
