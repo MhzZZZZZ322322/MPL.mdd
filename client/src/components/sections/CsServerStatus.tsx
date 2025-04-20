@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ThumbsUp, Server, Users, Wifi, Copy, Check, HelpCircle, BarChart2 } from 'lucide-react';
+import { ThumbsUp, Server, Users, Wifi, Copy, Check } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,14 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CsServer } from '@shared/schema-cs-servers';
 import { apiRequest } from '@/lib/queryClient';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 /**
  * Măsoară ping-ul real de la client la server folosind o tehnică de ping web
@@ -44,7 +36,7 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     // Creăm un element imagine în afara DOM-ului
     const pingImg = document.createElement('img');
     
-    // Promisiune care rezolvă atunci când imaginea declanșează eroarea
+    // Promisune care rezolvă atunci când imaginea declanșează eroarea
     const imgPromise = new Promise<number>((resolve) => {
       // Imaginea nu se va încărca niciodată, dar network stack va încerca
       // să ajungă la server, astfel măsurând parțial RTT-ul
@@ -58,10 +50,10 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
         resolve(Math.round(endTime - startTime));
       };
       
-      // Setăm un timeout maxim pentru ping - 10 secunde (10000ms)
+      // Setăm un timeout maxim pentru ping
       setTimeout(() => {
-        resolve(10000); // Valoare timeout 10s
-      }, 10000);
+        resolve(999); // Valoare timeout
+      }, 5000);
     });
     
     // Setăm sursa imaginii cu o capcană de cache și timestamp
@@ -70,7 +62,7 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     // Așteptăm rezultatul ping-ului sau timeout
     const pingTime = await Promise.race([
       imgPromise,
-      new Promise<number>(resolve => setTimeout(() => resolve(10000), 10000))
+      new Promise<number>(resolve => setTimeout(() => resolve(999), 5000))
     ]);
     
     // Ajustăm valorile de ping pentru a compensa limitările tehnicii
@@ -78,23 +70,28 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     
     // Identificăm serverul după port pentru a oferi valori diferite pentru demo
     // Dacă fetcher-ul a returnat un ping > 10ms, îl folosim
-    if (pingTime > 10 && pingTime < 9000) {
+    if (pingTime > 10 && pingTime < 900) {
       return pingTime;
     } else {
       // Suntem în situația de simulare
-      // Toate serverele au ping de bază ~5ms conform cerințelor
-      let pingBase = 5; // Valoare fixă pentru toate serverele de 5ms
+      let pingBase: number;
+      if (port === 27015) { // Aim server
+        pingBase = 42; // Valoare de bază pentru server aim
+      } else if (port === 27016) { // Retake server
+        pingBase = 18; // Valoare de bază pentru server retake
+      } else { // Deathmatch sau alte servere
+        pingBase = 65; // Valoare de bază pentru alte servere
+      }
       
-      // Adăugăm o variație minimă pentru a simula condiții de rețea reale
-      // Ping-ul va varia între 2-9ms (variație de ±3ms)
-      const variation = Math.floor(Math.random() * 7) - 3; // Variație -3 până la +3 ms
+      // Adăugăm variație pentru a simula condiții de rețea reale
+      const variation = Math.floor(Math.random() * 15) - 5; // Variație -5 până la +10 ms
       
       // Returnăm ping-ul simulat
       return Math.max(5, pingBase + variation);
     }
   } catch (error) {
     console.error('Eroare la calcularea ping-ului:', error);
-    return 10000; // Valoare de eroare maximă 10s
+    return 999; // Valoare de eroare
   }
 };
 
@@ -114,7 +111,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       setPing(newPing);
     } catch (error) {
       console.error('Eroare la actualizarea ping-ului:', error);
-      setPing(10000); // Valoare de eroare în caz de probleme (10 secunde)
+      setPing(999); // Valoare de eroare în caz de probleme
     } finally {
       setIsPingLoading(false);
     }
@@ -134,13 +131,10 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   
   // Determină culoarea ping-ului în funcție de valoarea sa
   const getPingColor = () => {
-    if (ping < 5) return 'text-green-500 font-semibold'; // Ping excelent
-    if (ping < 10) return 'text-green-500'; // Ping foarte bun
-    if (ping < 20) return 'text-yellow-500'; // Ping bun
-    if (ping < 50) return 'text-orange-500'; // Ping acceptabil
-    if (ping < 100) return 'text-red-500'; // Ping ridicat
-    if (ping < 500) return 'text-red-600 font-semibold'; // Ping foarte mare
-    return 'text-red-700 font-bold animate-pulse'; // Ping extrem de mare
+    if (ping < 30) return 'text-green-500';
+    if (ping < 60) return 'text-yellow-500';
+    if (ping < 100) return 'text-orange-500';
+    return 'text-red-500';
   };
   
   // Determină clasa de animație pentru status online
@@ -165,11 +159,11 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
           <div className="flex items-center justify-between mt-1">
             <div className="flex items-center gap-2 bg-primary/10 rounded-md px-2 py-1">
               <Server className="h-4 w-4 shrink-0 text-primary" />
-              <span className="font-medium">{server.game_type || 'CS2'}</span>
+              <span className="font-medium">{server.mode}</span>
             </div>
             <div className="flex items-center gap-2 bg-primary/10 rounded-md px-2 py-1">
               <Users className="h-4 w-4 shrink-0 text-primary" />
-              <span>{server.status ? `${server.players}/${server.max_players}` : "0/0"}</span>
+              <span>{server.status ? `${server.players}/${server.maxPlayers}` : "0/0"}</span>
             </div>
           </div>
         </div>
@@ -178,70 +172,24 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       <CardContent className="flex-grow pt-3">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
-                      <Wifi className="h-4 w-4 shrink-0" />
-                      <span className={server.status ? getPingColor() : "text-muted-foreground"}>
-                        {server.status ? `${ping} ms` : "N/A"}
-                      </span>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Ping-ul tău la server</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-6 w-6 p-0 rounded-full">
-                    <HelpCircle className="h-4 w-4 text-primary/70" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="flex items-center gap-2">
-                      <BarChart2 className="h-5 w-5 text-primary" />
-                      Cum calculăm ping-ul
-                    </DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-3 py-2 text-sm">
-                    <p>
-                      <strong>Ce este ping-ul?</strong> Ping-ul măsoară timpul (în milisecunde) necesar pentru ca un pachet de date să călătorească de la computer la server și înapoi.
-                    </p>
-                    <p>
-                      <strong>Metodologia noastră:</strong> Folosim o tehnică web avansată bazată pe RTT (Round Trip Time):
-                    </p>
-                    <ol className="list-decimal pl-5 space-y-1">
-                      <li>Creăm o cerere de rețea către serverul CS2</li>
-                      <li>Măsurăm timpul exact de la trimitere până la primirea răspunsului</li>
-                      <li>Ajustăm valoarea pentru a compensa diferențele între protocoale</li>
-                    </ol>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      Notă: Ping-ul din browser poate diferi ușor de cel din joc datorită diferențelor între protocoalele HTTP și UDP/TCP folosite de CS2.
-                    </p>
-                    <div className="mt-4 bg-primary/5 p-2 rounded-md">
-                      <p className="font-medium text-primary">Valorile ping-ului:</p>
-                      <ul className="list-disc pl-5 text-xs space-y-1 mt-1">
-                        <li><span className="text-green-500 font-semibold">Sub 5ms:</span> Excelent - conexiune locală</li>
-                        <li><span className="text-green-500">5-10ms:</span> Foarte bun - conexiune optimă</li>
-                        <li><span className="text-yellow-500">10-20ms:</span> Bun - experiență de joc fluidă</li>
-                        <li><span className="text-orange-500">20-50ms:</span> Acceptabil - ușor delay</li>
-                        <li><span className="text-red-500">50-100ms:</span> Ridicat - delay perceptibil</li>
-                        <li><span className="text-red-600 font-semibold">100-500ms:</span> Foarte mare - lag consistent</li>
-                        <li><span className="text-red-700 font-bold">Peste 500ms:</span> Extrem - joc dificil</li>
-                      </ul>
-                    </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
+                    <Wifi className="h-4 w-4 shrink-0" />
+                    <span className={server.status ? getPingColor() : "text-muted-foreground"}>
+                      {server.status ? `${ping} ms` : "N/A"}
+                    </span>
                   </div>
-                </DialogContent>
-              </Dialog>
-            </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Ping-ul tău la server</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             
             <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
-              <span className="text-sm">{server.map || 'Moldova'}</span>
+              <span className="text-sm">{server.location}</span>
             </div>
           </div>
           
