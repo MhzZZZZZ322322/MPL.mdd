@@ -74,17 +74,12 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
       return pingTime;
     } else {
       // Suntem în situația de simulare
-      let pingBase: number;
-      if (port === 27015) { // Aim server
-        pingBase = 35; // Valoare actualizată pentru server aim
-      } else if (port === 27016) { // Retake server
-        pingBase = 22; // Valoare actualizată pentru server retake
-      } else { // Deathmatch sau alte servere
-        pingBase = 48; // Valoare actualizată pentru alte servere
-      }
+      // Toate serverele au ping de bază ~5ms conform cerințelor
+      let pingBase = 5; // Valoare fixă pentru toate serverele de 5ms
       
-      // Adăugăm variație pentru a simula condiții de rețea reale
-      const variation = Math.floor(Math.random() * 20) - 8; // Variație -8 până la +12 ms
+      // Adăugăm o variație minimă pentru a simula condiții de rețea reale
+      // Ping-ul va varia între 2-9ms (variație de ±3ms)
+      const variation = Math.floor(Math.random() * 7) - 3; // Variație -3 până la +3 ms
       
       // Returnăm ping-ul simulat
       return Math.max(5, pingBase + variation);
@@ -131,12 +126,13 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   
   // Determină culoarea ping-ului în funcție de valoarea sa
   const getPingColor = () => {
-    if (ping < 30) return 'text-green-500';
-    if (ping < 60) return 'text-yellow-500';
-    if (ping < 100) return 'text-orange-500';
-    if (ping < 500) return 'text-red-500';
-    if (ping < 1000) return 'text-red-600 font-semibold';
-    return 'text-red-700 font-bold animate-pulse';
+    if (ping < 5) return 'text-green-500 font-semibold'; // Ping excelent
+    if (ping < 10) return 'text-green-500'; // Ping foarte bun
+    if (ping < 20) return 'text-yellow-500'; // Ping bun
+    if (ping < 50) return 'text-orange-500'; // Ping acceptabil
+    if (ping < 100) return 'text-red-500'; // Ping ridicat
+    if (ping < 500) return 'text-red-600 font-semibold'; // Ping foarte mare
+    return 'text-red-700 font-bold animate-pulse'; // Ping extrem de mare
   };
   
   // Determină clasa de animație pentru status online
