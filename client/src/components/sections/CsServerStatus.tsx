@@ -46,7 +46,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
   };
   
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full">
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg font-bold">{server.name}</CardTitle>
@@ -221,7 +221,7 @@ export const CsServerStatus: React.FC = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">Serverele Noastre CS2</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
-            <div key={server.id} className="w-full max-w-sm">
+            <div key={server.id} className="w-full" style={{ maxWidth: "320px", minHeight: "320px" }}>
               <ServerCard 
                 server={server} 
                 onLike={handleLike} 
