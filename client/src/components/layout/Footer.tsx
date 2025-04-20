@@ -98,7 +98,7 @@ const Footer = () => {
           <FooterSection title="Turnee">
             <ul className="space-y-2 text-sm">
               <FooterLink href="/events/mpl-pilot-cup">CS2</FooterLink>
-              <li className="text-xs text-gray-500 mt-3 mb-1">În curând</li>
+              <li className="text-xs text-gray-500 mt-3 mb-1">Pe viitor planificăm și:</li>
               <li className="text-sm text-gray-400">Dota 2</li>
               <li className="text-sm text-gray-400">PUBG</li>
               <li className="text-sm text-gray-400">League of Legends</li>
