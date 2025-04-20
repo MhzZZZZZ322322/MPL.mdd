@@ -205,18 +205,20 @@ export const CsServerStatus: React.FC = () => {
               variant="default" 
               className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
               onClick={() => {
-                // Trimite like la toate serverele și marchează ca apreciat
-                if (servers && Array.isArray(servers)) {
-                  servers.forEach((server: CsServer) => {
-                    likeMutation.mutate(server.id);
-                  });
+                // Adaugă doar un singur like la primul server activ
+                if (servers && Array.isArray(servers) && servers.length > 0) {
+                  // Găsește primul server online sau primul server dacă niciunul nu e online
+                  const targetServer = servers.find(s => s.status) || servers[0];
+                  
+                  // Adaugă un singur like doar la acest server
+                  likeMutation.mutate(targetServer.id);
                   
                   setHasLiked(true);
                   localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
                   
                   toast({
                     title: 'Mulțumim pentru apreciere!',
-                    description: 'Ai adăugat 1 mulțumire la fiecare server.',
+                    description: 'Ai adăugat 1 mulțumire.',
                   });
                 }
               }}
