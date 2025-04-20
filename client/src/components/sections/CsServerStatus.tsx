@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogClose, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { CsServer } from '@shared/schema-cs-servers';
 
 /**
@@ -193,18 +193,19 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-[450px] p-0 border-blue-600 overflow-hidden">
+                  <DialogTitle className="sr-only">Cum calculăm ping-ul</DialogTitle>
+                  <DialogDescription className="sr-only">Metodologia de calcul a ping-ului și interpretarea valorilor</DialogDescription>
+                  
                   <div className="bg-blue-950 text-white">
                     <div className="flex items-center justify-between p-4 border-b border-blue-800">
                       <div className="flex items-center gap-2">
                         <div className="h-5 w-1.5 bg-blue-500"></div>
                         <h4 className="font-bold text-blue-300 text-lg">Cum calculăm ping-ul</h4>
                       </div>
-                      <DialogTrigger asChild>
-                        <Button variant="ghost" className="h-6 w-6 p-0 rounded-full text-white/70 hover:text-white hover:bg-blue-800">
-                          <X className="h-4 w-4" />
-                          <span className="sr-only">Închide</span>
-                        </Button>
-                      </DialogTrigger>
+                      <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none text-white hover:text-white hover:opacity-100">
+                        <X className="h-4 w-4" />
+                        <span className="sr-only">Închide</span>
+                      </DialogClose>
                     </div>
                     
                     <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
