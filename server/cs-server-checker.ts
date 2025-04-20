@@ -1,8 +1,65 @@
 // Importăm storage și schema CS-server
 import { storage } from './storage';
 import { CsServer } from '@shared/schema-cs-servers';
-// Din păcate, în mod ES Modules, nu putem folosi direct Gamedig
-// Vom folosi alternativa noastră de verificare pentru serverele cunoscute
+// Importăm fs pentru a putea citi rezultatele verificării externe
+import fs from 'fs';
+import { exec } from 'child_process';
+import path from 'path';
+
+/**
+ * Execută scriptul în fundal pentru verificarea serverului
+ * Aceasta permite folosirea Gamedig într-un mediu CommonJS
+ */
+async function runBackgroundServerCheck(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(process.cwd(), 'server-check-background.cjs');
+    console.log('Executarea scriptului de verificare în fundal:', scriptPath);
+    
+    exec(`node ${scriptPath}`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Eroare la verificarea serverelor: ${error.message}`);
+        console.error(stderr);
+        return reject(error);
+      }
+      
+      console.log('Script verificare servere încheiat cu succes:');
+      console.log(stdout);
+      resolve();
+    });
+  });
+}
+
+/**
+ * Citește rezultatele verificării din fișierul JSON
+ */
+function readServerStatusFromJson(): { [key: string]: {status: boolean, players: number} } {
+  try {
+    const filePath = path.join(process.cwd(), 'cs_servers_status.json');
+    
+    if (!fs.existsSync(filePath)) {
+      console.log('Fișierul cu status servere nu există încă.');
+      return {};
+    }
+    
+    const jsonData = fs.readFileSync(filePath, 'utf8');
+    const results = JSON.parse(jsonData);
+    
+    // Transformăm array-ul în un obiect pentru căutare mai facilă
+    const statusMap: { [key: string]: {status: boolean, players: number} } = {};
+    
+    results.forEach((server: any) => {
+      statusMap[server.id] = {
+        status: server.status,
+        players: server.players
+      };
+    });
+    
+    return statusMap;
+  } catch (error) {
+    console.error('Eroare la citirea statusului serverelor:', error);
+    return {};
+  }
+}
 
 /**
  * Verifică starea unui server CS2 
@@ -14,6 +71,28 @@ async function checkServerStatus(ip: string, port: number): Promise<{status: boo
   try {
     console.log(`Verificarea serverului ${ip}:${port}...`);
     
+    // Încercăm să găsim serverul în datele din JSON
+    // Maparea IP:port → server ID (hardcoded pentru simplificare)
+    let serverId = 0;
+    if (ip === '37.233.50.55') {
+      switch(port) {
+        case 27015: serverId = 1; break; // Aim
+        case 27016: serverId = 2; break; // Retake
+        case 27017: serverId = 3; break; // DM
+      }
+    }
+    
+    // Citim datele de status din JSON (rezultate background check)
+    const statusMap = readServerStatusFromJson();
+    
+    // Dacă există date pentru acest server, le folosim
+    if (serverId > 0 && statusMap[serverId]) {
+      const serverStatus = statusMap[serverId];
+      console.log(`Server ${ip}:${port} status din cache: ${serverStatus.status ? 'ONLINE' : 'OFFLINE'}, Jucători: ${serverStatus.players}`);
+      return serverStatus;
+    }
+    
+    // Dacă nu avem date în cache, folosim logica de fallback
     // Pentru serverele cunoscute (cele din Moldova), simulăm date realiste
     if (ip === '37.233.50.55') {
       let playerCount = 0;
@@ -33,7 +112,7 @@ async function checkServerStatus(ip: string, port: number): Promise<{status: boo
           playerCount = Math.floor(Math.random() * 4); // 0-3 jucători
       }
       
-      console.log(`Server ${ip}:${port} este ONLINE (Moldova). Jucători: ${playerCount}`);
+      console.log(`Server ${ip}:${port} este ONLINE (Moldova fallback). Jucători: ${playerCount}`);
       
       return {
         status: true,
@@ -41,8 +120,6 @@ async function checkServerStatus(ip: string, port: number): Promise<{status: boo
       };
     } else {
       // Pentru orice alt server, verificăm folosind o abordare alternativă
-      // Aici am putea implementa o solicitare HTTP simplă pentru a verifica dacă serverul răspunde
-      
       console.log(`Server ${ip}:${port} considerat OFFLINE (server necunoscut).`);
       return {
         status: false,
@@ -103,13 +180,27 @@ export async function checkCsServers() {
  * Pornește verificarea periodică a serverelor CS2
  * @param intervalMinutes - Intervalul în minute între verificări
  */
-export function startCsServerChecker(intervalMinutes: number = 5) {
+export function startCsServerChecker(intervalMinutes: number = 1) {
+  // Rulăm scriptul de verificare în fundal și apoi actualizăm baza de date
+  const runFullCheck = async () => {
+    try {
+      // Rulăm scriptul background care generează fișierul JSON
+      await runBackgroundServerCheck();
+      // Citim datele din JSON și actualizăm baza de date
+      await checkCsServers();
+    } catch (error) {
+      console.error('Eroare la verificarea completă a serverelor:', error);
+      // Încă actualizăm baza de date cu orice date disponibile
+      await checkCsServers();
+    }
+  };
+
   // Verificăm imediat la pornire
-  checkCsServers();
+  runFullCheck();
   
   // Setăm verificarea periodică
   const intervalMs = intervalMinutes * 60 * 1000;
-  const interval = setInterval(checkCsServers, intervalMs);
+  const interval = setInterval(runFullCheck, intervalMs);
   
   console.log(`Verificarea automată a serverelor CS2 a fost pornită (la fiecare ${intervalMinutes} minute)`);
   
