@@ -164,21 +164,42 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       <CardContent className="flex-grow pt-3">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
-                    <Wifi className="h-4 w-4 shrink-0" />
-                    <span className={server.status ? getPingColor() : "text-muted-foreground"}>
-                      {server.status ? `${ping} ms` : "N/A"}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Ping-ul tău la server</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <div className="flex items-center">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
+                      <Wifi className="h-4 w-4 shrink-0" />
+                      <span className={server.status ? getPingColor() : "text-muted-foreground"}>
+                        {server.status ? `${ping} ms` : "N/A"}
+                      </span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Ping-ul tău la server</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      className="h-4 w-4 p-0 ml-1 text-muted-foreground hover:text-foreground hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+                    >
+                      <span className="text-xs font-bold">i</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-[250px] text-xs">
+                    <p className="mb-1"><strong>Cum se calculează ping-ul?</strong></p>
+                    <p>Măsurăm timpul necesar pentru ca o cerere să ajungă la server și să primim un răspuns.</p>
+                    <p className="mt-1">Pentru un rezultat precis, deschide consola CS2 și folosește comanda <code>ping</code>.</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
             
             <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
               <span className="text-sm">{server.location}</span>
