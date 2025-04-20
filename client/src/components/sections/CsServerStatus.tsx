@@ -182,20 +182,22 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
               </TooltipProvider>
               
               <TooltipProvider>
-                <Tooltip>
+                <Tooltip delayDuration={100}>
                   <TooltipTrigger asChild>
                     <Button 
                       variant="ghost" 
-                      size="icon" 
-                      className="h-4 w-4 p-0 ml-1 text-muted-foreground hover:text-foreground hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+                      className="h-6 w-6 p-0 ml-1 bg-primary/10 rounded-full hover:bg-primary/20 text-primary"
+                      type="button"
                     >
                       <span className="text-xs font-bold">i</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent className="max-w-[250px] text-xs">
-                    <p className="mb-1"><strong>Cum se calculează ping-ul?</strong></p>
-                    <p>Măsurăm timpul necesar pentru ca o cerere să ajungă la server și să primim un răspuns.</p>
-                    <p className="mt-1">Pentru un rezultat precis, deschide consola CS2 și folosește comanda <code>ping</code>.</p>
+                  <TooltipContent side="bottom" align="center" className="max-w-[250px] p-3">
+                    <div className="space-y-2 text-sm">
+                      <h4 className="font-bold">Cum se calculează ping-ul?</h4>
+                      <p>Măsurăm timpul necesar pentru ca o cerere să ajungă la server și să primim un răspuns.</p>
+                      <p>Pentru un rezultat precis, deschide consola CS2 și folosește comanda <code>ping</code>.</p>
+                    </div>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
