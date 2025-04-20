@@ -1,0 +1,88 @@
+// 📁 index.js
+const express = require('express');
+const Gamedig = require('gamedig');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const servers = [
+  { name: 'Aim', host: '37.233.50.55', port: 27015 },
+  { name: 'Retake', host: '37.233.50.55', port: 27016 },
+  { name: 'FFA', host: '37.233.50.55', port: 27017 },
+];
+
+app.get('/api/status', async (req, res) => {
+  const results = await Promise.all(
+    servers.map(async (server) => {
+      try {
+        const state = await Gamedig.query({
+          type: 'cs2',
+          host: server.host,
+          port: server.port
+        });
+        return {
+          name: server.name,
+          ip: `${server.host}:${server.port}`,
+          status: 'Online',
+          players: `${state.players.length} / ${state.maxplayers}`,
+          serverName: state.name,
+        };
+      } catch (e) {
+        return {
+          name: server.name,
+          ip: `${server.host}:${server.port}`,
+          status: 'Offline',
+        };
+      }
+    })
+  );
+  res.json(results);
+});
+
+app.use(express.static('public'));
+
+app.listen(PORT, () => {
+  console.log(`🌐 Server running on http://localhost:${PORT}`);
+});
+
+// 📁 public/index.html
+/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS2 Server Status</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    .server { padding: 1rem; background: #fff; margin: 1rem 0; border-radius: 8px; box-shadow: 0 0 8px #ccc; }
+    .online { color: green; }
+    .offline { color: red; }
+  </style>
+</head>
+<body>
+  <h1>🎮 CS2 Moldova Server Status</h1>
+  <div id="servers"></div>
+
+  <script>
+    fetch('/api/status')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('servers');
+        data.forEach(server => {
+          const el = document.createElement('div');
+          el.className = 'server';
+          el.innerHTML = `
+            <strong>${server.name}</strong> <br>
+            IP: ${server.ip} <br>
+            Status: <span class="${server.status.toLowerCase()}">${server.status}</span><br>
+            ${server.players ? `Players: ${server.players}` : ''} <br>
+            ${server.serverName ? `Server Name: ${server.serverName}` : ''}
+          `;
+          container.appendChild(el);
+        });
+      });
+  </script>
+</body>
+</html>
+*/

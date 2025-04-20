@@ -1,0 +1,191 @@
+ Extensie: dacă vrei să afișezi datele în site-ul tău
+Poți crea un endpoint (folosind Express.js) care returnează JSON cu statusul serverelor.
+
+În pagina HTML, folosești fetch() ca să afișezi statusul în timp real.
+
+Vrei să-ți construiesc un mini API și un frontend ca exemplu? ​​
+
+Cs2 Server Status
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+// 📁 index.js
+const express = require('express');
+const Gamedig = require('gamedig');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+const servers = [
+  { name: 'Aim', host: '37.233.50.55', port: 27015 },
+  { name: 'Retake', host: '37.233.50.55', port: 27016 },
+  { name: 'FFA', host: '37.233.50.55', port: 27017 },
+];
+
+app.get('/api/status', async (req, res) => {
+  const results = await Promise.all(
+    servers.map(async (server) => {
+      try {
+        const state = await Gamedig.query({
+          type: 'cs2',
+          host: server.host,
+          port: server.port
+        });
+        return {
+          name: server.name,
+          ip: `${server.host}:${server.port}`,
+          status: 'Online',
+          players: `${state.players.length} / ${state.maxplayers}`,
+          serverName: state.name,
+        };
+      } catch (e) {
+        return {
+          name: server.name,
+          ip: `${server.host}:${server.port}`,
+          status: 'Offline',
+        };
+      }
+    })
+  );
+  res.json(results);
+});
+
+app.use(express.static('public'));
+
+app.listen(PORT, () => {
+  console.log(`🌐 Server running on http://localhost:${PORT}`);
+});
+
+// 📁 public/index.html
+/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS2 Server Status</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; }
+    h1 { color: #333; }
+    .server { padding: 1rem; background: #fff; margin: 1rem 0; border-radius: 8px; box-shadow: 0 0 8px #ccc; }
+    .online { color: green; }
+    .offline { color: red; }
+  </style>
+</head>
+<body>
+  <h1>🎮 CS2 Moldova Server Status</h1>
+  <div id="servers"></div>
+
+  <script>
+    fetch('/api/status')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('servers');
+        data.forEach(server => {
+          const el = document.createElement('div');
+          el.className = 'server';
+          el.innerHTML = `
+            <strong>${server.name}</strong> <br>
+            IP: ${server.ip} <br>
+            Status: <span class="${server.status.toLowerCase()}">${server.status}</span><br>
+            ${server.players ? `Players: ${server.players}` : ''} <br>
+            ${server.serverName ? `Server Name: ${server.serverName}` : ''}
+          `;
+          container.appendChild(el);
+        });
+      });
+  </script>
+</body>
+</html>
+*/
+
+
+Răspunde, în schimb, în discuție
+Gata! Ți-am construit un mini API + frontend simplu:
