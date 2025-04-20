@@ -7,6 +7,7 @@ import {
   seoSettings, type SeoSettings, type InsertSeo,
   analyticsSettings, type AnalyticsSettings, type InsertAnalytics
 } from "@shared/schema";
+import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
 
 // modify the interface with any CRUD methods
 // you might need
@@ -34,6 +35,12 @@ export interface IStorage {
   createPlayer(player: InsertPlayer): Promise<Player>;
   updatePlayer(id: number, player: Partial<InsertPlayer>): Promise<Player>;
   deletePlayer(id: number): Promise<void>;
+  
+  // CS Server methods
+  getCsServers(): Promise<CsServer[]>;
+  getCsServer(id: number): Promise<CsServer | undefined>;
+  updateCsServerLikes(id: number): Promise<CsServer>;
+  updateCsServerStatus(id: number, status: boolean, players: number): Promise<CsServer>;
   
   // Contact methods
   createContactSubmission(submission: InsertContact): Promise<Contact>;
@@ -72,6 +79,7 @@ export class MemStorage implements IStorage {
   private siteContents: Map<number, SiteContent>;
   private seoSettings: Map<number, SeoSettings>;
   private analyticsSettings: Map<number, AnalyticsSettings>;
+  private csServers: Map<number, CsServer>;
   
   currentUserId: number;
   currentEventId: number;
@@ -81,6 +89,7 @@ export class MemStorage implements IStorage {
   currentSiteContentId: number;
   currentSeoId: number;
   currentAnalyticsId: number;
+  currentCsServerId: number;
 
   constructor() {
     this.users = new Map();
@@ -91,6 +100,7 @@ export class MemStorage implements IStorage {
     this.siteContents = new Map();
     this.seoSettings = new Map();
     this.analyticsSettings = new Map();
+    this.csServers = new Map();
     
     this.currentUserId = 1;
     this.currentEventId = 1;
@@ -100,6 +110,7 @@ export class MemStorage implements IStorage {
     this.currentSiteContentId = 1;
     this.currentSeoId = 1;
     this.currentAnalyticsId = 1;
+    this.currentCsServerId = 1;
     
     // Load contact submissions from file first
     this.loadContactsFromFile();
