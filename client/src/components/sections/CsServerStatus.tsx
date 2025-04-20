@@ -21,10 +21,9 @@ const calculatePing = () => {
 
 interface ServerCardProps {
   server: CsServer;
-  onLike: (id: number) => void;
 }
 
-const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
+const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   const [ping, setPing] = useState<number>(0);
   
   useEffect(() => {
@@ -136,14 +135,14 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
 
 export const CsServerStatus: React.FC = () => {
   const queryClient = useQueryClient();
-  // State pentru a urmări like-urile date de utilizator
-  const [likedServers, setLikedServers] = useState<Record<number, boolean>>({});
+  // State pentru a urmări dacă utilizatorul a dat like
+  const [hasLiked, setHasLiked] = useState<boolean>(false);
   
-  // Încarcă like-urile din localStorage la inițializare
+  // Încarcă starea like-ului din localStorage la inițializare
   useEffect(() => {
-    const savedLikes = localStorage.getItem('likedCsServers');
-    if (savedLikes) {
-      setLikedServers(JSON.parse(savedLikes));
+    const savedLikeState = localStorage.getItem('hasLikedCsServers');
+    if (savedLikeState) {
+      setHasLiked(JSON.parse(savedLikeState));
     }
   }, []);
   
@@ -157,17 +156,8 @@ export const CsServerStatus: React.FC = () => {
       const res = await apiRequest('POST', `/api/cs-servers/${id}/like`);
       return await res.json();
     },
-    onSuccess: (_, id) => {
-      // Actualizează starea locală și salvează în localStorage
-      const updatedLikes = { ...likedServers, [id]: true };
-      setLikedServers(updatedLikes);
-      localStorage.setItem('likedCsServers', JSON.stringify(updatedLikes));
-      
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/cs-servers'] });
-      toast({
-        title: 'Mulțumim pentru apreciere!',
-        description: 'Like-ul tău a fost înregistrat cu succes.',
-      });
     },
     onError: (error: Error) => {
       toast({
@@ -177,19 +167,6 @@ export const CsServerStatus: React.FC = () => {
       });
     },
   });
-  
-  const handleLike = (id: number) => {
-    // Verifică dacă utilizatorul a dat deja like la acest server
-    if (likedServers[id]) {
-      toast({
-        title: 'Deja ai apreciat',
-        description: 'Poți aprecia un server doar o singură dată. Mulțumim!',
-      });
-      return;
-    }
-    
-    likeMutation.mutate(id);
-  };
   
   if (isLoading) {
     return (
@@ -215,8 +192,7 @@ export const CsServerStatus: React.FC = () => {
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
             <div key={server.id} className="w-full" style={{ maxWidth: "320px", minHeight: "320px" }}>
               <ServerCard 
-                server={server} 
-                onLike={handleLike} 
+                server={server}
               />
             </div>
           )) : (
@@ -228,21 +204,29 @@ export const CsServerStatus: React.FC = () => {
             variant="outline" 
             className="flex items-center gap-2 px-6 py-2"
             onClick={() => {
-              // Verifică dacă utilizatorul a dat like la toate serverele
-              if (servers && Array.isArray(servers) && servers.every((server: CsServer) => likedServers[server.id])) {
+              // Verifică dacă utilizatorul a dat deja like
+              if (hasLiked) {
                 toast({
                   title: 'Deja ai apreciat',
-                  description: 'Ai apreciat deja toate serverele. Mulțumim!',
+                  description: 'Poți aprecia serverele doar o singură dată. Mulțumim!',
                 });
                 return;
               }
               
-              // Trimite like la toate serverele care nu au fost încă apreciate
-              servers && Array.isArray(servers) && servers.forEach((server: CsServer) => {
-                if (!likedServers[server.id]) {
+              // Trimite like la toate serverele și marchează ca apreciat
+              if (servers && Array.isArray(servers)) {
+                servers.forEach((server: CsServer) => {
                   likeMutation.mutate(server.id);
-                }
-              });
+                });
+                
+                setHasLiked(true);
+                localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
+                
+                toast({
+                  title: 'Mulțumim pentru apreciere!',
+                  description: 'Mulțumirile tale au fost înregistrate cu succes.',
+                });
+              }
             }}
           >
             <ThumbsUp className="h-5 w-5 text-primary" />
