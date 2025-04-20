@@ -217,18 +217,18 @@ export const CsServerStatus: React.FC = () => {
   
   return (
     <section className="py-10">
-      <div className="container text-center">
-        <h2 className="text-2xl font-bold mb-6">Serverele Noastre CS2</h2>
-        <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6">
+      <div className="container max-w-6xl mx-auto">
+        <h2 className="text-2xl font-bold mb-6 text-center">Serverele Noastre CS2</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
-            <div key={server.id} className="w-full lg:w-1/3 max-w-md mx-auto">
+            <div key={server.id} className="w-full max-w-sm">
               <ServerCard 
                 server={server} 
                 onLike={handleLike} 
               />
             </div>
           )) : (
-            <p>Nu există servere disponibile</p>
+            <p className="col-span-3 text-center">Nu există servere disponibile</p>
           )}
         </div>
       </div>
