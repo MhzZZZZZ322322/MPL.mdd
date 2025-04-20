@@ -569,7 +569,7 @@ export class MemStorage implements IStorage {
       port: 27015,
       location: "Moldova",
       mode: "Aim",
-      status: false,
+      status: true, // Inițializează ca online conform informațiilor primite
       players: 0,
       maxPlayers: 16,
       likes: 0
@@ -583,7 +583,7 @@ export class MemStorage implements IStorage {
       port: 27016,
       location: "Moldova",
       mode: "Retake",
-      status: false,
+      status: true, // Inițializează ca online conform informațiilor primite
       players: 0,
       maxPlayers: 16,
       likes: 0
@@ -597,7 +597,7 @@ export class MemStorage implements IStorage {
       port: 27017,
       location: "Moldova",
       mode: "Deathmatch",
-      status: false,
+      status: true, // Inițializează ca online conform informațiilor primite
       players: 0,
       maxPlayers: 16,
       likes: 0
