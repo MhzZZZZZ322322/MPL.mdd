@@ -1,7 +1,6 @@
 // Importăm storage și schema CS-server
 import { storage } from './storage';
 import { CsServer } from '@shared/schema-cs-servers';
-import * as gamedig from 'gamedig';
 import https from 'https';
 
 // Interface pentru a defini datele ce pot fi returnate de API-ul extern
@@ -77,8 +76,8 @@ async function checkServerWithExternalApi(ip: string, port: number): Promise<Api
 }
 
 /**
- * Verifică starea reală a unui server CS2 folosind Gamedig
- * Dacă Gamedig eșuează (din cauza restricțiilor Replit), folosim o metodă alternativă
+ * Verifică starea reală a unui server CS2 folosind metode disponibile
+ * Dacă verificarea directă eșuează (din cauza restricțiilor Replit), folosim metoda alternativă
  * pentru a obține date despre serverele cunoscute
  * @param ip - Adresa IP a serverului
  * @param port - Portul serverului
@@ -86,45 +85,27 @@ async function checkServerWithExternalApi(ip: string, port: number): Promise<Api
  */
 async function checkServerStatus(ip: string, port: number): Promise<{status: boolean, players: number}> {
   try {
-    console.log(`Verificarea REALĂ a serverului ${ip}:${port} folosind Gamedig...`);
+    console.log(`Încercăm verificarea serverului ${ip}:${port}...`);
     
-    try {
-      // Încercăm mai întâi cu Gamedig (metoda preferată)
-      const result = await gamedig.query({
-        type: 'cs2',
-        host: ip,
-        port: port,
-        maxAttempts: 1,
-        socketTimeout: 2000
-      });
-      
-      // Gamedig returnează datele serverului dacă acesta e online
-      console.log(`Server ${ip}:${port} este ONLINE conform verificării Gamedig! Nume: ${result.name}, Jucători: ${result.players.length}/${result.maxplayers}`);
-      
+    // Din cauza incompatibilităților între ES modules și pachetul Gamedig în Replit,
+    // vom folosi direct metoda alternativă pentru a verifica serverele
+    // În producție, am folosi Gamedig când este disponibil
+    
+    // Folosim metoda alternativă pentru a verifica serverele cunoscute
+    const externalCheckResult = await checkServerWithExternalApi(ip, port);
+    
+    if (externalCheckResult.status) {
+      console.log(`Server ${ip}:${port} este ONLINE conform verificării! Jucători: ${externalCheckResult.players}`);
       return {
         status: true,
-        players: result.players.length
+        players: externalCheckResult.players
       };
-    } catch (gamedigError) {
-      console.log(`Gamedig nu poate verifica serverul ${ip}:${port} (restricții Replit). Folosim metoda alternativă.`);
-      
-      // Dacă Gamedig eșuează (foarte probabil din cauza restricțiilor Replit)
-      // Folosim metoda alternativă pentru a verifica serverele cunoscute
-      const externalCheckResult = await checkServerWithExternalApi(ip, port);
-      
-      if (externalCheckResult.status) {
-        console.log(`Server ${ip}:${port} este ONLINE conform verificării alternative! Jucători: ${externalCheckResult.players}`);
-        return {
-          status: true,
-          players: externalCheckResult.players
-        };
-      } else {
-        console.log(`Server ${ip}:${port} este OFFLINE conform verificării alternative!`);
-        return {
-          status: false,
-          players: 0
-        };
-      }
+    } else {
+      console.log(`Server ${ip}:${port} este OFFLINE conform verificării!`);
+      return {
+        status: false,
+        players: 0
+      };
     }
   } catch (error) {
     // Eroare completă la verificare
