@@ -232,7 +232,7 @@ export const CsServerStatus: React.FC = () => {
             className="flex items-center gap-2 px-6 py-2"
             onClick={() => {
               // Verifică dacă utilizatorul a dat like la toate serverele
-              if (servers && servers.every(server => likedServers[server.id])) {
+              if (servers && Array.isArray(servers) && servers.every((server: CsServer) => likedServers[server.id])) {
                 toast({
                   title: 'Deja ai apreciat',
                   description: 'Ai apreciat deja toate serverele. Mulțumim!',
@@ -241,7 +241,7 @@ export const CsServerStatus: React.FC = () => {
               }
               
               // Trimite like la toate serverele care nu au fost încă apreciate
-              servers?.forEach(server => {
+              servers && Array.isArray(servers) && servers.forEach((server: CsServer) => {
                 if (!likedServers[server.id]) {
                   likeMutation.mutate(server.id);
                 }
@@ -251,7 +251,7 @@ export const CsServerStatus: React.FC = () => {
             <ThumbsUp className="h-5 w-5 text-primary" />
             <span>Mulțumește pentru toate serverele</span>
           </Button>
-          <p className="text-sm text-muted-foreground">Mulțumiri lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru servere</p>
+          <p className="text-sm text-muted-foreground">Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru toate serverele – cu un Follow, Like și Share. E Gratis!</p>
         </div>
       </div>
     </section>
