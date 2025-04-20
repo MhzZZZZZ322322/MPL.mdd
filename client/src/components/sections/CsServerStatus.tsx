@@ -249,7 +249,7 @@ export const CsServerStatus: React.FC = () => {
             }}
           >
             <ThumbsUp className="h-5 w-5 text-primary" />
-            <span>Mulțumește pentru toate serverele</span>
+            <span>Mulțumiri</span>
           </Button>
           <p className="text-sm text-muted-foreground">Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru toate serverele – cu un Follow, Like și Share. E Gratis!</p>
         </div>
