@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertEventSchema, insertPlayerSchema, insertFaqSchema } from "@shared/schema";
 import { insertSiteContentSchema } from "@shared/content-schema";
+import { csServersRouter } from "./routes/cs-servers-routes";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -419,6 +420,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to submit contact form" });
     }
   });
+
+  // Use CS Servers router
+  app.use(csServersRouter);
 
   const httpServer = createServer(app);
 

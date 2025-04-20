@@ -107,9 +107,11 @@ export class MemStorage implements IStorage {
       throw new Error(`CS Server with id ${id} not found`);
     }
     
+    const currentLikes = server.likes || 0;
+    
     const updatedServer = {
       ...server,
-      likes: server.likes + 1
+      likes: currentLikes + 1
     };
     
     this.csServers.set(id, updatedServer);
