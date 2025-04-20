@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { startCsServerChecker } from "./cs-server-checker";
 
 const app = express();
 app.use(express.json());
@@ -66,5 +67,9 @@ app.use((req, res, next) => {
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    
+    // Pornește verificarea automată a stării serverelor CS2
+    // Verifică la fiecare 5 minute
+    startCsServerChecker(5);
   });
 })();
