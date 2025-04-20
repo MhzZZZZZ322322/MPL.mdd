@@ -135,7 +135,7 @@ const SimpleContactForm = () => {
       name: 'TikTok', 
       url: 'https://www.tiktok.com/@domnukrot', 
       icon: <FaTiktok className="mr-2 text-xl" />,
-      className: 'bg-[#8B5CF6]/10 hover:bg-[#8B5CF6]/30 border-[#8B5CF6]/30 hover:border-[#8B5CF6]/70'
+      className: 'bg-black hover:bg-black/80 border-[#8B5CF6]/50 hover:border-[#8B5CF6]'
     }
   ];
 
