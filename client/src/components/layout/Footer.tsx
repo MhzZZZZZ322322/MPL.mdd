@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
-import { FaYoutube, FaDiscord, FaTwitch, FaTiktok, FaInstagram } from "react-icons/fa";
+import { FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -70,7 +70,6 @@ const Footer = () => {
                 <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
                 <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
                 <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
-                <SocialIcon href="https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3" target="_blank" rel="noopener noreferrer" icon={FaInstagram} />
               </div>
               <Button 
                 onClick={() => window.location.href = "/mef"}
@@ -133,12 +132,6 @@ const Footer = () => {
                 <span className="text-secondary mt-1 mr-2"><FaTiktok /></span>
                 <a href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
                   TikTok
-                </a>
-              </li>
-              <li className="flex items-start">
-                <span className="text-secondary mt-1 mr-2"><FaInstagram /></span>
-                <a href="https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
-                  Instagram
                 </a>
               </li>
               <li className="flex items-start">

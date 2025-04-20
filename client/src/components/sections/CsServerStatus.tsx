@@ -17,58 +17,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-// Definim serverele direct în cod pentru a preveni problemele cu redeployul
-const staticServers: CsServer[] = [
-  {
-    id: 1,
-    name: "Aim Server",
-    ip: "37.233.50.55",
-    port: 27015,
-    description: "Server AIM pentru antrenament și încălzire",
-    max_players: 16,
-    game_type: "aim",
-    map: "aim_redline",
-    status: true,
-    players: 0,
-    ping: 0,
-    likes: 0,
-    created_at: new Date(),
-    updated_at: new Date()
-  },
-  {
-    id: 2,
-    name: "Retake Server",
-    ip: "37.233.50.55",
-    port: 27016,
-    description: "Server retake pentru situații de joc reale",
-    max_players: 16,
-    game_type: "retake",
-    map: "de_dust2",
-    status: true,
-    players: 0,
-    ping: 0,
-    likes: 0,
-    created_at: new Date(),
-    updated_at: new Date()
-  },
-  {
-    id: 3,
-    name: "Deathmatch Server",
-    ip: "37.233.50.55",
-    port: 27017,
-    description: "Server deathmatch pentru practică intensivă",
-    max_players: 16,
-    game_type: "dm",
-    map: "de_mirage",
-    status: true,
-    players: 0,
-    ping: 0,
-    likes: 0,
-    created_at: new Date(),
-    updated_at: new Date()
-  }
-];
-
 /**
  * Măsoară ping-ul real de la client la server folosind o tehnică de ping web
  * Obține un timp de răspuns aproximativ de la client la server
@@ -289,7 +237,20 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     </ul>
                     
                     <div className="mt-4 bg-primary/5 p-3 rounded-md">
-                      <p className="font-medium text-primary mb-2">Grilă de interpretare ping:</p>
+                      <div className="flex justify-between items-center mb-2">
+                        <p className="font-medium text-primary">Grilă de interpretare ping:</p>
+                        <a 
+                          href="https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-xs flex items-center gap-1 bg-primary/10 hover:bg-primary/20 rounded px-2 py-1 transition-colors"
+                        >
+                          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                          </svg>
+                          <span>@moldova_pro_league</span>
+                        </a>
+                      </div>
                       <ul className="list-disc pl-5 text-xs space-y-1 mt-1">
                         <li><span className="text-green-500 font-semibold">Sub 5ms:</span> Excelent - conexiune LAN/datacenter</li>
                         <li><span className="text-green-500">5-10ms:</span> Foarte bun - conexiune FTTH/fibră de calitate</li>
@@ -352,9 +313,6 @@ export const CsServerStatus: React.FC = () => {
   const queryClient = useQueryClient();
   // State pentru a urmări dacă utilizatorul a mulțumit
   const [hasLiked, setHasLiked] = useState<boolean>(false);
-  // State pentru a urmări serverele și numărul de "mulțumiri"
-  const [servers, setServers] = useState<CsServer[]>(staticServers);
-  const [totalLikes, setTotalLikes] = useState<number>(0);
   
   // Încarcă starea mulțumirii din localStorage la inițializare
   useEffect(() => {
@@ -362,126 +320,60 @@ export const CsServerStatus: React.FC = () => {
     if (savedLikeState) {
       setHasLiked(JSON.parse(savedLikeState));
     }
-    
-    // Încarcă numărul de mulțumiri din localStorage
-    const savedLikes = localStorage.getItem('csServersLikes');
-    if (savedLikes) {
-      try {
-        const likesData = JSON.parse(savedLikes);
-        setTotalLikes(likesData.total || 0);
-        
-        // Actualizăm serverele statice cu numărul de likes
-        const updatedServers = [...staticServers];
-        if (likesData.servers && Array.isArray(likesData.servers)) {
-          for (const serverLike of likesData.servers) {
-            const serverIndex = updatedServers.findIndex(s => s.id === serverLike.id);
-            if (serverIndex >= 0) {
-              updatedServers[serverIndex].likes = serverLike.likes || 0;
-            }
-          }
-        }
-        setServers(updatedServers);
-      } catch (err) {
-        console.error('Eroare la parsarea datelor de like:', err);
-      }
-    }
-    
-    // Simulăm actualizarea numărului de jucători la interval regulat
-    const playerUpdateInterval = setInterval(() => {
-      setServers(currentServers => {
-        return currentServers.map(server => {
-          // Generăm un număr aleatoriu de jucători între 1 și maxPlayers
-          const randomPlayers = Math.floor(Math.random() * (server.max_players || 16)) + 1;
-          return {
-            ...server,
-            players: randomPlayers
-          };
-        });
-      });
-    }, 60000); // La fiecare minut
-    
-    // Simulăm numărul inițial de jucători
-    setServers(currentServers => {
-      return currentServers.map(server => {
-        const randomPlayers = Math.floor(Math.random() * (server.max_players || 16)) + 1;
-        return {
-          ...server,
-          players: randomPlayers
-        };
-      });
-    });
-    
-    return () => clearInterval(playerUpdateInterval);
   }, []);
   
-  // Funcție pentru a adăuga o apreciere
-  const addLike = (serverId: number) => {
-    // Actualizăm starea de like a utilizatorului
-    setHasLiked(true);
-    localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
-    
-    // Actualizăm serverele cu noul like
-    const updatedServers = servers.map(server => {
-      if (server.id === serverId) {
-        return { ...server, likes: (server.likes || 0) + 1 };
-      }
-      return server;
-    });
-    
-    // Calculăm totalul de likes
-    const newTotalLikes = updatedServers.reduce((total, server) => total + (server.likes || 0), 0);
-    setTotalLikes(newTotalLikes);
-    setServers(updatedServers);
-    
-    // Salvăm datele în localStorage
-    const likesData = {
-      total: newTotalLikes,
-      servers: updatedServers.map(s => ({ id: s.id, likes: s.likes }))
-    };
-    localStorage.setItem('csServersLikes', JSON.stringify(likesData));
-    
-    // Afișăm toast de confirmare
-    toast({
-      title: 'Mulțumim pentru apreciere!',
-      description: 'Ai adăugat 1 mulțumire.',
-    });
-  };
-  
-  // Am eliminat verificarea de isLoading și error deoarece acum avem serverele statice
-  
-  // Debug-ui la consolă
-  console.log("CsServerStatus component data:", {
-    servers: servers,
-    isArray: servers && Array.isArray(servers),
-    serverCount: servers && Array.isArray(servers) ? servers.length : 0
+  const { isLoading, error, data: servers } = useQuery({
+    queryKey: ['/api/cs-servers'],
+    refetchInterval: 60000, // Refetch every 60 seconds (1 minute)
   });
-
+  
+  const likeMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const res = await apiRequest('POST', `/api/cs-servers/${id}/like`);
+      return await res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/cs-servers'] });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: 'Eroare',
+        description: 'Nu am putut înregistra aprecierea ta. Te rugăm să încerci din nou.',
+        variant: 'destructive',
+      });
+    },
+  });
+  
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center py-12">
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+  
+  if (error) {
+    return (
+      <div className="flex justify-center items-center py-12">
+        <p className="text-destructive">Eroare la încărcarea serverelor. Te rugăm să reîmprospătezi pagina.</p>
+      </div>
+    );
+  }
+  
   return (
     <section className="py-10">
       <div className="container max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">Serverele Noastre CS2</h2>
         
         <div className="flex flex-wrap justify-center gap-6">
-          {servers && Array.isArray(servers) && servers.length > 0 ? servers.map((server: CsServer) => (
+          {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
             <div key={server.id} className="w-full md:w-[300px] transform transition-all duration-300 hover:scale-105">
               <ServerCard 
                 server={server}
               />
             </div>
           )) : (
-            <div className="w-full text-center">
-              <p className="mb-4">Se încarcă serverele...</p>
-              <Button 
-                onClick={() => {
-                  // Resetăm serverele la valorile inițiale
-                  setServers([...staticServers]);
-                }}
-                variant="outline"
-                className="mx-auto"
-              >
-                Reîncarcă serverele
-              </Button>
-            </div>
+            <p className="w-full text-center">Nu există servere disponibile</p>
           )}
         </div>
         
@@ -496,8 +388,16 @@ export const CsServerStatus: React.FC = () => {
                   // Găsește primul server online sau primul server dacă niciunul nu e online
                   const targetServer = servers.find(s => s.status) || servers[0];
                   
-                  // Adaugă un singur like folosind funcția noastră locală
-                  addLike(targetServer.id);
+                  // Adaugă un singur like doar la acest server
+                  likeMutation.mutate(targetServer.id);
+                  
+                  setHasLiked(true);
+                  localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
+                  
+                  toast({
+                    title: 'Mulțumim pentru apreciere!',
+                    description: 'Ai adăugat 1 mulțumire.',
+                  });
                 }
               }}
             >
@@ -509,7 +409,7 @@ export const CsServerStatus: React.FC = () => {
               <ThumbsUp className="h-5 w-5 text-primary" />
               <span className="font-medium">
                 {servers && Array.isArray(servers) ? 
-                  servers.reduce((total, server) => total + (server.likes || 0), 0) || "0"
+                  servers.reduce((total, server) => total + server.likes, 0) || "0"
                   : "0"
                 } mulțumiri
               </span>
@@ -520,9 +420,21 @@ export const CsServerStatus: React.FC = () => {
             className="text-primary hover:underline font-medium">@faceofmadness</a> pentru toate serverele – 
             cu un Follow, Like și Share. E Gratis!
           </p>
+          
+          <div className="flex justify-center items-center gap-4 mt-2">
+            <a 
+              href="https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 rounded-md px-3 py-1.5 transition-colors text-sm"
+            >
+              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span className="font-medium">Urmărește-ne pe Instagram</span>
+            </a>
+          </div>
         </div>
-        
-
       </div>
     </section>
   );
