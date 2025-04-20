@@ -36,7 +36,7 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     // Creăm un element imagine în afara DOM-ului
     const pingImg = document.createElement('img');
     
-    // Promisune care rezolvă atunci când imaginea declanșează eroarea
+    // Promisiune care rezolvă atunci când imaginea declanșează eroarea
     const imgPromise = new Promise<number>((resolve) => {
       // Imaginea nu se va încărca niciodată, dar network stack va încerca
       // să ajungă la server, astfel măsurând parțial RTT-ul
@@ -50,10 +50,10 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
         resolve(Math.round(endTime - startTime));
       };
       
-      // Setăm un timeout maxim pentru ping
+      // Setăm un timeout maxim pentru ping - 10 secunde (10000ms)
       setTimeout(() => {
-        resolve(999); // Valoare timeout
-      }, 5000);
+        resolve(10000); // Valoare timeout 10s
+      }, 10000);
     });
     
     // Setăm sursa imaginii cu o capcană de cache și timestamp
@@ -62,7 +62,7 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     // Așteptăm rezultatul ping-ului sau timeout
     const pingTime = await Promise.race([
       imgPromise,
-      new Promise<number>(resolve => setTimeout(() => resolve(999), 5000))
+      new Promise<number>(resolve => setTimeout(() => resolve(10000), 10000))
     ]);
     
     // Ajustăm valorile de ping pentru a compensa limitările tehnicii
@@ -70,28 +70,28 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     
     // Identificăm serverul după port pentru a oferi valori diferite pentru demo
     // Dacă fetcher-ul a returnat un ping > 10ms, îl folosim
-    if (pingTime > 10 && pingTime < 900) {
+    if (pingTime > 10 && pingTime < 9000) {
       return pingTime;
     } else {
       // Suntem în situația de simulare
       let pingBase: number;
       if (port === 27015) { // Aim server
-        pingBase = 42; // Valoare de bază pentru server aim
+        pingBase = 35; // Valoare actualizată pentru server aim
       } else if (port === 27016) { // Retake server
-        pingBase = 18; // Valoare de bază pentru server retake
+        pingBase = 22; // Valoare actualizată pentru server retake
       } else { // Deathmatch sau alte servere
-        pingBase = 65; // Valoare de bază pentru alte servere
+        pingBase = 48; // Valoare actualizată pentru alte servere
       }
       
       // Adăugăm variație pentru a simula condiții de rețea reale
-      const variation = Math.floor(Math.random() * 15) - 5; // Variație -5 până la +10 ms
+      const variation = Math.floor(Math.random() * 20) - 8; // Variație -8 până la +12 ms
       
       // Returnăm ping-ul simulat
       return Math.max(5, pingBase + variation);
     }
   } catch (error) {
     console.error('Eroare la calcularea ping-ului:', error);
-    return 999; // Valoare de eroare
+    return 10000; // Valoare de eroare maximă 10s
   }
 };
 
@@ -111,7 +111,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       setPing(newPing);
     } catch (error) {
       console.error('Eroare la actualizarea ping-ului:', error);
-      setPing(999); // Valoare de eroare în caz de probleme
+      setPing(10000); // Valoare de eroare în caz de probleme (10 secunde)
     } finally {
       setIsPingLoading(false);
     }
@@ -134,7 +134,9 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
     if (ping < 30) return 'text-green-500';
     if (ping < 60) return 'text-yellow-500';
     if (ping < 100) return 'text-orange-500';
-    return 'text-red-500';
+    if (ping < 500) return 'text-red-500';
+    if (ping < 1000) return 'text-red-600 font-semibold';
+    return 'text-red-700 font-bold animate-pulse';
   };
   
   // Determină clasa de animație pentru status online
