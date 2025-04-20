@@ -869,4 +869,228 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Importăm baza de date pentru storage persistent
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import * as schema from "@shared/schema";
+import { csServers } from '@shared/schema-cs-servers';
+import { eq } from 'drizzle-orm';
+import ws from 'ws';
+
+// Configurăm WebSocket pentru Neon Database
+neonConfig.webSocketConstructor = ws;
+
+// Configurăm conexiunea la baza de date
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const db = drizzle(pool, { schema: { ...schema, csServers } });
+
+// Folosim DatabaseStorage în loc de MemStorage pentru persistență
+export class DatabaseStorage implements IStorage {
+  // Implementăm toate metodele din IStorage, dar folosind baza de date reală
+  
+  // Metodele pentru useri
+  async getUser(id: number): Promise<User | undefined> {
+    try {
+      const [user] = await db.select().from(schema.users).where(eq(schema.users.id, id));
+      return user;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return undefined;
+    }
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    try {
+      const [user] = await db.select().from(schema.users).where(eq(schema.users.username, username));
+      return user;
+    } catch (error) {
+      console.error('Error fetching user by username:', error);
+      return undefined;
+    }
+  }
+
+  async createUser(user: InsertUser): Promise<User> {
+    try {
+      const [newUser] = await db.insert(schema.users).values(user).returning();
+      return newUser;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw error;
+    }
+  }
+  
+  // Metode pentru servere CS2
+  async getCsServers(): Promise<CsServer[]> {
+    try {
+      return await db.select().from(csServers);
+    } catch (error) {
+      console.error('Error fetching CS servers:', error);
+      return [];
+    }
+  }
+
+  async getCsServer(id: number): Promise<CsServer | undefined> {
+    try {
+      const [server] = await db.select().from(csServers).where(eq(csServers.id, id));
+      return server;
+    } catch (error) {
+      console.error('Error fetching CS server:', error);
+      return undefined;
+    }
+  }
+
+  async updateCsServerLikes(id: number): Promise<CsServer> {
+    try {
+      // Găsim serverul curent
+      const [currentServer] = await db.select().from(csServers).where(eq(csServers.id, id));
+      if (!currentServer) {
+        throw new Error(`Server with ID ${id} not found`);
+      }
+      
+      // Incrementăm numărul de likes
+      const [updatedServer] = await db
+        .update(csServers)
+        .set({ likes: (currentServer.likes || 0) + 1 })
+        .where(eq(csServers.id, id))
+        .returning();
+        
+      return updatedServer;
+    } catch (error) {
+      console.error('Error updating CS server likes:', error);
+      throw error;
+    }
+  }
+
+  async updateCsServerStatus(id: number, status: boolean, players: number): Promise<CsServer> {
+    try {
+      const [updatedServer] = await db
+        .update(csServers)
+        .set({ status, players })
+        .where(eq(csServers.id, id))
+        .returning();
+        
+      return updatedServer;
+    } catch (error) {
+      console.error('Error updating CS server status:', error);
+      throw error;
+    }
+  }
+  
+  // Restul metodelor rămân ca implementări temporare până le actualizăm
+  // Metodele pentru evenimente, jucători, etc.
+  // ...
+
+  async getEvents(): Promise<Event[]> {
+    return memStorage.getEvents();
+  }
+
+  async getEvent(id: number): Promise<Event | undefined> {
+    return memStorage.getEvent(id);
+  }
+
+  async createEvent(event: InsertEvent): Promise<Event> {
+    return memStorage.createEvent(event);
+  }
+
+  async updateEvent(id: number, event: Partial<InsertEvent>): Promise<Event> {
+    return memStorage.updateEvent(id, event);
+  }
+
+  async deleteEvent(id: number): Promise<void> {
+    return memStorage.deleteEvent(id);
+  }
+
+  async getPlayers(game?: string): Promise<Player[]> {
+    return memStorage.getPlayers(game);
+  }
+
+  async getPlayer(id: number): Promise<Player | undefined> {
+    return memStorage.getPlayer(id);
+  }
+
+  async createPlayer(player: InsertPlayer): Promise<Player> {
+    return memStorage.createPlayer(player);
+  }
+
+  async updatePlayer(id: number, player: Partial<InsertPlayer>): Promise<Player> {
+    return memStorage.updatePlayer(id, player);
+  }
+
+  async deletePlayer(id: number): Promise<void> {
+    return memStorage.deletePlayer(id);
+  }
+
+  async createContactSubmission(submission: InsertContact): Promise<Contact> {
+    return memStorage.createContactSubmission(submission);
+  }
+
+  async getContactSubmissions(): Promise<Contact[]> {
+    return memStorage.getContactSubmissions();
+  }
+
+  async getFaqs(): Promise<Faq[]> {
+    return memStorage.getFaqs();
+  }
+
+  async getFaq(id: number): Promise<Faq | undefined> {
+    return memStorage.getFaq(id);
+  }
+
+  async createFaq(faq: InsertFaq): Promise<Faq> {
+    return memStorage.createFaq(faq);
+  }
+
+  async updateFaq(id: number, faq: Partial<InsertFaq>): Promise<Faq> {
+    return memStorage.updateFaq(id, faq);
+  }
+
+  async deleteFaq(id: number): Promise<void> {
+    return memStorage.deleteFaq(id);
+  }
+
+  async getSiteContents(): Promise<SiteContent[]> {
+    return memStorage.getSiteContents();
+  }
+
+  async getSiteContentByKey(key: string): Promise<SiteContent | undefined> {
+    return memStorage.getSiteContentByKey(key);
+  }
+
+  async updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent> {
+    return memStorage.updateSiteContent(id, content);
+  }
+
+  async getSeoSettings(): Promise<SeoSettings[]> {
+    return memStorage.getSeoSettings();
+  }
+
+  async getSeoSettingByUrl(pageUrl: string): Promise<SeoSettings | undefined> {
+    return memStorage.getSeoSettingByUrl(pageUrl);
+  }
+
+  async createSeoSetting(seo: InsertSeo): Promise<SeoSettings> {
+    return memStorage.createSeoSetting(seo);
+  }
+
+  async updateSeoSetting(id: number, seo: Partial<InsertSeo>): Promise<SeoSettings> {
+    return memStorage.updateSeoSetting(id, seo);
+  }
+
+  async getAnalyticsSettings(): Promise<AnalyticsSettings | undefined> {
+    return memStorage.getAnalyticsSettings();
+  }
+
+  async updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings> {
+    return memStorage.updateAnalyticsSettings(id, settings);
+  }
+
+  async createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings> {
+    return memStorage.createAnalyticsSettings(settings);
+  }
+}
+
+// Păstrăm o instanță MemStorage pentru metodele care nu sunt încă migrate
+const memStorage = new MemStorage();
+
+// Exportăm instanța DatabaseStorage pentru a fi folosită în aplicație
+export const storage = new DatabaseStorage();
