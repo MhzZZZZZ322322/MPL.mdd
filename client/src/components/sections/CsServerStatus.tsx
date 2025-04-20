@@ -208,57 +208,31 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                       Cum calculăm ping-ul
                     </DialogTitle>
                   </DialogHeader>
-                  <DialogDescription className="sr-only">
-                    Informații tehnice despre calculul ping-ului către servere
-                  </DialogDescription>
                   <div className="space-y-3 py-2 text-sm">
                     <p>
-                      <strong>Ce este ping-ul?</strong> Ping-ul măsoară latența de rețea (în milisecunde) între dispozitivul tău și server, reprezentând timpul necesar pentru ca un pachet de date să călătorească dus-întors (RTT - Round Trip Time).
+                      <strong>Ce este ping-ul?</strong> Ping-ul măsoară timpul (în milisecunde) necesar pentru ca un pachet de date să călătorească de la computer la server și înapoi.
                     </p>
                     <p>
-                      <strong>Metodologia avansată:</strong> Implementăm o tehnică web sofisticată bazată pe următorul algoritm:
+                      <strong>Metodologia noastră:</strong> Folosim o tehnică web avansată bazată pe RTT (Round Trip Time):
                     </p>
                     <ol className="list-decimal pl-5 space-y-1">
-                      <li>Inițiem o cerere de rețea utilizând JavaScript și API-uri moderne de performanță</li>
-                      <li>Măsurăm timpul cu precizie de microsecunde folosind <code>performance.now()</code></li> 
-                      <li>Folosim metode asincrone și promise racing pentru a gestiona timeout-urile</li>
-                      <li>Aplicăm corecții și compensări statistice pentru diferențele între protocoale (HTTP vs. UDP)</li>
-                      <li>Calibrăm pentru a elimina varianțele cauzate de jitter și packet loss</li>
+                      <li>Creăm o cerere de rețea către serverul CS2</li>
+                      <li>Măsurăm timpul exact de la trimitere până la primirea răspunsului</li>
+                      <li>Ajustăm valoarea pentru a compensa diferențele între protocoale</li>
                     </ol>
-                    <p className="text-xs mt-4 font-medium">
-                      <strong>Specificații tehnice:</strong>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Notă: Ping-ul din browser poate diferi ușor de cel din joc datorită diferențelor între protocoalele HTTP și UDP/TCP folosite de CS2.
                     </p>
-                    <ul className="list-disc pl-5 text-xs space-y-1 mt-1 text-muted-foreground">
-                      <li>Timeout maxim: 10 secunde (10000ms)</li>
-                      <li>RTT măsurat cu precizie la nivel de milisecundă</li>
-                      <li>Sistem hibrid de detecție care utilizează network stack la nivel de TCP/IP</li>
-                      <li>Optimizat pentru a funcționa prin diverse configurații de firewall și NAT</li>
-                      <li>Implementează metode pentru a preveni caching-ul și buffering-ul</li>
-                    </ul>
-                    
-                    <div className="mt-4 bg-primary/5 p-3 rounded-md">
-                      <div className="flex justify-between items-center mb-2">
-                        <p className="font-medium text-primary">Grilă de interpretare ping:</p>
-                        <a 
-                          href="https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-xs flex items-center gap-1 bg-primary/10 hover:bg-primary/20 rounded px-2 py-1 transition-colors"
-                        >
-                          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                          </svg>
-                          <span>@moldova_pro_league</span>
-                        </a>
-                      </div>
+                    <div className="mt-4 bg-primary/5 p-2 rounded-md">
+                      <p className="font-medium text-primary">Valorile ping-ului:</p>
                       <ul className="list-disc pl-5 text-xs space-y-1 mt-1">
-                        <li><span className="text-green-500 font-semibold">Sub 5ms:</span> Excelent - conexiune LAN/datacenter</li>
-                        <li><span className="text-green-500">5-10ms:</span> Foarte bun - conexiune FTTH/fibră de calitate</li>
-                        <li><span className="text-yellow-500">10-20ms:</span> Bun - experiență competitivă optimă</li>
-                        <li><span className="text-orange-500">20-50ms:</span> Acceptabil - ușoară latență perceptibilă</li>
-                        <li><span className="text-red-500">50-100ms:</span> Ridicat - latență medie, joc recreational</li>
-                        <li><span className="text-red-600 font-semibold">100-500ms:</span> Foarte mare - latență severă, joc dificil</li>
-                        <li><span className="text-red-700 font-bold">Peste 500ms:</span> Extrem - practic nejucabil pentru CS2</li>
+                        <li><span className="text-green-500 font-semibold">Sub 5ms:</span> Excelent - conexiune locală</li>
+                        <li><span className="text-green-500">5-10ms:</span> Foarte bun - conexiune optimă</li>
+                        <li><span className="text-yellow-500">10-20ms:</span> Bun - experiență de joc fluidă</li>
+                        <li><span className="text-orange-500">20-50ms:</span> Acceptabil - ușor delay</li>
+                        <li><span className="text-red-500">50-100ms:</span> Ridicat - delay perceptibil</li>
+                        <li><span className="text-red-600 font-semibold">100-500ms:</span> Foarte mare - lag consistent</li>
+                        <li><span className="text-red-700 font-bold">Peste 500ms:</span> Extrem - joc dificil</li>
                       </ul>
                     </div>
                   </div>
@@ -420,20 +394,6 @@ export const CsServerStatus: React.FC = () => {
             className="text-primary hover:underline font-medium">@faceofmadness</a> pentru toate serverele – 
             cu un Follow, Like și Share. E Gratis!
           </p>
-          
-          <div className="flex justify-center items-center gap-4 mt-2">
-            <a 
-              href="https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 rounded-md px-3 py-1.5 transition-colors text-sm"
-            >
-              <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              <span className="font-medium">Urmărește-ne pe Instagram</span>
-            </a>
-          </div>
         </div>
       </div>
     </section>
