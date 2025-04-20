@@ -202,8 +202,8 @@ export const CsServerStatus: React.FC = () => {
         <div className="flex flex-col justify-center items-center mt-8 gap-3">
           {!hasLiked ? (
             <Button 
-              variant="outline" 
-              className="flex items-center gap-2 px-6 py-2 bg-black/20 hover:bg-black/30 border-primary"
+              variant="default" 
+              className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
               onClick={() => {
                 // Trimite like la toate serverele și marchează ca apreciat
                 if (servers && Array.isArray(servers)) {
@@ -216,13 +216,13 @@ export const CsServerStatus: React.FC = () => {
                   
                   toast({
                     title: 'Mulțumim pentru apreciere!',
-                    description: 'Ai adăugat o mulțumire pentru toate serverele.',
+                    description: 'Ai adăugat 1 mulțumire la fiecare server.',
                   });
                 }
               }}
             >
-              <ThumbsUp className="h-5 w-5 text-primary" />
-              <span className="ml-1">Adaugă 1 mulțumire</span>
+              <ThumbsUp className="h-5 w-5" />
+              <span className="ml-1 font-medium">MULȚUMEȘTE O DATĂ</span>
             </Button>
           ) : (
             <div className="flex items-center gap-2 text-muted-foreground">
