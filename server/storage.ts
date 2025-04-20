@@ -758,7 +758,7 @@ export class MemStorage implements IStorage {
     
     this.createFaq({
       question: "Cum pot deveni sponsor?",
-      answer: "Pentru parteneriate și sponsorizări, te rugăm să ne contactezi direct prin formularul de contact sau la adresa de email partnerships@moldovaproleague.md. Echipa noastră îți va răspunde în cel mai scurt timp cu detalii despre pachetele de sponsorizare disponibile.",
+      answer: "Pentru parteneriate și sponsorizări, te rugăm să ne contactezi direct prin formularul de contact sau la adresa de email proleaguemoldova@gmail.com. Echipa noastră îți va răspunde în cel mai scurt timp cu detalii despre pachetele de sponsorizare disponibile.",
       order: 5
     });
   }
