@@ -564,7 +564,7 @@ export class MemStorage implements IStorage {
     // Initialize CS Servers
     const aimServer: CsServer = {
       id: this.currentCsServerId++,
-      name: "Server CS2 Moldova - Aim",
+      name: "Server CS2 Moldova",
       ip: "37.233.50.55",
       port: 27015,
       location: "Moldova",
@@ -578,7 +578,7 @@ export class MemStorage implements IStorage {
     
     const retakeServer: CsServer = {
       id: this.currentCsServerId++,
-      name: "Server CS2 Moldova - Retake",
+      name: "Server CS2 Moldova",
       ip: "37.233.50.55",
       port: 27016,
       location: "Moldova",
@@ -592,7 +592,7 @@ export class MemStorage implements IStorage {
     
     const deathmatchServer: CsServer = {
       id: this.currentCsServerId++,
-      name: "Server CS2 Moldova - Deathmatch",
+      name: "Server CS2 Moldova",
       ip: "37.233.50.55",
       port: 27017,
       location: "Moldova",
