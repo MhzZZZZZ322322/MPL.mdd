@@ -93,7 +93,9 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
                 <TooltipTrigger asChild>
                   <div className="flex items-center gap-1">
                     <Wifi className="h-4 w-4" />
-                    <span className={getPingColor()}>{ping} ms</span>
+                    <span className={server.status ? getPingColor() : "text-muted-foreground"}>
+                      {server.status ? `${ping} ms` : "N/A"}
+                    </span>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -109,7 +111,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
                 <TooltipTrigger asChild>
                   <div className="flex items-center gap-1">
                     <Users className="h-4 w-4" />
-                    <span>{server.players}/{server.maxPlayers}</span>
+                    <span>{server.status ? `${server.players}/${server.maxPlayers}` : "0/0"}</span>
                   </div>
                 </TooltipTrigger>
                 <TooltipContent>
