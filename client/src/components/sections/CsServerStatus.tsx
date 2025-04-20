@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Heart, Server, Users, Wifi } from 'lucide-react';
+import { ThumbsUp, Server, Users, Wifi, Copy, Check } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,9 +55,34 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
           </Badge>
         </div>
         <CardDescription>
-          <span className="font-mono bg-black/10 dark:bg-white/10 p-1 rounded text-xs">
-            connect {server.ip}:{server.port}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="font-mono bg-black/10 dark:bg-white/10 p-1 rounded text-xs">
+              connect {server.ip}:{server.port}
+            </span>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="h-6 w-6 p-0"
+                    onClick={() => {
+                      navigator.clipboard.writeText(`connect ${server.ip}:${server.port}`);
+                      toast({
+                        description: "Conectarea a fost copiată în clipboard",
+                        duration: 2000,
+                      });
+                    }}
+                  >
+                    <Copy className="h-3 w-3" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Copiază comanda de conectare</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -106,7 +131,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
           className="flex items-center gap-1"
           onClick={() => onLike(server.id)}
         >
-          <Heart className="h-4 w-4 text-red-500" />
+          <ThumbsUp className="h-4 w-4 text-primary" />
           <span>{server.likes} mulțumiri</span>
         </Button>
         <p className="text-xs text-muted-foreground italic">
@@ -119,6 +144,16 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
 
 export const CsServerStatus: React.FC = () => {
   const queryClient = useQueryClient();
+  // State pentru a urmări like-urile date de utilizator
+  const [likedServers, setLikedServers] = useState<Record<number, boolean>>({});
+  
+  // Încarcă like-urile din localStorage la inițializare
+  useEffect(() => {
+    const savedLikes = localStorage.getItem('likedCsServers');
+    if (savedLikes) {
+      setLikedServers(JSON.parse(savedLikes));
+    }
+  }, []);
   
   const { isLoading, error, data: servers } = useQuery({
     queryKey: ['/api/cs-servers'],
@@ -130,7 +165,12 @@ export const CsServerStatus: React.FC = () => {
       const res = await apiRequest('POST', `/api/cs-servers/${id}/like`);
       return await res.json();
     },
-    onSuccess: () => {
+    onSuccess: (_, id) => {
+      // Actualizează starea locală și salvează în localStorage
+      const updatedLikes = { ...likedServers, [id]: true };
+      setLikedServers(updatedLikes);
+      localStorage.setItem('likedCsServers', JSON.stringify(updatedLikes));
+      
       queryClient.invalidateQueries({ queryKey: ['/api/cs-servers'] });
       toast({
         title: 'Mulțumim pentru apreciere!',
@@ -147,6 +187,15 @@ export const CsServerStatus: React.FC = () => {
   });
   
   const handleLike = (id: number) => {
+    // Verifică dacă utilizatorul a dat deja like la acest server
+    if (likedServers[id]) {
+      toast({
+        title: 'Deja ai apreciat',
+        description: 'Poți aprecia un server doar o singură dată. Mulțumim!',
+      });
+      return;
+    }
+    
     likeMutation.mutate(id);
   };
   
@@ -168,15 +217,16 @@ export const CsServerStatus: React.FC = () => {
   
   return (
     <section className="py-10">
-      <div className="container">
+      <div className="container text-center">
         <h2 className="text-2xl font-bold mb-6">Serverele Noastre CS2</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col lg:flex-row justify-center items-stretch gap-6">
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
-            <ServerCard 
-              key={server.id} 
-              server={server} 
-              onLike={handleLike} 
-            />
+            <div key={server.id} className="w-full lg:w-1/3 max-w-md mx-auto">
+              <ServerCard 
+                server={server} 
+                onLike={handleLike} 
+              />
+            </div>
           )) : (
             <p>Nu există servere disponibile</p>
           )}
