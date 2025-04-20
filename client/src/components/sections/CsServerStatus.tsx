@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ThumbsUp, Server, Users, Wifi, Copy, Check } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { Server, Users, Wifi, Copy } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CsServer } from '@shared/schema-cs-servers';
-import { apiRequest } from '@/lib/queryClient';
 
 /**
  * Măsoară ping-ul real de la client la server folosind o tehnică de ping web
@@ -225,38 +224,9 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
 };
 
 export const CsServerStatus: React.FC = () => {
-  const queryClient = useQueryClient();
-  // State pentru a urmări dacă utilizatorul a mulțumit
-  const [hasLiked, setHasLiked] = useState<boolean>(false);
-  
-  // Încarcă starea mulțumirii din localStorage la inițializare
-  useEffect(() => {
-    const savedLikeState = localStorage.getItem('hasLikedCsServers');
-    if (savedLikeState) {
-      setHasLiked(JSON.parse(savedLikeState));
-    }
-  }, []);
-  
   const { isLoading, error, data: servers } = useQuery({
     queryKey: ['/api/cs-servers'],
     refetchInterval: 60000, // Refetch every 60 seconds (1 minute)
-  });
-  
-  const likeMutation = useMutation({
-    mutationFn: async (id: number) => {
-      const res = await apiRequest('POST', `/api/cs-servers/${id}/like`);
-      return await res.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/cs-servers'] });
-    },
-    onError: (error: Error) => {
-      toast({
-        title: 'Eroare',
-        description: 'Nu am putut înregistra aprecierea ta. Te rugăm să încerci din nou.',
-        variant: 'destructive',
-      });
-    },
   });
   
   if (isLoading) {
@@ -293,51 +263,10 @@ export const CsServerStatus: React.FC = () => {
         </div>
         
         <div className="flex flex-col justify-center items-center mt-10 gap-4 p-6 bg-black/5 dark:bg-white/5 rounded-lg border border-primary/10">
-          {!hasLiked ? (
-            <Button 
-              variant="default" 
-              className="flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg rounded-full border border-primary/50 transition-all duration-300 hover:shadow-primary/20"
-              onClick={() => {
-                // Adaugă doar un singur like la primul server activ
-                if (servers && Array.isArray(servers) && servers.length > 0) {
-                  // Găsește primul server online sau primul server dacă niciunul nu e online
-                  const targetServer = servers.find(s => s.status) || servers[0];
-                  
-                  // Adaugă un singur like doar la acest server
-                  likeMutation.mutate(targetServer.id);
-                  
-                  setHasLiked(true);
-                  localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
-                  
-                  toast({
-                    title: 'Mulțumim pentru apreciere!',
-                    description: 'Ai adăugat 1 mulțumire.',
-                  });
-                }
-              }}
-            >
-              <ThumbsUp className="h-5 w-5" />
-              <span className="ml-1 font-medium">MULȚUMEȘTE O DATĂ</span>
-            </Button>
-          ) : (
-            <Button 
-              variant="outline" 
-              className="px-6 py-3 cursor-default bg-transparent"
-              disabled
-            >
-              <ThumbsUp className="h-5 w-5 text-primary mr-2" />
-              <span className="font-medium">
-                {servers && Array.isArray(servers) ? 
-                  servers.reduce((total, server) => total + server.likes, 0) || "0"
-                  : "0"
-                } mulțumiri
-              </span>
-            </Button>
-          )}
           <p className="text-sm text-center">
             Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" 
             className="text-primary hover:underline font-medium">@faceofmadness</a> pentru toate serverele – 
-            cu un Follow, Like și Share. E Gratis!
+            cu un Follow, Like și Share pe TikTok. E Gratis!
           </p>
         </div>
       </div>
