@@ -128,19 +128,14 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-2">
-        <div className="flex justify-between items-center w-full">
-          <Button 
-            variant="ghost" 
-            className="flex items-center gap-1"
-            onClick={() => onLike(server.id)}
-          >
-            <ThumbsUp className="h-4 w-4 text-primary" />
-            <span>{server.likes} mulțumiri</span>
-          </Button>
-          <div className="text-xs text-muted-foreground italic">
-            <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a>
-          </div>
-        </div>
+        <Button 
+          variant="ghost" 
+          className="flex items-center gap-1"
+          onClick={() => onLike(server.id)}
+        >
+          <ThumbsUp className="h-4 w-4 text-primary" />
+          <span>{server.likes} mulțumiri lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru servere</span>
+        </Button>
       </CardFooter>
     </Card>
   );
