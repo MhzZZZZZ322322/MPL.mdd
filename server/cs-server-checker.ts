@@ -101,7 +101,7 @@ export async function checkCsServers() {
         const { status, players } = await checkServerStatus(server.ip, server.port);
         
         // Afișăm statusul serverului
-        console.log(`Server ${server.name} este ${status ? 'ONLINE' : 'OFFLINE'}, Jucători: ${players}/${server.maxPlayers}`);
+        console.log(`Server ${server.name} este ${status ? 'ONLINE' : 'OFFLINE'}, Jucători: ${players}/${server.max_players || 16}`);
         
         // Actualizăm starea serverului în baza de date
         await storage.updateCsServerStatus(

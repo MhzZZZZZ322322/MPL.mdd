@@ -159,11 +159,11 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
           <div className="flex items-center justify-between mt-1">
             <div className="flex items-center gap-2 bg-primary/10 rounded-md px-2 py-1">
               <Server className="h-4 w-4 shrink-0 text-primary" />
-              <span className="font-medium">{server.mode}</span>
+              <span className="font-medium">{server.game_type || 'CS2'}</span>
             </div>
             <div className="flex items-center gap-2 bg-primary/10 rounded-md px-2 py-1">
               <Users className="h-4 w-4 shrink-0 text-primary" />
-              <span>{server.status ? `${server.players}/${server.maxPlayers}` : "0/0"}</span>
+              <span>{server.status ? `${server.players}/${server.max_players}` : "0/0"}</span>
             </div>
           </div>
         </div>
@@ -189,7 +189,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
             </TooltipProvider>
             
             <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
-              <span className="text-sm">{server.location}</span>
+              <span className="text-sm">{server.map || 'Moldova'}</span>
             </div>
           </div>
           
