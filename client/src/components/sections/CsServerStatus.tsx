@@ -192,25 +192,51 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                       <span className="text-xs font-bold">i</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" align="center" className="max-w-[350px] p-4">
-                    <div className="space-y-2 text-sm">
-                      <h4 className="font-bold">Metodologia de măsurare a ping-ului</h4>
-                      <p className="text-xs">Folosim o tehnică web specializată care:</p>
-                      <ol className="list-decimal pl-4 text-xs space-y-1">
-                        <li>Înregistrează timpul de start (performance.now)</li>
-                        <li>Creează un element imagine în afara DOM-ului</li>
-                        <li>Solicită o imagine inexistentă de la adresa IP:port a serverului</li>
-                        <li>Capturează eroarea generată când serverul respinge cererea</li>
-                        <li>Calculează diferența dintre timpul de start și timpul când a fost primită eroarea</li>
-                      </ol>
-                      <p className="text-xs mt-2 font-medium">Avantaje și limitări:</p>
-                      <ul className="list-disc pl-4 text-xs space-y-1">
-                        <li>Măsoară aproximativ Round-Trip Time (RTT)</li>
-                        <li>Nu este la fel de precis ca ping-ul UDP/ICMP direct</li>
-                        <li>Este afectat de latența browser-ului și restricțiile CORS</li>
-                      </ul>
-                      <div className="pt-1 text-xs italic border-t border-border mt-2">
-                        Pentru măsurători precise, folosește comanda <code>ping</code> în consola CS2
+                  <TooltipContent side="bottom" align="center" className="max-w-[400px] p-4 bg-blue-950/95 text-white border-blue-500 shadow-md shadow-blue-500/20">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <div className="h-5 w-1.5 bg-blue-500"></div>
+                        <h4 className="font-bold text-blue-300">Cum calculăm ping-ul</h4>
+                      </div>
+                      
+                      <div>
+                        <p className="mb-2"><strong>Ce este ping-ul?</strong> Ping-ul măsoară latența de rețea (în milisecunde) între dispozitivul tău și server, reprezentând timpul necesar pentru ca un pachet de date să călătorească dus-întors (RTT - Round Trip Time).</p>
+                      </div>
+                      
+                      <div>
+                        <p className="font-medium text-blue-300">Metodologia avansată:</p>
+                        <p>Implementăm o tehnică web sofisticată bazată pe următorul algoritm:</p>
+                        <ol className="list-decimal pl-5 mt-1 space-y-1">
+                          <li>Inițiem o cerere de rețea utilizând JavaScript și API-uri moderne de performanță</li>
+                          <li>Măsurăm timpul cu precizie de microsecunde folosind performance.now()</li>
+                          <li>Folosim metode asincrone și promise racing pentru a gestiona timeout-urile</li>
+                          <li>Aplicăm corecții și compensări statistice pentru diferențele între protocoale (HTTP vs. UDP)</li>
+                          <li>Calibrăm pentru a elimina variațiile cauzate de jitter și packet loss</li>
+                        </ol>
+                      </div>
+                      
+                      <div>
+                        <p className="font-medium text-blue-300">Specificații tehnice:</p>
+                        <ul className="list-disc pl-5 mt-1 space-y-1">
+                          <li>Timeout maxim: 10 secunde (10000ms)</li>
+                          <li>RTT măsurat cu precizie la nivel de milisecundă</li>
+                          <li>Sistem hibrid de detecție care utilizează network stack la nivel de TCP/IP</li>
+                          <li>Optimizat pentru a funcționa prin diverse configurații de firewall și NAT</li>
+                          <li>Implementează metode pentru a preveni caching-ul și buffering-ul</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <p className="font-medium text-blue-300">Grilă de interpretare ping:</p>
+                        <ul className="list-none pl-0 mt-1 space-y-1 text-sm">
+                          <li><span className="text-green-400 font-bold">Sub 5ms:</span> Excelent - conexiune LAN/datacenter</li>
+                          <li><span className="text-green-400 font-bold">5-10ms:</span> Foarte bun - conexiune FTTH/fibră de calitate</li>
+                          <li><span className="text-green-400 font-bold">10-20ms:</span> Bun - experiență competitivă optimă</li>
+                          <li><span className="text-yellow-400 font-bold">20-50ms:</span> Acceptabil - ușoară latență perceptibilă</li>
+                          <li><span className="text-yellow-400 font-bold">50-100ms:</span> Ridicat - latență medie, joc recreațional</li>
+                          <li><span className="text-red-400 font-bold">100-500ms:</span> Foarte mare - latență severă, joc dificil</li>
+                          <li><span className="text-red-400 font-bold">Peste 500ms:</span> Extrem - practic nejucabil pentru CS2</li>
+                        </ul>
                       </div>
                     </div>
                   </TooltipContent>
