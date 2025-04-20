@@ -134,7 +134,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
           onClick={() => onLike(server.id)}
         >
           <ThumbsUp className="h-4 w-4 text-primary" />
-          <span>{server.likes} mulțumiri lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru servere</span>
+          <span>{server.likes} mulțumiri</span>
         </Button>
       </CardFooter>
     </Card>
@@ -229,6 +229,9 @@ export const CsServerStatus: React.FC = () => {
           )) : (
             <p className="col-span-3 text-center">Nu există servere disponibile</p>
           )}
+        </div>
+        <div className="text-center mt-8 text-sm text-muted-foreground">
+          <p>Mulțumiri lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru servere</p>
         </div>
       </div>
     </section>
