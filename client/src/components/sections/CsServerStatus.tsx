@@ -147,7 +147,7 @@ export const CsServerStatus: React.FC = () => {
   
   const { isLoading, error, data: servers } = useQuery({
     queryKey: ['/api/cs-servers'],
-    refetchInterval: 10000, // Refetch every 10 seconds
+    refetchInterval: 25000, // Refetch every 25 seconds
   });
   
   const likeMutation = useMutation({
