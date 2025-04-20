@@ -135,10 +135,10 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
 
 export const CsServerStatus: React.FC = () => {
   const queryClient = useQueryClient();
-  // State pentru a urmări dacă utilizatorul a dat like
+  // State pentru a urmări dacă utilizatorul a mulțumit
   const [hasLiked, setHasLiked] = useState<boolean>(false);
   
-  // Încarcă starea like-ului din localStorage la inițializare
+  // Încarcă starea mulțumirii din localStorage la inițializare
   useEffect(() => {
     const savedLikeState = localStorage.getItem('hasLikedCsServers');
     if (savedLikeState) {
@@ -200,43 +200,41 @@ export const CsServerStatus: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col justify-center items-center mt-8 gap-3">
-          <Button 
-            variant="outline" 
-            className="flex items-center gap-2 px-6 py-2"
-            onClick={() => {
-              // Verifică dacă utilizatorul a dat deja like
-              if (hasLiked) {
-                toast({
-                  title: 'Deja ai apreciat',
-                  description: 'Poți aprecia serverele doar o singură dată. Mulțumim!',
-                });
-                return;
-              }
-              
-              // Trimite like la toate serverele și marchează ca apreciat
-              if (servers && Array.isArray(servers)) {
-                servers.forEach((server: CsServer) => {
-                  likeMutation.mutate(server.id);
-                });
-                
-                setHasLiked(true);
-                localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
-                
-                toast({
-                  title: 'Mulțumim pentru apreciere!',
-                  description: 'Mulțumirile tale au fost înregistrate cu succes.',
-                });
-              }
-            }}
-          >
-            <ThumbsUp className="h-5 w-5 text-primary" />
-            <span>
-              {servers && Array.isArray(servers) ? 
-                servers.reduce((total, server) => total + server.likes, 0) || "0"
-                : "0"
-              } mulțumiri
-            </span>
-          </Button>
+          {!hasLiked ? (
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2 px-6 py-2 bg-black/20 hover:bg-black/30 border-primary"
+              onClick={() => {
+                // Trimite like la toate serverele și marchează ca apreciat
+                if (servers && Array.isArray(servers)) {
+                  servers.forEach((server: CsServer) => {
+                    likeMutation.mutate(server.id);
+                  });
+                  
+                  setHasLiked(true);
+                  localStorage.setItem('hasLikedCsServers', JSON.stringify(true));
+                  
+                  toast({
+                    title: 'Mulțumim pentru apreciere!',
+                    description: 'Ai adăugat o mulțumire pentru toate serverele.',
+                  });
+                }
+              }}
+            >
+              <ThumbsUp className="h-5 w-5 text-primary" />
+              <span className="ml-1">Adaugă 1 mulțumire</span>
+            </Button>
+          ) : (
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <ThumbsUp className="h-5 w-5 text-primary" />
+              <span>
+                {servers && Array.isArray(servers) ? 
+                  servers.reduce((total, server) => total + server.likes, 0) || "0"
+                  : "0"
+                } mulțumiri
+              </span>
+            </div>
+          )}
           <p className="text-sm text-muted-foreground">Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru toate serverele – cu un Follow, Like și Share. E Gratis!</p>
         </div>
       </div>
