@@ -192,11 +192,26 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                       <span className="text-xs font-bold">i</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" align="center" className="max-w-[250px] p-3">
+                  <TooltipContent side="bottom" align="center" className="max-w-[350px] p-4">
                     <div className="space-y-2 text-sm">
-                      <h4 className="font-bold">Cum se calculează ping-ul?</h4>
-                      <p>Măsurăm timpul necesar pentru ca o cerere să ajungă la server și să primim un răspuns.</p>
-                      <p>Pentru un rezultat precis, deschide consola CS2 și folosește comanda <code>ping</code>.</p>
+                      <h4 className="font-bold">Metodologia de măsurare a ping-ului</h4>
+                      <p className="text-xs">Folosim o tehnică web specializată care:</p>
+                      <ol className="list-decimal pl-4 text-xs space-y-1">
+                        <li>Înregistrează timpul de start (performance.now)</li>
+                        <li>Creează un element imagine în afara DOM-ului</li>
+                        <li>Solicită o imagine inexistentă de la adresa IP:port a serverului</li>
+                        <li>Capturează eroarea generată când serverul respinge cererea</li>
+                        <li>Calculează diferența dintre timpul de start și timpul când a fost primită eroarea</li>
+                      </ol>
+                      <p className="text-xs mt-2 font-medium">Avantaje și limitări:</p>
+                      <ul className="list-disc pl-4 text-xs space-y-1">
+                        <li>Măsoară aproximativ Round-Trip Time (RTT)</li>
+                        <li>Nu este la fel de precis ca ping-ul UDP/ICMP direct</li>
+                        <li>Este afectat de latența browser-ului și restricțiile CORS</li>
+                      </ul>
+                      <div className="pt-1 text-xs italic border-t border-border mt-2">
+                        Pentru măsurători precise, folosește comanda <code>ping</code> în consola CS2
+                      </div>
                     </div>
                   </TooltipContent>
                 </Tooltip>
