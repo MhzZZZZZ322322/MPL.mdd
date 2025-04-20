@@ -45,17 +45,52 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   };
   
   return (
-    <Card className="w-full h-full">
-      <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-lg font-bold">{server.name}</CardTitle>
-          <Badge variant={server.status ? "default" : "destructive"} className={server.status ? "bg-green-600 hover:bg-green-700" : ""}>
-            {server.status ? 'Online' : 'Offline'}
-          </Badge>
+    <Card className="w-full h-full flex flex-col">
+      <CardHeader className="pb-2">
+        <div className="flex flex-col space-y-2">
+          <div className="flex justify-between items-center">
+            <CardTitle className="text-lg font-bold truncate mr-2">{server.name}</CardTitle>
+            <Badge variant={server.status ? "default" : "destructive"} className={server.status ? "bg-green-600 hover:bg-green-700 shrink-0" : "shrink-0"}>
+              {server.status ? 'Online' : 'Offline'}
+            </Badge>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Server className="h-4 w-4 shrink-0" />
+              <span className="font-medium">{server.mode}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4 shrink-0" />
+              <span>{server.status ? `${server.players}/${server.maxPlayers}` : "0/0"}</span>
+            </div>
+          </div>
         </div>
-        <CardDescription>
-          <div className="flex items-center gap-2">
-            <span className="font-mono bg-black/10 dark:bg-white/10 p-1 rounded text-xs">
+      </CardHeader>
+      
+      <CardContent className="flex-grow pt-0">
+        <div className="flex flex-col space-y-4">
+          <div className="flex items-center justify-between">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex items-center gap-1">
+                    <Wifi className="h-4 w-4 shrink-0" />
+                    <span className={server.status ? getPingColor() : "text-muted-foreground"}>
+                      {server.status ? `${ping} ms` : "N/A"}
+                    </span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Ping-ul tău la server</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            
+            <span className="text-sm text-muted-foreground">{server.location}</span>
+          </div>
+          
+          <div className="flex items-center gap-2 mt-2">
+            <span className="font-mono bg-black/10 dark:bg-white/10 p-1 rounded text-xs flex-grow truncate">
               connect {server.ip}:{server.port}
             </span>
             <TooltipProvider>
@@ -64,7 +99,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="h-6 w-6 p-0"
+                    className="h-6 w-6 p-0 shrink-0"
                     onClick={() => {
                       navigator.clipboard.writeText(`connect ${server.ip}:${server.port}`);
                       toast({
@@ -82,51 +117,10 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
               </Tooltip>
             </TooltipProvider>
           </div>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex items-center gap-1">
-                    <Wifi className="h-4 w-4" />
-                    <span className={server.status ? getPingColor() : "text-muted-foreground"}>
-                      {server.status ? `${ping} ms` : "N/A"}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Ping-ul tău la server</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex items-center gap-1">
-                    <Users className="h-4 w-4" />
-                    <span>{server.status ? `${server.players}/${server.maxPlayers}` : "0/0"}</span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Jucători activi</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <Server className="h-4 w-4" />
-            <span>{server.mode}</span>
-          </div>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col items-start gap-2">
+      
+      <CardFooter className="pt-0">
         {/* Spațiu fără butoane de like sau număr de mulțumiri */}
       </CardFooter>
     </Card>
@@ -188,15 +182,15 @@ export const CsServerStatus: React.FC = () => {
     <section className="py-10">
       <div className="container max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center">Serverele Noastre CS2</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+        <div className="flex flex-wrap justify-center gap-6">
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
-            <div key={server.id} className="w-full" style={{ maxWidth: "320px", minHeight: "320px" }}>
+            <div key={server.id} className="w-full md:w-[300px]">
               <ServerCard 
                 server={server}
               />
             </div>
           )) : (
-            <p className="col-span-3 text-center">Nu există servere disponibile</p>
+            <p className="w-full text-center">Nu există servere disponibile</p>
           )}
         </div>
         <div className="flex flex-col justify-center items-center mt-8 gap-3">
