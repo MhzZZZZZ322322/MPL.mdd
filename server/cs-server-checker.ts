@@ -30,7 +30,7 @@ async function checkServerStatus(ip: string, port: number): Promise<{status: boo
     const cacheExpiry = 5 * 60 * 1000; // 5 minute
     
     // Pentru serverele cunoscute, considerăm că sunt online și variăm numărul de jucători realist
-    if (isKnownServer) {
+    if (isRealServer) {
       // Dacă avem date în cache, le folosim și le actualizăm ușor
       if (cachedData && now - cachedData.lastCheck < cacheExpiry) {
         // Modifică numărul de jucători cu +/- 1 pentru realism
