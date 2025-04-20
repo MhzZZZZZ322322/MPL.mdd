@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Server, Users, Wifi, Copy } from 'lucide-react';
+import { Server, Users, Wifi, Copy, X } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { CsServer } from '@shared/schema-cs-servers';
 
 /**
@@ -181,29 +182,32 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                 </Tooltip>
               </TooltipProvider>
               
-              <TooltipProvider>
-                <Tooltip delayDuration={100}>
-                  <TooltipTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      className="h-6 w-6 p-0 ml-1 bg-primary/10 rounded-full hover:bg-primary/20 text-primary"
-                      type="button"
-                    >
-                      <span className="text-xs font-bold">i</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent 
-                    side="right" 
-                    align="start" 
-                    className="max-w-[400px] p-4 bg-blue-950/95 text-white border-blue-500 shadow-md shadow-blue-500/20 z-50"
-                    sideOffset={5}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="h-6 w-6 p-0 ml-1 bg-primary/10 rounded-full hover:bg-primary/20 text-primary"
+                    type="button"
                   >
-                    <div className="space-y-3">
+                    <span className="text-xs font-bold">i</span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-[450px] p-0 border-blue-600 overflow-hidden">
+                  <div className="bg-blue-950 text-white">
+                    <div className="flex items-center justify-between p-4 border-b border-blue-800">
                       <div className="flex items-center gap-2">
                         <div className="h-5 w-1.5 bg-blue-500"></div>
-                        <h4 className="font-bold text-blue-300">Cum calculăm ping-ul</h4>
+                        <h4 className="font-bold text-blue-300 text-lg">Cum calculăm ping-ul</h4>
                       </div>
-                      
+                      <DialogTrigger asChild>
+                        <Button variant="ghost" className="h-6 w-6 p-0 rounded-full text-white/70 hover:text-white hover:bg-blue-800">
+                          <X className="h-4 w-4" />
+                          <span className="sr-only">Închide</span>
+                        </Button>
+                      </DialogTrigger>
+                    </div>
+                    
+                    <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
                       <div>
                         <p className="mb-2"><strong>Ce este ping-ul?</strong> Ping-ul măsoară latența de rețea (în milisecunde) între dispozitivul tău și server, reprezentând timpul necesar pentru ca un pachet de date să călătorească dus-întors (RTT - Round Trip Time).</p>
                       </div>
@@ -233,7 +237,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                       
                       <div>
                         <p className="font-medium text-blue-300">Grilă de interpretare ping:</p>
-                        <ul className="list-none pl-0 mt-1 space-y-1 text-sm">
+                        <ul className="list-none pl-0 mt-1 space-y-1">
                           <li><span className="text-green-400 font-bold">Sub 5ms:</span> Excelent - conexiune LAN/datacenter</li>
                           <li><span className="text-green-400 font-bold">5-10ms:</span> Foarte bun - conexiune FTTH/fibră de calitate</li>
                           <li><span className="text-green-400 font-bold">10-20ms:</span> Bun - experiență competitivă optimă</li>
@@ -244,9 +248,9 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                         </ul>
                       </div>
                     </div>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
             
             <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
