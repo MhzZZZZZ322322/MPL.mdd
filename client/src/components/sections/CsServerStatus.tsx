@@ -192,7 +192,12 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                       <span className="text-xs font-bold">i</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" align="center" className="max-w-[400px] p-4 bg-blue-950/95 text-white border-blue-500 shadow-md shadow-blue-500/20">
+                  <TooltipContent 
+                    side="right" 
+                    align="start" 
+                    className="max-w-[400px] p-4 bg-blue-950/95 text-white border-blue-500 shadow-md shadow-blue-500/20 z-50"
+                    sideOffset={5}
+                  >
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
                         <div className="h-5 w-1.5 bg-blue-500"></div>
