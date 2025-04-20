@@ -248,9 +248,9 @@ export const CsServerStatus: React.FC = () => {
             <ThumbsUp className="h-5 w-5 text-primary" />
             <span>
               {servers && Array.isArray(servers) ? 
-                `Mulțumiri (${servers.reduce((total, server) => total + server.likes, 0)})` : 
-                "Mulțumiri"
-              }
+                servers.reduce((total, server) => total + server.likes, 0) || "0"
+                : "0"
+              } mulțumiri
             </span>
           </Button>
           <p className="text-sm text-muted-foreground">Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru toate serverele – cu un Follow, Like și Share. E Gratis!</p>
