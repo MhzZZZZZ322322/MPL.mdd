@@ -90,6 +90,48 @@ export class MemStorage implements IStorage {
   currentSeoId: number;
   currentAnalyticsId: number;
   currentCsServerId: number;
+  
+  // CS Server methods
+  async getCsServers(): Promise<CsServer[]> {
+    return Array.from(this.csServers.values());
+  }
+  
+  async getCsServer(id: number): Promise<CsServer | undefined> {
+    return this.csServers.get(id);
+  }
+  
+  async updateCsServerLikes(id: number): Promise<CsServer> {
+    const server = this.csServers.get(id);
+    
+    if (!server) {
+      throw new Error(`CS Server with id ${id} not found`);
+    }
+    
+    const updatedServer = {
+      ...server,
+      likes: server.likes + 1
+    };
+    
+    this.csServers.set(id, updatedServer);
+    return updatedServer;
+  }
+  
+  async updateCsServerStatus(id: number, status: boolean, players: number): Promise<CsServer> {
+    const server = this.csServers.get(id);
+    
+    if (!server) {
+      throw new Error(`CS Server with id ${id} not found`);
+    }
+    
+    const updatedServer = {
+      ...server,
+      status,
+      players
+    };
+    
+    this.csServers.set(id, updatedServer);
+    return updatedServer;
+  }
 
   constructor() {
     this.users = new Map();
@@ -510,6 +552,56 @@ export class MemStorage implements IStorage {
   }
   
   private initializeData() {
+    // Create admin user
+    this.createUser({
+      username: "admin",
+      password: "$2b$10$uAJwYP4R80jVKxZ.pT4hVuXz/iNZBkr7mXM3YFcQ5J9X8DX6HkODa", // "admin322" hashed
+      role: "admin"
+    });
+    
+    // Initialize CS Servers
+    const aimServer: CsServer = {
+      id: this.currentCsServerId++,
+      name: "Server CS2 Moldova - Aim",
+      ip: "37.233.50.55",
+      port: 27015,
+      location: "Moldova",
+      mode: "Aim",
+      status: false,
+      players: 0,
+      maxPlayers: 16,
+      likes: 0
+    };
+    this.csServers.set(aimServer.id, aimServer);
+    
+    const retakeServer: CsServer = {
+      id: this.currentCsServerId++,
+      name: "Server CS2 Moldova - Retake",
+      ip: "37.233.50.55",
+      port: 27016,
+      location: "Moldova",
+      mode: "Retake",
+      status: false,
+      players: 0,
+      maxPlayers: 16,
+      likes: 0
+    };
+    this.csServers.set(retakeServer.id, retakeServer);
+    
+    const deathmatchServer: CsServer = {
+      id: this.currentCsServerId++,
+      name: "Server CS2 Moldova - Deathmatch",
+      ip: "37.233.50.55",
+      port: 27017,
+      location: "Moldova",
+      mode: "Deathmatch",
+      status: false,
+      players: 0,
+      maxPlayers: 16,
+      likes: 0
+    };
+    this.csServers.set(deathmatchServer.id, deathmatchServer);
+    
     // Initialize site content
     // Hero section
     const heroContent: SiteContent = {
