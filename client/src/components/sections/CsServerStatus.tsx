@@ -320,15 +320,19 @@ export const CsServerStatus: React.FC = () => {
               <span className="ml-1 font-medium">MULȚUMEȘTE O DATĂ</span>
             </Button>
           ) : (
-            <div className="flex items-center gap-2 text-muted-foreground border border-primary/20 rounded-full px-6 py-3 bg-black/10 dark:bg-white/10">
-              <ThumbsUp className="h-5 w-5 text-primary" />
+            <Button 
+              variant="outline" 
+              className="px-6 py-3 cursor-default bg-transparent"
+              disabled
+            >
+              <ThumbsUp className="h-5 w-5 text-primary mr-2" />
               <span className="font-medium">
                 {servers && Array.isArray(servers) ? 
                   servers.reduce((total, server) => total + server.likes, 0) || "0"
                   : "0"
                 } mulțumiri
               </span>
-            </div>
+            </Button>
           )}
           <p className="text-sm text-center">
             Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" 
