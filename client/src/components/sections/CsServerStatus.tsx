@@ -128,10 +128,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-2">
-        <div className="flex items-center gap-1">
-          <ThumbsUp className="h-4 w-4 text-muted-foreground" />
-          <span>{server.likes} mulțumiri</span>
-        </div>
+        {/* Spațiu fără butoane de like sau număr de mulțumiri */}
       </CardFooter>
     </Card>
   );
@@ -249,7 +246,12 @@ export const CsServerStatus: React.FC = () => {
             }}
           >
             <ThumbsUp className="h-5 w-5 text-primary" />
-            <span>Mulțumiri</span>
+            <span>
+              {servers && Array.isArray(servers) ? 
+                `Mulțumiri (${servers.reduce((total, server) => total + server.likes, 0)})` : 
+                "Mulțumiri"
+              }
+            </span>
           </Button>
           <p className="text-sm text-muted-foreground">Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru toate serverele – cu un Follow, Like și Share. E Gratis!</p>
         </div>
