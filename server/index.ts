@@ -69,7 +69,7 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
     
     // Pornește verificarea automată a stării serverelor CS2
-    // Verifică la fiecare 5 minute
-    startCsServerChecker(5);
+    // Verifică la fiecare 0.5 minute (30 secunde) pentru a fi sincronizat cu frontend-ul
+    startCsServerChecker(0.5);
   });
 })();
