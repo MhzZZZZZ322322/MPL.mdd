@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ThumbsUp, Server, Users, Wifi, Copy, Check } from 'lucide-react';
+import { ThumbsUp, Server, Users, Wifi, Copy, Check, HelpCircle, BarChart2 } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +8,14 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CsServer } from '@shared/schema-cs-servers';
 import { apiRequest } from '@/lib/queryClient';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 /**
  * Măsoară ping-ul real de la client la server folosind o tehnică de ping web
@@ -170,21 +178,67 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       <CardContent className="flex-grow pt-3">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
-                    <Wifi className="h-4 w-4 shrink-0" />
-                    <span className={server.status ? getPingColor() : "text-muted-foreground"}>
-                      {server.status ? `${ping} ms` : "N/A"}
-                    </span>
+            <div className="flex items-center gap-1">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
+                      <Wifi className="h-4 w-4 shrink-0" />
+                      <span className={server.status ? getPingColor() : "text-muted-foreground"}>
+                        {server.status ? `${ping} ms` : "N/A"}
+                      </span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Ping-ul tău la server</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="ghost" size="icon" className="h-6 w-6 p-0 rounded-full">
+                    <HelpCircle className="h-4 w-4 text-primary/70" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2">
+                      <BarChart2 className="h-5 w-5 text-primary" />
+                      Cum calculăm ping-ul
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-3 py-2 text-sm">
+                    <p>
+                      <strong>Ce este ping-ul?</strong> Ping-ul măsoară timpul (în milisecunde) necesar pentru ca un pachet de date să călătorească de la computer la server și înapoi.
+                    </p>
+                    <p>
+                      <strong>Metodologia noastră:</strong> Folosim o tehnică web avansată bazată pe RTT (Round Trip Time):
+                    </p>
+                    <ol className="list-decimal pl-5 space-y-1">
+                      <li>Creăm o cerere de rețea către serverul CS2</li>
+                      <li>Măsurăm timpul exact de la trimitere până la primirea răspunsului</li>
+                      <li>Ajustăm valoarea pentru a compensa diferențele între protocoale</li>
+                    </ol>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Notă: Ping-ul din browser poate diferi ușor de cel din joc datorită diferențelor între protocoalele HTTP și UDP/TCP folosite de CS2.
+                    </p>
+                    <div className="mt-4 bg-primary/5 p-2 rounded-md">
+                      <p className="font-medium text-primary">Valorile ping-ului:</p>
+                      <ul className="list-disc pl-5 text-xs space-y-1 mt-1">
+                        <li><span className="text-green-500 font-semibold">Sub 5ms:</span> Excelent - conexiune locală</li>
+                        <li><span className="text-green-500">5-10ms:</span> Foarte bun - conexiune optimă</li>
+                        <li><span className="text-yellow-500">10-20ms:</span> Bun - experiență de joc fluidă</li>
+                        <li><span className="text-orange-500">20-50ms:</span> Acceptabil - ușor delay</li>
+                        <li><span className="text-red-500">50-100ms:</span> Ridicat - delay perceptibil</li>
+                        <li><span className="text-red-600 font-semibold">100-500ms:</span> Foarte mare - lag consistent</li>
+                        <li><span className="text-red-700 font-bold">Peste 500ms:</span> Extrem - joc dificil</li>
+                      </ul>
+                    </div>
                   </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Ping-ul tău la server</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+                </DialogContent>
+              </Dialog>
+            </div>
             
             <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
               <span className="text-sm">{server.map || 'Moldova'}</span>
