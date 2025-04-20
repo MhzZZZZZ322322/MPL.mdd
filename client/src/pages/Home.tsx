@@ -4,6 +4,7 @@ import About from '@/components/sections/About';
 import Partners from '@/components/sections/Partners';
 import FAQ from '@/components/sections/FAQ';
 import SimpleContactForm from '@/components/sections/SimpleContactForm';
+import CsServerStatus from '@/components/sections/CsServerStatus';
 import { Helmet } from 'react-helmet';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -45,6 +46,7 @@ const Home = () => {
       </Helmet>
       <Hero />
       <About />
+      <CsServerStatus />
       <Partners />
       <FAQ />
       <SimpleContactForm />

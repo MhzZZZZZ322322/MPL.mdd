@@ -50,7 +50,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="text-lg font-bold">{server.name}</CardTitle>
-          <Badge variant={server.status ? "success" : "destructive"}>
+          <Badge variant={server.status ? "default" : "destructive"} className={server.status ? "bg-green-600 hover:bg-green-700" : ""}>
             {server.status ? 'Online' : 'Offline'}
           </Badge>
         </div>
@@ -171,13 +171,15 @@ export const CsServerStatus: React.FC = () => {
       <div className="container">
         <h2 className="text-2xl font-bold mb-6">Serverele Noastre CS2</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servers && servers.map((server: CsServer) => (
+          {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
             <ServerCard 
               key={server.id} 
               server={server} 
               onLike={handleLike} 
             />
-          ))}
+          )) : (
+            <p>Nu există servere disponibile</p>
+          )}
         </div>
       </div>
     </section>
