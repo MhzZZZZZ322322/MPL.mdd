@@ -45,35 +45,38 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   };
   
   return (
-    <Card className="w-full h-full flex flex-col">
-      <CardHeader className="pb-2">
+    <Card className="w-full h-full flex flex-col shadow-md hover:shadow-lg transition-shadow">
+      <CardHeader className="pb-2 bg-gradient-to-r from-black/5 to-transparent dark:from-white/5">
         <div className="flex flex-col space-y-2">
           <div className="flex justify-between items-center">
             <CardTitle className="text-lg font-bold truncate mr-2">{server.name}</CardTitle>
-            <Badge variant={server.status ? "default" : "destructive"} className={server.status ? "bg-green-600 hover:bg-green-700 shrink-0" : "shrink-0"}>
+            <Badge variant={server.status ? "default" : "destructive"} 
+              className={server.status 
+                ? "bg-green-600 hover:bg-green-700 shrink-0 animate-pulse" 
+                : "shrink-0"}>
               {server.status ? 'Online' : 'Offline'}
             </Badge>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Server className="h-4 w-4 shrink-0" />
+          <div className="flex items-center justify-between mt-1">
+            <div className="flex items-center gap-2 bg-primary/10 rounded-md px-2 py-1">
+              <Server className="h-4 w-4 shrink-0 text-primary" />
               <span className="font-medium">{server.mode}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 shrink-0" />
+            <div className="flex items-center gap-2 bg-primary/10 rounded-md px-2 py-1">
+              <Users className="h-4 w-4 shrink-0 text-primary" />
               <span>{server.status ? `${server.players}/${server.maxPlayers}` : "0/0"}</span>
             </div>
           </div>
         </div>
       </CardHeader>
       
-      <CardContent className="flex-grow pt-0">
+      <CardContent className="flex-grow pt-3">
         <div className="flex flex-col space-y-4">
           <div className="flex items-center justify-between">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
                     <Wifi className="h-4 w-4 shrink-0" />
                     <span className={server.status ? getPingColor() : "text-muted-foreground"}>
                       {server.status ? `${ping} ms` : "N/A"}
@@ -86,20 +89,22 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
               </Tooltip>
             </TooltipProvider>
             
-            <span className="text-sm text-muted-foreground">{server.location}</span>
+            <div className="flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-md px-2 py-1">
+              <span className="text-sm">{server.location}</span>
+            </div>
           </div>
           
-          <div className="flex items-center gap-2 mt-2">
-            <span className="font-mono bg-black/10 dark:bg-white/10 p-1 rounded text-xs flex-grow truncate">
+          <div className="flex items-center gap-2 mt-2 border border-primary/20 rounded p-2 bg-black/5 dark:bg-white/5">
+            <span className="font-mono p-1 rounded text-xs flex-grow truncate">
               connect {server.ip}:{server.port}
             </span>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button 
-                    variant="ghost" 
+                    variant="outline" 
                     size="icon" 
-                    className="h-6 w-6 p-0 shrink-0"
+                    className="h-6 w-6 p-0 shrink-0 border-primary/20"
                     onClick={() => {
                       navigator.clipboard.writeText(`connect ${server.ip}:${server.port}`);
                       toast({
@@ -142,7 +147,7 @@ export const CsServerStatus: React.FC = () => {
   
   const { isLoading, error, data: servers } = useQuery({
     queryKey: ['/api/cs-servers'],
-    refetchInterval: 60000, // Refetch every minute
+    refetchInterval: 10000, // Refetch every 10 seconds
   });
   
   const likeMutation = useMutation({
@@ -181,10 +186,11 @@ export const CsServerStatus: React.FC = () => {
   return (
     <section className="py-10">
       <div className="container max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center">Serverele Noastre CS2</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">Serverele Noastre CS2</h2>
+        
         <div className="flex flex-wrap justify-center gap-6">
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
-            <div key={server.id} className="w-full md:w-[300px]">
+            <div key={server.id} className="w-full md:w-[300px] transform transition-all duration-300 hover:scale-105">
               <ServerCard 
                 server={server}
               />
@@ -193,11 +199,12 @@ export const CsServerStatus: React.FC = () => {
             <p className="w-full text-center">Nu există servere disponibile</p>
           )}
         </div>
-        <div className="flex flex-col justify-center items-center mt-8 gap-3">
+        
+        <div className="flex flex-col justify-center items-center mt-10 gap-4 p-6 bg-black/5 dark:bg-white/5 rounded-lg border border-primary/10">
           {!hasLiked ? (
             <Button 
               variant="default" 
-              className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg"
+              className="flex items-center gap-2 px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg rounded-full border border-primary/50 transition-all duration-300 hover:shadow-primary/20"
               onClick={() => {
                 // Adaugă doar un singur like la primul server activ
                 if (servers && Array.isArray(servers) && servers.length > 0) {
@@ -221,9 +228,9 @@ export const CsServerStatus: React.FC = () => {
               <span className="ml-1 font-medium">MULȚUMEȘTE O DATĂ</span>
             </Button>
           ) : (
-            <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="flex items-center gap-2 text-muted-foreground border border-primary/20 rounded-full px-6 py-3 bg-black/10 dark:bg-white/10">
               <ThumbsUp className="h-5 w-5 text-primary" />
-              <span>
+              <span className="font-medium">
                 {servers && Array.isArray(servers) ? 
                   servers.reduce((total, server) => total + server.likes, 0) || "0"
                   : "0"
@@ -231,7 +238,11 @@ export const CsServerStatus: React.FC = () => {
               </span>
             </div>
           )}
-          <p className="text-sm text-muted-foreground">Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru toate serverele – cu un Follow, Like și Share. E Gratis!</p>
+          <p className="text-sm text-center">
+            Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" 
+            className="text-primary hover:underline font-medium">@faceofmadness</a> pentru toate serverele – 
+            cu un Follow, Like și Share. E Gratis!
+          </p>
         </div>
       </div>
     </section>
