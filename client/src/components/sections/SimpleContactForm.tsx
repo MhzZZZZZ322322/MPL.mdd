@@ -6,7 +6,8 @@ import {
   FaFacebook, 
   FaYoutube,
   FaTwitch,
-  FaTiktok
+  FaTiktok,
+  FaInstagram
 } from 'react-icons/fa';
 import { Mail, MapPin } from 'lucide-react';
 
@@ -130,6 +131,12 @@ const SimpleContactForm = () => {
       url: 'https://www.youtube.com/@MoldovaProLeague', 
       icon: <FaYoutube className="mr-2 text-xl" />,
       className: 'bg-[#FF0000]/10 hover:bg-[#FF0000]/30 border-[#FF0000]/30 hover:border-[#FF0000]/50'
+    },
+    { 
+      name: 'Instagram', 
+      url: 'https://www.instagram.com/moldova_pro_league/profilecard/?igsh=dGFlbDExMGl2Z2c3', 
+      icon: <FaInstagram className="mr-2 text-xl" />,
+      className: 'bg-[#E1306C]/10 hover:bg-[#E1306C]/30 border-[#E1306C]/30 hover:border-[#E1306C]/50'
     },
     { 
       name: 'TikTok', 
