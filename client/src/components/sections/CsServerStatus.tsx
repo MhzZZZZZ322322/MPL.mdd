@@ -128,14 +128,10 @@ const ServerCard: React.FC<ServerCardProps> = ({ server, onLike }) => {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-start gap-2">
-        <Button 
-          variant="ghost" 
-          className="flex items-center gap-1"
-          onClick={() => onLike(server.id)}
-        >
-          <ThumbsUp className="h-4 w-4 text-primary" />
+        <div className="flex items-center gap-1">
+          <ThumbsUp className="h-4 w-4 text-muted-foreground" />
           <span>{server.likes} mulțumiri</span>
-        </Button>
+        </div>
       </CardFooter>
     </Card>
   );
@@ -230,8 +226,32 @@ export const CsServerStatus: React.FC = () => {
             <p className="col-span-3 text-center">Nu există servere disponibile</p>
           )}
         </div>
-        <div className="text-center mt-8 text-sm text-muted-foreground">
-          <p>Mulțumiri lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru servere</p>
+        <div className="flex flex-col justify-center items-center mt-8 gap-3">
+          <Button 
+            variant="outline" 
+            className="flex items-center gap-2 px-6 py-2"
+            onClick={() => {
+              // Verifică dacă utilizatorul a dat like la toate serverele
+              if (servers && servers.every(server => likedServers[server.id])) {
+                toast({
+                  title: 'Deja ai apreciat',
+                  description: 'Ai apreciat deja toate serverele. Mulțumim!',
+                });
+                return;
+              }
+              
+              // Trimite like la toate serverele care nu au fost încă apreciate
+              servers?.forEach(server => {
+                if (!likedServers[server.id]) {
+                  likeMutation.mutate(server.id);
+                }
+              });
+            }}
+          >
+            <ThumbsUp className="h-5 w-5 text-primary" />
+            <span>Mulțumește pentru toate serverele</span>
+          </Button>
+          <p className="text-sm text-muted-foreground">Mulțumiri lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@faceofmadness</a> pentru servere</p>
         </div>
       </div>
     </section>
