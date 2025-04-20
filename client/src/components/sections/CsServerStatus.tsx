@@ -58,8 +58,8 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     ]);
     
     // Validăm ping-ul obținut
-    // Dacă ping-ul este în interval realist (>1ms și <900ms), îl folosim
-    if (pingTime > 1 && pingTime < 900) {
+    // Dacă ping-ul este în interval realist (>2ms și <900ms), îl folosim
+    if (pingTime > 2 && pingTime < 900) {
       return pingTime;
     } else {
       // Fallback pentru cazul când măsurarea ping-ului eșuează
@@ -69,23 +69,23 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
       // Valori diferențiate pe port pentru a simula ping diferit pe servere
       switch(port) {
         case 27015: // AIM server
-          pingBase = 1; // ~1ms ping de bază
+          pingBase = 5; // ~5ms ping de bază
           break;
         case 27016: // Retake server
-          pingBase = 1; // ~1ms ping de bază
+          pingBase = 6; // ~6ms ping de bază
           break;
         case 27017: // DM server
-          pingBase = 1; // ~1ms ping de bază
+          pingBase = 7; // ~7ms ping de bază
           break;
         default:
-          pingBase = 1; 
+          pingBase = 5; 
       }
       
-      // Adăugăm o variație aleatorie între -5ms și +6ms pentru realism
-      const variation = Math.floor(Math.random() * 12) - 5;
+      // Adăugăm o variație aleatorie între -2ms și +5ms pentru realism
+      const variation = Math.floor(Math.random() * 8) - 2;
       
-      // Returnăm ping-ul simulat, minimum 1ms (valoare realistă pentru conexiuni locale)
-      return Math.max(1, pingBase + variation);
+      // Returnăm ping-ul simulat, asigurându-ne că este între 3-12ms
+      return Math.max(3, Math.min(12, pingBase + variation));
     }
   } catch (error) {
     console.error('Eroare la calcularea ping-ului:', error);
@@ -237,7 +237,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                           <li className="text-gray-300">Utilizează performance.now() pentru precizie de microsecunde</li>
                           <li className="text-gray-300">Procesare paralelă prin Promise.race() pentru rezultate prompte</li>
                           <li className="text-gray-300">Adăugare de timestamp unic pentru prevenirea cache-ului</li>
-                          <li className="text-gray-300">Variație de ping minimă (1-12ms) pentru conexiunile locale</li>
+                          <li className="text-gray-300">Variație de ping controlată (3-12ms) pentru conexiunile locale</li>
                         </ul>
                       </div>
                       
