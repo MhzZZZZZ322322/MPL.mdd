@@ -311,7 +311,11 @@ export const CsServerStatus: React.FC = () => {
   
   const { isLoading, error, data: servers } = useQuery({
     queryKey: ['/api/cs-servers'],
-    refetchInterval: 60000, // Refetch every 60 seconds (1 minute)
+    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    retry: 3,
   });
   
   const likeMutation = useMutation({
@@ -347,20 +351,36 @@ export const CsServerStatus: React.FC = () => {
     );
   }
   
+  // Debug-ui la consolă
+  console.log("CsServerStatus component data:", {
+    servers: servers,
+    isArray: servers && Array.isArray(servers),
+    serverCount: servers && Array.isArray(servers) ? servers.length : 0
+  });
+
   return (
     <section className="py-10">
       <div className="container max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">Serverele Noastre CS2</h2>
         
         <div className="flex flex-wrap justify-center gap-6">
-          {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (
+          {servers && Array.isArray(servers) && servers.length > 0 ? servers.map((server: CsServer) => (
             <div key={server.id} className="w-full md:w-[300px] transform transition-all duration-300 hover:scale-105">
               <ServerCard 
                 server={server}
               />
             </div>
           )) : (
-            <p className="w-full text-center">Nu există servere disponibile</p>
+            <div className="w-full text-center">
+              <p className="mb-4">Se încarcă serverele...</p>
+              <Button 
+                onClick={() => queryClient.invalidateQueries({ queryKey: ['/api/cs-servers'] })}
+                variant="outline"
+                className="mx-auto"
+              >
+                Reîncarcă serverele
+              </Button>
+            </div>
           )}
         </div>
         
