@@ -25,13 +25,8 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       return savedLang;
     }
     
-    // Verificăm limba browserului pentru utilizatorii noi
-    const browserLang = navigator.language || (navigator as any).userLanguage || '';
-    if (browserLang.startsWith('ru')) {
-      return 'ru';
-    }
-    
-    return 'ro'; // Limba implicită
+    // Folosim întotdeauna limba română ca implicit, conform cerințelor
+    return 'ro'; // Limba implicită este întotdeauna RO
   };
   
   const [language, setLanguageState] = useState<Language>(getSavedLanguage);
