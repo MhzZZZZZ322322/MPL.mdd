@@ -37,29 +37,29 @@ const HatorCSLeague = () => {
             <div className="max-w-4xl">
               <Link href="/#about">
                 <Button variant="ghost" className="mb-4 text-gray-300 hover:text-white">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Înapoi la evenimente
+                  <ArrowLeft className="mr-2 h-4 w-4" /> {t('event.back.button')}
                 </Button>
               </Link>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 font-rajdhani">
-                HATOR CS2 LEAGUE MOLDOVA
+                {t('event.hator.title')}
               </h1>
               
               <div className="flex items-center mb-6 text-gray-300">
                 <Calendar className="mr-2 h-4 w-4 text-primary" />
-                <span className="mr-4">Aprilie-Iunie 2025</span>
+                <span className="mr-4">{t('event.hator.date')}</span>
                 
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
-                <span>Online (FACEIT)</span>
+                <span>{t('event.hator.location')}</span>
               </div>
               
               <p className="text-lg text-gray-100 max-w-2xl mb-8">
-                Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de comunitatea MPL în parteneriat cu HATOR.
+                {t('event.hator.description')}
               </p>
               
               {/* Countdown timer până la începerea jocurilor */}
               <div className="mb-8">
-                <p className="text-center text-white mb-2">Până la începerea turneului:</p>
+                <p className="text-center text-white mb-2">{t('event.countdown')}</p>
                 <CountdownTimer targetDate="2025-06-02T20:00:00" className="max-w-3xl" />
               </div>
               
@@ -186,15 +186,15 @@ const HatorCSLeague = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Despre turneu</h2>
+              <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.about.title')}</h2>
               
               <div className="prose prose-invert max-w-none">
                 <p>
-                  <strong>HATOR CS2 LEAGUE MOLDOVA</strong> este primul turneu major de Counter-Strike 2 organizat de Moldova Pro League în parteneriat cu HATOR - unul dintre cei mai importanți producători de periferice de gaming din regiune și Darwin.md - cel mai mare retailer de electronice și IT din Moldova.
+                  <strong>{t('event.hator.title')}</strong> {t('event.league.description.1')}
                 </p>
                 
                 <p>
-                  Acest turneu reprezintă un pas important în dezvoltarea scenei de esports din Moldova, oferind jucătorilor locali șansa de a concura la un nivel înalt, cu premii în valoare de 65.000 lei și vizibilitate internațională.
+                  {t('event.league.description.2')}
                 </p>
                 
                 <h3>Format Oficial Turneu</h3>
