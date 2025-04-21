@@ -244,6 +244,132 @@ export const translations: TranslationDictionary = {
   "servers.thanks.message": {
     ro: "Mulțumește lui @faceofmadness pentru toate serverele – cu un Follow, Like și Share pe TikTok. E Gratis!",
     ru: "Поблагодарите @faceofmadness за все серверы – Follow, Like и Share в TikTok. Это бесплатно!"
+  },
+  
+  // Secțiunea Contact
+  "contact.title.first": {
+    ro: "Contactează-",
+    ru: "Свяжитесь с "
+  },
+  "contact.title.second": {
+    ro: "ne",
+    ru: "нами"
+  },
+  "contact.subtitle": {
+    ro: "Ai întrebări sau sugestii? Completează formularul sau alătură-te comunității noastre pe Discord.",
+    ru: "У вас есть вопросы или предложения? Заполните форму или присоединитесь к нашему сообществу в Discord."
+  },
+  "contact.form.title": {
+    ro: "Trimite-ne un mesaj",
+    ru: "Отправьте нам сообщение"
+  },
+  "contact.form.name": {
+    ro: "Nume",
+    ru: "Имя"
+  },
+  "contact.form.name.placeholder": {
+    ro: "Numele tău",
+    ru: "Ваше имя"
+  },
+  "contact.form.email": {
+    ro: "Email",
+    ru: "Email"
+  },
+  "contact.form.email.placeholder": {
+    ro: "emailul@tau.com",
+    ru: "your@email.com"
+  },
+  "contact.form.subject": {
+    ro: "Subiect",
+    ru: "Тема"
+  },
+  "contact.form.subject.general": {
+    ro: "Întrebare generală",
+    ru: "Общий вопрос"
+  },
+  "contact.form.subject.tournaments": {
+    ro: "Informații turnee",
+    ru: "Информация о турнирах"
+  },
+  "contact.form.subject.partnership": {
+    ro: "Parteneriat",
+    ru: "Партнерство"
+  },
+  "contact.form.subject.other": {
+    ro: "Altele",
+    ru: "Другое"
+  },
+  "contact.form.message": {
+    ro: "Mesaj",
+    ru: "Сообщение"
+  },
+  "contact.form.message.placeholder": {
+    ro: "Mesajul tău...",
+    ru: "Ваше сообщение..."
+  },
+  "contact.form.submit": {
+    ro: "Trimite mesajul",
+    ru: "Отправить сообщение"
+  },
+  "contact.form.submitting": {
+    ro: "Se trimite...",
+    ru: "Отправка..."
+  },
+  "contact.info.title": {
+    ro: "Informații de contact",
+    ru: "Контактная информация"
+  },
+  "contact.info.location": {
+    ro: "Locație",
+    ru: "Местоположение"
+  },
+  "contact.social.title": {
+    ro: "Urmărește-ne",
+    ru: "Подписывайтесь на нас"
+  },
+  "contact.discord.title": {
+    ro: "Alătură-te comunității",
+    ru: "Присоединяйтесь к сообществу"
+  },
+  "contact.discord.text": {
+    ro: "Fii parte din cea mai mare comunitate de esports din Moldova. Discuții, turnee, evenimente și multe altele.",
+    ru: "Станьте частью крупнейшего киберспортивного сообщества Молдовы. Обсуждения, турниры, мероприятия и многое другое."
+  },
+  "contact.discord.button": {
+    ro: "Discord MPL",
+    ru: "Discord MPL"
+  },
+  "contact.validation.name": {
+    ro: "Numele trebuie să conțină cel puțin 2 caractere",
+    ru: "Имя должно содержать не менее 2 символов"
+  },
+  "contact.validation.email": {
+    ro: "Adresa de email nu este validă",
+    ru: "Неверный адрес электронной почты"
+  },
+  "contact.validation.subject": {
+    ro: "Vă rugăm să selectați un subiect",
+    ru: "Пожалуйста, выберите тему"
+  },
+  "contact.validation.message": {
+    ro: "Mesajul trebuie să conțină cel puțin 10 caractere",
+    ru: "Сообщение должно содержать не менее 10 символов"
+  },
+  "contact.success.title": {
+    ro: "Succes!",
+    ru: "Успех!"
+  },
+  "contact.success.message": {
+    ro: "Mesajul a fost trimis cu succes!",
+    ru: "Сообщение успешно отправлено!"
+  },
+  "contact.error.title": {
+    ro: "Eroare",
+    ru: "Ошибка"
+  },
+  "contact.error.message": {
+    ro: "A apărut o eroare. Încercați din nou mai târziu.",
+    ru: "Произошла ошибка. Пожалуйста, повторите попытку позже."
   }
 };
 

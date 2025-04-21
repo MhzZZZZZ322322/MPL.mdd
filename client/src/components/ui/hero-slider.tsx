@@ -16,6 +16,7 @@ interface HeroContent {
 }
 
 export const HeroSlider = () => {
+  const { t } = useLanguage();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -24,10 +25,10 @@ export const HeroSlider = () => {
 
   const heroContent: HeroContent = {
     image: '/upscalemedia-transformed.jpeg',
-    title: 'HATOR CS2 LEAGUE MOLDOVA',
-    subtitle: 'Sezonul 1 - Mai-Iunie 2025',
+    title: t('hero.slider.title'),
+    subtitle: t('hero.slider.subtitle'),
     primaryBtn: {
-      text: 'Detalii Turneu',
+      text: t('hero.slider.button'),
       link: '/events/hator-cs-league',
     }
   };

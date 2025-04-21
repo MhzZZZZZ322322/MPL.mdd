@@ -10,9 +10,11 @@ import {
   FaInstagram
 } from 'react-icons/fa';
 import { Mail, MapPin } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const SimpleContactForm = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -43,19 +45,19 @@ const SimpleContactForm = () => {
     const newErrors: Record<string, string> = {};
     
     if (!formState.name.trim() || formState.name.length < 2) {
-      newErrors.name = 'Numele trebuie să conțină cel puțin 2 caractere';
+      newErrors.name = t('contact.validation.name');
     }
     
     if (!formState.email.trim() || !/^\S+@\S+\.\S+$/.test(formState.email)) {
-      newErrors.email = 'Adresa de email nu este validă';
+      newErrors.email = t('contact.validation.email');
     }
     
     if (!formState.subject) {
-      newErrors.subject = 'Vă rugăm să selectați un subiect';
+      newErrors.subject = t('contact.validation.subject');
     }
     
     if (!formState.message.trim() || formState.message.length < 10) {
-      newErrors.message = 'Mesajul trebuie să conțină cel puțin 10 caractere';
+      newErrors.message = t('contact.validation.message');
     }
     
     setErrors(newErrors);
@@ -87,8 +89,8 @@ const SimpleContactForm = () => {
       }
       
       toast({
-        title: 'Succes!',
-        description: 'Mesajul a fost trimis cu succes!',
+        title: t('contact.success.title'),
+        description: t('contact.success.message'),
       });
       
       console.log('Form data sent to the server:', formState);
@@ -103,8 +105,8 @@ const SimpleContactForm = () => {
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
-        title: 'Eroare',
-        description: 'A apărut o eroare. Încercați din nou mai târziu.',
+        title: t('contact.error.title'),
+        description: t('contact.error.message'),
         variant: 'destructive',
       });
     } finally {
@@ -156,7 +158,7 @@ const SimpleContactForm = () => {
     },
     {
       icon: <MapPin className="w-5 h-5 text-secondary" />,
-      title: 'Locație',
+      title: t('contact.info.location'),
       content: 'Chișinău, Republica Moldova',
       link: null
     },
@@ -180,10 +182,10 @@ const SimpleContactForm = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div data-aos="fade-up" className="text-center mb-16">
           <h2 className="font-rajdhani font-bold text-3xl md:text-4xl text-white mb-4">
-            Contactează-<span className="text-secondary">ne</span>
+            {t('contact.title.first')}<span className="text-secondary">{t('contact.title.second')}</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto"></div>
-          <p className="mt-4 max-w-2xl mx-auto">Ai întrebări sau sugestii? Completează formularul sau alătură-te comunității noastre pe Discord.</p>
+          <p className="mt-4 max-w-2xl mx-auto">{t('contact.subtitle')}</p>
         </div>
         
         <div className="max-w-6xl mx-auto">
@@ -200,18 +202,18 @@ const SimpleContactForm = () => {
                       <FaDiscord className="text-7xl text-white opacity-20" />
                     </div>
                     <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-darkGray/90 to-transparent">
-                      <h3 className="font-rajdhani font-bold text-2xl text-white">Alătură-te comunității</h3>
+                      <h3 className="font-rajdhani font-bold text-2xl text-white">{t('contact.discord.title')}</h3>
                     </div>
                   </div>
                   
                   <div className="p-6">
-                    <p className="mb-6">Fii parte din cea mai mare comunitate de esports din Moldova. Discuții, turnee, evenimente și multe altele.</p>
+                    <p className="mb-6">{t('contact.discord.text')}</p>
                     <button
                       className="flex w-full items-center justify-center bg-[#5865F2] hover:bg-[#4752C4] text-white py-3 px-4 rounded-md font-medium transition-all"
                       onClick={() => window.open('https://discord.gg/Ek4qvWE5qB', '_blank')}
                     >
                       <FaDiscord className="mr-2 text-xl" />
-                      Discord MPL
+                      {t('contact.discord.button')}
                     </button>
                   </div>
                 </div>
