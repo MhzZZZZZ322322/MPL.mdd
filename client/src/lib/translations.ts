@@ -952,6 +952,82 @@ export const translations: TranslationDictionary = {
   "event.technical.pause.rule2": {
     ro: "Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare",
     ru: "Злоупотребление техническими паузами будет наказываться предупреждениями и возможной потерей права на будущие паузы"
+  },
+  "event.rules.warning": {
+    ro: "Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):",
+    ru: "Несоблюдение этих правил приведет к дисквалификации (техническое поражение):"
+  },
+  "event.rule.nickname.title": {
+    ro: "Nickname adecvat",
+    ru: "Подходящий никнейм"
+  },
+  "event.rule.nickname.description": {
+    ro: "un nickname provocator, care instigă la ură națională, rasism, misoginie și alte forme de discriminare, este absolut INTERZIS.",
+    ru: "провокационный никнейм, подстрекающий к национальной ненависти, расизму, мизогинии и другим формам дискриминации, категорически ЗАПРЕЩЕН."
+  },
+  "event.rule.skins.title": {
+    ro: "Skinuri indecente",
+    ru: "Неприличные скины"
+  },
+  "event.rule.skins.description": {
+    ro: "se interzice folosirea skinurilor care conțin combinații de stickere indecente sau name tag-uri provocatoare. Dacă este depistată utilizarea unui skin indecent, se va aplica o avertizare; la a doua abatere, echipa va fi descalificată.",
+    ru: "запрещается использование скинов, содержащих неприличные комбинации стикеров или провокационные нейм-теги. Если обнаружено использование неприличного скина, будет применено предупреждение; при повторном нарушении команда будет дисквалифицирована."
+  },
+  "event.rule.agents.title": {
+    ro: "Agenții",
+    ru: "Агенты"
+  },
+  "event.rule.agents.description": {
+    ro: "trebuie să aibă skin-ul default.",
+    ru: "должны иметь скин по умолчанию."
+  },
+  "event.rule.taunting.title": {
+    ro: "Provocarea",
+    ru: "Провокация"
+  },
+  "event.rule.taunting.description": {
+    ro: "și alte forme de batjocură sunt permise doar dacă ambele echipe sunt de acord cu trash talk-ul; în caz contrar, se aplică avertizare, urmată de descalificare.",
+    ru: "и другие формы насмешек разрешены только если обе команды согласны на треш-ток; в противном случае применяется предупреждение, за которым следует дисквалификация."
+  },
+  "event.rule.bugs.title": {
+    ro: "Bug-uri",
+    ru: "Баги"
+  },
+  "event.rule.bugs.description": {
+    ro: "folosirea bug-urilor cu ajutorul aplicațiilor externe este echivalentă cu folosirea de cheats. Bug-urile din joc sunt permise doar dacă nu oferă un avantaj semnificativ (ex: bug cu WH sau macro/exploit pentru Auto-Aim sunt interzise).",
+    ru: "использование багов с помощью внешних приложений приравнивается к использованию читов. Баги в игре разрешены только если они не дают значительного преимущества (например: баг с WH или макросы/эксплойты для Auto-Aim запрещены)."
+  },
+  "event.rule.pfp.title": {
+    ro: "PFP (profile picture)",
+    ru: "PFP (аватар профиля)"
+  },
+  "event.rule.pfp.description": {
+    ro: "poza de profil trebuie să conțină un conținut adecvat.",
+    ru: "изображение профиля должно содержать соответствующий контент."
+  },
+  "event.rule.smurfing.title": {
+    ro: "Smurfing",
+    ru: "Смурфинг"
+  },
+  "event.rule.smurfing.description": {
+    ro: "conturile suspecte de smurfing vor fi investigate până la demonstrarea clară a smurfingului sau, în caz contrar, până la infirmarea acestuia. Se admite folosirea unui alt cont (decât cel principal) doar dacă acel cont principal are un ban temporar. Conturile cu ban pentru smurfing sau cheating nu sunt admise. Dacă jucătorul nu deține contul original, este obligat să informeze moderatorii sau organizatorii turneului.",
+    ru: "подозрительные на смурфинг аккаунты будут расследоваться до ясного доказательства смурфинга или, наоборот, до его опровержения. Разрешается использование другого аккаунта (кроме основного) только если этот основной аккаунт имеет временный бан. Аккаунты с баном за смурфинг или читерство не допускаются. Если игрок не владеет оригинальным аккаунтом, он обязан информировать модераторов или организаторов турнира."
+  },
+  "event.rule.streamsniping.title": {
+    ro: "Streamsniping",
+    ru: "Стримснайпинг"
+  },
+  "event.rule.streamsniping.description": {
+    ro: "este interzisă vizionarea jocului atât timp cât jucătorul se află în meci, indiferent de delay.",
+    ru: "запрещается просмотр игры, пока игрок находится в матче, независимо от задержки."
+  },
+  "event.rule.discord.title": {
+    ro: "Folosirea Discordului",
+    ru: "Использование Discord"
+  },
+  "event.rule.discord.description": {
+    ro: "Discord turneului este platforma oficială de comunicare și trebuie utilizată pentru coordonare.",
+    ru: "Discord турнира является официальной платформой для общения и должен использоваться для координации."
   }
 };
 

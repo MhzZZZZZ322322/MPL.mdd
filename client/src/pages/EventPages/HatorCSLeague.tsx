@@ -319,15 +319,15 @@ const HatorCSLeague = () => {
                   <h3>{t('event.rules.mandatory')}</h3>
                   <p className="text-red-400 font-semibold">{t('event.rules.warning')}</p>
                   <ol className="space-y-2">
-                    <li><strong>Nickname adecvat</strong> – un nickname provocator, care instigă la ură națională, rasism, misoginie și alte forme de discriminare, este absolut INTERZIS.</li>
-                    <li><strong>Skinuri indecente</strong> – se interzice folosirea skinurilor care conțin combinații de stickere indecente sau name tag-uri provocatoare. Dacă este depistată utilizarea unui skin indecent, se va aplica o avertizare; la a doua abatere, echipa va fi descalificată.</li>
-                    <li><strong>Agenții</strong> trebuie să aibă skin-ul default.</li>
-                    <li><strong>Provocarea</strong> și alte forme de batjocură sunt permise doar dacă ambele echipe sunt de acord cu trash talk-ul; în caz contrar, se aplică avertizare, urmată de descalificare.</li>
-                    <li><strong>Bug-uri</strong> – folosirea bug-urilor cu ajutorul aplicațiilor externe este echivalentă cu folosirea de cheats. Bug-urile din joc sunt permise doar dacă nu oferă un avantaj semnificativ (ex: bug cu WH sau macro/exploit pentru Auto-Aim sunt interzise).</li>
-                    <li><strong>PFP (profile picture)</strong> – poza de profil trebuie să conțină un conținut adecvat.</li>
-                    <li><strong>Smurfing</strong> – conturile suspecte de smurfing vor fi investigate până la demonstrarea clară a smurfingului sau, în caz contrar, până la infirmarea acestuia. Se admite folosirea unui alt cont (decât cel principal) doar dacă acel cont principal are un ban temporar. Conturile cu ban pentru smurfing sau cheating nu sunt admise. Dacă jucătorul nu deține contul original, este obligat să informeze moderatorii sau organizatorii turneului.</li>
-                    <li><strong>Streamsniping</strong> – este interzisă vizionarea jocului atât timp cât jucătorul se află în meci, indiferent de delay.</li>
-                    <li><strong>Folosirea Discordului</strong> – Discord turneului este platforma oficială de comunicare și trebuie utilizată pentru coordonare.</li>
+                    <li><strong>{t('event.rule.nickname.title')}</strong> – {t('event.rule.nickname.description')}</li>
+                    <li><strong>{t('event.rule.skins.title')}</strong> – {t('event.rule.skins.description')}</li>
+                    <li><strong>{t('event.rule.agents.title')}</strong> – {t('event.rule.agents.description')}</li>
+                    <li><strong>{t('event.rule.taunting.title')}</strong> – {t('event.rule.taunting.description')}</li>
+                    <li><strong>{t('event.rule.bugs.title')}</strong> – {t('event.rule.bugs.description')}</li>
+                    <li><strong>{t('event.rule.pfp.title')}</strong> – {t('event.rule.pfp.description')}</li>
+                    <li><strong>{t('event.rule.smurfing.title')}</strong> – {t('event.rule.smurfing.description')}</li>
+                    <li><strong>{t('event.rule.streamsniping.title')}</strong> – {t('event.rule.streamsniping.description')}</li>
+                    <li><strong>{t('event.rule.discord.title')}</strong> – {t('event.rule.discord.description')}</li>
                   </ol>
                 </div>
               </div>
