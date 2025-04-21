@@ -247,42 +247,22 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     
                     <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto bg-gradient-to-b from-darkBg/20 to-transparent">
                       <div>
-                        <p className="mb-2"><strong className="text-primary">Ce este ping-ul?</strong> Ping-ul măsoară latența de rețea (în milisecunde) între dispozitivul tău și server, reprezentând timpul necesar pentru ca un pachet de date să călătorească dus-întors (RTT - Round Trip Time).</p>
+                        <p className="mb-2"><strong className="text-primary">Ce este ping-ul?</strong> Ping-ul arată cât de rapid comunică dispozitivul tău cu serverul de joc. Cu cât valoarea este mai mică, cu atât vei avea o experiență mai bună în joc.</p>
                       </div>
                       
                       <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
-                        <p className="font-rajdhani font-bold text-primary">Metodologia avansată:</p>
-                        <p>Implementăm o tehnică web creativă bazată pe următorul algoritm:</p>
-                        <ol className="list-decimal pl-5 mt-1 space-y-1">
-                          <li className="text-gray-300">Creăm un element imagine în afara DOM-ului (invizibil pentru utilizator)</li>
-                          <li className="text-gray-300">Înregistrăm timpul inițial cu precizie de microsecunde folosind performance.now()</li>
-                          <li className="text-gray-300">Setăm sursa imaginii la un URL care conține IP-ul și portul serverului CS2</li>
-                          <li className="text-gray-300">Când browserul încearcă să descarce imaginea, solicită o conexiune la server</li>
-                          <li className="text-gray-300">Măsurăm timpul până când primim răspunsul (eroare) de la server</li>
-                        </ol>
+                        <p className="font-rajdhani font-bold text-primary">Cum măsurăm ping-ul</p>
+                        <p className="text-gray-300">Folosim metoda imaginilor pentru a calcula rapid timpul de răspuns între dispozitivul tău și serverele noastre. Aceasta este o valoare aproximativă - în joc, ping-ul poate varia și chiar poate fi mai mic decât cel afișat aici.</p>
                       </div>
                       
                       <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
-                        <p className="font-rajdhani font-bold text-primary">Specificații tehnice:</p>
-                        <ul className="list-disc pl-5 mt-1 space-y-1">
-                          <li className="text-gray-300">Timeout maxim: 5 secunde pentru măsurători non-responsabile</li>
-                          <li className="text-gray-300">Utilizează performance.now() pentru precizie de microsecunde</li>
-                          <li className="text-gray-300">Procesare paralelă prin Promise.race() pentru rezultate prompte</li>
-                          <li className="text-gray-300">Adăugare de timestamp unic pentru prevenirea cache-ului</li>
-                          <li className="text-gray-300">Variație de ping controlată (3-12ms) pentru conexiunile locale</li>
-                        </ul>
-                      </div>
-                      
-                      <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
-                        <p className="font-rajdhani font-bold text-primary">Grilă de interpretare ping:</p>
+                        <p className="font-rajdhani font-bold text-primary">Ce înseamnă valorile ping:</p>
                         <ul className="list-none pl-0 mt-1 space-y-1">
-                          <li><span className="text-green-400 font-bold">Sub 5ms:</span> <span className="text-gray-300">Excelent - conexiune LAN/datacenter</span></li>
-                          <li><span className="text-green-400 font-bold">5-10ms:</span> <span className="text-gray-300">Foarte bun - conexiune FTTH/fibră de calitate</span></li>
-                          <li><span className="text-green-400 font-bold">10-20ms:</span> <span className="text-gray-300">Bun - experiență competitivă optimă</span></li>
-                          <li><span className="text-yellow-400 font-bold">20-50ms:</span> <span className="text-gray-300">Acceptabil - ușoară latență perceptibilă</span></li>
-                          <li><span className="text-yellow-400 font-bold">50-100ms:</span> <span className="text-gray-300">Ridicat - latență medie, joc recreațional</span></li>
-                          <li><span className="text-red-400 font-bold">100-500ms:</span> <span className="text-gray-300">Foarte mare - latență severă, joc dificil</span></li>
-                          <li><span className="text-red-400 font-bold">Peste 500ms:</span> <span className="text-gray-300">Extrem - practic nejucabil pentru CS2</span></li>
+                          <li><span className="text-green-400 font-bold">Sub 10ms:</span> <span className="text-gray-300">Excelent - joc competitiv optim</span></li>
+                          <li><span className="text-green-400 font-bold">10-20ms:</span> <span className="text-gray-300">Foarte bun - fără probleme</span></li>
+                          <li><span className="text-yellow-400 font-bold">20-50ms:</span> <span className="text-gray-300">Bun - experiență plăcută</span></li>
+                          <li><span className="text-yellow-400 font-bold">50-100ms:</span> <span className="text-gray-300">Acceptabil - ușoară întârziere</span></li>
+                          <li><span className="text-red-400 font-bold">Peste 100ms:</span> <span className="text-gray-300">Problematic - joc dificil</span></li>
                         </ul>
                       </div>
                     </div>
