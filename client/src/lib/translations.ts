@@ -765,6 +765,86 @@ export const translations: TranslationDictionary = {
     ro: "Format Meciuri",
     ru: "Формат матчей"
   },
+  "event.format.max.capacity": {
+    ro: "Capacitate maximă",
+    ru: "Максимальная вместимость"
+  },
+  "event.format.teams.number": {
+    ro: "128 echipe din Moldova și România",
+    ru: "128 команд из Молдовы и Румынии"
+  },
+  "event.format.structure": {
+    ro: "Structură",
+    ru: "Структура"
+  },
+  "event.format.groups.structure": {
+    ro: "16 grupe a câte 8 echipe",
+    ru: "16 групп по 8 команд"
+  },
+  "event.format.system": {
+    ro: "Sistem",
+    ru: "Система"
+  },
+  "event.format.swiss.description": {
+    ro: "Swiss Style Bo1 - echipele joacă meciuri până acumulează:",
+    ru: "Swiss Style Bo1 - команды играют матчи до накопления:"
+  },
+  "event.format.wins.qualification": {
+    ro: "2 victorii - se califică automat în play-off",
+    ru: "2 победы - автоматически квалифицируются в плей-офф"
+  },
+  "event.format.losses.elimination": {
+    ro: "2 înfrângeri - sunt eliminate",
+    ru: "2 поражения - выбывают"
+  },
+  "event.format.swiss.detailed": {
+    ro: "Explicație detaliată Swiss Format",
+    ru: "Подробное объяснение Swiss формата"
+  },
+  "event.format.qualification": {
+    ro: "Calificare",
+    ru: "Квалификация"
+  },
+  "event.format.qualification.description": {
+    ro: "Primele 3 echipe din fiecare grupă (cele cu rezultate 2-0, 2-1 sau 1-2) avansează în faza Play-off",
+    ru: "Первые 3 команды из каждой группы (с результатами 2-0, 2-1 или 1-2) переходят в стадию плей-офф"
+  },
+  "event.format.bonus.seeding": {
+    ro: "Bonus seeding",
+    ru: "Бонус посева"
+  },
+  "event.format.bonus.description": {
+    ro: "Echipele clasate pe locul 1 din cele 16 grupe avansează direct în Top 24, fără a juca primul meci din Play-off",
+    ru: "Команды, занявшие 1-е место в 16 группах, переходят прямо в Top 24, минуя первый матч плей-офф"
+  },
+  "event.format.qualified.teams": {
+    ro: "Echipe calificate",
+    ru: "Квалифицированные команды"
+  },
+  "event.format.qualified.number": {
+    ro: "48 din faza grupelor",
+    ru: "48 из группового этапа"
+  },
+  "event.format.round1": {
+    ro: "Runda 1 (Top 48 → Top 32): participă locurile 2 și 3 din grupe (32 echipe) - meciuri Bo1",
+    ru: "Раунд 1 (Top 48 → Top 32): участвуют места 2 и 3 из групп (32 команды) - матчи Bo1"
+  },
+  "event.format.round2": {
+    ro: "Runda 2 (Top 32 → Top 24): echipele câștigătoare din R1 + echipele clasate pe locul 1 în grupe - meciuri Bo1",
+    ru: "Раунд 2 (Top 32 → Top 24): команды-победители R1 + команды, занявшие 1-е место в группах - матчи Bo1"
+  },
+  "event.format.round3": {
+    ro: "Runda 3 (Top 24 → Top 12): se joacă 12 meciuri Bo1",
+    ru: "Раунд 3 (Top 24 → Top 12): играются 12 матчей Bo1"
+  },
+  "event.format.final": {
+    ro: "Etapa finală: optimi, sferturi, semifinale și finală - toate meciuri Bo3",
+    ru: "Финальный этап: 1/8, 1/4, полуфиналы и финал - все матчи Bo3"
+  },
+  "event.format.playoff.detailed": {
+    ro: "Explicație detaliată Play-off",
+    ru: "Подробное объяснение плей-офф"
+  },
   "event.maps.selection": {
     ro: "Alegere Hărți - Bo3",
     ru: "Выбор карт - Bo3"
@@ -952,6 +1032,14 @@ export const translations: TranslationDictionary = {
   "event.technical.pause.rule2": {
     ro: "Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare",
     ru: "Злоупотребление техническими паузами будет наказываться предупреждениями и возможной потерей права на будущие паузы"
+  },
+  "event.format.bo1": {
+    ro: "Un singur meci decide câștigătorul (grupe și primele 3 runde din Play-off)",
+    ru: "Один матч определяет победителя (группы и первые 3 раунда плей-офф)"
+  },
+  "event.format.bo3": {
+    ro: "Cele mai bune din 3 hărți (etapa finală din Top 12 până în finală)",
+    ru: "Лучшее из 3 карт (финальный этап от Top 12 до финала)"
   },
   "event.rules.warning": {
     ro: "Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):",

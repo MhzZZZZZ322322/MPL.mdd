@@ -201,13 +201,13 @@ const HatorCSLeague = () => {
                 
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage1')}</h4>
                 <ul className="mb-4">
-                  <li><strong>Capacitate maximă</strong>: 128 echipe din Moldova și România</li>
-                  <li><strong>Structură</strong>: 16 grupe a câte 8 echipe</li>
+                  <li><strong>{t('event.format.max.capacity')}</strong>: {t('event.format.teams.number')}</li>
+                  <li><strong>{t('event.format.structure')}</strong>: {t('event.format.groups.structure')}</li>
                   <li>
-                    <strong>Sistem</strong>: Swiss Style Bo1 - echipele joacă meciuri până acumulează:
+                    <strong>{t('event.format.system')}</strong>: {t('event.format.swiss.description')}
                     <ul className="ml-6 mt-2 mb-2 list-disc">
-                      <li>2 victorii - se califică automat în play-off</li>
-                      <li>2 înfrângeri - sunt eliminate</li>
+                      <li>{t('event.format.wins.qualification')}</li>
+                      <li>{t('event.format.losses.elimination')}</li>
                     </ul>
                     <div className="mt-2 ml-6">
                       <a 
@@ -215,24 +215,24 @@ const HatorCSLeague = () => {
                         target="_blank"
                         className="text-primary hover:text-primary/80 underline flex items-center"
                       >
-                        <FileIcon className="w-4 h-4 mr-1" /> Explicație detaliată Swiss Format
+                        <FileIcon className="w-4 h-4 mr-1" /> {t('event.format.swiss.detailed')}
                       </a>
                     </div>
                   </li>
-                  <li><strong>Calificare</strong>: Primele 3 echipe din fiecare grupă (cele cu rezultate 2-0, 2-1 sau 1-2) avansează în faza Play-off</li>
-                  <li><strong>Bonus seeding</strong>: Echipele clasate pe locul 1 din cele 16 grupe avansează direct în Top 24, fără a juca primul meci din Play-off</li>
+                  <li><strong>{t('event.format.qualification')}</strong>: {t('event.format.qualification.description')}</li>
+                  <li><strong>{t('event.format.bonus.seeding')}</strong>: {t('event.format.bonus.description')}</li>
                 </ul>
                 
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage2')}</h4>
                 <ul className="mb-4">
-                  <li><strong>Echipe calificate</strong>: 48 din faza grupelor</li>
+                  <li><strong>{t('event.format.qualified.teams')}</strong>: {t('event.format.qualified.number')}</li>
                   <li>
-                    <strong>Structură</strong>:
+                    <strong>{t('event.format.structure')}</strong>:
                     <ul className="ml-6 mt-2 mb-2 list-disc">
-                      <li>Runda 1 (Top 48 → Top 32): participă locurile 2 și 3 din grupe (32 echipe) - meciuri Bo1</li>
-                      <li>Runda 2 (Top 32 → Top 24): echipele câștigătoare din R1 + echipele clasate pe locul 1 în grupe - meciuri Bo1</li>
-                      <li>Runda 3 (Top 24 → Top 12): se joacă 12 meciuri Bo1</li>
-                      <li>Etapa finală: optimi, sferturi, semifinale și finală - toate meciuri Bo3</li>
+                      <li>{t('event.format.round1')}</li>
+                      <li>{t('event.format.round2')}</li>
+                      <li>{t('event.format.round3')}</li>
+                      <li>{t('event.format.final')}</li>
                     </ul>
                     <div className="mt-2 ml-6">
                       <a 
@@ -240,7 +240,7 @@ const HatorCSLeague = () => {
                         target="_blank"
                         className="text-primary hover:text-primary/80 underline flex items-center"
                       >
-                        <FileIcon className="w-4 h-4 mr-1" /> Explicație detaliată Play-off
+                        <FileIcon className="w-4 h-4 mr-1" /> {t('event.format.playoff.detailed')}
                       </a>
                     </div>
                   </li>
@@ -248,25 +248,25 @@ const HatorCSLeague = () => {
                 
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.matches.format')}</h4>
                 <ul className="mb-4">
-                  <li><strong>Bo1</strong>: Un singur meci decide câștigătorul (grupe și primele 3 runde din Play-off)</li>
-                  <li><strong>Bo3</strong>: Cele mai bune din 3 hărți (etapa finală din Top 12 până în finală)</li>
+                  <li><strong>Bo1</strong>: {t('event.format.bo1')}</li>
+                  <li><strong>Bo3</strong>: {t('event.format.bo3')}</li>
                 </ul>
                 
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.maps.selection')}</h4>
                 <ul>
-                  <li><strong>Coinflip</strong>: Determinarea echipelor A și B</li>
-                  <li><strong>Pași alegere hartă</strong>:
+                  <li><strong>{t('event.maps.coinflip')}</strong>: {t('event.maps.teams.determination')}</li>
+                  <li><strong>{t('event.maps.steps')}</strong>:
                     <ol className="ml-6 mt-2 list-decimal">
-                      <li>Echipa A elimină 1 hartă</li>
-                      <li>Echipa B elimină 1 hartă</li>
-                      <li>Echipa A alege harta 1 (care va fi jucată prima)</li>
-                      <li>Echipa B alege partea (CT/T) pentru harta 1</li>
-                      <li>Echipa B alege harta 2 (care va fi jucată a doua)</li>
-                      <li>Echipa A alege partea (CT/T) pentru harta 2</li>
-                      <li>Echipa A elimină 1 hartă</li>
-                      <li>Echipa B elimină 1 hartă</li>
-                      <li>Harta rămasă devine harta 3 (decisivă dacă scorul e 1-1)</li>
-                      <li>Echipa A alege partea (CT/T) pentru harta 3</li>
+                      <li>{t('event.maps.step1')}</li>
+                      <li>{t('event.maps.step2')}</li>
+                      <li>{t('event.maps.step3')}</li>
+                      <li>{t('event.maps.step4')}</li>
+                      <li>{t('event.maps.step5')}</li>
+                      <li>{t('event.maps.step6')}</li>
+                      <li>{t('event.maps.step7')}</li>
+                      <li>{t('event.maps.step8')}</li>
+                      <li>{t('event.maps.step9')}</li>
+                      <li>{t('event.maps.step10')}</li>
                     </ol>
                   </li>
                 </ul>
