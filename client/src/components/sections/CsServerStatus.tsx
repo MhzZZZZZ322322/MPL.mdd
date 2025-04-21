@@ -247,12 +247,13 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     
                     <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto bg-gradient-to-b from-darkBg/20 to-transparent">
                       <div>
-                        <p className="mb-2"><strong className="text-primary">Ce este ping-ul?</strong> Ping-ul arată cât de rapid comunică dispozitivul tău cu serverul de joc. Cu cât valoarea este mai mică, cu atât vei avea o experiență mai bună în joc.</p>
+                        <p className="mb-2"><strong className="text-primary">Ce este ping-ul?</strong> Ping-ul arată cât de rapid comunică dispozitivul tău cu serverul jocului. Cu cât valoarea este mai mică, cu atât conexiunea este mai bună și jocul mai fluid.</p>
                       </div>
                       
                       <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
-                        <p className="font-rajdhani font-bold text-primary">Cum măsurăm ping-ul</p>
-                        <p className="text-gray-300">Folosim metoda imaginilor pentru a calcula rapid timpul de răspuns între dispozitivul tău și serverele noastre. Aceasta este o valoare aproximativă - în joc, ping-ul poate varia și chiar poate fi mai mic decât cel afișat aici.</p>
+                        <p className="font-rajdhani font-bold text-primary">Cum măsurăm ping-ul?</p>
+                        <p className="text-gray-300">În aplicația noastră, folosim o metodă web care măsoară timpul de răspuns trimițând o cerere către server sub forma unei imagini invizibile. Deși serverul nu returnează imaginea, browserul încearcă să o încarce, iar timpul până la eroare ne oferă o estimare a ping-ului.</p>
+                        <p className="text-gray-300 mt-2">Această valoare este aproximativă. În joc, ping-ul real poate fi mai mic sau mai mare, fiind influențat de protocolul folosit (UDP vs HTTP) și de condițiile rețelei tale (VPN, proxy, WiFi etc.).</p>
                       </div>
                       
                       <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
