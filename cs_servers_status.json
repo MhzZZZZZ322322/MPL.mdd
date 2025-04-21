@@ -2,7 +2,7 @@
   {
     "id": 1,
     "status": true,
-    "players": 5,
+    "players": 3,
     "name": "Aim",
     "maxplayers": 16
   },

@@ -1184,6 +1184,122 @@ export const translations: TranslationDictionary = {
   "event.date.tournament.start": {
     ro: "2 Iunie 2025",
     ru: "2 июня 2025"
+  },
+  "event.rules.title": {
+    ro: "Regulament",
+    ru: "Правила"
+  },
+  "event.eligibility.title": {
+    ro: "Eligibilitate",
+    ru: "Требования к участникам"
+  },
+  "event.eligibility.team.size": {
+    ro: "Echipele au trebuit să aibă minim 5 jucători și maximum 7 (5 titulari + 2 rezerve)",
+    ru: "Команды должны были иметь минимум 5 игроков и максимум 7 (5 основных + 2 запасных)"
+  },
+  "event.eligibility.faceit.account": {
+    ro: "Toți jucătorii au trebuit să dețină un cont FACEIT verificat",
+    ru: "Все игроки должны были иметь верифицированный аккаунт FACEIT"
+  },
+  "event.eligibility.nationality.rule": {
+    ro: "Cel puțin 3 jucători din echipă au trebuit să fie din Republica Moldova",
+    ru: "Не менее 3 игроков в команде должны были быть из Республики Молдова"
+  },
+  "event.general.rules.title": {
+    ro: "Reguli generale",
+    ru: "Общие правила"
+  },
+  "event.rules.cheating": {
+    ro: "Utilizarea oricărui tip de cheat/hack a fost strict interzisă și a rezultat în descalificarea imediată",
+    ru: "Использование любого типа читов/хаков было строго запрещено и привело к немедленной дисквалификации"
+  },
+  "event.rules.toxic.behavior": {
+    ro: "Comportamentul toxic, rasist sau discriminatoriu nu a fost tolerat",
+    ru: "Токсичное, расистское или дискриминационное поведение не допускалось"
+  },
+  "event.rules.map.selection": {
+    ro: "Hărțile s-au ales prin sistemul de veto înainte de fiecare meci",
+    ru: "Карты выбирались с помощью системы вето перед каждым матчем"
+  },
+  "event.rules.monitoring": {
+    ro: "Toate meciurile au fost monitorizate de administratori oficiali MPL",
+    ru: "Все матчи контролировались официальными администраторами MPL"
+  },
+  "event.rules.disputes": {
+    ro: "Orice dispută a fost rezolvată de administratorii turneului, iar decizia lor a fost finală",
+    ru: "Любые споры разрешались администраторами турнира, и их решение было окончательным"
+  },
+  "event.quick.info.title": {
+    ro: "Informații rapide",
+    ru: "Быстрая информация"
+  },
+  "event.date.range.march": {
+    ro: "10-23 Martie 2025",
+    ru: "10-23 марта 2025"
+  },
+  "event.date.hours.range": {
+    ro: "15:00 - 22:00 EEST",
+    ru: "15:00 - 22:00 EEST"
+  },
+  "event.platform.official": {
+    ro: "Platforma oficială de competiție",
+    ru: "Официальная платформа соревнований"
+  },
+  "event.teams.count": {
+    ro: "64 echipe",
+    ru: "64 команды"
+  },
+  "event.prizes.hator": {
+    ro: "Premii oferite de HATOR",
+    ru: "Призы предоставлены HATOR"
+  },
+  "event.equipment.gaming": {
+    ro: "Echipament gaming pentru câștigători",
+    ru: "Игровое оборудование для победителей"
+  },
+  "event.sponsors.title": {
+    ro: "Sponsori",
+    ru: "Спонсоры"
+  },
+  "event.sponsor.main": {
+    ro: "Main Sponsor",
+    ru: "Главный спонсор"
+  },
+  "event.partner.title": {
+    ro: "Partner",
+    ru: "Партнер"
+  },
+  "event.contact.title": {
+    ro: "Contact",
+    ru: "Контакты"
+  },
+  "event.contact.questions": {
+    ro: "Pentru orice întrebări legate de turneu, nu ezitați să ne contactați:",
+    ru: "По любым вопросам, связанным с турниром, не стесняйтесь обращаться к нам:"
+  },
+  "event.winners.text.first": {
+    ro: "Felicitări, LitEnergy! 🏆 Echipa a demonstrat că talentul, determinarea și munca în echipă sunt cheia succesului! Printr-un parcurs spectaculos și momente de joc electrizante, au reușit să cucerească titlul de campioni ai turneului.",
+    ru: "Поздравляем, LitEnergy! 🏆 Команда доказала, что талант, решимость и командная работа - ключ к успеху! Благодаря впечатляющему выступлению и захватывающим моментам игры, они смогли завоевать чемпионский титул турнира."
+  },
+  "event.winners.text.second": {
+    ro: "Respect, R5Team! Echipa a demonstrat curaj, determinare și un joc de înaltă clasă în turneu! Au luptat până la capăt și au arătat de ce sunt una dintre cele mai puternice echipe din competiție.",
+    ru: "Уважение, R5Team! Команда показала храбрость, решимость и высококлассную игру в турнире! Они боролись до конца и показали, почему являются одной из сильнейших команд в соревновании."
+  },
+  "event.winners.text.third": {
+    ro: "Felicitări, K9 TEAM! Echipa a demonstrat ambiție, spirit de luptă și skill-uri impresionante în turneu! Printr-un parcurs plin de emoții și meciuri spectaculoase, au reușit să urce pe podium.",
+    ru: "Поздравляем, K9 TEAM! Команда показала амбиции, боевой дух и впечатляющие навыки в турнире! Благодаря эмоциональному выступлению и захватывающим матчам, они смогли подняться на пьедестал."
+  },
+  "event.place.first": {
+    ro: "LOCUL 1",
+    ru: "1 МЕСТО"
+  },
+  "event.place.second": {
+    ro: "LOCUL 2",
+    ru: "2 МЕСТО"
+  },
+  "event.place.third": {
+    ro: "LOCUL 3",
+    ru: "3 МЕСТО"
   }
 };
 

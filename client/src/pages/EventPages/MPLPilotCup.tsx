@@ -105,7 +105,7 @@ const MPLPilotCup = () => {
                   <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-primary/30 hover:border-primary transition-colors">
                     <div className="p-4">
                       <div className="flex items-center mb-3">
-                        <span className="bg-gradient-to-r from-yellow-500 to-amber-300 text-black font-bold text-sm py-1 px-3 rounded mr-2">{t('event.first.place')}</span>
+                        <span className="bg-gradient-to-r from-yellow-500 to-amber-300 text-black font-bold text-sm py-1 px-3 rounded mr-2">{t('event.place.first')}</span>
                         <h3 className="text-xl font-bold text-white">LitEnergy</h3>
                       </div>
                       <img 
@@ -117,7 +117,7 @@ const MPLPilotCup = () => {
                         height="300"
                       />
                       <p className="text-gray-300 mt-4">
-                        Felicitări, LitEnergy! 🏆 Echipa a demonstrat că talentul, determinarea și munca în echipă sunt cheia succesului! Printr-un parcurs spectaculos și momente de joc electrizante, au reușit să cucerească titlul de campioni ai turneului.
+                        {t('event.winners.text.first')}
                       </p>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ const MPLPilotCup = () => {
                   <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-gray-700 hover:border-gray-500 transition-colors">
                     <div className="p-4">
                       <div className="flex items-center mb-3">
-                        <span className="bg-gradient-to-r from-gray-200 to-gray-400 text-black font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 2</span>
+                        <span className="bg-gradient-to-r from-gray-200 to-gray-400 text-black font-bold text-sm py-1 px-3 rounded mr-2">{t('event.place.second')}</span>
                         <h3 className="text-xl font-bold text-white">R5Team</h3>
                       </div>
                       <img 
@@ -138,7 +138,7 @@ const MPLPilotCup = () => {
                         height="300"
                       />
                       <p className="text-gray-300">
-                        Respect, R5Team! Echipa a demonstrat curaj, determinare și un joc de înaltă clasă în turneu! Au luptat până la capăt și au arătat de ce sunt una dintre cele mai puternice echipe din competiție.
+                        {t('event.winners.text.second')}
                       </p>
                     </div>
                   </div>
@@ -147,7 +147,7 @@ const MPLPilotCup = () => {
                   <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-amber-800/50 hover:border-amber-700 transition-colors">
                     <div className="p-4">
                       <div className="flex items-center mb-3">
-                        <span className="bg-gradient-to-r from-amber-700 to-amber-500 text-white font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 3</span>
+                        <span className="bg-gradient-to-r from-amber-700 to-amber-500 text-white font-bold text-sm py-1 px-3 rounded mr-2">{t('event.place.third')}</span>
                         <h3 className="text-xl font-bold text-white">K9 TEAM</h3>
                       </div>
                       <img 
@@ -159,29 +159,29 @@ const MPLPilotCup = () => {
                         height="300"
                       />
                       <p className="text-gray-300">
-                        Felicitări, K9 TEAM! Echipa a demonstrat ambiție, spirit de luptă și skill-uri impresionante în turneu! Printr-un parcurs plin de emoții și meciuri spectaculoase, au reușit să urce pe podium.
+                        {t('event.winners.text.third')}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Regulament</h2>
+                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.rules.title')}</h2>
                 
                 <div className="prose prose-invert max-w-none">
-                  <h3>Eligibilitate</h3>
+                  <h3>{t('event.eligibility.title')}</h3>
                   <ul>
-                    <li>Echipele au trebuit să aibă minim 5 jucători și maximum 7 (5 titulari + 2 rezerve)</li>
-                    <li>Toți jucătorii au trebuit să dețină un cont FACEIT verificat</li>
-                    <li>Cel puțin 3 jucători din echipă au trebuit să fie din Republica Moldova</li>
+                    <li>{t('event.eligibility.team.size')}</li>
+                    <li>{t('event.eligibility.faceit.account')}</li>
+                    <li>{t('event.eligibility.nationality.rule')}</li>
                   </ul>
                   
-                  <h3>Reguli generale</h3>
+                  <h3>{t('event.general.rules.title')}</h3>
                   <ul>
-                    <li>Utilizarea oricărui tip de cheat/hack a fost strict interzisă și a rezultat în descalificarea imediată</li>
-                    <li>Comportamentul toxic, rasist sau discriminatoriu nu a fost tolerat</li>
-                    <li>Hărțile s-au ales prin sistemul de veto înainte de fiecare meci</li>
-                    <li>Toate meciurile au fost monitorizate de administratori oficiali MPL</li>
-                    <li>Orice dispută a fost rezolvată de administratorii turneului, iar decizia lor a fost finală</li>
+                    <li>{t('event.rules.cheating')}</li>
+                    <li>{t('event.rules.toxic.behavior')}</li>
+                    <li>{t('event.rules.map.selection')}</li>
+                    <li>{t('event.rules.monitoring')}</li>
+                    <li>{t('event.rules.disputes')}</li>
                   </ul>
                 </div>
               </div>
@@ -189,14 +189,14 @@ const MPLPilotCup = () => {
             
             <div className="lg:col-span-1">
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Informații rapide</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.quick.info.title')}</h3>
                 
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
                     <Calendar className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">10-23 Martie 2025</div>
-                      <div className="text-sm">15:00 - 22:00 EEST</div>
+                      <div className="font-semibold text-white">{t('event.date.range.march')}</div>
+                      <div className="text-sm">{t('event.date.hours.range')}</div>
                     </div>
                   </div>
                   
@@ -204,34 +204,34 @@ const MPLPilotCup = () => {
                     <MapPin className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <div className="font-semibold text-white">Online (FACEIT)</div>
-                      <div className="text-sm">Platforma oficială de competiție</div>
+                      <div className="text-sm">{t('event.platform.official')}</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Users className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">64 echipe</div>
-                      <div className="text-sm">Format 5v5</div>
+                      <div className="font-semibold text-white">{t('event.teams.count')}</div>
+                      <div className="text-sm">{t('event.format.5v5')}</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Trophy className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">Premii oferite de HATOR</div>
-                      <div className="text-sm">Echipament gaming pentru câștigători</div>
+                      <div className="font-semibold text-white">{t('event.prizes.hator')}</div>
+                      <div className="text-sm">{t('event.equipment.gaming')}</div>
                     </div>
                   </div>
                 </div>
               </NeonBorder>
               
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Sponsori</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.sponsors.title')}</h3>
                 
                 <div className="flex flex-col space-y-6">
                   <div>
-                    <div className="font-semibold text-white mb-2">Main Sponsor</div>
+                    <div className="font-semibold text-white mb-2">{t('event.sponsor.main')}</div>
                     <a 
                       href="https://hator.gg" 
                       target="_blank" 
@@ -243,7 +243,7 @@ const MPLPilotCup = () => {
                   </div>
                   
                   <div>
-                    <div className="font-semibold text-white mb-2">Partner</div>
+                    <div className="font-semibold text-white mb-2">{t('event.partner.title')}</div>
                     <a 
                       href="https://darwin.md" 
                       target="_blank" 
@@ -257,10 +257,10 @@ const MPLPilotCup = () => {
               </NeonBorder>
               
               <NeonBorder className="rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.contact.title')}</h3>
                 
                 <p className="text-gray-300 mb-4">
-                  Pentru orice întrebări legate de turneu, nu ezitați să ne contactați:
+                  {t('event.contact.questions')}
                 </p>
                 
                 <div className="space-y-2">
