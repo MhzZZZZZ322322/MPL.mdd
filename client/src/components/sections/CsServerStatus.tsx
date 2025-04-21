@@ -105,11 +105,60 @@ interface ServerCardProps {
   server: CsServer;
 }
 
+// Funcție pentru a detecta dacă utilizatorul este din Moldova
+// În acest scenariu, implementăm o logică simplificată
+// Pentru o soluție reală, ar trebui folosit un serviciu de geolocație IP
+const detectMoldovanUser = (): boolean => {
+  try {
+    // Pentru dezvoltare și testare, forțăm valoarea la true
+    // În producție, această logică ar trebui înlocuită cu geolocație reală
+    
+    // Verificăm dacă există un parametru în URL care să indice testarea
+    const urlParams = new URLSearchParams(window.location.search);
+    const testCountry = urlParams.get('country');
+    
+    // Dacă există parametrul ?country=moldova în URL, considerăm utilizatorul din Moldova
+    if (testCountry && testCountry.toLowerCase() === 'moldova') {
+      console.log("Test: Utilizator specificat din Moldova prin URL");
+      return true;
+    }
+    
+    // Dacă există parametrul ?country=other în URL, considerăm utilizatorul din altă țară
+    if (testCountry && testCountry.toLowerCase() === 'other') {
+      console.log("Test: Utilizator specificat din altă țară prin URL");
+      return false;
+    }
+    
+    // Dacă nu există parametrul, folosim logica de detectare bazată pe limbă
+    // Obține limba browserului
+    const userLanguage = navigator.language || (navigator as any).userLanguage || '';
+    console.log("Limba browser utilizator:", userLanguage);
+    
+    // Verifică codul țării (ultima parte din codul de limbă, după linia) - 'ro-MD' sau 'ru-MD' pentru Moldova
+    const countryCode = userLanguage.split('-')[1]?.toUpperCase();
+    
+    // Dacă codul de țară este MD (Moldova), returnează true
+    if (countryCode === 'MD') {
+      console.log("Utilizator detectat din Moldova (prin cod de țară)");
+      return true;
+    }
+    
+    // În acest demo, forțăm toți utilizatorii să fie considerați din Moldova
+    // Într-o implementare reală, această linie ar trebui înlocuită cu geolocație bazată pe IP
+    console.log("Considerăm utilizatorul din Moldova pentru demo");
+    return true;
+    
+  } catch (error) {
+    console.error("Eroare la detectarea locației:", error);
+    // În caz de eroare, considerăm implicit că utilizatorul este din Moldova pentru acest demo
+    return true;
+  }
+};
+
 const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
-  // Verificăm dacă utilizatorul este din Moldova
-  // Aceasta este o simplificare, în realitate ar trebui să folosiți un serviciu de geolocație
-  // Pentru simplitate, considerăm că toți utilizatorii sunt din Moldova în acest exemplu
-  const isFromMoldova = true; // În scenariul real, aceasta ar fi determinată prin IP sau geo API
+  // Determinăm dacă utilizatorul este din Moldova
+  // În producție, ar trebui implementată o soluție mai robustă bazată pe geolocație
+  const isFromMoldova = detectMoldovanUser();
   
   // Generăm un ping inițial adecvat locației serverului
   let initialPing;
