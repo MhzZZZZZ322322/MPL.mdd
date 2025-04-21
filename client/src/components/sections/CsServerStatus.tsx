@@ -106,6 +106,11 @@ interface ServerCardProps {
 }
 
 const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
+  // Verificăm dacă utilizatorul este din Moldova
+  // Aceasta este o simplificare, în realitate ar trebui să folosiți un serviciu de geolocație
+  // Pentru simplitate, considerăm că toți utilizatorii sunt din Moldova în acest exemplu
+  const isFromMoldova = true; // În scenariul real, aceasta ar fi determinată prin IP sau geo API
+  
   // Generăm un ping inițial adecvat locației serverului
   let initialPing;
   if (server.location === "Moldova") {
@@ -117,15 +122,37 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   }
   const [ping, setPing] = useState<number>(initialPing);
   const [isPingLoading, setIsPingLoading] = useState<boolean>(true);
+  const [lastUpdateTime, setLastUpdateTime] = useState<number>(Date.now());
   
   // Funcție pentru actualizarea ping-ului
   const updatePing = async () => {
+    // Pentru utilizatori din Moldova, verificăm dacă au trecut cel puțin 2 minute
+    if (isFromMoldova && server.location === "Moldova") {
+      const currentTime = Date.now();
+      const timeSinceLastUpdate = currentTime - lastUpdateTime;
+      const twoMinutesInMs = 2 * 60 * 1000; // 2 minute în milisecunde
+      
+      if (timeSinceLastUpdate < twoMinutesInMs) {
+        // Nu a trecut suficient timp, păstrăm ping-ul curent
+        return;
+      }
+      
+      // Au trecut 2 minute, actualizăm timpul și generăm un nou ping între 4-10ms
+      setLastUpdateTime(currentTime);
+      const moldovaPing = Math.floor(Math.random() * 7) + 4; // Între 4 și 10
+      setPing(moldovaPing);
+      console.log("Actualizare ping Moldova după 2+ minute:", moldovaPing, "ms");
+      return;
+    }
+    
+    // Pentru alte țări sau alte servere, folosim calculul normal
     setIsPingLoading(true);
     try {
       console.log("Calculăm ping-ul pentru", server.ip, server.port);
       const newPing = await calculatePing(server.ip, server.port, server.location);
       console.log("Ping calculat:", newPing, "ms");
       setPing(newPing);
+      setLastUpdateTime(Date.now());
     } catch (error) {
       console.error('Eroare la actualizarea ping-ului:', error);
       // Folosim un ping random care respectă limitele pentru locație
@@ -139,19 +166,23 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       }
       console.log("Setăm ping aleatoriu de fallback:", randomPing, "ms");
       setPing(randomPing);
+      setLastUpdateTime(Date.now());
     } finally {
       setIsPingLoading(false);
     }
   };
   
   useEffect(() => {
-    // Calculează ping-ul inițial
+    // Inițializăm ping-ul
     updatePing();
     
-    // Actualizează ping-ul la fiecare 30 secunde
+    // Interval de verificare diferit în funcție de locație
+    const intervalTime = (isFromMoldova && server.location === "Moldova") ? 120000 : 30000; // 2 minute vs 30 secunde
+    
+    // Actualizează ping-ul la intervalul specificat
     const interval = setInterval(() => {
       updatePing();
-    }, 30000);
+    }, intervalTime);
     
     return () => clearInterval(interval);
   }, [server.ip, server.port]);
