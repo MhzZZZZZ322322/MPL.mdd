@@ -3,8 +3,10 @@ import { ArrowLeft, Calendar, MapPin, Trophy, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const MPLPilotCup = () => {
+  const { t } = useLanguage();
   return (
     <>
       <Helmet>
@@ -34,24 +36,24 @@ const MPLPilotCup = () => {
             <div className="max-w-3xl">
               <Link href="/#about">
                 <Button variant="ghost" className="mb-4 text-gray-300 hover:text-white">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Înapoi la evenimente
+                  <ArrowLeft className="mr-2 h-4 w-4" /> {t('event.back.button')}
                 </Button>
               </Link>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 font-rajdhani">
-                MPL Pilot Cup
+                {t('event.pilot.cup.title')}
               </h1>
               
               <div className="flex items-center mb-6 text-gray-300">
                 <Calendar className="mr-2 h-4 w-4 text-primary" />
-                <span className="mr-4">10-23 Martie 2025</span>
+                <span className="mr-4">{t('event.pilot.cup.date')}</span>
                 
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
-                <span>Online (FACEIT)</span>
+                <span>{t('event.pilot.cup.location')}</span>
               </div>
               
               <p className="text-lg text-gray-100 max-w-2xl mb-8">
-                Turneul inaugural organizat de Moldova Pro League, dedicat jucătorilor de Counter-Strike 2 din Moldova, a fost un succes cu o participare record și meciuri intense.
+                {t('event.pilot.cup.description')}
               </p>
               
               <div className="flex flex-wrap gap-4">
@@ -65,45 +67,45 @@ const MPLPilotCup = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Despre eveniment</h2>
+              <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.about.title')}</h2>
               
               <div className="prose prose-invert max-w-none">
                 <p>
-                  <strong>MPL Pilot Cup</strong> a fost turneul pilot prin care Moldova Pro League a inaugurat seria sa de competiții oficiale pentru Counter-Strike 2. Acest turneu a fost conceput special pentru jucătorii din Moldova, indiferent de nivelul lor de abilitate, oferind o platformă inclusivă unde echipele au concurat într-un mediu profesionist.
+                  <strong>MPL Pilot Cup</strong> {t('event.pilot.cup.about.p1')}
                 </p>
                 
                 <p>
-                  Turneul a fost organizat exclusiv online pe platforma FACEIT, eliminând astfel barierele geografice și facilitând participarea echipelor. MPL Pilot Cup nu a fost doar despre competiție, ci și despre construirea unei comunități unite în jurul pasiunii pentru Counter-Strike.
+                  {t('event.pilot.cup.about.p2')}
                 </p>
                 
-                <h3>Format</h3>
+                <h3>{t('event.format.title')}</h3>
                 <ul>
-                  <li><strong>Faza eliminatorie</strong>: 64 echipe într-un bracket simplu, meciuri eliminatorii (single elimination).</li>
-                  <li><strong>Format meciuri</strong>: Bo1 (Best of 1) pentru majoritatea meciurilor, Bo3 (Best of 3) pentru ultimele 4 echipe.</li>
+                  <li><strong>{t('event.format.elimination')}</strong></li>
+                  <li><strong>{t('event.format.matches')}</strong></li>
                 </ul>
                 
-                <h3>Premii</h3>
+                <h3>{t('event.prizes.title')}</h3>
                 <p>
-                  MPL Pilot Cup a oferit premii valoroase pentru echipele câștigătoare, furnizate de sponsorii noștri Darwin și HATOR:
+                  {t('event.prizes.description')}
                 </p>
                 <ul>
-                  <li><strong>Locul 1</strong>: 5x Mouse sau Tastatură (la alegere): Tastatură Hator Gravity TKL White sau Mouse Hator Quasar 2 Ultra 4K Black</li>
-                  <li><strong>Locul 2</strong>: 5x Mouse sau Tastatură (în funcție de alegerea echipei câștigătoare)</li>
-                  <li><strong>Locul 3</strong>: 5x Căști gaming Hator Hypergang 2 USB 7.1</li>
-                  <li><strong>Locul 4</strong>: 5x Mousepad Hator Tonn EVO L Black</li>
+                  <li><strong>{t('event.prize.first.place')}</strong>: 5x Mouse sau Tastatură (la alegere): Tastatură Hator Gravity TKL White sau Mouse Hator Quasar 2 Ultra 4K Black</li>
+                  <li><strong>{t('event.prize.second.place')}</strong>: 5x Mouse sau Tastatură (în funcție de alegerea echipei câștigătoare)</li>
+                  <li><strong>{t('event.prize.third.place')}</strong>: 5x Căști gaming Hator Hypergang 2 USB 7.1</li>
+                  <li><strong>{t('event.prize.fourth.place')}</strong>: 5x Mousepad Hator Tonn EVO L Black</li>
                 </ul>
               </div>
               
               <div className="mt-12">
                 
-                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">Câștigătorii</h2>
+                <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.winners.title')}</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                   {/* Locul 1 */}
                   <div className="bg-darkGray/60 rounded-lg overflow-hidden border border-primary/30 hover:border-primary transition-colors">
                     <div className="p-4">
                       <div className="flex items-center mb-3">
-                        <span className="bg-gradient-to-r from-yellow-500 to-amber-300 text-black font-bold text-sm py-1 px-3 rounded mr-2">LOCUL 1</span>
+                        <span className="bg-gradient-to-r from-yellow-500 to-amber-300 text-black font-bold text-sm py-1 px-3 rounded mr-2">{t('event.first.place')}</span>
                         <h3 className="text-xl font-bold text-white">LitEnergy</h3>
                       </div>
                       <img 

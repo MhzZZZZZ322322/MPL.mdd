@@ -594,6 +594,118 @@ export const translations: TranslationDictionary = {
   "mef.button": {
     ro: "MEF",
     ru: "MEF"
+  },
+  
+  // Event pages
+  "event.back.button": {
+    ro: "Înapoi la evenimente",
+    ru: "Назад к событиям"
+  },
+  "event.pilot.cup.title": {
+    ro: "MPL Pilot Cup",
+    ru: "MPL Pilot Cup"
+  },
+  "event.pilot.cup.date": {
+    ro: "10-23 Martie 2025",
+    ru: "10-23 марта 2025"
+  },
+  "event.pilot.cup.location": {
+    ro: "Online (FACEIT)",
+    ru: "Онлайн (FACEIT)"
+  },
+  "event.pilot.cup.description": {
+    ro: "Turneul inaugural organizat de Moldova Pro League, dedicat jucătorilor de Counter-Strike 2 din Moldova, a fost un succes cu o participare record și meciuri intense.",
+    ru: "Инаугурационный турнир, организованный Moldova Pro League, посвященный игрокам Counter-Strike 2 из Молдовы, прошел с рекордным участием и напряженными матчами."
+  },
+  "event.about.title": {
+    ro: "Despre eveniment",
+    ru: "О событии"
+  },
+  "event.pilot.cup.about.p1": {
+    ro: "MPL Pilot Cup a fost turneul pilot prin care Moldova Pro League a inaugurat seria sa de competiții oficiale pentru Counter-Strike 2. Acest turneu a fost conceput special pentru jucătorii din Moldova, indiferent de nivelul lor de abilitate, oferind o platformă inclusivă unde echipele au concurat într-un mediu profesionist.",
+    ru: "MPL Pilot Cup был пилотным турниром, которым Moldova Pro League открыла свою серию официальных соревнований по Counter-Strike 2. Этот турнир был разработан специально для игроков из Молдовы, независимо от их уровня мастерства, предоставляя инклюзивную платформу, где команды соревновались в профессиональной среде."
+  },
+  "event.pilot.cup.about.p2": {
+    ro: "Turneul a fost organizat exclusiv online pe platforma FACEIT, eliminând astfel barierele geografice și facilitând participarea echipelor. MPL Pilot Cup nu a fost doar despre competiție, ci și despre construirea unei comunități unite în jurul pasiunii pentru Counter-Strike.",
+    ru: "Турнир проводился полностью онлайн на платформе FACEIT, устраняя географические барьеры и облегчая участие команд. MPL Pilot Cup был не только о соревновании, но и о создании объединенного сообщества вокруг страсти к Counter-Strike."
+  },
+  "event.format.title": {
+    ro: "Format",
+    ru: "Формат"
+  },
+  "event.format.elimination": {
+    ro: "Faza eliminatorie: 64 echipe într-un bracket simplu, meciuri eliminatorii (single elimination).",
+    ru: "Стадия выбывания: 64 команды в простой сетке, матчи на выбывание (single elimination)."
+  },
+  "event.format.matches": {
+    ro: "Format meciuri: Bo1 (Best of 1) pentru majoritatea meciurilor, Bo3 (Best of 3) pentru ultimele 4 echipe.",
+    ru: "Формат матчей: Bo1 (Best of 1) для большинства матчей, Bo3 (Best of 3) для последних 4 команд."
+  },
+  "event.prizes.title": {
+    ro: "Premii",
+    ru: "Призы"
+  },
+  "event.prizes.description": {
+    ro: "MPL Pilot Cup a oferit premii valoroase pentru echipele câștigătoare, furnizate de sponsorii noștri Darwin și HATOR:",
+    ru: "MPL Pilot Cup предложил ценные призы для команд-победителей, предоставленные нашими спонсорами Darwin и HATOR:"
+  },
+  "event.prize.first.place": {
+    ro: "Locul 1",
+    ru: "1-е место"
+  },
+  "event.prize.second.place": {
+    ro: "Locul 2",
+    ru: "2-е место"
+  },
+  "event.prize.third.place": {
+    ro: "Locul 3",
+    ru: "3-е место"
+  },
+  "event.prize.fourth.place": {
+    ro: "Locul 4",
+    ru: "4-е место"
+  },
+  "event.winners.title": {
+    ro: "Câștigătorii",
+    ru: "Победители"
+  },
+  "event.first.place": {
+    ro: "LOCUL 1",
+    ru: "1-Е МЕСТО"
+  },
+  
+  // HATOR CS2 LEAGUE
+  "event.hator.title": {
+    ro: "HATOR CS2 LEAGUE MOLDOVA",
+    ru: "HATOR CS2 LEAGUE MOLDOVA"
+  },
+  "event.hator.date": {
+    ro: "Aprilie-Iunie 2025",
+    ru: "Апрель-Июнь 2025"
+  },
+  "event.hator.location": {
+    ro: "Online (FACEIT)",
+    ru: "Онлайн (FACEIT)"
+  },
+  "event.hator.description": {
+    ro: "Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de comunitatea MPL în parteneriat cu HATOR.",
+    ru: "Самый крутой онлайн-турнир по Counter-Strike 2 в Молдове и Румынии, организованный сообществом MPL в партнерстве с HATOR."
+  },
+  "event.countdown": {
+    ro: "Până la începerea turneului:",
+    ru: "До начала турнира:"
+  },
+  "event.schedule.title": {
+    ro: "Program",
+    ru: "Расписание"
+  },
+  "event.league.description.1": {
+    ro: "MPL, cea mai mare comunitate CS din Moldova, în parteneriat cu HATOR și susținut de rețeaua Darwin, organizează primul sezon al turneului Hator CS2 League Moldova. Primul sezon promite un spectacol de neuitat – sute de jucători, zeci de meciuri, transmisiuni live și premii impresionante.",
+    ru: "MPL, крупнейшее CS-сообщество в Молдове, в партнерстве с HATOR и при поддержке сети Darwin, организует первый сезон турнира Hator CS2 League Moldova. Первый сезон обещает незабываемое зрелище – сотни игроков, десятки матчей, прямые трансляции и впечатляющие призы."
+  },
+  "event.league.description.2": {
+    ro: "Participanții și spectatorii vor primi coduri promoționale exclusive pentru produsele HATOR, disponibile în magazinele Darwin.",
+    ru: "Участники и зрители получат эксклюзивные промо-коды на продукцию HATOR, доступную в магазинах Darwin."
   }
 };
 

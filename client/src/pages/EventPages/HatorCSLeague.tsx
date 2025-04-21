@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const HatorCSLeague = () => {
+  const { t } = useLanguage();
   return (
     <>
       <Helmet>
