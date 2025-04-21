@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogClose, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { CsServer } from '@shared/schema-cs-servers';
+import { useLanguage } from '@/lib/LanguageContext';
 
 /**
  * Măsoară ping-ul real de la client la server folosind o tehnică de ping web
@@ -159,6 +160,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   // Determinăm dacă utilizatorul este din Moldova
   // În producție, ar trebui implementată o soluție mai robustă bazată pe geolocație
   const isFromMoldova = detectMoldovanUser();
+  const { t } = useLanguage();
   
   // Generăm un ping inițial adecvat locației serverului
   let initialPing;
@@ -260,7 +262,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
               className={server.status 
                 ? `bg-green-600 hover:bg-green-700 shrink-0 ${getStatusAnimationClass()}` 
                 : "shrink-0 bg-destructive"}>
-              {server.status ? 'Online' : 'Offline'}
+              {server.status ? t('servers.online') : t('servers.offline')}
             </Badge>
           </div>
           <div className="flex items-center justify-between mt-1">
@@ -291,7 +293,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Ping-ul tău la server</p>
+                    <p>{t('servers.ping')}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -377,7 +379,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Copiază comanda de conectare</p>
+                  <p>{t('servers.copy')}</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -393,6 +395,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
 };
 
 export const CsServerStatus: React.FC = () => {
+  const { t } = useLanguage();
   const { isLoading, error, data: servers } = useQuery({
     queryKey: ['/api/cs-servers'],
     refetchInterval: 60000, // Refetch every 60 seconds (1 minute)
@@ -417,7 +420,7 @@ export const CsServerStatus: React.FC = () => {
   return (
     <section className="py-10">
       <div className="container max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">Serverele Noastre CS2</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">{t('servers.section.title')}</h2>
         
         <div className="flex flex-wrap justify-center gap-6">
           {servers && Array.isArray(servers) ? servers.map((server: CsServer) => (

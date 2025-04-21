@@ -158,6 +158,20 @@ export const translations: TranslationDictionary = {
   "coming.soon": {
     ro: "În curând",
     ru: "Скоро"
+  },
+  
+  // Secțiunea CS Server Status
+  "servers.section.title": {
+    ro: "Serverele Noastre CS2",
+    ru: "Наши CS2 серверы"
+  },
+  "servers.connect.command": {
+    ro: "Comandă de conectare",
+    ru: "Команда подключения"
+  },
+  "servers.thanks.message": {
+    ro: "Mulțumește lui @faceofmadness pentru toate serverele – cu un Follow, Like și Share pe TikTok. E Gratis!",
+    ru: "Поблагодарите @faceofmadness за все серверы – Follow, Like и Share в TikTok. Это бесплатно!"
   }
 };
 
