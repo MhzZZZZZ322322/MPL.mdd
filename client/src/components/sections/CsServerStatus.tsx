@@ -61,12 +61,11 @@ const calculatePing = async (host: string, port: number, location: string): Prom
     // Validăm ping-ul obținut
     // Dacă ping-ul este în interval realist (>2ms și <900ms), îl folosim
     if (pingTime > 2 && pingTime < 900) {
-      // Verificăm dacă serverul este din Moldova pentru a limita ping-ul la maxim 10ms
-      if (location === "Moldova" && pingTime > 10) {
-        // Pentru servere din Moldova, limităm ping-ul la maxim 10ms
-        return 10;
+      if (location === "Moldova") {
+        // Pentru Moldova, ping-ul trebuie să fie între 4-10ms, generăm o valoare aleatorie
+        return Math.floor(Math.random() * 7) + 4; // Între 4 și 10ms
       }
-      return pingTime;
+      return pingTime; // Pentru alte locații, folosim valoarea calculată
     } else {
       // Fallback pentru cazul când măsurarea ping-ului eșuează
       // sau returnează valori nerealiste
@@ -87,15 +86,13 @@ const calculatePing = async (host: string, port: number, location: string): Prom
           pingBase = 5; 
       }
       
-      // Adăugăm o variație aleatorie între -2ms și +3ms pentru realism
-      const variation = Math.floor(Math.random() * 6) - 2;
-      
-      // Pentru servere din Moldova, ne asigurăm că ping-ul nu depășește 10ms
+      // Pentru serverele din Moldova, pingul trebuie să fie între 4 și 10ms
       if (location === "Moldova") {
-        return Math.max(3, Math.min(10, pingBase + variation));
+        return Math.floor(Math.random() * 7) + 4; // Între 4 și 10ms
       } else {
-        // Pentru alte locații, ping-ul poate fi între 3-12ms
-        return Math.max(3, Math.min(12, pingBase + variation));
+        // Pentru alte locații, simulăm o variație mai mare
+        const variation = Math.floor(Math.random() * 10) - 2; // -2 până la +7
+        return Math.max(3, Math.min(15, pingBase + variation)); // Între 3 și 15ms
       }
     }
   } catch (error) {
@@ -112,11 +109,11 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
   // Generăm un ping inițial adecvat locației serverului
   let initialPing;
   if (server.location === "Moldova") {
-    // Pentru serverele din Moldova, ping-ul inițial va fi între 3-10ms
-    initialPing = Math.floor(Math.random() * 8) + 3; // Între 3 și 10
+    // Pentru serverele din Moldova, ping-ul inițial va fi între 4-10ms
+    initialPing = Math.floor(Math.random() * 7) + 4; // Între 4 și 10
   } else {
-    // Pentru alte locații, ping-ul poate fi între 3-12ms
-    initialPing = Math.floor(Math.random() * 10) + 3; // Între 3 și 12
+    // Pentru alte locații, ping-ul poate fi între 3-15ms
+    initialPing = Math.floor(Math.random() * 13) + 3; // Între 3 și 15
   }
   const [ping, setPing] = useState<number>(initialPing);
   const [isPingLoading, setIsPingLoading] = useState<boolean>(true);
@@ -134,11 +131,11 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
       // Folosim un ping random care respectă limitele pentru locație
       let randomPing;
       if (server.location === "Moldova") {
-        // Pentru Moldova, ping între 3-10ms
-        randomPing = Math.floor(Math.random() * 8) + 3;
+        // Pentru Moldova, ping între 4-10ms
+        randomPing = Math.floor(Math.random() * 7) + 4;
       } else {
-        // Pentru alte locații, ping între 3-12ms
-        randomPing = Math.floor(Math.random() * 10) + 3;
+        // Pentru alte locații, ping între 3-15ms
+        randomPing = Math.floor(Math.random() * 13) + 3;
       }
       console.log("Setăm ping aleatoriu de fallback:", randomPing, "ms");
       setPing(randomPing);
