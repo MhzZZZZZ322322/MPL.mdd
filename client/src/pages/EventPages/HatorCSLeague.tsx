@@ -284,10 +284,10 @@ const HatorCSLeague = () => {
                   {t('event.registration.description')}
                 </p>
                 <ul>
-                  <li><strong>{t('event.registration.start')}</strong>: 21 Aprilie 2025</li>
-                  <li><strong>{t('event.registration.end')}</strong>: 25 Mai 2025</li>
-                  <li><strong>{t('event.team.validation')}</strong>: 26 Mai - 1 Iunie 2025</li>
-                  <li><strong>{t('event.tournament.start')}</strong>: 2 Iunie 2025</li>
+                  <li><strong>{t('event.registration.start')}</strong>: {t('event.date.registration.start')}</li>
+                  <li><strong>{t('event.registration.end')}</strong>: {t('event.date.registration.end')}</li>
+                  <li><strong>{t('event.team.validation')}</strong>: {t('event.date.team.validation')}</li>
+                  <li><strong>{t('event.tournament.start')}</strong>: {t('event.date.tournament.start')}</li>
                 </ul>
               </div>
               

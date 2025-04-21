@@ -1041,6 +1041,58 @@ export const translations: TranslationDictionary = {
     ro: "Cele mai bune din 3 hărți (etapa finală din Top 12 până în finală)",
     ru: "Лучшее из 3 карт (финальный этап от Top 12 до финала)"
   },
+  "event.maps.coinflip": {
+    ro: "Coinflip",
+    ru: "Жребий"
+  },
+  "event.maps.teams.determination": {
+    ro: "Determinarea echipelor A și B",
+    ru: "Определение команд A и B"
+  },
+  "event.maps.steps": {
+    ro: "Pași alegere hartă",
+    ru: "Шаги выбора карты"
+  },
+  "event.maps.step1": {
+    ro: "Echipa A elimină 1 hartă",
+    ru: "Команда A исключает 1 карту"
+  },
+  "event.maps.step2": {
+    ro: "Echipa B elimină 1 hartă",
+    ru: "Команда B исключает 1 карту"
+  },
+  "event.maps.step3": {
+    ro: "Echipa A alege harta 1 (care va fi jucată prima)",
+    ru: "Команда A выбирает карту 1 (которая будет сыграна первой)"
+  },
+  "event.maps.step4": {
+    ro: "Echipa B alege partea (CT/T) pentru harta 1",
+    ru: "Команда B выбирает сторону (CT/T) для карты 1"
+  },
+  "event.maps.step5": {
+    ro: "Echipa B alege harta 2 (care va fi jucată a doua)",
+    ru: "Команда B выбирает карту 2 (которая будет сыграна второй)"
+  },
+  "event.maps.step6": {
+    ro: "Echipa A alege partea (CT/T) pentru harta 2",
+    ru: "Команда A выбирает сторону (CT/T) для карты 2"
+  },
+  "event.maps.step7": {
+    ro: "Echipa A elimină 1 hartă",
+    ru: "Команда A исключает 1 карту"
+  },
+  "event.maps.step8": {
+    ro: "Echipa B elimină 1 hartă",
+    ru: "Команда B исключает 1 карту"
+  },
+  "event.maps.step9": {
+    ro: "Harta rămasă devine harta 3 (decisivă dacă scorul e 1-1)",
+    ru: "Оставшаяся карта становится картой 3 (решающей при счете 1-1)"
+  },
+  "event.maps.step10": {
+    ro: "Echipa A alege partea (CT/T) pentru harta 3",
+    ru: "Команда A выбирает сторону (CT/T) для карты 3"
+  },
   "event.rules.warning": {
     ro: "Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):",
     ru: "Несоблюдение этих правил приведет к дисквалификации (техническое поражение):"
@@ -1116,6 +1168,22 @@ export const translations: TranslationDictionary = {
   "event.rule.discord.description": {
     ro: "Discord turneului este platforma oficială de comunicare și trebuie utilizată pentru coordonare.",
     ru: "Discord турнира является официальной платформой для общения и должен использоваться для координации."
+  },
+  "event.date.registration.start": {
+    ro: "21 Aprilie 2025",
+    ru: "21 апреля 2025"
+  },
+  "event.date.registration.end": {
+    ro: "25 Mai 2025",
+    ru: "25 мая 2025"
+  },
+  "event.date.team.validation": {
+    ro: "26 Mai - 1 Iunie 2025",
+    ru: "26 мая - 1 июня 2025"
+  },
+  "event.date.tournament.start": {
+    ro: "2 Iunie 2025",
+    ru: "2 июня 2025"
   }
 };
 
