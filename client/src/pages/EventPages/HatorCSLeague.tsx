@@ -316,7 +316,7 @@ const HatorCSLeague = () => {
                     <li>Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare</li>
                   </ul>
                   
-                  <h3>Reguli obligatorii pentru participanți</h3>
+                  <h3>{t('event.rules.mandatory')}</h3>
                   <p className="text-red-400 font-semibold">Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):</p>
                   <ol className="space-y-2">
                     <li><strong>Nickname adecvat</strong> – un nickname provocator, care instigă la ură națională, rasism, misoginie și alte forme de discriminare, este absolut INTERZIS.</li>
@@ -335,14 +335,14 @@ const HatorCSLeague = () => {
             
             <div className="lg:col-span-1">
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Informații rapide</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.quick.info')}</h3>
                 
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
                     <Calendar className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">Aprilie-Iunie 2025</div>
-                      <div className="text-sm">Weekenduri: 10:00 - 22:00 EEST</div>
+                      <div className="font-semibold text-white">{t('event.date.range')}</div>
+                      <div className="text-sm">{t('event.date.hours')}</div>
                     </div>
                   </div>
                   
@@ -350,30 +350,30 @@ const HatorCSLeague = () => {
                     <MapPin className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <div className="font-semibold text-white">Online (FACEIT)</div>
-                      <div className="text-sm">Platforma oficială de competiție</div>
+                      <div className="text-sm">{t('event.platform')}</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Users className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">Până la 128 echipe</div>
-                      <div className="text-sm">Format 5v5</div>
+                      <div className="font-semibold text-white">{t('event.teams.limit')}</div>
+                      <div className="text-sm">{t('event.format.5v5')}</div>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
                     <Trophy className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <div className="font-semibold text-white">Premii în valoare de 65.000 lei</div>
-                      <div className="text-sm">Echipament HATOR premium</div>
+                      <div className="font-semibold text-white">{t('event.prizes.value.hator')}</div>
+                      <div className="text-sm">{t('event.hator.premium')}</div>
                     </div>
                   </div>
                 </div>
               </NeonBorder>
               
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Organizat de</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.organized.by')}</h3>
                 <div className="flex flex-col space-y-4">
                   <div className="mb-4">
                     <a 
@@ -387,7 +387,7 @@ const HatorCSLeague = () => {
                   <hr className="border-gray-700" />
                   
                   <div>
-                    <div className="font-semibold text-white mb-2">Sponsori Principali</div>
+                    <div className="font-semibold text-white mb-2">{t('event.main.sponsor')}</div>
                     <a 
                       href="https://hator.gg" 
                       target="_blank" 
@@ -409,10 +409,10 @@ const HatorCSLeague = () => {
               </NeonBorder>
               
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Stream & Media</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.stream.media')}</h3>
                 
                 <p className="text-gray-300 mb-4">
-                  Toate meciurile din faza eliminatorie vor fi transmise live pe canalele oficiale:
+                  {t('event.stream.description')}
                 </p>
                 
                 <div className="space-y-2">
@@ -443,10 +443,10 @@ const HatorCSLeague = () => {
               </NeonBorder>
               
               <NeonBorder className="rounded-lg p-6 bg-darkGray/50">
-                <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
+                <h3 className="text-xl font-bold text-white mb-4">{t('event.contact')}</h3>
                 
                 <p className="text-gray-300 mb-4">
-                  Pentru orice întrebări legate de turneu, nu ezitați să ne contactați:
+                  {t('event.contact.description')}
                 </p>
                 
                 <div className="space-y-2">
