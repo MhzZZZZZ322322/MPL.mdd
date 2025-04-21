@@ -864,6 +864,22 @@ export const translations: TranslationDictionary = {
   "event.playoff": {
     ro: "Play-off",
     ru: "Плей-офф"
+  },
+  "event.stream.media": {
+    ro: "Stream & Media",
+    ru: "Стримы и Медиа"
+  },
+  "event.stream.description": {
+    ro: "Toate meciurile din faza eliminatorie vor fi transmise live pe canalele oficiale:",
+    ru: "Все матчи отборочного этапа будут транслироваться в прямом эфире на официальных каналах:"
+  },
+  "event.contact": {
+    ro: "Contact",
+    ru: "Контакты"
+  },
+  "event.contact.description": {
+    ro: "Pentru orice întrebări legate de turneu, nu ezitați să ne contactați:",
+    ru: "По любым вопросам, связанным с турниром, не стесняйтесь обращаться к нам:"
   }
 };
 
