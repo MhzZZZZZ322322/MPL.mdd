@@ -1006,12 +1006,12 @@ export const translations: TranslationDictionary = {
     ru: "Использование любого типа читов/хаков, эксплойтов или несанкционированных скриптов приведет к немедленной дисквалификации команды"
   },
   "event.anticheat.rule3": {
-    ro: "Este obligatorie înregistrarea video (POV) a jocului pentru toți jucătorii",
-    ru: "Видеозапись игры (POV) обязательна для всех игроков"
+    ro: "Conturi Steam publice – Toți jucătorii trebuie să joace de pe un cont Steam public. Dacă nu folosesc contul principal, trebuie să prezinte motivul și să accepte riscul descalificării.",
+    ru: "Публичные аккаунты Steam – Все игроки должны играть с публичного аккаунта Steam. Если они не используют свой основной аккаунт, они должны объяснить причину и принять риск дисквалификации."
   },
   "event.anticheat.rule4": {
-    ro: "Administratorii MPL își rezervă dreptul de a verifica orice înregistrare suspectă",
-    ru: "Администраторы MPL оставляют за собой право проверять любые подозрительные записи"
+    ro: "Răspundere pentru reguli – Orice abatere sau folosirea unui cont alternativ fără motiv justificat poate duce la descalificarea echipei.",
+    ru: "Ответственность за правила – Любое нарушение или использование альтернативного аккаунта без уважительной причины может привести к дисквалификации команды."
   },
   "event.conduct.rule1": {
     ro: "Jucătorii trebuie să manifeste respect față de adversari, spectatori și administratori",
