@@ -220,7 +220,7 @@ const SimpleContactForm = () => {
                 
                 {/* Contact Info */}
                 <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-6 space-y-4">
-                  <h3 className="font-rajdhani font-bold text-xl text-white mb-4">Informații de contact</h3>
+                  <h3 className="font-rajdhani font-bold text-xl text-white mb-4">{t('contact.info.title')}</h3>
                   
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex gap-3 items-start">
@@ -248,7 +248,7 @@ const SimpleContactForm = () => {
                 
                 {/* Social Media Links */}
                 <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-6">
-                  <h3 className="font-rajdhani font-bold text-xl text-white mb-4">Urmărește-ne</h3>
+                  <h3 className="font-rajdhani font-bold text-xl text-white mb-4">{t('contact.social.title')}</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {socialLinks.map((social, index) => (
                       <a 
@@ -270,18 +270,18 @@ const SimpleContactForm = () => {
             {/* Right Side - Contact Form */}
             <div className="md:col-span-7" data-aos="fade-left" data-aos-delay="200">
               <div className="bg-darkGray/60 backdrop-blur-sm border border-primary/20 rounded-lg p-8">
-                <h3 className="font-rajdhani font-bold text-2xl text-white mb-6">Trimite-ne un mesaj</h3>
+                <h3 className="font-rajdhani font-bold text-2xl text-white mb-6">{t('contact.form.title')}</h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-white mb-2">Nume</label>
+                      <label className="block text-white mb-2">{t('contact.form.name')}</label>
                       <input
                         type="text"
                         name="name"
                         value={formState.name}
                         onChange={handleChange}
-                        placeholder="Numele tău"
+                        placeholder={t('contact.form.name.placeholder')}
                         style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
                         className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors placeholder-gray-500"
                       />
@@ -289,13 +289,13 @@ const SimpleContactForm = () => {
                     </div>
                     
                     <div>
-                      <label className="block text-white mb-2">Email</label>
+                      <label className="block text-white mb-2">{t('contact.form.email')}</label>
                       <input
                         type="email"
                         name="email"
                         value={formState.email}
                         onChange={handleChange}
-                        placeholder="emailul@tau.com"
+                        placeholder={t('contact.form.email.placeholder')}
                         style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
                         className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors placeholder-gray-500"
                       />
@@ -304,7 +304,7 @@ const SimpleContactForm = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-white mb-2">Subiect</label>
+                    <label className="block text-white mb-2">{t('contact.form.subject')}</label>
                     <select
                       name="subject"
                       value={formState.subject}
@@ -312,21 +312,21 @@ const SimpleContactForm = () => {
                       style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
                       className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors"
                     >
-                      <option value="general">Întrebare generală</option>
-                      <option value="tournaments">Informații turnee</option>
-                      <option value="partnership">Parteneriat</option>
-                      <option value="other">Altele</option>
+                      <option value="general">{t('contact.form.subject.general')}</option>
+                      <option value="tournaments">{t('contact.form.subject.tournaments')}</option>
+                      <option value="partnership">{t('contact.form.subject.partnership')}</option>
+                      <option value="other">{t('contact.form.subject.other')}</option>
                     </select>
                     {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
                   </div>
                   
                   <div>
-                    <label className="block text-white mb-2">Mesaj</label>
+                    <label className="block text-white mb-2">{t('contact.form.message')}</label>
                     <textarea
                       name="message"
                       value={formState.message}
                       onChange={handleChange}
-                      placeholder="Mesajul tău..."
+                      placeholder={t('contact.form.message.placeholder')}
                       style={{ color: 'white', backgroundColor: '#1a1a2e', borderColor: 'purple' }}
                       className="w-full border rounded-md p-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors placeholder-gray-500"
                       rows={5}
@@ -339,7 +339,7 @@ const SimpleContactForm = () => {
                     className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white py-3 px-4 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(139,92,246,0.4)]"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Se trimite...' : 'Trimite mesajul'}
+                    {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
                   </button>
                 </form>
               </div>
