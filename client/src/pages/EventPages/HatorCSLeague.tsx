@@ -271,23 +271,23 @@ const HatorCSLeague = () => {
                   </li>
                 </ul>
                 
-                <h3>Eligibilitate</h3>
+                <h3>{t('event.eligibility')}</h3>
                 <ul>
-                  <li>Echipele trebuie să aibă minimum 5 jucători și maximum 7 (5 titulari + 2 rezerve)</li>
-                  <li>Toți jucătorii trebuie să dețină un cont FACEIT verificat</li>
-                  <li>Cel puțin 4 jucători care vor juca - fără rezerve - din echipă trebuie să fie din Moldova, din Romania maxim 1 jucator</li>
-                  <li>Fiecare echipă trebuie să aibă <strong>obligatoriu</strong> un TEG (tag) și un logotip oficial pe platformă</li>
+                  <li>{t('event.eligibility.teams')}</li>
+                  <li>{t('event.eligibility.faceit')}</li>
+                  <li>{t('event.eligibility.nationality')}</li>
+                  <li>{t('event.eligibility.tag')}</li>
                 </ul>
                 
-                <h3>Înscriere</h3>
+                <h3>{t('event.registration.title')}</h3>
                 <p>
-                  Înscrierea echipelor se va face exclusiv pe platforma FACEIT și Discord MPL, conform următorului calendar:
+                  {t('event.registration.description')}
                 </p>
                 <ul>
-                  <li><strong>Start înscrieri</strong>: 21 Aprilie 2025</li>
-                  <li><strong>Închidere înscrieri</strong>: 25 Mai 2025</li>
-                  <li><strong>Validare echipe</strong>: 26 Mai - 1 Iunie 2025</li>
-                  <li><strong>Start turneu</strong>: 2 Iunie 2025</li>
+                  <li><strong>{t('event.registration.start')}</strong>: 21 Aprilie 2025</li>
+                  <li><strong>{t('event.registration.end')}</strong>: 25 Mai 2025</li>
+                  <li><strong>{t('event.team.validation')}</strong>: 26 Mai - 1 Iunie 2025</li>
+                  <li><strong>{t('event.tournament.start')}</strong>: 2 Iunie 2025</li>
                 </ul>
               </div>
               
@@ -297,27 +297,27 @@ const HatorCSLeague = () => {
                 <div className="prose prose-invert max-w-none">
                   <h3>{t('event.anticheat')}</h3>
                   <ul>
-                    <li>Toți jucătorii sunt obligați să folosească FACEIT Anti-Cheat pe durata turneului</li>
-                    <li>Utilizarea oricărui tip de cheat/hack, exploit, sau script neautorizat va duce la descalificarea imediată a echipei</li>
-                    <li>Este obligatorie înregistrarea video (POV) a jocului pentru toți jucătorii</li>
-                    <li>Administratorii MPL își rezervă dreptul de a verifica orice înregistrare suspectă</li>
+                    <li>{t('event.anticheat.rule1')}</li>
+                    <li>{t('event.anticheat.rule2')}</li>
+                    <li>{t('event.anticheat.rule3')}</li>
+                    <li>{t('event.anticheat.rule4')}</li>
                   </ul>
                   
                   <h3>{t('event.conduct')}</h3>
                   <ul>
-                    <li>Jucătorii trebuie să manifeste respect față de adversari, spectatori și administratori</li>
-                    <li>Comportamentul toxic, limbajul abuziv, rasist sau discriminatoriu nu sunt tolerate</li>
-                    <li>Nerespectarea regulilor de conduită poate duce la avertismente, penalizări sau descalificare</li>
+                    <li>{t('event.conduct.rule1')}</li>
+                    <li>{t('event.conduct.rule2')}</li>
+                    <li>{t('event.conduct.rule3')}</li>
                   </ul>
                   
                   <h3>{t('event.technical.pause')}</h3>
                   <ul>
-                    <li>Fiecare echipă are dreptul la maximum 2 pauze tehnice de maximum 5 minute pe meci</li>
-                    <li>Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare</li>
+                    <li>{t('event.technical.pause.rule1')}</li>
+                    <li>{t('event.technical.pause.rule2')}</li>
                   </ul>
                   
                   <h3>{t('event.rules.mandatory')}</h3>
-                  <p className="text-red-400 font-semibold">Nerespectarea acestor reguli duce la descalificare (pierdere tehnică):</p>
+                  <p className="text-red-400 font-semibold">{t('event.rules.warning')}</p>
                   <ol className="space-y-2">
                     <li><strong>Nickname adecvat</strong> – un nickname provocator, care instigă la ură națională, rasism, misoginie și alte forme de discriminare, este absolut INTERZIS.</li>
                     <li><strong>Skinuri indecente</strong> – se interzice folosirea skinurilor care conțin combinații de stickere indecente sau name tag-uri provocatoare. Dacă este depistată utilizarea unui skin indecent, se va aplica o avertizare; la a doua abatere, echipa va fi descalificată.</li>

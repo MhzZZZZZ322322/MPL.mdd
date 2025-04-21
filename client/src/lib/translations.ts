@@ -880,6 +880,78 @@ export const translations: TranslationDictionary = {
   "event.contact.description": {
     ro: "Pentru orice întrebări legate de turneu, nu ezitați să ne contactați:",
     ru: "По любым вопросам, связанным с турниром, не стесняйтесь обращаться к нам:"
+  },
+  "event.eligibility": {
+    ro: "Eligibilitate",
+    ru: "Требования к участникам"
+  },
+  "event.eligibility.teams": {
+    ro: "Echipele trebuie să aibă minimum 5 jucători și maximum 7 (5 titulari + 2 rezerve)",
+    ru: "Команды должны иметь минимум 5 игроков и максимум 7 (5 основных + 2 запасных)"
+  },
+  "event.eligibility.faceit": {
+    ro: "Toți jucătorii trebuie să dețină un cont FACEIT verificat",
+    ru: "Все игроки должны иметь верифицированный аккаунт FACEIT"
+  },
+  "event.eligibility.nationality": {
+    ro: "Cel puțin 4 jucători care vor juca - fără rezerve - din echipă trebuie să fie din Moldova, din Romania maxim 1 jucator",
+    ru: "Не менее 4 игроков, которые будут играть - без запасных - должны быть из Молдовы, из Румынии максимум 1 игрок"
+  },
+  "event.eligibility.tag": {
+    ro: "Fiecare echipă trebuie să aibă obligatoriu un TEG (tag) și un logotip oficial pe platformă",
+    ru: "Каждая команда должна обязательно иметь TEG (тег) и официальный логотип на платформе"
+  },
+  "event.registration.title": {
+    ro: "Înscriere",
+    ru: "Регистрация команд"
+  },
+  "event.registration.description": {
+    ro: "Înscrierea echipelor se va face exclusiv pe platforma FACEIT și Discord MPL, conform următorului calendar:",
+    ru: "Регистрация команд будет проводиться исключительно на платформе FACEIT и в Discord MPL в соответствии со следующим графиком:"
+  },
+  "event.registration.start": {
+    ro: "Start înscrieri",
+    ru: "Начало регистрации"
+  },
+  "event.registration.end": {
+    ro: "Închidere înscrieri",
+    ru: "Закрытие регистрации"
+  },
+  "event.anticheat.rule1": {
+    ro: "Toți jucătorii sunt obligați să folosească FACEIT Anti-Cheat pe durata turneului",
+    ru: "Все игроки обязаны использовать FACEIT Anti-Cheat на протяжении всего турнира"
+  },
+  "event.anticheat.rule2": {
+    ro: "Utilizarea oricărui tip de cheat/hack, exploit, sau script neautorizat va duce la descalificarea imediată a echipei",
+    ru: "Использование любого типа читов/хаков, эксплойтов или несанкционированных скриптов приведет к немедленной дисквалификации команды"
+  },
+  "event.anticheat.rule3": {
+    ro: "Este obligatorie înregistrarea video (POV) a jocului pentru toți jucătorii",
+    ru: "Видеозапись игры (POV) обязательна для всех игроков"
+  },
+  "event.anticheat.rule4": {
+    ro: "Administratorii MPL își rezervă dreptul de a verifica orice înregistrare suspectă",
+    ru: "Администраторы MPL оставляют за собой право проверять любые подозрительные записи"
+  },
+  "event.conduct.rule1": {
+    ro: "Jucătorii trebuie să manifeste respect față de adversari, spectatori și administratori",
+    ru: "Игроки должны проявлять уважение к соперникам, зрителям и администраторам"
+  },
+  "event.conduct.rule2": {
+    ro: "Comportamentul toxic, limbajul abuziv, rasist sau discriminatoriu nu sunt tolerate",
+    ru: "Токсичное поведение, оскорбительная, расистская или дискриминационная лексика не допускаются"
+  },
+  "event.conduct.rule3": {
+    ro: "Nerespectarea regulilor de conduită poate duce la avertismente, penalizări sau descalificare",
+    ru: "Несоблюдение правил поведения может привести к предупреждениям, штрафам или дисквалификации"
+  },
+  "event.technical.pause.rule1": {
+    ro: "Fiecare echipă are dreptul la maximum 2 pauze tehnice de maximum 5 minute pe meci",
+    ru: "Каждая команда имеет право на максимум 2 технических паузы продолжительностью до 5 минут за матч"
+  },
+  "event.technical.pause.rule2": {
+    ro: "Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare",
+    ru: "Злоупотребление техническими паузами будет наказываться предупреждениями и возможной потерей права на будущие паузы"
   }
 };
 
