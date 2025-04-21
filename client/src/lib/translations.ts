@@ -706,6 +706,164 @@ export const translations: TranslationDictionary = {
   "event.league.description.2": {
     ro: "Participanții și spectatorii vor primi coduri promoționale exclusive pentru produsele HATOR, disponibile în magazinele Darwin.",
     ru: "Участники и зрители получат эксклюзивные промо-коды на продукцию HATOR, доступную в магазинах Darwin."
+  },
+  
+  "event.prizes.value": {
+    ro: "Premii în Valoare de 65.000 Lei",
+    ru: "Призы стоимостью 65 000 леев"
+  },
+  "event.prize.first": {
+    ro: "Locul 1",
+    ru: "1-е место"
+  },
+  "event.prize.second": {
+    ro: "Locul 2",
+    ru: "2-е место"
+  },
+  "event.prize.third": {
+    ro: "Locul 3",
+    ru: "3-е место"
+  },
+  "event.prize.secret": {
+    ro: "Premiu Secret",
+    ru: "Секретный приз"
+  },
+  "event.prize.secret.description": {
+    ro: "Va fi dezvăluit în timpul turneului",
+    ru: "Будет раскрыт во время турнира"
+  },
+  "event.prize.special": {
+    ro: "Surpriză specială pentru participanți",
+    ru: "Специальный сюрприз для участников"
+  },
+  "event.hator.chairs": {
+    ro: "5x Scaune gaming HATOR Arc 2 XL",
+    ru: "5x Игровые кресла HATOR Arc 2 XL"
+  },
+  "event.hator.mouse": {
+    ro: "5x Mouse HATOR Quasar 3 ULTRA 8K",
+    ru: "5x Мышь HATOR Quasar 3 ULTRA 8K"
+  },
+  "event.hator.headphones": {
+    ro: "5x Căști HATOR Hypergang 2 USB 7.1",
+    ru: "5x Наушники HATOR Hypergang 2 USB 7.1"
+  },
+  
+  "event.format.title.official": {
+    ro: "Format Oficial Turneu",
+    ru: "Официальный формат турнира"
+  },
+  "event.format.stage1": {
+    ro: "Etapa 1: Grupe (Swiss Format)",
+    ru: "Этап 1: Группы (Швейцарская система)"
+  },
+  "event.format.stage2": {
+    ro: "Etapa 2: Play-off (Eliminatoriu)",
+    ru: "Этап 2: Плей-офф (На выбывание)"
+  },
+  "event.format.matches.format": {
+    ro: "Format Meciuri",
+    ru: "Формат матчей"
+  },
+  "event.maps.selection": {
+    ro: "Alegere Hărți - Bo3",
+    ru: "Выбор карт - Bo3"
+  },
+  
+  "event.rules": {
+    ro: "Reguli importante",
+    ru: "Важные правила"
+  },
+  "event.anticheat": {
+    ro: "Anti-cheat și Fair Play",
+    ru: "Анти-чит и честная игра"
+  },
+  "event.conduct": {
+    ro: "Conduită",
+    ru: "Поведение"
+  },
+  "event.technical.pause": {
+    ro: "Technical Pause",
+    ru: "Технические паузы"
+  },
+  "event.rules.mandatory": {
+    ro: "Reguli obligatorii pentru participanți",
+    ru: "Обязательные правила для участников"
+  },
+  
+  "event.registration": {
+    ro: "Înregistrare echipă",
+    ru: "Регистрация команды"
+  },
+  "event.regulation": {
+    ro: "Regulament",
+    ru: "Правила"
+  },
+  
+  "event.quick.info": {
+    ro: "Informații rapide",
+    ru: "Быстрая информация"
+  },
+  "event.date.range": {
+    ro: "Aprilie-Iunie 2025",
+    ru: "Апрель-Июнь 2025"
+  },
+  "event.date.hours": {
+    ro: "Weekenduri: 10:00 - 22:00 EEST",
+    ru: "Выходные: 10:00 - 22:00 EEST"
+  },
+  "event.platform": {
+    ro: "Platforma oficială de competiție",
+    ru: "Официальная платформа соревнований"
+  },
+  "event.teams.limit": {
+    ro: "Până la 128 echipe",
+    ru: "До 128 команд"
+  },
+  "event.format.5v5": {
+    ro: "Format 5v5",
+    ru: "Формат 5v5"
+  },
+  "event.prizes.value.hator": {
+    ro: "Premii în valoare de 65.000 lei",
+    ru: "Призы стоимостью 65 000 леев"
+  },
+  "event.hator.premium": {
+    ro: "Echipament HATOR premium",
+    ru: "Премиальное оборудование HATOR"
+  },
+  
+  "event.organized.by": {
+    ro: "Organizat de",
+    ru: "Организовано"
+  },
+  "event.main.sponsor": {
+    ro: "Sponsor Principal",
+    ru: "Главный спонсор"
+  },
+  "event.partners": {
+    ro: "Parteneri",
+    ru: "Партнеры"
+  },
+  "event.registrations": {
+    ro: "Înscrieri",
+    ru: "Регистрация"
+  }, 
+  "event.team.validation": {
+    ro: "Validare echipe",
+    ru: "Проверка команд"
+  },
+  "event.tournament.start": {
+    ro: "Start turneu",
+    ru: "Начало турнира"
+  },
+  "event.swiss.format": {
+    ro: "Swiss Format",
+    ru: "Швейцарская система"
+  },
+  "event.playoff": {
+    ro: "Play-off",
+    ru: "Плей-офф"
   }
 };
 

@@ -66,7 +66,7 @@ const HatorCSLeague = () => {
               <div className="flex flex-wrap gap-4">
                 <a href="https://discord.gg/KgXXUebhVM" target="_blank" rel="noopener noreferrer">
                   <Button className="bg-primary hover:bg-primary/90">
-                    Înregistrare echipă
+                    {t('event.registration')}
                   </Button>
                 </a>
                 <a href="#rules" onClick={(e) => {
@@ -74,7 +74,7 @@ const HatorCSLeague = () => {
                   document.getElementById('rules')?.scrollIntoView({ behavior: 'smooth' });
                 }}>
                   <Button variant="outline" className="border-white text-white hover:bg-white/10">
-                    Regulament
+                    {t('event.regulation')}
                   </Button>
                 </a>
               </div>
@@ -85,7 +85,7 @@ const HatorCSLeague = () => {
         {/* Premii Section */}
         <div className="py-12 bg-gradient-to-b from-darkBg to-black">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-white mb-8 font-rajdhani text-center">Premii în Valoare de 65.000 Lei</h2>
+            <h2 className="text-3xl font-bold text-white mb-8 font-rajdhani text-center">{t('event.prizes.value')}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
               <a 
@@ -97,7 +97,7 @@ const HatorCSLeague = () => {
                 <div className="bg-gradient-to-br from-amber-500/20 to-amber-600/20 p-4 sm:p-6 rounded-lg border border-amber-500/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-500/20 h-full flex flex-col">
                   <div className="flex items-center mb-4">
                     <Award className="text-amber-500 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
-                    <h3 className="text-amber-500 text-xl sm:text-2xl font-bold">Locul 1</h3>
+                    <h3 className="text-amber-500 text-xl sm:text-2xl font-bold">{t('event.prize.first')}</h3>
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow">
                     <img 
@@ -109,7 +109,7 @@ const HatorCSLeague = () => {
                       height="450"
                     />
                   </div>
-                  <p className="text-white text-center text-base sm:text-lg">5x Scaune gaming HATOR Arc 2 XL</p>
+                  <p className="text-white text-center text-base sm:text-lg">{t('event.hator.chairs')}</p>
                 </div>
               </a>
               
@@ -122,7 +122,7 @@ const HatorCSLeague = () => {
                 <div className="bg-gradient-to-br from-slate-400/20 to-slate-500/20 p-4 sm:p-6 rounded-lg border border-slate-400/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-slate-400/20 h-full flex flex-col">
                   <div className="flex items-center mb-4">
                     <Award className="text-slate-400 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
-                    <h3 className="text-slate-400 text-xl sm:text-2xl font-bold">Locul 2</h3>
+                    <h3 className="text-slate-400 text-xl sm:text-2xl font-bold">{t('event.prize.second')}</h3>
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow">
                     <img 
@@ -134,7 +134,7 @@ const HatorCSLeague = () => {
                       height="450"
                     />
                   </div>
-                  <p className="text-white text-center text-base sm:text-lg">5x Mouse HATOR Quasar 3 ULTRA 8K</p>
+                  <p className="text-white text-center text-base sm:text-lg">{t('event.hator.mouse')}</p>
                 </div>
               </a>
               
@@ -147,7 +147,7 @@ const HatorCSLeague = () => {
                 <div className="bg-gradient-to-br from-amber-700/20 to-amber-800/20 p-4 sm:p-6 rounded-lg border border-amber-700/30 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-amber-700/20 h-full flex flex-col">
                   <div className="flex items-center mb-4">
                     <Award className="text-amber-700 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
-                    <h3 className="text-amber-700 text-xl sm:text-2xl font-bold">Locul 3</h3>
+                    <h3 className="text-amber-700 text-xl sm:text-2xl font-bold">{t('event.prize.third')}</h3>
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow">
                     <img 
@@ -159,7 +159,7 @@ const HatorCSLeague = () => {
                       height="450"
                     />
                   </div>
-                  <p className="text-white text-center text-base sm:text-lg">5x Căști HATOR Hypergang 2 USB 7.1</p>
+                  <p className="text-white text-center text-base sm:text-lg">{t('event.hator.headphones')}</p>
                 </div>
               </a>
 
@@ -167,15 +167,15 @@ const HatorCSLeague = () => {
                 <div className="bg-gradient-to-br from-purple-500/30 to-purple-700/30 p-4 sm:p-6 rounded-lg border border-purple-500/40 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30 h-full flex flex-col">
                   <div className="flex items-center mb-4">
                     <Gift className="text-purple-400 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
-                    <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">Premiu Secret</h3>
+                    <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">{t('event.prize.secret')}</h3>
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow flex items-center justify-center bg-darkGray/60">
                     <Sparkles className="text-purple-300 h-20 w-20 opacity-80" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-8">
-                      <p className="text-purple-300 text-lg sm:text-xl font-semibold">Va fi dezvăluit în timpul turneului</p>
+                      <p className="text-purple-300 text-lg sm:text-xl font-semibold">{t('event.prize.secret.description')}</p>
                     </div>
                   </div>
-                  <p className="text-white text-center text-base sm:text-lg">Surpriză specială pentru participanți</p>
+                  <p className="text-white text-center text-base sm:text-lg">{t('event.prize.special')}</p>
                 </div>
               </div>
             </div>
@@ -197,9 +197,9 @@ const HatorCSLeague = () => {
                   {t('event.league.description.2')}
                 </p>
                 
-                <h3>Format Oficial Turneu</h3>
+                <h3>{t('event.format.title.official')}</h3>
                 
-                <h4 className="mt-4 mb-2 text-primary font-semibold">Etapa 1: Grupe (Swiss Format)</h4>
+                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage1')}</h4>
                 <ul className="mb-4">
                   <li><strong>Capacitate maximă</strong>: 128 echipe din Moldova și România</li>
                   <li><strong>Structură</strong>: 16 grupe a câte 8 echipe</li>
@@ -223,7 +223,7 @@ const HatorCSLeague = () => {
                   <li><strong>Bonus seeding</strong>: Echipele clasate pe locul 1 din cele 16 grupe avansează direct în Top 24, fără a juca primul meci din Play-off</li>
                 </ul>
                 
-                <h4 className="mt-4 mb-2 text-primary font-semibold">Etapa 2: Play-off (Eliminatoriu)</h4>
+                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage2')}</h4>
                 <ul className="mb-4">
                   <li><strong>Echipe calificate</strong>: 48 din faza grupelor</li>
                   <li>
@@ -246,13 +246,13 @@ const HatorCSLeague = () => {
                   </li>
                 </ul>
                 
-                <h4 className="mt-4 mb-2 text-primary font-semibold">Format Meciuri</h4>
+                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.matches.format')}</h4>
                 <ul className="mb-4">
                   <li><strong>Bo1</strong>: Un singur meci decide câștigătorul (grupe și primele 3 runde din Play-off)</li>
                   <li><strong>Bo3</strong>: Cele mai bune din 3 hărți (etapa finală din Top 12 până în finală)</li>
                 </ul>
                 
-                <h4 className="mt-4 mb-2 text-primary font-semibold">Alegere Hărți - Bo3</h4>
+                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.maps.selection')}</h4>
                 <ul>
                   <li><strong>Coinflip</strong>: Determinarea echipelor A și B</li>
                   <li><strong>Pași alegere hartă</strong>:
@@ -292,10 +292,10 @@ const HatorCSLeague = () => {
               </div>
               
               <div className="mt-12">
-                <h2 id="rules" className="text-3xl font-bold text-white mb-6 font-rajdhani">Reguli importante</h2>
+                <h2 id="rules" className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.rules')}</h2>
                 
                 <div className="prose prose-invert max-w-none">
-                  <h3>Anti-cheat și Fair Play</h3>
+                  <h3>{t('event.anticheat')}</h3>
                   <ul>
                     <li>Toți jucătorii sunt obligați să folosească FACEIT Anti-Cheat pe durata turneului</li>
                     <li>Utilizarea oricărui tip de cheat/hack, exploit, sau script neautorizat va duce la descalificarea imediată a echipei</li>
@@ -303,14 +303,14 @@ const HatorCSLeague = () => {
                     <li>Administratorii MPL își rezervă dreptul de a verifica orice înregistrare suspectă</li>
                   </ul>
                   
-                  <h3>Conduită</h3>
+                  <h3>{t('event.conduct')}</h3>
                   <ul>
                     <li>Jucătorii trebuie să manifeste respect față de adversari, spectatori și administratori</li>
                     <li>Comportamentul toxic, limbajul abuziv, rasist sau discriminatoriu nu sunt tolerate</li>
                     <li>Nerespectarea regulilor de conduită poate duce la avertismente, penalizări sau descalificare</li>
                   </ul>
                   
-                  <h3>Technical Pause</h3>
+                  <h3>{t('event.technical.pause')}</h3>
                   <ul>
                     <li>Fiecare echipă are dreptul la maximum 2 pauze tehnice de maximum 5 minute pe meci</li>
                     <li>Abuzul de pauze tehnice va fi penalizat cu avertismente și potențial pierderea dreptului la pauze viitoare</li>
