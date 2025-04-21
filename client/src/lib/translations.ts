@@ -142,6 +142,22 @@ export const translations: TranslationDictionary = {
   "language.switch": {
     ro: "Schimbă limba",
     ru: "Изменить язык"
+  },
+  
+  // Butoane
+  "button.join": {
+    ro: "Alătură-te",
+    ru: "Присоединяйся"
+  },
+  
+  // Alte secțiuni
+  "games": {
+    ro: "Jocuri",
+    ru: "Игры"
+  },
+  "coming.soon": {
+    ro: "În curând",
+    ru: "Скоро"
   }
 };
 

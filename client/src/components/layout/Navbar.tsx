@@ -20,12 +20,13 @@ interface NavItem {
   href: string;
 }
 
+// Aceste etichete vor fi traduse la afișare folosind funcția t()
 const navItems: NavItem[] = [
-  { label: "Acasă", href: "/" },
-  { label: "Despre noi", href: "/#about" },
-  { label: "Parteneriate", href: "/#partners" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
+  { label: "nav.home", href: "/" },
+  { label: "nav.about", href: "/#about" },
+  { label: "nav.partners", href: "/#partners" },
+  { label: "nav.faq", href: "/#faq" },
+  { label: "nav.contact", href: "/#contact" },
 ];
 
 // Jocurile disponibile și în curând
@@ -119,7 +120,7 @@ const Navbar = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center hover:text-secondary transition-colors">
-                Jocuri <ChevronDown className="ml-1 h-3 w-3" />
+                {t('games')} <ChevronDown className="ml-1 h-3 w-3" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="bg-black/90 border border-primary/30 text-white">
@@ -131,7 +132,7 @@ const Navbar = () => {
               {upcomingGames.length > 0 && (
                 <>
                   <DropdownMenuSeparator className="bg-gray-700/50" />
-                  <div className="px-2 py-1 text-xs text-gray-400">În curând</div>
+                  <div className="px-2 py-1 text-xs text-gray-400">{t('coming.soon')}</div>
                   {upcomingGames.map((game) => (
                     <DropdownMenuItem key={game.name} className="text-gray-400 cursor-not-allowed">
                       {game.name}
@@ -148,12 +149,14 @@ const Navbar = () => {
               onClick={() => handleNavLinkClick(item.href)}
               className="hover:text-secondary transition-colors"
             >
-              {item.label}
+              {t(item.label)}
             </button>
           ))}
         </div>
         
         <div className="flex items-center gap-3">
+          <SimpleLanguageSwitcher />
+          
           <button 
             className="block md:hidden text-white hover:text-secondary"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -165,7 +168,7 @@ const Navbar = () => {
             onClick={() => handleNavLinkClick('/#contact')}
             className="hidden md:flex bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded text-sm font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
-            Alătură-te
+            {t('button.join')}
           </Button>
         </div>
       </nav>
@@ -178,7 +181,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 py-6 flex flex-col space-y-5">
           {/* Jocuri section */}
           <div className="py-3 text-lg font-medium hover:text-secondary border-b border-gray-800">
-            <p className="mb-2">Jocuri</p>
+            <p className="mb-2">{t('games')}</p>
             <div className="ml-4 mt-3 space-y-2">
               {currentGames.map(game => (
                 <Link key={game.name} href={game.link} className="block py-2 text-base">
@@ -188,7 +191,7 @@ const Navbar = () => {
               
               {upcomingGames.length > 0 && (
                 <>
-                  <p className="text-sm text-gray-500 mt-3 mb-1">În curând</p>
+                  <p className="text-sm text-gray-500 mt-3 mb-1">{t('coming.soon')}</p>
                   {upcomingGames.map(game => (
                     <p key={game.name} className="block py-1 text-sm text-gray-400">
                       {game.name}
@@ -206,14 +209,14 @@ const Navbar = () => {
               onClick={() => handleNavLinkClick(item.href)}
               className="py-3 text-lg font-medium hover:text-secondary transition-colors border-b border-gray-800"
             >
-              {item.label}
+              {t(item.label)}
             </button>
           ))}
           <Button 
             onClick={() => handleNavLinkClick('/#contact')}
             className="w-full mt-4 bg-primary hover:bg-primary/80 text-white px-4 py-3 rounded text-center font-medium transition-all hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]"
           >
-            Alătură-te
+            {t('button.join')}
           </Button>
         </div>
       </div>
