@@ -430,7 +430,7 @@ export const CsServerStatus: React.FC = () => {
               />
             </div>
           )) : (
-            <p className="w-full text-center">Nu există servere disponibile</p>
+            <p className="w-full text-center">{t('servers.none')}</p>
           )}
         </div>
         
