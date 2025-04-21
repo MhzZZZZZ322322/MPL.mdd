@@ -75,9 +75,13 @@ export const translations: TranslationDictionary = {
     ro: "Conectarea a fost copiată în clipboard",
     ru: "Команда подключения скопирована в буфер обмена"
   },
-  "servers.thanks": {
-    ro: "Mulțumește lui @faceofmadness pentru toate serverele – cu un Follow, Like și Share pe TikTok. E Gratis!",
-    ru: "Поблагодарите @faceofmadness за все серверы – Follow, Like и Share в TikTok. Это бесплатно!"
+  "servers.thanks.start": {
+    ro: "Mulțumește lui ",
+    ru: "Поблагодарите "
+  },
+  "servers.thanks.end": {
+    ro: " pentru toate serverele – cu un Follow, Like și Share pe TikTok. E Gratis!",
+    ru: " за все серверы – Follow, Like и Share в TikTok. Это бесплатно!"
   },
   
   // Ping Info Dialog
@@ -160,6 +164,12 @@ export const translations: TranslationDictionary = {
     ru: "Скоро"
   },
   
+  // Erori
+  "errors.loading": {
+    ro: "Eroare la încărcarea datelor. Te rugăm să reîmprospătezi pagina.",
+    ru: "Ошибка при загрузке данных. Пожалуйста, обновите страницу."
+  },
+  
   // Secțiunea CS Server Status
   "servers.section.title": {
     ro: "Serverele Noastre CS2",
@@ -168,6 +178,10 @@ export const translations: TranslationDictionary = {
   "servers.connect.command": {
     ro: "Comandă de conectare",
     ru: "Команда подключения"
+  },
+  "servers.none": {
+    ro: "Nu există servere disponibile",
+    ru: "Серверы не доступны"
   },
   "servers.thanks.message": {
     ro: "Mulțumește lui @faceofmadness pentru toate serverele – cu un Follow, Like și Share pe TikTok. E Gratis!",

@@ -309,14 +309,14 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-[450px] p-0 border-primary/30 overflow-hidden">
-                  <DialogTitle className="sr-only">Cum calculăm ping-ul</DialogTitle>
+                  <DialogTitle className="sr-only">{t('ping.dialog.title')}</DialogTitle>
                   <DialogDescription className="sr-only">Metodologia de calcul a ping-ului și interpretarea valorilor</DialogDescription>
                   
                   <div className="bg-darkGray/90 text-white border border-primary/30 rounded-lg overflow-hidden">
                     <div className="flex items-center justify-between p-4 border-b border-primary/30 bg-gradient-to-r from-primary/10 to-transparent backdrop-blur-sm">
                       <div className="flex items-center gap-2">
                         <div className="h-5 w-1.5 bg-primary"></div>
-                        <h4 className="font-rajdhani font-bold text-white text-lg">Cum calculăm ping-ul</h4>
+                        <h4 className="font-rajdhani font-bold text-white text-lg">{t('ping.dialog.title')}</h4>
                       </div>
                       <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:ring-offset-black disabled:pointer-events-none text-white hover:text-white hover:opacity-100">
                         <X className="h-4 w-4" />
@@ -326,23 +326,23 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     
                     <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto bg-gradient-to-b from-darkBg/20 to-transparent">
                       <div>
-                        <p className="mb-2"><strong className="text-primary">Ce este ping-ul?</strong> Ping-ul arată cât de rapid comunică dispozitivul tău cu serverul jocului. Cu cât valoarea este mai mică, cu atât conexiunea este mai bună și jocul mai fluid.</p>
+                        <p className="mb-2"><strong className="text-primary">{t('ping.what.title')}</strong> {t('ping.what.description')}</p>
                       </div>
                       
                       <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
-                        <p className="font-rajdhani font-bold text-primary">Cum măsurăm ping-ul?</p>
-                        <p className="text-gray-300">În aplicația noastră, folosim o metodă web care măsoară timpul de răspuns trimițând o cerere către server sub forma unei imagini invizibile. Deși serverul nu returnează imaginea, browserul încearcă să o încarce, iar timpul până la eroare ne oferă o estimare a ping-ului.</p>
-                        <p className="text-gray-300 mt-2">Această valoare este aproximativă. În joc, ping-ul real poate fi mai mic sau mai mare, fiind influențat de protocolul folosit (UDP vs HTTP) și de condițiile rețelei tale (VPN, proxy, WiFi etc.).</p>
+                        <p className="font-rajdhani font-bold text-primary">{t('ping.how.title')}</p>
+                        <p className="text-gray-300">{t('ping.how.description.1')}</p>
+                        <p className="text-gray-300 mt-2">{t('ping.how.description.2')}</p>
                       </div>
                       
                       <div className="bg-darkBg/30 backdrop-blur-sm p-3 rounded-lg border border-primary/10">
-                        <p className="font-rajdhani font-bold text-primary">Ce înseamnă valorile ping:</p>
+                        <p className="font-rajdhani font-bold text-primary">{t('ping.values.title')}</p>
                         <ul className="list-none pl-0 mt-1 space-y-1">
-                          <li><span className="text-green-400 font-bold">Sub 10ms:</span> <span className="text-gray-300">Excelent - joc competitiv optim</span></li>
-                          <li><span className="text-green-400 font-bold">10-20ms:</span> <span className="text-gray-300">Foarte bun - fără probleme</span></li>
-                          <li><span className="text-yellow-400 font-bold">20-50ms:</span> <span className="text-gray-300">Bun - experiență plăcută</span></li>
-                          <li><span className="text-yellow-400 font-bold">50-100ms:</span> <span className="text-gray-300">Acceptabil - ușoară întârziere</span></li>
-                          <li><span className="text-red-400 font-bold">Peste 100ms:</span> <span className="text-gray-300">Problematic - joc dificil</span></li>
+                          <li><span className="text-green-400 font-bold">{t('ping.values.excellent').split(':')[0]}:</span> <span className="text-gray-300">{t('ping.values.excellent').split(':')[1]}</span></li>
+                          <li><span className="text-green-400 font-bold">{t('ping.values.very.good').split(':')[0]}:</span> <span className="text-gray-300">{t('ping.values.very.good').split(':')[1]}</span></li>
+                          <li><span className="text-yellow-400 font-bold">{t('ping.values.good').split(':')[0]}:</span> <span className="text-gray-300">{t('ping.values.good').split(':')[1]}</span></li>
+                          <li><span className="text-yellow-400 font-bold">{t('ping.values.acceptable').split(':')[0]}:</span> <span className="text-gray-300">{t('ping.values.acceptable').split(':')[1]}</span></li>
+                          <li><span className="text-red-400 font-bold">{t('ping.values.problematic').split(':')[0]}:</span> <span className="text-gray-300">{t('ping.values.problematic').split(':')[1]}</span></li>
                         </ul>
                       </div>
                     </div>
@@ -370,7 +370,7 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
                     onClick={() => {
                       navigator.clipboard.writeText(`connect ${server.ip}:${server.port}`);
                       toast({
-                        description: "Conectarea a fost copiată în clipboard",
+                        description: t('servers.copy.success'),
                         duration: 2000,
                       });
                     }}
@@ -412,7 +412,7 @@ export const CsServerStatus: React.FC = () => {
   if (error) {
     return (
       <div className="flex justify-center items-center py-12">
-        <p className="text-destructive">Eroare la încărcarea serverelor. Te rugăm să reîmprospătezi pagina.</p>
+        <p className="text-destructive">{t('errors.loading')}</p>
       </div>
     );
   }
@@ -436,9 +436,10 @@ export const CsServerStatus: React.FC = () => {
         
         <div className="flex flex-col justify-center items-center mt-10 gap-4 p-6 bg-black/5 dark:bg-white/5 rounded-lg border border-primary/10">
           <p className="text-sm text-center">
-            Mulțumește lui <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" 
-            className="text-primary hover:underline font-medium">@faceofmadness</a> pentru toate serverele – 
-            cu un Follow, Like și Share pe TikTok. E Gratis!
+            {t('servers.thanks.start')}
+            <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" 
+               className="text-primary hover:underline font-medium">@faceofmadness</a>
+            {t('servers.thanks.end')}
           </p>
         </div>
       </div>
