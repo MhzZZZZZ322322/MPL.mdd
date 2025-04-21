@@ -11,44 +11,43 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const About = () => {
+  const { t } = useLanguage();
+  
   const missions = [
     {
       icon: <Trophy size={30} />,
-      title: "Dezvoltare",
-      description:
-        "Să creăm o scenă esports vibrantă și recunoscută în Republica Moldova.",
+      title: t('about.mission1.title'),
+      description: t('about.mission1.description'),
       iconColor: "text-secondary",
     },
     {
       icon: <Users size={30} />,
-      title: "Comunitate",
-      description:
-        "Să construim un spațiu inclusiv pentru gameri de toate nivelurile.",
+      title: t('about.mission2.title'),
+      description: t('about.mission2.description'),
       iconColor: "text-accent",
     },
     {
       icon: <Medal size={30} />,
-      title: "Excelență",
-      description:
-        "Să promovăm competiția de calitate și fair-play în mediul digital.",
+      title: t('about.mission3.title'),
+      description: t('about.mission3.description'),
       iconColor: "text-blue-500",
     },
   ];
 
   const timeline = [
     {
-      year: "22-23 Martie 2025",
-      title: "MPL Pilot Cup",
-      description: "Turneul inaugural dedicat jucătorilor din Moldova și România cu susținerea oferită de Darwin și HATOR.",
+      year: t('about.timeline.event1.date'),
+      title: t('about.timeline.event1.title'),
+      description: t('about.timeline.event1.description'),
       icon: <Trophy />,
     },
     {
-      year: "Mai-Iunie 2025",
-      title: "HATOR CS2 LEAGUE MOLDOVA",
-      description:
-        "Un turneu major sponsorizat de HATOR cu premii substanțiale, marcând un moment cheie pentru scena competitivă  din Moldova.",
+      year: t('about.timeline.event2.date'),
+      title: t('about.timeline.event2.title'),
+      description: t('about.timeline.event2.description'),
       icon: <Medal />,
     },
   ];
@@ -90,7 +89,7 @@ const About = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12" data-aos="fade-up">
             <h2 className="font-rajdhani font-bold text-3xl md:text-4xl text-white mb-4">
-              Despre <span className="text-secondary">Moldova Pro League</span>
+              {t('about.title')} <span className="text-secondary">{t('about.mpl')}</span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto"></div>
           </div>
@@ -98,34 +97,19 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-10 items-center mb-16">
             <div data-aos="fade-right" data-aos-delay="100">
               <h3 className="font-orbitron text-2xl mb-4 text-white">
-                Povestea noastră
+                {t('about.story.title')}
               </h3>
               <p className="mb-4">
-                MPL (Moldova Pro League) este o comunitate independentă, născută
-                din pasiune pură pentru gaming și dorința de a construi un
-                ecosistem de cybersport autentic în Republica Moldova.
+                {t('about.story.p1')}
               </p>
               <p className="mb-4">
-                Suntem o organizație fără bugete, fără sponsori și fără
-                promisiuni goale – dar cu o echipă de oameni dedicați care cred
-                că e-sportul merită un loc de cinste și recunoaștere în Moldova.
-                Tot ce am făcut până acum – am făcut din proprie inițiativă, în
-                timpul nostru liber, cu resurse minime, dar cu un scop clar: să
-                aducem jucătorii împreună și să punem Moldova pe harta
-                internațională a e-sportului.
+                {t('about.story.p2')}
               </p>
               <p className="mb-4">
-                Organizăm turnee, ligă proprie și evenimente online, susținem
-                creatorii locali și ne implicăm activ în creșterea comunității –
-                de la casual players la profesioniști. MPL nu este doar despre
-                competiție. Este despre comunitate, prietenie și oportunități
-                reale.
+                {t('about.story.p3')}
               </p>
               <p>
-                Dacă și tu visezi la o Moldovă unde gamingul este luat în serios
-                – alătură-te nouă. MPL e deschisă tuturor: jucători, streameri,
-                voluntari, sau pur și simplu fani ai e-sportului. Împreună putem
-                construi ceva măreț. Chiar de la zero.
+                {t('about.story.p4')}
               </p>
             </div>
 
@@ -146,7 +130,7 @@ const About = () => {
           <div className="mb-16">
             <div data-aos="fade-up">
               <h3 className="font-orbitron text-2xl mb-8 text-white text-center">
-                Cronologia MPL
+                {t('about.timeline')}
               </h3>
             </div>
 
@@ -174,7 +158,7 @@ const About = () => {
                       <div className="mt-4">
                         <Link href={index === 0 ? "/events/mpl-pilot-cup" : "/events/hator-cs-league"}>
                           <Button variant="outline" size="sm" className="text-primary border-primary hover:bg-primary/10">
-                            Detalii eveniment <ChevronRight className="ml-1 h-4 w-4" />
+                            {t('about.event.details')} <ChevronRight className="ml-1 h-4 w-4" />
                           </Button>
                         </Link>
                       </div>
@@ -189,7 +173,7 @@ const About = () => {
           <div>
             <div data-aos="fade-up">
               <h3 className="font-orbitron text-2xl mb-8 text-white text-center">
-                Misiunea noastră
+                {t('about.mission')}
               </h3>
             </div>
 
@@ -221,7 +205,7 @@ const About = () => {
                   size="lg"
                   className="bg-gradient-to-r from-primary to-secondary text-white hover:from-primary/90 hover:to-secondary/90"
                 >
-                  Alătură-te comunității
+                  {t('about.join.community')}
                 </Button>
               </Link>
             </div>

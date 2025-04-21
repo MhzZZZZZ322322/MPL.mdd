@@ -65,7 +65,7 @@ const Footer = () => {
           {/* Brand section */}
           <div>
             <p className="text-sm mb-6">
-              Moldova Pro League este comunitatea independentă de esports, creată din pasiunea pentru gaming competitiv.
+              {t('footer.description')}
             </p>
             <div className="flex items-center mb-4">
               <div className="flex space-x-4 mr-4">
@@ -85,23 +85,23 @@ const Footer = () => {
           </div>
           
           {/* Quick Links */}
-          <FooterSection title="Links Rapide">
+          <FooterSection title={t('footer.quick.links')}>
             <ul className="space-y-2 text-sm">
-              <FooterLink href="/">Acasă</FooterLink>
-              <FooterLink href="#about">Despre noi</FooterLink>
-              <FooterLink href="/cronologia-mpl">Cronologia MPL</FooterLink>
-              <FooterLink href="#events">Evenimente & Turnee</FooterLink>
-              <FooterLink href="#partners">Parteneriate</FooterLink>
-              <FooterLink href="#faq">FAQ</FooterLink>
-              <FooterLink href="#contact">Contact</FooterLink>
+              <FooterLink href="/">{t('footer.home')}</FooterLink>
+              <FooterLink href="#about">{t('footer.about')}</FooterLink>
+              <FooterLink href="/cronologia-mpl">{t('footer.timeline')}</FooterLink>
+              <FooterLink href="#events">{t('footer.events')}</FooterLink>
+              <FooterLink href="#partners">{t('footer.partners')}</FooterLink>
+              <FooterLink href="#faq">{t('footer.faq')}</FooterLink>
+              <FooterLink href="#contact">{t('footer.contact')}</FooterLink>
             </ul>
           </FooterSection>
           
           {/* Tournaments */}
-          <FooterSection title="Turnee">
+          <FooterSection title={t('footer.tournaments')}>
             <ul className="space-y-2 text-sm">
               <FooterLink href="/events/mpl-pilot-cup">CS2</FooterLink>
-              <li className="text-xs text-gray-500 mt-3 mb-1">Pe viitor planificăm și:</li>
+              <li className="text-xs text-gray-500 mt-3 mb-1">{t('footer.tournaments.future')}</li>
               <li className="text-sm text-gray-400">Dota 2</li>
               <li className="text-sm text-gray-400">PUBG</li>
               <li className="text-sm text-gray-400">League of Legends</li>
@@ -111,7 +111,7 @@ const Footer = () => {
           </FooterSection>
           
           {/* Contact */}
-          <FooterSection title="Contact">
+          <FooterSection title={t('footer.contact')}>
             <ul className="space-y-2 text-sm">
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2"><FaDiscord /></span>
@@ -145,7 +145,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2">📍</span>
-                <span>Chișinău, Republica Moldova</span>
+                <span>{t('footer.location')}</span>
               </li>
             </ul>
           </FooterSection>
@@ -153,21 +153,21 @@ const Footer = () => {
         
         {/* Footer bottom */}
         <div className="border-t border-primary/20 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2025 Moldova Pro League. Toate drepturile rezervate.</p>
+          <p className="text-sm text-gray-400 mb-4 md:mb-0">{t('footer.copyright')}</p>
           <div className="flex space-x-4 text-sm">
             <a 
               href="/docs/Terms_Privacy_MPL_RO_EN_RU_FINAL.pdf" 
               target="_blank"
               className="text-gray-400 hover:text-secondary transition-colors"
             >
-              Termeni și condiții
+              {t('footer.terms')}
             </a>
             <a 
               href="/docs/Terms_Privacy_MPL_RO_EN_RU_FINAL.pdf#page=6" 
               target="_blank"
               className="text-gray-400 hover:text-secondary transition-colors"
             >
-              Politica de confidențialitate
+              {t('footer.privacy')}
             </a>
           </div>
         </div>

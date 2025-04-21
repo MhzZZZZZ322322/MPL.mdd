@@ -370,6 +370,162 @@ export const translations: TranslationDictionary = {
   "contact.error.message": {
     ro: "A apărut o eroare. Încercați din nou mai târziu.",
     ru: "Произошла ошибка. Пожалуйста, повторите попытку позже."
+  },
+  
+  // Footer
+  "footer.description": {
+    ro: "Moldova Pro League este comunitatea independentă de esports, creată din pasiunea pentru gaming competitiv.",
+    ru: "Moldova Pro League - это независимое киберспортивное сообщество, созданное из страсти к соревновательным играм."
+  },
+  "footer.quick.links": {
+    ro: "Links Rapide",
+    ru: "Быстрые ссылки"
+  },
+  "footer.home": {
+    ro: "Acasă",
+    ru: "Главная"
+  },
+  "footer.about": {
+    ro: "Despre noi",
+    ru: "О нас"
+  },
+  "footer.timeline": {
+    ro: "Cronologia MPL",
+    ru: "Хронология MPL"
+  },
+  "footer.events": {
+    ro: "Evenimente & Turnee",
+    ru: "События & Турниры"
+  },
+  "footer.partners": {
+    ro: "Parteneriate",
+    ru: "Партнерства"
+  },
+  "footer.faq": {
+    ro: "FAQ",
+    ru: "FAQ"
+  },
+  "footer.contact": {
+    ro: "Contact",
+    ru: "Контакты"
+  },
+  "footer.tournaments": {
+    ro: "Turnee",
+    ru: "Турниры"
+  },
+  "footer.tournaments.future": {
+    ro: "Pe viitor planificăm și:",
+    ru: "В будущем планируем также:"
+  },
+  "footer.copyright": {
+    ro: "© 2025 Moldova Pro League. Toate drepturile rezervate.",
+    ru: "© 2025 Moldova Pro League. Все права защищены."
+  },
+  "footer.terms": {
+    ro: "Termeni și condiții",
+    ru: "Условия использования"
+  },
+  "footer.privacy": {
+    ro: "Politica de confidențialitate",
+    ru: "Политика конфиденциальности"
+  },
+  "footer.location": {
+    ro: "Chișinău, Republica Moldova",
+    ru: "Кишинёв, Республика Молдова"
+  },
+  
+  // About section
+  "about.title": {
+    ro: "Despre",
+    ru: "О нас"
+  },
+  "about.mpl": {
+    ro: "Moldova Pro League",
+    ru: "Moldova Pro League"
+  },
+  "about.story.title": {
+    ro: "Povestea noastră",
+    ru: "Наша история"
+  },
+  "about.story.p1": {
+    ro: "MPL (Moldova Pro League) este o comunitate independentă, născută din pasiune pură pentru gaming și dorința de a construi un ecosistem de cybersport autentic în Republica Moldova.",
+    ru: "MPL (Moldova Pro League) - это независимое сообщество, рожденное из чистой страсти к играм и желания построить подлинную киберспортивную экосистему в Республике Молдова."
+  },
+  "about.story.p2": {
+    ro: "Suntem o organizație fără bugete, fără sponsori și fără promisiuni goale – dar cu o echipă de oameni dedicați care cred că e-sportul merită un loc de cinste și recunoaștere în Moldova. Tot ce am făcut până acum – am făcut din proprie inițiativă, în timpul nostru liber, cu resurse minime, dar cu un scop clar: să aducem jucătorii împreună și să punem Moldova pe harta internațională a e-sportului.",
+    ru: "Мы организация без бюджетов, без спонсоров и без пустых обещаний – но с командой преданных людей, которые верят, что киберспорт заслуживает почетного места и признания в Молдове. Всё, что мы сделали до сих пор – мы сделали по собственной инициативе, в свободное время, с минимальными ресурсами, но с ясной целью: объединить игроков и поставить Молдову на международную карту киберспорта."
+  },
+  "about.story.p3": {
+    ro: "Organizăm turnee, ligă proprie și evenimente online, susținem creatorii locali și ne implicăm activ în creșterea comunității – de la casual players la profesioniști. MPL nu este doar despre competiție. Este despre comunitate, prietenie și oportunități reale.",
+    ru: "Мы организуем турниры, собственную лигу и онлайн-мероприятия, поддерживаем местных создателей контента и активно участвуем в росте сообщества – от обычных игроков до профессионалов. MPL – это не только соревнования. Это сообщество, дружба и реальные возможности."
+  },
+  "about.story.p4": {
+    ro: "Dacă și tu visezi la o Moldovă unde gamingul este luat în serios – alătură-te nouă. MPL e deschisă tuturor: jucători, streameri, voluntari, sau pur și simplu fani ai e-sportului. Împreună putem construi ceva măreț. Chiar de la zero.",
+    ru: "Если вы тоже мечтаете о Молдове, где киберспорт воспринимают серьезно – присоединяйтесь к нам. MPL открыта для всех: игроков, стримеров, волонтеров или просто поклонников киберспорта. Вместе мы можем построить что-то великое. Даже с нуля."
+  },
+  "about.timeline": {
+    ro: "Cronologia MPL",
+    ru: "Хронология MPL"
+  },
+  "about.timeline.event1.date": {
+    ro: "22-23 Martie 2025",
+    ru: "22-23 марта 2025"
+  },
+  "about.timeline.event1.title": {
+    ro: "MPL Pilot Cup",
+    ru: "MPL Pilot Cup"
+  },
+  "about.timeline.event1.description": {
+    ro: "Turneul inaugural dedicat jucătorilor din Moldova și România cu susținerea oferită de Darwin și HATOR.",
+    ru: "Инаугурационный турнир, посвященный игрокам из Молдовы и Румынии при поддержке Darwin и HATOR."
+  },
+  "about.timeline.event2.date": {
+    ro: "Mai-Iunie 2025",
+    ru: "Май-Июнь 2025"
+  },
+  "about.timeline.event2.title": {
+    ro: "HATOR CS2 LEAGUE MOLDOVA",
+    ru: "HATOR CS2 LEAGUE MOLDOVA"
+  },
+  "about.timeline.event2.description": {
+    ro: "Un turneu major sponsorizat de HATOR cu premii substanțiale, marcând un moment cheie pentru scena competitivă din Moldova.",
+    ru: "Крупный турнир, спонсируемый HATOR с существенными призами, знаменующий ключевой момент для соревновательной сцены Молдовы."
+  },
+  "about.mission": {
+    ro: "Misiunea noastră",
+    ru: "Наша миссия"
+  },
+  "about.mission1.title": {
+    ro: "Dezvoltare",
+    ru: "Развитие"
+  },
+  "about.mission1.description": {
+    ro: "Să creăm o scenă esports vibrantă și recunoscută în Republica Moldova.",
+    ru: "Создать яркую и признанную киберспортивную сцену в Республике Молдова."
+  },
+  "about.mission2.title": {
+    ro: "Comunitate",
+    ru: "Сообщество"
+  },
+  "about.mission2.description": {
+    ro: "Să construim un spațiu inclusiv pentru gameri de toate nivelurile.",
+    ru: "Построить инклюзивное пространство для геймеров всех уровней."
+  },
+  "about.mission3.title": {
+    ro: "Excelență",
+    ru: "Совершенство"
+  },
+  "about.mission3.description": {
+    ro: "Să promovăm competiția de calitate și fair-play în mediul digital.",
+    ru: "Продвигать качественные соревнования и честную игру в цифровой среде."
+  },
+  "about.event.details": {
+    ro: "Detalii eveniment",
+    ru: "Детали события"
+  },
+  "about.join.community": {
+    ro: "Alătură-te comunității",
+    ru: "Присоединяйтесь к сообществу"
   }
 };
 
