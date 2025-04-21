@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { FaYoutube, FaDiscord, FaTwitch, FaTiktok } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const FooterSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div>
@@ -42,6 +43,8 @@ const SocialIcon: React.FC<SocialIconProps> = ({
 );
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   const handleLinkClick = (href: string, e: React.MouseEvent) => {
     if (href.startsWith('#')) {
       e.preventDefault();
