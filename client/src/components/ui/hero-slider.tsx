@@ -3,6 +3,7 @@ import { Button } from './button';
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 interface HeroContent {
   image: string;

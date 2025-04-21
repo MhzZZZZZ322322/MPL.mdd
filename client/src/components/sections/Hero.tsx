@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Glitch from '@/components/animations/Glitch';
 import HeroSlider from '@/components/ui/hero-slider';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   const handleScrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -32,8 +35,8 @@ const Hero = () => {
             <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-4">
               <i className="fas fa-trophy text-2xl text-primary"></i>
             </div>
-            <h3 className="text-xl font-bold mb-2 font-rajdhani">Turnee Regulate</h3>
-            <p className="text-gray-400">Organizăm turnee și competiții pentru jucători de toate nivelurile, în diverse jocuri populare.</p>
+            <h3 className="text-xl font-bold mb-2 font-rajdhani">{t('hero.feature1.title')}</h3>
+            <p className="text-gray-400">{t('hero.feature1.text')}</p>
           </div>
           
           <div 
@@ -44,8 +47,8 @@ const Hero = () => {
             <div className="w-14 h-14 bg-secondary/20 rounded-full flex items-center justify-center mb-4">
               <i className="fas fa-users text-2xl text-secondary"></i>
             </div>
-            <h3 className="text-xl font-bold mb-2 font-rajdhani">Comunitate Unită</h3>
-            <p className="text-gray-400">O comunitate dedicată pasionaților de gaming competitiv din toată Moldova, cu Discord activ.</p>
+            <h3 className="text-xl font-bold mb-2 font-rajdhani">{t('hero.feature2.title')}</h3>
+            <p className="text-gray-400">{t('hero.feature2.text')}</p>
           </div>
           
           <div 
@@ -56,8 +59,8 @@ const Hero = () => {
             <div className="w-14 h-14 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
               <i className="fas fa-broadcast-tower text-2xl text-cyan-500"></i>
             </div>
-            <h3 className="text-xl font-bold mb-2 font-rajdhani">Transmisiuni Live</h3>
-            <p className="text-gray-400">Toate evenimentele importante sunt transmise în direct pe platformele noastre Twitch și YouTube.</p>
+            <h3 className="text-xl font-bold mb-2 font-rajdhani">{t('hero.feature3.title')}</h3>
+            <p className="text-gray-400">{t('hero.feature3.text')}</p>
           </div>
         </div>
       </div>

@@ -188,6 +188,46 @@ export const translations: TranslationDictionary = {
     ru: "Нет доступных вопросов"
   },
   
+  // Secțiunea Hero
+  "hero.feature1.title": {
+    ro: "Turnee Regulate",
+    ru: "Регулярные турниры"
+  },
+  "hero.feature1.text": {
+    ro: "Organizăm turnee și competiții pentru jucători de toate nivelurile, în diverse jocuri populare.",
+    ru: "Мы организуем турниры и соревнования для игроков всех уровней в различных популярных играх."
+  },
+  "hero.feature2.title": {
+    ro: "Comunitate Unită",
+    ru: "Сплоченное сообщество"
+  },
+  "hero.feature2.text": {
+    ro: "O comunitate dedicată pasionaților de gaming competitiv din toată Moldova, cu Discord activ.",
+    ru: "Сообщество, посвященное любителям соревновательных игр со всей Молдовы, с активным Discord."
+  },
+  "hero.feature3.title": {
+    ro: "Transmisiuni Live",
+    ru: "Прямые трансляции"
+  },
+  "hero.feature3.text": {
+    ro: "Toate evenimentele importante sunt transmise în direct pe platformele noastre Twitch și YouTube.",
+    ru: "Все важные события транслируются в прямом эфире на наших платформах Twitch и YouTube."
+  },
+  
+  // HeroSlider
+  "hero.slider.title": {
+    ro: "HATOR CS2 LEAGUE MOLDOVA",
+    ru: "HATOR CS2 LEAGUE MOLDOVA"
+  },
+  "hero.slider.subtitle": {
+    ro: "Sezonul 1 - Mai-Iunie 2025",
+    ru: "Сезон 1 - Май-Июнь 2025"
+  },
+  "hero.slider.button": {
+    ro: "Detalii Turneu",
+    ru: "Детали Турнира"
+  },
+  
   // Secțiunea CS Server Status
   "servers.section.title": {
     ro: "Serverele Noastre CS2",
