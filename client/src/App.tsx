@@ -84,6 +84,38 @@ function App() {
     };
   }, [comingSoonEnabled]);
   
+  // Actualizăm atributul lang al HTML pe baza schimbărilor de rută
+  useEffect(() => {
+    // Adăugăm funcționalitate pentru a actualiza tag-urile hreflang în funcție de rută
+    const updateHreflangLinks = () => {
+      const path = window.location.pathname;
+      const isRussian = path.startsWith('/ru');
+      
+      // Actualizăm atributul hreflang pentru paginile în rusă
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => {
+        const hreflangEl = el as HTMLLinkElement;
+        if (hreflangEl.hreflang === 'ro-MD') {
+          hreflangEl.href = 'http://mpl.md/';
+        } else if (hreflangEl.hreflang === 'ru-RU') {
+          hreflangEl.href = 'http://mpl.md/ru';
+        }
+      });
+    };
+    
+    updateHreflangLinks();
+    
+    // Adăugăm listener pentru schimbările de rută
+    const handleRouteChange = () => {
+      updateHreflangLinks();
+    };
+    
+    window.addEventListener('popstate', handleRouteChange);
+    
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
+  
   return (
     <LanguageProvider>
       <div className="flex flex-col min-h-screen overflow-hidden bg-black">
