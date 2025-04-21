@@ -4,8 +4,10 @@ import { Check } from 'lucide-react';
 import NeonBorder from '@/components/animations/NeonBorder';
 import darwinLogo from '@/assets/darwin-logo.png';
 import hatorLogo from '@/assets/hator-logo-yellow.png';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const Partners = () => {
+  const { t } = useLanguage();
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -30,10 +32,10 @@ const Partners = () => {
   };
 
   const benefitsList = [
-    "Branding la evenimente și turnee",
-    "Prezență pe platformele social media",
-    "Integrare în transmisiuni live",
-    "Acțiuni promoționale targetate"
+    t('partners.benefit.1'),
+    t('partners.benefit.2'),
+    t('partners.benefit.3'),
+    t('partners.benefit.4')
   ];
 
   const handleScrollToContact = () => {
@@ -59,10 +61,10 @@ const Partners = () => {
       >
         <motion.div className="text-center mb-12" variants={itemVariants}>
           <h2 className="font-rajdhani font-bold text-3xl md:text-4xl text-white mb-4">
-            Parteneriate & <span className="text-secondary">Sponsori</span>
+            {t('partners.title.first')} <span className="text-secondary">{t('partners.title.second')}</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto"></div>
-          <p className="mt-4 max-w-2xl mx-auto">Devino parte din comunitatea MPL și contribuie la creșterea scenei esports din Moldova.</p>
+          <p className="mt-4 max-w-2xl mx-auto">{t('partners.subtitle')}</p>
         </motion.div>
         
         <motion.div
@@ -72,10 +74,10 @@ const Partners = () => {
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
               <h3 className="font-orbitron text-2xl mb-4 text-white">
-                Hai să creștem <span className="text-secondary">împreună</span>
+                {t('partners.grow.title')} <span className="text-secondary">{t('partners.grow.together')}</span>
               </h3>
-              <p className="mb-4">Suntem deschisi la parteneriate cu branduri și companii care doresc să contribuie la dezvoltarea esports-ului în Moldova.</p>
-              <p className="mb-6">Ca sponsor al MPL, obții vizibilitate în fața unei audiențe tinere, pasionate și în continuă creștere.</p>
+              <p className="mb-4">{t('partners.description.1')}</p>
+              <p className="mb-6">{t('partners.description.2')}</p>
               
               <ul className="space-y-2 mb-6">
                 {benefitsList.map((benefit, index) => (
@@ -90,12 +92,12 @@ const Partners = () => {
                 onClick={handleScrollToContact}
                 className="inline-block bg-primary hover:bg-primary/80 text-white px-6 py-3 rounded-md font-medium transition-all hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]"
               >
-                Contactează-ne
+                {t('partners.contact.button')}
               </Button>
             </div>
             
             <NeonBorder className="p-6 bg-darkBg/80 rounded-lg">
-              <h4 className="font-rajdhani text-xl text-white mb-6 text-center">Partenerii noștri</h4>
+              <h4 className="font-rajdhani text-xl text-white mb-6 text-center">{t('partners.our.partners')}</h4>
               <div className="grid grid-cols-2 gap-6">
                 <a 
                   href="https://darwin.md" 
@@ -118,12 +120,12 @@ const Partners = () => {
                     key={i} 
                     className="aspect-video bg-darkGray/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
                   >
-                    <span className="text-gray-400 text-sm">Sponsor Spot</span>
+                    <span className="text-gray-400 text-sm">{t('partners.sponsor.spot')}</span>
                   </div>
                 ))}
               </div>
               <div className="mt-6 text-center text-sm text-gray-400">
-                <p>Susținut de partenerii noștri principali</p>
+                <p>{t('partners.supported.by')}</p>
               </div>
             </NeonBorder>
           </div>

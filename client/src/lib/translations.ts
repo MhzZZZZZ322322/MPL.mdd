@@ -526,6 +526,74 @@ export const translations: TranslationDictionary = {
   "about.join.community": {
     ro: "Alătură-te comunității",
     ru: "Присоединяйтесь к сообществу"
+  },
+  
+  // Partners section
+  "partners.title.first": {
+    ro: "Parteneriate &",
+    ru: "Партнерства и"
+  },
+  "partners.title.second": {
+    ro: "Sponsori",
+    ru: "Спонсоры"
+  },
+  "partners.subtitle": {
+    ro: "Devino parte din comunitatea MPL și contribuie la creșterea scenei esports din Moldova.",
+    ru: "Станьте частью сообщества MPL и внесите свой вклад в развитие киберспортивной сцены в Молдове."
+  },
+  "partners.grow.title": {
+    ro: "Hai să creștem",
+    ru: "Давайте расти"
+  },
+  "partners.grow.together": {
+    ro: "împreună",
+    ru: "вместе"
+  },
+  "partners.description.1": {
+    ro: "Suntem deschisi la parteneriate cu branduri și companii care doresc să contribuie la dezvoltarea esports-ului în Moldova.",
+    ru: "Мы открыты для партнерства с брендами и компаниями, которые хотят внести свой вклад в развитие киберспорта в Молдове."
+  },
+  "partners.description.2": {
+    ro: "Ca sponsor al MPL, obții vizibilitate în fața unei audiențe tinere, pasionate și în continuă creștere.",
+    ru: "Как спонсор MPL, вы получаете видимость перед молодой, увлеченной и растущей аудиторией."
+  },
+  "partners.benefit.1": {
+    ro: "Branding la evenimente și turnee",
+    ru: "Брендинг на мероприятиях и турнирах"
+  },
+  "partners.benefit.2": {
+    ro: "Prezență pe platformele social media",
+    ru: "Присутствие на платформах социальных сетей"
+  },
+  "partners.benefit.3": {
+    ro: "Integrare în transmisiuni live",
+    ru: "Интеграция в прямые трансляции"
+  },
+  "partners.benefit.4": {
+    ro: "Acțiuni promoționale targetate",
+    ru: "Целевые рекламные акции"
+  },
+  "partners.contact.button": {
+    ro: "Contactează-ne",
+    ru: "Свяжитесь с нами"
+  },
+  "partners.our.partners": {
+    ro: "Partenerii noștri",
+    ru: "Наши партнеры"
+  },
+  "partners.sponsor.spot": {
+    ro: "Sponsor Spot",
+    ru: "Место для спонсора"
+  },
+  "partners.supported.by": {
+    ro: "Susținut de partenerii noștri principali",
+    ru: "При поддержке наших основных партнеров"
+  },
+  
+  // MEF button
+  "mef.button": {
+    ro: "MEF",
+    ru: "MEF"
   }
 };
 
