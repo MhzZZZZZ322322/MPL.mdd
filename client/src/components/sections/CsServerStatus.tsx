@@ -14,8 +14,9 @@ import { CsServer } from '@shared/schema-cs-servers';
  * Obține un timp de răspuns aproximativ de la client la server
  * @param host Adresa IP a serverului țintă
  * @param port Portul serverului
+ * @param location Locația serverului pentru a limita ping-ul în funcție de regiune
  */
-const calculatePing = async (host: string, port: number): Promise<number> => {
+const calculatePing = async (host: string, port: number, location: string): Promise<number> => {
   try {
     // Înregistrăm timpul de start utilizând performance.now() pentru precizie maximă
     const startTime = performance.now();
@@ -60,6 +61,11 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
     // Validăm ping-ul obținut
     // Dacă ping-ul este în interval realist (>2ms și <900ms), îl folosim
     if (pingTime > 2 && pingTime < 900) {
+      // Verificăm dacă serverul este din Moldova pentru a limita ping-ul la maxim 10ms
+      if (location === "Moldova" && pingTime > 10) {
+        // Pentru servere din Moldova, limităm ping-ul la maxim 10ms
+        return 10;
+      }
       return pingTime;
     } else {
       // Fallback pentru cazul când măsurarea ping-ului eșuează
@@ -81,11 +87,16 @@ const calculatePing = async (host: string, port: number): Promise<number> => {
           pingBase = 5; 
       }
       
-      // Adăugăm o variație aleatorie între -2ms și +5ms pentru realism
-      const variation = Math.floor(Math.random() * 8) - 2;
+      // Adăugăm o variație aleatorie între -2ms și +3ms pentru realism
+      const variation = Math.floor(Math.random() * 6) - 2;
       
-      // Returnăm ping-ul simulat, asigurându-ne că este între 3-12ms
-      return Math.max(3, Math.min(12, pingBase + variation));
+      // Pentru servere din Moldova, ne asigurăm că ping-ul nu depășește 10ms
+      if (location === "Moldova") {
+        return Math.max(3, Math.min(10, pingBase + variation));
+      } else {
+        // Pentru alte locații, ping-ul poate fi între 3-12ms
+        return Math.max(3, Math.min(12, pingBase + variation));
+      }
     }
   } catch (error) {
     console.error('Eroare la calcularea ping-ului:', error);
@@ -98,8 +109,15 @@ interface ServerCardProps {
 }
 
 const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
-  // Generăm un ping inițial în intervalul 3-12ms
-  const initialPing = Math.floor(Math.random() * 10) + 3; // Între 3 și 12
+  // Generăm un ping inițial adecvat locației serverului
+  let initialPing;
+  if (server.location === "Moldova") {
+    // Pentru serverele din Moldova, ping-ul inițial va fi între 3-10ms
+    initialPing = Math.floor(Math.random() * 8) + 3; // Între 3 și 10
+  } else {
+    // Pentru alte locații, ping-ul poate fi între 3-12ms
+    initialPing = Math.floor(Math.random() * 10) + 3; // Între 3 și 12
+  }
   const [ping, setPing] = useState<number>(initialPing);
   const [isPingLoading, setIsPingLoading] = useState<boolean>(true);
   
@@ -108,13 +126,20 @@ const ServerCard: React.FC<ServerCardProps> = ({ server }) => {
     setIsPingLoading(true);
     try {
       console.log("Calculăm ping-ul pentru", server.ip, server.port);
-      const newPing = await calculatePing(server.ip, server.port);
+      const newPing = await calculatePing(server.ip, server.port, server.location);
       console.log("Ping calculat:", newPing, "ms");
       setPing(newPing);
     } catch (error) {
       console.error('Eroare la actualizarea ping-ului:', error);
-      // Folosim un ping random în intervalul 3-12ms în caz de eroare
-      const randomPing = Math.floor(Math.random() * 10) + 3;
+      // Folosim un ping random care respectă limitele pentru locație
+      let randomPing;
+      if (server.location === "Moldova") {
+        // Pentru Moldova, ping între 3-10ms
+        randomPing = Math.floor(Math.random() * 8) + 3;
+      } else {
+        // Pentru alte locații, ping între 3-12ms
+        randomPing = Math.floor(Math.random() * 10) + 3;
+      }
       console.log("Setăm ping aleatoriu de fallback:", randomPing, "ms");
       setPing(randomPing);
     } finally {
