@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Glitch from "@/components/animations/Glitch";
 import mplLogo from "@/assets/mpl-logo.png";
+import { useLanguage } from "@/lib/LanguageContext";
+import { SimpleLanguageSwitcher } from "@/components/ui/language-switcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,6 +45,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [, setLocation] = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {

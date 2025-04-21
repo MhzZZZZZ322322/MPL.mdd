@@ -14,6 +14,7 @@ import ComingSoon from "@/pages/ComingSoon";
 import MPLPilotCup from "@/pages/EventPages/MPLPilotCup";
 import HatorCSLeague from "@/pages/EventPages/HatorCSLeague";
 import MefPage from "@/pages/MefPage";
+import { LanguageProvider } from "@/lib/LanguageContext";
 
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
@@ -84,18 +85,20 @@ function App() {
   }, [comingSoonEnabled]);
   
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden bg-black">
-      {/* Afișăm pagina Coming Soon peste conținut */}
-      <ComingSoon enabled={comingSoonEnabled} />
-      
-      {/* Nu afișăm navbar și footer când Coming Soon este activ */}
-      {!isAdminPage() && !comingSoonEnabled && <Navbar />}
-      <main className="flex-grow overflow-hidden bg-black">
-        <Router />
-      </main>
-      {!isAdminPage() && !comingSoonEnabled && <Footer />}
-      <Toaster />
-    </div>
+    <LanguageProvider>
+      <div className="flex flex-col min-h-screen overflow-hidden bg-black">
+        {/* Afișăm pagina Coming Soon peste conținut */}
+        <ComingSoon enabled={comingSoonEnabled} />
+        
+        {/* Nu afișăm navbar și footer când Coming Soon este activ */}
+        {!isAdminPage() && !comingSoonEnabled && <Navbar />}
+        <main className="flex-grow overflow-hidden bg-black">
+          <Router />
+        </main>
+        {!isAdminPage() && !comingSoonEnabled && <Footer />}
+        <Toaster />
+      </div>
+    </LanguageProvider>
   );
 }
 
