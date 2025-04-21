@@ -170,6 +170,24 @@ export const translations: TranslationDictionary = {
     ru: "Ошибка при загрузке данных. Пожалуйста, обновите страницу."
   },
   
+  // Secțiunea FAQ
+  "faq.title.first": {
+    ro: "Întrebări",
+    ru: "Часто задаваемые"
+  },
+  "faq.title.second": {
+    ro: "Frecvente",
+    ru: "вопросы"
+  },
+  "faq.subtitle": {
+    ro: "Află răspunsurile la cele mai comune întrebări despre Moldova Pro League.",
+    ru: "Узнайте ответы на самые распространенные вопросы о Moldova Pro League."
+  },
+  "faq.no.questions": {
+    ro: "Nu există întrebări disponibile",
+    ru: "Нет доступных вопросов"
+  },
+  
   // Secțiunea CS Server Status
   "servers.section.title": {
     ro: "Serverele Noastre CS2",

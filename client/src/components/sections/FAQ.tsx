@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { 
@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/accordion";
 import { Skeleton } from '@/components/ui/skeleton';
 import type { Faq } from '@shared/schema';
+import { useLanguage, Language } from '@/lib/LanguageContext';
 
 const FAQ = () => {
+  const { t } = useLanguage();
   const { data: faqs, isLoading } = useQuery<Faq[]>({
     queryKey: ['/api/faqs'],
   });
@@ -49,10 +51,10 @@ const FAQ = () => {
       >
         <motion.div className="text-center mb-12" variants={itemVariants}>
           <h2 className="font-rajdhani font-bold text-3xl md:text-4xl text-white mb-4">
-            Întrebări <span className="text-secondary">Frecvente</span>
+            {t('faq.title.first')} <span className="text-secondary">{t('faq.title.second')}</span>
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto"></div>
-          <p className="mt-4 max-w-2xl mx-auto">Află răspunsurile la cele mai comune întrebări despre Moldova Pro League.</p>
+          <p className="mt-4 max-w-2xl mx-auto">{t('faq.subtitle')}</p>
         </motion.div>
         
         <motion.div className="max-w-3xl mx-auto" variants={itemVariants}>
