@@ -43,8 +43,8 @@ try {
 
 // Definim serverele de verificat
 const servers = [
-  { id: 1, name: 'Aim', host: '37.233.50.55', port: 27015, type: 'csgo' },
-  { id: 2, name: 'Retake', host: '37.233.50.55', port: 27016, type: 'csgo' },
+  { id: 1, name: 'Retake 1', host: '37.233.50.55', port: 27015, type: 'csgo' },
+  { id: 2, name: 'Retake 2', host: '37.233.50.55', port: 27016, type: 'csgo' },
   { id: 3, name: 'FFA/DM', host: '37.233.50.55', port: 27017, type: 'csgo' }
 ];
 
@@ -81,10 +81,10 @@ async function checkServer(server) {
       let playerCount = 0;
       // Diferite numere de jucători în funcție de portul serverului
       switch(server.port) {
-        case 27015: // AIM
+        case 27015: // Retake 1
           playerCount = Math.floor(Math.random() * 5) + 3; // 3-7 jucători
           break;
-        case 27016: // Retake
+        case 27016: // Retake 2
           playerCount = Math.floor(Math.random() * 4) + 1; // 1-4 jucători
           break;
         case 27017: // DM

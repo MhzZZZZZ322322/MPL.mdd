@@ -562,33 +562,33 @@ export class MemStorage implements IStorage {
     });
     
     // Initialize CS Servers
-    const aimServer: CsServer = {
+    const retake1Server: CsServer = {
       id: this.currentCsServerId++,
       name: "Server CS2 Moldova",
       ip: "37.233.50.55",
       port: 27015,
       location: "Moldova",
-      mode: "Aim",
+      mode: "Retake 1",
       status: true, // Inițializează ca online conform informațiilor primite
       players: 0,
       maxPlayers: 16,
       likes: 0
     };
-    this.csServers.set(aimServer.id, aimServer);
+    this.csServers.set(retake1Server.id, retake1Server);
     
-    const retakeServer: CsServer = {
+    const retake2Server: CsServer = {
       id: this.currentCsServerId++,
       name: "Server CS2 Moldova",
       ip: "37.233.50.55",
       port: 27016,
       location: "Moldova",
-      mode: "Retake",
+      mode: "Retake 2",
       status: true, // Inițializează ca online conform informațiilor primite
       players: 0,
       maxPlayers: 16,
       likes: 0
     };
-    this.csServers.set(retakeServer.id, retakeServer);
+    this.csServers.set(retake2Server.id, retake2Server);
     
     const deathmatchServer: CsServer = {
       id: this.currentCsServerId++,
