@@ -106,7 +106,9 @@ const Partners = () => {
                   rel="noopener noreferrer"
                   className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
                 >
-                  <img src={darwinLogo} alt="Darwin.md Logo" className="max-h-16 w-auto object-contain" />
+                  <div className="h-16 flex items-center justify-center">
+                    <img src={darwinLogo} alt="Darwin.md Logo" className="h-full w-auto object-contain" />
+                  </div>
                 </a>
                 <a 
                   href="https://hator.gg/keyboards/skyfall-tkl-pro-wireless/" 
@@ -114,7 +116,9 @@ const Partners = () => {
                   rel="noopener noreferrer"
                   className="aspect-video bg-darkBg rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
                 >
-                  <img src={hatorLogo} alt="Hator Logo" className="max-h-16 w-auto object-contain" />
+                  <div className="h-16 flex items-center justify-center">
+                    <img src={hatorLogo} alt="Hator Logo" className="h-full w-auto object-contain" />
+                  </div>
                 </a>
                 <a 
                   href="https://www.instagram.com/iziplay.md/" 
@@ -122,7 +126,9 @@ const Partners = () => {
                   rel="noopener noreferrer"
                   className="aspect-video bg-darkBg rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
                 >
-                  <img src={iziplayLogo} alt="IZI Play Logo" className="max-h-16 w-auto object-contain" />
+                  <div className="h-16 flex items-center justify-center">
+                    <img src={iziplayLogo} alt="IZI Play Logo" className="h-full w-auto object-contain" />
+                  </div>
                 </a>
                 {[...Array(1)].map((_, i) => (
                   <div 
