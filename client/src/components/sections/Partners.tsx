@@ -104,7 +104,7 @@ const Partners = () => {
                   href="https://darwin.md" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="aspect-video bg-darkGray/40 rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                  className="aspect-video bg-black/40 rounded flex items-center justify-center p-4 hover:bg-black/60 transition-colors"
                 >
                   <div className="h-16 flex items-center justify-center">
                     <img src={darwinLogo} alt="Darwin.md Logo" className="h-full w-auto object-contain" />
@@ -114,7 +114,7 @@ const Partners = () => {
                   href="https://hator.gg/keyboards/skyfall-tkl-pro-wireless/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="aspect-video bg-darkBg rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                  className="aspect-video bg-black/40 rounded flex items-center justify-center p-4 hover:bg-black/60 transition-colors"
                 >
                   <div className="h-16 flex items-center justify-center">
                     <img src={hatorLogo} alt="Hator Logo" className="h-full w-auto object-contain" />
@@ -124,7 +124,7 @@ const Partners = () => {
                   href="https://www.instagram.com/iziplay.md/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="aspect-video bg-darkBg rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                  className="aspect-video bg-black/40 rounded flex items-center justify-center p-4 hover:bg-black/60 transition-colors"
                 >
                   <div className="h-16 flex items-center justify-center">
                     <img src={iziplayLogo} alt="IZI Play Logo" className="h-full w-auto object-contain" />
@@ -133,7 +133,7 @@ const Partners = () => {
                 {[...Array(1)].map((_, i) => (
                   <div 
                     key={i} 
-                    className="aspect-video bg-darkGray/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
+                    className="aspect-video bg-black/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
                   >
                     <span className="text-gray-400 text-sm">{t('partners.sponsor.spot')}</span>
                   </div>
