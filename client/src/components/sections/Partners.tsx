@@ -141,6 +141,16 @@ const Partners = () => {
                     <img src={kingstonLogo} alt="Kingston Fury Logo" className="h-full w-auto object-contain" />
                   </div>
                 </a>
+                <div 
+                  className="aspect-video bg-black/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
+                >
+                  <span className="text-gray-400 text-sm">{t('partners.sponsor.spot')}</span>
+                </div>
+                <div 
+                  className="aspect-video bg-black/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
+                >
+                  <span className="text-gray-400 text-sm">{t('partners.sponsor.spot')}</span>
+                </div>
               </div>
               <div className="mt-6 text-center text-sm text-gray-400">
                 <p>{t('partners.supported.by')}</p>
