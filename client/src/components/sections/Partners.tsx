@@ -4,6 +4,7 @@ import { Check } from 'lucide-react';
 import NeonBorder from '@/components/animations/NeonBorder';
 import darwinLogo from '@/assets/darwin-logo.png';
 import hatorLogo from '@/assets/hator-logo-yellow.png';
+import iziplayLogo from '@/assets/iziplay-logo.png';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const Partners = () => {
@@ -115,7 +116,15 @@ const Partners = () => {
                 >
                   <img src={hatorLogo} alt="Hator Logo" className="max-h-10 w-auto object-contain" />
                 </a>
-                {[...Array(2)].map((_, i) => (
+                <a 
+                  href="https://www.instagram.com/iziplay.md/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="aspect-video bg-darkBg rounded flex items-center justify-center p-4 hover:bg-darkGray/60 transition-colors"
+                >
+                  <img src={iziplayLogo} alt="IZI Play Logo" className="max-h-10 w-auto object-contain" />
+                </a>
+                {[...Array(1)].map((_, i) => (
                   <div 
                     key={i} 
                     className="aspect-video bg-darkGray/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
