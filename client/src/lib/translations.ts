@@ -1174,16 +1174,16 @@ export const translations: TranslationDictionary = {
     ru: "21 апреля 2025"
   },
   "event.date.registration.end": {
-    ro: "25 Mai 2025",
-    ru: "25 мая 2025"
+    ro: "8 Iunie 2025",
+    ru: "8 июня 2025"
   },
   "event.date.team.validation": {
-    ro: "26 Mai - 1 Iunie 2025",
-    ru: "26 мая - 1 июня 2025"
+    ro: "9 Iunie - 15 Iunie 2025",
+    ru: "9 июня - 15 июня 2025"
   },
   "event.date.tournament.start": {
-    ro: "2 Iunie 2025",
-    ru: "2 июня 2025"
+    ro: "16 Iunie 2025",
+    ru: "16 июня 2025"
   },
   "event.rules.title": {
     ro: "Regulament",
