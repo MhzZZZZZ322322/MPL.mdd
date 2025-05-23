@@ -93,8 +93,14 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-darkBg">
-      <div className="container mx-auto px-4 py-12">
+    <>
+      <Helmet>
+        <title>Admin Panel | Moldova Pro League</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      
+      <div className="min-h-screen bg-darkBg">
+        <div className="container mx-auto px-4 py-12">
         <div className="mb-6 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-rajdhani font-bold text-white mb-2">Panou de administrare</h1>
@@ -240,6 +246,7 @@ const Admin = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
