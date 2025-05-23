@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Contact } from '@shared/schema';
 import { useToast } from '@/hooks/use-toast';
 import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, Globe, EyeOff, Eye } from 'lucide-react';
