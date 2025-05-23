@@ -36,6 +36,10 @@ function Router() {
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />
       <Route path="/admin/seo" component={SeoManager} />
+      <Route path="/cronologia-mpl" component={() => {
+        window.location.replace('/');
+        return null;
+      }} />
       <Route component={NotFound} />
     </Switch>
   );
