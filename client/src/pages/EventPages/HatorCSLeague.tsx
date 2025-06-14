@@ -23,16 +23,6 @@ const HatorCSLeague = () => {
           icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-72 h-72 object-contain rounded" />,
           gradient: "from-yellow-500 to-blue-600"
         };
-      case "DIGITAL WOLVES":
-        return {
-          icon: <Zap className="w-72 h-72 text-cyan-400" />,
-          gradient: "from-cyan-500 to-teal-600"
-        };
-      case "CYBER HAWKS":
-        return {
-          icon: <Eye className="w-72 h-72 text-blue-400" />,
-          gradient: "from-blue-500 to-indigo-600"
-        };
       default:
         return {
           icon: <Trophy className="w-72 h-72 text-primary" />,
