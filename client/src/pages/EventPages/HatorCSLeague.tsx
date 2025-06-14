@@ -238,14 +238,15 @@ const HatorCSLeague = () => {
 
         {/* Teams Profile Section */}
         <div className="py-16 container mx-auto px-4">
-          <button 
-            className="mb-6 cursor-pointer group text-left w-full p-6 rounded-xl border-3 border-gray-600 bg-gradient-to-r from-gray-800 to-gray-900 hover:border-primary hover:from-primary/20 hover:to-primary/10 transition-all duration-300 shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
+          <Button 
+            variant="outline" 
+            className="mb-6 cursor-pointer group text-left w-full p-6 h-auto border-white text-white hover:bg-white/10 justify-start"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
             <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
               Profilul echipelor
             </h2>
-          </button>
+          </Button>
 
           {isTeamsExpanded && (
             <>
@@ -334,14 +335,15 @@ const HatorCSLeague = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <button 
-                className="mb-6 cursor-pointer group text-left w-full p-6 rounded-xl border-3 border-gray-600 bg-gradient-to-r from-gray-800 to-gray-900 hover:border-primary hover:from-primary/20 hover:to-primary/10 transition-all duration-300 shadow-xl hover:shadow-primary/30 hover:scale-[1.02] active:scale-[0.98]"
+              <Button 
+                variant="outline" 
+                className="mb-6 cursor-pointer group text-left w-full p-6 h-auto border-white text-white hover:bg-white/10 justify-start"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
                 <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
                   Informații generale despre turneu
                 </h2>
-              </button>
+              </Button>
 
               {isContentExpanded && (
                 <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
