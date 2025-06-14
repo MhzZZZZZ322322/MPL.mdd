@@ -868,9 +868,8 @@ export class MemStorage implements IStorage {
       createdTeams.push(team);
     });
 
-    // Add corrected team members data from tournament organizers
-    const correctTeamMembers = [
-      // Team 1 - XPlosion
+    // Final team members data from official tournament file - 277 players across 39 teams
+    const finalTeamMembers = [
       { teamId: 1, nickname: "Duke_0", role: "captain", position: "main" },
       { teamId: 1, nickname: "Duke0", role: "player", position: "main" },
       { teamId: 1, nickname: "Gr1MM-", role: "player", position: "main" },
@@ -879,22 +878,16 @@ export class MemStorage implements IStorage {
       { teamId: 1, nickname: "RayeN-", role: "player", position: "main" },
       { teamId: 1, nickname: "Gherman-", role: "player", position: "reserve" },
       { teamId: 1, nickname: "acierdnay", role: "player", position: "reserve" },
-
-      // Team 2 - Robotaim
       { teamId: 2, nickname: "-n1ghtmarr", role: "captain", position: "main" },
       { teamId: 2, nickname: "mori66", role: "player", position: "main" },
       { teamId: 2, nickname: "HappyRaider", role: "player", position: "main" },
       { teamId: 2, nickname: "v1snea", role: "player", position: "main" },
       { teamId: 2, nickname: "Clu4er4", role: "player", position: "main" },
-
-      // Team 3 - Lean Vision
       { teamId: 3, nickname: "M1ndfvck", role: "captain", position: "main" },
       { teamId: 3, nickname: "ltmzzz", role: "player", position: "main" },
       { teamId: 3, nickname: "riks99", role: "player", position: "main" },
       { teamId: 3, nickname: "ayuk1n", role: "player", position: "main" },
       { teamId: 3, nickname: "Chukunda", role: "player", position: "main" },
-
-      // Team 4 - Coli
       { teamId: 4, nickname: "denisZ1x", role: "captain", position: "main" },
       { teamId: 4, nickname: "maskkout", role: "player", position: "main" },
       { teamId: 4, nickname: "kideeFrumu", role: "player", position: "main" },
@@ -902,8 +895,6 @@ export class MemStorage implements IStorage {
       { teamId: 4, nickname: "Biffaw", role: "player", position: "main" },
       { teamId: 4, nickname: "M7nraifu", role: "player", position: "main" },
       { teamId: 4, nickname: "predator_md", role: "player", position: "main" },
-
-      // Team 5 - Japon
       { teamId: 5, nickname: "BoreaTaga", role: "captain", position: "main" },
       { teamId: 5, nickname: "Yntelect", role: "player", position: "main" },
       { teamId: 5, nickname: "CCLey_", role: "player", position: "main" },
@@ -911,8 +902,6 @@ export class MemStorage implements IStorage {
       { teamId: 5, nickname: "Santiik1", role: "player", position: "main" },
       { teamId: 5, nickname: "MxGamer124", role: "player", position: "reserve" },
       { teamId: 5, nickname: "danyazabiv", role: "player", position: "reserve" },
-
-      // Team 6 - Flux Line
       { teamId: 6, nickname: "hide74-", role: "captain", position: "main" },
       { teamId: 6, nickname: "rheinTod", role: "player", position: "main" },
       { teamId: 6, nickname: "wizzhaha", role: "player", position: "main" },
@@ -920,16 +909,12 @@ export class MemStorage implements IStorage {
       { teamId: 6, nickname: "SayMons_", role: "player", position: "main" },
       { teamId: 6, nickname: "17theooo", role: "player", position: "reserve" },
       { teamId: 6, nickname: "y0kuza", role: "player", position: "reserve" },
-
-      // Team 7 - Cipok
       { teamId: 7, nickname: "KROUL1YSFORD", role: "captain", position: "main" },
       { teamId: 7, nickname: "CHORS1", role: "player", position: "main" },
       { teamId: 7, nickname: "Latinskii", role: "player", position: "main" },
       { teamId: 7, nickname: "Lolipop3121", role: "player", position: "main" },
       { teamId: 7, nickname: "absent12", role: "player", position: "main" },
       { teamId: 7, nickname: "Pinz4ru", role: "player", position: "reserve" },
-
-      // Team 8 - La Passion
       { teamId: 8, nickname: "NuBekk", role: "captain", position: "main" },
       { teamId: 8, nickname: "Sok1able_", role: "player", position: "main" },
       { teamId: 8, nickname: "kulya777", role: "player", position: "main" },
@@ -937,53 +922,39 @@ export class MemStorage implements IStorage {
       { teamId: 8, nickname: "chifuleacc", role: "player", position: "main" },
       { teamId: 8, nickname: "nocliippp", role: "player", position: "reserve" },
       { teamId: 8, nickname: "uukassen", role: "player", position: "reserve" },
-
-      // Team 9 - LYSQ
       { teamId: 9, nickname: "1lazcc", role: "captain", position: "main" },
       { teamId: 9, nickname: "F1nalYST", role: "player", position: "main" },
       { teamId: 9, nickname: "N3KK1T", role: "player", position: "main" },
       { teamId: 9, nickname: "sweeth3at_", role: "player", position: "main" },
       { teamId: 9, nickname: "Daveees", role: "player", position: "main" },
       { teamId: 9, nickname: "sebi11wx", role: "player", position: "reserve" },
-
-      // Team 10 - RCBVR
       { teamId: 10, nickname: "DumaSula", role: "captain", position: "main" },
       { teamId: 10, nickname: "UchihaRoby", role: "player", position: "main" },
       { teamId: 10, nickname: "My11", role: "player", position: "main" },
       { teamId: 10, nickname: "T0r1no", role: "player", position: "main" },
       { teamId: 10, nickname: "chocomilk17", role: "player", position: "main" },
       { teamId: 10, nickname: "lelavaida", role: "player", position: "reserve" },
-
-      // Team 11 - Crasat
       { teamId: 11, nickname: "Feniyxad", role: "captain", position: "main" },
       { teamId: 11, nickname: "px_csgo1", role: "player", position: "main" },
       { teamId: 11, nickname: "By_Vega", role: "player", position: "main" },
       { teamId: 11, nickname: "czxxy", role: "player", position: "main" },
       { teamId: 11, nickname: "Stan145", role: "player", position: "main" },
-
-      // Team 12 - Neo Egoist League
       { teamId: 12, nickname: "itzHYPEER", role: "captain", position: "main" },
       { teamId: 12, nickname: "Zev1x_x", role: "player", position: "main" },
       { teamId: 12, nickname: "Tr1zizxc", role: "player", position: "main" },
       { teamId: 12, nickname: "keanet-", role: "player", position: "main" },
       { teamId: 12, nickname: "SqTrueOmega", role: "player", position: "main" },
-
-      // Team 13 - LitEnergy
       { teamId: 13, nickname: "denzy", role: "captain", position: "main" },
       { teamId: 13, nickname: "hahanz0-", role: "player", position: "main" },
       { teamId: 13, nickname: "potapke", role: "player", position: "main" },
       { teamId: 13, nickname: "-pickup", role: "player", position: "main" },
       { teamId: 13, nickname: "Bagheera-_", role: "player", position: "main" },
       { teamId: 13, nickname: "_avi-", role: "player", position: "reserve" },
-
-      // Team 14 - Into The Beach
       { teamId: 14, nickname: "chazya", role: "captain", position: "main" },
       { teamId: 14, nickname: "SWAGTEAR", role: "player", position: "main" },
       { teamId: 14, nickname: "DediDR", role: "player", position: "main" },
       { teamId: 14, nickname: "Lavandar", role: "player", position: "main" },
       { teamId: 14, nickname: "madl9", role: "player", position: "main" },
-
-      // Team 15 - Very Good Team
       { teamId: 15, nickname: "DrMadness", role: "captain", position: "main" },
       { teamId: 15, nickname: "hex4l0ve", role: "player", position: "main" },
       { teamId: 15, nickname: "Bronxxxxx", role: "player", position: "main" },
@@ -993,16 +964,12 @@ export class MemStorage implements IStorage {
       { teamId: 15, nickname: "YTProst", role: "player", position: "reserve" },
       { teamId: 15, nickname: "gabriel_03", role: "player", position: "reserve" },
       { teamId: 15, nickname: "Mitowily", role: "player", position: "reserve" },
-
-      // Team 16 - KostiujeniKlinik
       { teamId: 16, nickname: "PhXGON", role: "captain", position: "main" },
       { teamId: 16, nickname: "Ovitaaa1", role: "player", position: "main" },
       { teamId: 16, nickname: "Pavar0tnik", role: "player", position: "main" },
       { teamId: 16, nickname: "sky4real", role: "player", position: "main" },
       { teamId: 16, nickname: "Sobranie-777", role: "player", position: "main" },
       { teamId: 16, nickname: "QuatrRo_", role: "player", position: "reserve" },
-
-      // Team 17 - Muligambia
       { teamId: 17, nickname: "Fr0yMan", role: "captain", position: "main" },
       { teamId: 17, nickname: "A1ken0_0", role: "player", position: "main" },
       { teamId: 17, nickname: "Miyazaki", role: "player", position: "main" },
@@ -1010,16 +977,12 @@ export class MemStorage implements IStorage {
       { teamId: 17, nickname: "l3xerrr", role: "player", position: "main" },
       { teamId: 17, nickname: "Kraken404", role: "player", position: "reserve" },
       { teamId: 17, nickname: "trywz", role: "player", position: "reserve" },
-
-      // Team 18 - Legalize
       { teamId: 18, nickname: "sn1deRR", role: "captain", position: "main" },
       { teamId: 18, nickname: "wh1te353", role: "player", position: "main" },
       { teamId: 18, nickname: "gerda", role: "player", position: "main" },
       { teamId: 18, nickname: "-tsoykyrit", role: "player", position: "main" },
       { teamId: 18, nickname: "lowtaber69", role: "player", position: "main" },
       { teamId: 18, nickname: "8fable8", role: "player", position: "reserve" },
-
-      // Team 19 - Trigger
       { teamId: 19, nickname: "patan1", role: "captain", position: "main" },
       { teamId: 19, nickname: "-D4Nt3Z", role: "player", position: "main" },
       { teamId: 19, nickname: "NoobOnRadar", role: "player", position: "main" },
@@ -1027,38 +990,28 @@ export class MemStorage implements IStorage {
       { teamId: 19, nickname: "MaxxBT", role: "player", position: "main" },
       { teamId: 19, nickname: "danchicago", role: "player", position: "reserve" },
       { teamId: 19, nickname: "buGaa1", role: "player", position: "reserve" },
-
-      // Team 20 - WenDeagle
       { teamId: 20, nickname: "Alohadron", role: "captain", position: "main" },
       { teamId: 20, nickname: "Super_Bobik", role: "player", position: "main" },
       { teamId: 20, nickname: "WenDigol", role: "player", position: "main" },
       { teamId: 20, nickname: "SL3SH_12", role: "player", position: "main" },
       { teamId: 20, nickname: "1liusa", role: "player", position: "main" },
       { teamId: 20, nickname: "MMSGMamaliga", role: "player", position: "reserve" },
-
-      // Team 21 - X-one
       { teamId: 21, nickname: "-OPIUMVXQ-", role: "captain", position: "main" },
       { teamId: 21, nickname: "yar1tyss", role: "player", position: "main" },
       { teamId: 21, nickname: "g0speLbtw", role: "player", position: "main" },
       { teamId: 21, nickname: "SolevoI_Voi", role: "player", position: "main" },
       { teamId: 21, nickname: "tronick999", role: "player", position: "main" },
-
-      // Team 22 - Cucumba
       { teamId: 22, nickname: "v6d5", role: "captain", position: "main" },
       { teamId: 22, nickname: "KaTaRiZ1337", role: "player", position: "main" },
       { teamId: 22, nickname: "xBogdy", role: "player", position: "main" },
       { teamId: 22, nickname: "7140", role: "player", position: "main" },
       { teamId: 22, nickname: "HELLBOYzx", role: "player", position: "main" },
       { teamId: 22, nickname: "ManoleBanan", role: "player", position: "reserve" },
-
-      // Team 23 - Cadian Team
       { teamId: 23, nickname: "cadiaN", role: "captain", position: "main" },
       { teamId: 23, nickname: "5h1zzu", role: "player", position: "main" },
       { teamId: 23, nickname: "machoman", role: "player", position: "main" },
       { teamId: 23, nickname: "kiyyyo-_-", role: "player", position: "main" },
       { teamId: 23, nickname: "Enkiee", role: "player", position: "main" },
-
-      // Team 24 - Onyx
       { teamId: 24, nickname: "Rexodd_", role: "captain", position: "main" },
       { teamId: 24, nickname: "vovchikk", role: "player", position: "main" },
       { teamId: 24, nickname: "Timurssz", role: "player", position: "main" },
@@ -1067,15 +1020,11 @@ export class MemStorage implements IStorage {
       { teamId: 24, nickname: "skip74", role: "player", position: "main" },
       { teamId: 24, nickname: "ZenoK1ng", role: "player", position: "reserve" },
       { teamId: 24, nickname: "Rexodd", role: "player", position: "reserve" },
-
-      // Team 25 - Barbosii
       { teamId: 25, nickname: "btate", role: "captain", position: "main" },
       { teamId: 25, nickname: "Lewis169", role: "player", position: "main" },
       { teamId: 25, nickname: "cozmann", role: "player", position: "main" },
       { teamId: 25, nickname: "qwus0", role: "player", position: "main" },
       { teamId: 25, nickname: "Brf_Bogdan", role: "player", position: "main" },
-
-      // Team 26 - Wenzo
       { teamId: 26, nickname: "-ExTaZzy-", role: "captain", position: "main" },
       { teamId: 26, nickname: "Twizzy_rs", role: "player", position: "main" },
       { teamId: 26, nickname: "sucdeananas", role: "player", position: "main" },
@@ -1083,15 +1032,11 @@ export class MemStorage implements IStorage {
       { teamId: 26, nickname: "-f0rz3-", role: "player", position: "main" },
       { teamId: 26, nickname: "-Dekj", role: "player", position: "reserve" },
       { teamId: 26, nickname: "P1ko_x", role: "player", position: "reserve" },
-
-      // Team 27 - GoldenFive
       { teamId: 27, nickname: "mooghiwara", role: "captain", position: "main" },
       { teamId: 27, nickname: "Klasse91", role: "player", position: "main" },
       { teamId: 27, nickname: "maTim", role: "player", position: "main" },
       { teamId: 27, nickname: "RONI1337", role: "player", position: "main" },
       { teamId: 27, nickname: "IOneTapI", role: "player", position: "main" },
-
-      // Team 28 - Auratix
       { teamId: 28, nickname: "Tankkillerr", role: "captain", position: "main" },
       { teamId: 28, nickname: "ash1kkk", role: "player", position: "main" },
       { teamId: 28, nickname: "TrownZy", role: "player", position: "main" },
@@ -1099,15 +1044,11 @@ export class MemStorage implements IStorage {
       { teamId: 28, nickname: "l1nx", role: "player", position: "main" },
       { teamId: 28, nickname: "O2DED", role: "player", position: "reserve" },
       { teamId: 28, nickname: "Cobqkq", role: "player", position: "reserve" },
-
-      // Team 29 - Rumina
       { teamId: 29, nickname: "Huh52", role: "captain", position: "main" },
       { teamId: 29, nickname: "Mamin_Cvetok", role: "player", position: "main" },
       { teamId: 29, nickname: "illinir", role: "player", position: "main" },
       { teamId: 29, nickname: "Pochita52", role: "player", position: "main" },
       { teamId: 29, nickname: "Kasador_52", role: "player", position: "main" },
-
-      // Team 30 - K9 Team
       { teamId: 30, nickname: "-farra", role: "captain", position: "main" },
       { teamId: 30, nickname: "-DeYn-", role: "player", position: "main" },
       { teamId: 30, nickname: "s0R1DE", role: "player", position: "main" },
@@ -1116,23 +1057,17 @@ export class MemStorage implements IStorage {
       { teamId: 30, nickname: "AngryTolean", role: "player", position: "reserve" },
       { teamId: 30, nickname: "iNsanityMD", role: "player", position: "reserve" },
       { teamId: 30, nickname: "-starsmd", role: "player", position: "reserve" },
-
-      // Team 31 - Killuminaty
       { teamId: 31, nickname: "aC_97", role: "captain", position: "main" },
       { teamId: 31, nickname: "Raw0-", role: "player", position: "main" },
       { teamId: 31, nickname: "-pROSECCO", role: "player", position: "main" },
       { teamId: 31, nickname: "LiSun", role: "player", position: "main" },
       { teamId: 31, nickname: "wolfistomas", role: "player", position: "main" },
       { teamId: 31, nickname: "pavlovvv", role: "player", position: "reserve" },
-
-      // Team 32 - Shashlik
       { teamId: 32, nickname: "BogdanR23", role: "captain", position: "main" },
       { teamId: 32, nickname: "Vaneasous", role: "player", position: "main" },
       { teamId: 32, nickname: "sashasous", role: "player", position: "main" },
       { teamId: 32, nickname: "999PingOnCs", role: "player", position: "main" },
       { teamId: 32, nickname: "spexFV", role: "player", position: "main" },
-
-      // Team 33 - Ciocana Esports
       { teamId: 33, nickname: "CoMMaNDeR_MD", role: "captain", position: "main" },
       { teamId: 33, nickname: "f1ke_soft", role: "player", position: "main" },
       { teamId: 33, nickname: "FraGGvesta9", role: "player", position: "main" },
@@ -1140,15 +1075,11 @@ export class MemStorage implements IStorage {
       { teamId: 33, nickname: "tr1cketw", role: "player", position: "main" },
       { teamId: 33, nickname: "xxx13", role: "player", position: "main" },
       { teamId: 33, nickname: "Shutting2", role: "player", position: "reserve" },
-
-      // Team 34 - Bobb3rs
       { teamId: 34, nickname: "ZanT3X", role: "captain", position: "main" },
       { teamId: 34, nickname: "ezforleoha", role: "player", position: "main" },
       { teamId: 34, nickname: "Z1L4K", role: "player", position: "main" },
       { teamId: 34, nickname: "Fyralyx", role: "player", position: "main" },
       { teamId: 34, nickname: "Yakuzaishi", role: "player", position: "main" },
-
-      // Team 35 - Bloody
       { teamId: 35, nickname: "MrPalste", role: "captain", position: "main" },
       { teamId: 35, nickname: "MaL1", role: "player", position: "main" },
       { teamId: 35, nickname: "nkwr", role: "player", position: "main" },
@@ -1156,15 +1087,11 @@ export class MemStorage implements IStorage {
       { teamId: 35, nickname: "Nonstoping", role: "player", position: "main" },
       { teamId: 35, nickname: "dan1k", role: "player", position: "reserve" },
       { teamId: 35, nickname: "wanderer", role: "player", position: "reserve" },
-
-      // Team 36 - Brigada
       { teamId: 36, nickname: "TonyBossuB", role: "captain", position: "main" },
       { teamId: 36, nickname: "Adm1ralExE", role: "player", position: "main" },
       { teamId: 36, nickname: "Kolea777", role: "player", position: "main" },
       { teamId: 36, nickname: "dariusbosu1", role: "player", position: "main" },
       { teamId: 36, nickname: "StasBosu", role: "player", position: "main" },
-
-      // Team 37 - Ciocălău Team
       { teamId: 37, nickname: "xen0", role: "captain", position: "main" },
       { teamId: 37, nickname: "Esantorix", role: "player", position: "main" },
       { teamId: 37, nickname: "kryz3w", role: "player", position: "main" },
@@ -1172,16 +1099,12 @@ export class MemStorage implements IStorage {
       { teamId: 37, nickname: "Bama_Booy", role: "player", position: "main" },
       { teamId: 37, nickname: "Kirspiden", role: "player", position: "reserve" },
       { teamId: 37, nickname: "Headcleaner", role: "player", position: "reserve" },
-
-      // Team 38 - Brigada Meteor
       { teamId: 38, nickname: "yeahmen707", role: "captain", position: "main" },
       { teamId: 38, nickname: "cacioc1", role: "player", position: "main" },
       { teamId: 38, nickname: "RoyalD1", role: "player", position: "main" },
       { teamId: 38, nickname: "_4AM", role: "player", position: "main" },
       { teamId: 38, nickname: "neirhe", role: "player", position: "main" },
       { teamId: 38, nickname: "Smali_", role: "player", position: "reserve" },
-
-      // Team 39 - BPSP
       { teamId: 39, nickname: "M1kee", role: "captain", position: "main" },
       { teamId: 39, nickname: "strky_1", role: "player", position: "main" },
       { teamId: 39, nickname: "-formet-", role: "player", position: "main" },
@@ -1189,7 +1112,7 @@ export class MemStorage implements IStorage {
       { teamId: 39, nickname: "Bandajel", role: "player", position: "main" }
     ];
 
-    correctTeamMembers.forEach(member => {
+    finalTeamMembers.forEach(member => {
       const teamMember: TeamMember = {
         id: this.currentTeamMemberId++,
         teamId: member.teamId,
