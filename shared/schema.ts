@@ -136,3 +136,38 @@ export const insertAnalyticsSchema = createInsertSchema(analyticsSettings).omit(
 
 export type InsertAnalytics = z.infer<typeof insertAnalyticsSchema>;
 export type AnalyticsSettings = typeof analyticsSettings.$inferSelect;
+
+// Teams schema
+export const teams = pgTable("teams", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  logoUrl: text("logo_url").notNull(),
+  tournament: text("tournament").notNull().default("hator-cs-league"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertTeamSchema = createInsertSchema(teams).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertTeam = z.infer<typeof insertTeamSchema>;
+export type Team = typeof teams.$inferSelect;
+
+// Team members schema
+export const teamMembers = pgTable("team_members", {
+  id: serial("id").primaryKey(),
+  teamId: integer("team_id").notNull(),
+  nickname: text("nickname").notNull(),
+  faceitProfile: text("faceit_profile").notNull(),
+  role: text("role").notNull().default("player"), // player, captain, coach
+  isActive: boolean("is_active").notNull().default(true),
+});
+
+export const insertTeamMemberSchema = createInsertSchema(teamMembers).omit({
+  id: true,
+});
+
+export type InsertTeamMember = z.infer<typeof insertTeamMemberSchema>;
+export type TeamMember = typeof teamMembers.$inferSelect;

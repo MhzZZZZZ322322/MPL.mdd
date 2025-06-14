@@ -1,0 +1,121 @@
+# Moldova Pro League (MPL) - Replit Guide
+
+## Overview
+
+Moldova Pro League is a web application for a gaming esports organization from Moldova. It's a full-stack application built with React frontend and Express backend, featuring game server monitoring, event management, player rankings, and content management functionality.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: React 18 with TypeScript
+- **Styling**: Tailwind CSS with custom design system
+- **UI Components**: Radix UI primitives with shadcn/ui
+- **Routing**: Wouter for client-side routing
+- **State Management**: TanStack Query for server state
+- **Animations**: AOS (Animate On Scroll) and Framer Motion
+- **Build Tool**: Vite for development and production builds
+
+### Backend Architecture
+- **Runtime**: Node.js with TypeScript (using tsx for development)
+- **Framework**: Express.js
+- **Database ORM**: Drizzle ORM
+- **Database**: PostgreSQL (configured for Neon serverless)
+- **Game Server Monitoring**: GameDig library for CS2 server status
+- **Email**: SendGrid integration for contact forms
+- **File Processing**: esbuild for production bundling
+
+## Key Components
+
+### Database Schema
+- **Users**: Authentication and user management
+- **Events**: Tournament and event information
+- **Players**: Player profiles and rankings
+- **CS Servers**: Counter-Strike server monitoring
+- **Contact Submissions**: Contact form data
+- **FAQs**: Frequently asked questions
+- **Site Content**: Dynamic content management
+- **SEO Settings**: Search engine optimization data
+
+### Game Server Integration
+- Real-time CS2 server monitoring using GameDig
+- Server status tracking (online/offline, player count)
+- Background server checking scripts (CommonJS compatibility)
+- JSON file-based status caching
+
+### Content Management
+- Admin authentication system
+- Dynamic content editing
+- Event management
+- SEO settings management
+- Player ranking system
+
+## Data Flow
+
+1. **Client Requests**: React frontend makes API calls to Express backend
+2. **Server Processing**: Express routes handle business logic and database operations
+3. **Database Operations**: Drizzle ORM manages PostgreSQL interactions
+4. **Game Server Monitoring**: Background scripts check CS2 server status
+5. **Real-time Updates**: TanStack Query manages client-side data synchronization
+
+## External Dependencies
+
+### Core Dependencies
+- React ecosystem (React, React DOM, React Router alternative)
+- Express.js for backend API
+- Drizzle ORM for database operations
+- Neon serverless PostgreSQL
+- GameDig for game server monitoring
+- SendGrid for email services
+
+### Development Tools
+- TypeScript for type safety
+- Vite for build tooling
+- Tailwind CSS for styling
+- Various Radix UI components
+
+### Gaming-Specific
+- CS2 server monitoring capabilities
+- Tournament bracket management
+- Player ranking systems
+
+## Deployment Strategy
+
+### Build Process
+1. **Frontend**: Vite builds React application to `dist/public`
+2. **Backend**: esbuild bundles server code to `dist/index.js`
+3. **Assets**: Static assets served from public directory
+
+### Environment Configuration
+- Database connection via `DATABASE_URL` environment variable
+- SendGrid API key for email functionality
+- Production vs development environment handling
+
+### Replit Deployment
+- Configured for autoscale deployment target
+- Port 5000 for local development, port 80 for external access
+- PostgreSQL 16 module enabled
+- Node.js 20 runtime
+
+### File Structure
+```
+├── client/                 # React frontend
+│   ├── src/
+│   │   ├── components/     # UI components
+│   │   ├── pages/          # Route components
+│   │   ├── lib/            # Utilities and configuration
+│   │   └── hooks/          # Custom React hooks
+├── server/                 # Express backend
+│   ├── routes/             # API route handlers
+│   └── storage.ts          # Database abstraction layer
+├── shared/                 # Shared TypeScript schemas
+└── public/                 # Static assets
+```
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## Changelog
+
+Changelog:
+- June 14, 2025. Initial setup

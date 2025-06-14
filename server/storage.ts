@@ -5,7 +5,9 @@ import {
   contactSubmissions, type Contact, type InsertContact,
   faqs, type Faq, type InsertFaq,
   seoSettings, type SeoSettings, type InsertSeo,
-  analyticsSettings, type AnalyticsSettings, type InsertAnalytics
+  analyticsSettings, type AnalyticsSettings, type InsertAnalytics,
+  teams, type Team, type InsertTeam,
+  teamMembers, type TeamMember, type InsertTeamMember
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
 
@@ -68,6 +70,19 @@ export interface IStorage {
   getAnalyticsSettings(): Promise<AnalyticsSettings | undefined>;
   updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings>;
   createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings>;
+  
+  // Team methods
+  getTeams(tournament?: string): Promise<Team[]>;
+  getTeam(id: number): Promise<Team | undefined>;
+  createTeam(team: InsertTeam): Promise<Team>;
+  updateTeam(id: number, team: Partial<InsertTeam>): Promise<Team>;
+  deleteTeam(id: number): Promise<void>;
+  
+  // Team Member methods
+  getTeamMembers(teamId: number): Promise<TeamMember[]>;
+  createTeamMember(member: InsertTeamMember): Promise<TeamMember>;
+  updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember>;
+  deleteTeamMember(id: number): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -80,6 +95,8 @@ export class MemStorage implements IStorage {
   private seoSettings: Map<number, SeoSettings>;
   private analyticsSettings: Map<number, AnalyticsSettings>;
   private csServers: Map<number, CsServer>;
+  private teams: Map<number, Team>;
+  private teamMembers: Map<number, TeamMember>;
   
   currentUserId: number;
   currentEventId: number;
@@ -90,6 +107,8 @@ export class MemStorage implements IStorage {
   currentSeoId: number;
   currentAnalyticsId: number;
   currentCsServerId: number;
+  currentTeamId: number;
+  currentTeamMemberId: number;
   
   // CS Server methods
   async getCsServers(): Promise<CsServer[]> {
@@ -145,6 +164,8 @@ export class MemStorage implements IStorage {
     this.seoSettings = new Map();
     this.analyticsSettings = new Map();
     this.csServers = new Map();
+    this.teams = new Map();
+    this.teamMembers = new Map();
     
     this.currentUserId = 1;
     this.currentEventId = 1;
@@ -155,6 +176,8 @@ export class MemStorage implements IStorage {
     this.currentSeoId = 1;
     this.currentAnalyticsId = 1;
     this.currentCsServerId = 1;
+    this.currentTeamId = 1;
+    this.currentTeamMemberId = 1;
     
     // Load contact submissions from file first
     this.loadContactsFromFile();
