@@ -239,11 +239,10 @@ const HatorCSLeague = () => {
         {/* Teams Profile Section */}
         <div className="py-16 container mx-auto px-4">
           <Button 
-            variant="outline" 
-            className="mb-6 cursor-pointer group text-left w-full p-6 h-auto border-white text-white hover:bg-white/10 justify-start"
+            className="mb-6 cursor-pointer group text-left w-full p-6 h-auto bg-primary hover:bg-primary/90 justify-start"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
-            <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
+            <h2 className="text-3xl font-bold text-black font-rajdhani">
               Profilul echipelor
             </h2>
           </Button>
