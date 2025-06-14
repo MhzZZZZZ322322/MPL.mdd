@@ -116,8 +116,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
-- June 14, 2025: Updated team name from VeryGoodTeam to Trigger with final logo version
-- June 14, 2025: Added Trigger (formerly VeryGoodTeam) as 39th team in HATOR CS2 LEAGUE MOLDOVA
+- June 14, 2025: Corrected team name "Tigger" to "Trigger" - VeryGoodTeam remains unchanged
+- June 14, 2025: Added VeryGoodTeam as 39th team in HATOR CS2 LEAGUE MOLDOVA
 - June 14, 2025: Updated Cadian Team logo with official tournament branding
 - June 14, 2025: Implemented neutral dark gray background for optimal logo visibility
 - June 14, 2025: Integrated all tournament teams with authentic logos from organizer's archive
