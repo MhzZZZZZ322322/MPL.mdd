@@ -348,22 +348,25 @@ const HatorCSLeague = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
+              {/* SEO Visible Content */}
+              <div className="prose prose-invert max-w-none mb-6">
+                <p>
+                  <strong>HATOR CS2 LEAGUE MOLDOVA</strong> MPL, cea mai mare comunitate CS din Moldova, în parteneriat cu HATOR și susținut de rețeaua Darwin, organizează primul sezon al turneului Hator CS2 League Moldova. Primul sezon promite un spectacol de neuitat – sute de jucători, zeci de meciuri, transmisiuni live și premii impresionante.
+                </p>
+                <p>
+                  Participanții și spectatorii vor primi coduri promoționale exclusive pentru produsele HATOR, disponibile în magazinele Darwin.
+                </p>
+              </div>
+
               <Button 
                 className="bg-primary hover:bg-primary/90 mb-6"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
-                Informații generale despre turneu
+                {isContentExpanded ? "Vezi mai puțin" : "Vezi mai mult"}
               </Button>
 
               {isContentExpanded && (
                 <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
-                  <p>
-                    <strong>{t('event.hator.title')}</strong> {t('event.league.description.1')}
-                  </p>
-
-                  <p>
-                    {t('event.league.description.2')}
-                  </p>
 
                   <h3>{t('event.format.title.official')}</h3>
 

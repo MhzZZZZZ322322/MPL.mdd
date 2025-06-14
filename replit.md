@@ -117,9 +117,10 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 - June 14, 2025: Enhanced team member system with position field (main/reserve)
-- June 14, 2025: Doubled team logo sizes from 24x24 to 48x48 pixels
+- June 14, 2025: Tripled team logo sizes from 24x24 to 72x72 pixels (3x larger)
 - June 14, 2025: Updated tournament capacity planning for approximately 40 teams
 - June 14, 2025: Added multilingual support for team member positions and roles
+- June 14, 2025: Implemented SEO optimization with visible preview text and expandable content
 
 ## Tournament Planning
 - Expected participation: ~40 teams from Moldova and Romania
