@@ -116,6 +116,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 14, 2025: Fixed XPlosion team duplicate Duke members - now shows only one "Duke" as captain
+- June 14, 2025: Completed alphabetical team mapping correction for all 39 teams
 - June 14, 2025: Successfully integrated complete team rosters with 277 authentic players across 39 teams
 - June 14, 2025: Processed official tournament files to extract real player data with captains and positions
 - June 14, 2025: Updated all team member data with authentic nickname information from tournament organizers
