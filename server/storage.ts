@@ -850,7 +850,8 @@ export class MemStorage implements IStorage {
       { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },
       { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },
       { name: "X-one", logoUrl: "/team-logos/X-one.png" },
-      { name: "XPloison", logoUrl: "/team-logos/XPloison.webp" }
+      { name: "XPloison", logoUrl: "/team-logos/XPloison.webp" },
+      { name: "VeryGoodTeam", logoUrl: "/team-logos/VeryGoodTeam.png" }
     ];
 
     const createdTeams: Team[] = [];
