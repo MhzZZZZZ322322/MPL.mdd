@@ -341,26 +341,20 @@ const HatorCSLeague = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold text-white font-rajdhani">Informații generale despre turneu</h2>
-                <Button
-                  onClick={() => setIsContentExpanded(!isContentExpanded)}
-                  variant="outline"
-                  size="sm"
-                  className="border-primary text-primary hover:bg-primary hover:text-black"
-                >
+              <div 
+                className="flex items-center justify-between mb-6 cursor-pointer group"
+                onClick={() => setIsContentExpanded(!isContentExpanded)}
+              >
+                <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
+                  Informații generale despre turneu
+                </h2>
+                <div className="text-primary group-hover:text-white transition-colors">
                   {isContentExpanded ? (
-                    <>
-                      <ChevronUp className="w-4 h-4 mr-2" />
-                      Închide
-                    </>
+                    <ChevronUp className="w-6 h-6" />
                   ) : (
-                    <>
-                      <ChevronDown className="w-4 h-4 mr-2" />
-                      Vezi tot conținutul
-                    </>
+                    <ChevronDown className="w-6 h-6" />
                   )}
-                </Button>
+                </div>
               </div>
 
               {isContentExpanded && (
