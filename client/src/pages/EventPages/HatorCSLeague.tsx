@@ -295,35 +295,37 @@ const HatorCSLeague = () => {
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
                       {teamMembers.map((member) => (
-                        <div key={member.id} className="bg-black/30 p-4 rounded-lg border border-gray-700">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="text-lg font-semibold text-white">{member.nickname}</h4>
-                            <div className="flex gap-2">
-                              {member.role === "captain" && (
-                                <span className="bg-primary text-black px-2 py-1 text-xs rounded font-semibold">
-                                  {t('team.role.captain')}
+                        <div key={member.id} className="bg-black/30 p-3 rounded-lg border border-gray-700">
+                          <div className="space-y-2">
+                            <div className="flex flex-col space-y-1">
+                              <h4 className="text-sm font-semibold text-white truncate">{member.nickname}</h4>
+                              <div className="flex flex-wrap gap-1">
+                                {member.role === "captain" && (
+                                  <span className="bg-primary text-black px-1.5 py-0.5 text-xs rounded font-semibold">
+                                    {t('team.role.captain')}
+                                  </span>
+                                )}
+                                <span className={`px-1.5 py-0.5 text-xs rounded font-semibold ${
+                                  member.position === "main" 
+                                    ? "bg-green-600 text-white" 
+                                    : "bg-orange-600 text-white"
+                                }`}>
+                                  {member.position === "main" ? t('team.position.main') : t('team.position.reserve')}
                                 </span>
-                              )}
-                              <span className={`px-2 py-1 text-xs rounded font-semibold ${
-                                member.position === "main" 
-                                  ? "bg-green-600 text-white" 
-                                  : "bg-orange-600 text-white"
-                              }`}>
-                                {member.position === "main" ? t('team.position.main') : t('team.position.reserve')}
-                              </span>
+                              </div>
                             </div>
+                            <a
+                              href={member.faceitProfile}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-xs"
+                            >
+                              <span className="mr-1">→</span>
+                              FACEIT
+                            </a>
                           </div>
-                          <a
-                            href={member.faceitProfile}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm"
-                          >
-                            <span className="mr-2">→</span>
-                            Profil FACEIT
-                          </a>
                         </div>
                       ))}
                     </div>
