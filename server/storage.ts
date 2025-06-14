@@ -811,42 +811,88 @@ export class MemStorage implements IStorage {
     };
     this.siteContents.set(contactHeaderContent.id, contactHeaderContent);
 
-    // Initialize sample teams for Hator CS League
-    const team1: Team = {
-      id: this.currentTeamId++,
-      name: "Ciocana Esports",
-      logoUrl: "/team-logos/ciocana-esports.png",
-      tournament: "hator-cs-league",
-      isActive: true,
-      createdAt: new Date()
-    };
-    this.teams.set(team1.id, team1);
-
-
-
-    // Add team members for each team
-    const team1Members = [
-      { nickname: "CoMMaNDeR_MD", faceitProfile: "https://www.faceit.com/en/players/CoMMaNDeR_MD", role: "captain", position: "main" },
-      { nickname: "f1ke_soft", faceitProfile: "https://www.faceit.com/en/players/f1ke_soft", role: "player", position: "main" },
-      { nickname: "FraGGvesta9", faceitProfile: "https://www.faceit.com/en/players/FraGGvesta9", role: "player", position: "main" },
-      { nickname: "HamsteR_TR", faceitProfile: "https://www.faceit.com/en/players/HamsteR_TR", role: "player", position: "main" },
-      { nickname: "tr1cketw", faceitProfile: "https://www.faceit.com/en/players/tr1cketw", role: "player", position: "main" },
-      { nickname: "xxx13", faceitProfile: "https://www.faceit.com/en/players/xxx13", role: "player", position: "reserve" },
-      { nickname: "Shutting2", faceitProfile: "https://www.faceit.com/en/players/Shutting2", role: "player", position: "reserve" }
+    // Initialize all tournament teams for Hator CS League
+    const teamsData = [
+      { name: "Auratix", logoUrl: "/team-logos/Auratix.png" },
+      { name: "Barbosii", logoUrl: "/team-logos/Barbosii.png" },
+      { name: "Bloody", logoUrl: "/team-logos/Bloody.png" },
+      { name: "Bobb3rs", logoUrl: "/team-logos/Bobb3rs.png" },
+      { name: "BPSP", logoUrl: "/team-logos/BPSP.png" },
+      { name: "Brigada Meteor", logoUrl: "/team-logos/Brigada Meteor.png" },
+      { name: "Brigada", logoUrl: "/team-logos/Brigada.png" },
+      { name: "Cadian Team", logoUrl: "/team-logos/Cadian Team.png" },
+      { name: "Ciocălău Team", logoUrl: "/team-logos/Ciocălău Team.png" },
+      { name: "Ciocana Esports", logoUrl: "/team-logos/Ciocana Esports.png" },
+      { name: "Cipok", logoUrl: "/team-logos/Cipok.png" },
+      { name: "Coli", logoUrl: "/team-logos/Coli.png" },
+      { name: "Crasat", logoUrl: "/team-logos/Crasat.png" },
+      { name: "Cucumba", logoUrl: "/team-logos/Cucumba.png" },
+      { name: "Flux Line", logoUrl: "/team-logos/Flux Line.png" },
+      { name: "Golden Five", logoUrl: "/team-logos/Golden Five.png" },
+      { name: "Into the Beach", logoUrl: "/team-logos/Into the Beach.png" },
+      { name: "Japon", logoUrl: "/team-logos/Japon.png" },
+      { name: "K9 Team", logoUrl: "/team-logos/K9 Team.png" },
+      { name: "Killuminaty", logoUrl: "/team-logos/Killuminaty.png" },
+      { name: "KostiujeniKlinik", logoUrl: "/team-logos/KostiujeniKlinik.png" },
+      { name: "La Passion", logoUrl: "/team-logos/La Passion.png" },
+      { name: "Lean Vision", logoUrl: "/team-logos/Lean Vision.png" },
+      { name: "Legalize", logoUrl: "/team-logos/Legalize.png" },
+      { name: "LitEnergy", logoUrl: "/team-logos/LitEnergy.png" },
+      { name: "LYSQ", logoUrl: "/team-logos/LYSQ.png" },
+      { name: "Muligambia", logoUrl: "/team-logos/Muligambia.png" },
+      { name: "Neo Egoist League", logoUrl: "/team-logos/Neo Egoist League.png" },
+      { name: "Onyx", logoUrl: "/team-logos/Onyx.png" },
+      { name: "RCBVR", logoUrl: "/team-logos/RCBVR.png" },
+      { name: "Robotaim", logoUrl: "/team-logos/Robotaim.png" },
+      { name: "Rumina", logoUrl: "/team-logos/Rumina.png" },
+      { name: "Shashlik", logoUrl: "/team-logos/Shashlik.png" },
+      { name: "Tigger", logoUrl: "/team-logos/Tigger.png" },
+      { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },
+      { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },
+      { name: "X-one", logoUrl: "/team-logos/X-one.png" },
+      { name: "XPloison", logoUrl: "/team-logos/XPloison.webp" }
     ];
 
-    team1Members.forEach(member => {
-      const teamMember: TeamMember = {
-        id: this.currentTeamMemberId++,
-        teamId: team1.id,
-        nickname: member.nickname,
-        faceitProfile: member.faceitProfile,
-        role: member.role,
-        position: member.position,
-        isActive: true
+    const createdTeams: Team[] = [];
+    teamsData.forEach(teamData => {
+      const team: Team = {
+        id: this.currentTeamId++,
+        name: teamData.name,
+        logoUrl: teamData.logoUrl,
+        tournament: "hator-cs-league",
+        isActive: true,
+        createdAt: new Date()
       };
-      this.teamMembers.set(teamMember.id, teamMember);
+      this.teams.set(team.id, team);
+      createdTeams.push(team);
     });
+
+    // Add sample team members for Ciocana Esports (team id 10)
+    const ciocanaTeam = createdTeams.find(team => team.name === "Ciocana Esports");
+    if (ciocanaTeam) {
+      const ciocanaMembers = [
+        { nickname: "CoMMaNDeR_MD", faceitProfile: "https://www.faceit.com/en/players/CoMMaNDeR_MD", role: "captain", position: "main" },
+        { nickname: "f1ke_soft", faceitProfile: "https://www.faceit.com/en/players/f1ke_soft", role: "player", position: "main" },
+        { nickname: "FraGGvesta9", faceitProfile: "https://www.faceit.com/en/players/FraGGvesta9", role: "player", position: "main" },
+        { nickname: "HamsteR_TR", faceitProfile: "https://www.faceit.com/en/players/HamsteR_TR", role: "player", position: "main" },
+        { nickname: "tr1cketw", faceitProfile: "https://www.faceit.com/en/players/tr1cketw", role: "player", position: "main" },
+        { nickname: "xxx13", faceitProfile: "https://www.faceit.com/en/players/xxx13", role: "player", position: "reserve" },
+        { nickname: "Shutting2", faceitProfile: "https://www.faceit.com/en/players/Shutting2", role: "player", position: "reserve" }
+      ];
+
+      ciocanaMembers.forEach(member => {
+        const teamMember: TeamMember = {
+          id: this.currentTeamMemberId++,
+          teamId: ciocanaTeam.id,
+          nickname: member.nickname,
+          faceitProfile: member.faceitProfile,
+          role: member.role,
+          position: member.position,
+          isActive: true
+        };
+        this.teamMembers.set(teamMember.id, teamMember);
+      });
+    }
 
 
     
