@@ -50,6 +50,20 @@ export const translations: TranslationDictionary = {
     ru: "Контакты"
   },
   
+  // Team member positions
+  "team.position.main": {
+    ro: "PRINCIPAL",
+    ru: "ОСНОВНОЙ"
+  },
+  "team.position.reserve": {
+    ro: "REZERVĂ",
+    ru: "ЗАПАСНОЙ"
+  },
+  "team.role.captain": {
+    ro: "CĂPITAN",
+    ru: "КАПИТАН"
+  },
+  
   // CS2 Server Status
   "servers.title": {
     ro: "Serverele Noastre CS2",

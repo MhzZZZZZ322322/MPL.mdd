@@ -888,11 +888,11 @@ export class MemStorage implements IStorage {
     });
 
     const team3Members = [
-      { nickname: "SkyStrike", faceitProfile: "https://www.faceit.com/en/players/SkyStrike", role: "captain" },
-      { nickname: "EagleEye", faceitProfile: "https://www.faceit.com/en/players/EagleEye", role: "player" },
-      { nickname: "HawkShot", faceitProfile: "https://www.faceit.com/en/players/HawkShot", role: "player" },
-      { nickname: "WingMan", faceitProfile: "https://www.faceit.com/en/players/WingMan", role: "player" },
-      { nickname: "AirForce", faceitProfile: "https://www.faceit.com/en/players/AirForce", role: "player" }
+      { nickname: "SkyStrike", faceitProfile: "https://www.faceit.com/en/players/SkyStrike", role: "captain", position: "main" },
+      { nickname: "EagleEye", faceitProfile: "https://www.faceit.com/en/players/EagleEye", role: "player", position: "main" },
+      { nickname: "HawkShot", faceitProfile: "https://www.faceit.com/en/players/HawkShot", role: "player", position: "main" },
+      { nickname: "WingMan", faceitProfile: "https://www.faceit.com/en/players/WingMan", role: "player", position: "main" },
+      { nickname: "AirForce", faceitProfile: "https://www.faceit.com/en/players/AirForce", role: "player", position: "main" }
     ];
 
     team3Members.forEach(member => {
@@ -902,6 +902,7 @@ export class MemStorage implements IStorage {
         nickname: member.nickname,
         faceitProfile: member.faceitProfile,
         role: member.role,
+        position: member.position,
         isActive: true
       };
       this.teamMembers.set(teamMember.id, teamMember);

@@ -310,11 +310,20 @@ const HatorCSLeague = () => {
                         <div key={member.id} className="bg-black/30 p-4 rounded-lg border border-gray-700">
                           <div className="flex items-center justify-between mb-2">
                             <h4 className="text-lg font-semibold text-white">{member.nickname}</h4>
-                            {member.role === "captain" && (
-                              <span className="bg-primary text-black px-2 py-1 text-xs rounded font-semibold">
-                                CĂPITAN
+                            <div className="flex gap-2">
+                              {member.role === "captain" && (
+                                <span className="bg-primary text-black px-2 py-1 text-xs rounded font-semibold">
+                                  {t('team.role.captain')}
+                                </span>
+                              )}
+                              <span className={`px-2 py-1 text-xs rounded font-semibold ${
+                                member.position === "main" 
+                                  ? "bg-green-600 text-white" 
+                                  : "bg-orange-600 text-white"
+                              }`}>
+                                {member.position === "main" ? t('team.position.main') : t('team.position.reserve')}
                               </span>
-                            )}
+                            </div>
                           </div>
                           <a
                             href={member.faceitProfile}
