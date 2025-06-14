@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 14, 2025: Updated VeryGoodTeam logo with transparent background version
 - June 14, 2025: Added VeryGoodTeam as 39th team in HATOR CS2 LEAGUE MOLDOVA
 - June 14, 2025: Updated Cadian Team logo with official tournament branding
 - June 14, 2025: Implemented neutral dark gray background for optimal logo visibility
