@@ -809,6 +809,98 @@ export class MemStorage implements IStorage {
       updatedAt: new Date()
     };
     this.siteContents.set(contactHeaderContent.id, contactHeaderContent);
+
+    // Initialize sample teams for Hator CS League
+    const team1: Team = {
+      id: this.currentTeamId++,
+      name: "FIRE SQUAD",
+      logoUrl: "https://via.placeholder.com/100x100/ff6b35/ffffff?text=FS",
+      tournament: "hator-cs-league",
+      isActive: true,
+      createdAt: new Date()
+    };
+    this.teams.set(team1.id, team1);
+
+    const team2: Team = {
+      id: this.currentTeamId++,
+      name: "DIGITAL WOLVES",
+      logoUrl: "https://via.placeholder.com/100x100/4ecdc4/ffffff?text=DW",
+      tournament: "hator-cs-league",
+      isActive: true,
+      createdAt: new Date()
+    };
+    this.teams.set(team2.id, team2);
+
+    const team3: Team = {
+      id: this.currentTeamId++,
+      name: "CYBER HAWKS",
+      logoUrl: "https://via.placeholder.com/100x100/45b7d1/ffffff?text=CH",
+      tournament: "hator-cs-league",
+      isActive: true,
+      createdAt: new Date()
+    };
+    this.teams.set(team3.id, team3);
+
+    // Add team members for each team
+    const team1Members = [
+      { nickname: "FireLord", faceitProfile: "https://www.faceit.com/en/players/FireLord", role: "captain" },
+      { nickname: "BlazeKing", faceitProfile: "https://www.faceit.com/en/players/BlazeKing", role: "player" },
+      { nickname: "InfernoAce", faceitProfile: "https://www.faceit.com/en/players/InfernoAce", role: "player" },
+      { nickname: "FlameShot", faceitProfile: "https://www.faceit.com/en/players/FlameShot", role: "player" },
+      { nickname: "BurnOut", faceitProfile: "https://www.faceit.com/en/players/BurnOut", role: "player" }
+    ];
+
+    team1Members.forEach(member => {
+      const teamMember: TeamMember = {
+        id: this.currentTeamMemberId++,
+        teamId: team1.id,
+        nickname: member.nickname,
+        faceitProfile: member.faceitProfile,
+        role: member.role,
+        isActive: true
+      };
+      this.teamMembers.set(teamMember.id, teamMember);
+    });
+
+    const team2Members = [
+      { nickname: "AlphaWolf", faceitProfile: "https://www.faceit.com/en/players/AlphaWolf", role: "captain" },
+      { nickname: "ShadowPack", faceitProfile: "https://www.faceit.com/en/players/ShadowPack", role: "player" },
+      { nickname: "WolfHunter", faceitProfile: "https://www.faceit.com/en/players/WolfHunter", role: "player" },
+      { nickname: "NightClaw", faceitProfile: "https://www.faceit.com/en/players/NightClaw", role: "player" },
+      { nickname: "PackLeader", faceitProfile: "https://www.faceit.com/en/players/PackLeader", role: "player" }
+    ];
+
+    team2Members.forEach(member => {
+      const teamMember: TeamMember = {
+        id: this.currentTeamMemberId++,
+        teamId: team2.id,
+        nickname: member.nickname,
+        faceitProfile: member.faceitProfile,
+        role: member.role,
+        isActive: true
+      };
+      this.teamMembers.set(teamMember.id, teamMember);
+    });
+
+    const team3Members = [
+      { nickname: "SkyStrike", faceitProfile: "https://www.faceit.com/en/players/SkyStrike", role: "captain" },
+      { nickname: "EagleEye", faceitProfile: "https://www.faceit.com/en/players/EagleEye", role: "player" },
+      { nickname: "HawkShot", faceitProfile: "https://www.faceit.com/en/players/HawkShot", role: "player" },
+      { nickname: "WingMan", faceitProfile: "https://www.faceit.com/en/players/WingMan", role: "player" },
+      { nickname: "AirForce", faceitProfile: "https://www.faceit.com/en/players/AirForce", role: "player" }
+    ];
+
+    team3Members.forEach(member => {
+      const teamMember: TeamMember = {
+        id: this.currentTeamMemberId++,
+        teamId: team3.id,
+        nickname: member.nickname,
+        faceitProfile: member.faceitProfile,
+        role: member.role,
+        isActive: true
+      };
+      this.teamMembers.set(teamMember.id, teamMember);
+    });
     
     // Add events
     this.createEvent({
