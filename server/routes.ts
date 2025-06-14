@@ -7,6 +7,27 @@ import { csServersRouter } from "./routes/cs-servers-routes";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Teams routes
+  app.get("/api/teams", async (req, res) => {
+    try {
+      const tournament = req.query.tournament as string;
+      const teams = await storage.getTeams(tournament);
+      res.json(teams);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch teams" });
+    }
+  });
+
+  app.get("/api/teams/:id/members", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      const members = await storage.getTeamMembers(teamId);
+      res.json(members);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch team members" });
+    }
+  });
+
   // put application routes here
   // prefix all routes with /api
 

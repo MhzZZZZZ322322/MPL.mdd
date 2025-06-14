@@ -6,10 +6,35 @@ import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Team, TeamMember } from "@shared/schema";
 
 const HatorCSLeague = () => {
   const { t } = useLanguage();
   const [isContentExpanded, setIsContentExpanded] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
+
+  // Fetch teams for this tournament
+  const { data: teams = [], isLoading: teamsLoading } = useQuery<Team[]>({
+    queryKey: ["/api/teams", "hator-cs-league"],
+    queryFn: async () => {
+      const response = await fetch("/api/teams?tournament=hator-cs-league");
+      if (!response.ok) throw new Error("Failed to fetch teams");
+      return response.json();
+    }
+  });
+
+  // Fetch members for selected team
+  const { data: teamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
+    queryKey: ["/api/teams", selectedTeam?.id, "members"],
+    queryFn: async () => {
+      if (!selectedTeam) return [];
+      const response = await fetch(`/api/teams/${selectedTeam.id}/members`);
+      if (!response.ok) throw new Error("Failed to fetch team members");
+      return response.json();
+    },
+    enabled: !!selectedTeam
+  });
   return (
     <>
       <Helmet>

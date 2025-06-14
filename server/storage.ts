@@ -186,6 +186,84 @@ export class MemStorage implements IStorage {
     this.initializeData();
   }
 
+  // Team methods
+  async getTeams(tournament?: string): Promise<Team[]> {
+    const teams = Array.from(this.teams.values());
+    if (tournament) {
+      return teams.filter(team => team.tournament === tournament);
+    }
+    return teams;
+  }
+
+  async getTeam(id: number): Promise<Team | undefined> {
+    return this.teams.get(id);
+  }
+
+  async createTeam(insertTeam: InsertTeam): Promise<Team> {
+    const id = this.currentTeamId++;
+    const team: Team = { 
+      id,
+      name: insertTeam.name,
+      logoUrl: insertTeam.logoUrl,
+      tournament: insertTeam.tournament || "hator-cs-league",
+      isActive: insertTeam.isActive !== undefined ? insertTeam.isActive : true,
+      createdAt: new Date()
+    };
+    this.teams.set(id, team);
+    return team;
+  }
+
+  async updateTeam(id: number, updateData: Partial<InsertTeam>): Promise<Team> {
+    const team = this.teams.get(id);
+    if (!team) throw new Error(`Team with id ${id} not found`);
+    
+    const updatedTeam: Team = {
+      ...team,
+      ...updateData,
+    };
+    this.teams.set(id, updatedTeam);
+    return updatedTeam;
+  }
+
+  async deleteTeam(id: number): Promise<void> {
+    this.teams.delete(id);
+  }
+
+  // Team Member methods
+  async getTeamMembers(teamId: number): Promise<TeamMember[]> {
+    return Array.from(this.teamMembers.values()).filter(member => member.teamId === teamId);
+  }
+
+  async createTeamMember(insertMember: InsertTeamMember): Promise<TeamMember> {
+    const id = this.currentTeamMemberId++;
+    const member: TeamMember = { 
+      id,
+      teamId: insertMember.teamId,
+      nickname: insertMember.nickname,
+      faceitProfile: insertMember.faceitProfile,
+      role: insertMember.role || "player",
+      isActive: insertMember.isActive !== undefined ? insertMember.isActive : true
+    };
+    this.teamMembers.set(id, member);
+    return member;
+  }
+
+  async updateTeamMember(id: number, updateData: Partial<InsertTeamMember>): Promise<TeamMember> {
+    const member = this.teamMembers.get(id);
+    if (!member) throw new Error(`Team member with id ${id} not found`);
+    
+    const updatedMember: TeamMember = {
+      ...member,
+      ...updateData,
+    };
+    this.teamMembers.set(id, updatedMember);
+    return updatedMember;
+  }
+
+  async deleteTeamMember(id: number): Promise<void> {
+    this.teamMembers.delete(id);
+  }
+
   // User methods
   async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
