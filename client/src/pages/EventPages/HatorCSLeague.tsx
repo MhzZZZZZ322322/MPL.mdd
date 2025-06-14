@@ -9,8 +9,7 @@ import { useState } from "react";
 
 const HatorCSLeague = () => {
   const { t } = useLanguage();
-  const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
-  const [isRulesExpanded, setIsRulesExpanded] = useState(false);
+  const [isContentExpanded, setIsContentExpanded] = useState(false);
   return (
     <>
       <Helmet>
@@ -190,14 +189,14 @@ const HatorCSLeague = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold text-white font-rajdhani">{t('event.about.title')}</h2>
+                <h2 className="text-3xl font-bold text-white font-rajdhani">Informații complete despre turneu</h2>
                 <Button
-                  onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}
+                  onClick={() => setIsContentExpanded(!isContentExpanded)}
                   variant="outline"
                   size="sm"
                   className="border-primary text-primary hover:bg-primary hover:text-black"
                 >
-                  {isDetailsExpanded ? (
+                  {isContentExpanded ? (
                     <>
                       <ChevronUp className="w-4 h-4 mr-2" />
                       Închide
@@ -205,13 +204,13 @@ const HatorCSLeague = () => {
                   ) : (
                     <>
                       <ChevronDown className="w-4 h-4 mr-2" />
-                      Deschide detalii
+                      Vezi tot conținutul
                     </>
                   )}
                 </Button>
               </div>
 
-              {isDetailsExpanded && (
+              {isContentExpanded && (
                 <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
                   <p>
                     <strong>{t('event.hator.title')}</strong> {t('event.league.description.1')}
@@ -316,30 +315,10 @@ const HatorCSLeague = () => {
                 </div>
               )}
 
-              <div className="mt-12">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 id="rules" className="text-3xl font-bold text-white font-rajdhani">{t('event.rules')}</h2>
-                  <Button
-                    onClick={() => setIsRulesExpanded(!isRulesExpanded)}
-                    variant="outline"
-                    size="sm"
-                    className="border-primary text-primary hover:bg-primary hover:text-black"
-                  >
-                    {isRulesExpanded ? (
-                      <>
-                        <ChevronUp className="w-4 h-4 mr-2" />
-                        Închide
-                      </>
-                    ) : (
-                      <>
-                        <ChevronDown className="w-4 h-4 mr-2" />
-                        Vezi regulile
-                      </>
-                    )}
-                  </Button>
-                </div>
+              {isContentExpanded && (
+                <div className="mt-12">
+                  <h2 id="rules" className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.rules')}</h2>
 
-                {isRulesExpanded && (
                   <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
                     <h3>{t('event.anticheat')}</h3>
                     <ul>
@@ -376,8 +355,8 @@ const HatorCSLeague = () => {
                       <li><strong>{t('event.rule.discord.title')}</strong> – {t('event.rule.discord.description')}</li>
                     </ol>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             <div className="lg:col-span-1">
