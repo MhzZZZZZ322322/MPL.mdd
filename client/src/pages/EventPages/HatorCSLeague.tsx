@@ -209,6 +209,99 @@ const HatorCSLeague = () => {
           </div>
         </div>
 
+        {/* Teams Profile Section */}
+        <div className="py-16 container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-white mb-4 font-rajdhani">Profilul echipelor</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Echipele participante la HATOR CS2 LEAGUE MOLDOVA. Faceți clic pe logo-ul unei echipe pentru a vedea membrii și link-urile către profilurile FACEIT.
+            </p>
+          </div>
+
+          {teamsLoading ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+              {teams.map((team) => (
+                <NeonBorder key={team.id} className="p-6 bg-darkGray/50 rounded-lg cursor-pointer hover:bg-darkGray/70 transition-all duration-300">
+                  <div 
+                    onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
+                    className="text-center"
+                  >
+                    <div className="w-24 h-24 mx-auto mb-4 bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
+                      <img 
+                        src={team.logoUrl} 
+                        alt={`${team.name} logo`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = `https://via.placeholder.com/100x100/6366f1/ffffff?text=${team.name.substring(0, 2)}`;
+                        }}
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">{team.name}</h3>
+                    <p className="text-gray-400 text-sm">
+                      {selectedTeam?.id === team.id ? "Ascunde membrii" : "Vezi membrii echipei"}
+                    </p>
+                  </div>
+                </NeonBorder>
+              ))}
+            </div>
+          )}
+
+          {/* Team Members Modal/Expanded View */}
+          {selectedTeam && (
+            <NeonBorder className="p-6 bg-darkGray/80 rounded-lg animate-in slide-in-from-top duration-300">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-white font-rajdhani">
+                  Membrii echipei {selectedTeam.name}
+                </h3>
+                <Button
+                  onClick={() => setSelectedTeam(null)}
+                  variant="outline"
+                  size="sm"
+                  className="border-primary text-primary hover:bg-primary hover:text-black"
+                >
+                  <ChevronUp className="w-4 h-4 mr-2" />
+                  Închide
+                </Button>
+              </div>
+
+              {membersLoading ? (
+                <div className="flex justify-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {teamMembers.map((member) => (
+                    <div key={member.id} className="bg-black/30 p-4 rounded-lg border border-gray-700">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="text-lg font-semibold text-white">{member.nickname}</h4>
+                        {member.role === "captain" && (
+                          <span className="bg-primary text-black px-2 py-1 text-xs rounded font-semibold">
+                            CĂPITAN
+                          </span>
+                        )}
+                      </div>
+                      <a
+                        href={member.faceitProfile}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-sm"
+                      >
+                        <span className="mr-2">→</span>
+                        Profil FACEIT
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </NeonBorder>
+          )}
+        </div>
+
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
