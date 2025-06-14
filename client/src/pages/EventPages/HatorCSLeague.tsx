@@ -238,26 +238,20 @@ const HatorCSLeague = () => {
 
         {/* Teams Profile Section */}
         <div className="py-16 container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold text-white font-rajdhani">Profilul echipelor</h2>
-            <Button
-              onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
-              variant="outline"
-              size="sm"
-              className="border-primary text-primary hover:bg-primary hover:text-black"
-            >
+          <div 
+            className="flex items-center justify-between mb-6 cursor-pointer group"
+            onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
+          >
+            <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
+              Profilul echipelor
+            </h2>
+            <div className="text-primary group-hover:text-white transition-colors">
               {isTeamsExpanded ? (
-                <>
-                  <ChevronUp className="w-4 h-4 mr-2" />
-                  Închide
-                </>
+                <ChevronUp className="w-6 h-6" />
               ) : (
-                <>
-                  <ChevronDown className="w-4 h-4 mr-2" />
-                  Deschide
-                </>
+                <ChevronDown className="w-6 h-6" />
               )}
-            </Button>
+            </div>
           </div>
 
           {isTeamsExpanded && (
