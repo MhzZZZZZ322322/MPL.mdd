@@ -1178,9 +1178,8 @@ export class MemStorage implements IStorage {
       { teamId: 38, nickname: "SolevoI_Voi", role: "player", position: "main" },
       { teamId: 38, nickname: "tronick999", role: "player", position: "main" },
       
-      // Team 39: XPlosion (Duke_0 captain)
-      { teamId: 39, nickname: "Duke_0", role: "captain", position: "main" },
-      { teamId: 39, nickname: "Duke0", role: "player", position: "main" },
+      // Team 39: XPlosion (Duke captain)
+      { teamId: 39, nickname: "Duke", role: "captain", position: "main" },
       { teamId: 39, nickname: "Gr1MM-", role: "player", position: "main" },
       { teamId: 39, nickname: "P1oNeR-_-", role: "player", position: "main" },
       { teamId: 39, nickname: "BENGOSO", role: "player", position: "main" },
