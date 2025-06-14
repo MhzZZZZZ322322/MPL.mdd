@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
@@ -13,6 +13,32 @@ const HatorCSLeague = () => {
   const { t } = useLanguage();
   const [isContentExpanded, setIsContentExpanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
+
+  // Team logo mapping
+  const getTeamLogo = (teamName: string) => {
+    switch (teamName) {
+      case "FIRE SQUAD":
+        return {
+          icon: <Flame className="w-12 h-12 text-orange-400" />,
+          gradient: "from-orange-500 to-red-600"
+        };
+      case "DIGITAL WOLVES":
+        return {
+          icon: <Zap className="w-12 h-12 text-cyan-400" />,
+          gradient: "from-cyan-500 to-teal-600"
+        };
+      case "CYBER HAWKS":
+        return {
+          icon: <Eye className="w-12 h-12 text-blue-400" />,
+          gradient: "from-blue-500 to-indigo-600"
+        };
+      default:
+        return {
+          icon: <Trophy className="w-12 h-12 text-primary" />,
+          gradient: "from-primary to-primary/80"
+        };
+    }
+  };
 
   // Fetch teams for this tournament
   const { data: teams = [], isLoading: teamsLoading } = useQuery<Team[]>({
@@ -230,16 +256,11 @@ const HatorCSLeague = () => {
                     onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                     className="text-center"
                   >
-                    <div className="w-24 h-24 mx-auto mb-4 bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
-                      <img 
-                        src={team.logoUrl} 
-                        alt={`${team.name} logo`}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = `https://via.placeholder.com/100x100/6366f1/ffffff?text=${team.name.substring(0, 2)}`;
-                        }}
-                      />
+                    <div className={`w-24 h-24 mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`}>
+                      <div className="relative">
+                        {getTeamLogo(team.name).icon}
+                        <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse"></div>
+                      </div>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">{team.name}</h3>
                     <p className="text-gray-400 text-sm">
