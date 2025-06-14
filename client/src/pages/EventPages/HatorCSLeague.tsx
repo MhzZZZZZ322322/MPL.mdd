@@ -246,25 +246,25 @@ const HatorCSLeague = () => {
                   {teams.map((team) => (
                     <div key={team.id} className="relative perspective-1000">
                       <div 
-                        className={`relative w-full h-80 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                        className={`relative w-full h-96 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
                           selectedTeam?.id === team.id ? 'rotate-y-180' : ''
                         }`}
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
                         {/* Front of card - Team Logo */}
-                        <NeonBorder className="absolute inset-0 p-6 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
+                        <NeonBorder className="absolute inset-0 p-4 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                           <div className="text-center h-full flex flex-col justify-center">
-                            <div className={`w-24 h-24 mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '96px', height: '96px'}}>
+                            <div className={`mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '140px', height: '140px'}}>
                               <div className="relative w-full h-full p-2">
                                 {getTeamLogo(team.name).icon}
                               </div>
                             </div>
-                            <h3 className="text-lg font-bold text-white font-rajdhani">{team.name}</h3>
+                            <h3 className="text-xl font-bold text-white font-rajdhani">{team.name}</h3>
                           </div>
                         </NeonBorder>
 
                         {/* Back of card - Team Members */}
-                        <NeonBorder className="absolute inset-0 p-4 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                        <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
                           <div className="h-full">
                             <h4 className="text-lg font-bold text-white mb-3 text-center">Membrii</h4>
                             {membersLoading ? (
@@ -272,25 +272,25 @@ const HatorCSLeague = () => {
                                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
                               </div>
                             ) : (
-                              <div className="space-y-2">
+                              <div className="space-y-1">
                                 {teamMembers.map((member) => (
                                   <a
                                     key={member.id}
                                     href={member.faceitProfile}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block bg-black/30 p-3 rounded border border-gray-700 hover:bg-black/50 transition-colors"
+                                    className="block bg-black/30 p-2 rounded border border-gray-700 hover:bg-black/50 transition-colors"
                                     onClick={(e) => e.stopPropagation()}
                                   >
-                                    <div className="text-sm">
-                                      <div className="font-semibold text-white mb-2">{member.nickname}</div>
-                                      <div className="flex flex-wrap gap-2">
+                                    <div className="text-xs">
+                                      <div className="font-semibold text-white mb-1">{member.nickname}</div>
+                                      <div className="flex flex-wrap gap-1">
                                         {member.role === "captain" && (
-                                          <span className="bg-primary text-black px-2 py-1 text-xs rounded font-semibold">
+                                          <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
                                             {t('team.role.captain')}
                                           </span>
                                         )}
-                                        <span className={`px-2 py-1 text-xs rounded font-semibold ${
+                                        <span className={`px-1 py-0.5 text-xs rounded font-semibold ${
                                           member.position === "main" 
                                             ? "bg-green-600 text-white" 
                                             : "bg-orange-600 text-white"
