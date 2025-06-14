@@ -20,22 +20,7 @@ const HatorCSLeague = () => {
     switch (teamName) {
       case "Ciocana Esports":
         return {
-          icon: (
-            <div className="relative w-12 h-12 flex items-center justify-center">
-              <img 
-                src="/team-logos/ciocana-esports.png" 
-                alt="Ciocana Esports" 
-                className="w-12 h-12 object-contain rounded"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = target.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'block';
-                }}
-              />
-              <Trophy className="w-12 h-12 text-yellow-400 hidden" />
-            </div>
-          ),
+          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-12 h-12 object-contain rounded" />,
           gradient: "from-yellow-500 to-blue-600"
         };
       case "DIGITAL WOLVES":
