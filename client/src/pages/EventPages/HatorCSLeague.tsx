@@ -255,8 +255,8 @@ const HatorCSLeague = () => {
                         {/* Front of card - Team Logo */}
                         <NeonBorder className="absolute inset-0 p-4 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                           <div className="text-center h-full flex flex-col justify-center">
-                            <div className={`mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '120px', height: '120px'}}>
-                              <div className="relative w-full h-full p-2">
+                            <div className={`mx-auto mb-6 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '200px', height: '200px'}}>
+                              <div className="relative w-full h-full p-3">
                                 {getTeamLogo(team.name).icon}
                               </div>
                             </div>
