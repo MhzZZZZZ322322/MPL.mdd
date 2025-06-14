@@ -648,8 +648,8 @@ export const translations: TranslationDictionary = {
     ru: "Формат"
   },
   "event.format.elimination": {
-    ro: "Faza eliminatorie: 64 echipe într-un bracket simplu, meciuri eliminatorii (single elimination).",
-    ru: "Стадия выбывания: 64 команды в простой сетке, матчи на выбывание (single elimination)."
+    ro: "Faza eliminatorie: circa 40 echipe într-un bracket simplu, meciuri eliminatorii (single elimination).",
+    ru: "Стадия выбывания: около 40 команд в простой сетке, матчи на выбывание (single elimination)."
   },
   "event.format.matches": {
     ro: "Format meciuri: Bo1 (Best of 1) pentru majoritatea meciurilor, Bo3 (Best of 3) pentru ultimele 4 echipe.",
@@ -784,8 +784,8 @@ export const translations: TranslationDictionary = {
     ru: "Максимальная вместимость"
   },
   "event.format.teams.number": {
-    ro: "128 echipe din Moldova și România",
-    ru: "128 команд из Молдовы и Румынии"
+    ro: "Până la 40 echipe din Moldova și România",
+    ru: "До 40 команд из Молдовы и Румынии"
   },
   "event.format.structure": {
     ro: "Structură",

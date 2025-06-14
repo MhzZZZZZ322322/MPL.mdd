@@ -20,22 +20,22 @@ const HatorCSLeague = () => {
     switch (teamName) {
       case "Ciocana Esports":
         return {
-          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-24 h-24 object-contain rounded" />,
+          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-48 h-48 object-contain rounded" />,
           gradient: "from-yellow-500 to-blue-600"
         };
       case "DIGITAL WOLVES":
         return {
-          icon: <Zap className="w-24 h-24 text-cyan-400" />,
+          icon: <Zap className="w-48 h-48 text-cyan-400" />,
           gradient: "from-cyan-500 to-teal-600"
         };
       case "CYBER HAWKS":
         return {
-          icon: <Eye className="w-24 h-24 text-blue-400" />,
+          icon: <Eye className="w-48 h-48 text-blue-400" />,
           gradient: "from-blue-500 to-indigo-600"
         };
       default:
         return {
-          icon: <Trophy className="w-24 h-24 text-primary" />,
+          icon: <Trophy className="w-48 h-48 text-primary" />,
           gradient: "from-primary to-primary/80"
         };
     }
