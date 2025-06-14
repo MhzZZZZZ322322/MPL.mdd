@@ -239,12 +239,10 @@ const HatorCSLeague = () => {
         {/* Teams Profile Section */}
         <div className="py-16 container mx-auto px-4">
           <Button 
-            className="mb-6 cursor-pointer group text-left max-w-md p-6 h-auto bg-primary hover:bg-primary/90 justify-start"
+            className="bg-primary hover:bg-primary/90 mb-6"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
-            <h2 className="text-3xl font-bold text-black font-rajdhani">
-              Profilul echipelor
-            </h2>
+            Profilul echipelor
           </Button>
 
           {isTeamsExpanded && (
@@ -335,12 +333,10 @@ const HatorCSLeague = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <Button 
-                className="mb-6 cursor-pointer group text-left max-w-md p-6 h-auto bg-primary hover:bg-primary/90 justify-start"
+                className="bg-primary hover:bg-primary/90 mb-6"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
-                <h2 className="text-3xl font-bold text-black font-rajdhani">
-                  Informații generale despre turneu
-                </h2>
+                Informații generale despre turneu
               </Button>
 
               {isContentExpanded && (
