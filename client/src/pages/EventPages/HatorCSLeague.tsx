@@ -253,14 +253,14 @@ const HatorCSLeague = () => {
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
                         {/* Front of card - Team Logo */}
-                        <NeonBorder className="absolute inset-0 p-4 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
-                          <div className="text-center h-full flex flex-col justify-center">
-                            <div className={`mx-auto mb-6 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '200px', height: '200px'}}>
-                              <div className="relative w-full h-full p-3">
+                        <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
+                          <div className="text-center h-full flex flex-col justify-between">
+                            <div className={`mx-auto bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '280px', height: '280px'}}>
+                              <div className="relative w-full h-full p-2">
                                 {getTeamLogo(team.name).icon}
                               </div>
                             </div>
-                            <h3 className="text-xl font-bold text-white font-rajdhani">{team.name}</h3>
+                            <h3 className="text-xl font-bold text-white font-rajdhani py-2">{team.name}</h3>
                           </div>
                         </NeonBorder>
 
