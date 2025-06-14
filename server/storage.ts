@@ -814,7 +814,7 @@ export class MemStorage implements IStorage {
     const team1: Team = {
       id: this.currentTeamId++,
       name: "FIRE SQUAD",
-      logoUrl: "https://via.placeholder.com/100x100/ff6b35/ffffff?text=FS",
+      logoUrl: "/team-logos/fire-squad.svg",
       tournament: "hator-cs-league",
       isActive: true,
       createdAt: new Date()
@@ -824,7 +824,7 @@ export class MemStorage implements IStorage {
     const team2: Team = {
       id: this.currentTeamId++,
       name: "DIGITAL WOLVES",
-      logoUrl: "https://via.placeholder.com/100x100/4ecdc4/ffffff?text=DW",
+      logoUrl: "/team-logos/digital-wolves.svg",
       tournament: "hator-cs-league",
       isActive: true,
       createdAt: new Date()
@@ -834,7 +834,7 @@ export class MemStorage implements IStorage {
     const team3: Team = {
       id: this.currentTeamId++,
       name: "CYBER HAWKS",
-      logoUrl: "https://via.placeholder.com/100x100/45b7d1/ffffff?text=CH",
+      logoUrl: "/team-logos/cyber-hawks.svg",
       tournament: "hator-cs-league",
       isActive: true,
       createdAt: new Date()
