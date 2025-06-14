@@ -20,22 +20,22 @@ const HatorCSLeague = () => {
     switch (teamName) {
       case "Ciocana Esports":
         return {
-          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-48 h-48 object-contain rounded" />,
+          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-72 h-72 object-contain rounded" />,
           gradient: "from-yellow-500 to-blue-600"
         };
       case "DIGITAL WOLVES":
         return {
-          icon: <Zap className="w-48 h-48 text-cyan-400" />,
+          icon: <Zap className="w-72 h-72 text-cyan-400" />,
           gradient: "from-cyan-500 to-teal-600"
         };
       case "CYBER HAWKS":
         return {
-          icon: <Eye className="w-48 h-48 text-blue-400" />,
+          icon: <Eye className="w-72 h-72 text-blue-400" />,
           gradient: "from-blue-500 to-indigo-600"
         };
       default:
         return {
-          icon: <Trophy className="w-48 h-48 text-primary" />,
+          icon: <Trophy className="w-72 h-72 text-primary" />,
           gradient: "from-primary to-primary/80"
         };
     }
@@ -259,7 +259,7 @@ const HatorCSLeague = () => {
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                         className="text-center"
                       >
-                        <div className={`w-24 h-24 mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`}>
+                        <div className={`w-72 h-72 mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`}>
                           <div className="relative">
                             {getTeamLogo(team.name).icon}
                             <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse"></div>
