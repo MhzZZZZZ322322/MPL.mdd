@@ -239,7 +239,7 @@ const HatorCSLeague = () => {
         {/* Teams Profile Section */}
         <div className="py-16 container mx-auto px-4">
           <button 
-            className="mb-6 cursor-pointer group text-left w-full"
+            className="mb-6 cursor-pointer group text-left w-full p-4 rounded-lg border-2 border-transparent bg-gradient-to-r from-darkGray/50 to-darkGray/30 hover:border-primary hover:from-primary/10 hover:to-primary/5 transition-all duration-300 shadow-lg hover:shadow-primary/20"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
             <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
@@ -335,7 +335,7 @@ const HatorCSLeague = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <button 
-                className="mb-6 cursor-pointer group text-left w-full"
+                className="mb-6 cursor-pointer group text-left w-full p-4 rounded-lg border-2 border-transparent bg-gradient-to-r from-darkGray/50 to-darkGray/30 hover:border-primary hover:from-primary/10 hover:to-primary/5 transition-all duration-300 shadow-lg hover:shadow-primary/20"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
                 <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
