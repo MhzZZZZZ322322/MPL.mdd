@@ -335,11 +335,10 @@ const HatorCSLeague = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <Button 
-                variant="outline" 
-                className="mb-6 cursor-pointer group text-left w-full p-6 h-auto border-white text-white hover:bg-white/10 justify-start"
+                className="mb-6 cursor-pointer group text-left w-full p-6 h-auto bg-primary hover:bg-primary/90 justify-start"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
-                <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
+                <h2 className="text-3xl font-bold text-black font-rajdhani">
                   Informații generale despre turneu
                 </h2>
               </Button>
