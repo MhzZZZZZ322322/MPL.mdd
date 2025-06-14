@@ -249,7 +249,7 @@ const HatorCSLeague = () => {
                         className={`relative w-full transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
                           selectedTeam?.id === team.id ? 'rotate-y-180' : ''
                         }`}
-                        style={{ height: '320px' }}
+                        style={{ height: '400px' }}
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
                         {/* Front of card - Team Logo */}
@@ -265,27 +265,27 @@ const HatorCSLeague = () => {
                         </NeonBorder>
 
                         {/* Back of card - Team Members */}
-                        <NeonBorder className="absolute inset-0 p-4 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                        <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
                           <div className="h-full flex flex-col">
-                            <h4 className="text-lg font-bold text-white mb-3 text-center flex-shrink-0">Membrii</h4>
+                            <h4 className="text-base font-bold text-white mb-2 text-center flex-shrink-0">Membrii</h4>
                             {membersLoading ? (
-                              <div className="flex justify-center py-8 flex-1">
-                                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                              <div className="flex justify-center py-4 flex-1">
+                                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
                               </div>
                             ) : (
-                              <div className="space-y-1 flex-1 overflow-hidden">
+                              <div className="space-y-1 flex-1 overflow-y-auto">
                                 {teamMembers.map((member) => (
                                   <a
                                     key={member.id}
                                     href={member.faceitProfile}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="block bg-black/30 p-2 rounded border border-gray-700 hover:bg-black/50 transition-colors"
+                                    className="block bg-black/30 p-1.5 rounded border border-gray-700 hover:bg-black/50 transition-colors"
                                     onClick={(e) => e.stopPropagation()}
                                   >
                                     <div className="text-xs flex items-center justify-between">
-                                      <div className="font-semibold text-white">{member.nickname}</div>
-                                      <div className="flex gap-1">
+                                      <div className="font-semibold text-white truncate pr-2">{member.nickname}</div>
+                                      <div className="flex gap-1 flex-shrink-0">
                                         {member.role === "captain" && (
                                           <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
                                             {t('team.role.captain')}
