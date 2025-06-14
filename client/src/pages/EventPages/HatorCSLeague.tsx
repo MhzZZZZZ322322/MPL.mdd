@@ -244,22 +244,69 @@ const HatorCSLeague = () => {
               ) : (
                 <div className="grid grid-cols-4 gap-4 mb-8">
                   {teams.map((team) => (
-                    <NeonBorder key={team.id} className="p-4 bg-darkGray/30 rounded-lg cursor-pointer hover:bg-darkGray/50 transition-all duration-300">
+                    <div key={team.id} className="relative perspective-1000">
                       <div 
-                        onClick={() => setSelectedTeam(team)}
-                        className="text-center"
+                        className={`relative w-full h-40 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                          selectedTeam?.id === team.id ? 'rotate-y-180' : ''
+                        }`}
+                        onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
-                        <div className={`w-24 h-24 mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`}>
-                          <div className="relative scale-[0.33]">
-                            {getTeamLogo(team.name).icon}
+                        {/* Front of card - Team Logo */}
+                        <NeonBorder className="absolute inset-0 p-4 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
+                          <div className="text-center h-full flex flex-col justify-center">
+                            <div className={`w-24 h-24 mx-auto mb-3 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`}>
+                              <div className="relative scale-[0.33]">
+                                {getTeamLogo(team.name).icon}
+                              </div>
+                            </div>
+                            <h3 className="text-sm font-bold text-white font-rajdhani">{team.name}</h3>
                           </div>
-                        </div>
-                        <h3 className="text-sm font-bold text-white mb-2 font-rajdhani">{team.name}</h3>
-                        <p className="text-gray-400 text-xs">
-                          Vezi echipa
-                        </p>
+                        </NeonBorder>
+
+                        {/* Back of card - Team Members */}
+                        <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                          <div className="h-full overflow-y-auto">
+                            <h4 className="text-sm font-bold text-white mb-2 text-center">Membrii</h4>
+                            {membersLoading ? (
+                              <div className="flex justify-center py-4">
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                              </div>
+                            ) : (
+                              <div className="space-y-1">
+                                {teamMembers.map((member) => (
+                                  <a
+                                    key={member.id}
+                                    href={member.faceitProfile}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block bg-black/30 p-2 rounded border border-gray-700 hover:bg-black/50 transition-colors"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <div className="text-xs">
+                                      <div className="font-semibold text-white mb-1 truncate">{member.nickname}</div>
+                                      <div className="flex flex-wrap gap-1">
+                                        {member.role === "captain" && (
+                                          <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
+                                            {t('team.role.captain')}
+                                          </span>
+                                        )}
+                                        <span className={`px-1 py-0.5 text-xs rounded font-semibold ${
+                                          member.position === "main" 
+                                            ? "bg-green-600 text-white" 
+                                            : "bg-orange-600 text-white"
+                                        }`}>
+                                          {member.position === "main" ? t('team.position.main') : t('team.position.reserve')}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </NeonBorder>
                       </div>
-                    </NeonBorder>
+                    </div>
                   ))}
                 </div>
               )}
