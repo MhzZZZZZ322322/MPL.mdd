@@ -15,20 +15,21 @@ const HatorCSLeague = () => {
   const [isTeamsExpanded, setIsTeamsExpanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
-  // Team logo mapping
-  const getTeamLogo = (teamName: string) => {
-    switch (teamName) {
-      case "Ciocana Esports":
-        return {
-          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-full h-full object-contain rounded" />,
-          gradient: "from-yellow-500 to-blue-600"
-        };
-      default:
-        return {
-          icon: <Trophy className="w-full h-full text-primary" />,
-          gradient: "from-primary to-primary/80"
-        };
+  // Team logo mapping - uses actual team logos from database
+  const getTeamLogo = (team: Team) => {
+    if (team.logoUrl) {
+      return {
+        icon: <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain rounded" onError={(e) => {
+          console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
+          e.currentTarget.style.display = 'none';
+        }} />,
+        gradient: "from-primary to-primary/80"
+      };
     }
+    return {
+      icon: <Trophy className="w-full h-full text-primary" />,
+      gradient: "from-primary to-primary/80"
+    };
   };
 
   // Fetch teams for this tournament
@@ -254,9 +255,21 @@ const HatorCSLeague = () => {
                         {/* Front of card - Team Logo */}
                         <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                           <div className="text-center h-full flex flex-col justify-between">
-                            <div className={`mx-auto bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80`}>
-                              <div className="relative w-full h-full p-2">
-                                {getTeamLogo(team.name).icon}
+                            <div className="mx-auto bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
+                              <div className="relative w-full h-full p-2 flex items-center justify-center">
+                                {team.logoUrl ? (
+                                  <img 
+                                    src={team.logoUrl} 
+                                    alt={team.name} 
+                                    className="w-full h-full object-contain rounded" 
+                                    onError={(e) => {
+                                      console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
+                                      e.currentTarget.style.display = 'none';
+                                      e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                    }}
+                                  />
+                                ) : null}
+                                <Trophy className="w-16 h-16 text-primary hidden" />
                               </div>
                             </div>
                             <h3 className="text-lg sm:text-xl font-bold text-white font-rajdhani py-2">{team.name}</h3>
