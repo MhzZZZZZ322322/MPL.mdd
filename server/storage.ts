@@ -242,6 +242,7 @@ export class MemStorage implements IStorage {
       nickname: insertMember.nickname,
       faceitProfile: insertMember.faceitProfile,
       role: insertMember.role || "player",
+      position: insertMember.position || "main",
       isActive: insertMember.isActive !== undefined ? insertMember.isActive : true
     };
     this.teamMembers.set(id, member);
@@ -843,13 +844,13 @@ export class MemStorage implements IStorage {
 
     // Add team members for each team
     const team1Members = [
-      { nickname: "CoMMaNDeR_MD", faceitProfile: "https://www.faceit.com/en/players/CoMMaNDeR_MD", role: "captain" },
-      { nickname: "f1ke_soft", faceitProfile: "https://www.faceit.com/en/players/f1ke_soft", role: "player" },
-      { nickname: "FraGGvesta9", faceitProfile: "https://www.faceit.com/en/players/FraGGvesta9", role: "player" },
-      { nickname: "HamsteR_TR", faceitProfile: "https://www.faceit.com/en/players/HamsteR_TR", role: "player" },
-      { nickname: "tr1cketw", faceitProfile: "https://www.faceit.com/en/players/tr1cketw", role: "player" },
-      { nickname: "xxx13", faceitProfile: "https://www.faceit.com/en/players/xxx13", role: "player" },
-      { nickname: "Shutting2", faceitProfile: "https://www.faceit.com/en/players/Shutting2", role: "substitute" }
+      { nickname: "CoMMaNDeR_MD", faceitProfile: "https://www.faceit.com/en/players/CoMMaNDeR_MD", role: "captain", position: "main" },
+      { nickname: "f1ke_soft", faceitProfile: "https://www.faceit.com/en/players/f1ke_soft", role: "player", position: "main" },
+      { nickname: "FraGGvesta9", faceitProfile: "https://www.faceit.com/en/players/FraGGvesta9", role: "player", position: "main" },
+      { nickname: "HamsteR_TR", faceitProfile: "https://www.faceit.com/en/players/HamsteR_TR", role: "player", position: "main" },
+      { nickname: "tr1cketw", faceitProfile: "https://www.faceit.com/en/players/tr1cketw", role: "player", position: "main" },
+      { nickname: "xxx13", faceitProfile: "https://www.faceit.com/en/players/xxx13", role: "player", position: "reserve" },
+      { nickname: "Shutting2", faceitProfile: "https://www.faceit.com/en/players/Shutting2", role: "player", position: "reserve" }
     ];
 
     team1Members.forEach(member => {
@@ -859,17 +860,18 @@ export class MemStorage implements IStorage {
         nickname: member.nickname,
         faceitProfile: member.faceitProfile,
         role: member.role,
+        position: member.position,
         isActive: true
       };
       this.teamMembers.set(teamMember.id, teamMember);
     });
 
     const team2Members = [
-      { nickname: "AlphaWolf", faceitProfile: "https://www.faceit.com/en/players/AlphaWolf", role: "captain" },
-      { nickname: "ShadowPack", faceitProfile: "https://www.faceit.com/en/players/ShadowPack", role: "player" },
-      { nickname: "WolfHunter", faceitProfile: "https://www.faceit.com/en/players/WolfHunter", role: "player" },
-      { nickname: "NightClaw", faceitProfile: "https://www.faceit.com/en/players/NightClaw", role: "player" },
-      { nickname: "PackLeader", faceitProfile: "https://www.faceit.com/en/players/PackLeader", role: "player" }
+      { nickname: "AlphaWolf", faceitProfile: "https://www.faceit.com/en/players/AlphaWolf", role: "captain", position: "main" },
+      { nickname: "ShadowPack", faceitProfile: "https://www.faceit.com/en/players/ShadowPack", role: "player", position: "main" },
+      { nickname: "WolfHunter", faceitProfile: "https://www.faceit.com/en/players/WolfHunter", role: "player", position: "main" },
+      { nickname: "NightClaw", faceitProfile: "https://www.faceit.com/en/players/NightClaw", role: "player", position: "main" },
+      { nickname: "PackLeader", faceitProfile: "https://www.faceit.com/en/players/PackLeader", role: "player", position: "main" }
     ];
 
     team2Members.forEach(member => {
@@ -879,6 +881,7 @@ export class MemStorage implements IStorage {
         nickname: member.nickname,
         faceitProfile: member.faceitProfile,
         role: member.role,
+        position: member.position,
         isActive: true
       };
       this.teamMembers.set(teamMember.id, teamMember);

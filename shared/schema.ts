@@ -162,6 +162,7 @@ export const teamMembers = pgTable("team_members", {
   nickname: text("nickname").notNull(),
   faceitProfile: text("faceit_profile").notNull(),
   role: text("role").notNull().default("player"), // player, captain, coach
+  position: text("position").notNull().default("main"), // main, reserve
   isActive: boolean("is_active").notNull().default(true),
 });
 
