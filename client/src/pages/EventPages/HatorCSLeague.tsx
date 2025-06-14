@@ -246,9 +246,10 @@ const HatorCSLeague = () => {
                   {teams.map((team) => (
                     <div key={team.id} className="relative perspective-1000">
                       <div 
-                        className={`relative w-full h-96 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                        className={`relative w-full transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
                           selectedTeam?.id === team.id ? 'rotate-y-180' : ''
                         }`}
+                        style={{ height: '480px' }}
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
                         {/* Front of card - Team Logo */}
@@ -264,15 +265,15 @@ const HatorCSLeague = () => {
                         </NeonBorder>
 
                         {/* Back of card - Team Members */}
-                        <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
-                          <div className="h-full">
-                            <h4 className="text-lg font-bold text-white mb-3 text-center">Membrii</h4>
+                        <NeonBorder className="absolute inset-0 p-4 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                          <div className="h-full flex flex-col">
+                            <h4 className="text-lg font-bold text-white mb-3 text-center flex-shrink-0">Membrii</h4>
                             {membersLoading ? (
-                              <div className="flex justify-center py-8">
+                              <div className="flex justify-center py-8 flex-1">
                                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
                               </div>
                             ) : (
-                              <div className="space-y-1">
+                              <div className="space-y-1 flex-1 overflow-hidden">
                                 {teamMembers.map((member) => (
                                   <a
                                     key={member.id}
