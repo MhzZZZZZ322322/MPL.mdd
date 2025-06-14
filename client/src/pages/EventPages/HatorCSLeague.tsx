@@ -227,9 +227,9 @@ const HatorCSLeague = () => {
         </div>
 
         {/* Teams Profile Section */}
-        <div className="py-16 container mx-auto px-4">
+        <div className="py-8 sm:py-16 container mx-auto px-4">
           <Button 
-            className="bg-primary hover:bg-primary/90 mb-6"
+            className="bg-primary hover:bg-primary/90 mb-4 sm:mb-6 w-full sm:w-auto text-sm sm:text-base"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
             Profilul echipelor
@@ -242,25 +242,24 @@ const HatorCSLeague = () => {
                   <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
                 </div>
               ) : (
-                <div className="grid grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
                   {teams.map((team) => (
                     <div key={team.id} className="relative perspective-1000">
                       <div 
-                        className={`relative w-full transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                        className={`relative w-full h-80 sm:h-96 lg:h-[400px] transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
                           selectedTeam?.id === team.id ? 'rotate-y-180' : ''
                         }`}
-                        style={{ height: '400px' }}
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
                         {/* Front of card - Team Logo */}
                         <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                           <div className="text-center h-full flex flex-col justify-between">
-                            <div className={`mx-auto bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '280px', height: '280px'}}>
+                            <div className={`mx-auto bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80`}>
                               <div className="relative w-full h-full p-2">
                                 {getTeamLogo(team.name).icon}
                               </div>
                             </div>
-                            <h3 className="text-xl font-bold text-white font-rajdhani py-2">{team.name}</h3>
+                            <h3 className="text-lg sm:text-xl font-bold text-white font-rajdhani py-2">{team.name}</h3>
                           </div>
                         </NeonBorder>
 
