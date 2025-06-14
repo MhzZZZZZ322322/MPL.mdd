@@ -116,6 +116,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 14, 2025: Integrated all 38 tournament teams with authentic logos from organizer's archive
+- June 14, 2025: Deployed complete HATOR CS2 LEAGUE MOLDOVA roster with real team data
 - June 14, 2025: Finalized team card design with 280x280 pixel logos filling maximum space
 - June 14, 2025: Optimized 3D flip card animation with horizontal member layout
 - June 14, 2025: Enhanced team member system with position field (main/reserve)
