@@ -40,29 +40,29 @@ const HatorCSLeague = () => {
                   <ArrowLeft className="mr-2 h-4 w-4" /> {t('event.back.button')}
                 </Button>
               </Link>
-              
+
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 font-rajdhani">
                 {t('event.hator.title')}
               </h1>
-              
+
               <div className="flex items-center mb-6 text-gray-300">
                 <Calendar className="mr-2 h-4 w-4 text-primary" />
                 <span className="mr-4">{t('event.hator.date')}</span>
-                
+
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
                 <span>{t('event.hator.location')}</span>
               </div>
-              
+
               <p className="text-lg text-gray-100 max-w-2xl mb-8">
                 {t('event.hator.description')}
               </p>
-              
+
               {/* Countdown timer până la începerea jocurilor */}
               <div className="mb-8">
                 <p className="text-center text-white mb-2">{t('event.countdown')}</p>
                 <CountdownTimer targetDate="2025-06-16T18:00:00" className="max-w-3xl" />
               </div>
-              
+
               <div className="flex flex-wrap gap-4">
                 <a href="https://discord.gg/KgXXUebhVM" target="_blank" rel="noopener noreferrer">
                   <Button className="bg-primary hover:bg-primary/90">
@@ -86,7 +86,7 @@ const HatorCSLeague = () => {
         <div className="py-12 bg-gradient-to-b from-darkBg to-black">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-white mb-8 font-rajdhani text-center">{t('event.prizes.value')}</h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
               <a 
                 href="https://darwin.md/scaun-gaming-hator-arc-2-xl-black-htc2000.html" 
@@ -112,7 +112,7 @@ const HatorCSLeague = () => {
                   <p className="text-white text-center text-base sm:text-lg">{t('event.hator.chairs')}</p>
                 </div>
               </a>
-              
+
               <a 
                 href="https://darwin.md/mouse-hator-quasar-3-ultra-8k-wireless-htm771-fara-fir-white.html" 
                 target="_blank"
@@ -137,7 +137,7 @@ const HatorCSLeague = () => {
                   <p className="text-white text-center text-base sm:text-lg">{t('event.hator.mouse')}</p>
                 </div>
               </a>
-              
+
               <a 
                 href="https://darwin.md/casti-hator-hypergang-2-usb-71-cu-fir-matte-titanium.html" 
                 target="_blank"
@@ -187,18 +187,18 @@ const HatorCSLeague = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.about.title')}</h2>
-              
+
               <div className="prose prose-invert max-w-none">
                 <p>
                   <strong>{t('event.hator.title')}</strong> {t('event.league.description.1')}
                 </p>
-                
+
                 <p>
                   {t('event.league.description.2')}
                 </p>
-                
+
                 <h3>{t('event.format.title.official')}</h3>
-                
+
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage1')}</h4>
                 <ul className="mb-4">
                   <li><strong>{t('event.format.max.capacity')}</strong>: {t('event.format.teams.number')}</li>
@@ -222,7 +222,7 @@ const HatorCSLeague = () => {
                   <li><strong>{t('event.format.qualification')}</strong>: {t('event.format.qualification.description')}</li>
                   <li><strong>{t('event.format.bonus.seeding')}</strong>: {t('event.format.bonus.description')}</li>
                 </ul>
-                
+
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage2')}</h4>
                 <ul className="mb-4">
                   <li><strong>{t('event.format.qualified.teams')}</strong>: {t('event.format.qualified.number')}</li>
@@ -245,13 +245,13 @@ const HatorCSLeague = () => {
                     </div>
                   </li>
                 </ul>
-                
+
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.matches.format')}</h4>
                 <ul className="mb-4">
                   <li><strong>Bo1</strong>: {t('event.format.bo1')}</li>
                   <li><strong>Bo3</strong>: {t('event.format.bo3')}</li>
                 </ul>
-                
+
                 <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.maps.selection')}</h4>
                 <ul>
                   <li><strong>{t('event.maps.coinflip')}</strong>: {t('event.maps.teams.determination')}</li>
@@ -270,7 +270,7 @@ const HatorCSLeague = () => {
                     </ol>
                   </li>
                 </ul>
-                
+
                 <h3>{t('event.eligibility')}</h3>
                 <ul>
                   <li>{t('event.eligibility.teams')}</li>
@@ -278,7 +278,7 @@ const HatorCSLeague = () => {
                   <li>{t('event.eligibility.nationality')}</li>
                   <li>{t('event.eligibility.tag')}</li>
                 </ul>
-                
+
                 <h3>{t('event.registration.title')}</h3>
                 <p>
                   {t('event.registration.description')}
@@ -287,13 +287,13 @@ const HatorCSLeague = () => {
                   <li><strong>{t('event.registration.start')}</strong>: {t('event.date.registration.start')}</li>
                   <li><strong>{t('event.registration.end')}</strong>: {t('event.date.registration.end')}</li>
                   <li><strong>{t('event.team.validation')}</strong>: {t('event.date.team.validation')}</li>
-                  <li><strong>{t('event.tournament.start')}</strong>: {t('event.date.tournament.start')}</li>
+                  <li><strong>{t('event.tournament.start')}</strong>: 18 Iunie 2025</li>
                 </ul>
               </div>
-              
+
               <div className="mt-12">
                 <h2 id="rules" className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.rules')}</h2>
-                
+
                 <div className="prose prose-invert max-w-none">
                   <h3>{t('event.anticheat')}</h3>
                   <ul>
@@ -302,20 +302,20 @@ const HatorCSLeague = () => {
                     <li>{t('event.anticheat.rule3')}</li>
                     <li>{t('event.anticheat.rule4')}</li>
                   </ul>
-                  
+
                   <h3>{t('event.conduct')}</h3>
                   <ul>
                     <li>{t('event.conduct.rule1')}</li>
                     <li>{t('event.conduct.rule2')}</li>
                     <li>{t('event.conduct.rule3')}</li>
                   </ul>
-                  
+
                   <h3>{t('event.technical.pause')}</h3>
                   <ul>
                     <li>{t('event.technical.pause.rule1')}</li>
                     <li>{t('event.technical.pause.rule2')}</li>
                   </ul>
-                  
+
                   <h3>{t('event.rules.mandatory')}</h3>
                   <p className="text-red-400 font-semibold">{t('event.rules.warning')}</p>
                   <ol className="space-y-2">
@@ -332,11 +332,11 @@ const HatorCSLeague = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="lg:col-span-1">
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
                 <h3 className="text-xl font-bold text-white mb-4">{t('event.quick.info')}</h3>
-                
+
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
                     <Calendar className="mr-3 h-5 w-5 text-primary mt-0.5" />
@@ -345,7 +345,7 @@ const HatorCSLeague = () => {
                       <div className="text-sm">{t('event.date.hours')}</div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <MapPin className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
@@ -353,7 +353,7 @@ const HatorCSLeague = () => {
                       <div className="text-sm">{t('event.platform')}</div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <Users className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
@@ -361,7 +361,7 @@ const HatorCSLeague = () => {
                       <div className="text-sm">{t('event.format.5v5')}</div>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <Trophy className="mr-3 h-5 w-5 text-primary mt-0.5" />
                     <div>
@@ -371,7 +371,7 @@ const HatorCSLeague = () => {
                   </div>
                 </div>
               </NeonBorder>
-              
+
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
                 <h3 className="text-xl font-bold text-white mb-4">{t('event.organized.by')}</h3>
                 <div className="flex flex-col space-y-4">
@@ -383,9 +383,9 @@ const HatorCSLeague = () => {
                       Moldova Pro League
                     </a>
                   </div>
-                  
+
                   <hr className="border-gray-700" />
-                  
+
                   <div>
                     <div className="font-semibold text-white mb-2">{t('event.main.sponsor')}</div>
                     <a 
@@ -407,14 +407,14 @@ const HatorCSLeague = () => {
                   </div>
                 </div>
               </NeonBorder>
-              
+
               <NeonBorder className="mb-8 rounded-lg p-6 bg-darkGray/50">
                 <h3 className="text-xl font-bold text-white mb-4">{t('event.stream.media')}</h3>
-                
+
                 <p className="text-gray-300 mb-4">
                   {t('event.stream.description')}
                 </p>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
@@ -427,7 +427,7 @@ const HatorCSLeague = () => {
                       Twitch
                     </a>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
                     <a 
@@ -441,14 +441,14 @@ const HatorCSLeague = () => {
                   </div>
                 </div>
               </NeonBorder>
-              
+
               <NeonBorder className="rounded-lg p-6 bg-darkGray/50">
                 <h3 className="text-xl font-bold text-white mb-4">{t('event.contact')}</h3>
-                
+
                 <p className="text-gray-300 mb-4">
                   {t('event.contact.description')}
                 </p>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
@@ -461,7 +461,7 @@ const HatorCSLeague = () => {
                       Discord MPL
                     </a>
                   </div>
-                  
+
                   <div className="flex items-center">
                     <span className="text-primary text-lg mr-2">→</span>
                     <a 
