@@ -1,13 +1,16 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useState } from "react";
 
 const HatorCSLeague = () => {
   const { t } = useLanguage();
+  const [isDetailsExpanded, setIsDetailsExpanded] = useState(false);
+  const [isRulesExpanded, setIsRulesExpanded] = useState(false);
   return (
     <>
       <Helmet>
@@ -186,150 +189,194 @@ const HatorCSLeague = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <h2 className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.about.title')}</h2>
-
-              <div className="prose prose-invert max-w-none">
-                <p>
-                  <strong>{t('event.hator.title')}</strong> {t('event.league.description.1')}
-                </p>
-
-                <p>
-                  {t('event.league.description.2')}
-                </p>
-
-                <h3>{t('event.format.title.official')}</h3>
-
-                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage1')}</h4>
-                <ul className="mb-4">
-                  <li><strong>{t('event.format.max.capacity')}</strong>: {t('event.format.teams.number')}</li>
-                  <li><strong>{t('event.format.structure')}</strong>: {t('event.format.groups.structure')}</li>
-                  <li>
-                    <strong>{t('event.format.system')}</strong>: {t('event.format.swiss.description')}
-                    <ul className="ml-6 mt-2 mb-2 list-disc">
-                      <li>{t('event.format.wins.qualification')}</li>
-                      <li>{t('event.format.losses.elimination')}</li>
-                    </ul>
-                    <div className="mt-2 ml-6">
-                      <a 
-                        href="/docs/Explicatie_Swiss_Grupa_8_Final.pdf" 
-                        target="_blank"
-                        className="text-primary hover:text-primary/80 underline flex items-center"
-                      >
-                        <FileIcon className="w-4 h-4 mr-1" /> {t('event.format.swiss.detailed')}
-                      </a>
-                    </div>
-                  </li>
-                  <li><strong>{t('event.format.qualification')}</strong>: {t('event.format.qualification.description')}</li>
-                  <li><strong>{t('event.format.bonus.seeding')}</strong>: {t('event.format.bonus.description')}</li>
-                </ul>
-
-                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage2')}</h4>
-                <ul className="mb-4">
-                  <li><strong>{t('event.format.qualified.teams')}</strong>: {t('event.format.qualified.number')}</li>
-                  <li>
-                    <strong>{t('event.format.structure')}</strong>:
-                    <ul className="ml-6 mt-2 mb-2 list-disc">
-                      <li>{t('event.format.round1')}</li>
-                      <li>{t('event.format.round2')}</li>
-                      <li>{t('event.format.round3')}</li>
-                      <li>{t('event.format.final')}</li>
-                    </ul>
-                    <div className="mt-2 ml-6">
-                      <a 
-                        href="/docs/Explicatie_Etapa2_Playoff_Curat.pdf" 
-                        target="_blank"
-                        className="text-primary hover:text-primary/80 underline flex items-center"
-                      >
-                        <FileIcon className="w-4 h-4 mr-1" /> {t('event.format.playoff.detailed')}
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-
-                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.matches.format')}</h4>
-                <ul className="mb-4">
-                  <li><strong>Bo1</strong>: {t('event.format.bo1')}</li>
-                  <li><strong>Bo3</strong>: {t('event.format.bo3')}</li>
-                </ul>
-
-                <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.maps.selection')}</h4>
-                <ul>
-                  <li><strong>{t('event.maps.coinflip')}</strong>: {t('event.maps.teams.determination')}</li>
-                  <li><strong>{t('event.maps.steps')}</strong>:
-                    <ol className="ml-6 mt-2 list-decimal">
-                      <li>{t('event.maps.step1')}</li>
-                      <li>{t('event.maps.step2')}</li>
-                      <li>{t('event.maps.step3')}</li>
-                      <li>{t('event.maps.step4')}</li>
-                      <li>{t('event.maps.step5')}</li>
-                      <li>{t('event.maps.step6')}</li>
-                      <li>{t('event.maps.step7')}</li>
-                      <li>{t('event.maps.step8')}</li>
-                      <li>{t('event.maps.step9')}</li>
-                      <li>{t('event.maps.step10')}</li>
-                    </ol>
-                  </li>
-                </ul>
-
-                <h3>{t('event.eligibility')}</h3>
-                <ul>
-                  <li>{t('event.eligibility.teams')}</li>
-                  <li>{t('event.eligibility.faceit')}</li>
-                  <li>{t('event.eligibility.nationality')}</li>
-                  <li>{t('event.eligibility.tag')}</li>
-                </ul>
-
-                <h3>{t('event.registration.title')}</h3>
-                <p>
-                  {t('event.registration.description')}
-                </p>
-                <ul>
-                  <li><strong>{t('event.registration.start')}</strong>: {t('event.date.registration.start')}</li>
-                  <li><strong>{t('event.registration.end')}</strong>: {t('event.date.registration.end')}</li>
-                  <li><strong>{t('event.team.validation')}</strong>: {t('event.date.team.validation')}</li>
-                  <li><strong>{t('event.tournament.start')}</strong>: 18 Iunie 2025</li>
-                </ul>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-3xl font-bold text-white font-rajdhani">{t('event.about.title')}</h2>
+                <Button
+                  onClick={() => setIsDetailsExpanded(!isDetailsExpanded)}
+                  variant="outline"
+                  size="sm"
+                  className="border-primary text-primary hover:bg-primary hover:text-black"
+                >
+                  {isDetailsExpanded ? (
+                    <>
+                      <ChevronUp className="w-4 h-4 mr-2" />
+                      Închide
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4 mr-2" />
+                      Deschide detalii
+                    </>
+                  )}
+                </Button>
               </div>
 
-              <div className="mt-12">
-                <h2 id="rules" className="text-3xl font-bold text-white mb-6 font-rajdhani">{t('event.rules')}</h2>
+              {isDetailsExpanded && (
+                <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
+                  <p>
+                    <strong>{t('event.hator.title')}</strong> {t('event.league.description.1')}
+                  </p>
 
-                <div className="prose prose-invert max-w-none">
-                  <h3>{t('event.anticheat')}</h3>
-                  <ul>
-                    <li>{t('event.anticheat.rule1')}</li>
-                    <li>{t('event.anticheat.rule2')}</li>
-                    <li>{t('event.anticheat.rule3')}</li>
-                    <li>{t('event.anticheat.rule4')}</li>
+                  <p>
+                    {t('event.league.description.2')}
+                  </p>
+
+                  <h3>{t('event.format.title.official')}</h3>
+
+                  <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage1')}</h4>
+                  <ul className="mb-4">
+                    <li><strong>{t('event.format.max.capacity')}</strong>: {t('event.format.teams.number')}</li>
+                    <li><strong>{t('event.format.structure')}</strong>: {t('event.format.groups.structure')}</li>
+                    <li>
+                      <strong>{t('event.format.system')}</strong>: {t('event.format.swiss.description')}
+                      <ul className="ml-6 mt-2 mb-2 list-disc">
+                        <li>{t('event.format.wins.qualification')}</li>
+                        <li>{t('event.format.losses.elimination')}</li>
+                      </ul>
+                      <div className="mt-2 ml-6">
+                        <a 
+                          href="/docs/Explicatie_Swiss_Grupa_8_Final.pdf" 
+                          target="_blank"
+                          className="text-primary hover:text-primary/80 underline flex items-center"
+                        >
+                          <FileIcon className="w-4 h-4 mr-1" /> {t('event.format.swiss.detailed')}
+                        </a>
+                      </div>
+                    </li>
+                    <li><strong>{t('event.format.qualification')}</strong>: {t('event.format.qualification.description')}</li>
+                    <li><strong>{t('event.format.bonus.seeding')}</strong>: {t('event.format.bonus.description')}</li>
                   </ul>
 
-                  <h3>{t('event.conduct')}</h3>
-                  <ul>
-                    <li>{t('event.conduct.rule1')}</li>
-                    <li>{t('event.conduct.rule2')}</li>
-                    <li>{t('event.conduct.rule3')}</li>
+                  <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.stage2')}</h4>
+                  <ul className="mb-4">
+                    <li><strong>{t('event.format.qualified.teams')}</strong>: {t('event.format.qualified.number')}</li>
+                    <li>
+                      <strong>{t('event.format.structure')}</strong>:
+                      <ul className="ml-6 mt-2 mb-2 list-disc">
+                        <li>{t('event.format.round1')}</li>
+                        <li>{t('event.format.round2')}</li>
+                        <li>{t('event.format.round3')}</li>
+                        <li>{t('event.format.final')}</li>
+                      </ul>
+                      <div className="mt-2 ml-6">
+                        <a 
+                          href="/docs/Explicatie_Etapa2_Playoff_Curat.pdf" 
+                          target="_blank"
+                          className="text-primary hover:text-primary/80 underline flex items-center"
+                        >
+                          <FileIcon className="w-4 h-4 mr-1" /> {t('event.format.playoff.detailed')}
+                        </a>
+                      </div>
+                    </li>
                   </ul>
 
-                  <h3>{t('event.technical.pause')}</h3>
-                  <ul>
-                    <li>{t('event.technical.pause.rule1')}</li>
-                    <li>{t('event.technical.pause.rule2')}</li>
+                  <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.format.matches.format')}</h4>
+                  <ul className="mb-4">
+                    <li><strong>Bo1</strong>: {t('event.format.bo1')}</li>
+                    <li><strong>Bo3</strong>: {t('event.format.bo3')}</li>
                   </ul>
 
-                  <h3>{t('event.rules.mandatory')}</h3>
-                  <p className="text-red-400 font-semibold">{t('event.rules.warning')}</p>
-                  <ol className="space-y-2">
-                    <li><strong>{t('event.rule.nickname.title')}</strong> – {t('event.rule.nickname.description')}</li>
-                    <li><strong>{t('event.rule.skins.title')}</strong> – {t('event.rule.skins.description')}</li>
-                    <li><strong>{t('event.rule.agents.title')}</strong> – {t('event.rule.agents.description')}</li>
-                    <li><strong>{t('event.rule.taunting.title')}</strong> – {t('event.rule.taunting.description')}</li>
-                    <li><strong>{t('event.rule.bugs.title')}</strong> – {t('event.rule.bugs.description')}</li>
-                    <li><strong>{t('event.rule.pfp.title')}</strong> – {t('event.rule.pfp.description')}</li>
-                    <li><strong>{t('event.rule.smurfing.title')}</strong> – {t('event.rule.smurfing.description')}</li>
-                    <li><strong>{t('event.rule.streamsniping.title')}</strong> – {t('event.rule.streamsniping.description')}</li>
-                    <li><strong>{t('event.rule.discord.title')}</strong> – {t('event.rule.discord.description')}</li>
-                  </ol>
+                  <h4 className="mt-4 mb-2 text-primary font-semibold">{t('event.maps.selection')}</h4>
+                  <ul>
+                    <li><strong>{t('event.maps.coinflip')}</strong>: {t('event.maps.teams.determination')}</li>
+                    <li><strong>{t('event.maps.steps')}</strong>:
+                      <ol className="ml-6 mt-2 list-decimal">
+                        <li>{t('event.maps.step1')}</li>
+                        <li>{t('event.maps.step2')}</li>
+                        <li>{t('event.maps.step3')}</li>
+                        <li>{t('event.maps.step4')}</li>
+                        <li>{t('event.maps.step5')}</li>
+                        <li>{t('event.maps.step6')}</li>
+                        <li>{t('event.maps.step7')}</li>
+                        <li>{t('event.maps.step8')}</li>
+                        <li>{t('event.maps.step9')}</li>
+                        <li>{t('event.maps.step10')}</li>
+                      </ol>
+                    </li>
+                  </ul>
+
+                  <h3>{t('event.eligibility')}</h3>
+                  <ul>
+                    <li>{t('event.eligibility.teams')}</li>
+                    <li>{t('event.eligibility.faceit')}</li>
+                    <li>{t('event.eligibility.nationality')}</li>
+                    <li>{t('event.eligibility.tag')}</li>
+                  </ul>
+
+                  <h3>{t('event.registration.title')}</h3>
+                  <p>
+                    {t('event.registration.description')}
+                  </p>
+                  <ul>
+                    <li><strong>{t('event.registration.start')}</strong>: {t('event.date.registration.start')}</li>
+                    <li><strong>{t('event.registration.end')}</strong>: {t('event.date.registration.end')}</li>
+                    <li><strong>{t('event.team.validation')}</strong>: {t('event.date.team.validation')}</li>
+                    <li><strong>{t('event.tournament.start')}</strong>: 18 Iunie 2025</li>
+                  </ul>
                 </div>
+              )}
+
+              <div className="mt-12">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 id="rules" className="text-3xl font-bold text-white font-rajdhani">{t('event.rules')}</h2>
+                  <Button
+                    onClick={() => setIsRulesExpanded(!isRulesExpanded)}
+                    variant="outline"
+                    size="sm"
+                    className="border-primary text-primary hover:bg-primary hover:text-black"
+                  >
+                    {isRulesExpanded ? (
+                      <>
+                        <ChevronUp className="w-4 h-4 mr-2" />
+                        Închide
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="w-4 h-4 mr-2" />
+                        Vezi regulile
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {isRulesExpanded && (
+                  <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
+                    <h3>{t('event.anticheat')}</h3>
+                    <ul>
+                      <li>{t('event.anticheat.rule1')}</li>
+                      <li>{t('event.anticheat.rule2')}</li>
+                      <li>{t('event.anticheat.rule3')}</li>
+                      <li>{t('event.anticheat.rule4')}</li>
+                    </ul>
+
+                    <h3>{t('event.conduct')}</h3>
+                    <ul>
+                      <li>{t('event.conduct.rule1')}</li>
+                      <li>{t('event.conduct.rule2')}</li>
+                      <li>{t('event.conduct.rule3')}</li>
+                    </ul>
+
+                    <h3>{t('event.technical.pause')}</h3>
+                    <ul>
+                      <li>{t('event.technical.pause.rule1')}</li>
+                      <li>{t('event.technical.pause.rule2')}</li>
+                    </ul>
+
+                    <h3>{t('event.rules.mandatory')}</h3>
+                    <p className="text-red-400 font-semibold">{t('event.rules.warning')}</p>
+                    <ol className="space-y-2">
+                      <li><strong>{t('event.rule.nickname.title')}</strong> – {t('event.rule.nickname.description')}</li>
+                      <li><strong>{t('event.rule.skins.title')}</strong> – {t('event.rule.skins.description')}</li>
+                      <li><strong>{t('event.rule.agents.title')}</strong> – {t('event.rule.agents.description')}</li>
+                      <li><strong>{t('event.rule.taunting.title')}</strong> – {t('event.rule.taunting.description')}</li>
+                      <li><strong>{t('event.rule.bugs.title')}</strong> – {t('event.rule.bugs.description')}</li>
+                      <li><strong>{t('event.rule.pfp.title')}</strong> – {t('event.rule.pfp.description')}</li>
+                      <li><strong>{t('event.rule.smurfing.title')}</strong> – {t('event.rule.smurfing.description')}</li>
+                      <li><strong>{t('event.rule.streamsniping.title')}</strong> – {t('event.rule.streamsniping.description')}</li>
+                      <li><strong>{t('event.rule.discord.title')}</strong> – {t('event.rule.discord.description')}</li>
+                    </ol>
+                  </div>
+                )}
               </div>
             </div>
 
