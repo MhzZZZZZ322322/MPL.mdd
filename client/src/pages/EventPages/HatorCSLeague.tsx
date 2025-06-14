@@ -238,21 +238,14 @@ const HatorCSLeague = () => {
 
         {/* Teams Profile Section */}
         <div className="py-16 container mx-auto px-4">
-          <div 
-            className="flex items-center justify-between mb-6 cursor-pointer group"
+          <button 
+            className="mb-6 cursor-pointer group text-left w-full"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
             <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
               Profilul echipelor
             </h2>
-            <div className="text-primary group-hover:text-white transition-colors">
-              {isTeamsExpanded ? (
-                <ChevronUp className="w-6 h-6" />
-              ) : (
-                <ChevronDown className="w-6 h-6" />
-              )}
-            </div>
-          </div>
+          </button>
 
           {isTeamsExpanded && (
             <>
@@ -341,21 +334,14 @@ const HatorCSLeague = () => {
         <div className="py-16 container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div 
-                className="flex items-center justify-between mb-6 cursor-pointer group"
+              <button 
+                className="mb-6 cursor-pointer group text-left w-full"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
                 <h2 className="text-3xl font-bold text-white font-rajdhani group-hover:text-primary transition-colors">
                   Informații generale despre turneu
                 </h2>
-                <div className="text-primary group-hover:text-white transition-colors">
-                  {isContentExpanded ? (
-                    <ChevronUp className="w-6 h-6" />
-                  ) : (
-                    <ChevronDown className="w-6 h-6" />
-                  )}
-                </div>
-              </div>
+              </button>
 
               {isContentExpanded && (
                 <div className="prose prose-invert max-w-none animate-in slide-in-from-top duration-300">
