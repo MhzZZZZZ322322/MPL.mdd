@@ -255,13 +255,13 @@ const HatorCSLeague = () => {
                         {/* Front of card - Team Logo */}
                         <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                           <div className="text-center h-full flex flex-col justify-between">
-                            <div className="mx-auto bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
-                              <div className="relative w-full h-full p-2 flex items-center justify-center">
+                            <div className="mx-auto bg-gradient-to-br from-gray-100 to-white rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
+                              <div className="relative w-full h-full p-3 flex items-center justify-center bg-white/95 rounded">
                                 {team.logoUrl ? (
                                   <img 
                                     src={team.logoUrl} 
                                     alt={team.name} 
-                                    className="w-full h-full object-contain rounded" 
+                                    className="w-full h-full object-contain drop-shadow-sm" 
                                     onError={(e) => {
                                       console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
                                       e.currentTarget.style.display = 'none';
@@ -269,7 +269,7 @@ const HatorCSLeague = () => {
                                     }}
                                   />
                                 ) : null}
-                                <Trophy className="w-16 h-16 text-primary hidden" />
+                                <Trophy className="w-16 h-16 text-gray-400 hidden" />
                               </div>
                             </div>
                             <h3 className="text-lg sm:text-xl font-bold text-white font-rajdhani py-2">{team.name}</h3>
