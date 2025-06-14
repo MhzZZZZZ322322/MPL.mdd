@@ -811,47 +811,47 @@ export class MemStorage implements IStorage {
     };
     this.siteContents.set(contactHeaderContent.id, contactHeaderContent);
 
-    // Teams ordered exactly as in official tournament list to match player data
+    // Teams in alphabetical order for better navigation
     const teamsData = [
-      { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" },        // Team 1: Duke_0 captain
-      { name: "Robotaim", logoUrl: "/team-logos/Robotaim.png" },         // Team 2: -n1ghtmarr captain
-      { name: "Lean Vision", logoUrl: "/team-logos/Lean Vision.png" },   // Team 3: M1ndfvck captain
-      { name: "Coli", logoUrl: "/team-logos/Coli.png" },                 // Team 4: denisZ1x captain
-      { name: "Japon", logoUrl: "/team-logos/Japon.png" },               // Team 5: BoreaTaga captain
-      { name: "Flux Line", logoUrl: "/team-logos/Flux Line.png" },       // Team 6: hide74- captain
-      { name: "Cipok", logoUrl: "/team-logos/Cipok.png" },               // Team 7: KROUL1YSFORD captain
-      { name: "La Passion", logoUrl: "/team-logos/La Passion.png" },     // Team 8: NuBekk captain
-      { name: "LYSQ", logoUrl: "/team-logos/LYSQ.png" },                 // Team 9: 1lazcc captain
-      { name: "RCBVR", logoUrl: "/team-logos/RCBVR.png" },               // Team 10: DumaSula captain
-      { name: "Crasat", logoUrl: "/team-logos/Crasat.png" },             // Team 11: Feniyxad captain
-      { name: "Neo Egoist League", logoUrl: "/team-logos/Neo Egoist League.png" }, // Team 12: itzHYPEER captain
-      { name: "LitEnergy", logoUrl: "/team-logos/LitEnergy.png" },       // Team 13: denzy captain
-      { name: "Into the Beach", logoUrl: "/team-logos/Into the Beach.png" }, // Team 14: chazya captain
-      { name: "VeryGoodTeam", logoUrl: "/team-logos/VeryGoodTeam.png" }, // Team 15: DrMadness captain
-      { name: "KostiujeniKlinik", logoUrl: "/team-logos/KostiujeniKlinik.png" }, // Team 16: PhXGON captain
-      { name: "Muligambia", logoUrl: "/team-logos/Muligambia.png" },     // Team 17: Fr0yMan captain
-      { name: "Legalize", logoUrl: "/team-logos/Legalize.png" },         // Team 18: sn1deRR captain
-      { name: "Trigger", logoUrl: "/team-logos/Tigger.png" },            // Team 19: patan1 captain
-      { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },       // Team 20: Alohadron captain
-      { name: "X-one", logoUrl: "/team-logos/X-one.png" },               // Team 21: -OPIUMVXQ- captain
-      { name: "Cucumba", logoUrl: "/team-logos/Cucumba.png" },           // Team 22: v6d5 captain
-      { name: "Cadian Team", logoUrl: "/team-logos/Cadian Team.png" },   // Team 23: cadiaN captain
-      { name: "Onyx", logoUrl: "/team-logos/Onyx.png" },                 // Team 24: Rexodd_ captain
-      { name: "Barbosii", logoUrl: "/team-logos/Barbosii.png" },         // Team 25: btate captain
-      { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },               // Team 26: -ExTaZzy- captain
-      { name: "Golden Five", logoUrl: "/team-logos/Golden Five.png" },   // Team 27: mooghiwara captain
-      { name: "Auratix", logoUrl: "/team-logos/Auratix.png" },           // Team 28: Tankkillerr captain
-      { name: "Rumina", logoUrl: "/team-logos/Rumina.png" },             // Team 29: Huh52 captain
-      { name: "K9 Team", logoUrl: "/team-logos/K9 Team.png" },           // Team 30: -farra captain
-      { name: "Killuminaty", logoUrl: "/team-logos/Killuminaty.png" },   // Team 31: aC_97 captain
-      { name: "Shashlik", logoUrl: "/team-logos/Shashlik.png" },         // Team 32: BogdanR23 captain
-      { name: "Ciocana Esports", logoUrl: "/team-logos/Ciocana Esports.png" }, // Team 33: CoMMaNDeR_MD captain
-      { name: "Bobb3rs", logoUrl: "/team-logos/Bobb3rs.png" },           // Team 34: ZanT3X captain
-      { name: "Bloody", logoUrl: "/team-logos/Bloody.png" },             // Team 35: MrPalste captain
-      { name: "Brigada", logoUrl: "/team-logos/Brigada.png" },           // Team 36: TonyBossuB captain
-      { name: "Ciocălău Team", logoUrl: "/team-logos/Ciocălău Team.png" }, // Team 37: xen0 captain
-      { name: "Brigada Meteor", logoUrl: "/team-logos/Brigada Meteor.png" }, // Team 38: yeahmen707 captain
-      { name: "BPSP", logoUrl: "/team-logos/BPSP.png" }                  // Team 39: M1kee captain
+      { name: "Auratix", logoUrl: "/team-logos/Auratix.png" },
+      { name: "Barbosii", logoUrl: "/team-logos/Barbosii.png" },
+      { name: "Bloody", logoUrl: "/team-logos/Bloody.png" },
+      { name: "Bobb3rs", logoUrl: "/team-logos/Bobb3rs.png" },
+      { name: "BPSP", logoUrl: "/team-logos/BPSP.png" },
+      { name: "Brigada", logoUrl: "/team-logos/Brigada.png" },
+      { name: "Brigada Meteor", logoUrl: "/team-logos/Brigada Meteor.png" },
+      { name: "Cadian Team", logoUrl: "/team-logos/Cadian Team.png" },
+      { name: "Ciocana Esports", logoUrl: "/team-logos/Ciocana Esports.png" },
+      { name: "Ciocălău Team", logoUrl: "/team-logos/Ciocălău Team.png" },
+      { name: "Cipok", logoUrl: "/team-logos/Cipok.png" },
+      { name: "Coli", logoUrl: "/team-logos/Coli.png" },
+      { name: "Crasat", logoUrl: "/team-logos/Crasat.png" },
+      { name: "Cucumba", logoUrl: "/team-logos/Cucumba.png" },
+      { name: "Flux Line", logoUrl: "/team-logos/Flux Line.png" },
+      { name: "Golden Five", logoUrl: "/team-logos/Golden Five.png" },
+      { name: "Into the Beach", logoUrl: "/team-logos/Into the Beach.png" },
+      { name: "Japon", logoUrl: "/team-logos/Japon.png" },
+      { name: "K9 Team", logoUrl: "/team-logos/K9 Team.png" },
+      { name: "Killuminaty", logoUrl: "/team-logos/Killuminaty.png" },
+      { name: "KostiujeniKlinik", logoUrl: "/team-logos/KostiujeniKlinik.png" },
+      { name: "La Passion", logoUrl: "/team-logos/La Passion.png" },
+      { name: "Lean Vision", logoUrl: "/team-logos/Lean Vision.png" },
+      { name: "Legalize", logoUrl: "/team-logos/Legalize.png" },
+      { name: "LitEnergy", logoUrl: "/team-logos/LitEnergy.png" },
+      { name: "LYSQ", logoUrl: "/team-logos/LYSQ.png" },
+      { name: "Muligambia", logoUrl: "/team-logos/Muligambia.png" },
+      { name: "Neo Egoist League", logoUrl: "/team-logos/Neo Egoist League.png" },
+      { name: "Onyx", logoUrl: "/team-logos/Onyx.png" },
+      { name: "RCBVR", logoUrl: "/team-logos/RCBVR.png" },
+      { name: "Robotaim", logoUrl: "/team-logos/Robotaim.png" },
+      { name: "Rumina", logoUrl: "/team-logos/Rumina.png" },
+      { name: "Shashlik", logoUrl: "/team-logos/Shashlik.png" },
+      { name: "Trigger", logoUrl: "/team-logos/Tigger.png" },
+      { name: "VeryGoodTeam", logoUrl: "/team-logos/VeryGoodTeam.png" },
+      { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },
+      { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },
+      { name: "X-one", logoUrl: "/team-logos/X-one.png" },
+      { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" }
     ];
 
     const createdTeams: Team[] = [];
