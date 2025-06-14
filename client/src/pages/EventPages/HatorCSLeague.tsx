@@ -18,10 +18,10 @@ const HatorCSLeague = () => {
   // Team logo mapping
   const getTeamLogo = (teamName: string) => {
     switch (teamName) {
-      case "FIRE SQUAD":
+      case "Ciocana Esports":
         return {
-          icon: <Flame className="w-12 h-12 text-orange-400" />,
-          gradient: "from-orange-500 to-red-600"
+          icon: <img src="/team-logos/ciocana-esports.png" alt="Ciocana Esports" className="w-12 h-12 object-contain" />,
+          gradient: "from-yellow-500 to-blue-600"
         };
       case "DIGITAL WOLVES":
         return {

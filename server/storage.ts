@@ -813,8 +813,8 @@ export class MemStorage implements IStorage {
     // Initialize sample teams for Hator CS League
     const team1: Team = {
       id: this.currentTeamId++,
-      name: "FIRE SQUAD",
-      logoUrl: "/team-logos/fire-squad.svg",
+      name: "Ciocana Esports",
+      logoUrl: "/team-logos/ciocana-esports.png",
       tournament: "hator-cs-league",
       isActive: true,
       createdAt: new Date()
@@ -843,11 +843,13 @@ export class MemStorage implements IStorage {
 
     // Add team members for each team
     const team1Members = [
-      { nickname: "FireLord", faceitProfile: "https://www.faceit.com/en/players/FireLord", role: "captain" },
-      { nickname: "BlazeKing", faceitProfile: "https://www.faceit.com/en/players/BlazeKing", role: "player" },
-      { nickname: "InfernoAce", faceitProfile: "https://www.faceit.com/en/players/InfernoAce", role: "player" },
-      { nickname: "FlameShot", faceitProfile: "https://www.faceit.com/en/players/FlameShot", role: "player" },
-      { nickname: "BurnOut", faceitProfile: "https://www.faceit.com/en/players/BurnOut", role: "player" }
+      { nickname: "CoMMaNDeR_MD", faceitProfile: "https://www.faceit.com/en/players/CoMMaNDeR_MD", role: "captain" },
+      { nickname: "f1ke_soft", faceitProfile: "https://www.faceit.com/en/players/f1ke_soft", role: "player" },
+      { nickname: "FraGGvesta9", faceitProfile: "https://www.faceit.com/en/players/FraGGvesta9", role: "player" },
+      { nickname: "HamsteR_TR", faceitProfile: "https://www.faceit.com/en/players/HamsteR_TR", role: "player" },
+      { nickname: "tr1cketw", faceitProfile: "https://www.faceit.com/en/players/tr1cketw", role: "player" },
+      { nickname: "xxx13", faceitProfile: "https://www.faceit.com/en/players/xxx13", role: "player" },
+      { nickname: "Shutting2", faceitProfile: "https://www.faceit.com/en/players/Shutting2", role: "substitute" }
     ];
 
     team1Members.forEach(member => {
