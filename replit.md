@@ -121,7 +121,6 @@ Preferred communication style: Simple, everyday language.
 - June 14, 2025: Updated tournament capacity planning for approximately 40 teams
 - June 14, 2025: Added multilingual support for team member positions and roles
 - June 14, 2025: Implemented SEO optimization with visible preview text and expandable content
-- June 14, 2025: Removed Digital Wolves and Cyber Hawks teams pending real team data
 
 ## Tournament Planning
 - Expected participation: ~40 teams from Moldova and Romania
