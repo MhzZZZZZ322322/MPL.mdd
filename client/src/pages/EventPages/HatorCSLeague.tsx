@@ -279,9 +279,16 @@ const HatorCSLeague = () => {
               {selectedTeam && (
                 <NeonBorder className="p-6 bg-darkGray/80 rounded-lg animate-in slide-in-from-top duration-300">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-bold text-white font-rajdhani">
-                      Membrii echipei {selectedTeam.name}
-                    </h3>
+                    <div className="flex items-center space-x-4">
+                      <div className={`w-16 h-16 bg-gradient-to-br ${getTeamLogo(selectedTeam.name).gradient} rounded-lg flex items-center justify-center border-2 border-white/20 shadow-lg`}>
+                        <div className="scale-75">
+                          {getTeamLogo(selectedTeam.name).icon}
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white font-rajdhani">
+                        Membrii echipei {selectedTeam.name}
+                      </h3>
+                    </div>
                     <Button
                       onClick={() => setSelectedTeam(null)}
                       variant="outline"
