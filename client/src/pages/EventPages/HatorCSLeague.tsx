@@ -249,13 +249,13 @@ const HatorCSLeague = () => {
                         className={`relative w-full transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
                           selectedTeam?.id === team.id ? 'rotate-y-180' : ''
                         }`}
-                        style={{ height: '480px' }}
+                        style={{ height: '320px' }}
                         onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
                       >
                         {/* Front of card - Team Logo */}
                         <NeonBorder className="absolute inset-0 p-4 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                           <div className="text-center h-full flex flex-col justify-center">
-                            <div className={`mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '180px', height: '180px'}}>
+                            <div className={`mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(team.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`} style={{width: '120px', height: '120px'}}>
                               <div className="relative w-full h-full p-2">
                                 {getTeamLogo(team.name).icon}
                               </div>
@@ -283,9 +283,9 @@ const HatorCSLeague = () => {
                                     className="block bg-black/30 p-2 rounded border border-gray-700 hover:bg-black/50 transition-colors"
                                     onClick={(e) => e.stopPropagation()}
                                   >
-                                    <div className="text-xs">
-                                      <div className="font-semibold text-white mb-1">{member.nickname}</div>
-                                      <div className="flex flex-wrap gap-1">
+                                    <div className="text-xs flex items-center justify-between">
+                                      <div className="font-semibold text-white">{member.nickname}</div>
+                                      <div className="flex gap-1">
                                         {member.role === "captain" && (
                                           <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
                                             {t('team.role.captain')}
