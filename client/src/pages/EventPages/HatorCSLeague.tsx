@@ -624,78 +624,7 @@ const HatorCSLeague = () => {
         </div>
       </div>
 
-      {/* Team Members Modal Overlay */}
-      {selectedTeam && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-darkGray border border-gray-700 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-            {/* Team Card Header */}
-            <NeonBorder className="p-4 bg-darkGray/30 rounded-lg m-4">
-              <div className="text-center">
-                <div className={`w-24 h-24 mx-auto mb-4 bg-gradient-to-br ${getTeamLogo(selectedTeam.name).gradient} rounded-lg flex items-center justify-center overflow-hidden border-2 border-white/20 shadow-lg`}>
-                  <div className="relative scale-[0.33]">
-                    {getTeamLogo(selectedTeam.name).icon}
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">{selectedTeam.name}</h3>
-                <Button
-                  onClick={() => setSelectedTeam(null)}
-                  variant="outline"
-                  size="sm"
-                  className="border-primary text-primary hover:bg-primary hover:text-black mb-4"
-                >
-                  <ChevronUp className="w-4 h-4 mr-2" />
-                  Închide
-                </Button>
-              </div>
 
-              {/* Team Members */}
-              <div className="border-t border-gray-700 pt-4">
-                <h4 className="text-lg font-bold text-white mb-3 text-center">Membrii echipei</h4>
-                {membersLoading ? (
-                  <div className="flex justify-center py-4">
-                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {teamMembers.map((member) => (
-                      <div key={member.id} className="bg-black/30 p-3 rounded-lg border border-gray-700">
-                        <div className="space-y-2">
-                          <div className="flex flex-col space-y-1">
-                            <h5 className="text-sm font-semibold text-white">{member.nickname}</h5>
-                            <div className="flex flex-wrap gap-1">
-                              {member.role === "captain" && (
-                                <span className="bg-primary text-black px-1.5 py-0.5 text-xs rounded font-semibold">
-                                  {t('team.role.captain')}
-                                </span>
-                              )}
-                              <span className={`px-1.5 py-0.5 text-xs rounded font-semibold ${
-                                member.position === "main" 
-                                  ? "bg-green-600 text-white" 
-                                  : "bg-orange-600 text-white"
-                              }`}>
-                                {member.position === "main" ? t('team.position.main') : t('team.position.reserve')}
-                              </span>
-                            </div>
-                          </div>
-                          <a
-                            href={member.faceitProfile}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center text-primary hover:text-primary/80 transition-colors text-xs"
-                          >
-                            <span className="mr-1">→</span>
-                            FACEIT
-                          </a>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </NeonBorder>
-          </div>
-        </div>
-      )}
     </>
   );
 };
