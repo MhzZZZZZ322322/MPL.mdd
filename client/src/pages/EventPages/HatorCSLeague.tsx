@@ -245,7 +245,7 @@ const HatorCSLeague = () => {
             className="bg-primary hover:bg-primary/90 mb-4 sm:mb-6 w-full sm:w-auto text-sm sm:text-base"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
-            Profilul echipelor
+            {t('teams.profile.button')}
           </Button>
 
           {isTeamsExpanded && (
@@ -359,7 +359,7 @@ const HatorCSLeague = () => {
                 className="bg-primary hover:bg-primary/90 mb-6"
                 onClick={() => setIsContentExpanded(!isContentExpanded)}
               >
-                {isContentExpanded ? "Vezi mai puțin" : "Vezi mai mult"}
+                {isContentExpanded ? t('event.read.less') : t('event.read.more')}
               </Button>
 
               {isContentExpanded && (

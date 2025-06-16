@@ -385,6 +385,20 @@ export const translations: TranslationDictionary = {
     ro: "A apărut o eroare. Încercați din nou mai târziu.",
     ru: "Произошла ошибка. Пожалуйста, повторите попытку позже."
   },
+
+  // Butoane pentru evenimente și echipe
+  "teams.profile.button": {
+    ro: "Profilul echipelor",
+    ru: "Профили команд"
+  },
+  "event.read.more": {
+    ro: "Vezi mai mult",
+    ru: "Читать далее"
+  },
+  "event.read.less": {
+    ro: "Vezi mai puțin",
+    ru: "Читать меньше"
+  },
   
   // Footer
   "footer.description": {
