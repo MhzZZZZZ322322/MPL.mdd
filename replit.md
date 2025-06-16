@@ -116,14 +116,18 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 16, 2025: Successfully expanded tournament from 39 to 42 teams total
+- June 16, 2025: Added WinSpirit, Xtreme Players, and BaitMD with complete rosters
+- June 16, 2025: Reorganized teams in alphabetical order while preserving member data
+- June 16, 2025: Integrated authentic team logos for all 3 new teams
+- June 16, 2025: All 42 teams now have complete player rosters with positions
 - June 14, 2025: Updated XPlosion team positions - Gherman- is main player, P1oNeR-_- moved to reserve
 - June 14, 2025: Corrected XPlosion captain to "Duke_0" with proper FACEIT profile link
-- June 14, 2025: Completed alphabetical team mapping correction for all 39 teams
-- June 14, 2025: Successfully integrated complete team rosters with 277 authentic players across 39 teams
+- June 14, 2025: Completed alphabetical team mapping correction for all teams
+- June 14, 2025: Successfully integrated complete team rosters with authentic players
 - June 14, 2025: Processed official tournament files to extract real player data with captains and positions
 - June 14, 2025: Updated all team member data with authentic nickname information from tournament organizers
 - June 14, 2025: Corrected team name "Tigger" to "Trigger" - VeryGoodTeam remains unchanged
-- June 14, 2025: Added VeryGoodTeam as 39th team in HATOR CS2 LEAGUE MOLDOVA
 - June 14, 2025: Updated Cadian Team logo with official tournament branding
 - June 14, 2025: Implemented neutral dark gray background for optimal logo visibility
 - June 14, 2025: Integrated all tournament teams with authentic logos from organizer's archive
@@ -131,7 +135,6 @@ Preferred communication style: Simple, everyday language.
 - June 14, 2025: Finalized team card design with 280x280 pixel logos filling maximum space
 - June 14, 2025: Optimized 3D flip card animation with horizontal member layout
 - June 14, 2025: Enhanced team member system with position field (main/reserve)
-- June 14, 2025: Updated tournament capacity planning for approximately 40 teams
 - June 14, 2025: Added multilingual support for team member positions and roles
 
 ## Tournament Planning
