@@ -1191,38 +1191,35 @@ export class MemStorage implements IStorage {
       { teamId: 38, nickname: "SolevoI_Voi", role: "player", position: "main" },
       { teamId: 38, nickname: "tronick999", role: "player", position: "main" },
       
-      // Team 39: XPlosion (Duke_0 captain)
-      { teamId: 39, nickname: "Duke_0", role: "captain", position: "main" },
-      { teamId: 39, nickname: "Gr1MM-", role: "player", position: "main" },
-      { teamId: 39, nickname: "BENGOSO", role: "player", position: "main" },
-      { teamId: 39, nickname: "RayeN-", role: "player", position: "main" },
-      { teamId: 39, nickname: "Gherman-", role: "player", position: "main" },
-      { teamId: 39, nickname: "P1oNeR-_-", role: "player", position: "reserve" },
-      { teamId: 39, nickname: "acierdnay", role: "player", position: "reserve" },
+      // Team 39: WinSpirit (LightStormyx captain)
+      { teamId: 39, nickname: "LightStormyx", role: "captain", position: "main" },
+      { teamId: 39, nickname: "WRacer420", role: "player", position: "main" },
+      { teamId: 39, nickname: "Dany0443", role: "player", position: "main" },
+      { teamId: 39, nickname: "Free_man1337", role: "player", position: "main" },
+      { teamId: 39, nickname: "stass4", role: "player", position: "main" },
       
-      // Team 40: WinSpirit (LightStormyx captain)
-      { teamId: 40, nickname: "LightStormyx", role: "captain", position: "main" },
-      { teamId: 40, nickname: "WRacer420", role: "player", position: "main" },
-      { teamId: 40, nickname: "Dany0443", role: "player", position: "main" },
-      { teamId: 40, nickname: "Free_man1337", role: "player", position: "main" },
-      { teamId: 40, nickname: "stass4", role: "player", position: "main" },
+      // Team 40: X-one (-OPIUMVXQ- captain)
+      { teamId: 40, nickname: "-OPIUMVXQ-", role: "captain", position: "main" },
+      { teamId: 40, nickname: "yar1tyss", role: "player", position: "main" },
+      { teamId: 40, nickname: "g0speLbtw", role: "player", position: "main" },
+      { teamId: 40, nickname: "SolevoI_Voi", role: "player", position: "main" },
+      { teamId: 40, nickname: "tronick999", role: "player", position: "main" },
       
-      // Team 41: Xtreme Players (w0lf3nstein captain)
-      { teamId: 41, nickname: "w0lf3nstein", role: "captain", position: "main" },
-      { teamId: 41, nickname: "kaeden-", role: "player", position: "main" },
-      { teamId: 41, nickname: "1L0e_", role: "player", position: "main" },
-      { teamId: 41, nickname: "enthusiastul1", role: "player", position: "main" },
-      { teamId: 41, nickname: "daf10-", role: "player", position: "main" },
+      // Team 41: XPlosion (Duke_0 captain)
+      { teamId: 41, nickname: "Duke_0", role: "captain", position: "main" },
+      { teamId: 41, nickname: "Gr1MM-", role: "player", position: "main" },
+      { teamId: 41, nickname: "BENGOSO", role: "player", position: "main" },
+      { teamId: 41, nickname: "RayeN-", role: "player", position: "main" },
+      { teamId: 41, nickname: "Gherman-", role: "player", position: "main" },
+      { teamId: 41, nickname: "P1oNeR-_-", role: "player", position: "reserve" },
+      { teamId: 41, nickname: "acierdnay", role: "player", position: "reserve" },
       
-      // Team 42: BaitMD (NeoK1nG- captain)
-      { teamId: 42, nickname: "NeoK1nG-", role: "captain", position: "main" },
-      { teamId: 42, nickname: "Mehti89", role: "player", position: "main" },
-      { teamId: 42, nickname: "dopezneel-", role: "player", position: "main" },
-      { teamId: 42, nickname: "MaJ0r4Ka", role: "player", position: "main" },
-      { teamId: 42, nickname: "MasChef", role: "player", position: "main" },
-      { teamId: 42, nickname: "batelfield", role: "player", position: "reserve" },
-      { teamId: 42, nickname: "B1LAMAGICA", role: "player", position: "reserve" },
-      { teamId: 42, nickname: "IamNakey", role: "player", position: "reserve" }
+      // Team 42: Xtreme Players (w0lf3nstein captain)
+      { teamId: 42, nickname: "w0lf3nstein", role: "captain", position: "main" },
+      { teamId: 42, nickname: "kaeden-", role: "player", position: "main" },
+      { teamId: 42, nickname: "1L0e_", role: "player", position: "main" },
+      { teamId: 42, nickname: "enthusiastul1", role: "player", position: "main" },
+      { teamId: 42, nickname: "daf10-", role: "player", position: "main" }
     ];
 
     finalTeamMembers.forEach(member => {
