@@ -10,6 +10,8 @@ import {
   teamMembers, type TeamMember, type InsertTeamMember
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -1363,4 +1365,201 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// DatabaseStorage implementation using PostgreSQL
+export class DatabaseStorage implements IStorage {
+  // Team methods
+  async getTeams(tournament?: string): Promise<Team[]> {
+    const query = tournament 
+      ? db.select().from(teams).where(eq(teams.tournament, tournament))
+      : db.select().from(teams);
+    return await query;
+  }
+
+  async getTeam(id: number): Promise<Team | undefined> {
+    const [team] = await db.select().from(teams).where(eq(teams.id, id));
+    return team || undefined;
+  }
+
+  async createTeam(team: InsertTeam): Promise<Team> {
+    const [newTeam] = await db.insert(teams).values(team).returning();
+    return newTeam;
+  }
+
+  async updateTeam(id: number, team: Partial<InsertTeam>): Promise<Team> {
+    const [updatedTeam] = await db.update(teams).set(team).where(eq(teams.id, id)).returning();
+    return updatedTeam;
+  }
+
+  async deleteTeam(id: number): Promise<void> {
+    await db.delete(teams).where(eq(teams.id, id));
+  }
+
+  // Team Member methods
+  async getTeamMembers(teamId: number): Promise<TeamMember[]> {
+    return await db.select().from(teamMembers).where(eq(teamMembers.teamId, teamId));
+  }
+
+  async createTeamMember(member: InsertTeamMember): Promise<TeamMember> {
+    const [newMember] = await db.insert(teamMembers).values(member).returning();
+    return newMember;
+  }
+
+  async updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember> {
+    const [updatedMember] = await db.update(teamMembers).set(member).where(eq(teamMembers.id, id)).returning();
+    return updatedMember;
+  }
+
+  async deleteTeamMember(id: number): Promise<void> {
+    await db.delete(teamMembers).where(eq(teamMembers.id, id));
+  }
+
+  // For all other methods, we'll delegate to the old MemStorage for now
+  private memStorage = new MemStorage();
+
+  // User methods
+  async getUser(id: number): Promise<User | undefined> {
+    return this.memStorage.getUser(id);
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    return this.memStorage.getUserByUsername(username);
+  }
+
+  async createUser(user: InsertUser): Promise<User> {
+    return this.memStorage.createUser(user);
+  }
+
+  // Event methods
+  async getEvents(): Promise<Event[]> {
+    return this.memStorage.getEvents();
+  }
+
+  async getEvent(id: number): Promise<Event | undefined> {
+    return this.memStorage.getEvent(id);
+  }
+
+  async createEvent(event: InsertEvent): Promise<Event> {
+    return this.memStorage.createEvent(event);
+  }
+
+  async updateEvent(id: number, event: Partial<InsertEvent>): Promise<Event> {
+    return this.memStorage.updateEvent(id, event);
+  }
+
+  async deleteEvent(id: number): Promise<void> {
+    return this.memStorage.deleteEvent(id);
+  }
+
+  // Player methods
+  async getPlayers(game?: string): Promise<Player[]> {
+    return this.memStorage.getPlayers(game);
+  }
+
+  async getPlayer(id: number): Promise<Player | undefined> {
+    return this.memStorage.getPlayer(id);
+  }
+
+  async createPlayer(player: InsertPlayer): Promise<Player> {
+    return this.memStorage.createPlayer(player);
+  }
+
+  async updatePlayer(id: number, player: Partial<InsertPlayer>): Promise<Player> {
+    return this.memStorage.updatePlayer(id, player);
+  }
+
+  async deletePlayer(id: number): Promise<void> {
+    return this.memStorage.deletePlayer(id);
+  }
+
+  // CS Server methods
+  async getCsServers(): Promise<CsServer[]> {
+    return this.memStorage.getCsServers();
+  }
+
+  async getCsServer(id: number): Promise<CsServer | undefined> {
+    return this.memStorage.getCsServer(id);
+  }
+
+  async updateCsServerLikes(id: number): Promise<CsServer> {
+    return this.memStorage.updateCsServerLikes(id);
+  }
+
+  async updateCsServerStatus(id: number, status: boolean, players: number): Promise<CsServer> {
+    return this.memStorage.updateCsServerStatus(id, status, players);
+  }
+
+  // Contact methods
+  async createContactSubmission(submission: InsertContact): Promise<Contact> {
+    return this.memStorage.createContactSubmission(submission);
+  }
+
+  async getContactSubmissions(): Promise<Contact[]> {
+    return this.memStorage.getContactSubmissions();
+  }
+
+  // FAQ methods
+  async getFaqs(): Promise<Faq[]> {
+    return this.memStorage.getFaqs();
+  }
+
+  async getFaq(id: number): Promise<Faq | undefined> {
+    return this.memStorage.getFaq(id);
+  }
+
+  async createFaq(faq: InsertFaq): Promise<Faq> {
+    return this.memStorage.createFaq(faq);
+  }
+
+  async updateFaq(id: number, faq: Partial<InsertFaq>): Promise<Faq> {
+    return this.memStorage.updateFaq(id, faq);
+  }
+
+  async deleteFaq(id: number): Promise<void> {
+    return this.memStorage.deleteFaq(id);
+  }
+
+  // Site Content methods
+  async getSiteContents(): Promise<SiteContent[]> {
+    return this.memStorage.getSiteContents();
+  }
+
+  async getSiteContentByKey(key: string): Promise<SiteContent | undefined> {
+    return this.memStorage.getSiteContentByKey(key);
+  }
+
+  async updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent> {
+    return this.memStorage.updateSiteContent(id, content);
+  }
+
+  // SEO Settings methods
+  async getSeoSettings(): Promise<SeoSettings[]> {
+    return this.memStorage.getSeoSettings();
+  }
+
+  async getSeoSettingByUrl(pageUrl: string): Promise<SeoSettings | undefined> {
+    return this.memStorage.getSeoSettingByUrl(pageUrl);
+  }
+
+  async createSeoSetting(seo: InsertSeo): Promise<SeoSettings> {
+    return this.memStorage.createSeoSetting(seo);
+  }
+
+  async updateSeoSetting(id: number, seo: Partial<InsertSeo>): Promise<SeoSettings> {
+    return this.memStorage.updateSeoSetting(id, seo);
+  }
+
+  // Analytics Settings methods
+  async getAnalyticsSettings(): Promise<AnalyticsSettings | undefined> {
+    return this.memStorage.getAnalyticsSettings();
+  }
+
+  async updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings> {
+    return this.memStorage.updateAnalyticsSettings(id, settings);
+  }
+
+  async createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings> {
+    return this.memStorage.createAnalyticsSettings(settings);
+  }
+}
+
+export const storage = new DatabaseStorage();

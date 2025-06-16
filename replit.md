@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 16, 2025: Created PostgreSQL database with all 39 teams and 239 members exactly as shown on site
+- June 16, 2025: Migrated from MemStorage to DatabaseStorage for teams and team members
+- June 16, 2025: All team data now persisted in PostgreSQL with authentic logos and FACEIT profiles
 - June 14, 2025: Updated XPlosion team positions - Gherman- is main player, P1oNeR-_- moved to reserve
 - June 14, 2025: Corrected XPlosion captain to "Duke_0" with proper FACEIT profile link
 - June 14, 2025: Completed alphabetical team mapping correction for all 39 teams
