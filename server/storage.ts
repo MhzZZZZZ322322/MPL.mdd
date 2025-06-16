@@ -10,11 +10,6 @@ import {
   teamMembers, type TeamMember, type InsertTeamMember
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
-import { db, pool } from "./db";
-import { eq } from "drizzle-orm";
-import connectPg from "connect-pg-simple";
-import createMemoryStore from "memorystore";
-import session from "express-session";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -819,7 +814,6 @@ export class MemStorage implements IStorage {
     // Teams in alphabetical order for better navigation
     const teamsData = [
       { name: "Auratix", logoUrl: "/team-logos/Auratix.png" },
-      { name: "BaitMD", logoUrl: "/team-logos/BaitMD.webp" },
       { name: "Barbosii", logoUrl: "/team-logos/Barbosii.png" },
       { name: "Bloody", logoUrl: "/team-logos/Bloody.png" },
       { name: "Bobb3rs", logoUrl: "/team-logos/Bobb3rs.png" },
@@ -856,10 +850,8 @@ export class MemStorage implements IStorage {
       { name: "VeryGoodTeam", logoUrl: "/team-logos/VeryGoodTeam.png" },
       { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },
       { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },
-      { name: "WinSpirit", logoUrl: "/team-logos/WinSpirit.webp" },
       { name: "X-one", logoUrl: "/team-logos/X-one.png" },
-      { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" },
-      { name: "Xtreme Players", logoUrl: "/team-logos/Xtreme Players.webp" }
+      { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" }
     ];
 
     const createdTeams: Team[] = [];
@@ -887,84 +879,74 @@ export class MemStorage implements IStorage {
       { teamId: 1, nickname: "O2DED", role: "player", position: "reserve" },
       { teamId: 1, nickname: "Cobqkq", role: "player", position: "reserve" },
       
-      // Team 2: BaitMD (NeoK1nG- captain)
-      { teamId: 2, nickname: "NeoK1nG-", role: "captain", position: "main" },
-      { teamId: 2, nickname: "Mehti89", role: "player", position: "main" },
-      { teamId: 2, nickname: "dopezneel-", role: "player", position: "main" },
-      { teamId: 2, nickname: "MaJ0r4Ka", role: "player", position: "main" },
-      { teamId: 2, nickname: "MasChef", role: "player", position: "main" },
-      { teamId: 2, nickname: "batelfield", role: "player", position: "reserve" },
-      { teamId: 2, nickname: "B1LAMAGICA", role: "player", position: "reserve" },
-      { teamId: 2, nickname: "IamNakey", role: "player", position: "reserve" },
+      // Team 2: Barbosii (btate captain)
+      { teamId: 2, nickname: "btate", role: "captain", position: "main" },
+      { teamId: 2, nickname: "Lewis169", role: "player", position: "main" },
+      { teamId: 2, nickname: "cozmann", role: "player", position: "main" },
+      { teamId: 2, nickname: "qwus0", role: "player", position: "main" },
+      { teamId: 2, nickname: "Brf_Bogdan", role: "player", position: "main" },
       
-      // Team 3: Barbosii (btate captain)
-      { teamId: 3, nickname: "btate", role: "captain", position: "main" },
-      { teamId: 3, nickname: "Lewis169", role: "player", position: "main" },
-      { teamId: 3, nickname: "cozmann", role: "player", position: "main" },
-      { teamId: 3, nickname: "qwus0", role: "player", position: "main" },
-      { teamId: 3, nickname: "Brf_Bogdan", role: "player", position: "main" },
+      // Team 3: Bloody (MrPalste captain)
+      { teamId: 3, nickname: "MrPalste", role: "captain", position: "main" },
+      { teamId: 3, nickname: "MaL1", role: "player", position: "main" },
+      { teamId: 3, nickname: "nkwr", role: "player", position: "main" },
+      { teamId: 3, nickname: "sased2096", role: "player", position: "main" },
+      { teamId: 3, nickname: "Nonstoping", role: "player", position: "main" },
+      { teamId: 3, nickname: "dan1k", role: "player", position: "reserve" },
+      { teamId: 3, nickname: "wanderer", role: "player", position: "reserve" },
       
-      // Team 4: Bloody (MrPalste captain)
-      { teamId: 4, nickname: "MrPalste", role: "captain", position: "main" },
-      { teamId: 4, nickname: "MaL1", role: "player", position: "main" },
-      { teamId: 4, nickname: "nkwr", role: "player", position: "main" },
-      { teamId: 4, nickname: "sased2096", role: "player", position: "main" },
-      { teamId: 4, nickname: "Nonstoping", role: "player", position: "main" },
-      { teamId: 4, nickname: "dan1k", role: "player", position: "reserve" },
-      { teamId: 4, nickname: "wanderer", role: "player", position: "reserve" },
+      // Team 4: Bobb3rs (ZanT3X captain)
+      { teamId: 4, nickname: "ZanT3X", role: "captain", position: "main" },
+      { teamId: 4, nickname: "ezforleoha", role: "player", position: "main" },
+      { teamId: 4, nickname: "Z1L4K", role: "player", position: "main" },
+      { teamId: 4, nickname: "Fyralyx", role: "player", position: "main" },
+      { teamId: 4, nickname: "Yakuzaishi", role: "player", position: "main" },
       
-      // Team 5: Bobb3rs (ZanT3X captain)
-      { teamId: 5, nickname: "ZanT3X", role: "captain", position: "main" },
-      { teamId: 5, nickname: "ezforleoha", role: "player", position: "main" },
-      { teamId: 5, nickname: "Z1L4K", role: "player", position: "main" },
-      { teamId: 5, nickname: "Fyralyx", role: "player", position: "main" },
-      { teamId: 5, nickname: "Yakuzaishi", role: "player", position: "main" },
+      // Team 5: BPSP (M1kee captain)
+      { teamId: 5, nickname: "M1kee", role: "captain", position: "main" },
+      { teamId: 5, nickname: "strky_1", role: "player", position: "main" },
+      { teamId: 5, nickname: "-formet-", role: "player", position: "main" },
+      { teamId: 5, nickname: "KureaCYA", role: "player", position: "main" },
+      { teamId: 5, nickname: "Bandajel", role: "player", position: "main" },
       
-      // Team 6: BPSP (M1kee captain)
-      { teamId: 6, nickname: "M1kee", role: "captain", position: "main" },
-      { teamId: 6, nickname: "strky_1", role: "player", position: "main" },
-      { teamId: 6, nickname: "-formet-", role: "player", position: "main" },
-      { teamId: 6, nickname: "KureaCYA", role: "player", position: "main" },
-      { teamId: 6, nickname: "Bandajel", role: "player", position: "main" },
+      // Team 6: Brigada (TonyBossuB captain)
+      { teamId: 6, nickname: "TonyBossuB", role: "captain", position: "main" },
+      { teamId: 6, nickname: "Adm1ralExE", role: "player", position: "main" },
+      { teamId: 6, nickname: "Kolea777", role: "player", position: "main" },
+      { teamId: 6, nickname: "dariusbosu1", role: "player", position: "main" },
+      { teamId: 6, nickname: "StasBosu", role: "player", position: "main" },
       
-      // Team 7: Brigada (TonyBossuB captain)
-      { teamId: 7, nickname: "TonyBossuB", role: "captain", position: "main" },
-      { teamId: 7, nickname: "Adm1ralExE", role: "player", position: "main" },
-      { teamId: 7, nickname: "Kolea777", role: "player", position: "main" },
-      { teamId: 7, nickname: "dariusbosu1", role: "player", position: "main" },
-      { teamId: 7, nickname: "StasBosu", role: "player", position: "main" },
+      // Team 7: Brigada Meteor (yeahmen707 captain)
+      { teamId: 7, nickname: "yeahmen707", role: "captain", position: "main" },
+      { teamId: 7, nickname: "cacioc1", role: "player", position: "main" },
+      { teamId: 7, nickname: "RoyalD1", role: "player", position: "main" },
+      { teamId: 7, nickname: "_4AM", role: "player", position: "main" },
+      { teamId: 7, nickname: "neirhe", role: "player", position: "main" },
+      { teamId: 7, nickname: "Smali_", role: "player", position: "reserve" },
       
-      // Team 8: Brigada Meteor (yeahmen707 captain)
-      { teamId: 8, nickname: "yeahmen707", role: "captain", position: "main" },
-      { teamId: 8, nickname: "cacioc1", role: "player", position: "main" },
-      { teamId: 8, nickname: "RoyalD1", role: "player", position: "main" },
-      { teamId: 8, nickname: "_4AM", role: "player", position: "main" },
-      { teamId: 8, nickname: "neirhe", role: "player", position: "main" },
-      { teamId: 8, nickname: "Smali_", role: "player", position: "reserve" },
+      // Team 8: Cadian Team (cadiaN captain)
+      { teamId: 8, nickname: "cadiaN", role: "captain", position: "main" },
+      { teamId: 8, nickname: "5h1zzu", role: "player", position: "main" },
+      { teamId: 8, nickname: "machoman", role: "player", position: "main" },
+      { teamId: 8, nickname: "kiyyyo-_-", role: "player", position: "main" },
+      { teamId: 8, nickname: "Enkiee", role: "player", position: "main" },
       
-      // Team 9: Cadian Team (cadiaN captain)
-      { teamId: 9, nickname: "cadiaN", role: "captain", position: "main" },
-      { teamId: 9, nickname: "5h1zzu", role: "player", position: "main" },
-      { teamId: 9, nickname: "machoman", role: "player", position: "main" },
-      { teamId: 9, nickname: "kiyyyo-_-", role: "player", position: "main" },
-      { teamId: 9, nickname: "Enkiee", role: "player", position: "main" },
+      // Team 9: Ciocana Esports (CoMMaNDeR_MD captain)
+      { teamId: 9, nickname: "CoMMaNDeR_MD", role: "captain", position: "main" },
+      { teamId: 9, nickname: "f1ke_soft", role: "player", position: "main" },
+      { teamId: 9, nickname: "FraGGvesta9", role: "player", position: "main" },
+      { teamId: 9, nickname: "HamsteR_TR", role: "player", position: "main" },
+      { teamId: 9, nickname: "tr1cketw", role: "player", position: "main" },
+      { teamId: 9, nickname: "xxx13", role: "player", position: "main" },
+      { teamId: 9, nickname: "Shutting2", role: "player", position: "reserve" },
       
-      // Team 10: Ciocana Esports (CoMMaNDeR_MD captain)
-      { teamId: 10, nickname: "CoMMaNDeR_MD", role: "captain", position: "main" },
-      { teamId: 10, nickname: "f1ke_soft", role: "player", position: "main" },
-      { teamId: 10, nickname: "FraGGvesta9", role: "player", position: "main" },
-      { teamId: 10, nickname: "HamsteR_TR", role: "player", position: "main" },
-      { teamId: 10, nickname: "tr1cketw", role: "player", position: "main" },
-      { teamId: 10, nickname: "xxx13", role: "player", position: "main" },
-      { teamId: 10, nickname: "Shutting2", role: "player", position: "reserve" },
-      
-      // Team 11: Ciocălău Team (xen0 captain)
-      { teamId: 11, nickname: "xen0", role: "captain", position: "main" },
-      { teamId: 11, nickname: "Esantorix", role: "player", position: "main" },
-      { teamId: 11, nickname: "kryz3w", role: "player", position: "main" },
-      { teamId: 11, nickname: "SF-eMakzie", role: "player", position: "main" },
-      { teamId: 11, nickname: "Bama_Booy", role: "player", position: "main" },
-      { teamId: 11, nickname: "Kirspiden", role: "player", position: "reserve" },
+      // Team 10: Ciocălău Team (xen0 captain)
+      { teamId: 10, nickname: "xen0", role: "captain", position: "main" },
+      { teamId: 10, nickname: "Esantorix", role: "player", position: "main" },
+      { teamId: 10, nickname: "kryz3w", role: "player", position: "main" },
+      { teamId: 10, nickname: "SF-eMakzie", role: "player", position: "main" },
+      { teamId: 10, nickname: "Bama_Booy", role: "player", position: "main" },
+      { teamId: 10, nickname: "Kirspiden", role: "player", position: "reserve" },
       { teamId: 10, nickname: "Headcleaner", role: "player", position: "reserve" },
       
       // Team 11: Cipok (KROUL1YSFORD captain)
@@ -1196,35 +1178,14 @@ export class MemStorage implements IStorage {
       { teamId: 38, nickname: "SolevoI_Voi", role: "player", position: "main" },
       { teamId: 38, nickname: "tronick999", role: "player", position: "main" },
       
-      // Team 39: WinSpirit (LightStormyx captain)
-      { teamId: 39, nickname: "LightStormyx", role: "captain", position: "main" },
-      { teamId: 39, nickname: "WRacer420", role: "player", position: "main" },
-      { teamId: 39, nickname: "Dany0443", role: "player", position: "main" },
-      { teamId: 39, nickname: "Free_man1337", role: "player", position: "main" },
-      { teamId: 39, nickname: "stass4", role: "player", position: "main" },
-      
-      // Team 40: X-one (-OPIUMVXQ- captain)
-      { teamId: 40, nickname: "-OPIUMVXQ-", role: "captain", position: "main" },
-      { teamId: 40, nickname: "yar1tyss", role: "player", position: "main" },
-      { teamId: 40, nickname: "g0speLbtw", role: "player", position: "main" },
-      { teamId: 40, nickname: "SolevoI_Voi", role: "player", position: "main" },
-      { teamId: 40, nickname: "tronick999", role: "player", position: "main" },
-      
-      // Team 41: XPlosion (Duke_0 captain)
-      { teamId: 41, nickname: "Duke_0", role: "captain", position: "main" },
-      { teamId: 41, nickname: "Gr1MM-", role: "player", position: "main" },
-      { teamId: 41, nickname: "BENGOSO", role: "player", position: "main" },
-      { teamId: 41, nickname: "RayeN-", role: "player", position: "main" },
-      { teamId: 41, nickname: "Gherman-", role: "player", position: "main" },
-      { teamId: 41, nickname: "P1oNeR-_-", role: "player", position: "reserve" },
-      { teamId: 41, nickname: "acierdnay", role: "player", position: "reserve" },
-      
-      // Team 42: Xtreme Players (w0lf3nstein captain)
-      { teamId: 42, nickname: "w0lf3nstein", role: "captain", position: "main" },
-      { teamId: 42, nickname: "kaeden-", role: "player", position: "main" },
-      { teamId: 42, nickname: "1L0e_", role: "player", position: "main" },
-      { teamId: 42, nickname: "enthusiastul1", role: "player", position: "main" },
-      { teamId: 42, nickname: "daf10-", role: "player", position: "main" }
+      // Team 39: XPlosion (Duke_0 captain)
+      { teamId: 39, nickname: "Duke_0", role: "captain", position: "main" },
+      { teamId: 39, nickname: "Gr1MM-", role: "player", position: "main" },
+      { teamId: 39, nickname: "BENGOSO", role: "player", position: "main" },
+      { teamId: 39, nickname: "RayeN-", role: "player", position: "main" },
+      { teamId: 39, nickname: "Gherman-", role: "player", position: "main" },
+      { teamId: 39, nickname: "P1oNeR-_-", role: "player", position: "reserve" },
+      { teamId: 39, nickname: "acierdnay", role: "player", position: "reserve" }
     ];
 
     finalTeamMembers.forEach(member => {
@@ -1402,267 +1363,4 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Database Storage Implementation with PostgreSQL
-export class DatabaseStorage implements IStorage {
-  sessionStore: any;
-
-  constructor() {
-    const MemoryStore = createMemoryStore(session);
-    this.sessionStore = new MemoryStore({
-      checkPeriod: 86400000,
-    });
-  }
-
-  // User methods
-  async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
-    return user;
-  }
-
-  // Team methods
-  async getTeams(tournament?: string): Promise<Team[]> {
-    if (tournament) {
-      return await db.select().from(teams).where(eq(teams.tournament, tournament));
-    }
-    return await db.select().from(teams);
-  }
-
-  async getTeam(id: number): Promise<Team | undefined> {
-    const [team] = await db.select().from(teams).where(eq(teams.id, id));
-    return team || undefined;
-  }
-
-  async createTeam(team: InsertTeam): Promise<Team> {
-    const [newTeam] = await db
-      .insert(teams)
-      .values(team)
-      .returning();
-    return newTeam;
-  }
-
-  async updateTeam(id: number, team: Partial<InsertTeam>): Promise<Team> {
-    const [updatedTeam] = await db
-      .update(teams)
-      .set(team)
-      .where(eq(teams.id, id))
-      .returning();
-    return updatedTeam;
-  }
-
-  async deleteTeam(id: number): Promise<void> {
-    await db.delete(teams).where(eq(teams.id, id));
-  }
-
-  // Team Member methods
-  async getTeamMembers(teamId: number): Promise<TeamMember[]> {
-    return await db.select().from(teamMembers)
-      .where(eq(teamMembers.teamId, teamId))
-      .orderBy(
-        // Căpitanul primul
-        sql`CASE WHEN ${teamMembers.role} = 'captain' THEN 0 ELSE 1 END`,
-        // Apoi jucătorii main înainte de reserve
-        sql`CASE WHEN ${teamMembers.position} = 'main' THEN 0 ELSE 1 END`,
-        // În final sortare alfabetică după nickname
-        teamMembers.nickname
-      );
-  }
-
-  async createTeamMember(member: InsertTeamMember): Promise<TeamMember> {
-    const [newMember] = await db
-      .insert(teamMembers)
-      .values(member)
-      .returning();
-    return newMember;
-  }
-
-  async updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember> {
-    const [updatedMember] = await db
-      .update(teamMembers)
-      .set(member)
-      .where(eq(teamMembers.id, id))
-      .returning();
-    return updatedMember;
-  }
-
-  async deleteTeamMember(id: number): Promise<void> {
-    await db.delete(teamMembers).where(eq(teamMembers.id, id));
-  }
-
-  // Placeholder methods for other entities (keeping existing MemStorage logic)
-  async getEvents(): Promise<Event[]> {
-    return [];
-  }
-
-  async getEvent(id: number): Promise<Event | undefined> {
-    return undefined;
-  }
-
-  async createEvent(event: InsertEvent): Promise<Event> {
-    throw new Error("Not implemented");
-  }
-
-  async updateEvent(id: number, event: Partial<InsertEvent>): Promise<Event> {
-    throw new Error("Not implemented");
-  }
-
-  async deleteEvent(id: number): Promise<void> {
-    throw new Error("Not implemented");
-  }
-
-  async getPlayers(game?: string): Promise<Player[]> {
-    return [];
-  }
-
-  async getPlayer(id: number): Promise<Player | undefined> {
-    return undefined;
-  }
-
-  async createPlayer(player: InsertPlayer): Promise<Player> {
-    throw new Error("Not implemented");
-  }
-
-  async updatePlayer(id: number, player: Partial<InsertPlayer>): Promise<Player> {
-    throw new Error("Not implemented");
-  }
-
-  async deletePlayer(id: number): Promise<void> {
-    throw new Error("Not implemented");
-  }
-
-  async getCsServers(): Promise<CsServer[]> {
-    return [
-      {
-        id: 1,
-        name: "Server CS2 Moldova",
-        ip: "37.233.50.55",
-        port: 27015,
-        location: "Moldova",
-        mode: "Retake 1",
-        status: true,
-        players: 0,
-        maxPlayers: 16,
-        likes: 0
-      },
-      {
-        id: 2,
-        name: "Server CS2 Moldova",
-        ip: "37.233.50.55",
-        port: 27016,
-        location: "Moldova",
-        mode: "Retake 2",
-        status: true,
-        players: 0,
-        maxPlayers: 16,
-        likes: 0
-      },
-      {
-        id: 3,
-        name: "Server CS2 Moldova",
-        ip: "37.233.50.55",
-        port: 27017,
-        location: "Moldova",
-        mode: "Deathmatch",
-        status: true,
-        players: 0,
-        maxPlayers: 16,
-        likes: 0
-      }
-    ];
-  }
-
-  async getCsServer(id: number): Promise<CsServer | undefined> {
-    const servers = await this.getCsServers();
-    return servers.find(server => server.id === id);
-  }
-
-  async updateCsServerLikes(id: number): Promise<CsServer> {
-    throw new Error("Not implemented");
-  }
-
-  async updateCsServerStatus(id: number, status: boolean, players: number): Promise<CsServer> {
-    throw new Error("Not implemented");
-  }
-
-  async createContactSubmission(submission: InsertContact): Promise<Contact> {
-    throw new Error("Not implemented");
-  }
-
-  async getContactSubmissions(): Promise<Contact[]> {
-    return [];
-  }
-
-  async getFaqs(): Promise<Faq[]> {
-    return [];
-  }
-
-  async getFaq(id: number): Promise<Faq | undefined> {
-    return undefined;
-  }
-
-  async createFaq(faq: InsertFaq): Promise<Faq> {
-    throw new Error("Not implemented");
-  }
-
-  async updateFaq(id: number, faq: Partial<InsertFaq>): Promise<Faq> {
-    throw new Error("Not implemented");
-  }
-
-  async deleteFaq(id: number): Promise<void> {
-    throw new Error("Not implemented");
-  }
-
-  async getSiteContents(): Promise<SiteContent[]> {
-    return [];
-  }
-
-  async getSiteContentByKey(key: string): Promise<SiteContent | undefined> {
-    return undefined;
-  }
-
-  async updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent> {
-    throw new Error("Not implemented");
-  }
-
-  async getSeoSettings(): Promise<SeoSettings[]> {
-    return [];
-  }
-
-  async getSeoSettingByUrl(pageUrl: string): Promise<SeoSettings | undefined> {
-    return undefined;
-  }
-
-  async createSeoSetting(seo: InsertSeo): Promise<SeoSettings> {
-    throw new Error("Not implemented");
-  }
-
-  async updateSeoSetting(id: number, seo: Partial<InsertSeo>): Promise<SeoSettings> {
-    throw new Error("Not implemented");
-  }
-
-  async getAnalyticsSettings(): Promise<AnalyticsSettings | undefined> {
-    return undefined;
-  }
-
-  async updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings> {
-    throw new Error("Not implemented");
-  }
-
-  async createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings> {
-    throw new Error("Not implemented");
-  }
-}
-
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
