@@ -814,7 +814,6 @@ export class MemStorage implements IStorage {
     // Teams in alphabetical order for better navigation
     const teamsData = [
       { name: "Auratix", logoUrl: "/team-logos/Auratix.png" },
-      { name: "BaitMD", logoUrl: "/team-logos/BaitMD.webp" },
       { name: "Barbosii", logoUrl: "/team-logos/Barbosii.png" },
       { name: "Bloody", logoUrl: "/team-logos/Bloody.png" },
       { name: "Bobb3rs", logoUrl: "/team-logos/Bobb3rs.png" },
@@ -851,10 +850,11 @@ export class MemStorage implements IStorage {
       { name: "VeryGoodTeam", logoUrl: "/team-logos/VeryGoodTeam.png" },
       { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },
       { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },
-      { name: "WinSpirit", logoUrl: "/team-logos/WinSpirit.webp" },
       { name: "X-one", logoUrl: "/team-logos/X-one.png" },
       { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" },
-      { name: "Xtreme Players", logoUrl: "/team-logos/Xtreme Players.webp" }
+      { name: "WinSpirit", logoUrl: "/team-logos/WinSpirit.webp" },
+      { name: "Xtreme Players", logoUrl: "/team-logos/Xtreme Players.webp" },
+      { name: "BaitMD", logoUrl: "/team-logos/BaitMD.webp" }
     ];
 
     const createdTeams: Team[] = [];
@@ -882,22 +882,12 @@ export class MemStorage implements IStorage {
       { teamId: 1, nickname: "O2DED", role: "player", position: "reserve" },
       { teamId: 1, nickname: "Cobqkq", role: "player", position: "reserve" },
       
-      // Team 2: BaitMD (NeoK1nG- captain)
-      { teamId: 2, nickname: "NeoK1nG-", role: "captain", position: "main" },
-      { teamId: 2, nickname: "Mehti89", role: "player", position: "main" },
-      { teamId: 2, nickname: "dopezneel-", role: "player", position: "main" },
-      { teamId: 2, nickname: "MaJ0r4Ka", role: "player", position: "main" },
-      { teamId: 2, nickname: "MasChef", role: "player", position: "main" },
-      { teamId: 2, nickname: "batelfield", role: "player", position: "reserve" },
-      { teamId: 2, nickname: "B1LAMAGICA", role: "player", position: "reserve" },
-      { teamId: 2, nickname: "IamNakey", role: "player", position: "reserve" },
-      
-      // Team 3: Barbosii (btate captain)
-      { teamId: 3, nickname: "btate", role: "captain", position: "main" },
-      { teamId: 3, nickname: "Lewis169", role: "player", position: "main" },
-      { teamId: 3, nickname: "cozmann", role: "player", position: "main" },
-      { teamId: 3, nickname: "qwus0", role: "player", position: "main" },
-      { teamId: 3, nickname: "Brf_Bogdan", role: "player", position: "main" },
+      // Team 2: Barbosii (btate captain)
+      { teamId: 2, nickname: "btate", role: "captain", position: "main" },
+      { teamId: 2, nickname: "Lewis169", role: "player", position: "main" },
+      { teamId: 2, nickname: "cozmann", role: "player", position: "main" },
+      { teamId: 2, nickname: "qwus0", role: "player", position: "main" },
+      { teamId: 2, nickname: "Brf_Bogdan", role: "player", position: "main" },
       
       // Team 3: Bloody (MrPalste captain)
       { teamId: 3, nickname: "MrPalste", role: "captain", position: "main" },
@@ -915,34 +905,34 @@ export class MemStorage implements IStorage {
       { teamId: 4, nickname: "Fyralyx", role: "player", position: "main" },
       { teamId: 4, nickname: "Yakuzaishi", role: "player", position: "main" },
       
-      // Team 5: BPSP (M1kee captain)
-      { teamId: 5, nickname: "M1kee", role: "captain", position: "main" },
-      { teamId: 5, nickname: "strky_1", role: "player", position: "main" },
-      { teamId: 5, nickname: "-formet-", role: "player", position: "main" },
-      { teamId: 5, nickname: "KureaCYA", role: "player", position: "main" },
-      { teamId: 5, nickname: "Bandajel", role: "player", position: "main" },
+      // Team 6: BPSP (M1kee captain)
+      { teamId: 6, nickname: "M1kee", role: "captain", position: "main" },
+      { teamId: 6, nickname: "strky_1", role: "player", position: "main" },
+      { teamId: 6, nickname: "-formet-", role: "player", position: "main" },
+      { teamId: 6, nickname: "KureaCYA", role: "player", position: "main" },
+      { teamId: 6, nickname: "Bandajel", role: "player", position: "main" },
       
-      // Team 6: Brigada (TonyBossuB captain)
-      { teamId: 6, nickname: "TonyBossuB", role: "captain", position: "main" },
-      { teamId: 6, nickname: "Adm1ralExE", role: "player", position: "main" },
-      { teamId: 6, nickname: "Kolea777", role: "player", position: "main" },
-      { teamId: 6, nickname: "dariusbosu1", role: "player", position: "main" },
-      { teamId: 6, nickname: "StasBosu", role: "player", position: "main" },
+      // Team 7: Brigada (TonyBossuB captain)
+      { teamId: 7, nickname: "TonyBossuB", role: "captain", position: "main" },
+      { teamId: 7, nickname: "Adm1ralExE", role: "player", position: "main" },
+      { teamId: 7, nickname: "Kolea777", role: "player", position: "main" },
+      { teamId: 7, nickname: "dariusbosu1", role: "player", position: "main" },
+      { teamId: 7, nickname: "StasBosu", role: "player", position: "main" },
       
-      // Team 7: Brigada Meteor (yeahmen707 captain)
-      { teamId: 7, nickname: "yeahmen707", role: "captain", position: "main" },
-      { teamId: 7, nickname: "cacioc1", role: "player", position: "main" },
-      { teamId: 7, nickname: "RoyalD1", role: "player", position: "main" },
-      { teamId: 7, nickname: "_4AM", role: "player", position: "main" },
-      { teamId: 7, nickname: "neirhe", role: "player", position: "main" },
-      { teamId: 7, nickname: "Smali_", role: "player", position: "reserve" },
+      // Team 8: Brigada Meteor (yeahmen707 captain)
+      { teamId: 8, nickname: "yeahmen707", role: "captain", position: "main" },
+      { teamId: 8, nickname: "cacioc1", role: "player", position: "main" },
+      { teamId: 8, nickname: "RoyalD1", role: "player", position: "main" },
+      { teamId: 8, nickname: "_4AM", role: "player", position: "main" },
+      { teamId: 8, nickname: "neirhe", role: "player", position: "main" },
+      { teamId: 8, nickname: "Smali_", role: "player", position: "reserve" },
       
-      // Team 8: Cadian Team (cadiaN captain)
-      { teamId: 8, nickname: "cadiaN", role: "captain", position: "main" },
-      { teamId: 8, nickname: "5h1zzu", role: "player", position: "main" },
-      { teamId: 8, nickname: "machoman", role: "player", position: "main" },
-      { teamId: 8, nickname: "kiyyyo-_-", role: "player", position: "main" },
-      { teamId: 8, nickname: "Enkiee", role: "player", position: "main" },
+      // Team 9: Cadian Team (cadiaN captain)
+      { teamId: 9, nickname: "cadiaN", role: "captain", position: "main" },
+      { teamId: 9, nickname: "5h1zzu", role: "player", position: "main" },
+      { teamId: 9, nickname: "machoman", role: "player", position: "main" },
+      { teamId: 9, nickname: "kiyyyo-_-", role: "player", position: "main" },
+      { teamId: 9, nickname: "Enkiee", role: "player", position: "main" },
       
       // Team 9: Ciocana Esports (CoMMaNDeR_MD captain)
       { teamId: 9, nickname: "CoMMaNDeR_MD", role: "captain", position: "main" },
@@ -1198,7 +1188,31 @@ export class MemStorage implements IStorage {
       { teamId: 39, nickname: "RayeN-", role: "player", position: "main" },
       { teamId: 39, nickname: "Gherman-", role: "player", position: "main" },
       { teamId: 39, nickname: "P1oNeR-_-", role: "player", position: "reserve" },
-      { teamId: 39, nickname: "acierdnay", role: "player", position: "reserve" }
+      { teamId: 39, nickname: "acierdnay", role: "player", position: "reserve" },
+      
+      // Team 40: WinSpirit (LightStormyx captain)
+      { teamId: 40, nickname: "LightStormyx", role: "captain", position: "main" },
+      { teamId: 40, nickname: "WRacer420", role: "player", position: "main" },
+      { teamId: 40, nickname: "Dany0443", role: "player", position: "main" },
+      { teamId: 40, nickname: "Free_man1337", role: "player", position: "main" },
+      { teamId: 40, nickname: "stass4", role: "player", position: "main" },
+      
+      // Team 41: Xtreme Players (w0lf3nstein captain)
+      { teamId: 41, nickname: "w0lf3nstein", role: "captain", position: "main" },
+      { teamId: 41, nickname: "kaeden-", role: "player", position: "main" },
+      { teamId: 41, nickname: "1L0e_", role: "player", position: "main" },
+      { teamId: 41, nickname: "enthusiastul1", role: "player", position: "main" },
+      { teamId: 41, nickname: "daf10-", role: "player", position: "main" },
+      
+      // Team 42: BaitMD (NeoK1nG- captain)
+      { teamId: 42, nickname: "NeoK1nG-", role: "captain", position: "main" },
+      { teamId: 42, nickname: "Mehti89", role: "player", position: "main" },
+      { teamId: 42, nickname: "dopezneel-", role: "player", position: "main" },
+      { teamId: 42, nickname: "MaJ0r4Ka", role: "player", position: "main" },
+      { teamId: 42, nickname: "MasChef", role: "player", position: "main" },
+      { teamId: 42, nickname: "batelfield", role: "player", position: "reserve" },
+      { teamId: 42, nickname: "B1LAMAGICA", role: "player", position: "reserve" },
+      { teamId: 42, nickname: "IamNakey", role: "player", position: "reserve" }
     ];
 
     finalTeamMembers.forEach(member => {
