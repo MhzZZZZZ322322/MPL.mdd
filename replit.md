@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 16, 2025: Updated Japon team roster with 9 new authentic members (CCLey captain, 5 main players, 3 reserves)
 - June 16, 2025: Updated KostiujeniKlinik team roster with 6 new authentic members (PhXGON captain, 4 main players, 1 reserve)
 - June 16, 2025: Added 4 new teams to database - Win Spirit, Xtreme Players, Saponel, BaitMD (now 43 teams total)
 - June 16, 2025: Updated database to 262 total members with authentic tournament data
