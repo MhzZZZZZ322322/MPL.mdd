@@ -33,7 +33,7 @@ const HatorCSLeague = () => {
   };
 
   // Fetch teams for this tournament
-  const { data: teams = [], isLoading: teamsLoading } = useQuery<Team[]>({
+  const { data: rawTeams = [], isLoading: teamsLoading } = useQuery<Team[]>({
     queryKey: ["/api/teams", "hator-cs-league"],
     queryFn: async () => {
       const response = await fetch("/api/teams?tournament=hator-cs-league");
@@ -42,8 +42,11 @@ const HatorCSLeague = () => {
     }
   });
 
+  // Sort teams alphabetically by name
+  const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
+
   // Fetch members for selected team
-  const { data: teamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
+  const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
     queryKey: ["/api/teams", selectedTeam?.id, "members"],
     queryFn: async () => {
       if (!selectedTeam) return [];
@@ -52,6 +55,15 @@ const HatorCSLeague = () => {
       return response.json();
     },
     enabled: !!selectedTeam
+  });
+
+  // Sort team members: captain first, then by position (main before reserve), then alphabetically
+  const teamMembers = rawTeamMembers.sort((a, b) => {
+    if (a.role === 'captain' && b.role !== 'captain') return -1;
+    if (b.role === 'captain' && a.role !== 'captain') return 1;
+    if (a.position === 'main' && b.position === 'reserve') return -1;
+    if (b.position === 'main' && a.position === 'reserve') return 1;
+    return a.nickname.localeCompare(b.nickname);
   });
   return (
     <>
