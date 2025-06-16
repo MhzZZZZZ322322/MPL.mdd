@@ -1,0 +1,176 @@
+RAPORT FINAL - ECHIPE ȘI MEMBRI AUTENTICI TURNEU HATOR CS2 LEAGUE MOLDOVA
+Data restaurării: 16 Iunie 2025, ora 08:52
+Sursa: team-members-data.js (datele corecte de ieri la ora 23:00)
+Total echipe: 39 active
+Total membri: 202
+
+====================================================================
+
+ECHIPA 1: Auratix
+Căpitan: Tankkillerr
+Jucători main: ash1kkk, TrownZy, 4nbdfdfdf, l1nx
+Jucători reserve: O2DED, Cobqkq
+
+ECHIPA 2: BaitMD
+Căpitan: Mkee
+Jucători main: strky_, -formet-, KureaCYA, Bandajel
+
+ECHIPA 3: Barbosii
+Căpitan: btate
+Jucători main: Lewis, cozmann, qwus0, Brf_Bogdan
+
+ECHIPA 4: Bloody
+Căpitan: MrPalste
+Jucători main: MaL1, nkwr, sased2096, Nonstoping
+Jucători reserve: dan1k, wanderer
+
+ECHIPA 5: Bobb3rs
+Căpitan: ZanTX
+Jucători main: ezforleoha, ZLK, Fyralyx, Yakuzaishi
+
+ECHIPA 6: BPSP
+Căpitan: yeahmen0
+Jucători main: cacioc, RoyalD, _AM, neirhe
+Jucători reserve: Smali_
+
+ECHIPA 7: Brigada
+Căpitan: TonyBossuB
+Jucători main: AdmralExE, Kolea, dariusbosu, StasBosu
+
+ECHIPA 8: Brigada Meteor
+Căpitan: cadiaN
+Jucători main: 5h1zzu, machoman, kiyyyo-_-, Enkiee
+
+ECHIPA 9: Cadian Team
+Căpitan: CoMMaNDeR_MD
+Jucători main: f1ke_soft, FraGGvesta, HamsteR_TR, tr1cketw
+Jucători reserve: xxx, Shutting
+
+ECHIPA 10: Ciocana Esports
+Căpitan: xen0
+Jucători main: Esantorix, kryzw, w1ks, fartune
+
+ECHIPA 11: Ciocălău Team
+Căpitan: gufyX
+Jucători main: Serhiok1, Luk4x, drazzer, TenZ
+Jucători reserve: alexa190y
+
+ECHIPA 12: Cipok
+Căpitan: CADE_
+Jucători main: BastionBG, Vali_rux_, OrangeFlash, DedInside_
+
+ECHIPA 13: Coli
+Căpitan: greyto
+Jucători main: danducu, darko, faKe1, peeeew
+Jucători reserve: flockyy
+
+ECHIPA 14: Crasat
+Căpitan: liveez
+Jucători main: elecTRO, eZ4ZLYY, Sandu, Sh4dY
+Jucători reserve: Redfox
+
+ECHIPA 15: Cucumba
+Căpitan: albinutza22
+Jucători main: ezmoneywins, fkneko, kap1tosha, neaNN
+
+ECHIPA 16: Flux Line
+Căpitan: DRACU23
+Jucători main: d1sconnected, Sliinky, tedi9, Darius_MD
+
+ECHIPA 17: Golden Five
+Căpitan: beeeear1337
+Jucători main: BeTTer_ThanU, Shizom, Lol_mxn, ERASE_
+
+ECHIPA 18: Into the Beach
+Căpitan: TomasZ
+Jucători main: Ixolite, KeM3Ra, V1Kki, CristianSir_
+
+ECHIPA 20: K9 Team
+Căpitan: StiLLin
+Jucători main: SECU, tavi369, Haiduki, aKOLYT
+Jucători reserve: TheBeasT
+
+ECHIPA 21: Killuminaty
+Căpitan: Th3c0br4
+Jucători main: b1indu, cUbel, nyk0Lash, 4uKers
+
+ECHIPA 22: KostiujeniKlinik
+Căpitan: sTyX
+Jucători main: fAtaLGod, xXElitaXx, Bogdin_05, DarkD
+
+ECHIPA 23: La Passion
+Căpitan: toasT
+Jucători main: ICEBEAER, a_simple_loser, Aky007, Sh1pper
+
+ECHIPA 24: Lean Vision
+Căpitan: NICKforb1
+Jucători main: stalkah, s1lly, vd3, L1NKin
+
+ECHIPA 25: Legalize
+Căpitan: Triksterr
+Jucători main: AresFPS, Maxxer, zR1, RAGE
+
+ECHIPA 26: LitEnergy ✓ CORECT
+Căpitan: Ult1mate
+Jucători main: Dextro, DeTox, AxelDiamond, GGS
+
+ECHIPA 27: LYSQ
+Căpitan: SirMiky
+Jucători main: l1ttlem0nk3y, rk9, Keyl1, HiddeR
+
+ECHIPA 28: Muligambia
+Căpitan: s1lv3r
+Jucători main: mok4, jqke, NoNameE3, MrB4nK
+
+ECHIPA 29: Neo Egoist League
+Căpitan: crni
+Jucători main: KING15, Ady, Dan1eL, S1mpleOfMoldova
+
+ECHIPA 30: Onyx
+Căpitan: BoSs7
+Jucători main: Sandr100, DanielS, L0nqu, NeX7SCAM
+
+ECHIPA 31: RCBVR
+Căpitan: alexPROHAha
+Jucători main: aidoka, ixchel0, unKn0wn_, Shurikenn
+
+ECHIPA 33: Rumina
+Căpitan: BURAZERU
+Jucători main: KZ_gigi_MD, stihl, temakaZZZ, ZOV
+
+ECHIPA 34: Shashlik
+Căpitan: patan1
+Jucători main: -D4Nt3Z, NoobOnRadar, TheCerebro, MaxxBT
+Jucători reserve: danchicago, buGaa1
+
+ECHIPA 35: Trigger
+Căpitan: DrMadness
+Jucători main: hex4l0ve, Bronxxxxx, ENKOhUN773R_, dnx666
+Jucători reserve: Flash, YTProst, gabriel_03, Mitowily
+
+ECHIPA 36: VeryGoodTeam
+Căpitan: RdTm_7
+Jucători main: AleX_RO, S1m1k, Nxce, EnzoTCS
+
+ECHIPA 37: WenDeagle
+Căpitan: enzo
+Jucători main: UwU_, Vint, eX, aRtyyy
+
+ECHIPA 38: Wenzo
+Căpitan: Raizen_
+Jucători main: DanieLL47, Maty, NVK_laMa, GaMeR
+
+ECHIPA 39: WinSpirit
+Căpitan: Mihai
+Jucători main: kEo, Andry, AJzzze, LexusLx570
+
+====================================================================
+
+OBSERVAȚII:
+- Datele au fost restaurate din fișierul team-members-data.js
+- LitEnergy afișează acum corect căpitanul Ult1mate (nu -ExTaZzy-)
+- Auratix afișează corect căpitanul Tankkillerr
+- Lipsesc echipele 19, 32, 40, 41, 42 din fișierul original
+- Toate datele sunt autentice din turneu, nu simulate
+
+STARE: RESTAURAT CU SUCCES - DATELE CORECTE DE IERI LA ORA 23:00
