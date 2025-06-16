@@ -116,6 +116,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 16, 2025: Added 4 new teams to database - Win Spirit, Xtreme Players, Saponel, BaitMD (now 43 teams total)
+- June 16, 2025: Updated database to 262 total members with authentic tournament data
 - June 16, 2025: Created PostgreSQL database with all 39 teams and 239 members exactly as shown on site
 - June 16, 2025: Migrated from MemStorage to DatabaseStorage for teams and team members
 - June 16, 2025: All team data now persisted in PostgreSQL with authentic logos and FACEIT profiles
