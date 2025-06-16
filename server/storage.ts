@@ -905,34 +905,34 @@ export class MemStorage implements IStorage {
       { teamId: 4, nickname: "Fyralyx", role: "player", position: "main" },
       { teamId: 4, nickname: "Yakuzaishi", role: "player", position: "main" },
       
-      // Team 6: BPSP (M1kee captain)
-      { teamId: 6, nickname: "M1kee", role: "captain", position: "main" },
-      { teamId: 6, nickname: "strky_1", role: "player", position: "main" },
-      { teamId: 6, nickname: "-formet-", role: "player", position: "main" },
-      { teamId: 6, nickname: "KureaCYA", role: "player", position: "main" },
-      { teamId: 6, nickname: "Bandajel", role: "player", position: "main" },
+      // Team 5: BPSP (M1kee captain)
+      { teamId: 5, nickname: "M1kee", role: "captain", position: "main" },
+      { teamId: 5, nickname: "strky_1", role: "player", position: "main" },
+      { teamId: 5, nickname: "-formet-", role: "player", position: "main" },
+      { teamId: 5, nickname: "KureaCYA", role: "player", position: "main" },
+      { teamId: 5, nickname: "Bandajel", role: "player", position: "main" },
       
-      // Team 7: Brigada (TonyBossuB captain)
-      { teamId: 7, nickname: "TonyBossuB", role: "captain", position: "main" },
-      { teamId: 7, nickname: "Adm1ralExE", role: "player", position: "main" },
-      { teamId: 7, nickname: "Kolea777", role: "player", position: "main" },
-      { teamId: 7, nickname: "dariusbosu1", role: "player", position: "main" },
-      { teamId: 7, nickname: "StasBosu", role: "player", position: "main" },
+      // Team 6: Brigada (TonyBossuB captain)
+      { teamId: 6, nickname: "TonyBossuB", role: "captain", position: "main" },
+      { teamId: 6, nickname: "Adm1ralExE", role: "player", position: "main" },
+      { teamId: 6, nickname: "Kolea777", role: "player", position: "main" },
+      { teamId: 6, nickname: "dariusbosu1", role: "player", position: "main" },
+      { teamId: 6, nickname: "StasBosu", role: "player", position: "main" },
       
-      // Team 8: Brigada Meteor (yeahmen707 captain)
-      { teamId: 8, nickname: "yeahmen707", role: "captain", position: "main" },
-      { teamId: 8, nickname: "cacioc1", role: "player", position: "main" },
-      { teamId: 8, nickname: "RoyalD1", role: "player", position: "main" },
-      { teamId: 8, nickname: "_4AM", role: "player", position: "main" },
-      { teamId: 8, nickname: "neirhe", role: "player", position: "main" },
-      { teamId: 8, nickname: "Smali_", role: "player", position: "reserve" },
+      // Team 7: Brigada Meteor (yeahmen707 captain)
+      { teamId: 7, nickname: "yeahmen707", role: "captain", position: "main" },
+      { teamId: 7, nickname: "cacioc1", role: "player", position: "main" },
+      { teamId: 7, nickname: "RoyalD1", role: "player", position: "main" },
+      { teamId: 7, nickname: "_4AM", role: "player", position: "main" },
+      { teamId: 7, nickname: "neirhe", role: "player", position: "main" },
+      { teamId: 7, nickname: "Smali_", role: "player", position: "reserve" },
       
-      // Team 9: Cadian Team (cadiaN captain)
-      { teamId: 9, nickname: "cadiaN", role: "captain", position: "main" },
-      { teamId: 9, nickname: "5h1zzu", role: "player", position: "main" },
-      { teamId: 9, nickname: "machoman", role: "player", position: "main" },
-      { teamId: 9, nickname: "kiyyyo-_-", role: "player", position: "main" },
-      { teamId: 9, nickname: "Enkiee", role: "player", position: "main" },
+      // Team 8: Cadian Team (cadiaN captain)
+      { teamId: 8, nickname: "cadiaN", role: "captain", position: "main" },
+      { teamId: 8, nickname: "5h1zzu", role: "player", position: "main" },
+      { teamId: 8, nickname: "machoman", role: "player", position: "main" },
+      { teamId: 8, nickname: "kiyyyo-_-", role: "player", position: "main" },
+      { teamId: 8, nickname: "Enkiee", role: "player", position: "main" },
       
       // Team 9: Ciocana Esports (CoMMaNDeR_MD captain)
       { teamId: 9, nickname: "CoMMaNDeR_MD", role: "captain", position: "main" },
