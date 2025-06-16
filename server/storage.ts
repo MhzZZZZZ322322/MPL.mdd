@@ -1468,7 +1468,16 @@ export class DatabaseStorage implements IStorage {
 
   // Team Member methods
   async getTeamMembers(teamId: number): Promise<TeamMember[]> {
-    return await db.select().from(teamMembers).where(eq(teamMembers.teamId, teamId));
+    return await db.select().from(teamMembers)
+      .where(eq(teamMembers.teamId, teamId))
+      .orderBy(
+        // Căpitanul primul
+        sql`CASE WHEN ${teamMembers.role} = 'captain' THEN 0 ELSE 1 END`,
+        // Apoi jucătorii main înainte de reserve
+        sql`CASE WHEN ${teamMembers.position} = 'main' THEN 0 ELSE 1 END`,
+        // În final sortare alfabetică după nickname
+        teamMembers.nickname
+      );
   }
 
   async createTeamMember(member: InsertTeamMember): Promise<TeamMember> {
