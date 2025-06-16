@@ -814,6 +814,7 @@ export class MemStorage implements IStorage {
     // Teams in alphabetical order for better navigation
     const teamsData = [
       { name: "Auratix", logoUrl: "/team-logos/Auratix.png" },
+      { name: "BaitMD", logoUrl: "/team-logos/BaitMD.webp" },
       { name: "Barbosii", logoUrl: "/team-logos/Barbosii.png" },
       { name: "Bloody", logoUrl: "/team-logos/Bloody.png" },
       { name: "Bobb3rs", logoUrl: "/team-logos/Bobb3rs.png" },
@@ -850,8 +851,10 @@ export class MemStorage implements IStorage {
       { name: "VeryGoodTeam", logoUrl: "/team-logos/VeryGoodTeam.png" },
       { name: "WenDeagle", logoUrl: "/team-logos/WenDeagle.png" },
       { name: "Wenzo", logoUrl: "/team-logos/Wenzo.png" },
+      { name: "WinSpirit", logoUrl: "/team-logos/WinSpirit.webp" },
       { name: "X-one", logoUrl: "/team-logos/X-one.png" },
-      { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" }
+      { name: "XPlosion", logoUrl: "/team-logos/XPloison.webp" },
+      { name: "Xtreme Players", logoUrl: "/team-logos/Xtreme Players.webp" }
     ];
 
     const createdTeams: Team[] = [];
@@ -879,12 +882,22 @@ export class MemStorage implements IStorage {
       { teamId: 1, nickname: "O2DED", role: "player", position: "reserve" },
       { teamId: 1, nickname: "Cobqkq", role: "player", position: "reserve" },
       
-      // Team 2: Barbosii (btate captain)
-      { teamId: 2, nickname: "btate", role: "captain", position: "main" },
-      { teamId: 2, nickname: "Lewis169", role: "player", position: "main" },
-      { teamId: 2, nickname: "cozmann", role: "player", position: "main" },
-      { teamId: 2, nickname: "qwus0", role: "player", position: "main" },
-      { teamId: 2, nickname: "Brf_Bogdan", role: "player", position: "main" },
+      // Team 2: BaitMD (NeoK1nG- captain)
+      { teamId: 2, nickname: "NeoK1nG-", role: "captain", position: "main" },
+      { teamId: 2, nickname: "Mehti89", role: "player", position: "main" },
+      { teamId: 2, nickname: "dopezneel-", role: "player", position: "main" },
+      { teamId: 2, nickname: "MaJ0r4Ka", role: "player", position: "main" },
+      { teamId: 2, nickname: "MasChef", role: "player", position: "main" },
+      { teamId: 2, nickname: "batelfield", role: "player", position: "reserve" },
+      { teamId: 2, nickname: "B1LAMAGICA", role: "player", position: "reserve" },
+      { teamId: 2, nickname: "IamNakey", role: "player", position: "reserve" },
+      
+      // Team 3: Barbosii (btate captain)
+      { teamId: 3, nickname: "btate", role: "captain", position: "main" },
+      { teamId: 3, nickname: "Lewis169", role: "player", position: "main" },
+      { teamId: 3, nickname: "cozmann", role: "player", position: "main" },
+      { teamId: 3, nickname: "qwus0", role: "player", position: "main" },
+      { teamId: 3, nickname: "Brf_Bogdan", role: "player", position: "main" },
       
       // Team 3: Bloody (MrPalste captain)
       { teamId: 3, nickname: "MrPalste", role: "captain", position: "main" },
