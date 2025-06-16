@@ -10,6 +10,11 @@ import {
   teamMembers, type TeamMember, type InsertTeamMember
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
+import { db, pool } from "./db";
+import { eq } from "drizzle-orm";
+import connectPg from "connect-pg-simple";
+import createMemoryStore from "memorystore";
+import session from "express-session";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -1397,4 +1402,258 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Database Storage Implementation with PostgreSQL
+export class DatabaseStorage implements IStorage {
+  sessionStore: any;
+
+  constructor() {
+    const MemoryStore = createMemoryStore(session);
+    this.sessionStore = new MemoryStore({
+      checkPeriod: 86400000,
+    });
+  }
+
+  // User methods
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  // Team methods
+  async getTeams(tournament?: string): Promise<Team[]> {
+    if (tournament) {
+      return await db.select().from(teams).where(eq(teams.tournament, tournament));
+    }
+    return await db.select().from(teams);
+  }
+
+  async getTeam(id: number): Promise<Team | undefined> {
+    const [team] = await db.select().from(teams).where(eq(teams.id, id));
+    return team || undefined;
+  }
+
+  async createTeam(team: InsertTeam): Promise<Team> {
+    const [newTeam] = await db
+      .insert(teams)
+      .values(team)
+      .returning();
+    return newTeam;
+  }
+
+  async updateTeam(id: number, team: Partial<InsertTeam>): Promise<Team> {
+    const [updatedTeam] = await db
+      .update(teams)
+      .set(team)
+      .where(eq(teams.id, id))
+      .returning();
+    return updatedTeam;
+  }
+
+  async deleteTeam(id: number): Promise<void> {
+    await db.delete(teams).where(eq(teams.id, id));
+  }
+
+  // Team Member methods
+  async getTeamMembers(teamId: number): Promise<TeamMember[]> {
+    return await db.select().from(teamMembers).where(eq(teamMembers.teamId, teamId));
+  }
+
+  async createTeamMember(member: InsertTeamMember): Promise<TeamMember> {
+    const [newMember] = await db
+      .insert(teamMembers)
+      .values(member)
+      .returning();
+    return newMember;
+  }
+
+  async updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember> {
+    const [updatedMember] = await db
+      .update(teamMembers)
+      .set(member)
+      .where(eq(teamMembers.id, id))
+      .returning();
+    return updatedMember;
+  }
+
+  async deleteTeamMember(id: number): Promise<void> {
+    await db.delete(teamMembers).where(eq(teamMembers.id, id));
+  }
+
+  // Placeholder methods for other entities (keeping existing MemStorage logic)
+  async getEvents(): Promise<Event[]> {
+    return [];
+  }
+
+  async getEvent(id: number): Promise<Event | undefined> {
+    return undefined;
+  }
+
+  async createEvent(event: InsertEvent): Promise<Event> {
+    throw new Error("Not implemented");
+  }
+
+  async updateEvent(id: number, event: Partial<InsertEvent>): Promise<Event> {
+    throw new Error("Not implemented");
+  }
+
+  async deleteEvent(id: number): Promise<void> {
+    throw new Error("Not implemented");
+  }
+
+  async getPlayers(game?: string): Promise<Player[]> {
+    return [];
+  }
+
+  async getPlayer(id: number): Promise<Player | undefined> {
+    return undefined;
+  }
+
+  async createPlayer(player: InsertPlayer): Promise<Player> {
+    throw new Error("Not implemented");
+  }
+
+  async updatePlayer(id: number, player: Partial<InsertPlayer>): Promise<Player> {
+    throw new Error("Not implemented");
+  }
+
+  async deletePlayer(id: number): Promise<void> {
+    throw new Error("Not implemented");
+  }
+
+  async getCsServers(): Promise<CsServer[]> {
+    return [
+      {
+        id: 1,
+        name: "Server CS2 Moldova",
+        ip: "37.233.50.55",
+        port: 27015,
+        location: "Moldova",
+        mode: "Retake 1",
+        status: true,
+        players: 0,
+        maxPlayers: 16,
+        likes: 0
+      },
+      {
+        id: 2,
+        name: "Server CS2 Moldova",
+        ip: "37.233.50.55",
+        port: 27016,
+        location: "Moldova",
+        mode: "Retake 2",
+        status: true,
+        players: 0,
+        maxPlayers: 16,
+        likes: 0
+      },
+      {
+        id: 3,
+        name: "Server CS2 Moldova",
+        ip: "37.233.50.55",
+        port: 27017,
+        location: "Moldova",
+        mode: "Deathmatch",
+        status: true,
+        players: 0,
+        maxPlayers: 16,
+        likes: 0
+      }
+    ];
+  }
+
+  async getCsServer(id: number): Promise<CsServer | undefined> {
+    const servers = await this.getCsServers();
+    return servers.find(server => server.id === id);
+  }
+
+  async updateCsServerLikes(id: number): Promise<CsServer> {
+    throw new Error("Not implemented");
+  }
+
+  async updateCsServerStatus(id: number, status: boolean, players: number): Promise<CsServer> {
+    throw new Error("Not implemented");
+  }
+
+  async createContactSubmission(submission: InsertContact): Promise<Contact> {
+    throw new Error("Not implemented");
+  }
+
+  async getContactSubmissions(): Promise<Contact[]> {
+    return [];
+  }
+
+  async getFaqs(): Promise<Faq[]> {
+    return [];
+  }
+
+  async getFaq(id: number): Promise<Faq | undefined> {
+    return undefined;
+  }
+
+  async createFaq(faq: InsertFaq): Promise<Faq> {
+    throw new Error("Not implemented");
+  }
+
+  async updateFaq(id: number, faq: Partial<InsertFaq>): Promise<Faq> {
+    throw new Error("Not implemented");
+  }
+
+  async deleteFaq(id: number): Promise<void> {
+    throw new Error("Not implemented");
+  }
+
+  async getSiteContents(): Promise<SiteContent[]> {
+    return [];
+  }
+
+  async getSiteContentByKey(key: string): Promise<SiteContent | undefined> {
+    return undefined;
+  }
+
+  async updateSiteContent(id: number, content: Partial<InsertSiteContent>): Promise<SiteContent> {
+    throw new Error("Not implemented");
+  }
+
+  async getSeoSettings(): Promise<SeoSettings[]> {
+    return [];
+  }
+
+  async getSeoSettingByUrl(pageUrl: string): Promise<SeoSettings | undefined> {
+    return undefined;
+  }
+
+  async createSeoSetting(seo: InsertSeo): Promise<SeoSettings> {
+    throw new Error("Not implemented");
+  }
+
+  async updateSeoSetting(id: number, seo: Partial<InsertSeo>): Promise<SeoSettings> {
+    throw new Error("Not implemented");
+  }
+
+  async getAnalyticsSettings(): Promise<AnalyticsSettings | undefined> {
+    return undefined;
+  }
+
+  async updateAnalyticsSettings(id: number, settings: Partial<InsertAnalytics>): Promise<AnalyticsSettings> {
+    throw new Error("Not implemented");
+  }
+
+  async createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings> {
+    throw new Error("Not implemented");
+  }
+}
+
+export const storage = new DatabaseStorage();
