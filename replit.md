@@ -116,7 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
-- June 17, 2025: **ADDED** - Stream URL functionality for matches - admin can add stream links (Twitch/YouTube) for each match, visible to fans with watch button
+- June 17, 2025: **COMPLETED** - Stream URL functionality with 📺 button appearing in match results for Faceit links, demos, and statistics access
 - June 17, 2025: **COMPLETED** - Tournament schedule updated with official TXT data (June 2025, 7 days, 105 total matches, complete round-robin format per group)
 - June 17, 2025: **ADDED** - Tournament schedule module between match results and groups with expandable interface showing complete match calendar
 - June 17, 2025: **UPDATED** - Adapted tournament stage progression details with corrected Stage 2 format (11 direct + 5 from elimination = 16 total)

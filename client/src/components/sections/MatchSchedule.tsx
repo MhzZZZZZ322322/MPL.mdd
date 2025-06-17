@@ -240,6 +240,21 @@ export default function MatchSchedule() {
                         }}
                       />
                     </div>
+
+                    {/* Stream button */}
+                    {match.result?.streamUrl && (
+                      <div className="ml-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => window.open(match.result!.streamUrl!, '_blank')}
+                          className="h-6 w-6 p-0 text-purple-400 border-purple-400 hover:bg-purple-400/10"
+                          title="Vizionează meciul pe Faceit"
+                        >
+                          📺
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
