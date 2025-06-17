@@ -2,7 +2,7 @@
   {
     "id": 1,
     "status": true,
-    "players": 5,
+    "players": 6,
     "name": "Retake 1",
     "maxplayers": 16
   },
@@ -16,7 +16,7 @@
   {
     "id": 3,
     "status": true,
-    "players": 5,
+    "players": 3,
     "name": "FFA/DM",
     "maxplayers": 16
   }
