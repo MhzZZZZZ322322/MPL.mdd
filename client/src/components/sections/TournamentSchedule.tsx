@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Calendar, Clock } from 'lucide-react';
+import { ChevronDown, ChevronUp, Calendar, Clock, ExternalLink } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from "@/components/ui/button";
 
 interface ScheduleDay {
   date: string;
@@ -13,187 +15,102 @@ interface ScheduleMatch {
   team2: string;
   group: string;
   stage: string;
+  faceitUrl?: string;
 }
 
-const scheduleData: ScheduleDay[] = [
-  {
-    date: "18 Iunie 2025",
-    dayName: "Miercuri",
-    matches: [
-      { time: "18:00", team1: "Kamikaze Clan", team2: "Saponel", group: "Grupa A", stage: "Stage 1" },
-      { time: "18:00", team1: "Lean Vision", team2: "Ciocălău Team", group: "Grupa A", stage: "Stage 1" },
-      { time: "18:00", team1: "Muligambia", team2: "BPSP", group: "Grupa A", stage: "Stage 1" },
-      { time: "18:45", team1: "BPSP", team2: "Saponel", group: "Grupa A", stage: "Stage 1" },
-      { time: "18:45", team1: "Muligambia", team2: "Ciocălău Team", group: "Grupa A", stage: "Stage 1" },
-      { time: "18:45", team1: "Kamikaze Clan", team2: "Lean Vision", group: "Grupa A", stage: "Stage 1" },
-      { time: "19:30", team1: "Lean Vision", team2: "Saponel", group: "Grupa A", stage: "Stage 1" },
-      { time: "19:30", team1: "Kamikaze Clan", team2: "Muligambia", group: "Grupa A", stage: "Stage 1" },
-      { time: "19:30", team1: "BPSP", team2: "Ciocălău Team", group: "Grupa A", stage: "Stage 1" },
-      { time: "20:15", team1: "Ciocălău Team", team2: "Saponel", group: "Grupa A", stage: "Stage 1" },
-      { time: "20:15", team1: "Kamikaze Clan", team2: "BPSP", group: "Grupa A", stage: "Stage 1" },
-      { time: "20:15", team1: "Lean Vision", team2: "Muligambia", group: "Grupa A", stage: "Stage 1" },
-      { time: "21:00", team1: "Muligambia", team2: "Saponel", group: "Grupa A", stage: "Stage 1" },
-      { time: "21:00", team1: "Lean Vision", team2: "BPSP", group: "Grupa A", stage: "Stage 1" },
-      { time: "21:00", team1: "Kamikaze Clan", team2: "Ciocălău Team", group: "Grupa A", stage: "Stage 1" },
-    ]
-  },
-  {
-    date: "19 Iunie 2025",
-    dayName: "Joi",
-    matches: [
-      { time: "18:00", team1: "Ciocana Esports", team2: "Xtreme Players", group: "Grupa B", stage: "Stage 1" },
-      { time: "18:00", team1: "Legalize", team2: "Barbosii", group: "Grupa B", stage: "Stage 1" },
-      { time: "18:00", team1: "LitEnergy", team2: "Japon", group: "Grupa B", stage: "Stage 1" },
-      { time: "18:45", team1: "Japon", team2: "Xtreme Players", group: "Grupa B", stage: "Stage 1" },
-      { time: "18:45", team1: "LitEnergy", team2: "Barbosii", group: "Grupa B", stage: "Stage 1" },
-      { time: "18:45", team1: "Ciocana Esports", team2: "Legalize", group: "Grupa B", stage: "Stage 1" },
-      { time: "19:30", team1: "Legalize", team2: "Xtreme Players", group: "Grupa B", stage: "Stage 1" },
-      { time: "19:30", team1: "Ciocana Esports", team2: "LitEnergy", group: "Grupa B", stage: "Stage 1" },
-      { time: "19:30", team1: "Japon", team2: "Barbosii", group: "Grupa B", stage: "Stage 1" },
-      { time: "20:15", team1: "Barbosii", team2: "Xtreme Players", group: "Grupa B", stage: "Stage 1" },
-      { time: "20:15", team1: "Ciocana Esports", team2: "Japon", group: "Grupa B", stage: "Stage 1" },
-      { time: "20:15", team1: "Legalize", team2: "LitEnergy", group: "Grupa B", stage: "Stage 1" },
-      { time: "21:00", team1: "LitEnergy", team2: "Xtreme Players", group: "Grupa B", stage: "Stage 1" },
-      { time: "21:00", team1: "Legalize", team2: "Japon", group: "Grupa B", stage: "Stage 1" },
-      { time: "21:00", team1: "Ciocana Esports", team2: "Barbosii", group: "Grupa B", stage: "Stage 1" },
-    ]
-  },
-  {
-    date: "20 Iunie 2025",
-    dayName: "Vineri",
-    matches: [
-      { time: "18:00", team1: "Brigada Meteor", team2: "Bobb3rs", group: "Grupa C", stage: "Stage 1" },
-      { time: "18:00", team1: "Neo Egoist League", team2: "BaitMD", group: "Grupa C", stage: "Stage 1" },
-      { time: "18:00", team1: "La Passion", team2: "Win Spirit", group: "Grupa C", stage: "Stage 1" },
-      { time: "18:45", team1: "Win Spirit", team2: "Bobb3rs", group: "Grupa C", stage: "Stage 1" },
-      { time: "18:45", team1: "La Passion", team2: "BaitMD", group: "Grupa C", stage: "Stage 1" },
-      { time: "18:45", team1: "Brigada Meteor", team2: "Neo Egoist League", group: "Grupa C", stage: "Stage 1" },
-      { time: "19:30", team1: "Neo Egoist League", team2: "Bobb3rs", group: "Grupa C", stage: "Stage 1" },
-      { time: "19:30", team1: "Brigada Meteor", team2: "La Passion", group: "Grupa C", stage: "Stage 1" },
-      { time: "19:30", team1: "Win Spirit", team2: "BaitMD", group: "Grupa C", stage: "Stage 1" },
-      { time: "20:15", team1: "BaitMD", team2: "Bobb3rs", group: "Grupa C", stage: "Stage 1" },
-      { time: "20:15", team1: "Brigada Meteor", team2: "Win Spirit", group: "Grupa C", stage: "Stage 1" },
-      { time: "20:15", team1: "Neo Egoist League", team2: "La Passion", group: "Grupa C", stage: "Stage 1" },
-      { time: "21:00", team1: "La Passion", team2: "Bobb3rs", group: "Grupa C", stage: "Stage 1" },
-      { time: "21:00", team1: "Neo Egoist League", team2: "Win Spirit", group: "Grupa C", stage: "Stage 1" },
-      { time: "21:00", team1: "Brigada Meteor", team2: "BaitMD", group: "Grupa C", stage: "Stage 1" },
-    ]
-  },
-  {
-    date: "25 Iunie 2025",
-    dayName: "Miercuri",
-    matches: [
-      { time: "18:00", team1: "Coli", team2: "Rumina", group: "Grupa D", stage: "Stage 1" },
-      { time: "18:00", team1: "K9 Team", team2: "Shashlik", group: "Grupa D", stage: "Stage 1" },
-      { time: "18:00", team1: "Into the Breach", team2: "WenDeagle", group: "Grupa D", stage: "Stage 1" },
-      { time: "18:45", team1: "WenDeagle", team2: "Rumina", group: "Grupa D", stage: "Stage 1" },
-      { time: "18:45", team1: "Into the Breach", team2: "Shashlik", group: "Grupa D", stage: "Stage 1" },
-      { time: "18:45", team1: "Coli", team2: "K9 Team", group: "Grupa D", stage: "Stage 1" },
-      { time: "19:30", team1: "K9 Team", team2: "Rumina", group: "Grupa D", stage: "Stage 1" },
-      { time: "19:30", team1: "Coli", team2: "Into the Breach", group: "Grupa D", stage: "Stage 1" },
-      { time: "19:30", team1: "WenDeagle", team2: "Shashlik", group: "Grupa D", stage: "Stage 1" },
-      { time: "20:15", team1: "Shashlik", team2: "Rumina", group: "Grupa D", stage: "Stage 1" },
-      { time: "20:15", team1: "Coli", team2: "WenDeagle", group: "Grupa D", stage: "Stage 1" },
-      { time: "20:15", team1: "K9 Team", team2: "Into the Breach", group: "Grupa D", stage: "Stage 1" },
-      { time: "21:00", team1: "Into the Breach", team2: "Rumina", group: "Grupa D", stage: "Stage 1" },
-      { time: "21:00", team1: "K9 Team", team2: "WenDeagle", group: "Grupa D", stage: "Stage 1" },
-      { time: "21:00", team1: "Coli", team2: "Shashlik", group: "Grupa D", stage: "Stage 1" },
-    ]
-  },
-  {
-    date: "26 Iunie 2025",
-    dayName: "Joi",
-    matches: [
-      { time: "18:00", team1: "XPlosion", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
-      { time: "18:00", team1: "Cadian Team", team2: "Bloody", group: "Grupa E", stage: "Stage 1" },
-      { time: "18:00", team1: "KostiujeniKlinik", team2: "Flux Line", group: "Grupa E", stage: "Stage 1" },
-      { time: "18:45", team1: "Flux Line", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
-      { time: "18:45", team1: "KostiujeniKlinik", team2: "Bloody", group: "Grupa E", stage: "Stage 1" },
-      { time: "18:45", team1: "XPlosion", team2: "Cadian Team", group: "Grupa E", stage: "Stage 1" },
-      { time: "19:30", team1: "Cadian Team", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
-      { time: "19:30", team1: "XPlosion", team2: "KostiujeniKlinik", group: "Grupa E", stage: "Stage 1" },
-      { time: "19:30", team1: "Flux Line", team2: "Bloody", group: "Grupa E", stage: "Stage 1" },
-      { time: "20:15", team1: "Bloody", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
-      { time: "20:15", team1: "XPlosion", team2: "Flux Line", group: "Grupa E", stage: "Stage 1" },
-      { time: "20:15", team1: "Cadian Team", team2: "KostiujeniKlinik", group: "Grupa E", stage: "Stage 1" },
-      { time: "21:00", team1: "KostiujeniKlinik", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
-      { time: "21:00", team1: "Cadian Team", team2: "Flux Line", group: "Grupa E", stage: "Stage 1" },
-      { time: "21:00", team1: "XPlosion", team2: "Bloody", group: "Grupa E", stage: "Stage 1" },
-    ]
-  },
-  {
-    date: "27 Iunie 2025",
-    dayName: "Vineri",
-    matches: [
-      { time: "18:00", team1: "Wenzo", team2: "X-one", group: "Grupa F", stage: "Stage 1" },
-      { time: "18:00", team1: "Robotaim", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
-      { time: "18:00", team1: "Auratix", team2: "Killuminaty", group: "Grupa F", stage: "Stage 1" },
-      { time: "18:45", team1: "Killuminaty", team2: "X-one", group: "Grupa F", stage: "Stage 1" },
-      { time: "18:45", team1: "Auratix", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
-      { time: "18:45", team1: "Wenzo", team2: "Robotaim", group: "Grupa F", stage: "Stage 1" },
-      { time: "19:30", team1: "Robotaim", team2: "X-one", group: "Grupa F", stage: "Stage 1" },
-      { time: "19:30", team1: "Wenzo", team2: "Auratix", group: "Grupa F", stage: "Stage 1" },
-      { time: "19:30", team1: "Killuminaty", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
-      { time: "20:15", team1: "Brigada", team2: "X-one", group: "Grupa F", stage: "Stage 1" },
-      { time: "20:15", team1: "Wenzo", team2: "Killuminaty", group: "Grupa F", stage: "Stage 1" },
-      { time: "20:15", team1: "Robotaim", team2: "Auratix", group: "Grupa F", stage: "Stage 1" },
-      { time: "21:00", team1: "Auratix", team2: "X-one", group: "Grupa F", stage: "Stage 1" },
-      { time: "21:00", team1: "Robotaim", team2: "Killuminaty", group: "Grupa F", stage: "Stage 1" },
-      { time: "21:00", team1: "Wenzo", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
-    ]
-  },
-  {
-    date: "28 Iunie 2025",
-    dayName: "Sâmbătă",
-    matches: [
-      { time: "18:00", team1: "Cipok", team2: "VeryGoodTeam", group: "Grupa G", stage: "Stage 1" },
-      { time: "18:00", team1: "Cucumba", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
-      { time: "18:00", team1: "Golden Five", team2: "Onyx", group: "Grupa G", stage: "Stage 1" },
-      { time: "18:45", team1: "Onyx", team2: "VeryGoodTeam", group: "Grupa G", stage: "Stage 1" },
-      { time: "18:45", team1: "Golden Five", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
-      { time: "18:45", team1: "Cipok", team2: "Cucumba", group: "Grupa G", stage: "Stage 1" },
-      { time: "19:30", team1: "Cucumba", team2: "VeryGoodTeam", group: "Grupa G", stage: "Stage 1" },
-      { time: "19:30", team1: "Cipok", team2: "Golden Five", group: "Grupa G", stage: "Stage 1" },
-      { time: "19:30", team1: "Onyx", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
-      { time: "20:15", team1: "Trigger", team2: "VeryGoodTeam", group: "Grupa G", stage: "Stage 1" },
-      { time: "20:15", team1: "Cipok", team2: "Onyx", group: "Grupa G", stage: "Stage 1" },
-      { time: "20:15", team1: "Cucumba", team2: "Golden Five", group: "Grupa G", stage: "Stage 1" },
-      { time: "21:00", team1: "Golden Five", team2: "VeryGoodTeam", group: "Grupa G", stage: "Stage 1" },
-      { time: "21:00", team1: "Cucumba", team2: "Onyx", group: "Grupa G", stage: "Stage 1" },
-      { time: "21:00", team1: "Cipok", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
-    ]
-  }
-];
+// Transform scheduled matches into schedule format grouped by days
+const transformScheduleData = (matches: any[]) => {
+  if (!matches) return [];
+  
+  const dayNames = {
+    "18.06.2025": { display: "18 Iunie 2025", dayName: "Miercuri" },
+    "19.06.2025": { display: "19 Iunie 2025", dayName: "Joi" },
+    "20.06.2025": { display: "20 Iunie 2025", dayName: "Vineri" },
+    "25.06.2025": { display: "25 Iunie 2025", dayName: "Miercuri" },
+    "26.06.2025": { display: "26 Iunie 2025", dayName: "Joi" },
+    "27.06.2025": { display: "27 Iunie 2025", dayName: "Vineri" },
+    "28.06.2025": { display: "28 Iunie 2025", dayName: "Sâmbătă" }
+  };
+  
+  const grouped = matches.reduce((acc, match) => {
+    const dateKey = match.date || "18.06.2025";
+    const dayInfo = dayNames[dateKey as keyof typeof dayNames] || { display: dateKey, dayName: "Necunoscut" };
+    
+    if (!acc[dateKey]) {
+      acc[dateKey] = {
+        date: dayInfo.display,
+        dayName: dayInfo.dayName,
+        matches: []
+      };
+    }
+    
+    acc[dateKey].matches.push({
+      time: match.time,
+      team1: match.team1,
+      team2: match.team2,
+      group: `Grupa ${match.group}`,
+      stage: match.stage,
+      faceitUrl: match.faceitUrl || ""
+    });
+    
+    return acc;
+  }, {} as Record<string, any>);
+  
+  return Object.values(grouped).sort((a: any, b: any) => {
+    const dateA = a.date.split(' ')[0];
+    const dateB = b.date.split(' ')[0];
+    return dateA.localeCompare(dateB);
+  });
+};
 
 export default function TournamentSchedule() {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Fetch scheduled matches from API
+  const { data: scheduledMatches = [], isLoading } = useQuery({
+    queryKey: ['/api/admin/scheduled-matches'],
+    refetchInterval: 30000,
+  });
+
+  // Transform scheduled matches data
+  const scheduleData = transformScheduleData(scheduledMatches);
+
+  if (isLoading) {
+    return (
+      <div className="bg-slate-800/50 rounded-xl border border-slate-600/20 p-6">
+        <div className="text-center text-white">Se încarcă programul...</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden">
+    <div className="bg-slate-800/50 rounded-xl border border-slate-600/20 overflow-hidden">
       <div 
-        className="bg-gradient-to-r from-purple-600/30 to-indigo-600/30 p-4 border-b border-slate-600/30 cursor-pointer"
+        className="flex items-center justify-between p-6 cursor-pointer hover:bg-slate-700/30 transition-colors"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Calendar className="w-6 h-6 text-purple-400" />
-            <h3 className="text-xl font-bold text-white">Orar Turneu</h3>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-300">Program meciuri</span>
-            {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-gray-400" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-400" />
-            )}
-          </div>
+        <div className="flex items-center space-x-3">
+          <Calendar className="w-6 h-6 text-purple-400" />
+          <h3 className="text-xl font-bold text-white">
+            Orar Turneu
+          </h3>
+        </div>
+        <div className="flex items-center space-x-3">
+          <span className="text-sm text-purple-400 hidden sm:block">
+            Program complet meciuri
+          </span>
+          {isExpanded ? (
+            <ChevronUp className="w-5 h-5 text-purple-400" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-purple-400" />
+          )}
         </div>
       </div>
 
       {isExpanded && (
-        <div className="p-4">
+        <div className="px-6 pb-6">
           <div className="space-y-6">
-            {scheduleData.map((day, dayIndex) => (
+            {scheduleData.map((day: ScheduleDay, dayIndex: number) => (
               <div key={dayIndex} className="border-l-4 border-purple-500/50 pl-4">
                 <div className="mb-4">
                   <h4 className="text-lg font-bold text-white">{day.date}</h4>
@@ -201,22 +118,19 @@ export default function TournamentSchedule() {
                 </div>
                 
                 <div className="space-y-3">
-                  {day.matches.map((match, matchIndex) => (
-                    <div 
-                      key={matchIndex}
-                      className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/20"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="flex items-center space-x-2 text-purple-400">
+                  {day.matches.map((match: ScheduleMatch, matchIndex: number) => (
+                    <div key={matchIndex} className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/20">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-3 sm:space-y-0">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center space-x-2 text-orange-400 min-w-[60px]">
                             <Clock className="w-4 h-4" />
-                            <span className="font-semibold">{match.time}</span>
+                            <span className="text-sm font-medium">{match.time}</span>
                           </div>
                           
-                          <div className="flex items-center space-x-2">
-                            <span className="text-white font-medium">{match.team1}</span>
-                            <span className="text-gray-400">vs</span>
-                            <span className="text-white font-medium">{match.team2}</span>
+                          <div className="text-white font-medium">
+                            <span className="text-blue-300">{match.team1}</span>
+                            <span className="text-gray-400 mx-2">vs</span>
+                            <span className="text-red-300">{match.team2}</span>
                           </div>
                         </div>
                         
@@ -227,6 +141,18 @@ export default function TournamentSchedule() {
                           <span className="text-xs bg-slate-600/30 text-gray-300 px-2 py-1 rounded">
                             {match.stage}
                           </span>
+                          
+                          {match.faceitUrl && (
+                            <Button
+                              size="sm"
+                              variant="default"
+                              onClick={() => window.open(match.faceitUrl, '_blank')}
+                              className="bg-red-600 hover:bg-red-700 text-white animate-pulse"
+                            >
+                              <ExternalLink className="w-4 h-4 mr-1" />
+                              LIVE
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>
