@@ -327,9 +327,11 @@ export default function MatchResultsManager() {
                     <SelectValue placeholder={formData.groupName ? "Selectează echipa 2" : "Selectează grupa mai întâi"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {getTeamsForGroup(formData.groupName).map(team => (
-                      <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
-                    ))}
+                    {getTeamsForGroup(formData.groupName)
+                      .filter(team => team.name !== formData.team1Name)
+                      .map(team => (
+                        <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
               </div>
