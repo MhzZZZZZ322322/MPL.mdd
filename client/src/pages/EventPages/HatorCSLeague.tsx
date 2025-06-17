@@ -14,6 +14,7 @@ const HatorCSLeague = () => {
   const { t } = useLanguage();
   const [isContentExpanded, setIsContentExpanded] = useState(false);
   const [isTeamsExpanded, setIsTeamsExpanded] = useState(false);
+  const [isGroupsExpanded, setIsGroupsExpanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   // Team logo mapping - uses actual team logos from database
@@ -343,7 +344,10 @@ const HatorCSLeague = () => {
         </div>
 
         {/* Tournament Groups Section */}
-        <TournamentGroups />
+        <TournamentGroups 
+          isExpanded={isGroupsExpanded}
+          onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
+        />
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
