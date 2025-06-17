@@ -19,7 +19,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
 import SeoManager from "@/pages/SeoManager";
-import TournamentAdmin from "@/pages/TournamentAdmin";
+import TournamentAdmin from "@/pages/TournamentAdminFixed";
 import { useState, useEffect } from "react";
 
 function Router() {

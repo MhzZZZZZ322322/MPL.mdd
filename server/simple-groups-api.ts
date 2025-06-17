@@ -30,6 +30,7 @@ interface GroupStanding {
 // In-memory storage
 let groupResults: GroupResult[] = [];
 let groupStandings: GroupStanding[] = [];
+let groupConfiguration: any[] = [];
 let initialized = false;
 
 export function registerSimpleGroupsAPI(app: Express) {
@@ -198,38 +199,172 @@ export function registerSimpleGroupsAPI(app: Express) {
     }
   });
 
+  // Get current group configuration
+  app.get("/api/admin/group-config", (req, res) => {
+    try {
+      res.json(groupConfiguration);
+    } catch (error) {
+      console.error("Error fetching group config:", error);
+      res.status(500).json({ message: "Failed to fetch group config" });
+    }
+  });
+
+  // Save group configuration
+  app.post("/api/admin/save-group-config", (req, res) => {
+    try {
+      const { groups } = req.body;
+      groupConfiguration = groups;
+
+      // Update standings based on new configuration
+      groupStandings = [];
+      groups.forEach((group: any) => {
+        group.teams.forEach((team: any, index: number) => {
+          const existingStanding = groupStandings.find(s => s.teamName === team.name && s.groupName === group.groupName);
+          if (existingStanding) {
+            existingStanding.position = index + 1;
+          } else {
+            groupStandings.push({
+              teamName: team.name,
+              groupName: group.groupName,
+              matchesPlayed: 0,
+              wins: 0,
+              losses: 0,
+              roundsWon: 0,
+              roundsLost: 0,
+              roundDifference: 0,
+              points: 0,
+              position: index + 1,
+            });
+          }
+        });
+      });
+
+      res.json({ message: "Group configuration saved successfully" });
+    } catch (error) {
+      console.error("Error saving group config:", error);
+      res.status(500).json({ message: "Failed to save group config" });
+    }
+  });
+
+  // Auto-distribute teams
+  app.post("/api/admin/auto-distribute-teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { teams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const allTeams = await db.select().from(teams).where(eq(teams.isActive, true));
+      
+      const groups = [
+        { groupName: 'A', displayName: 'Group A', teams: [] },
+        { groupName: 'B', displayName: 'Group B', teams: [] },
+        { groupName: 'C', displayName: 'Group C', teams: [] },
+        { groupName: 'D', displayName: 'Group D', teams: [] },
+        { groupName: 'E', displayName: 'Group E', teams: [] },
+        { groupName: 'F', displayName: 'Group F', teams: [] },
+        { groupName: 'G', displayName: 'Group G', teams: [] },
+      ];
+
+      let teamIndex = 0;
+      for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
+        const group = groups[groupIndex];
+        const teamsInGroup = groupIndex === 6 ? 7 : 6; // Last group gets 7 teams
+        
+        for (let i = 0; i < teamsInGroup && teamIndex < allTeams.length; i++) {
+          (group.teams as any[]).push(allTeams[teamIndex]);
+          teamIndex++;
+        }
+      }
+
+      groupConfiguration = groups;
+
+      res.json({ 
+        message: "Teams distributed automatically",
+        groups,
+        teamsDistributed: teamIndex,
+        groupsCount: groups.length
+      });
+    } catch (error) {
+      console.error("Error auto-distributing teams:", error);
+      res.status(500).json({ message: "Failed to auto-distribute teams" });
+    }
+  });
+
   // Get tournament groups for public display
   app.get("/api/tournament-groups", (req, res) => {
     try {
-      const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(groupName => {
-        const teams = groupStandings
-          .filter(s => s.groupName === groupName)
-          .sort((a, b) => {
-            if (a.points !== b.points) return b.points - a.points;
-            if (a.roundDifference !== b.roundDifference) return b.roundDifference - a.roundDifference;
-            return b.roundsWon - a.roundsWon;
-          })
-          .map((standing, index) => ({
-            id: index + 1,
-            teamId: index + 1,
-            teamName: standing.teamName,
-            teamLogo: `/team-logos/${standing.teamName.toLowerCase().replace(/\s+/g, '-')}.webp`,
-            matchesPlayed: standing.matchesPlayed,
-            wins: standing.wins,
-            draws: 0, // CS2 doesn't have draws
-            losses: standing.losses,
-            roundsWon: standing.roundsWon,
-            roundsLost: standing.roundsLost,
-            roundDifference: standing.roundDifference,
-            points: standing.points,
-            position: index + 1,
+      if (groupConfiguration.length === 0) {
+        // Fallback to automatic distribution if no manual config exists
+        const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(groupName => {
+          const teams = groupStandings
+            .filter(s => s.groupName === groupName)
+            .sort((a, b) => {
+              if (a.points !== b.points) return b.points - a.points;
+              if (a.roundDifference !== b.roundDifference) return b.roundDifference - a.roundDifference;
+              return b.roundsWon - a.roundsWon;
+            })
+            .map((standing, index) => ({
+              id: index + 1,
+              teamId: index + 1,
+              teamName: standing.teamName,
+              teamLogo: `/team-logos/${standing.teamName.toLowerCase().replace(/\s+/g, '-')}.webp`,
+              matchesPlayed: standing.matchesPlayed,
+              wins: standing.wins,
+              draws: 0, // CS2 doesn't have draws
+              losses: standing.losses,
+              roundsWon: standing.roundsWon,
+              roundsLost: standing.roundsLost,
+              roundDifference: standing.roundDifference,
+              points: standing.points,
+              position: index + 1,
+              lastUpdated: new Date().toISOString(),
+            }));
+
+          return {
+            id: groupName.charCodeAt(0) - 64, // A=1, B=2, etc.
+            groupName,
+            groupDisplayName: `Group ${groupName}`,
+            tournament: "hator-cs-league",
+            isActive: true,
+            teams,
+          };
+        });
+        return res.json(groups);
+      }
+
+      // Use manual configuration
+      const groups = groupConfiguration.map(group => {
+        const teams = group.teams.map((team: any, index: number) => {
+          const standing = groupStandings.find(s => s.teamName === team.name && s.groupName === group.groupName);
+          return {
+            id: team.id,
+            teamId: team.id,
+            teamName: team.name,
+            teamLogo: team.logoUrl,
+            matchesPlayed: standing?.matchesPlayed || 0,
+            wins: standing?.wins || 0,
+            draws: 0,
+            losses: standing?.losses || 0,
+            roundsWon: standing?.roundsWon || 0,
+            roundsLost: standing?.roundsLost || 0,
+            roundDifference: standing?.roundDifference || 0,
+            points: standing?.points || 0,
+            position: standing?.position || index + 1,
             lastUpdated: new Date().toISOString(),
-          }));
+          };
+        });
+
+        // Sort teams by performance
+        teams.sort((a, b) => {
+          if (a.points !== b.points) return b.points - a.points;
+          if (a.roundDifference !== b.roundDifference) return b.roundDifference - a.roundDifference;
+          return b.roundsWon - a.roundsWon;
+        });
 
         return {
-          id: groupName.charCodeAt(0) - 64, // A=1, B=2, etc.
-          groupName,
-          groupDisplayName: `Group ${groupName}`,
+          id: group.groupName.charCodeAt(0) - 64,
+          groupName: group.groupName,
+          groupDisplayName: group.displayName,
           tournament: "hator-cs-league",
           isActive: true,
           teams,
