@@ -3,19 +3,17 @@ import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Trophy, Target } from 'lucide-react';
-import { getTranslation, Language } from '@/lib/translations';
-import { useContext } from 'react';
-import { LanguageContext } from '@/lib/LanguageContext';
+import { useLanguage } from '@/lib/LanguageContext';
 
 interface MatchResult {
   id: number;
-  group_name: string;
-  team1_name: string;
-  team2_name: string;
-  team1_score: number;
-  team2_score: number;
-  winner_id: number | null;
-  match_date: string;
+  groupName: string;
+  team1Name: string;
+  team2Name: string;
+  team1Score: number;
+  team2Score: number;
+  winnerId: number | null;
+  matchDate: string;
 }
 
 interface GroupedResults {
@@ -59,18 +57,18 @@ export default function MatchResults() {
 
   // Group results by group name
   const groupedResults: GroupedResults = matchResults.reduce((acc, match) => {
-    if (!acc[match.group_name]) {
-      acc[match.group_name] = [];
+    if (!acc[match.groupName]) {
+      acc[match.groupName] = [];
     }
-    acc[match.group_name].push(match);
+    acc[match.groupName].push(match);
     return acc;
   }, {} as GroupedResults);
 
   const getWinnerName = (match: MatchResult): string => {
-    if (match.team1_score > match.team2_score) {
-      return match.team1_name;
-    } else if (match.team2_score > match.team1_score) {
-      return match.team2_name;
+    if (match.team1Score > match.team2Score) {
+      return match.team1Name;
+    } else if (match.team2Score > match.team1Score) {
+      return match.team2Name;
     }
     return '';
   };
