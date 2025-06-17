@@ -17,6 +17,7 @@ const HatorCSLeague = () => {
   const [isContentExpanded, setIsContentExpanded] = useState(false);
   const [isTeamsExpanded, setIsTeamsExpanded] = useState(false);
   const [isGroupsExpanded, setIsGroupsExpanded] = useState(false);
+  const [isMatchesExpanded, setIsMatchesExpanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   // Team logo mapping - uses actual team logos from database
@@ -353,8 +354,38 @@ const HatorCSLeague = () => {
 
         {/* Match Schedule Section */}
         <div className="py-16 bg-gradient-to-b from-background/50 to-background">
-          <div className="container mx-auto px-4">
-            <MatchSchedule />
+          <div className="container mx-auto px-4 space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-4xl font-bold text-primary mb-4">
+                Programul Meciurilor
+              </h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Toate meciurile programate și rezultatele din faza grupelor
+              </p>
+              
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2"
+                onClick={() => setIsMatchesExpanded(!isMatchesExpanded)}
+              >
+                {isMatchesExpanded ? (
+                  <>
+                    <ChevronUp className="w-4 h-4" />
+                    Ascunde Meciurile
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4" />
+                    Vezi Meciurile
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {isMatchesExpanded && (
+              <div className="animate-in slide-in-from-top duration-300">
+                <MatchSchedule />
+              </div>
+            )}
           </div>
         </div>
 

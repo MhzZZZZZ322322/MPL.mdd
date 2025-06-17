@@ -97,16 +97,7 @@ export default function MatchSchedule() {
   }
 
   return (
-    <div className="w-full space-y-6">
-      <div className="text-center space-y-2">
-        <h2 className="text-3xl font-bold text-primary">
-          Programul Meciurilor
-        </h2>
-        <p className="text-muted-foreground">
-          Toate meciurile programate și rezultatele din faza grupelor
-        </p>
-      </div>
-
+    <div className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
         {Object.entries(groupedMatches).map(([group, matches]) => (
           <Card key={group} className="bg-card/50 backdrop-blur-sm border-border/50 p-4">

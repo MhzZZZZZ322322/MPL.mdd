@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: **COMPLETED** - Added collapsible "Programul Meciurilor" section with toggle button matching groups design
+- June 17, 2025: **ORGANIZED** - Match schedule displays by groups only (A, B, C, etc.) without day divisions as requested
+- June 17, 2025: **INTEGRATED** - Match results automatically sync from PostgreSQL database with live score updates
 - June 17, 2025: **COMPLETED** - All match results display perfectly in tournament groups with full PostgreSQL synchronization
 - June 17, 2025: **VERIFIED** - Points, wins, losses, and round differences display correctly for all teams (Auratix 6pts, BPSP 3pts, Japon 3pts)
 - June 17, 2025: Implemented auto-sync system ensuring all match statistics appear instantly in group standings
