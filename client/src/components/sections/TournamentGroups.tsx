@@ -56,7 +56,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
       if (!response.ok) throw new Error('Sync failed');
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       // Force refresh of all tournament-related data
       queryClient.invalidateQueries({ queryKey: ['/api/tournament-groups'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
@@ -65,6 +65,19 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
       
       // Force refetch immediately
       refetch();
+      
+      // Show success notification
+      toast({
+        title: "Sincronizare completă",
+        description: `Grupele au fost actualizate cu succes. ${data.totalGroups} grupe sincronizate.`,
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Eroare sincronizare",
+        description: "Nu s-au putut actualiza grupele. Încercați din nou.",
+        variant: "destructive",
+      });
     },
   });
 
