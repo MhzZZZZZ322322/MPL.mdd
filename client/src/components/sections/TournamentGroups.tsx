@@ -22,7 +22,16 @@ interface GroupTeam {
   lastUpdated: string;
 }
 
-
+interface MatchResult {
+  id: number;
+  groupName: string;
+  team1Name: string;
+  team2Name: string;
+  team1Score: number;
+  team2Score: number;
+  winnerId: number | null;
+  matchDate: string;
+}
 
 interface TournamentGroup {
   id: number;
@@ -134,113 +143,109 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
             <Button
               onClick={handleManualSync}
               disabled={syncMutation.isPending}
-              className="bg-secondary hover:bg-secondary/90 text-white px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+              variant="outline"
+              size="sm"
+              className="border-primary/50 text-primary hover:bg-primary/10"
             >
-              <RefreshCw className={`w-4 h-4 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
-              Sync
+              <RefreshCw className={`w-4 h-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
+              {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizare'}
             </Button>
           )}
         </div>
 
         {isExpanded && (
-          <div className="animate-in slide-in-from-top duration-300">
+          <div className="space-y-6">
             {isLoading ? (
-              <div className="text-center text-white py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-                <p className="mt-2">Se încarcă grupele...</p>
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                <p className="mt-4 text-gray-300">{t('tournament.groups.loading')}</p>
               </div>
             ) : error ? (
-              <div className="text-center text-red-400 py-8">
-                <p>Eroare la încărcarea grupelor. Se folosesc date locale.</p>
-              </div>
-            ) : groups.length === 0 ? (
-              <div className="text-center text-gray-400 py-8">
-                <p>Nu există grupe configurate încă.</p>
+              <div className="text-center py-12">
+                <p className="text-red-500 mb-4">{t('tournament.groups.error')}</p>
+                <Button onClick={() => refetch()} variant="outline">
+                  Încearcă din nou
+                </Button>
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {groups.map((group) => (
-                    <div key={group.id} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg border border-slate-700/50 overflow-hidden">
-                      {/* Group Header */}
-                      <div className="bg-gradient-to-r from-primary/80 to-primary/60 px-4 py-3 border-b border-slate-600">
-                        <h3 className="text-white font-bold text-lg text-center">
-                          {group.groupDisplayName}
-                        </h3>
-                        <p className="text-white/80 text-sm text-center mt-1">
-                          {t('tournament.groups.standings')}
-                        </p>
-                      </div>
+                    <div key={group.id} className="group">
+                      <div className="bg-gradient-to-br from-primary/20 to-blue-600/20 border border-primary/30 rounded-lg overflow-hidden hover:border-primary/50 transition-all duration-200">
+                        {/* Group Header */}
+                        <div className="bg-gradient-to-r from-primary/30 to-blue-600/30 p-4 border-b border-primary/20">
+                          <h3 className="text-lg font-bold text-white mb-1">
+                            {group.groupDisplayName}
+                          </h3>
+                          <p className="text-sm text-gray-300">
+                            {group.teams.length} {group.teams.length === 1 ? 'echipă' : 'echipe'} • {' '}
+                            {t('tournament.groups.standings')}
+                          </p>
+                        </div>
 
-                      {/* Teams List */}
-                      <div className="p-4">
-                        {group.teams.length === 0 ? (
-                          <div className="text-center text-gray-400 py-4">
-                            <p className="text-sm">Nu există echipe în această grupă încă</p>
-                          </div>
-                        ) : (
-                          <div className="space-y-2">
-                            {group.teams
-                              .sort((a, b) => {
-                                // Sort by position (ascending), then by points (descending), then by round difference (descending)
-                                if (a.position !== b.position) return a.position - b.position;
-                                if (a.points !== b.points) return b.points - a.points;
-                                return b.roundDifference - a.roundDifference;
-                              })
-                              .map((team, index) => (
-                              <div 
-                                key={team.id} 
-                                className={`flex items-center justify-between p-2 rounded ${
-                                  // Grupe cu 6 echipe: primele 3 avansează (verde)
-                                  // Grupa cu 7 echipe: primele 4 avansează (verde)
-                                  (group.teams.length === 6 && index < 3) || (group.teams.length === 7 && index < 4) ? 
-                                    'bg-green-600/20 border border-green-500/30' :
-                                  // Poziția 1 - aur
-                                  index === 0 ? 'bg-yellow-600/20 border border-yellow-500/30' :
-                                  // Poziția 2 - argint  
-                                  index === 1 ? 'bg-gray-400/20 border border-gray-400/30' :
-                                  // Poziția 3 (și 4 pentru grupa cu 7) - bronz/calificare
-                                  ((group.teams.length === 6 && index === 2) || (group.teams.length === 7 && (index === 2 || index === 3))) ?
-                                    'bg-amber-600/20 border border-amber-500/30' :
-                                  // Restul - eliminare
-                                  'bg-slate-700/30 border border-slate-600/30'
-                                }`}
-                              >
-                                <div className="flex items-center space-x-3 flex-1 min-w-0">
-                                  <span className="text-white font-bold text-sm w-6 text-center">
-                                    {team.position}.
-                                  </span>
-                                  <div className="w-8 h-8 rounded overflow-hidden bg-slate-600 flex-shrink-0">
-                                    <img 
-                                      src={team.teamLogo} 
-                                      alt={team.teamName}
-                                      className="w-full h-full object-cover"
-                                      onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                      }}
-                                    />
+                        {/* Teams List */}
+                        <div className="p-4">
+                          {group.teams.length === 0 ? (
+                            <div className="text-center text-gray-400 py-4">
+                              <p className="text-sm">Nu există echipe în această grupă încă</p>
+                            </div>
+                          ) : (
+                            <div className="space-y-2">
+                              {group.teams
+                                .sort((a, b) => {
+                                  // Sort by position (ascending), then by points (descending), then by round difference (descending)
+                                  if (a.position !== b.position) return a.position - b.position;
+                                  if (a.points !== b.points) return b.points - a.points;
+                                  return b.roundDifference - a.roundDifference;
+                                })
+                                .map((team, index) => (
+                                <div 
+                                  key={team.id}
+                                  className={`flex items-center justify-between p-2 rounded transition-colors ${
+                                    // Top 3 teams advance for groups with 6 teams, top 4 for group with 7 teams
+                                    (group.teams.length <= 6 && team.position <= 3) || 
+                                    (group.teams.length === 7 && team.position <= 4)
+                                      ? 'bg-green-600/20 border border-green-500/30' 
+                                      : 'bg-slate-700/30 border border-slate-600/30'
+                                  }`}
+                                >
+                                  <div className="flex items-center space-x-2 min-w-0 flex-1">
+                                    <span className="text-xs text-gray-400 w-4 flex-shrink-0">
+                                      {team.position}.
+                                    </span>
+                                    <div className="w-8 h-8 rounded overflow-hidden bg-slate-600 flex-shrink-0">
+                                      <img 
+                                        src={team.teamLogo} 
+                                        alt={team.teamName}
+                                        className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                          e.currentTarget.style.display = 'none';
+                                        }}
+                                      />
+                                    </div>
+                                    <span className="text-white text-sm font-medium truncate">
+                                      {team.teamName}
+                                    </span>
                                   </div>
-                                  <span className="text-white text-sm font-medium truncate">
-                                    {team.teamName}
-                                  </span>
+                                  <div className="flex items-center space-x-2 text-xs">
+                                    <span className={`px-2 py-1 rounded ${
+                                      team.points > 0 ? 'bg-green-600/30 text-green-400' :
+                                      'bg-gray-600/30 text-gray-400'
+                                    }`}>
+                                      {team.points}pts
+                                    </span>
+                                    <span className="text-slate-400 min-w-[3rem] text-right">
+                                      {team.wins}-{team.losses}
+                                    </span>
+                                    <span className="text-slate-400 min-w-[2.5rem] text-right">
+                                      {team.roundDifference >= 0 ? '+' : ''}{team.roundDifference}
+                                    </span>
+                                  </div>
                                 </div>
-                                <div className="flex items-center space-x-2 text-xs">
-                                  <span className={`px-2 py-1 rounded ${
-                                    team.points > 0 ? 'bg-green-600/30 text-green-400' :
-                                    'bg-gray-600/30 text-gray-400'
-                                  }`}>
-                                    {team.points}pts
-                                  </span>
-                                  <span className="text-slate-400 min-w-[3rem] text-right">
-                                    {team.wins}-{team.losses}
-                                  </span>
-                                  <span className="text-slate-400 min-w-[2.5rem] text-right">
-                                    {team.roundDifference >= 0 ? '+' : ''}{team.roundDifference}
-                                  </span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
+                              ))}
+                            </div>
+                          )}
 
                           {/* Match Results for this group */}
                           {getResultsForGroup(group.groupName).length > 0 && (
@@ -249,7 +254,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                                 <h4 className="text-sm font-medium text-gray-300">Rezultate Meciuri</h4>
                               </div>
                               <div className="space-y-1">
-                                {getResultsForGroup(group.groupName).slice(0, 5).map((match) => (
+                                {getResultsForGroup(group.groupName).slice(0, 3).map((match) => (
                                   <div
                                     key={match.id}
                                     className="bg-slate-800/30 border border-slate-700/50 rounded p-2 text-xs"
@@ -263,7 +268,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                                         </span>
                                       </div>
 
-                                      <div className="flex items-center space-x-2 px-2">
+                                      <div className="flex items-center space-x-1 px-2">
                                         <span className={`font-bold ${
                                           match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
                                         }`}>
@@ -284,28 +289,21 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                                           {match.team2Name}
                                         </span>
                                       </div>
-
-                                      <div className="text-gray-400 text-xs ml-2">
-                                        {formatDate(match.matchDate)}
-                                      </div>
                                     </div>
                                   </div>
                                 ))}
-                                {getResultsForGroup(group.groupName).length > 5 && (
-                                  <div className="text-center text-xs text-gray-400 mt-2">
-                                    și încă {getResultsForGroup(group.groupName).length - 5} rezultate...
+                                {getResultsForGroup(group.groupName).length > 3 && (
+                                  <div className="text-center text-xs text-gray-400 mt-1">
+                                    +{getResultsForGroup(group.groupName).length - 3} meciuri
                                   </div>
                                 )}
                               </div>
                             </div>
                           )}
-                        )}
-                      </div>
-                    </div>
+                        </div>
                       </div>
                     </div>
                   ))}
-                </div>
                 </div>
                 
                 {/* Legend */}
