@@ -1354,6 +1354,44 @@ export const translations: TranslationDictionary = {
   "event.place.third": {
     ro: "LOCUL 3",
     ru: "3 МЕСТО"
+  },
+  
+  // Match Results Translations
+  "match_results": {
+    ro: "Rezultate Meciuri",
+    ru: "Результаты матчей"
+  },
+  "match_results_description": {
+    ro: "Vezi toate rezultatele meciurilor jucate în cadrul turneului, organizate pe grupe",
+    ru: "Смотрите все результаты матчей, сыгранных в рамках турнира, организованные по группам"
+  },
+  "loading_results": {
+    ro: "Se încarcă rezultatele...",
+    ru: "Загружаются результаты..."
+  },
+  "error_loading_results": {
+    ro: "Eroare la încărcarea rezultatelor",
+    ru: "Ошибка при загрузке результатов"
+  },
+  "no_matches_played": {
+    ro: "Nu au fost jucate încă meciuri",
+    ru: "Пока что матчи не проводились"
+  },
+  "matches_will_appear_here": {
+    ro: "Rezultatele meciurilor vor apărea aici odată ce sunt introduse",
+    ru: "Результаты матчей появятся здесь после их ввода"
+  },
+  "group": {
+    ro: "Grupa",
+    ru: "Группа"
+  },
+  "matches": {
+    ro: "meciuri",
+    ru: "матчей"
+  },
+  "winner": {
+    ro: "Câștigător",
+    ru: "Победитель"
   }
 };
 
