@@ -111,30 +111,27 @@ export default function MatchResults() {
               <CardContent className="p-0">
                 {/* Group Header */}
                 <div 
-                  className="flex items-center justify-between p-4 cursor-pointer hover:bg-white/5 transition-colors"
+                  className="flex items-center justify-between p-3 cursor-pointer hover:bg-white/5 transition-colors"
                   onClick={() => toggleGroup(groupName)}
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-primary/30 rounded-full flex items-center justify-center">
-                      <Trophy className="w-5 h-5 text-primary" />
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-primary/30 rounded-full flex items-center justify-center">
+                      <Trophy className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white">
+                      <h3 className="text-base font-bold text-white">
                         Grupa {groupName}
                       </h3>
-                      <p className="text-sm text-gray-300">
-                        {matchCount} {matchCount === 1 ? 'meci' : 'meciuri'} jucat{matchCount === 1 ? '' : 'e'}
-                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge variant="outline" className="text-primary border-primary/50">
-                      {matchCount} rezultate
+                    <Badge variant="outline" className="text-xs text-primary border-primary/50 px-2 py-0.5">
+                      {matchCount}
                     </Badge>
                     {isExpanded ? (
-                      <ChevronUp className="w-5 h-5 text-gray-400" />
+                      <ChevronUp className="w-4 h-4 text-gray-400" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                      <ChevronDown className="w-4 h-4 text-gray-400" />
                     )}
                   </div>
                 </div>
@@ -142,64 +139,52 @@ export default function MatchResults() {
                 {/* Matches List */}
                 {isExpanded && (
                   <div className="border-t border-white/10">
-                    <div className="p-4 space-y-3">
+                    <div className="p-2 space-y-1">
                       {groupMatches
                         .sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime())
                         .map((match) => {
-                          const winner = getWinner(match);
                           return (
                             <div
                               key={match.id}
-                              className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 hover:bg-slate-800/70 transition-colors"
+                              className="bg-slate-800/50 border border-slate-700 rounded p-2 hover:bg-slate-800/70 transition-colors"
                             >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-4 flex-1">
+                              <div className="flex items-center justify-between text-sm">
+                                <div className="flex items-center flex-1">
                                   {/* Team 1 */}
-                                  <div className="flex items-center space-x-2 min-w-0 flex-1">
-                                    <span className={`font-medium truncate ${
-                                      match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
-                                    }`}>
-                                      {match.team1Name}
-                                    </span>
-                                  </div>
-
-                                  {/* Score */}
-                                  <div className="flex items-center space-x-2 px-4">
-                                    <span className={`text-lg font-bold ${
-                                      match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
-                                    }`}>
-                                      {match.team1Score}
-                                    </span>
-                                    <span className="text-gray-500">-</span>
-                                    <span className={`text-lg font-bold ${
-                                      match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
-                                    }`}>
-                                      {match.team2Score}
-                                    </span>
-                                  </div>
-
-                                  {/* Team 2 */}
-                                  <div className="flex items-center space-x-2 min-w-0 flex-1 justify-end">
-                                    <span className={`font-medium truncate ${
-                                      match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
-                                    }`}>
-                                      {match.team2Name}
-                                    </span>
-                                  </div>
+                                  <span className={`font-medium truncate min-w-0 ${
+                                    match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
+                                  }`}>
+                                    {match.team1Name}
+                                  </span>
                                 </div>
 
-                                <div className="flex items-center space-x-3 ml-4">
-                                  <div className="text-right">
-                                    <div className="flex items-center text-gray-400 text-sm">
-                                      <Calendar className="h-4 w-4 mr-1" />
-                                      {formatDate(match.matchDate)}
-                                    </div>
-                                    {winner !== 'Egalitate' && (
-                                      <Badge variant="outline" className="mt-1 text-green-400 border-green-400">
-                                        Câștigător: {winner}
-                                      </Badge>
-                                    )}
-                                  </div>
+                                {/* Score */}
+                                <div className="flex items-center space-x-2 px-3">
+                                  <span className={`font-bold ${
+                                    match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
+                                  }`}>
+                                    {match.team1Score}
+                                  </span>
+                                  <span className="text-gray-500">-</span>
+                                  <span className={`font-bold ${
+                                    match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
+                                  }`}>
+                                    {match.team2Score}
+                                  </span>
+                                </div>
+
+                                {/* Team 2 */}
+                                <div className="flex items-center flex-1 justify-end">
+                                  <span className={`font-medium truncate min-w-0 ${
+                                    match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
+                                  }`}>
+                                    {match.team2Name}
+                                  </span>
+                                </div>
+
+                                {/* Date */}
+                                <div className="text-gray-400 text-xs ml-3">
+                                  {formatDate(match.matchDate)}
                                 </div>
                               </div>
                             </div>
