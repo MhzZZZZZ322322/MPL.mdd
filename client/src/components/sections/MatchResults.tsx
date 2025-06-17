@@ -113,7 +113,7 @@ export default function MatchResults() {
                 <CardContent className="p-6">
                   <div className="grid gap-4">
                     {matches
-                      .sort((a, b) => new Date(b.match_date).getTime() - new Date(a.match_date).getTime())
+                      .sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime())
                       .map((match) => {
                         const winner = getWinnerName(match);
                         return (
@@ -124,13 +124,13 @@ export default function MatchResults() {
                             <div className="flex items-center gap-4 w-full md:w-auto">
                               <div className="text-center">
                                 <p className={`font-semibold text-lg ${
-                                  winner === match.team1_name 
+                                  winner === match.team1Name 
                                     ? 'text-green-600 dark:text-green-400' 
                                     : 'text-gray-700 dark:text-gray-300'
                                 }`}>
-                                  {match.team1_name}
+                                  {match.team1Name}
                                 </p>
-                                {winner === match.team1_name && (
+                                {winner === match.team1Name && (
                                   <Trophy className="h-4 w-4 text-green-600 mx-auto mt-1" />
                                 )}
                               </div>
@@ -138,19 +138,19 @@ export default function MatchResults() {
                               <div className="text-center px-4">
                                 <div className="flex items-center gap-2 text-2xl font-bold">
                                   <span className={`${
-                                    match.team1_score > match.team2_score 
+                                    match.team1Score > match.team2Score 
                                       ? 'text-green-600 dark:text-green-400' 
                                       : 'text-gray-600 dark:text-gray-400'
                                   }`}>
-                                    {match.team1_score}
+                                    {match.team1Score}
                                   </span>
                                   <span className="text-gray-400">-</span>
                                   <span className={`${
-                                    match.team2_score > match.team1_score 
+                                    match.team2Score > match.team1Score 
                                       ? 'text-green-600 dark:text-green-400' 
                                       : 'text-gray-600 dark:text-gray-400'
                                   }`}>
-                                    {match.team2_score}
+                                    {match.team2Score}
                                   </span>
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1">CS2 BO1</p>
@@ -158,13 +158,13 @@ export default function MatchResults() {
                               
                               <div className="text-center">
                                 <p className={`font-semibold text-lg ${
-                                  winner === match.team2_name 
+                                  winner === match.team2Name 
                                     ? 'text-green-600 dark:text-green-400' 
                                     : 'text-gray-700 dark:text-gray-300'
                                 }`}>
-                                  {match.team2_name}
+                                  {match.team2Name}
                                 </p>
-                                {winner === match.team2_name && (
+                                {winner === match.team2Name && (
                                   <Trophy className="h-4 w-4 text-green-600 mx-auto mt-1" />
                                 )}
                               </div>
@@ -172,7 +172,7 @@ export default function MatchResults() {
                             
                             <div className="text-right mt-4 md:mt-0">
                               <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {formatDate(match.match_date)}
+                                {formatDate(match.matchDate)}
                               </p>
                               {winner && (
                                 <Badge variant="outline" className="mt-1 text-green-600 border-green-600">

@@ -8,6 +8,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Save, Trophy, Users, RefreshCw, Settings } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GroupManagement from "@/components/GroupManagement";
+import MatchResultsManager from "@/components/admin/MatchResultsManager";
 
 interface MatchResult {
   team1: string;

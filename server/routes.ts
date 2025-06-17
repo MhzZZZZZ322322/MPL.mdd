@@ -476,17 +476,113 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Match results endpoint
+  // Match results endpoint - public display
   app.get("/api/match-results", async (req, res) => {
     try {
       const { db } = await import("./db");
       const { matchResults } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
       
-      const results = await db.select().from(matchResults).orderBy(matchResults.matchDate);
+      const results = await db.select().from(matchResults).orderBy(desc(matchResults.matchDate));
       res.json(results);
     } catch (error) {
       console.error("Error fetching match results:", error);
       res.status(500).json({ message: "Failed to fetch match results" });
+    }
+  });
+
+  // Admin match results endpoints
+  app.get("/api/admin/match-results", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { matchResults } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const results = await db.select().from(matchResults).orderBy(desc(matchResults.matchDate));
+      res.json(results);
+    } catch (error) {
+      console.error("Error fetching admin match results:", error);
+      res.status(500).json({ message: "Failed to fetch match results" });
+    }
+  });
+
+  app.post("/api/admin/match-results", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { matchResults, insertMatchResultSchema } = await import("@shared/schema");
+      
+      const result = insertMatchResultSchema.safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      const newMatch = await db.insert(matchResults).values(result.data).returning();
+      res.status(201).json(newMatch[0]);
+    } catch (error) {
+      console.error("Error creating match result:", error);
+      res.status(500).json({ message: "Failed to create match result" });
+    }
+  });
+
+  app.put("/api/admin/match-results/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid match result ID" });
+      }
+
+      const { db } = await import("./db");
+      const { matchResults, insertMatchResultSchema } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const result = insertMatchResultSchema.partial().safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+      
+      const updatedMatch = await db.update(matchResults)
+        .set(result.data)
+        .where(eq(matchResults.id, id))
+        .returning();
+        
+      if (updatedMatch.length === 0) {
+        return res.status(404).json({ message: "Match result not found" });
+      }
+      
+      res.json(updatedMatch[0]);
+    } catch (error) {
+      console.error("Error updating match result:", error);
+      res.status(500).json({ message: "Failed to update match result" });
+    }
+  });
+
+  app.delete("/api/admin/match-results/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid match result ID" });
+      }
+
+      const { db } = await import("./db");
+      const { matchResults } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const deletedMatch = await db.delete(matchResults)
+        .where(eq(matchResults.id, id))
+        .returning();
+        
+      if (deletedMatch.length === 0) {
+        return res.status(404).json({ message: "Match result not found" });
+      }
+      
+      res.json({ message: "Match result deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting match result:", error);
+      res.status(500).json({ message: "Failed to delete match result" });
     }
   });
 
