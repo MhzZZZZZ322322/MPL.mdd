@@ -22,6 +22,8 @@ interface GroupTeam {
   lastUpdated: string;
 }
 
+
+
 interface TournamentGroup {
   id: number;
   groupName: string;
@@ -45,6 +47,12 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
   const { data: groups = [], isLoading, error, refetch } = useQuery<TournamentGroup[]>({
     queryKey: ['/api/tournament-groups'],
     refetchInterval: 60000, // Refetch every minute
+  });
+
+  // Fetch match results from API
+  const { data: matchResults = [] } = useQuery<MatchResult[]>({
+    queryKey: ['/api/match-results'],
+    refetchInterval: 30000, // Refetch every 30 seconds
   });
 
   const { toast } = useToast();
@@ -83,6 +91,22 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
 
   const handleManualSync = () => {
     syncMutation.mutate();
+  };
+
+  // Helper function to format date
+  const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('ro-RO', {
+      day: '2-digit',
+      month: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  // Helper function to get results for a specific group
+  const getResultsForGroup = (groupName: string): MatchResult[] => {
+    return matchResults.filter(result => result.groupName === groupName)
+      .sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime());
   };
 
   return (
@@ -217,10 +241,71 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                               </div>
                             ))}
                           </div>
+
+                          {/* Match Results for this group */}
+                          {getResultsForGroup(group.groupName).length > 0 && (
+                            <div className="mt-4 pt-4 border-t border-slate-600/30">
+                              <div className="mb-2">
+                                <h4 className="text-sm font-medium text-gray-300">Rezultate Meciuri</h4>
+                              </div>
+                              <div className="space-y-1">
+                                {getResultsForGroup(group.groupName).slice(0, 5).map((match) => (
+                                  <div
+                                    key={match.id}
+                                    className="bg-slate-800/30 border border-slate-700/50 rounded p-2 text-xs"
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <div className="flex items-center flex-1">
+                                        <span className={`font-medium truncate min-w-0 ${
+                                          match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
+                                        }`}>
+                                          {match.team1Name}
+                                        </span>
+                                      </div>
+
+                                      <div className="flex items-center space-x-2 px-2">
+                                        <span className={`font-bold ${
+                                          match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
+                                        }`}>
+                                          {match.team1Score}
+                                        </span>
+                                        <span className="text-gray-500">-</span>
+                                        <span className={`font-bold ${
+                                          match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
+                                        }`}>
+                                          {match.team2Score}
+                                        </span>
+                                      </div>
+
+                                      <div className="flex items-center flex-1 justify-end">
+                                        <span className={`font-medium truncate min-w-0 ${
+                                          match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
+                                        }`}>
+                                          {match.team2Name}
+                                        </span>
+                                      </div>
+
+                                      <div className="text-gray-400 text-xs ml-2">
+                                        {formatDate(match.matchDate)}
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                                {getResultsForGroup(group.groupName).length > 5 && (
+                                  <div className="text-center text-xs text-gray-400 mt-2">
+                                    și încă {getResultsForGroup(group.groupName).length - 5} rezultate...
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
                         )}
                       </div>
                     </div>
+                      </div>
+                    </div>
                   ))}
+                </div>
                 </div>
                 
                 {/* Legend */}
