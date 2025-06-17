@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 17, 2025: **CORRECTED** - Fixed playoff calculation display to show correct 21 teams advancing (7 groups × 3 teams) instead of erroneous 22 teams
 - June 17, 2025: **RECONFIGURED** - Eliminated RCBVR team and restructured tournament to 7 groups with 6 teams each (42 teams total, 21 advance to playoff)
 - June 17, 2025: **STANDARDIZED** - Aligned all button chevron positions to the right side for perfect visual consistency across all 3 main buttons
 - June 17, 2025: **FIXED** - Corrected TournamentGroups button styling to match all other buttons with border-primary/50 and outline variant
