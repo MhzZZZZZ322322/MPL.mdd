@@ -112,7 +112,14 @@ export default function MatchSchedule() {
               </div>
               
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {matches.map((match, index) => (
+                {matches
+                  .sort((a, b) => {
+                    // Meciurile jucate (cu rezultate) în partea de sus
+                    if (a.result && !b.result) return -1;
+                    if (!a.result && b.result) return 1;
+                    return 0;
+                  })
+                  .map((match, index) => (
                   <div
                     key={`${match.team1}-${match.team2}-${index}`}
                     className="flex items-center justify-between bg-muted/30 rounded-lg p-3 hover:bg-muted/50 transition-colors"
