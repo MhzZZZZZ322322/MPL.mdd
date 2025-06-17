@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
-import MatchResults from "@/components/sections/MatchResults";
+
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -350,8 +350,7 @@ const HatorCSLeague = () => {
           onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
         />
 
-        {/* Match Results Section */}
-        <MatchResults />
+
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">

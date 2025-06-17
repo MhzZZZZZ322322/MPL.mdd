@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: Removed separate MatchResults module - results now display only within tournament groups structure
+- June 17, 2025: Completed final integration of match results directly into TournamentGroups component
+- June 17, 2025: Eliminated standalone MatchResults component and integrated all functionality into groups display
 - June 17, 2025: Integrated match results from PostgreSQL database directly into tournament groups display - results now appear under each group automatically
 - June 17, 2025: Completed full database integration - both group standings and match results pull from PostgreSQL in real-time
 - June 17, 2025: Implemented compact match results display within tournament groups with live data synchronization
