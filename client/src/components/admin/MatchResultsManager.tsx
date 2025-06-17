@@ -459,11 +459,7 @@ export default function MatchResultsManager() {
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     {matches
-                      .sort((a, b) => {
-                        const dateA = match.matchDate ? new Date(a.matchDate).getTime() : 0;
-                        const dateB = match.matchDate ? new Date(b.matchDate).getTime() : 0;
-                        return dateB - dateA;
-                      })
+                      .sort((a, b) => b.id - a.id)
                       .map((match) => {
                         const winner = getWinner(match);
                         return (
@@ -516,7 +512,7 @@ export default function MatchResultsManager() {
                               <div className="text-right">
                                 <div className="flex items-center text-gray-400 text-sm">
                                   <Calendar className="h-4 w-4 mr-1" />
-                                  {formatDate(match.matchDate)}
+                                  {formatDate(typeof match.matchDate === 'string' ? match.matchDate : match.matchDate?.toISOString() || null)}
                                 </div>
                                 {winner && (
                                   <Badge variant="outline" className="mt-1 text-green-400 border-green-400">

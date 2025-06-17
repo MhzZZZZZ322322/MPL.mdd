@@ -31,43 +31,30 @@ export default function TournamentAdmin() {
   const { toast } = useToast();
 
   // Fetch teams
-  const { data: teams = [] } = useQuery<any[]>({
+  const { data: teams = [], isLoading: teamsLoading } = useQuery({
     queryKey: ['/api/teams'],
   });
 
-  // Fetch current standings
-  const { data: standings = [], isLoading: standingsLoading } = useQuery<any[]>({
+  // Fetch standings
+  const { data: standings = [], isLoading: standingsLoading } = useQuery({
     queryKey: ['/api/admin/group-standings'],
-    refetchInterval: 30000,
   });
 
-  // Add match result mutation
-  const addMatchMutation = useMutation({
-    mutationFn: async (match: MatchResult) => {
-      const response = await fetch('/api/admin/add-match-result', {
+  // Initialize groups mutation
+  const initGroupsMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/admin/initialize-groups', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(match),
       });
-      if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error);
-      }
+      if (!response.ok) throw new Error('Failed to initialize groups');
       return response.json();
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/group-standings'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/tournament-groups'] });
       toast({
-        title: "Rezultat adăugat",
-        description: "Meciul a fost înregistrat și clasamentul actualizat",
-      });
-      setNewMatch({
-        team1: '',
-        team2: '',
-        team1Score: 0,
-        team2Score: 0,
-        groupName: 'A'
+        title: "Succes",
+        description: "Grupele au fost inițializate cu succes",
       });
     },
     onError: (error: Error) => {
@@ -79,76 +66,109 @@ export default function TournamentAdmin() {
     },
   });
 
-  // Initialize groups mutation
-  const initGroupsMutation = useMutation({
-    mutationFn: async () => {
-      const response = await fetch('/api/admin/initialize-groups', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (!response.ok) throw new Error('Failed to initialize groups');
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-standings'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/tournament-groups'] });
-      toast({
-        title: "Grupe inițializate",
-        description: "Sistemul de grupe a fost configurat cu toate echipele",
-      });
-    },
-  });
-
-  // Reset all results mutation
+  // Reset tournament mutation
   const resetMutation = useMutation({
     mutationFn: async () => {
       const response = await fetch('/api/admin/reset-tournament', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
       });
       if (!response.ok) throw new Error('Failed to reset tournament');
       return response.json();
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/group-standings'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/tournament-groups'] });
       toast({
-        title: "Turneu resetat",
-        description: "Toate rezultatele au fost șterse",
+        title: "Succes",
+        description: "Turneul a fost resetat cu succes",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Eroare",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Add match mutation
+  const addMatchMutation = useMutation({
+    mutationFn: async (match: MatchResult) => {
+      const response = await fetch('/api/admin/add-match', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(match),
+      });
+      if (!response.ok) throw new Error('Failed to add match');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-standings'] });
+      setNewMatch({
+        team1: '',
+        team2: '',
+        team1Score: 0,
+        team2Score: 0,
+        groupName: 'A'
+      });
+      toast({
+        title: "Succes",
+        description: "Meciul a fost adăugat cu succes",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Eroare",
+        description: error.message,
+        variant: "destructive",
       });
     },
   });
 
   const handleAddMatch = () => {
-    if (newMatch.team1 && newMatch.team2 && newMatch.team1 !== newMatch.team2) {
-      // Validate CS2 BO1 score format (first to 13 rounds wins, no ties possible)
-      if (newMatch.team1Score < 13 && newMatch.team2Score < 13) {
-        toast({
-          title: "Scor invalid",
-          description: "În CS2 BO1, o echipă trebuie să câștige cu cel puțin 13 runde",
-          variant: "destructive",
-        });
-        return;
-      }
-      if (newMatch.team1Score >= 13 && newMatch.team2Score >= 13) {
-        toast({
-          title: "Scor invalid", 
-          description: "În CS2 BO1 nu poate fi egalitate - o echipă trebuie să câștige",
-          variant: "destructive",
-        });
-        return;
-      }
-      if (newMatch.team1Score === newMatch.team2Score) {
-        toast({
-          title: "Scor invalid",
-          description: "Nu sunt permise egaluri în CS2 BO1",
-          variant: "destructive",
-        });
-        return;
-      }
-      
-      addMatchMutation.mutate(newMatch);
+    if (!newMatch.team1 || !newMatch.team2 || newMatch.team1 === newMatch.team2) {
+      toast({
+        title: "Eroare",
+        description: "Selectează două echipe diferite",
+        variant: "destructive",
+      });
+      return;
     }
+
+    const totalScore = newMatch.team1Score + newMatch.team2Score;
+    const maxScore = Math.max(newMatch.team1Score, newMatch.team2Score);
+    
+    if (maxScore < 13 || totalScore < 13) {
+      toast({
+        title: "Eroare", 
+        description: "Scorul este invalid pentru CS2 BO1 (minim 13 runde pentru câștigător)",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (Math.abs(newMatch.team1Score - newMatch.team2Score) < 2 && maxScore < 16) {
+      toast({
+        title: "Eroare",
+        description: "Pentru CS2 BO1, diferența trebuie să fie de minim 2 runde sau scorul maxim 16",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (maxScore > 16) {
+      toast({
+        title: "Eroare",
+        description: "Scorul maxim pentru CS2 BO1 este 16",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    addMatchMutation.mutate(newMatch);
   };
 
   // Get teams for a specific group
@@ -196,196 +216,7 @@ export default function TournamentAdmin() {
             </TabsContent>
             
             <TabsContent value="results" className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <Card className="bg-slate-800/50 border-slate-700">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center space-x-4">
-                      <Users className="text-primary" />
-                      <div>
-                        <p className="text-sm text-gray-300">Total echipe</p>
-                        <p className="text-2xl font-bold">{teams.length}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-slate-800/50 border-slate-700">
-                  <CardContent className="pt-6">
-                    <Button 
-                      onClick={() => initGroupsMutation.mutate()}
-                      disabled={initGroupsMutation.isPending}
-                      className="w-full bg-primary hover:bg-primary/90"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Inițializează Grupele
-                    </Button>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-slate-800/50 border-slate-700">
-                  <CardContent className="pt-6">
-                    <Button 
-                      onClick={() => resetMutation.mutate()}
-                      disabled={resetMutation.isPending}
-                      className="w-full bg-red-600 hover:bg-red-700"
-                    >
-                      <RefreshCw className="w-4 h-4 mr-2" />
-                      Reset Turneu
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Add Match Result Form */}
-              <Card className="mb-8 bg-slate-800/50 border-slate-700">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Save className="mr-2" />
-                    Adaugă Rezultat Meci
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-                    <Select value={newMatch.groupName} onValueChange={(value) => 
-                      setNewMatch({...newMatch, groupName: value, team1: '', team2: ''})
-                    }>
-                      <SelectTrigger className="bg-slate-700 border-slate-600">
-                        <SelectValue placeholder="Grupa" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(group => (
-                          <SelectItem key={group} value={group}>Grupa {group}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-
-                    <Select value={newMatch.team1} onValueChange={(value) => 
-                      setNewMatch({...newMatch, team1: value})
-                    }>
-                      <SelectTrigger className="bg-slate-700 border-slate-600">
-                        <SelectValue placeholder="Echipa 1" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {getTeamsByGroup(newMatch.groupName).map((team: any) => (
-                          <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-
-                    <Input
-                      type="number"
-                      placeholder="Runde câștigate"
-                      value={newMatch.team1Score}
-                      onChange={(e) => setNewMatch({...newMatch, team1Score: parseInt(e.target.value) || 0})}
-                      min="0"
-                      max="30"
-                      className="bg-slate-700 border-slate-600"
-                    />
-
-                    <Input
-                      type="number"
-                      placeholder="Runde câștigate"
-                      value={newMatch.team2Score}
-                      onChange={(e) => setNewMatch({...newMatch, team2Score: parseInt(e.target.value) || 0})}
-                      min="0"
-                      max="30"
-                      className="bg-slate-700 border-slate-600"
-                    />
-
-                    <Select value={newMatch.team2} onValueChange={(value) => 
-                      setNewMatch({...newMatch, team2: value})
-                    }>
-                      <SelectTrigger className="bg-slate-700 border-slate-600">
-                        <SelectValue placeholder="Echipa 2" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {getTeamsByGroup(newMatch.groupName)
-                          .filter((team: any) => team.name !== newMatch.team1)
-                          .map((team: any) => (
-                          <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-
-                    <Button 
-                      onClick={handleAddMatch}
-                      disabled={addMatchMutation.isPending || !newMatch.team1 || !newMatch.team2}
-                      className="bg-green-600 hover:bg-green-700"
-                    >
-                      <Save className="w-4 h-4 mr-2" />
-                      {addMatchMutation.isPending ? "Se salvează..." : "Salvează"}
-                    </Button>
-                  </div>
-                  
-                  {newMatch.team1 && newMatch.team2 && (
-                    <div className="mt-4 p-4 bg-slate-700/50 rounded-lg">
-                      <p className="text-sm text-gray-300">Previzualizare rezultat:</p>
-                      <p className="text-lg font-semibold">
-                        {newMatch.team1} <span className="text-primary">{newMatch.team1Score}</span> - 
-                        <span className="text-primary"> {newMatch.team2Score}</span> {newMatch.team2}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        Grupa {newMatch.groupName} • CS2 BO1 • 
-                        {(newMatch.team1Score >= 13 || newMatch.team2Score >= 13) && newMatch.team1Score !== newMatch.team2Score ? (
-                          <>Învingător: {newMatch.team1Score > newMatch.team2Score ? newMatch.team1 : newMatch.team2}</>
-                        ) : (
-                          <span className="text-yellow-400">⚠️ Scor invalid pentru CS2 BO1 (minim 13 runde)</span>
-                        )}
-                      </p>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Current Standings */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-                {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(group => {
-                  const groupStandings = getStandingsByGroup(group);
-                  return (
-                    <Card key={group} className="bg-slate-800/50 border-slate-700">
-                      <CardHeader>
-                        <CardTitle className="text-center text-primary">Grupa {group}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        {standingsLoading ? (
-                          <div className="text-center py-4">
-                            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto"></div>
-                          </div>
-                        ) : groupStandings.length === 0 ? (
-                          <div className="text-center text-gray-400 py-4">
-                            <p className="text-sm">Nu există rezultate încă</p>
-                          </div>
-                        ) : (
-                          <div className="space-y-2">
-                            {groupStandings.map((team: any, index: number) => (
-                              <div 
-                                key={team.teamName} 
-                                className={`flex items-center justify-between p-2 rounded text-sm ${
-                                  index === 0 ? 'bg-green-600/20 border border-green-500/30' :
-                                  index === 1 ? 'bg-blue-600/20 border border-blue-500/30' :
-                                  'bg-slate-700/30'
-                                }`}
-                              >
-                                <div className="flex items-center space-x-2 flex-1 min-w-0">
-                                  <span className="font-bold w-4">{index + 1}.</span>
-                                  <span className="truncate">{team.teamName}</span>
-                                </div>
-                                <div className="flex items-center space-x-1 text-xs">
-                                  <span className="bg-primary/20 px-1 rounded">{team.points}pts</span>
-                                  <span className="text-gray-400">{team.wins}-{team.losses}</span>
-                                  <span className="text-gray-400">
-                                    {team.roundDifference >= 0 ? '+' : ''}{team.roundDifference}
-                                  </span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
+              <MatchResultsManager />
             </TabsContent>
           </Tabs>
         </div>
