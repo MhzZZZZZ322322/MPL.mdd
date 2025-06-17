@@ -248,10 +248,12 @@ export default function MatchSchedule() {
                           size="sm"
                           variant="outline"
                           onClick={() => window.open(match.result!.streamUrl!, '_blank')}
-                          className="h-8 px-2 text-orange-500 border-orange-500/50 hover:bg-orange-500/10 font-semibold text-xs"
+                          className="h-6 w-6 p-0 text-orange-500 border-orange-500/50 hover:bg-orange-500/10"
                           title="Vezi statistici și demo pe Faceit"
                         >
-                          FACEIT
+                          <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
+                            <path d="M14.4 10.8c-.8-.8-2.1-.8-2.9 0-.8.8-.8 2.1 0 2.9.8.8 2.1.8 2.9 0 .8-.8.8-2.1 0-2.9zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+                          </svg>
                         </Button>
                       </div>
                     )}
