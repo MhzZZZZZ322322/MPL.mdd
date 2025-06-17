@@ -1,0 +1,106 @@
+Data	Ora	Grupa	Echipa 1	Echipa 2
+19.06.2025	18:00	GRUPA A	Kamikaze Clan 	Saponel 
+19.06.2025	18:00	GRUPA A	Lean Vision 	Ciocălău Team 
+19.06.2025	18:00	GRUPA A	Muligambia 	BPSP 
+19.06.2025	18:45	GRUPA A	BPSP 	Saponel 
+19.06.2025	18:45	GRUPA A	Muligambia 	Ciocălău Team 
+19.06.2025	18:45	GRUPA A	Kamikaze Clan 	Lean Vision 
+19.06.2025	19:30	GRUPA A	Lean Vision 	Saponel 
+19.06.2025	19:30	GRUPA A	Kamikaze Clan 	Muligambia 
+19.06.2025	19:30	GRUPA A	BPSP 	Ciocălău Team 
+19.06.2025	20:15	GRUPA A	Ciocălău Team 	Saponel 
+19.06.2025	20:15	GRUPA A	Kamikaze Clan 	BPSP 
+19.06.2025	20:15	GRUPA A	Lean Vision 	Muligambia 
+19.06.2025	21:00	GRUPA A	Muligambia 	Saponel 
+19.06.2025	21:00	GRUPA A	Lean Vision 	BPSP 
+19.06.2025	21:00	GRUPA A	Kamikaze Clan 	Ciocălău Team 
+20.06.2025	18:00	GRUPA B	Ciocana Esports 	Xtreme Players
+20.06.2025	18:00	GRUPA B	Legalize 	Barbosii 
+20.06.2025	18:00	GRUPA B	LitEnergy 	Japon 
+20.06.2025	18:45	GRUPA B	Japon 	Xtreme Players
+20.06.2025	18:45	GRUPA B	LitEnergy 	Barbosii 
+20.06.2025	18:45	GRUPA B	Ciocana Esports 	Legalize 
+20.06.2025	19:30	GRUPA B	Legalize 	Xtreme Players
+20.06.2025	19:30	GRUPA B	Ciocana Esports 	LitEnergy 
+20.06.2025	19:30	GRUPA B	Japon 	Barbosii 
+20.06.2025	20:15	GRUPA B	Barbosii 	Xtreme Players
+20.06.2025	20:15	GRUPA B	Ciocana Esports 	Japon 
+20.06.2025	20:15	GRUPA B	Legalize 	LitEnergy 
+20.06.2025	21:00	GRUPA B	LitEnergy 	Xtreme Players
+20.06.2025	21:00	GRUPA B	Legalize 	Japon 
+20.06.2025	21:00	GRUPA B	Ciocana Esports 	Barbosii 
+21.06.2025	18:00	GRUPA C	Brigada Meteor 	Bobb3rs 
+21.06.2025	18:00	GRUPA C	Neo Egoist League 	BaitMD 
+21.06.2025	18:00	GRUPA C	La Passion 	 Win Spirit 
+21.06.2025	18:45	GRUPA C	 Win Spirit 	Bobb3rs 
+21.06.2025	18:45	GRUPA C	La Passion 	BaitMD 
+21.06.2025	18:45	GRUPA C	Brigada Meteor 	Neo Egoist League 
+21.06.2025	19:30	GRUPA C	Neo Egoist League 	Bobb3rs 
+21.06.2025	19:30	GRUPA C	Brigada Meteor 	La Passion 
+21.06.2025	19:30	GRUPA C	 Win Spirit 	BaitMD 
+21.06.2025	20:15	GRUPA C	BaitMD 	Bobb3rs 
+21.06.2025	20:15	GRUPA C	Brigada Meteor 	 Win Spirit 
+21.06.2025	20:15	GRUPA C	Neo Egoist League 	La Passion 
+21.06.2025	21:00	GRUPA C	La Passion 	Bobb3rs 
+21.06.2025	21:00	GRUPA C	Neo Egoist League 	 Win Spirit 
+21.06.2025	21:00	GRUPA C	Brigada Meteor 	BaitMD 
+25.06.2025	18:00	GRUPA D	Coli 	Rumina 
+25.06.2025	18:00	GRUPA D	K9 Team 	Shashlik 
+25.06.2025	18:00	GRUPA D	Into the Breach 	WenDeagle 
+25.06.2025	18:45	GRUPA D	WenDeagle 	Rumina 
+25.06.2025	18:45	GRUPA D	Into the Breach 	Shashlik 
+25.06.2025	18:45	GRUPA D	Coli 	K9 Team 
+25.06.2025	19:30	GRUPA D	K9 Team 	Rumina 
+25.06.2025	19:30	GRUPA D	Coli 	Into the Breach 
+25.06.2025	19:30	GRUPA D	WenDeagle 	Shashlik 
+25.06.2025	20:15	GRUPA D	Shashlik 	Rumina 
+25.06.2025	20:15	GRUPA D	Coli 	WenDeagle 
+25.06.2025	20:15	GRUPA D	K9 Team 	Into the Breach 
+25.06.2025	21:00	GRUPA D	Into the Breach 	Rumina 
+25.06.2025	21:00	GRUPA D	K9 Team 	WenDeagle 
+25.06.2025	21:00	GRUPA D	Coli 	Shashlik 
+26.06.2025	18:00	GRUPA E	XPlosion 	LYSQ 
+26.06.2025	18:00	GRUPA E	Cadian Team 	Bloody 
+26.06.2025	18:00	GRUPA E	KostiujeniKlinik 	Flux Line 
+26.06.2025	18:45	GRUPA E	Flux Line 	LYSQ 
+26.06.2025	18:45	GRUPA E	KostiujeniKlinik 	Bloody 
+26.06.2025	18:45	GRUPA E	XPlosion 	Cadian Team 
+26.06.2025	19:30	GRUPA E	Cadian Team 	LYSQ 
+26.06.2025	19:30	GRUPA E	XPlosion 	KostiujeniKlinik 
+26.06.2025	19:30	GRUPA E	Flux Line 	Bloody 
+26.06.2025	20:15	GRUPA E	Bloody 	LYSQ 
+26.06.2025	20:15	GRUPA E	XPlosion 	Flux Line 
+26.06.2025	20:15	GRUPA E	Cadian Team 	KostiujeniKlinik 
+26.06.2025	21:00	GRUPA E	KostiujeniKlinik 	LYSQ 
+26.06.2025	21:00	GRUPA E	Cadian Team 	Flux Line 
+26.06.2025	21:00	GRUPA E	XPlosion 	Bloody 
+27.06.2025	18:00	GRUPA F	Wenzo	X-one
+27.06.2025	18:00	GRUPA F	Robotaim 	Brigada 
+27.06.2025	18:00	GRUPA F	Auratix 	Killuminaty 
+27.06.2025	18:45	GRUPA F	Killuminaty 	X-one
+27.06.2025	18:45	GRUPA F	Auratix 	Brigada 
+27.06.2025	18:45	GRUPA F	Wenzo	Robotaim 
+27.06.2025	19:30	GRUPA F	Robotaim 	X-one
+27.06.2025	19:30	GRUPA F	Wenzo	Auratix 
+27.06.2025	19:30	GRUPA F	Killuminaty 	Brigada 
+27.06.2025	20:15	GRUPA F	Brigada 	X-one
+27.06.2025	20:15	GRUPA F	Wenzo	Killuminaty 
+27.06.2025	20:15	GRUPA F	Robotaim 	Auratix 
+27.06.2025	21:00	GRUPA F	Auratix 	X-one
+27.06.2025	21:00	GRUPA F	Robotaim 	Killuminaty 
+27.06.2025	21:00	GRUPA F	Wenzo	Brigada 
+28.06.2025	18:00	GRUPA G	Cipok 	VeryGoodTeam 
+28.06.2025	18:00	GRUPA G	Cucumba 	Trigger 
+28.06.2025	18:00	GRUPA G	Golden Five 	Onyx 
+28.06.2025	18:45	GRUPA G	Onyx 	VeryGoodTeam 
+28.06.2025	18:45	GRUPA G	Golden Five 	Trigger 
+28.06.2025	18:45	GRUPA G	Cipok 	Cucumba 
+28.06.2025	19:30	GRUPA G	Cucumba 	VeryGoodTeam 
+28.06.2025	19:30	GRUPA G	Cipok 	Golden Five 
+28.06.2025	19:30	GRUPA G	Onyx 	Trigger 
+28.06.2025	20:15	GRUPA G	Trigger 	VeryGoodTeam 
+28.06.2025	20:15	GRUPA G	Cipok 	Onyx 
+28.06.2025	20:15	GRUPA G	Cucumba 	Golden Five 
+28.06.2025	21:00	GRUPA G	Golden Five 	VeryGoodTeam 
+28.06.2025	21:00	GRUPA G	Cucumba 	Onyx 
+28.06.2025	21:00	GRUPA G	Cipok 	Trigger 
