@@ -598,6 +598,27 @@ export function registerTournamentDatabaseAPI(app: Express) {
     }
   });
 
+  // Auto-sync all standings with correct calculations
+  app.post("/api/admin/auto-sync-standings", async (req, res) => {
+    try {
+      const configs = await db.select().from(groupConfiguration);
+      let syncedGroups = 0;
+      
+      for (const config of configs) {
+        await recalculateGroupStandings(config.groupName);
+        syncedGroups++;
+      }
+      
+      res.json({ 
+        message: "All standings auto-synced successfully",
+        groupsSynced: syncedGroups
+      });
+    } catch (error) {
+      console.error("Error in auto-sync:", error);
+      res.status(500).json({ message: "Failed to auto-sync standings" });
+    }
+  });
+
   // Reset tournament - clear all match results and standings
   app.post("/api/admin/reset-tournament", async (req, res) => {
     try {
