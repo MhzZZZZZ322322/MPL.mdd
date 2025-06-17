@@ -255,10 +255,9 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                 </div>
                 
                 {/* Layout cu grupe și reguli pe același rând */}
-                <div className="mt-8 grid grid-cols-1 xl:grid-cols-4 gap-6 items-start">
-                  {/* Grupele continuă în partea stângă */}
-                  <div className="xl:col-span-3">
-                    {/* Legend */}
+                <div className="mt-8 grid grid-cols-1 xl:grid-cols-8 gap-6 items-start">
+                  {/* Legenda centrată */}
+                  <div className="xl:col-span-8">
                     <div className="flex flex-wrap justify-center gap-4 text-sm mb-4">
                       <div className="flex items-center space-x-2">
                         <div className="w-4 h-4 bg-green-600/30 border border-green-500/50 rounded"></div>
@@ -270,27 +269,27 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Reguli în partea dreaptă - mai înguste */}
-                  <div className="xl:col-span-1">
-                    <div className="bg-slate-800/50 rounded-lg p-3 h-fit">
-                      <h3 className="text-white font-semibold mb-3 text-center text-sm">Reguli de Avansare în Playoff</h3>
-                      <div className="space-y-2 text-xs">
-                        <div className="bg-green-600/20 rounded p-2 border border-green-500/30">
-                          <div className="font-medium text-green-400 mb-1">Grupe A, B, C, D, E, F</div>
-                          <div className="text-gray-300 text-xs">6 echipe per grupă</div>
-                          <div className="text-white font-semibold text-xs">Primele 3 echipe avansează</div>
-                        </div>
-                        <div className="bg-amber-600/20 rounded p-2 border border-amber-500/30">
-                          <div className="font-medium text-amber-400 mb-1">Grupa G</div>
-                          <div className="text-gray-300 text-xs">7 echipe în grupă</div>
-                          <div className="text-white font-semibold text-xs">Primele 4 echipe avansează</div>
-                        </div>
+                </div>
+                
+                {/* Reguli ca un modul separat în grid-ul grupelor */}
+                <div className="mt-6">
+                  <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg p-4 max-w-md mx-auto">
+                    <h3 className="text-white font-semibold text-center text-lg mb-3">Reguli de Avansare în Playoff</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="bg-green-600/20 rounded p-3 border border-green-500/30">
+                        <div className="font-medium text-green-400 mb-1">Grupe A, B, C, D, E, F</div>
+                        <div className="text-gray-300 text-sm">6 echipe per grupă</div>
+                        <div className="text-white font-semibold">Primele 3 echipe avansează</div>
                       </div>
-                      <div className="mt-2 text-center text-xs text-gray-400">
-                        <div>Total: 22 echipe avansează în playoff (3×6 + 4×1 = 22)</div>
-                        <div className="mt-1">Format: CS2 BO1 (Best of 1) - fără egaluri</div>
+                      <div className="bg-amber-600/20 rounded p-3 border border-amber-500/30">
+                        <div className="font-medium text-amber-400 mb-1">Grupa G</div>
+                        <div className="text-gray-300 text-sm">7 echipe în grupă</div>
+                        <div className="text-white font-semibold">Primele 4 echipe avansează</div>
                       </div>
+                    </div>
+                    <div className="mt-3 text-center text-sm text-gray-400">
+                      <div>Total: 22 echipe avansează în playoff (3×6 + 4×1 = 22)</div>
+                      <div className="mt-1">Format: CS2 BO1 (Best of 1) - fără egaluri</div>
                     </div>
                   </div>
                 </div>
