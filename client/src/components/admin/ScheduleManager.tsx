@@ -14,6 +14,47 @@ interface ScheduleDay {
   matches: ScheduleMatch[];
 }
 
+// Transform scheduled matches into schedule format grouped by days
+const transformScheduleData = (matches: any[]) => {
+  if (!matches) return [];
+  
+  const dayNames = {
+    "18.06.2025": { display: "18 Iunie 2025", dayName: "Miercuri" },
+    "19.06.2025": { display: "19 Iunie 2025", dayName: "Joi" },
+    "20.06.2025": { display: "20 Iunie 2025", dayName: "Vineri" },
+    "25.06.2025": { display: "25 Iunie 2025", dayName: "Miercuri" },
+    "26.06.2025": { display: "26 Iunie 2025", dayName: "Joi" },
+    "27.06.2025": { display: "27 Iunie 2025", dayName: "Vineri" },
+    "28.06.2025": { display: "28 Iunie 2025", dayName: "Sâmbătă" }
+  };
+  
+  const grouped = matches.reduce((acc, match) => {
+    const dateKey = match.date || "18.06.2025";
+    const dayInfo = dayNames[dateKey] || { display: dateKey, dayName: "Necunoscut" };
+    
+    if (!acc[dateKey]) {
+      acc[dateKey] = {
+        date: dayInfo.display,
+        dayName: dayInfo.dayName,
+        matches: []
+      };
+    }
+    
+    acc[dateKey].matches.push({
+      ...match,
+      faceitUrl: match.faceitUrl || ""
+    });
+    
+    return acc;
+  }, {} as Record<string, any>);
+  
+  return Object.values(grouped).sort((a: any, b: any) => {
+    const dateA = a.date.split(' ')[0];
+    const dateB = b.date.split(' ')[0];
+    return dateA.localeCompare(dateB);
+  });
+};
+
 interface ScheduleMatch {
   time: string;
   team1: string;
@@ -60,6 +101,11 @@ export default function ScheduleManager() {
     queryKey: ['/api/admin/scheduled-matches'],
     refetchInterval: 30000,
   });
+
+  // Transform scheduled matches data
+  const scheduleData = React.useMemo(() => {
+    return transformScheduleData(scheduledMatches);
+  }, [scheduledMatches]);
 
   // Update Faceit URL mutation
   const updateFaceitUrlMutation = useMutation({
@@ -132,7 +178,7 @@ export default function ScheduleManager() {
       {isExpanded && (
         <div className="p-4">
           <div className="space-y-6">
-            {scheduleData.map((day, dayIndex) => (
+            {transformScheduleData(scheduledMatches).map((day, dayIndex) => (
               <div key={dayIndex} className="border-l-4 border-purple-500/50 pl-4">
                 <div className="mb-4">
                   <h4 className="text-lg font-bold text-white">{day.date}</h4>
