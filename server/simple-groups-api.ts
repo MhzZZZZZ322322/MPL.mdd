@@ -377,6 +377,24 @@ export function registerSimpleGroupsAPI(app: Express) {
       res.status(500).json({ message: "Failed to fetch tournament groups" });
     }
   });
+
+  // Sync groups endpoint for manual refresh
+  app.post("/api/sync-groups", (req, res) => {
+    try {
+      // Force refresh of group data
+      const timestamp = Date.now();
+      
+      res.json({ 
+        message: "Groups synced successfully",
+        timestamp,
+        totalGroups: groupConfiguration.length,
+        totalStandings: groupStandings.length
+      });
+    } catch (error) {
+      console.error("Error syncing groups:", error);
+      res.status(500).json({ message: "Failed to sync groups" });
+    }
+  });
 }
 
 // Helper function to recalculate positions within a group

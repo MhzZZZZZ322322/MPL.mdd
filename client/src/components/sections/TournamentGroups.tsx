@@ -3,6 +3,7 @@ import { getTranslation } from "@/lib/translations";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, RefreshCw } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
 
 interface GroupTeam {
   id: number;
@@ -41,10 +42,12 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
   const queryClient = useQueryClient();
 
   // Fetch tournament groups from API
-  const { data: groups = [], isLoading, error } = useQuery<TournamentGroup[]>({
+  const { data: groups = [], isLoading, error, refetch } = useQuery<TournamentGroup[]>({
     queryKey: ['/api/tournament-groups'],
     refetchInterval: 60000, // Refetch every minute
   });
+
+  const { toast } = useToast();
 
   // Manual sync mutation
   const syncMutation = useMutation({
@@ -54,7 +57,14 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
       return response.json();
     },
     onSuccess: () => {
+      // Force refresh of all tournament-related data
       queryClient.invalidateQueries({ queryKey: ['/api/tournament-groups'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-standings'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/teams'] });
+      
+      // Force refetch immediately
+      refetch();
     },
   });
 
