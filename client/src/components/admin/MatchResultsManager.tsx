@@ -58,21 +58,13 @@ export default function MatchResultsManager() {
 
   // Get teams for selected group
   const getTeamsForGroup = (groupName: string) => {
-    console.log('getTeamsForGroup called with:', groupName);
-    console.log('groupConfig:', groupConfig);
-    console.log('teams:', teams);
-    
     if (!groupName || !groupConfig.length) return [];
     
     const group = groupConfig.find((g: any) => g.groupName === groupName);
-    console.log('Found group:', group);
+    if (!group || !group.teams) return [];
     
-    if (!group || !group.teamIds) return [];
-    
-    const filteredTeams = teams.filter((team: Team) => group.teamIds.includes(team.id));
-    console.log('Filtered teams:', filteredTeams);
-    
-    return filteredTeams;
+    // Return the teams directly from the group configuration
+    return group.teams;
   };
 
   // Create match mutation
