@@ -409,6 +409,7 @@ export function registerTournamentDatabaseAPI(app: Express) {
       
       const groupsWithTeams = await Promise.all(
         configs.map(async (config) => {
+          // Parse team IDs from JSON string
           const teamIds = JSON.parse(config.teamIds);
           const teamsData = await Promise.all(
             teamIds.map(async (id: number) => {
