@@ -127,7 +127,7 @@ const HatorCSLeague = () => {
 
               <div className="flex flex-wrap gap-4">
                 <a href="https://discord.gg/KgXXUebhVM" target="_blank" rel="noopener noreferrer">
-                  <Button className="bg-primary hover:bg-primary/90">
+                  <Button className="border-primary/50 text-primary hover:bg-primary/10" variant="outline">
                     {t('event.registration')}
                   </Button>
                 </a>
@@ -135,7 +135,7 @@ const HatorCSLeague = () => {
                   e.preventDefault();
                   document.getElementById('rules')?.scrollIntoView({ behavior: 'smooth' });
                 }}>
-                  <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                  <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary/10">
                     {t('event.regulation')}
                   </Button>
                 </a>
