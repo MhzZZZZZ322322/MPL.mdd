@@ -97,7 +97,8 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
         <div className="flex justify-between items-center mb-8">
           <Button 
             onClick={onToggle}
-            className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+            variant="outline"
+            className="border-primary/50 text-primary hover:bg-primary/10 px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
           >
             {isExpanded ? (
               <>
