@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Calendar, Clock, Edit, Plus, Link, ExternalLink } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -104,6 +104,7 @@ export default function ScheduleManager() {
 
   // Transform scheduled matches data
   const scheduleData = React.useMemo(() => {
+    if (!Array.isArray(scheduledMatches)) return [];
     return transformScheduleData(scheduledMatches);
   }, [scheduledMatches]);
 
