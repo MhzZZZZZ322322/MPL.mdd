@@ -5,6 +5,7 @@ import { insertContactSchema, insertEventSchema, insertPlayerSchema, insertFaqSc
 import { insertSiteContentSchema } from "@shared/content-schema";
 import { csServersRouter } from "./routes/cs-servers-routes";
 import { registerSimpleGroupsAPI } from "./simple-groups-api";
+import { registerTournamentDatabaseAPI } from "./tournament-database";
 import { verifyAdminCredentials } from "./auth-config";
 import { fromZodError } from "zod-validation-error";
 
@@ -478,7 +479,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Use CS Servers router
   app.use(csServersRouter);
 
-  // Register simplified groups API for tournament management
+  // Register tournament management APIs with database persistence
+  registerTournamentDatabaseAPI(app);
+  
+  // Keep legacy API for backward compatibility
   registerSimpleGroupsAPI(app);
 
   const httpServer = createServer(app);

@@ -200,6 +200,76 @@ export const groupTeams = pgTable("group_teams", {
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
 
+// Match Results - Rezultatele meciurilor
+export const matchResults = pgTable("match_results", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score").notNull(),
+  team2Score: integer("team2_score").notNull(),
+  winnerId: integer("winner_id"), // ID-ul echipei câștigătoare
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  matchDate: timestamp("match_date").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Group Configuration - Configurația grupelor
+export const groupConfiguration = pgTable("group_configuration", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  displayName: text("display_name").notNull(), // Group A, Group B, etc.
+  teamIds: text("team_ids").notNull(), // JSON array cu ID-urile echipelor
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Group Standings - Clasamentele grupelor
+export const groupStandings = pgTable("group_standings", {
+  id: serial("id").primaryKey(),
+  teamName: text("team_name").notNull(),
+  groupName: text("group_name").notNull(),
+  matchesPlayed: integer("matches_played").notNull().default(0),
+  wins: integer("wins").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  roundsWon: integer("rounds_won").notNull().default(0),
+  roundsLost: integer("rounds_lost").notNull().default(0),
+  roundDifference: integer("round_difference").notNull().default(0),
+  points: integer("points").notNull().default(0),
+  position: integer("position").notNull().default(1),
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  lastUpdated: timestamp("last_updated").defaultNow(),
+});
+
+// Insert schemas and types for the new tables
+export const insertMatchResultSchema = createInsertSchema(matchResults).omit({
+  id: true,
+  createdAt: true,
+  matchDate: true,
+});
+
+export const insertGroupConfigurationSchema = createInsertSchema(groupConfiguration).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertGroupStandingsSchema = createInsertSchema(groupStandings).omit({
+  id: true,
+  lastUpdated: true,
+});
+
+export type InsertMatchResult = z.infer<typeof insertMatchResultSchema>;
+export type MatchResult = typeof matchResults.$inferSelect;
+
+export type InsertGroupConfiguration = z.infer<typeof insertGroupConfigurationSchema>;
+export type GroupConfiguration = typeof groupConfiguration.$inferSelect;
+
+export type InsertGroupStandings = z.infer<typeof insertGroupStandingsSchema>;
+export type GroupStandings = typeof groupStandings.$inferSelect;
+
 // Matches - Meciurile din turneu
 export const matches = pgTable("matches", {
   id: serial("id").primaryKey(),
