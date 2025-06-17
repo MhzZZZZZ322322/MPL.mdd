@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Calendar, Clock, Edit, Plus, Link } from 'lucide-react';
+import { ChevronDown, ChevronUp, Calendar, Clock, Edit, Plus, Link, ExternalLink } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -178,7 +178,7 @@ export default function ScheduleManager() {
       {isExpanded && (
         <div className="p-4">
           <div className="space-y-6">
-            {transformScheduleData(scheduledMatches).map((day, dayIndex) => (
+            {scheduleData.map((day: any, dayIndex: number) => (
               <div key={dayIndex} className="border-l-4 border-purple-500/50 pl-4">
                 <div className="mb-4">
                   <h4 className="text-lg font-bold text-white">{day.date}</h4>
@@ -211,9 +211,15 @@ export default function ScheduleManager() {
                           </span>
                           
                           {match.faceitUrl && (
-                            <span className="text-xs bg-orange-600/20 text-orange-300 px-2 py-1 rounded">
-                              Link Set
-                            </span>
+                            <Button
+                              size="sm"
+                              variant="default"
+                              onClick={() => window.open(match.faceitUrl, '_blank')}
+                              className="bg-red-600 hover:bg-red-700 text-white animate-pulse"
+                            >
+                              <ExternalLink className="w-4 h-4 mr-1" />
+                              LIVE
+                            </Button>
                           )}
                           
                           <Button
