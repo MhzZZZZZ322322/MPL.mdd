@@ -583,6 +583,21 @@ export function registerTournamentDatabaseAPI(app: Express) {
     }
   });
 
+  // Force recalculate specific group standings
+  app.post("/api/admin/recalculate-group/:groupName", async (req, res) => {
+    try {
+      const { groupName } = req.params;
+      await recalculateGroupStandings(groupName);
+      
+      res.json({ 
+        message: `Group ${groupName} standings recalculated successfully`
+      });
+    } catch (error) {
+      console.error(`Error recalculating group ${req.params.groupName}:`, error);
+      res.status(500).json({ message: "Failed to recalculate group standings" });
+    }
+  });
+
   // Reset tournament - clear all match results and standings
   app.post("/api/admin/reset-tournament", async (req, res) => {
     try {
