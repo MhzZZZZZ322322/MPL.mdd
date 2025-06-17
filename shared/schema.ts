@@ -179,41 +179,39 @@ export const tournamentGroups = pgTable("tournament_groups", {
   groupName: text("group_name").notNull(), // A, B, C, etc.
   groupDisplayName: text("group_display_name").notNull(), // Group A, Group B, etc.
   tournament: text("tournament").notNull().default("hator-cs-league"),
-  isActive: boolean("is_active").default(true).notNull(),
+  isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// Group Teams - Echipele în grupe cu statistici complete
+// Group Teams - Echipele din grupe cu statistici
 export const groupTeams = pgTable("group_teams", {
   id: serial("id").primaryKey(),
-  groupId: integer("group_id").references(() => tournamentGroups.id).notNull(),
-  teamId: integer("team_id").references(() => teams.id).notNull(),
-  matchesPlayed: integer("matches_played").default(0).notNull(),
-  wins: integer("wins").default(0).notNull(),
-  draws: integer("draws").default(0).notNull(),
-  losses: integer("losses").default(0).notNull(),
-  roundsWon: integer("rounds_won").default(0).notNull(),
-  roundsLost: integer("rounds_lost").default(0).notNull(),
-  roundDifference: integer("round_difference").default(0).notNull(),
-  points: integer("points").default(0).notNull(), // 3 pts win, 1 pt draw, 0 pts loss
-  position: integer("position").default(1).notNull(),
+  groupId: integer("group_id").notNull(),
+  teamId: integer("team_id").notNull(),
+  matchesPlayed: integer("matches_played").notNull().default(0),
+  wins: integer("wins").notNull().default(0),
+  draws: integer("draws").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  roundsWon: integer("rounds_won").notNull().default(0),
+  roundsLost: integer("rounds_lost").notNull().default(0),
+  roundDifference: integer("round_difference").notNull().default(0),
+  points: integer("points").notNull().default(0),
+  position: integer("position").notNull().default(1),
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
 
-// Group Matches - Meciurile din grupe
-export const groupMatches = pgTable("group_matches", {
+// Matches - Meciurile din turneu
+export const matches = pgTable("matches", {
   id: serial("id").primaryKey(),
-  groupId: integer("group_id").references(() => tournamentGroups.id).notNull(),
-  team1Id: integer("team1_id").references(() => teams.id).notNull(),
-  team2Id: integer("team2_id").references(() => teams.id).notNull(),
-  team1Score: integer("team1_score"),
-  team2Score: integer("team2_score"),
-  status: text("status").default("scheduled").notNull(), // scheduled, live, completed
-  matchNumber: integer("match_number"), // Numărul meciului în grupă
-  scheduledTime: timestamp("scheduled_time"),
-  completedTime: timestamp("completed_time"),
-  googleSheetsRowId: text("google_sheets_row_id"), // Pentru sincronizare cu Google Sheets
-  notes: text("notes"), // Note despre meci
+  groupId: integer("group_id").notNull(),
+  team1Id: integer("team1_id").notNull(),
+  team2Id: integer("team2_id").notNull(),
+  team1Score: integer("team1_score").default(0),
+  team2Score: integer("team2_score").default(0),
+  status: text("status").notNull().default("scheduled"), // scheduled, live, completed
+  datePlayed: timestamp("date_played"),
+  notes: text("notes").default(""),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 // Schemas pentru inserare
@@ -227,8 +225,9 @@ export const insertGroupTeamSchema = createInsertSchema(groupTeams).omit({
   lastUpdated: true,
 });
 
-export const insertGroupMatchSchema = createInsertSchema(groupMatches).omit({
+export const insertMatchSchema = createInsertSchema(matches).omit({
   id: true,
+  createdAt: true,
 });
 
 // Types
@@ -238,5 +237,5 @@ export type TournamentGroup = typeof tournamentGroups.$inferSelect;
 export type InsertGroupTeam = z.infer<typeof insertGroupTeamSchema>;
 export type GroupTeam = typeof groupTeams.$inferSelect;
 
-export type InsertGroupMatch = z.infer<typeof insertGroupMatchSchema>;
-export type GroupMatch = typeof groupMatches.$inferSelect;
+export type InsertMatch = z.infer<typeof insertMatchSchema>;
+export type Match = typeof matches.$inferSelect;

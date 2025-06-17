@@ -565,7 +565,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/tournament-groups/:groupName/matches", async (req, res) => {
     try {
       const { db } = await import("./db");
-      const { tournamentGroups, groupMatches, teams } = await import("@shared/schema");
+      const { tournamentGroups, matches, teams } = await import("@shared/schema");
       const { eq } = await import("drizzle-orm");
       
       const groupName = req.params.groupName.toUpperCase();

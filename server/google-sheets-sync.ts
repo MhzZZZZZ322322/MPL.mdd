@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { tournamentGroups, groupTeams, groupMatches, teams } from "@shared/schema";
+import { tournamentGroups, groupTeams, matches, teams } from "@shared/schema";
 import { eq, and } from "drizzle-orm";
 
 interface GoogleSheetsConfig {
