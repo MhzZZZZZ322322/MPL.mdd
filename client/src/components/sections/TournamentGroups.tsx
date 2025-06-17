@@ -232,7 +232,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                 
                 {/* Tournament Stages - În rând separat */}
                 <div className="mt-8">
-                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Grupe Turneu Stage 1</h2>
+                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Format Turneu</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     
                     {/* Stage 1 - Group Elimination */}

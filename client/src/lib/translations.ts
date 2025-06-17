@@ -392,8 +392,8 @@ export const translations: TranslationDictionary = {
     ru: "Профили команд"
   },
   "tournament.groups.button": {
-    ro: "Stage 1",
-    ru: "Stage 1"
+    ro: "Grupe Turneu Stage 1",
+    ru: "Группы турнира Stage 1"
   },
   "tournament.matches.button": {
     ro: "Vezi Meciurile",
