@@ -51,6 +51,21 @@ export default function MatchResultsManager() {
     queryKey: ['/api/teams'],
   });
 
+  // Fetch group configuration
+  const { data: groupConfig = [] } = useQuery<any[]>({
+    queryKey: ['/api/admin/group-config'],
+  });
+
+  // Get teams for selected group
+  const getTeamsForGroup = (groupName: string) => {
+    if (!groupName || !groupConfig.length) return [];
+    
+    const group = groupConfig.find((g: any) => g.groupName === groupName);
+    if (!group || !group.teamIds) return [];
+    
+    return teams.filter((team: Team) => group.teamIds.includes(team.id));
+  };
+
   // Create match mutation
   const createMatchMutation = useMutation({
     mutationFn: async (data: MatchFormData) => {
@@ -254,7 +269,12 @@ export default function MatchResultsManager() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="groupName">Grupa</Label>
-                <Select value={formData.groupName} onValueChange={(value) => setFormData({...formData, groupName: value})}>
+                <Select value={formData.groupName} onValueChange={(value) => setFormData({
+                  ...formData, 
+                  groupName: value,
+                  team1Name: '', // Reset team selections when group changes
+                  team2Name: ''
+                })}>
                   <SelectTrigger>
                     <SelectValue placeholder="Selectează grupa" />
                   </SelectTrigger>
@@ -268,12 +288,16 @@ export default function MatchResultsManager() {
 
               <div>
                 <Label htmlFor="team1Name">Echipa 1</Label>
-                <Select value={formData.team1Name} onValueChange={(value) => setFormData({...formData, team1Name: value})}>
+                <Select 
+                  value={formData.team1Name} 
+                  onValueChange={(value) => setFormData({...formData, team1Name: value})}
+                  disabled={!formData.groupName}
+                >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selectează echipa 1" />
+                    <SelectValue placeholder={formData.groupName ? "Selectează echipa 1" : "Selectează grupa mai întâi"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {teams.map(team => (
+                    {getTeamsForGroup(formData.groupName).map(team => (
                       <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
                     ))}
                   </SelectContent>
@@ -293,12 +317,16 @@ export default function MatchResultsManager() {
 
               <div>
                 <Label htmlFor="team2Name">Echipa 2</Label>
-                <Select value={formData.team2Name} onValueChange={(value) => setFormData({...formData, team2Name: value})}>
+                <Select 
+                  value={formData.team2Name} 
+                  onValueChange={(value) => setFormData({...formData, team2Name: value})}
+                  disabled={!formData.groupName}
+                >
                   <SelectTrigger>
-                    <SelectValue placeholder="Selectează echipa 2" />
+                    <SelectValue placeholder={formData.groupName ? "Selectează echipa 2" : "Selectează grupa mai întâi"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {teams.map(team => (
+                    {getTeamsForGroup(formData.groupName).map(team => (
                       <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
                     ))}
                   </SelectContent>
