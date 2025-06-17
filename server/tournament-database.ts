@@ -388,6 +388,78 @@ export function registerTournamentDatabaseAPI(app: Express) {
     }
   });
 
+  // Get tournament groups with teams from database
+  app.get("/api/tournament-groups", async (req, res) => {
+    try {
+      const configs = await db.select().from(groupConfiguration)
+        .orderBy(groupConfiguration.groupName);
+      
+      if (configs.length === 0) {
+        // Return empty groups if no configuration exists
+        const emptyGroups = ['A', 'B', 'C', 'D', 'E', 'F', 'G'].map(groupName => ({
+          id: groupName.charCodeAt(0) - 64,
+          groupName,
+          groupDisplayName: `Group ${groupName}`,
+          tournament: "hator-cs-league",
+          isActive: true,
+          teams: [],
+        }));
+        return res.json(emptyGroups);
+      }
+      
+      const groupsWithTeams = await Promise.all(
+        configs.map(async (config) => {
+          const teamIds = JSON.parse(config.teamIds);
+          const teamsData = await Promise.all(
+            teamIds.map(async (id: number) => {
+              const [team] = await db.select().from(teams).where(eq(teams.id, id));
+              return team;
+            })
+          );
+          
+          // Get standings for teams in this group
+          const standings = await db.select().from(groupStandings)
+            .where(eq(groupStandings.groupName, config.groupName))
+            .orderBy(groupStandings.position);
+          
+          const teamsWithStandings = teamsData.filter(Boolean).map((team, index) => {
+            const standing = standings.find(s => s.teamName === team.name);
+            return {
+              id: team.id,
+              teamId: team.id,
+              teamName: team.name,
+              teamLogo: team.logoUrl,
+              matchesPlayed: standing?.matchesPlayed || 0,
+              wins: standing?.wins || 0,
+              draws: 0, // CS2 BO1 format - no draws possible
+              losses: standing?.losses || 0,
+              roundsWon: standing?.roundsWon || 0,
+              roundsLost: standing?.roundsLost || 0,
+              roundDifference: standing?.roundDifference || 0,
+              points: standing?.points || 0,
+              position: standing?.position || index + 1,
+              lastUpdated: new Date().toISOString(),
+            };
+          });
+          
+          return {
+            id: config.groupName.charCodeAt(0) - 64,
+            groupName: config.groupName,
+            groupDisplayName: config.displayName,
+            tournament: "hator-cs-league",
+            isActive: true,
+            teams: teamsWithStandings,
+          };
+        })
+      );
+      
+      res.json(groupsWithTeams);
+    } catch (error) {
+      console.error("Error fetching tournament groups:", error);
+      res.status(500).json({ message: "Failed to fetch tournament groups" });
+    }
+  });
+
   // Reset tournament - clear all match results and standings
   app.post("/api/admin/reset-tournament", async (req, res) => {
     try {
