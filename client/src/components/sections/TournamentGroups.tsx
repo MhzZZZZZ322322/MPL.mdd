@@ -229,112 +229,86 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                     </div>
                   ))}
                   
-                  {/* Reguli de Avansare ca modul în același grid */}
+                  {/* Stage 1 - Group Elimination */}
                   <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden">
-                    <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-4 border-b border-slate-600/30">
-                      <h3 className="text-xl font-bold text-white text-center">Reguli de Avansare în Playoff</h3>
-                    </div>
-                    
-                    <div className="p-4">
-                      {/* Grid layout exact ca grupele */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        
-                        {/* Stage 1 - Group Elimination */}
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden h-48">
-                          <div className="bg-gradient-to-r from-green-600/30 to-green-500/20 p-4 border-b border-slate-600/30">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-bold text-white">Stage 1</h4>
-                              <span className="text-lg">🎯</span>
-                            </div>
-                            <div className="text-xs text-gray-300 mt-1">42 echipe • Group Elimination</div>
-                          </div>
-                          <div className="p-4 h-32 flex flex-col justify-center">
-                            <div className="text-center text-gray-400 text-xs mb-2">
-                              Format: BO1 Round-robin
-                            </div>
-                            <div className="text-center">
-                              <div className="text-white font-semibold text-sm">Primele 3 echipe</div>
-                              <div className="text-green-400 text-xs">din fiecare grupă avansează</div>
-                              <div className="text-purple-300 text-xs mt-1">📊 21 echipe → Stage 2</div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Stage 2 - Single Elimination */}
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden h-48">
-                          <div className="bg-gradient-to-r from-orange-600/30 to-orange-500/20 p-4 border-b border-slate-600/30">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-bold text-white">Stage 2</h4>
-                              <span className="text-lg">⚔️</span>
-                            </div>
-                            <div className="text-xs text-gray-300 mt-1">21 echipe • Single Elimination</div>
-                          </div>
-                          <div className="p-4 h-32 flex flex-col justify-center">
-                            <div className="text-center text-gray-400 text-xs mb-2">
-                              Format: BO3 Eliminatoriu
-                            </div>
-                            <div className="text-center">
-                              <div className="text-white font-semibold text-sm">Top 6 → direct</div>
-                              <div className="text-orange-400 text-xs">Următoarele 15 → meciuri</div>
-                              <div className="text-purple-300 text-xs mt-1">📊 16 echipe → Stage 3</div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Stage 3 - Swiss Format */}
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden h-48">
-                          <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-slate-600/30">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-bold text-white">Stage 3</h4>
-                              <span className="text-lg">🧩</span>
-                            </div>
-                            <div className="text-xs text-gray-300 mt-1">16 echipe • Swiss Format</div>
-                          </div>
-                          <div className="p-4 h-32 flex flex-col justify-center">
-                            <div className="text-center text-gray-400 text-xs mb-2">
-                              Format: BO1/BO3 Swiss
-                            </div>
-                            <div className="text-center">
-                              <div className="text-white font-semibold text-sm">3 victorii sau 3 înfrângeri</div>
-                              <div className="text-blue-400 text-xs">Top 8 cu 3W avansează</div>
-                              <div className="text-purple-300 text-xs mt-1">📊 8 echipe → Playoff</div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Stage 4 - Playoff Top 8 */}
-                        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden h-48">
-                          <div className="bg-gradient-to-r from-yellow-600/30 to-yellow-500/20 p-4 border-b border-slate-600/30">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-bold text-white">Playoff</h4>
-                              <span className="text-lg">🏆</span>
-                            </div>
-                            <div className="text-xs text-gray-300 mt-1">8 echipe • Top 8 Final</div>
-                          </div>
-                          <div className="p-4 h-32 flex flex-col justify-center">
-                            <div className="text-center text-gray-400 text-xs mb-2">
-                              Format: BO3 Eliminare Directă
-                            </div>
-                            <div className="text-center">
-                              <div className="text-white font-semibold text-sm">Toate meciurile BO3</div>
-                              <div className="text-yellow-400 text-xs">Eliminare directă</div>
-                              <div className="text-yellow-300 text-xs mt-1">🏆 1 Câștigător</div>
-                            </div>
-                          </div>
-                        </div>
-
+                    <div className="bg-gradient-to-r from-green-600/30 to-green-500/20 p-4 border-b border-slate-600/30">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-lg font-bold text-white">Stage 1 – Group Elimination</h4>
+                        <span className="text-xl">🎯</span>
                       </div>
-                      
-                      {/* Summary */}
-                      <div className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/30 text-center">
-                        <div className="text-white font-semibold text-sm mb-2">Progresie Completă Turneu</div>
-                        <div className="text-gray-400 text-xs space-y-1">
-                          <div className="font-mono">42 echipe → 21 echipe → 16 echipe → 8 echipe → 1 Câștigător</div>
-                          <div className="mt-2 pt-2 border-t border-slate-600/30">
-                            <div className="text-green-400 font-semibold">🎯 Acum: Stage 1 (Group Elimination)</div>
-                            <div>Format: CS2 BO1 (Best of 1) - fără egaluri</div>
-                          </div>
-                        </div>
+                      <div className="text-sm text-gray-300 mt-1">42 echipe • Format: BO1 Round-robin</div>
+                    </div>
+                    <div className="p-4">
+                      <div className="text-center text-gray-400 text-sm mb-3">
+                        7 grupe × 6 echipe = 42 echipe totale
+                      </div>
+                      <div className="text-center">
+                        <div className="text-white font-semibold">Primele 3 echipe din fiecare grupă avansează</div>
+                        <div className="text-green-400 text-sm mt-1">Round-robin: fiecare cu fiecare</div>
+                        <div className="text-purple-300 font-semibold mt-2">📊 Total: 21 echipe → Stage 2</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stage 2 - Single Elimination */}
+                  <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden">
+                    <div className="bg-gradient-to-r from-orange-600/30 to-orange-500/20 p-4 border-b border-slate-600/30">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-lg font-bold text-white">Stage 2 – Single Elimination</h4>
+                        <span className="text-xl">⚔️</span>
+                      </div>
+                      <div className="text-sm text-gray-300 mt-1">21 echipe • Format: BO3 Eliminatoriu</div>
+                    </div>
+                    <div className="p-4">
+                      <div className="text-center text-gray-400 text-sm mb-3">
+                        Primele 6 echipe (seed înalt) → direct în Stage 3
+                      </div>
+                      <div className="text-center">
+                        <div className="text-white font-semibold">Următoarele 15 echipe joacă eliminatoriu</div>
+                        <div className="text-orange-400 text-sm mt-1">Doar 10 se califică mai departe</div>
+                        <div className="text-purple-300 font-semibold mt-2">📊 Total: 16 echipe → Stage 3</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stage 3 - Swiss Format */}
+                  <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden">
+                    <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-slate-600/30">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-lg font-bold text-white">Stage 3 – Swiss Format</h4>
+                        <span className="text-xl">🧩</span>
+                      </div>
+                      <div className="text-sm text-gray-300 mt-1">16 echipe • Format: BO1/BO3 Swiss</div>
+                    </div>
+                    <div className="p-4">
+                      <div className="text-center text-gray-400 text-sm mb-3">
+                        Sistem: până la 3 victorii sau 3 înfrângeri
+                      </div>
+                      <div className="text-center">
+                        <div className="text-white font-semibold">Meciuri BO1 (non-decisive), BO3 (decisive)</div>
+                        <div className="text-blue-400 text-sm mt-1">Primele 8 echipe cu 3W avansează</div>
+                        <div className="text-purple-300 font-semibold mt-2">📊 Total: 8 echipe → Playoff</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stage 4 - Playoff Top 8 */}
+                  <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden">
+                    <div className="bg-gradient-to-r from-yellow-600/30 to-yellow-500/20 p-4 border-b border-slate-600/30">
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-lg font-bold text-white">Playoff – Top 8</h4>
+                        <span className="text-xl">🏆</span>
+                      </div>
+                      <div className="text-sm text-gray-300 mt-1">8 echipe • Format: BO3 Eliminare Directă</div>
+                    </div>
+                    <div className="p-4">
+                      <div className="text-center text-gray-400 text-sm mb-3">
+                        Eliminare directă - toate meciurile sunt BO3
+                      </div>
+                      <div className="text-center">
+                        <div className="text-white font-semibold">Meciuri decisive BO3</div>
+                        <div className="text-yellow-400 text-sm mt-1">Fără a doua șansă</div>
+                        <div className="text-yellow-300 font-semibold mt-2">🏆 Final: 1 Câștigător</div>
                       </div>
                     </div>
                   </div>
