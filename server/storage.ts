@@ -1367,6 +1367,46 @@ export class MemStorage implements IStorage {
       order: 5
     });
   }
+
+  // Scheduled Matches methods for MemStorage
+  async getScheduledMatches(): Promise<any[]> {
+    // Return hardcoded schedule data from 322_1750189809362.txt
+    const scheduleData = [
+      // Ziua 1
+      { time: "10:00", team1: "Auratix", team2: "Barbosii", group: "A", stage: "Grupe", faceitUrl: "" },
+      { time: "10:30", team1: "BPSP", team2: "Bloody", group: "A", stage: "Grupe", faceitUrl: "" },
+      { time: "11:00", team1: "Bobb3rs", team2: "Japon", group: "A", stage: "Grupe", faceitUrl: "" },
+      { time: "11:30", team1: "Brigada", team2: "Brigada Meteor", group: "B", stage: "Grupe", faceitUrl: "" },
+      { time: "12:00", team1: "Cadian Team", team2: "Ciocana Esports", group: "B", stage: "Grupe", faceitUrl: "" },
+      { time: "12:30", team1: "Ciocălău Team", team2: "Cipok", group: "B", stage: "Grupe", faceitUrl: "" },
+      { time: "13:00", team1: "Coli", team2: "Cucumba", group: "C", stage: "Grupe", faceitUrl: "" },
+      { time: "13:30", team1: "Flux Line", team2: "Golden Five", group: "C", stage: "Grupe", faceitUrl: "" },
+      { time: "14:00", team1: "Into the Beach", team2: "K9 Team", group: "C", stage: "Grupe", faceitUrl: "" },
+      { time: "14:30", team1: "Killuminaty", team2: "KostiujeniKlinik", group: "D", stage: "Grupe", faceitUrl: "" },
+      { time: "15:00", team1: "La Passion", team2: "Lean Vision", group: "D", stage: "Grupe", faceitUrl: "" },
+      { time: "15:30", team1: "Legalize", team2: "LitEnergy", group: "D", stage: "Grupe", faceitUrl: "" },
+      { time: "16:00", team1: "LYSQ", team2: "Muligambia", group: "E", stage: "Grupe", faceitUrl: "" },
+      { time: "16:30", team1: "Neo Egoist League", team2: "Onyx", group: "E", stage: "Grupe", faceitUrl: "" },
+      { time: "17:00", team1: "Robotaim", team2: "Rumina", group: "E", stage: "Grupe", faceitUrl: "" },
+      { time: "17:30", team1: "Shashlik", team2: "Trigger", group: "F", stage: "Grupe", faceitUrl: "" },
+      { time: "18:00", team1: "VeryGoodTeam", team2: "WenDeagle", group: "F", stage: "Grupe", faceitUrl: "" },
+      { time: "18:30", team1: "Wenzo", team2: "X-one", group: "F", stage: "Grupe", faceitUrl: "" },
+      { time: "19:00", team1: "XPlosion", team2: "Kamikaze Clan", group: "G", stage: "Grupe", faceitUrl: "" },
+      { time: "19:30", team1: "Win Spirit", team2: "Xtreme Players", group: "G", stage: "Grupe", faceitUrl: "" },
+      { time: "20:00", team1: "Saponel", team2: "BaitMD", group: "G", stage: "Grupe", faceitUrl: "" }
+    ];
+    return scheduleData;
+  }
+
+  async updateScheduledMatchFaceitUrl(team1: string, team2: string, faceitUrl: string): Promise<any> {
+    // For MemStorage, we just return the updated match data
+    return {
+      team1,
+      team2,
+      faceitUrl,
+      updated: true
+    };
+  }
 }
 
 // DatabaseStorage implementation using PostgreSQL
@@ -1563,6 +1603,15 @@ export class DatabaseStorage implements IStorage {
 
   async createAnalyticsSettings(settings: InsertAnalytics): Promise<AnalyticsSettings> {
     return this.memStorage.createAnalyticsSettings(settings);
+  }
+
+  // Scheduled Matches methods for DatabaseStorage
+  async getScheduledMatches(): Promise<any[]> {
+    return this.memStorage.getScheduledMatches();
+  }
+
+  async updateScheduledMatchFaceitUrl(team1: string, team2: string, faceitUrl: string): Promise<any> {
+    return this.memStorage.updateScheduledMatchFaceitUrl(team1, team2, faceitUrl);
   }
 }
 
