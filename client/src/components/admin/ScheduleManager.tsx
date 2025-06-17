@@ -154,6 +154,14 @@ export default function ScheduleManager() {
     });
   };
 
+  const handleDeleteLink = (match: ScheduleMatch) => {
+    updateFaceitUrlMutation.mutate({
+      team1: match.team1,
+      team2: match.team2,
+      faceitUrl: "",
+    });
+  };
+
   return (
     <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-600/30 rounded-lg overflow-hidden">
       <div 
@@ -223,15 +231,28 @@ export default function ScheduleManager() {
                             </Button>
                           )}
                           
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleEditMatch(match)}
-                            className="text-orange-400 border-orange-400/50 hover:bg-orange-400/10"
-                          >
-                            <Link className="w-4 h-4 mr-1" />
-                            {match.faceitUrl ? 'Editează' : 'Adaugă'} Link
-                          </Button>
+                          <div className="flex items-center space-x-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleEditMatch(match)}
+                              className="text-orange-400 border-orange-400/50 hover:bg-orange-400/10"
+                            >
+                              <Link className="w-4 h-4 mr-1" />
+                              {match.faceitUrl ? 'Editează' : 'Adaugă'} Link
+                            </Button>
+                            
+                            {match.faceitUrl && (
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleDeleteLink(match)}
+                                className="text-red-400 border-red-400/50 hover:bg-red-400/10"
+                              >
+                                Șterge
+                              </Button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>

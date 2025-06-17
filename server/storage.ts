@@ -1493,11 +1493,37 @@ export class MemStorage implements IStorage {
       { date: "28.06.2025", time: "21:00", team1: "Cucumba", team2: "Onyx", group: "G", stage: "Grupe", faceitUrl: "" },
       { date: "28.06.2025", time: "21:00", team1: "Cipok", team2: "Trigger", group: "G", stage: "Grupe", faceitUrl: "" }
     ];
-    return scheduleData;
+    
+    // Apply any dynamic updates from scheduledMatches Map
+    return scheduleData.map(match => {
+      const key = `${match.team1}-${match.team2}-${match.date}-${match.time}`;
+      const updatedMatch = this.scheduledMatches.get(key);
+      return updatedMatch ? { ...match, faceitUrl: updatedMatch.faceitUrl } : match;
+    });
+  }
+
+  async updateScheduledMatchUrl(team1: string, team2: string, date: string, time: string, faceitUrl: string): Promise<any> {
+    const key = `${team1}-${team2}-${date}-${time}`;
+    const existingMatch = { team1, team2, date, time, faceitUrl };
+    this.scheduledMatches.set(key, existingMatch);
+    return existingMatch;
   }
 
   async updateScheduledMatchFaceitUrl(team1: string, team2: string, faceitUrl: string): Promise<any> {
-    // For MemStorage, we just return the updated match data
+    // Find and update all matches for this team combination
+    const scheduleData = await this.getScheduledMatches();
+    const updatedMatches = [];
+    
+    for (const match of scheduleData) {
+      if ((match.team1 === team1 && match.team2 === team2) || 
+          (match.team1 === team2 && match.team2 === team1)) {
+        const key = `${match.team1}-${match.team2}-${match.date}-${match.time}`;
+        const updatedMatch = { ...match, faceitUrl };
+        this.scheduledMatches.set(key, updatedMatch);
+        updatedMatches.push(updatedMatch);
+      }
+    }
+    
     return {
       team1,
       team2,
