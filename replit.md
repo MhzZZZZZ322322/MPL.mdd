@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: Updated playoff advancement rules - groups with 6 teams advance top 3, group with 7 teams advances top 4 (total 22 teams to playoff)
+- June 17, 2025: Implemented complete manual group management system with team selection, distribution, and instant reflection on main page
+- June 17, 2025: Added comprehensive admin interface with "Configurare Grupe" and "Rezultate Meciuri" tabs
 - June 17, 2025: Removed team Crasat from tournament due to disqualification (now 43 teams total)
 - June 17, 2025: Updated Kamikaze Clan captain name from "crititadon" to correct "critidaton" and fixed team configuration
 - June 16, 2025: Added new team Kamikaze Clan with 5 members (critidaton captain, 4 main players) and authentic logo

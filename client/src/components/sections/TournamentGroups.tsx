@@ -144,9 +144,18 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                               <div 
                                 key={team.id} 
                                 className={`flex items-center justify-between p-2 rounded ${
-                                  index === 0 ? 'bg-green-600/20 border border-green-500/30' :
-                                  index === 1 ? 'bg-blue-600/20 border border-blue-500/30' :
-                                  index >= group.teams.length - 2 ? 'bg-red-600/20 border border-red-500/30' :
+                                  // Grupe cu 6 echipe: primele 3 avansează (verde)
+                                  // Grupa cu 7 echipe: primele 4 avansează (verde)
+                                  (group.teams.length === 6 && index < 3) || (group.teams.length === 7 && index < 4) ? 
+                                    'bg-green-600/20 border border-green-500/30' :
+                                  // Poziția 1 - aur
+                                  index === 0 ? 'bg-yellow-600/20 border border-yellow-500/30' :
+                                  // Poziția 2 - argint  
+                                  index === 1 ? 'bg-gray-400/20 border border-gray-400/30' :
+                                  // Poziția 3 (și 4 pentru grupa cu 7) - bronz/calificare
+                                  ((group.teams.length === 6 && index === 2) || (group.teams.length === 7 && (index === 2 || index === 3))) ?
+                                    'bg-amber-600/20 border border-amber-500/30' :
+                                  // Restul - eliminare
                                   'bg-slate-700/30 border border-slate-600/30'
                                 }`}
                               >
@@ -192,18 +201,36 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                 </div>
                 
                 {/* Legend */}
-                <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 bg-green-600/30 border border-green-500/50 rounded"></div>
-                    <span className="text-white">{t('tournament.groups.legend.advance')}</span>
+                <div className="mt-8 space-y-4">
+                  <div className="flex flex-wrap justify-center gap-4 text-sm">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-green-600/30 border border-green-500/50 rounded"></div>
+                      <span className="text-white">Avansează în playoff</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-slate-700/30 border border-slate-600/50 rounded"></div>
+                      <span className="text-white">Eliminat</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 bg-blue-600/30 border border-blue-500/50 rounded"></div>
-                    <span className="text-white">{t('tournament.groups.legend.playoffs')}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 bg-red-600/30 border border-red-500/50 rounded"></div>
-                    <span className="text-white">{t('tournament.groups.legend.eliminated')}</span>
+                  
+                  {/* Advancement Rules */}
+                  <div className="bg-slate-800/50 rounded-lg p-4 max-w-2xl mx-auto">
+                    <h3 className="text-white font-semibold mb-2 text-center">Reguli de Avansare în Playoff</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                      <div className="bg-green-600/20 rounded p-3 border border-green-500/30">
+                        <div className="font-medium text-green-400 mb-1">Grupe A, B, C, D, E, F</div>
+                        <div className="text-gray-300">6 echipe per grupă</div>
+                        <div className="text-white font-semibold">Primele 3 echipe avansează</div>
+                      </div>
+                      <div className="bg-amber-600/20 rounded p-3 border border-amber-500/30">
+                        <div className="font-medium text-amber-400 mb-1">Grupa G</div>
+                        <div className="text-gray-300">7 echipe în grupă</div>
+                        <div className="text-white font-semibold">Primele 4 echipe avansează</div>
+                      </div>
+                    </div>
+                    <div className="mt-3 text-center text-xs text-gray-400">
+                      Total: 22 echipe avansează în playoff (3×6 + 4×1 = 22)
+                    </div>
                   </div>
                 </div>
 
