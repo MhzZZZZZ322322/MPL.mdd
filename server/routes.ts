@@ -519,7 +519,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: errorMessage });
       }
 
-      const { groupName, team1Name, team2Name, team1Score, team2Score } = result.data;
+      const { groupName, team1Name, team2Name, team1Score, team2Score, streamUrl } = result.data;
 
       // Validate teams are different
       if (team1Name === team2Name) {

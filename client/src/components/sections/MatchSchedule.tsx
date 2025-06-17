@@ -13,6 +13,7 @@ interface MatchResult {
   team2Name: string;
   team1Score: number;
   team2Score: number;
+  streamUrl?: string;
   matchDate: string;
 }
 

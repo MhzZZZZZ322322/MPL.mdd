@@ -302,7 +302,7 @@ export default function MatchResultsManager() {
                     <SelectValue placeholder={formData.groupName ? "Selectează echipa 1" : "Selectează grupa mai întâi"} />
                   </SelectTrigger>
                   <SelectContent>
-                    {getTeamsForGroup(formData.groupName).map(team => (
+                    {getTeamsForGroup(formData.groupName).map((team: Team) => (
                       <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
                     ))}
                   </SelectContent>
@@ -332,8 +332,8 @@ export default function MatchResultsManager() {
                   </SelectTrigger>
                   <SelectContent>
                     {getTeamsForGroup(formData.groupName)
-                      .filter(team => team.name !== formData.team1Name)
-                      .map(team => (
+                      .filter((team: Team) => team.name !== formData.team1Name)
+                      .map((team: Team) => (
                         <SelectItem key={team.id} value={team.name}>{team.name}</SelectItem>
                       ))}
                   </SelectContent>
@@ -348,6 +348,16 @@ export default function MatchResultsManager() {
                   max="30"
                   value={formData.team2Score}
                   onChange={(e) => setFormData({...formData, team2Score: parseInt(e.target.value) || 0})}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="streamUrl">Link Stream (opțional)</Label>
+                <Input
+                  type="url"
+                  placeholder="https://www.twitch.tv/canal sau https://www.youtube.com/watch?v=..."
+                  value={formData.streamUrl}
+                  onChange={(e) => setFormData({...formData, streamUrl: e.target.value})}
                 />
               </div>
 
@@ -557,6 +567,17 @@ export default function MatchResultsManager() {
                               </div>
                               
                               <div className="flex gap-2">
+                                {match.streamUrl && (
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    onClick={() => window.open(match.streamUrl, '_blank')}
+                                    className="text-purple-400 border-purple-400 hover:bg-purple-400/10"
+                                    title="Vizionează stream-ul"
+                                  >
+                                    📺
+                                  </Button>
+                                )}
                                 <Button
                                   size="sm"
                                   variant="outline"
