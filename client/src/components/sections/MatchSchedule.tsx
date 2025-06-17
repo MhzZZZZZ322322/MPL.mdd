@@ -148,16 +148,18 @@ export default function MatchSchedule() {
 
   return (
     <div className="w-full">
-      {/* Sync Button */}
-      <div className="flex justify-center mb-6">
+      {/* Header with sync button aligned right like groups */}
+      <div className="flex justify-between items-center mb-6">
+        <div></div> {/* Empty div for spacing */}
         <Button
           onClick={handleSync}
           disabled={syncMutation.isPending}
           variant="outline"
-          className="bg-slate-800/50 backdrop-blur-sm border-slate-600/30 hover:bg-slate-700/50 text-white"
+          size="sm"
+          className="bg-slate-800/50 backdrop-blur-sm border-slate-600/30 hover:bg-slate-700/50 text-white hover:text-white"
         >
           <RefreshCw className={`h-4 w-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
-          {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizează Meciurile'}
+          {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizează'}
         </Button>
       </div>
 
