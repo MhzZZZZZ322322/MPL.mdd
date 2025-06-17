@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: Migrated tournament system to PostgreSQL for complete data persistence - all match results, group configurations, and standings now saved permanently in database
 - June 17, 2025: Implemented complete match validation system - teams can only play once against each other within same group, with CS2 BO1 scoring validation (minimum 13 rounds to win)
 - June 17, 2025: Fixed CS2 BO1 display format - removed draws, now shows only W-L format (wins-losses) as CS2 cannot have ties
 - June 17, 2025: Updated admin password to "Admin322" for all authentication systems
