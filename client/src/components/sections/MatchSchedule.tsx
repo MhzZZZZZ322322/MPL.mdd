@@ -241,17 +241,17 @@ export default function MatchSchedule() {
                       />
                     </div>
 
-                    {/* Stream button */}
+                    {/* Faceit button */}
                     {match.result?.streamUrl && (
                       <div className="ml-2">
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => window.open(match.result!.streamUrl!, '_blank')}
-                          className="h-6 w-6 p-0 text-purple-400 border-purple-400 hover:bg-purple-400/10"
-                          title="Vizionează meciul pe Faceit"
+                          className="h-8 px-2 text-orange-500 border-orange-500/50 hover:bg-orange-500/10 font-semibold text-xs"
+                          title="Vezi statistici și demo pe Faceit"
                         >
-                          📺
+                          FACEIT
                         </Button>
                       </div>
                     )}

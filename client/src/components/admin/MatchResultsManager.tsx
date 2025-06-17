@@ -572,10 +572,10 @@ export default function MatchResultsManager() {
                                     size="sm"
                                     variant="outline"
                                     onClick={() => window.open(match.streamUrl, '_blank')}
-                                    className="text-purple-400 border-purple-400 hover:bg-purple-400/10"
-                                    title="Vizionează stream-ul"
+                                    className="text-orange-500 border-orange-500/50 hover:bg-orange-500/10 font-semibold text-xs"
+                                    title="Vezi statistici și demo pe Faceit"
                                   >
-                                    📺
+                                    FACEIT
                                   </Button>
                                 )}
                                 <Button
