@@ -402,18 +402,25 @@ export function registerSimpleGroupsAPI(app: Express) {
     }
   });
 
-  // Sync groups endpoint for manual refresh
-  app.post("/api/sync-groups", (req, res) => {
+  // Sync groups endpoint for manual refresh - forces complete recalculation from database
+  app.post("/api/sync-groups", async (req, res) => {
     try {
-      // Force refresh of group data
-      const timestamp = Date.now();
+      // Import the auto-sync function to force complete recalculation
+      const { autoSyncAllStandings } = await import("./auto-sync-standings");
       
-      res.json({ 
-        message: "Groups synced successfully",
-        timestamp,
-        totalGroups: groupConfiguration.length,
-        totalStandings: groupStandings.length
-      });
+      // Force complete recalculation of all standings based on database match results
+      const result = await autoSyncAllStandings();
+      
+      if (result.success) {
+        res.json({ 
+          message: "Groups synced successfully",
+          timestamp: Date.now(),
+          totalGroups: result.groupsSynced,
+          syncedFromDatabase: true
+        });
+      } else {
+        throw new Error(result.error || "Sync failed");
+      }
     } catch (error) {
       console.error("Error syncing groups:", error);
       res.status(500).json({ message: "Failed to sync groups" });

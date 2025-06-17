@@ -19,7 +19,7 @@ export async function autoSyncAllStandings() {
     return { success: true, groupsSynced: syncedGroups };
   } catch (error) {
     console.error("Error in auto-sync:", error);
-    return { success: false, error: error.message };
+    return { success: false, error: error instanceof Error ? error.message : String(error) };
   }
 }
 
@@ -98,7 +98,7 @@ async function syncGroupStandings(groupName: string) {
         return b.stats.roundDifference - a.stats.roundDifference;
       });
 
-    // Update database with new standings
+    // Update database with new standings - ALWAYS reset to match database exactly
     for (let i = 0; i < sortedStandings.length; i++) {
       const { teamName, stats } = sortedStandings[i];
       
@@ -112,7 +112,8 @@ async function syncGroupStandings(groupName: string) {
           roundsLost: stats.roundsLost,
           roundDifference: stats.roundDifference,
           points: stats.points,
-          position: i + 1
+          position: i + 1,
+          lastUpdated: new Date()
         })
         .where(
           and(
