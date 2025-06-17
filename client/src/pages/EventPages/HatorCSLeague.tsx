@@ -351,7 +351,12 @@ const HatorCSLeague = () => {
           onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
         />
 
-
+        {/* Match Schedule Section */}
+        <div className="py-16 bg-gradient-to-b from-background/50 to-background">
+          <div className="container mx-auto px-4">
+            <MatchSchedule />
+          </div>
+        </div>
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
