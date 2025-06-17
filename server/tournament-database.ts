@@ -292,8 +292,8 @@ export function registerTournamentDatabaseAPI(app: Express) {
         return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu minimum 13 runde" });
       }
 
-      if (team1Score >= 13 && team2Score >= 13) {
-        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 13+ runde)" });
+      if (team1Score >= 13 && team2Score >= 13 && Math.abs(team1Score - team2Score) < 2) {
+        return res.status(400).json({ message: "În CS2 BO1, câștigătorul trebuie să aibă cu cel puțin 2 runde mai mult" });
       }
 
       // Check if teams have reached maximum matches for their group

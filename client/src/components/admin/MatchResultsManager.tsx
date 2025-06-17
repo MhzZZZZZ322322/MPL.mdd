@@ -352,10 +352,10 @@ export default function MatchResultsManager() {
               </div>
 
               <div>
-                <Label htmlFor="streamUrl">Link Stream (opțional)</Label>
+                <Label htmlFor="streamUrl">Link (opțional)</Label>
                 <Input
                   type="url"
-                  placeholder="https://www.twitch.tv/canal sau https://www.youtube.com/watch?v=..."
+                  placeholder="https://www.faceit.com/match/... sau https://www.twitch.tv/..."
                   value={formData.streamUrl}
                   onChange={(e) => setFormData({...formData, streamUrl: e.target.value})}
                 />
@@ -454,6 +454,16 @@ export default function MatchResultsManager() {
                 max="30"
                 value={formData.team2Score}
                 onChange={(e) => setFormData({...formData, team2Score: parseInt(e.target.value) || 0})}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="streamUrl">Link (opțional)</Label>
+              <Input
+                type="url"
+                placeholder="https://www.faceit.com/match/... sau https://www.twitch.tv/..."
+                value={formData.streamUrl}
+                onChange={(e) => setFormData({...formData, streamUrl: e.target.value})}
               />
             </div>
 
