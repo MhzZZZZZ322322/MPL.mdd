@@ -77,7 +77,7 @@ export default function ScheduleManager() {
     onSuccess: () => {
       toast({
         title: "Succes",
-        description: "Link-ul Faceit a fost actualizat cu succes",
+        description: "Link-ul meciului a fost actualizat cu succes",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/scheduled-matches'] });
       setEditingMatch(null);
@@ -166,7 +166,7 @@ export default function ScheduleManager() {
                           
                           {match.faceitUrl && (
                             <span className="text-xs bg-orange-600/20 text-orange-300 px-2 py-1 rounded">
-                              Faceit Set
+                              Link Set
                             </span>
                           )}
                           
@@ -195,7 +195,7 @@ export default function ScheduleManager() {
         <DialogContent className="bg-gray-800 border-gray-700">
           <DialogHeader>
             <DialogTitle className="text-white">
-              Setează Link Faceit pentru Meci
+              Setează Link pentru Meci
             </DialogTitle>
           </DialogHeader>
           
@@ -211,13 +211,13 @@ export default function ScheduleManager() {
               </div>
               
               <div>
-                <Label htmlFor="faceitUrl" className="text-white">Link Faceit Room</Label>
+                <Label htmlFor="faceitUrl" className="text-white">Link Meci</Label>
                 <Input
                   id="faceitUrl"
                   type="url"
                   value={faceitUrl}
                   onChange={(e) => setFaceitUrl(e.target.value)}
-                  placeholder="https://www.faceit.com/en/cs2/room/..."
+                  placeholder="https://www.faceit.com/en/cs2/room/... sau orice alt link"
                   className="bg-gray-700 border-gray-600 text-white"
                 />
               </div>
