@@ -399,6 +399,28 @@ export const translations: TranslationDictionary = {
     ro: "Vezi mai puțin",
     ru: "Читать меньше"
   },
+
+  // Tournament Groups
+  "tournament.groups.title": {
+    ro: "Grupe Turneu",
+    ru: "Турнирные группы"
+  },
+  "tournament.groups.standings": {
+    ro: "Clasament",
+    ru: "Таблица"
+  },
+  "tournament.groups.legend.advance": {
+    ro: "Calificare directă",
+    ru: "Прямое прохождение"
+  },
+  "tournament.groups.legend.playoffs": {
+    ro: "Playoff",
+    ru: "Плей-офф"
+  },
+  "tournament.groups.legend.eliminated": {
+    ro: "Eliminare",
+    ru: "Исключение"
+  },
   
   // Footer
   "footer.description": {

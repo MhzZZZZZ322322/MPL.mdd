@@ -116,8 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: Removed team Crasat from tournament due to disqualification (now 43 teams total)
 - June 17, 2025: Updated Kamikaze Clan captain name from "crititadon" to correct "critidaton" and fixed team configuration
-- June 16, 2025: Added new team Kamikaze Clan with 5 members (critidaton captain, 4 main players) and authentic logo (now 44 teams total)
+- June 16, 2025: Added new team Kamikaze Clan with 5 members (critidaton captain, 4 main players) and authentic logo
 - June 16, 2025: Updated Bloody team roster with 6 new authentic members (Nostoping captain, 5 main players)
 - June 16, 2025: Updated Xtreme Players member enthys1astyl with correct nickname and FACEIT profile
 - June 16, 2025: Updated Japon team roster with 9 new authentic members (CCLey captain, 5 main players, 3 reserves)
