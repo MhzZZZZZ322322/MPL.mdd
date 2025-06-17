@@ -364,43 +364,7 @@ const HatorCSLeague = () => {
           onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
         />
 
-        {/* Tournament Schedule Section */}
-        <div className="py-16 bg-gradient-to-b from-background/50 to-background">
-          <div className="container mx-auto px-4">
-            <TournamentSchedule />
-          </div>
-        </div>
 
-        {/* Match Schedule Section */}
-        <div className="py-16 bg-gradient-to-b from-background/50 to-background">
-          <div className="container mx-auto px-4 space-y-8">
-            <div className="text-center">
-              <Button 
-                className="border-primary/50 text-primary hover:bg-primary/10 flex items-center gap-2"
-                variant="outline"
-                onClick={() => setIsMatchesExpanded(!isMatchesExpanded)}
-              >
-                {isMatchesExpanded ? (
-                  <>
-                    Ascunde Meciurile
-                    <ChevronUp className="w-4 h-4" />
-                  </>
-                ) : (
-                  <>
-                    {t('tournament.matches.button')}
-                    <ChevronDown className="w-4 h-4" />
-                  </>
-                )}
-              </Button>
-            </div>
-
-            {isMatchesExpanded && (
-              <div className="animate-in slide-in-from-top duration-300">
-                <MatchSchedule />
-              </div>
-            )}
-          </div>
-        </div>
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">

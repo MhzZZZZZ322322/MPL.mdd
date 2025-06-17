@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp, RefreshCw } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
+import TournamentSchedule from "./TournamentSchedule";
+import MatchSchedule from "./MatchSchedule";
 
 interface GroupTeam {
   id: number;
@@ -308,6 +310,18 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                     </div>
 
                   </div>
+                </div>
+
+                {/* Orar Turneu Section */}
+                <div className="mt-12">
+                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Orar Turneu</h2>
+                  <TournamentSchedule />
+                </div>
+
+                {/* Rezultate Meciuri Section */}
+                <div className="mt-12">
+                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Rezultate Meciuri</h2>
+                  <MatchSchedule />
                 </div>
                 
                 {/* Legenda */}
