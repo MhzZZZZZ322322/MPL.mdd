@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Contact } from '@shared/schema';
 import { useToast } from '@/hooks/use-toast';
-import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, Globe, EyeOff, Eye } from 'lucide-react';
+import { LoaderCircle, Mail, User, Type, Calendar, AlignLeft, FileEdit, Users2, Globe, EyeOff, Eye, Trophy } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ro } from 'date-fns/locale';
 import AdminLogin from '@/components/ui/admin-login';
@@ -185,6 +185,14 @@ const Admin = () => {
             description="Administrare jucători și clasamente" 
             icon={Users2} 
             href="/admin/players"
+          />
+          
+          {/* Tournament Management */}
+          <AdminCard 
+            title="Gestionare Turneu" 
+            description="Configurare grupe și rezultate HATOR CS2 LEAGUE" 
+            icon={Trophy} 
+            href="/admin/tournament"
           />
           
           {/* SEO & Analytics Management */}

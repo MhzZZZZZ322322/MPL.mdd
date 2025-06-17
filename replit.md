@@ -116,6 +116,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: Added "Gestionare Turneu" button in admin dashboard for easy access to tournament management
+- June 17, 2025: Secured /admin/tournament with admin authentication (same as /admin)
 - June 17, 2025: Updated playoff advancement rules - groups with 6 teams advance top 3, group with 7 teams advances top 4 (total 22 teams to playoff)
 - June 17, 2025: Implemented complete manual group management system with team selection, distribution, and instant reflection on main page
 - June 17, 2025: Added comprehensive admin interface with "Configurare Grupe" and "Rezultate Meciuri" tabs
