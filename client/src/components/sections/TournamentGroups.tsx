@@ -242,13 +242,13 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                           <h4 className="text-lg font-bold text-white">Stage 1</h4>
                           <span className="text-xl">🎯</span>
                         </div>
-                        <div className="text-sm text-gray-300 mt-1">Group Elimination</div>
+                        <div className="text-sm text-gray-300 mt-1">Group Elimination (BO1)</div>
                       </div>
                       <div className="p-4 h-32 flex flex-col justify-center">
                         <div className="text-center">
-                          <div className="text-green-400 font-semibold text-sm">42 → 21 echipe</div>
-                          <div className="text-white text-xs mt-1">BO1 Round-robin</div>
-                          <div className="text-gray-400 text-xs mt-1">Top 3 din fiecare grupă</div>
+                          <div className="text-green-400 font-semibold text-sm">7 grupe × 6 echipe = 42</div>
+                          <div className="text-white text-xs mt-1">Round-robin: fiecare cu fiecare</div>
+                          <div className="text-gray-400 text-xs mt-1">Primele 3 din fiecare grupă → 21 echipe</div>
                         </div>
                       </div>
                     </div>
@@ -260,13 +260,13 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                           <h4 className="text-lg font-bold text-white">Stage 2</h4>
                           <span className="text-xl">⚔️</span>
                         </div>
-                        <div className="text-sm text-gray-300 mt-1">Single Elimination</div>
+                        <div className="text-sm text-gray-300 mt-1">Single Elimination (BO3)</div>
                       </div>
                       <div className="p-4 h-32 flex flex-col justify-center">
                         <div className="text-center">
-                          <div className="text-orange-400 font-semibold text-sm">21 → 16 echipe</div>
-                          <div className="text-white text-xs mt-1">BO3 Eliminatoriu</div>
-                          <div className="text-gray-400 text-xs mt-1">Top 6 direct + 10 calificați</div>
+                          <div className="text-orange-400 font-semibold text-sm">Primele 11 (seed înalt) → direct</div>
+                          <div className="text-white text-xs mt-1">Următoarele 10 → eliminatoriu</div>
+                          <div className="text-gray-400 text-xs mt-1">Doar 5 se califică → 16 echipe</div>
                         </div>
                       </div>
                     </div>
@@ -282,9 +282,9 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                       </div>
                       <div className="p-4 h-32 flex flex-col justify-center">
                         <div className="text-center">
-                          <div className="text-blue-400 font-semibold text-sm">16 → 8 echipe</div>
-                          <div className="text-white text-xs mt-1">BO1/BO3 Swiss</div>
-                          <div className="text-gray-400 text-xs mt-1">3 victorii avansează</div>
+                          <div className="text-blue-400 font-semibold text-sm">Până la 3 victorii sau 3 înfrângeri</div>
+                          <div className="text-white text-xs mt-1">BO1 (non-decisive), BO3 (decisive)</div>
+                          <div className="text-gray-400 text-xs mt-1">Primele 8 cu 3W → Playoff</div>
                         </div>
                       </div>
                     </div>
@@ -296,13 +296,13 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                           <h4 className="text-lg font-bold text-white">Playoff</h4>
                           <span className="text-xl">🏆</span>
                         </div>
-                        <div className="text-sm text-gray-300 mt-1">Top 8 Final</div>
+                        <div className="text-sm text-gray-300 mt-1">Top 8</div>
                       </div>
                       <div className="p-4 h-32 flex flex-col justify-center">
                         <div className="text-center">
-                          <div className="text-yellow-400 font-semibold text-sm">8 → 1 echipă</div>
-                          <div className="text-white text-xs mt-1">BO3 Eliminare</div>
-                          <div className="text-gray-400 text-xs mt-1">Câștigător campionat</div>
+                          <div className="text-yellow-400 font-semibold text-sm">Eliminare directă</div>
+                          <div className="text-white text-xs mt-1">Toate meciurile sunt BO3</div>
+                          <div className="text-gray-400 text-xs mt-1">8 → 1 Câștigător</div>
                         </div>
                       </div>
                     </div>

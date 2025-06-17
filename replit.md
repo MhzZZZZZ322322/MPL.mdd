@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 17, 2025: **UPDATED** - Adapted tournament stage progression details with corrected Stage 2 format (11 direct + 5 from elimination = 16 total)
 - June 17, 2025: **ORGANIZED** - Arranged tournament stages in separate horizontal row with responsive 4-column grid layout
 - June 17, 2025: **SEPARATED** - Split tournament stages into individual modules, each stage now displays as its own card like tournament groups
 - June 17, 2025: **REDESIGNED** - Reorganized tournament stage rules into 4 separate blocks using 2x2 grid layout matching group card design
