@@ -510,12 +510,52 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { db } = await import("./db");
       const { matchResults, insertMatchResultSchema } = await import("@shared/schema");
+      const { and, eq } = await import("drizzle-orm");
       
       const result = insertMatchResultSchema.safeParse(req.body);
       if (!result.success) {
         const errorMessage = fromZodError(result.error).message;
         console.error("Validation error:", errorMessage);
         return res.status(400).json({ message: errorMessage });
+      }
+
+      const { groupName, team1Name, team2Name, team1Score, team2Score } = result.data;
+
+      // Validate teams are different
+      if (team1Name === team2Name) {
+        return res.status(400).json({ message: "O echipă nu poate juca împotriva ei însăși" });
+      }
+
+      // Check if teams have already played against each other in this group
+      const existingMatches = await db.select().from(matchResults).where(
+        and(
+          eq(matchResults.groupName, groupName),
+          eq(matchResults.team1Name, team1Name),
+          eq(matchResults.team2Name, team2Name)
+        )
+      );
+      
+      const reverseMatches = await db.select().from(matchResults).where(
+        and(
+          eq(matchResults.groupName, groupName),
+          eq(matchResults.team1Name, team2Name),
+          eq(matchResults.team2Name, team1Name)
+        )
+      );
+
+      if (existingMatches.length > 0 || reverseMatches.length > 0) {
+        return res.status(400).json({ 
+          message: `Echipele ${team1Name} și ${team2Name} au mai jucat între ele în grupa ${groupName}. În CS2 BO1, fiecare echipă poate juca doar o dată cu fiecare altă echipă din grupă.` 
+        });
+      }
+
+      // Validate CS2 BO1 scores (minimum 13 rounds to win, no draws)
+      if (team1Score < 13 && team2Score < 13) {
+        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu minimum 13 runde" });
+      }
+
+      if (team1Score >= 13 && team2Score >= 13) {
+        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 13+ runde)" });
       }
       
       const newMatch = await db.insert(matchResults).values(result.data).returning();
