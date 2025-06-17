@@ -1,5 +1,7 @@
 import { useLanguage } from "@/lib/LanguageContext";
 import { getTranslation } from "@/lib/translations";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface Team {
   id: number;
@@ -17,6 +19,11 @@ interface Group {
   id: string;
   name: string;
   teams: GroupTeam[];
+}
+
+interface TournamentGroupsProps {
+  isExpanded: boolean;
+  onToggle: () => void;
 }
 
 // Mock data pentru demonstrație - în realitate ar veni din API
@@ -108,102 +115,125 @@ const mockGroups: Group[] = [
   }
 ];
 
-export default function TournamentGroups() {
+export default function TournamentGroups({ isExpanded, onToggle }: TournamentGroupsProps) {
   const { language } = useLanguage();
   const t = (key: string) => getTranslation(key, language);
 
   return (
     <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 sm:mb-12 font-rajdhani text-center">
-          {t('tournament.groups.title')}
-        </h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-          {mockGroups.map((group) => (
-            <div key={group.id} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg border border-slate-700/50 overflow-hidden">
-              {/* Group Header */}
-              <div className="bg-gradient-to-r from-primary/80 to-primary/60 px-4 py-3 border-b border-slate-600">
-                <h3 className="text-white font-bold text-lg text-center">
-                  {group.name}
-                </h3>
-                <p className="text-white/80 text-sm text-center mt-1">
-                  {t('tournament.groups.standings')}
-                </p>
-              </div>
+        <div className="flex flex-col items-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 font-rajdhani text-center">
+            {t('tournament.groups.title')}
+          </h2>
+          
+          <Button 
+            onClick={onToggle}
+            className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+          >
+            {isExpanded ? (
+              <>
+                {t('event.read.less')}
+                <ChevronUp className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                {t('event.read.more')}
+                <ChevronDown className="w-4 h-4" />
+              </>
+            )}
+          </Button>
+        </div>
 
-              {/* Teams List */}
-              <div className="p-4">
-                <div className="space-y-2">
-                  {group.teams
-                    .sort((a, b) => {
-                      // Sort by wins descending, then by losses ascending
-                      if (a.wins !== b.wins) return b.wins - a.wins;
-                      return a.losses - b.losses;
-                    })
-                    .map((team, index) => (
-                    <div 
-                      key={team.id} 
-                      className={`flex items-center justify-between p-2 rounded ${
-                        index === 0 ? 'bg-green-600/20 border border-green-500/30' :
-                        index === 1 ? 'bg-blue-600/20 border border-blue-500/30' :
-                        index >= group.teams.length - 2 ? 'bg-red-600/20 border border-red-500/30' :
-                        'bg-slate-700/30 border border-slate-600/30'
-                      }`}
-                    >
-                      <div className="flex items-center space-x-3 flex-1 min-w-0">
-                        <span className="text-white font-bold text-sm w-6 text-center">
-                          {index + 1}.
-                        </span>
-                        <div className="w-8 h-8 rounded overflow-hidden bg-slate-600 flex-shrink-0">
-                          <img 
-                            src={team.logoUrl} 
-                            alt={team.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                            }}
-                          />
+        {isExpanded && (
+          <div className="animate-in slide-in-from-top duration-300">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+              {mockGroups.map((group) => (
+                <div key={group.id} className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-lg border border-slate-700/50 overflow-hidden">
+                  {/* Group Header */}
+                  <div className="bg-gradient-to-r from-primary/80 to-primary/60 px-4 py-3 border-b border-slate-600">
+                    <h3 className="text-white font-bold text-lg text-center">
+                      {group.name}
+                    </h3>
+                    <p className="text-white/80 text-sm text-center mt-1">
+                      {t('tournament.groups.standings')}
+                    </p>
+                  </div>
+
+                  {/* Teams List */}
+                  <div className="p-4">
+                    <div className="space-y-2">
+                      {group.teams
+                        .sort((a, b) => {
+                          // Sort by wins descending, then by losses ascending
+                          if (a.wins !== b.wins) return b.wins - a.wins;
+                          return a.losses - b.losses;
+                        })
+                        .map((team, index) => (
+                        <div 
+                          key={team.id} 
+                          className={`flex items-center justify-between p-2 rounded ${
+                            index === 0 ? 'bg-green-600/20 border border-green-500/30' :
+                            index === 1 ? 'bg-blue-600/20 border border-blue-500/30' :
+                            index >= group.teams.length - 2 ? 'bg-red-600/20 border border-red-500/30' :
+                            'bg-slate-700/30 border border-slate-600/30'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-3 flex-1 min-w-0">
+                            <span className="text-white font-bold text-sm w-6 text-center">
+                              {index + 1}.
+                            </span>
+                            <div className="w-8 h-8 rounded overflow-hidden bg-slate-600 flex-shrink-0">
+                              <img 
+                                src={team.logoUrl} 
+                                alt={team.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = 'none';
+                                }}
+                              />
+                            </div>
+                            <span className="text-white text-sm font-medium truncate">
+                              {team.name}
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-2 text-xs">
+                            <span className={`px-2 py-1 rounded ${
+                              team.wins > team.losses ? 'bg-green-600/30 text-green-400' :
+                              team.wins === team.losses ? 'bg-yellow-600/30 text-yellow-400' :
+                              'bg-red-600/30 text-red-400'
+                            }`}>
+                              {team.wins}-{team.losses}
+                            </span>
+                            <span className="text-slate-400 min-w-[2.5rem] text-right">
+                              {team.winRate}
+                            </span>
+                          </div>
                         </div>
-                        <span className="text-white text-sm font-medium truncate">
-                          {team.name}
-                        </span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-xs">
-                        <span className={`px-2 py-1 rounded ${
-                          team.wins > team.losses ? 'bg-green-600/30 text-green-400' :
-                          team.wins === team.losses ? 'bg-yellow-600/30 text-yellow-400' :
-                          'bg-red-600/30 text-red-400'
-                        }`}>
-                          {team.wins}-{team.losses}
-                        </span>
-                        <span className="text-slate-400 min-w-[2.5rem] text-right">
-                          {team.winRate}
-                        </span>
-                      </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
+              ))}
+            </div>
+            
+            {/* Legend */}
+            <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 bg-green-600/30 border border-green-500/50 rounded"></div>
+                <span className="text-white">{t('tournament.groups.legend.advance')}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 bg-blue-600/30 border border-blue-500/50 rounded"></div>
+                <span className="text-white">{t('tournament.groups.legend.playoffs')}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 bg-red-600/30 border border-red-500/50 rounded"></div>
+                <span className="text-white">{t('tournament.groups.legend.eliminated')}</span>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Legend */}
-        <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm">
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-green-600/30 border border-green-500/50 rounded"></div>
-            <span className="text-white">{t('tournament.groups.legend.advance')}</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-blue-600/30 border border-blue-500/50 rounded"></div>
-            <span className="text-white">{t('tournament.groups.legend.playoffs')}</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-red-600/30 border border-red-500/50 rounded"></div>
-            <span className="text-white">{t('tournament.groups.legend.eliminated')}</span>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
