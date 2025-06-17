@@ -113,12 +113,12 @@ export function registerSimpleGroupsAPI(app: Express) {
       }
 
       // Validate CS2 scoring rules
-      if (team1Score < 16 && team2Score < 16) {
-        return res.status(400).json({ message: "In CS2, one team must win at least 16 rounds" });
+      if (team1Score < 13 && team2Score < 13) {
+        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu cel puțin 13 runde" });
       }
 
-      if (team1Score >= 16 && team2Score >= 16) {
-        return res.status(400).json({ message: "Both teams cannot have 16+ rounds in CS2" });
+      if (team1Score >= 13 && team2Score >= 13) {
+        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 13+ runde)" });
       }
 
       // Check if teams exist in the group

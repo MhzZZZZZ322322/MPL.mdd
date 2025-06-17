@@ -120,16 +120,16 @@ export default function TournamentAdmin() {
 
   const handleAddMatch = () => {
     if (newMatch.team1 && newMatch.team2 && newMatch.team1 !== newMatch.team2) {
-      // Validate CS2 BO1 score format (first to 16 rounds wins, no ties possible)
-      if (newMatch.team1Score < 16 && newMatch.team2Score < 16) {
+      // Validate CS2 BO1 score format (first to 13 rounds wins, no ties possible)
+      if (newMatch.team1Score < 13 && newMatch.team2Score < 13) {
         toast({
           title: "Scor invalid",
-          description: "În CS2 BO1, o echipă trebuie să câștige cu cel puțin 16 runde",
+          description: "În CS2 BO1, o echipă trebuie să câștige cu cel puțin 13 runde",
           variant: "destructive",
         });
         return;
       }
-      if (newMatch.team1Score >= 16 && newMatch.team2Score >= 16) {
+      if (newMatch.team1Score >= 13 && newMatch.team2Score >= 13) {
         toast({
           title: "Scor invalid", 
           description: "În CS2 BO1 nu poate fi egalitate - o echipă trebuie să câștige",
@@ -325,10 +325,10 @@ export default function TournamentAdmin() {
                       </p>
                       <p className="text-xs text-gray-400">
                         Grupa {newMatch.groupName} • CS2 BO1 • 
-                        {(newMatch.team1Score >= 16 || newMatch.team2Score >= 16) && newMatch.team1Score !== newMatch.team2Score ? (
+                        {(newMatch.team1Score >= 13 || newMatch.team2Score >= 13) && newMatch.team1Score !== newMatch.team2Score ? (
                           <>Învingător: {newMatch.team1Score > newMatch.team2Score ? newMatch.team1 : newMatch.team2}</>
                         ) : (
-                          <span className="text-yellow-400">⚠️ Scor invalid pentru CS2 BO1</span>
+                          <span className="text-yellow-400">⚠️ Scor invalid pentru CS2 BO1 (minim 13 runde)</span>
                         )}
                       </p>
                     </div>
