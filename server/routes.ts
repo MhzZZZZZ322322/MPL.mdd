@@ -527,23 +527,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Check if teams have already played against each other in this group
+      const { or } = await import("drizzle-orm");
+      
       const existingMatches = await db.select().from(matchResults).where(
         and(
           eq(matchResults.groupName, groupName),
-          eq(matchResults.team1Name, team1Name),
-          eq(matchResults.team2Name, team2Name)
-        )
-      );
-      
-      const reverseMatches = await db.select().from(matchResults).where(
-        and(
-          eq(matchResults.groupName, groupName),
-          eq(matchResults.team1Name, team2Name),
-          eq(matchResults.team2Name, team1Name)
+          or(
+            // Check both possible combinations: A vs B and B vs A
+            and(
+              eq(matchResults.team1Name, team1Name),
+              eq(matchResults.team2Name, team2Name)
+            ),
+            and(
+              eq(matchResults.team1Name, team2Name),
+              eq(matchResults.team2Name, team1Name)
+            )
+          )
         )
       );
 
-      if (existingMatches.length > 0 || reverseMatches.length > 0) {
+      if (existingMatches.length > 0) {
         return res.status(400).json({ 
           message: `Echipele ${team1Name} și ${team2Name} au mai jucat între ele în grupa ${groupName}. În CS2 BO1, fiecare echipă poate juca doar o dată cu fiecare altă echipă din grupă.` 
         });
