@@ -228,29 +228,88 @@ export function registerSimpleGroupsAPI(app: Express) {
   app.post("/api/admin/save-group-config", (req, res) => {
     try {
       const { groups } = req.body;
+      
+      // Get all teams that should be in groups now
+      const currentTeamsInGroups = new Set();
+      groups.forEach((group: any) => {
+        group.teams.forEach((team: any) => {
+          currentTeamsInGroups.add(`${team.name}-${group.groupName}`);
+        });
+      });
+
+      // Remove matches for teams that are no longer in their groups
+      groupResults = groupResults.filter((match: any) => {
+        const team1InGroup = currentTeamsInGroups.has(`${match.team1}-${match.groupName}`);
+        const team2InGroup = currentTeamsInGroups.has(`${match.team2}-${match.groupName}`);
+        return team1InGroup && team2InGroup;
+      });
+
+      // Save new configuration
       groupConfiguration = groups;
 
-      // Update standings based on new configuration
+      // Update standings based on new configuration - completely reset
       groupStandings = [];
       groups.forEach((group: any) => {
         group.teams.forEach((team: any, index: number) => {
-          const existingStanding = groupStandings.find(s => s.teamName === team.name && s.groupName === group.groupName);
-          if (existingStanding) {
-            existingStanding.position = index + 1;
+          groupStandings.push({
+            teamName: team.name,
+            groupName: group.groupName,
+            matchesPlayed: 0,
+            wins: 0,
+            losses: 0,
+            roundsWon: 0,
+            roundsLost: 0,
+            roundDifference: 0,
+            points: 0,
+            position: index + 1,
+          });
+        });
+      });
+
+      // Recalculate standings based on remaining matches
+      groupResults.forEach((match: any) => {
+        const team1Standing = groupStandings.find(s => s.teamName === match.team1 && s.groupName === match.groupName);
+        const team2Standing = groupStandings.find(s => s.teamName === match.team2 && s.groupName === match.groupName);
+        
+        if (team1Standing && team2Standing) {
+          // Update match counts
+          team1Standing.matchesPlayed++;
+          team2Standing.matchesPlayed++;
+          
+          // Update rounds
+          team1Standing.roundsWon += match.team1Score;
+          team1Standing.roundsLost += match.team2Score;
+          team2Standing.roundsWon += match.team2Score;
+          team2Standing.roundsLost += match.team1Score;
+          
+          // Update round difference
+          team1Standing.roundDifference = team1Standing.roundsWon - team1Standing.roundsLost;
+          team2Standing.roundDifference = team2Standing.roundsWon - team2Standing.roundsLost;
+          
+          // Update wins/losses and points
+          if (match.team1Score > match.team2Score) {
+            team1Standing.wins++;
+            team1Standing.points += 3;
+            team2Standing.losses++;
           } else {
-            groupStandings.push({
-              teamName: team.name,
-              groupName: group.groupName,
-              matchesPlayed: 0,
-              wins: 0,
-              losses: 0,
-              roundsWon: 0,
-              roundsLost: 0,
-              roundDifference: 0,
-              points: 0,
-              position: index + 1,
-            });
+            team2Standing.wins++;
+            team2Standing.points += 3;
+            team1Standing.losses++;
           }
+        }
+      });
+
+      // Recalculate positions for each group
+      groups.forEach((group: any) => {
+        const groupTeams = groupStandings.filter(s => s.groupName === group.groupName);
+        groupTeams.sort((a, b) => {
+          if (b.points !== a.points) return b.points - a.points;
+          if (b.roundDifference !== a.roundDifference) return b.roundDifference - a.roundDifference;
+          return b.roundsWon - a.roundsWon;
+        });
+        
+        groupTeams.forEach((team, index) => {
+          team.position = index + 1;
         });
       });
 

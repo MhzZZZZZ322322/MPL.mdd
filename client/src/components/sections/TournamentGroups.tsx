@@ -22,16 +22,7 @@ interface GroupTeam {
   lastUpdated: string;
 }
 
-interface MatchResult {
-  id: number;
-  groupName: string;
-  team1Name: string;
-  team2Name: string;
-  team1Score: number;
-  team2Score: number;
-  winnerId: number | null;
-  matchDate: string;
-}
+// MatchResult interface removed - matches are now handled by MatchSchedule component
 
 interface TournamentGroup {
   id: number;
@@ -58,11 +49,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
     refetchInterval: 60000, // Refetch every minute
   });
 
-  // Fetch match results from API
-  const { data: matchResults = [] } = useQuery<MatchResult[]>({
-    queryKey: ['/api/match-results'],
-    refetchInterval: 30000, // Refetch every 30 seconds
-  });
+  // No longer fetching match results here - they are displayed in MatchSchedule component
 
   const { toast } = useToast();
 
@@ -102,21 +89,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
     syncMutation.mutate();
   };
 
-  // Helper function to format date
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString('ro-RO', {
-      day: '2-digit',
-      month: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
-  // Helper function to get results for a specific group
-  const getResultsForGroup = (groupName: string): MatchResult[] => {
-    return matchResults.filter(result => result.groupName === groupName)
-      .sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime());
-  };
+  // Removed match result helpers - matches are now displayed only in MatchSchedule component
 
   return (
     <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
