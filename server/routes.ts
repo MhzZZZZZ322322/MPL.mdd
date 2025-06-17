@@ -445,6 +445,162 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Use CS Servers router
   app.use(csServersRouter);
 
+  // Tournament Groups API Routes
+  app.get("/api/tournament-groups", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { tournamentGroups, groupTeams, teams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const groups = await db.select({
+        id: tournamentGroups.id,
+        groupName: tournamentGroups.groupName,
+        groupDisplayName: tournamentGroups.groupDisplayName,
+        tournament: tournamentGroups.tournament,
+        isActive: tournamentGroups.isActive,
+      })
+      .from(tournamentGroups)
+      .where(eq(tournamentGroups.isActive, true))
+      .orderBy(tournamentGroups.groupName);
+
+      // Pentru fiecare grupă, obține echipele cu statistici
+      const groupsWithTeams = await Promise.all(
+        groups.map(async (group) => {
+          const teamsInGroup = await db.select({
+            id: groupTeams.id,
+            teamId: groupTeams.teamId,
+            teamName: teams.name,
+            teamLogo: teams.logoUrl,
+            matchesPlayed: groupTeams.matchesPlayed,
+            wins: groupTeams.wins,
+            draws: groupTeams.draws,
+            losses: groupTeams.losses,
+            roundsWon: groupTeams.roundsWon,
+            roundsLost: groupTeams.roundsLost,
+            roundDifference: groupTeams.roundDifference,
+            points: groupTeams.points,
+            position: groupTeams.position,
+            lastUpdated: groupTeams.lastUpdated,
+          })
+          .from(groupTeams)
+          .innerJoin(teams, eq(groupTeams.teamId, teams.id))
+          .where(eq(groupTeams.groupId, group.id))
+          .orderBy(groupTeams.position);
+
+          return {
+            ...group,
+            teams: teamsInGroup,
+          };
+        })
+      );
+
+      res.json(groupsWithTeams);
+    } catch (error) {
+      console.error("Error fetching tournament groups:", error);
+      res.status(500).json({ message: "Failed to fetch tournament groups" });
+    }
+  });
+
+  // Get specific group with teams
+  app.get("/api/tournament-groups/:groupName", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { tournamentGroups, groupTeams, teams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const groupName = req.params.groupName.toUpperCase();
+      
+      const [group] = await db.select()
+        .from(tournamentGroups)
+        .where(eq(tournamentGroups.groupName, groupName));
+
+      if (!group) {
+        return res.status(404).json({ message: "Group not found" });
+      }
+
+      const teamsInGroup = await db.select({
+        id: groupTeams.id,
+        teamId: groupTeams.teamId,
+        teamName: teams.name,
+        teamLogo: teams.logoUrl,
+        matchesPlayed: groupTeams.matchesPlayed,
+        wins: groupTeams.wins,
+        draws: groupTeams.draws,
+        losses: groupTeams.losses,
+        roundsWon: groupTeams.roundsWon,
+        roundsLost: groupTeams.roundsLost,
+        roundDifference: groupTeams.roundDifference,
+        points: groupTeams.points,
+        position: groupTeams.position,
+        lastUpdated: groupTeams.lastUpdated,
+      })
+      .from(groupTeams)
+      .innerJoin(teams, eq(groupTeams.teamId, teams.id))
+      .where(eq(groupTeams.groupId, group.id))
+      .orderBy(groupTeams.position);
+
+      res.json({
+        ...group,
+        teams: teamsInGroup,
+      });
+    } catch (error) {
+      console.error("Error fetching group:", error);
+      res.status(500).json({ message: "Failed to fetch group" });
+    }
+  });
+
+  // Manual sync with Google Sheets
+  app.post("/api/sync-groups", async (req, res) => {
+    try {
+      const { syncNow } = await import("./google-sheets-sync");
+      await syncNow();
+      res.json({ message: "Synchronization completed successfully" });
+    } catch (error) {
+      console.error("Error syncing with Google Sheets:", error);
+      res.status(500).json({ message: "Failed to sync with Google Sheets" });
+    }
+  });
+
+  // Get matches for a specific group
+  app.get("/api/tournament-groups/:groupName/matches", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { tournamentGroups, groupMatches, teams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const groupName = req.params.groupName.toUpperCase();
+      
+      const [group] = await db.select()
+        .from(tournamentGroups)
+        .where(eq(tournamentGroups.groupName, groupName));
+
+      if (!group) {
+        return res.status(404).json({ message: "Group not found" });
+      }
+
+      const matches = await db.select({
+        id: groupMatches.id,
+        team1Name: teams.name,
+        team2Name: teams.name,
+        team1Score: groupMatches.team1Score,
+        team2Score: groupMatches.team2Score,
+        status: groupMatches.status,
+        scheduledTime: groupMatches.scheduledTime,
+        completedTime: groupMatches.completedTime,
+        notes: groupMatches.notes,
+      })
+      .from(groupMatches)
+      .innerJoin(teams, eq(groupMatches.team1Id, teams.id))
+      .where(eq(groupMatches.groupId, group.id))
+      .orderBy(groupMatches.matchNumber);
+
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching matches:", error);
+      res.status(500).json({ message: "Failed to fetch matches" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
