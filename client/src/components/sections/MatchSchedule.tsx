@@ -156,10 +156,10 @@ export default function MatchSchedule() {
           disabled={syncMutation.isPending}
           variant="outline"
           size="sm"
-          className="bg-slate-800/50 backdrop-blur-sm border-slate-600/30 hover:bg-slate-700/50 text-white hover:text-white"
+          className="border-primary/50 text-primary hover:bg-primary/10"
         >
-          <RefreshCw className={`h-4 w-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
-          {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizează'}
+          <RefreshCw className={`w-4 h-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
+          {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizare'}
         </Button>
       </div>
 

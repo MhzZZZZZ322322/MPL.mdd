@@ -116,7 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
-- June 17, 2025: **POLISHED** - Aligned sync button to right with consistent styling matching TournamentGroups design
+- June 17, 2025: **UNIFIED** - Copied exact button styling from TournamentGroups for perfect visual consistency across both sync buttons
 - June 17, 2025: **SYNCHRONIZED** - Updated MatchSchedule component to use dynamic group configuration from database instead of hardcoded team lists
 - June 17, 2025: **INTEGRATED** - Added playoff rules section as a module in the same grid with groups, positioned after Group G with identical styling
 - June 17, 2025: **FIXED** - Repaired synchronization system to force complete recalculation from PostgreSQL database - standings now perfectly reflect database state  
