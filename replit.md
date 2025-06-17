@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 17, 2025: **RENAMED** - Changed "Grupe Turneu" button to "Stage 1" to better reflect tournament phase structure
 - June 17, 2025: **UPDATED** - Tournament schedule data for groups A, B, C with official dates (19.06.2025, 20.06.2025, 21.06.2025) from organizer file 322_1750193697699.txt
 - June 17, 2025: **IMPLEMENTED** - Complete link management system with dynamic updates and deletion functionality for match URLs
 - June 17, 2025: **ADDED** - Red "Șterge" button for deleting match links in admin interface with real-time synchronization
