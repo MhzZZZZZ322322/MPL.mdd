@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
+import TournamentGroups from "@/components/sections/TournamentGroups";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -340,6 +341,9 @@ const HatorCSLeague = () => {
             </>
           )}
         </div>
+
+        {/* Tournament Groups Section */}
+        <TournamentGroups />
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
