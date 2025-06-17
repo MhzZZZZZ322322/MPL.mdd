@@ -172,3 +172,71 @@ export const insertTeamMemberSchema = createInsertSchema(teamMembers).omit({
 
 export type InsertTeamMember = z.infer<typeof insertTeamMemberSchema>;
 export type TeamMember = typeof teamMembers.$inferSelect;
+
+// Tournament Groups - Grupele de turneu
+export const tournamentGroups = pgTable("tournament_groups", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  groupDisplayName: text("group_display_name").notNull(), // Group A, Group B, etc.
+  tournament: text("tournament").notNull().default("hator-cs-league"),
+  isActive: boolean("is_active").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Group Teams - Echipele în grupe cu statistici complete
+export const groupTeams = pgTable("group_teams", {
+  id: serial("id").primaryKey(),
+  groupId: integer("group_id").references(() => tournamentGroups.id).notNull(),
+  teamId: integer("team_id").references(() => teams.id).notNull(),
+  matchesPlayed: integer("matches_played").default(0).notNull(),
+  wins: integer("wins").default(0).notNull(),
+  draws: integer("draws").default(0).notNull(),
+  losses: integer("losses").default(0).notNull(),
+  roundsWon: integer("rounds_won").default(0).notNull(),
+  roundsLost: integer("rounds_lost").default(0).notNull(),
+  roundDifference: integer("round_difference").default(0).notNull(),
+  points: integer("points").default(0).notNull(), // 3 pts win, 1 pt draw, 0 pts loss
+  position: integer("position").default(1).notNull(),
+  lastUpdated: timestamp("last_updated").defaultNow(),
+});
+
+// Group Matches - Meciurile din grupe
+export const groupMatches = pgTable("group_matches", {
+  id: serial("id").primaryKey(),
+  groupId: integer("group_id").references(() => tournamentGroups.id).notNull(),
+  team1Id: integer("team1_id").references(() => teams.id).notNull(),
+  team2Id: integer("team2_id").references(() => teams.id).notNull(),
+  team1Score: integer("team1_score"),
+  team2Score: integer("team2_score"),
+  status: text("status").default("scheduled").notNull(), // scheduled, live, completed
+  matchNumber: integer("match_number"), // Numărul meciului în grupă
+  scheduledTime: timestamp("scheduled_time"),
+  completedTime: timestamp("completed_time"),
+  googleSheetsRowId: text("google_sheets_row_id"), // Pentru sincronizare cu Google Sheets
+  notes: text("notes"), // Note despre meci
+});
+
+// Schemas pentru inserare
+export const insertTournamentGroupSchema = createInsertSchema(tournamentGroups).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertGroupTeamSchema = createInsertSchema(groupTeams).omit({
+  id: true,
+  lastUpdated: true,
+});
+
+export const insertGroupMatchSchema = createInsertSchema(groupMatches).omit({
+  id: true,
+});
+
+// Types
+export type InsertTournamentGroup = z.infer<typeof insertTournamentGroupSchema>;
+export type TournamentGroup = typeof tournamentGroups.$inferSelect;
+
+export type InsertGroupTeam = z.infer<typeof insertGroupTeamSchema>;
+export type GroupTeam = typeof groupTeams.$inferSelect;
+
+export type InsertGroupMatch = z.infer<typeof insertGroupMatchSchema>;
+export type GroupMatch = typeof groupMatches.$inferSelect;
