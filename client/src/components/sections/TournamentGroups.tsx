@@ -176,9 +176,11 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                                 <div 
                                   key={team.id}
                                   className={`flex items-center justify-between p-2 rounded transition-colors ${
-                                    // Top 3 teams advance for groups with 6 teams, top 4 for group with 7 teams
-                                    (group.teams.length <= 6 && team.position <= 3) || 
-                                    (group.teams.length === 7 && team.position <= 4)
+                                    // Fond verde doar dacă echipa are puncte (a jucat meciuri) ȘI este în pozițiile de calificare
+                                    team.points > 0 && (
+                                      (group.teams.length <= 6 && team.position <= 3) || 
+                                      (group.teams.length === 7 && team.position <= 4)
+                                    )
                                       ? 'bg-green-600/20 border border-green-500/30' 
                                       : 'bg-slate-700/30 border border-slate-600/30'
                                   }`}
