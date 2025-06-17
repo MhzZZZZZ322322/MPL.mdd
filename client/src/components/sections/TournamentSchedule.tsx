@@ -20,41 +20,76 @@ const scheduleData: ScheduleDay[] = [
     date: "18 Ianuarie 2025",
     dayName: "Sâmbătă",
     matches: [
-      { time: "10:00", team1: "Auratix", team2: "BPSP", group: "Grupa A", stage: "Stage 1" },
-      { time: "10:30", team1: "Japon", team2: "Brigada", group: "Grupa A", stage: "Stage 1" },
-      { time: "11:00", team1: "Ciocana Esports", team2: "Killuminaty", group: "Grupa B", stage: "Stage 1" },
-      { time: "11:30", team1: "Golden Five", team2: "K9 Team", group: "Grupa B", stage: "Stage 1" },
-      { time: "12:00", team1: "Cadian Team", team2: "Lean Vision", group: "Grupa C", stage: "Stage 1" },
-      { time: "12:30", team1: "Flux Line", team2: "Legalize", group: "Grupa C", stage: "Stage 1" },
+      { time: "09:00", team1: "Ciocana Esports", team2: "Japon", group: "Grupa A", stage: "Stage 1" },
+      { time: "09:30", team1: "Golden Five", team2: "Bloody", group: "Grupa B", stage: "Stage 1" },
+      { time: "10:00", team1: "Ciocana Esports", team2: "Killuminaty", group: "Grupa A", stage: "Stage 1" },
+      { time: "10:30", team1: "Golden Five", team2: "Kamikaze Clan", group: "Grupa B", stage: "Stage 1" },
+      { time: "11:00", team1: "Ciocana Esports", team2: "Barbosii", group: "Grupa A", stage: "Stage 1" },
+      { time: "11:30", team1: "Golden Five", team2: "LitEnergy", group: "Grupa B", stage: "Stage 1" },
     ]
   },
   {
     date: "19 Ianuarie 2025",
     dayName: "Duminică",
     matches: [
-      { time: "10:00", team1: "Into the Beach", team2: "Muligambia", group: "Grupa D", stage: "Stage 1" },
-      { time: "10:30", team1: "Neo Egoist League", team2: "Onyx", group: "Grupa D", stage: "Stage 1" },
-      { time: "11:00", team1: "Bloody", team2: "Kamikaze Clan", group: "Grupa E", stage: "Stage 1" },
-      { time: "11:30", team1: "LitEnergy", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
-      { time: "12:00", team1: "Barbosii", team2: "Ciocălău Team", group: "Grupa F", stage: "Stage 1" },
-      { time: "12:30", team1: "Robotaim", team2: "Rumina", group: "Grupa F", stage: "Stage 1" },
+      { time: "09:00", team1: "Brigada Meteor", team2: "Robotaim", group: "Grupa C", stage: "Stage 1" },
+      { time: "09:30", team1: "K9 Team", team2: "Into the Beach", group: "Grupa D", stage: "Stage 1" },
+      { time: "10:00", team1: "Brigada Meteor", team2: "La Passion", group: "Grupa C", stage: "Stage 1" },
+      { time: "10:30", team1: "K9 Team", team2: "Muligambia", group: "Grupa D", stage: "Stage 1" },
+      { time: "11:00", team1: "Brigada Meteor", team2: "Neo Egoist League", group: "Grupa C", stage: "Stage 1" },
+      { time: "11:30", team1: "K9 Team", team2: "Neo Egoist League", group: "Grupa D", stage: "Stage 1" },
     ]
   },
   {
-    date: "25 Ianuarie 2025",
-    dayName: "Sâmbătă",
+    date: "20 Ianuarie 2025",
+    dayName: "Luni",
     matches: [
-      { time: "10:00", team1: "Bobb3rs", team2: "Cipok", group: "Grupa G", stage: "Stage 1" },
-      { time: "10:30", team1: "Coli", team2: "Cucumba", group: "Grupa G", stage: "Stage 1" },
-      { time: "11:00", team1: "La Passion", team2: "Saponel", group: "Grupa G", stage: "Stage 1" },
-      { time: "11:30", team1: "Shashlik", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
-      { time: "12:00", team1: "VeryGoodTeam", team2: "WenDeagle", group: "Grupa G", stage: "Stage 1" },
-      { time: "12:30", team1: "Wenzo", team2: "Win Spirit", group: "Grupa G", stage: "Stage 1" },
+      { time: "09:00", team1: "LitEnergy", team2: "LYSQ", group: "Grupa E", stage: "Stage 1" },
+      { time: "09:30", team1: "Wenzo", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
+      { time: "10:00", team1: "LitEnergy", team2: "Bloody", group: "Grupa E", stage: "Stage 1" },
+      { time: "10:30", team1: "Wenzo", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
+      { time: "11:00", team1: "LitEnergy", team2: "Kamikaze Clan", group: "Grupa E", stage: "Stage 1" },
+      { time: "11:30", team1: "Wenzo", team2: "Brigada", group: "Grupa F", stage: "Stage 1" },
     ]
   },
   {
-    date: "26 Ianuarie 2025",
-    dayName: "Duminică",
+    date: "21 Ianuarie 2025",
+    dayName: "Marți",
+    matches: [
+      { time: "09:00", team1: "Wenzo", team2: "Brigada", group: "Grupa G", stage: "Stage 1" },
+      { time: "09:30", team1: "Cipok", team2: "VeryGoodTeam", group: "Grupa G", stage: "Stage 1" },
+      { time: "10:00", team1: "Wenzo", team2: "Coli", group: "Grupa G", stage: "Stage 1" },
+      { time: "10:30", team1: "Cipok", team2: "WenDeagle", group: "Grupa G", stage: "Stage 1" },
+      { time: "11:00", team1: "Wenzo", team2: "Cucumba", group: "Grupa G", stage: "Stage 1" },
+      { time: "11:30", team1: "Cipok", team2: "Win Spirit", group: "Grupa G", stage: "Stage 1" },
+    ]
+  },
+  {
+    date: "22 Ianuarie 2025",
+    dayName: "Miercuri",
+    matches: [
+      { time: "09:00", team1: "Cipok", team2: "X-one", group: "Grupa G", stage: "Stage 1" },
+      { time: "09:30", team1: "VeryGoodTeam", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
+      { time: "10:00", team1: "Cipok", team2: "XPlosion", group: "Grupa G", stage: "Stage 1" },
+      { time: "10:30", team1: "VeryGoodTeam", team2: "Xtreme Players", group: "Grupa G", stage: "Stage 1" },
+      { time: "11:00", team1: "WenDeagle", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
+      { time: "11:30", team1: "Win Spirit", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
+    ]
+  },
+  {
+    date: "23 Ianuarie 2025",
+    dayName: "Joi",
+    matches: [
+      { time: "09:00", team1: "Win Spirit", team2: "Xtreme Players", group: "Grupa G", stage: "Stage 1" },
+      { time: "09:30", team1: "X-one", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
+      { time: "10:00", team1: "X-one", team2: "Xtreme Players", group: "Grupa G", stage: "Stage 1" },
+      { time: "10:30", team1: "XPlosion", team2: "Trigger", group: "Grupa G", stage: "Stage 1" },
+      { time: "11:00", team1: "XPlosion", team2: "Xtreme Players", group: "Grupa G", stage: "Stage 1" },
+    ]
+  },
+  {
+    date: "24 Ianuarie 2025",
+    dayName: "Vineri",
     matches: [
       { time: "14:00", team1: "TBD", team2: "TBD", group: "Stage 2", stage: "Single Elimination" },
       { time: "14:30", team1: "TBD", team2: "TBD", group: "Stage 2", stage: "Single Elimination" },
