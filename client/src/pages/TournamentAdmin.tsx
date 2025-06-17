@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Plus, Save, Trophy, Users, RefreshCw } from "lucide-react";
+import { Plus, Save, Trophy, Users, RefreshCw, Settings } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import GroupManagement from "@/components/GroupManagement";
 
 interface MatchResult {
   team1: string;
@@ -181,7 +183,24 @@ export default function TournamentAdmin() {
             Admin Grupe Turneu - HATOR CS2 LEAGUE MOLDOVA
           </h1>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <Tabs defaultValue="management" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 bg-slate-800/50">
+              <TabsTrigger value="management" className="flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                Configurare Grupe
+              </TabsTrigger>
+              <TabsTrigger value="results" className="flex items-center gap-2">
+                <Trophy className="w-4 h-4" />
+                Rezultate Meciuri
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="management" className="mt-6">
+              <GroupManagement />
+            </TabsContent>
+            
+            <TabsContent value="results" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <Card className="bg-slate-800/50 border-slate-700">
               <CardContent className="pt-6">
                 <div className="flex items-center space-x-4">
@@ -219,11 +238,10 @@ export default function TournamentAdmin() {
                 </Button>
               </CardContent>
             </Card>
-          </div>
-        </div>
+              </div>
 
-        {/* Add Match Result Form */}
-        <Card className="mb-8 bg-slate-800/50 border-slate-700">
+              {/* Add Match Result Form */}
+              <Card className="mb-8 bg-slate-800/50 border-slate-700">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Save className="mr-2" />
@@ -371,6 +389,9 @@ export default function TournamentAdmin() {
               </Card>
             );
           })}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
