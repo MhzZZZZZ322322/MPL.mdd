@@ -264,7 +264,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                       </div>
                       <div className="p-4 h-32 flex flex-col justify-center">
                         <div className="text-center">
-                          <div className="text-orange-400 font-semibold text-sm">Primele 11 (seed înalt) → direct</div>
+                          <div className="text-orange-400 font-semibold text-sm">Primele 11 (seed înalt) → direct Stage 3</div>
                           <div className="text-white text-xs mt-1">Următoarele 10 → eliminatoriu</div>
                           <div className="text-gray-400 text-xs mt-1">Doar 5 se califică → 16 echipe</div>
                         </div>
