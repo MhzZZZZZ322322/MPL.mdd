@@ -247,59 +247,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                             </div>
                           )}
 
-                          {/* Match Results for this group */}
-                          {getResultsForGroup(group.groupName).length > 0 && (
-                            <div className="mt-4 pt-4 border-t border-slate-600/30">
-                              <div className="mb-2">
-                                <h4 className="text-sm font-medium text-gray-300">Rezultate Meciuri</h4>
-                              </div>
-                              <div className="space-y-1">
-                                {getResultsForGroup(group.groupName).slice(0, 3).map((match) => (
-                                  <div
-                                    key={match.id}
-                                    className="bg-slate-800/30 border border-slate-700/50 rounded p-2 text-xs"
-                                  >
-                                    <div className="flex items-center justify-between">
-                                      <div className="flex items-center flex-1">
-                                        <span className={`font-medium truncate min-w-0 ${
-                                          match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
-                                        }`}>
-                                          {match.team1Name}
-                                        </span>
-                                      </div>
 
-                                      <div className="flex items-center space-x-1 px-2">
-                                        <span className={`font-bold ${
-                                          match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
-                                        }`}>
-                                          {match.team1Score}
-                                        </span>
-                                        <span className="text-gray-500">-</span>
-                                        <span className={`font-bold ${
-                                          match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
-                                        }`}>
-                                          {match.team2Score}
-                                        </span>
-                                      </div>
-
-                                      <div className="flex items-center flex-1 justify-end">
-                                        <span className={`font-medium truncate min-w-0 ${
-                                          match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
-                                        }`}>
-                                          {match.team2Name}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))}
-                                {getResultsForGroup(group.groupName).length > 3 && (
-                                  <div className="text-center text-xs text-gray-400 mt-1">
-                                    +{getResultsForGroup(group.groupName).length - 3} meciuri
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
