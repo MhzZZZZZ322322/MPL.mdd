@@ -236,28 +236,28 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                     </div>
                     
                     <div className="p-4 space-y-4">
-                      {/* Grupe A-F */}
+                      {/* Toate grupele A-G */}
                       <div className="bg-green-600/20 rounded-lg p-3 border border-green-500/30">
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="text-lg font-bold text-green-400">Grupe A, B, C, D, E, F</h4>
+                          <h4 className="text-lg font-bold text-green-400">Grupe A, B, C, D, E, F, G</h4>
                         </div>
                         <div className="text-gray-300 text-sm mb-1">6 echipe per grupă</div>
                         <div className="text-white font-semibold">Primele 3 echipe avansează</div>
                       </div>
                       
-                      {/* Grupa G */}
-                      <div className="bg-amber-600/20 rounded-lg p-3 border border-amber-500/30">
+                      {/* Total echipe în playoff */}
+                      <div className="bg-purple-600/20 rounded-lg p-3 border border-purple-500/30">
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="text-lg font-bold text-amber-400">Grupa G</h4>
+                          <h4 className="text-lg font-bold text-purple-400">Total Playoff</h4>
                         </div>
-                        <div className="text-gray-300 text-sm mb-1">7 echipe în grupă</div>
-                        <div className="text-white font-semibold">Primele 4 echipe avansează</div>
+                        <div className="text-gray-300 text-sm mb-1">7 grupe × 3 echipe = 21 echipe</div>
+                        <div className="text-white font-semibold">21 echipe avansează în playoff</div>
                       </div>
                       
                       {/* Total și format */}
                       <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/30 text-center">
-                        <div className="text-white font-semibold text-sm">Total: 22 echipe avansează în playoff</div>
-                        <div className="text-gray-400 text-xs mt-1">(3×6 + 4×1 = 22)</div>
+                        <div className="text-white font-semibold text-sm">Total: 21 echipe avansează în playoff</div>
+                        <div className="text-gray-400 text-xs mt-1">(7 grupe × 3 echipe = 21)</div>
                         <div className="text-gray-400 text-xs mt-2">Format: CS2 BO1 (Best of 1) - fără egaluri</div>
                       </div>
                     </div>
