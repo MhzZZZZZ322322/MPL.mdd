@@ -5,8 +5,7 @@ import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
-import MatchSchedule from "@/components/sections/MatchSchedule";
-import TournamentSchedule from "@/components/sections/TournamentSchedule";
+
 
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
