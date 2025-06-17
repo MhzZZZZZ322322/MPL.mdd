@@ -25,7 +25,7 @@ export default function AdminProtectedRoute({ children }: AdminProtectedRoutePro
     e.preventDefault();
     
     // Verificăm parola (aceeași logică ca în componentele admin existente)
-    if (password === 'mpl2024admin' || password === 'admin123') {
+    if (password === 'Admin322') {
       setIsAuthenticated(true);
       sessionStorage.setItem('adminAuthenticated', 'true');
       setError("");
