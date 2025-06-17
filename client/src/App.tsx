@@ -20,6 +20,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import EventManager from "@/pages/EventManager";
 import SeoManager from "@/pages/SeoManager";
 import TournamentAdmin from "@/pages/TournamentAdminFixed";
+import AdminProtectedRoute from "@/components/AdminProtectedRoute";
 import { useState, useEffect } from "react";
 
 function Router() {
@@ -37,7 +38,11 @@ function Router() {
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />
       <Route path="/admin/seo" component={SeoManager} />
-      <Route path="/admin/tournament" component={TournamentAdmin} />
+      <Route path="/admin/tournament" component={() => (
+        <AdminProtectedRoute>
+          <TournamentAdmin />
+        </AdminProtectedRoute>
+      )} />
       <Route path="/cronologia-mpl" component={() => {
         window.location.replace('/');
         return null;
