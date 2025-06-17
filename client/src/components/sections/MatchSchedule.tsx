@@ -1,7 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { RefreshCw } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface MatchResult {
   id: number;
@@ -27,18 +30,60 @@ interface ScheduledMatch {
 }
 
 export default function MatchSchedule() {
-  const { data: matchResults = [], isLoading: loadingResults } = useQuery<MatchResult[]>({
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  const { data: matchResults = [], isLoading: loadingResults, refetch: refetchResults } = useQuery<MatchResult[]>({
     queryKey: ["/api/match-results"],
+    refetchInterval: 30000, // Refetch every 30 seconds
   });
 
-  const { data: teams = [], isLoading: loadingTeams } = useQuery<Team[]>({
+  const { data: teams = [], isLoading: loadingTeams, refetch: refetchTeams } = useQuery<Team[]>({
     queryKey: ["/api/teams"],
   });
 
   // Fetch current group configuration from API
-  const { data: groupConfig = [], isLoading: loadingGroups } = useQuery<any[]>({
+  const { data: groupConfig = [], isLoading: loadingGroups, refetch: refetchGroups } = useQuery<any[]>({
     queryKey: ["/api/admin/group-config"],
+    refetchInterval: 60000, // Refetch every minute
   });
+
+  // Sync mutation to refresh all match data
+  const syncMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/sync-groups', { method: 'POST' });
+      if (!response.ok) throw new Error('Sync failed');
+      return response.json();
+    },
+    onSuccess: (data) => {
+      // Force refresh of all match-related data
+      queryClient.invalidateQueries({ queryKey: ["/api/match-results"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/group-config"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/teams"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/tournament-groups"] });
+      
+      // Force refetch immediately
+      refetchResults();
+      refetchGroups();
+      refetchTeams();
+      
+      toast({
+        title: "Sincronizare completă",
+        description: `Meciurile au fost actualizate cu succes. ${data.totalGroups} grupe sincronizate.`,
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Eroare sincronizare",
+        description: "Nu s-au putut actualiza meciurile. Încercați din nou.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSync = () => {
+    syncMutation.mutate();
+  };
 
   // Generează meciurile programate pe baza configurației curente din grupe
   const generateScheduledMatches = (): ScheduledMatch[] => {
@@ -103,6 +148,19 @@ export default function MatchSchedule() {
 
   return (
     <div className="w-full">
+      {/* Sync Button */}
+      <div className="flex justify-center mb-6">
+        <Button
+          onClick={handleSync}
+          disabled={syncMutation.isPending}
+          variant="outline"
+          className="bg-slate-800/50 backdrop-blur-sm border-slate-600/30 hover:bg-slate-700/50 text-white"
+        >
+          <RefreshCw className={`h-4 w-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
+          {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizează Meciurile'}
+        </Button>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
         {Object.entries(groupedMatches).map(([group, matches]) => (
           <Card key={group} className="bg-card/50 backdrop-blur-sm border-border/50 p-4">
