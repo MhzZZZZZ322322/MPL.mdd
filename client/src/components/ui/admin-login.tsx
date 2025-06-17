@@ -13,7 +13,7 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simple validation
@@ -25,27 +25,43 @@ const AdminLogin = ({ onLogin }: AdminLoginProps) => {
     setIsLoading(true);
     setError(null);
     
-    // Verificare simplă - în producție, utilizează un sistem de autentificare securizat
-    // Aceasta este doar o soluție temporară pentru demo
-    setTimeout(() => {
-      if (username === 'admin' && password === 'Admin322') {
-        // În realitate, ar trebui să setăm un token JWT sau altă formă de autentificare securizată
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
         localStorage.setItem('isAdmin', 'true');
+        localStorage.setItem('adminToken', data.token);
         toast({
           title: 'Autentificare reușită',
           description: 'Bine ai venit în panoul de administrare!',
         });
         onLogin();
       } else {
-        setError('Credențiale invalide');
+        setError(data.error || 'Credențiale invalide');
         toast({
           title: 'Eroare de autentificare',
-          description: 'Numele de utilizator sau parola sunt incorecte',
+          description: data.error || 'Numele de utilizator sau parola sunt incorecte',
           variant: 'destructive',
         });
       }
+    } catch (error) {
+      setError('Eroare de conexiune');
+      toast({
+        title: 'Eroare de conexiune',
+        description: 'Nu s-a putut conecta la server',
+        variant: 'destructive',
+      });
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

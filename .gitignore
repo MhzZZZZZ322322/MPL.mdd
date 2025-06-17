@@ -4,3 +4,17 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Security files
+server/auth-config.ts
+.env
+.env.local
+.env.production
+*.pem
+*.key
+config/secrets.json
+
+# Admin credentials and session data
+admin-credentials.json
+sessions/
+tokens/

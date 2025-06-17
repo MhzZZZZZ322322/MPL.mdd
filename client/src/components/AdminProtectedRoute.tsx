@@ -21,16 +21,31 @@ export default function AdminProtectedRoute({ children }: AdminProtectedRoutePro
     }
   }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Verificăm parola (aceeași logică ca în componentele admin existente)
-    if (password === 'Admin322') {
-      setIsAuthenticated(true);
-      sessionStorage.setItem('adminAuthenticated', 'true');
-      setError("");
-    } else {
-      setError("Parolă incorectă");
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: 'admin', password }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        setIsAuthenticated(true);
+        sessionStorage.setItem('adminAuthenticated', 'true');
+        sessionStorage.setItem('adminToken', data.token);
+        setError("");
+      } else {
+        setError(data.error || "Parolă incorectă");
+        setPassword("");
+      }
+    } catch (error) {
+      setError("Eroare de conexiune");
       setPassword("");
     }
   };

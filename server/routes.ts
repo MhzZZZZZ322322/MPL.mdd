@@ -5,6 +5,7 @@ import { insertContactSchema, insertEventSchema, insertPlayerSchema, insertFaqSc
 import { insertSiteContentSchema } from "@shared/content-schema";
 import { csServersRouter } from "./routes/cs-servers-routes";
 import { registerSimpleGroupsAPI } from "./simple-groups-api";
+import { verifyAdminCredentials } from "./auth-config";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -440,6 +441,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error creating contact submission:", error);
       res.status(500).json({ message: "Failed to submit contact form" });
+    }
+  });
+
+  // Admin authentication endpoint
+  app.post("/api/admin/login", (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      if (!username || !password) {
+        return res.status(400).json({ error: "Username și parola sunt obligatorii" });
+      }
+      
+      const isValid = verifyAdminCredentials(username, password);
+      
+      if (isValid) {
+        // Generate a simple session token (in production, use JWT)
+        const sessionToken = Buffer.from(`${username}:${Date.now()}`).toString('base64');
+        res.json({ 
+          success: true, 
+          message: "Autentificare reușită",
+          token: sessionToken 
+        });
+      } else {
+        res.status(401).json({ 
+          success: false, 
+          error: "Credențiale invalide" 
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ error: "Eroare internă de server" });
     }
   });
 
