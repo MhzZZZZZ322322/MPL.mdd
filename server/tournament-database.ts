@@ -34,8 +34,111 @@ async function getMaxMatchesPerTeam(groupName: string): Promise<number> {
   return Math.max(0, teamsInGroup - 1); // Each team plays against every other team once
 }
 
+// Helper function to recalculate all standings for a group based on match results
+async function recalculateGroupStandings(groupName: string) {
+  // Get all match results for this group
+  const matches = await db.select().from(matchResults).where(
+    eq(matchResults.groupName, groupName)
+  );
+
+  // Get all teams in this group from configuration
+  const config = await db.select().from(groupConfiguration).where(
+    eq(groupConfiguration.groupName, groupName)
+  );
+  
+  if (config.length === 0) return;
+
+  const teamIds = JSON.parse(config[0].teamIds);
+  const teamsData = await Promise.all(
+    teamIds.map(async (id: number) => {
+      const [team] = await db.select().from(teams).where(eq(teams.id, id));
+      return team;
+    })
+  );
+
+  // Calculate standings for each team
+  const standings = teamsData.filter(Boolean).map(team => {
+    let matchesPlayed = 0;
+    let wins = 0;
+    let losses = 0;
+    let roundsWon = 0;
+    let roundsLost = 0;
+
+    matches.forEach(match => {
+      if (match.team1Name === team.name) {
+        matchesPlayed++;
+        roundsWon += match.team1Score;
+        roundsLost += match.team2Score;
+        if (match.team1Score > match.team2Score) wins++;
+        else losses++;
+      } else if (match.team2Name === team.name) {
+        matchesPlayed++;
+        roundsWon += match.team2Score;
+        roundsLost += match.team1Score;
+        if (match.team2Score > match.team1Score) wins++;
+        else losses++;
+      }
+    });
+
+    const roundDifference = roundsWon - roundsLost;
+    const points = wins * 3; // 3 points per win in CS2 BO1
+
+    return {
+      teamName: team.name,
+      matchesPlayed,
+      wins,
+      losses,
+      roundsWon,
+      roundsLost,
+      roundDifference,
+      points
+    };
+  });
+
+  // Sort teams by points, then by round difference, then by rounds won
+  standings.sort((a, b) => {
+    if (a.points !== b.points) return b.points - a.points;
+    if (a.roundDifference !== b.roundDifference) return b.roundDifference - a.roundDifference;
+    return b.roundsWon - a.roundsWon;
+  });
+
+  // Clear existing standings for this group
+  await db.delete(groupStandings).where(
+    eq(groupStandings.groupName, groupName)
+  );
+
+  // Insert updated standings
+  for (let i = 0; i < standings.length; i++) {
+    const standing = standings[i];
+    await db.insert(groupStandings).values({
+      teamName: standing.teamName,
+      groupName,
+      matchesPlayed: standing.matchesPlayed,
+      wins: standing.wins,
+      losses: standing.losses,
+      roundsWon: standing.roundsWon,
+      roundsLost: standing.roundsLost,
+      roundDifference: standing.roundDifference,
+      points: standing.points,
+      position: i + 1,
+    });
+  }
+}
+
 // Helper function to update standings after a match
 async function updateStandingsAfterMatch(matchData: {
+  groupName: string;
+  team1Name: string;
+  team2Name: string;
+  team1Score: number;
+  team2Score: number;
+}) {
+  // Simply recalculate all standings for the group
+  await recalculateGroupStandings(matchData.groupName);
+}
+
+// Legacy function for compatibility
+async function updateStandingsAfterMatchLegacy(matchData: {
   groupName: string;
   team1Name: string;
   team2Name: string;
@@ -458,6 +561,25 @@ export function registerTournamentDatabaseAPI(app: Express) {
     } catch (error) {
       console.error("Error fetching tournament groups:", error);
       res.status(500).json({ message: "Failed to fetch tournament groups" });
+    }
+  });
+
+  // Recalculate all group standings
+  app.post("/api/admin/recalculate-standings", async (req, res) => {
+    try {
+      const configs = await db.select().from(groupConfiguration);
+      
+      for (const config of configs) {
+        await recalculateGroupStandings(config.groupName);
+      }
+
+      res.json({ 
+        message: "All group standings recalculated successfully",
+        groupsProcessed: configs.length
+      });
+    } catch (error) {
+      console.error("Error recalculating standings:", error);
+      res.status(500).json({ message: "Failed to recalculate standings" });
     }
   });
 
