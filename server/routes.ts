@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertContactSchema, insertEventSchema, insertPlayerSchema, insertFaqSchema } from "@shared/schema";
 import { insertSiteContentSchema } from "@shared/content-schema";
 import { csServersRouter } from "./routes/cs-servers-routes";
+import { registerSimpleGroupsAPI } from "./simple-groups-api";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -561,45 +562,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get matches for a specific group
-  app.get("/api/tournament-groups/:groupName/matches", async (req, res) => {
-    try {
-      const { db } = await import("./db");
-      const { tournamentGroups, matches, teams } = await import("@shared/schema");
-      const { eq } = await import("drizzle-orm");
-      
-      const groupName = req.params.groupName.toUpperCase();
-      
-      const [group] = await db.select()
-        .from(tournamentGroups)
-        .where(eq(tournamentGroups.groupName, groupName));
+  // This route is replaced by the simplified groups API
 
-      if (!group) {
-        return res.status(404).json({ message: "Group not found" });
-      }
-
-      const matches = await db.select({
-        id: groupMatches.id,
-        team1Name: teams.name,
-        team2Name: teams.name,
-        team1Score: groupMatches.team1Score,
-        team2Score: groupMatches.team2Score,
-        status: groupMatches.status,
-        scheduledTime: groupMatches.scheduledTime,
-        completedTime: groupMatches.completedTime,
-        notes: groupMatches.notes,
-      })
-      .from(groupMatches)
-      .innerJoin(teams, eq(groupMatches.team1Id, teams.id))
-      .where(eq(groupMatches.groupId, group.id))
-      .orderBy(groupMatches.matchNumber);
-
-      res.json(matches);
-    } catch (error) {
-      console.error("Error fetching matches:", error);
-      res.status(500).json({ message: "Failed to fetch matches" });
-    }
-  });
+  // Register simplified groups API for tournament management
+  registerSimpleGroupsAPI(app);
 
   const httpServer = createServer(app);
 
