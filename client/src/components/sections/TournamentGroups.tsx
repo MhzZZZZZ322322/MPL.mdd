@@ -208,7 +208,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                                     {team.points}pts
                                   </span>
                                   <span className="text-slate-400 min-w-[3rem] text-right">
-                                    {team.wins}-{team.draws}-{team.losses}
+                                    {team.wins}-{team.losses}
                                   </span>
                                   <span className="text-slate-400 min-w-[2.5rem] text-right">
                                     {team.roundDifference >= 0 ? '+' : ''}{team.roundDifference}

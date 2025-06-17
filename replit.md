@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
+- June 17, 2025: Fixed CS2 BO1 display format - removed draws, now shows only W-L format (wins-losses) as CS2 cannot have ties
 - June 17, 2025: Updated admin password to "Admin322" for all authentication systems
 - June 17, 2025: Added "Gestionare Turneu" button in admin dashboard for easy access to tournament management
 - June 17, 2025: Secured /admin/tournament with admin authentication (same as /admin)

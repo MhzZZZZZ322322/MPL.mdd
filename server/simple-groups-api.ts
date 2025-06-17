@@ -14,6 +14,21 @@ interface GroupResult {
   timestamp: number;
 }
 
+// Helper function to check if two teams have already played against each other
+function teamsHavePlayedBefore(team1: string, team2: string, groupName: string): boolean {
+  return groupResults.some(result => 
+    result.groupName === groupName &&
+    ((result.team1 === team1 && result.team2 === team2) ||
+     (result.team1 === team2 && result.team2 === team1))
+  );
+}
+
+// Helper function to get maximum matches per team in a group
+function getMaxMatchesPerTeam(groupName: string): number {
+  const teamsInGroup = groupStandings.filter(s => s.groupName === groupName).length;
+  return Math.max(0, teamsInGroup - 1); // Each team plays against every other team once
+}
+
 interface GroupStanding {
   teamName: string;
   groupName: string;
@@ -310,7 +325,7 @@ export function registerSimpleGroupsAPI(app: Express) {
               teamLogo: `/team-logos/${standing.teamName.toLowerCase().replace(/\s+/g, '-')}.webp`,
               matchesPlayed: standing.matchesPlayed,
               wins: standing.wins,
-              draws: 0, // CS2 doesn't have draws
+              draws: 0, // CS2 BO1 format - no draws possible
               losses: standing.losses,
               roundsWon: standing.roundsWon,
               roundsLost: standing.roundsLost,
@@ -378,6 +393,100 @@ export function registerSimpleGroupsAPI(app: Express) {
     }
   });
 
+  // Add match result with validation
+  app.post("/api/admin/add-match-result", (req, res) => {
+    try {
+      const { groupName, team1, team2, team1Score, team2Score } = req.body;
+
+      // Validation checks
+      if (!groupName || !team1 || !team2 || team1Score === undefined || team2Score === undefined) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+
+      if (team1 === team2) {
+        return res.status(400).json({ message: "O echipă nu poate juca împotriva ei însăși" });
+      }
+
+      // Check if teams have already played against each other
+      if (teamsHavePlayedBefore(team1, team2, groupName)) {
+        return res.status(400).json({ 
+          message: `Echipele ${team1} și ${team2} au mai jucat între ele în grupa ${groupName}. Fiecare echipă poate juca doar o dată cu fiecare altă echipă din grupă.` 
+        });
+      }
+
+      // Validate CS2 BO1 scores (minimum 16 rounds to win, no draws)
+      if (team1Score < 16 && team2Score < 16) {
+        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu minimum 16 runde" });
+      }
+
+      if (team1Score >= 16 && team2Score >= 16) {
+        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 16+ runde)" });
+      }
+
+      // Check if teams have reached maximum matches for their group
+      const maxMatches = getMaxMatchesPerTeam(groupName);
+      const team1Matches = groupResults.filter(r => 
+        r.groupName === groupName && (r.team1 === team1 || r.team2 === team1)
+      ).length;
+      const team2Matches = groupResults.filter(r => 
+        r.groupName === groupName && (r.team1 === team2 || r.team2 === team2)
+      ).length;
+
+      if (team1Matches >= maxMatches) {
+        return res.status(400).json({ 
+          message: `Echipa ${team1} a jucat deja toate cele ${maxMatches} meciuri posibile în grupa ${groupName}` 
+        });
+      }
+
+      if (team2Matches >= maxMatches) {
+        return res.status(400).json({ 
+          message: `Echipa ${team2} a jucat deja toate cele ${maxMatches} meciuri posibile în grupa ${groupName}` 
+        });
+      }
+
+      // Add the match result
+      const matchResult: GroupResult = {
+        id: `${Date.now()}-${Math.random()}`,
+        groupName,
+        team1,
+        team2,
+        team1Score,
+        team2Score,
+        timestamp: Date.now()
+      };
+
+      groupResults.push(matchResult);
+
+      // Update standings
+      updateStandingsAfterMatch(matchResult);
+
+      // Recalculate positions
+      recalculatePositions(groupName);
+
+      res.json({ 
+        message: "Rezultatul meciului a fost înregistrat cu succes",
+        match: matchResult,
+        standings: groupStandings.filter(s => s.groupName === groupName)
+      });
+
+    } catch (error) {
+      console.error("Error adding match result:", error);
+      res.status(500).json({ message: "Failed to add match result" });
+    }
+  });
+
+  // Get match history for a group
+  app.get("/api/admin/group-matches/:groupName", (req, res) => {
+    try {
+      const { groupName } = req.params;
+      const matches = groupResults.filter(r => r.groupName === groupName);
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching group matches:", error);
+      res.status(500).json({ message: "Failed to fetch group matches" });
+    }
+  });
+
   // Sync groups endpoint for manual refresh
   app.post("/api/sync-groups", (req, res) => {
     try {
@@ -397,11 +506,80 @@ export function registerSimpleGroupsAPI(app: Express) {
   });
 }
 
+// Helper function to update standings after a match
+function updateStandingsAfterMatch(match: GroupResult) {
+  const { groupName, team1, team2, team1Score, team2Score } = match;
+  
+  // Find standings for both teams
+  let team1Standing = groupStandings.find(s => s.teamName === team1 && s.groupName === groupName);
+  let team2Standing = groupStandings.find(s => s.teamName === team2 && s.groupName === groupName);
+  
+  // Create standings if they don't exist
+  if (!team1Standing) {
+    team1Standing = {
+      teamName: team1,
+      groupName,
+      matchesPlayed: 0,
+      wins: 0,
+      losses: 0,
+      roundsWon: 0,
+      roundsLost: 0,
+      roundDifference: 0,
+      points: 0,
+      position: 1
+    };
+    groupStandings.push(team1Standing);
+  }
+  
+  if (!team2Standing) {
+    team2Standing = {
+      teamName: team2,
+      groupName,
+      matchesPlayed: 0,
+      wins: 0,
+      losses: 0,
+      roundsWon: 0,
+      roundsLost: 0,
+      roundDifference: 0,
+      points: 0,
+      position: 1
+    };
+    groupStandings.push(team2Standing);
+  }
+  
+  // Update match counts
+  team1Standing.matchesPlayed++;
+  team2Standing.matchesPlayed++;
+  
+  // Update rounds
+  team1Standing.roundsWon += team1Score;
+  team1Standing.roundsLost += team2Score;
+  team2Standing.roundsWon += team2Score;
+  team2Standing.roundsLost += team1Score;
+  
+  // Update round differences
+  team1Standing.roundDifference = team1Standing.roundsWon - team1Standing.roundsLost;
+  team2Standing.roundDifference = team2Standing.roundsWon - team2Standing.roundsLost;
+  
+  // Update wins/losses and points (CS2 BO1: 3 points for win, 0 for loss)
+  if (team1Score > team2Score) {
+    // Team1 wins
+    team1Standing.wins++;
+    team1Standing.points += 3;
+    team2Standing.losses++;
+  } else {
+    // Team2 wins
+    team2Standing.wins++;
+    team2Standing.points += 3;
+    team1Standing.losses++;
+  }
+}
+
 // Helper function to recalculate positions within a group
 function recalculatePositions(groupName: string) {
   const groupTeams = groupStandings
     .filter(s => s.groupName === groupName)
-    .sort((a, b) => {
+    .sort((a: any, b: any) => {
       if (a.points !== b.points) return b.points - a.points;
       if (a.roundDifference !== b.roundDifference) return b.roundDifference - a.roundDifference;
       return b.roundsWon - a.roundsWon;
