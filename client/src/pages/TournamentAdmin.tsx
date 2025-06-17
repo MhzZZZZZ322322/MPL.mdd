@@ -164,7 +164,7 @@ export default function TournamentAdmin() {
 
   // Get standings for a specific group
   const getStandingsByGroup = (groupName: string) => {
-    return standings.filter((team: any) => team.groupName === groupName)
+    return (standings as any[]).filter((team: any) => team.groupName === groupName)
       .sort((a: any, b: any) => {
         if (a.points !== b.points) return b.points - a.points;
         if (a.roundDifference !== b.roundDifference) return b.roundDifference - a.roundDifference;

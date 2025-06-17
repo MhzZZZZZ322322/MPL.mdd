@@ -19,6 +19,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 // Importăm paginile de administrare
 import EventManager from "@/pages/EventManager";
 import SeoManager from "@/pages/SeoManager";
+import TournamentAdmin from "@/pages/TournamentAdmin";
 import { useState, useEffect } from "react";
 
 function Router() {
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />
       <Route path="/admin/seo" component={SeoManager} />
+      <Route path="/admin/tournament" component={TournamentAdmin} />
       <Route path="/cronologia-mpl" component={() => {
         window.location.replace('/');
         return null;
