@@ -200,6 +200,20 @@ export const groupTeams = pgTable("group_teams", {
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
 
+// Scheduled Matches - Meciurile programate cu link-uri Faceit
+export const scheduledMatches = pgTable("scheduled_matches", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  faceitUrl: text("faceit_url"), // Link-ul către room-ul Faceit
+  matchDate: timestamp("match_date").notNull(),
+  matchTime: text("match_time").notNull(), // "18:00", "18:45", etc.
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  isPlayed: boolean("is_played").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // Match Results - Rezultatele meciurilor
 export const matchResults = pgTable("match_results", {
   id: serial("id").primaryKey(),
@@ -245,6 +259,11 @@ export const groupStandings = pgTable("group_standings", {
 });
 
 // Insert schemas and types for the new tables
+export const insertScheduledMatchSchema = createInsertSchema(scheduledMatches).omit({
+  id: true,
+  createdAt: true,
+});
+
 export const insertMatchResultSchema = createInsertSchema(matchResults).omit({
   id: true,
   createdAt: true,
@@ -261,6 +280,9 @@ export const insertGroupStandingsSchema = createInsertSchema(groupStandings).omi
   id: true,
   lastUpdated: true,
 });
+
+export type InsertScheduledMatch = z.infer<typeof insertScheduledMatchSchema>;
+export type ScheduledMatch = typeof scheduledMatches.$inferSelect;
 
 export type InsertMatchResult = z.infer<typeof insertMatchResultSchema>;
 export type MatchResult = typeof matchResults.$inferSelect;
