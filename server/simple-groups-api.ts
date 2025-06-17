@@ -414,13 +414,13 @@ export function registerSimpleGroupsAPI(app: Express) {
         });
       }
 
-      // Validate CS2 BO1 scores (minimum 16 rounds to win, no draws)
-      if (team1Score < 16 && team2Score < 16) {
-        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu minimum 16 runde" });
+      // Validate CS2 BO1 scores (minimum 13 rounds to win, no draws)
+      if (team1Score < 13 && team2Score < 13) {
+        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu minimum 13 runde" });
       }
 
-      if (team1Score >= 16 && team2Score >= 16) {
-        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 16+ runde)" });
+      if (team1Score >= 13 && team2Score >= 13) {
+        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 13+ runde)" });
       }
 
       // Check if teams have reached maximum matches for their group
