@@ -35,17 +35,22 @@ export default function MatchSchedule() {
     queryKey: ["/api/teams"],
   });
 
-  // Generează meciurile programate pentru toate grupele
+  // Fetch current group configuration from API
+  const { data: groupConfig = [], isLoading: loadingGroups } = useQuery<any[]>({
+    queryKey: ["/api/admin/group-config"],
+  });
+
+  // Generează meciurile programate pe baza configurației curente din grupe
   const generateScheduledMatches = (): ScheduledMatch[] => {
-    const groupTeams = {
-      'A': ['Auratix', 'Barbosii', 'Bloody', 'Bobb3rs', 'BPSP', 'Brigada'],
-      'B': ['Cipok', 'Coli', 'Cucumba', 'Japon', 'Killuminaty', 'KostiujeniKlinik'],
-      'C': ['BaitMD', 'Bloody Mafia', 'Brokefire', 'Carpatina', 'CGS', 'FalcoN'],
-      'D': ['Falcons', 'Gamerz', 'Imparable', 'Snipers', 'TSM Black', 'VeryGoodTeam'],
-      'E': ['Anonym', 'Blacklist', 'Crasat', 'Evolution', 'FearLess', 'TuranTeam'],
-      'F': ['CadianTeam', 'Kamikaze Clan', 'Legion', 'NewGen', 'TheStrong', 'Vinceremos'],
-      'G': ['Adrenalin', 'InfraRed', 'SAP0NEL', 'Trigger', 'uGOD', 'WinSpirit', 'Xtreme Players']
-    };
+    if (!Array.isArray(groupConfig) || groupConfig.length === 0) return [];
+    
+    // Construiește grupele pe baza configurației din baza de date
+    const groupTeams: Record<string, string[]> = {};
+    groupConfig.forEach((group: any) => {
+      if (group && group.groupName && Array.isArray(group.teams)) {
+        groupTeams[group.groupName] = group.teams.map((team: any) => team.name);
+      }
+    });
 
     const matches: ScheduledMatch[] = [];
     
@@ -83,7 +88,7 @@ export default function MatchSchedule() {
     return acc;
   }, {} as Record<string, ScheduledMatch[]>);
 
-  if (loadingResults || loadingTeams) {
+  if (loadingResults || loadingTeams || loadingGroups) {
     return (
       <div className="w-full space-y-6">
         <Skeleton className="h-8 w-64" />
