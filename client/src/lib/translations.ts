@@ -391,6 +391,14 @@ export const translations: TranslationDictionary = {
     ro: "Profilul echipelor",
     ru: "Профили команд"
   },
+  "tournament.groups.button": {
+    ro: "Grupe Turneu",
+    ru: "Группы турнира"
+  },
+  "tournament.matches.button": {
+    ro: "Vezi Meciurile",
+    ru: "Смотреть матчи"
+  },
   "event.read.more": {
     ro: "Vezi mai mult",
     ru: "Читать далее"
@@ -405,10 +413,7 @@ export const translations: TranslationDictionary = {
     ro: "Grupe Turneu",
     ru: "Турнирные группы"
   },
-  "tournament.groups.button": {
-    ro: "Grupe Turneu",
-    ru: "Турнирные группы"
-  },
+
   "tournament.groups.standings": {
     ro: "Clasament",
     ru: "Таблица"

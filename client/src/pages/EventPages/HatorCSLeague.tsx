@@ -247,7 +247,8 @@ const HatorCSLeague = () => {
         {/* Teams Profile Section */}
         <div className="py-8 sm:py-16 container mx-auto px-4">
           <Button 
-            className="bg-primary hover:bg-primary/90 mb-4 sm:mb-6 w-full sm:w-auto text-sm sm:text-base"
+            className="border-primary/50 text-primary hover:bg-primary/10 mb-4 sm:mb-6 w-full sm:w-auto text-sm sm:text-base"
+            variant="outline"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
             {t('teams.profile.button')}
@@ -357,7 +358,8 @@ const HatorCSLeague = () => {
           <div className="container mx-auto px-4 space-y-8">
             <div className="text-center">
               <Button 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2"
+                className="border-primary/50 text-primary hover:bg-primary/10 flex items-center gap-2"
+                variant="outline"
                 onClick={() => setIsMatchesExpanded(!isMatchesExpanded)}
               >
                 {isMatchesExpanded ? (
@@ -368,7 +370,7 @@ const HatorCSLeague = () => {
                 ) : (
                   <>
                     <ChevronDown className="w-4 h-4" />
-                    Vezi Meciurile
+                    {t('tournament.matches.button')}
                   </>
                 )}
               </Button>
