@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Trophy, Target } from 'lucide-react';
+import { Loader2, Trophy, ChevronDown, ChevronUp, Calendar } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 
 interface MatchResult {
@@ -22,17 +22,40 @@ interface GroupedResults {
 
 export default function MatchResults() {
   const { language, t } = useLanguage();
+  const [expandedGroups, setExpandedGroups] = useState<{ [key: string]: boolean }>({});
 
   const { data: matchResults, isLoading, error } = useQuery<MatchResult[]>({
     queryKey: ['/api/match-results'],
-    refetchInterval: 30000, // Refresh every 30 seconds
+    refetchInterval: 30000,
   });
+
+  const toggleGroup = (groupName: string) => {
+    setExpandedGroups(prev => ({
+      ...prev,
+      [groupName]: !prev[groupName]
+    }));
+  };
+
+  const formatDate = (dateString: string): string => {
+    return new Date(dateString).toLocaleDateString('ro-RO', {
+      day: '2-digit',
+      month: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const getWinner = (match: MatchResult): string => {
+    if (match.team1Score > match.team2Score) return match.team1Name;
+    if (match.team2Score > match.team1Score) return match.team2Name;
+    return 'Egalitate';
+  };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <span className="ml-2 text-lg">{t('loading_results')}</span>
+        <span className="ml-2 text-lg">Se încarcă rezultatele...</span>
       </div>
     );
   }
@@ -40,7 +63,7 @@ export default function MatchResults() {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-500">{t('error_loading_results')}</p>
+        <p className="text-red-500">Eroare la încărcarea rezultatelor</p>
       </div>
     );
   }
@@ -48,147 +71,148 @@ export default function MatchResults() {
   if (!matchResults || matchResults.length === 0) {
     return (
       <div className="text-center py-12">
-        <Target className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-        <p className="text-gray-500 text-lg">{t('no_matches_played')}</p>
-        <p className="text-gray-400 text-sm mt-2">{t('matches_will_appear_here')}</p>
+        <Trophy className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+        <p className="text-xl text-gray-300 mb-2">Nu există rezultate încă</p>
+        <p className="text-gray-400">Rezultatele meciurilor vor apărea aici după ce vor fi adăugate.</p>
       </div>
     );
   }
 
   // Group results by group name
-  const groupedResults: GroupedResults = matchResults.reduce((acc, match) => {
-    if (!acc[match.groupName]) {
-      acc[match.groupName] = [];
+  const groupedResults: GroupedResults = matchResults.reduce((groups, match) => {
+    const groupName = match.groupName;
+    if (!groups[groupName]) {
+      groups[groupName] = [];
     }
-    acc[match.groupName].push(match);
-    return acc;
+    groups[groupName].push(match);
+    return groups;
   }, {} as GroupedResults);
 
-  const getWinnerName = (match: MatchResult): string => {
-    if (match.team1Score > match.team2Score) {
-      return match.team1Name;
-    } else if (match.team2Score > match.team1Score) {
-      return match.team2Name;
-    }
-    return '';
-  };
-
-  const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString(language === 'ro' ? 'ro-RO' : language === 'ru' ? 'ru-RU' : 'en-US', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
+  // Sort groups alphabetically
+  const sortedGroups = Object.keys(groupedResults).sort();
 
   return (
-    <section className="py-16 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('match_results')}
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            {t('match_results_description')}
-          </p>
-        </div>
-
-        <div className="grid gap-8">
-          {Object.entries(groupedResults)
-            .sort(([a], [b]) => a.localeCompare(b))
-            .map(([groupName, matches]) => (
-              <Card key={groupName} className="overflow-hidden shadow-lg">
-                <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-                  <CardTitle className="flex items-center gap-2 text-xl">
-                    <Trophy className="h-6 w-6" />
-                    {t('group')} {groupName}
-                    <Badge variant="secondary" className="ml-auto bg-white/20 text-white">
-                      {matches.length} {t('matches')}
-                    </Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="grid gap-4">
-                    {matches
-                      .sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime())
-                      .map((match) => {
-                        const winner = getWinnerName(match);
-                        return (
-                          <div
-                            key={match.id}
-                            className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-200"
-                          >
-                            <div className="flex items-center gap-4 w-full md:w-auto">
-                              <div className="text-center">
-                                <p className={`font-semibold text-lg ${
-                                  winner === match.team1Name 
-                                    ? 'text-green-600 dark:text-green-400' 
-                                    : 'text-gray-700 dark:text-gray-300'
-                                }`}>
-                                  {match.team1Name}
-                                </p>
-                                {winner === match.team1Name && (
-                                  <Trophy className="h-4 w-4 text-green-600 mx-auto mt-1" />
-                                )}
-                              </div>
-                              
-                              <div className="text-center px-4">
-                                <div className="flex items-center gap-2 text-2xl font-bold">
-                                  <span className={`${
-                                    match.team1Score > match.team2Score 
-                                      ? 'text-green-600 dark:text-green-400' 
-                                      : 'text-gray-600 dark:text-gray-400'
-                                  }`}>
-                                    {match.team1Score}
-                                  </span>
-                                  <span className="text-gray-400">-</span>
-                                  <span className={`${
-                                    match.team2Score > match.team1Score 
-                                      ? 'text-green-600 dark:text-green-400' 
-                                      : 'text-gray-600 dark:text-gray-400'
-                                  }`}>
-                                    {match.team2Score}
-                                  </span>
-                                </div>
-                                <p className="text-xs text-gray-500 mt-1">CS2 BO1</p>
-                              </div>
-                              
-                              <div className="text-center">
-                                <p className={`font-semibold text-lg ${
-                                  winner === match.team2Name 
-                                    ? 'text-green-600 dark:text-green-400' 
-                                    : 'text-gray-700 dark:text-gray-300'
-                                }`}>
-                                  {match.team2Name}
-                                </p>
-                                {winner === match.team2Name && (
-                                  <Trophy className="h-4 w-4 text-green-600 mx-auto mt-1" />
-                                )}
-                              </div>
-                            </div>
-                            
-                            <div className="text-right mt-4 md:mt-0">
-                              <p className="text-sm text-gray-500 dark:text-gray-400">
-                                {formatDate(match.matchDate)}
-                              </p>
-                              {winner && (
-                                <Badge variant="outline" className="mt-1 text-green-600 border-green-600">
-                                  {t('winner')}: {winner}
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-        </div>
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold text-white mb-4">Rezultate Meciuri</h2>
+        <p className="text-gray-300">
+          Vezi toate rezultatele meciurilor jucate în cadrul turneului, organizate pe grupe
+        </p>
       </div>
-    </section>
+
+      <div className="grid gap-4">
+        {sortedGroups.map(groupName => {
+          const groupMatches = groupedResults[groupName];
+          const isExpanded = expandedGroups[groupName];
+          const matchCount = groupMatches.length;
+
+          return (
+            <Card key={groupName} className="bg-gradient-to-r from-primary/20 to-blue-600/20 border-primary/30 overflow-hidden">
+              <CardContent className="p-0">
+                {/* Group Header */}
+                <div 
+                  className="flex items-center justify-between p-4 cursor-pointer hover:bg-white/5 transition-colors"
+                  onClick={() => toggleGroup(groupName)}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-primary/30 rounded-full flex items-center justify-center">
+                      <Trophy className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white">
+                        Grupa {groupName}
+                      </h3>
+                      <p className="text-sm text-gray-300">
+                        {matchCount} {matchCount === 1 ? 'meci' : 'meciuri'} jucat{matchCount === 1 ? '' : 'e'}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Badge variant="outline" className="text-primary border-primary/50">
+                      {matchCount} rezultate
+                    </Badge>
+                    {isExpanded ? (
+                      <ChevronUp className="w-5 h-5 text-gray-400" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    )}
+                  </div>
+                </div>
+
+                {/* Matches List */}
+                {isExpanded && (
+                  <div className="border-t border-white/10">
+                    <div className="p-4 space-y-3">
+                      {groupMatches
+                        .sort((a, b) => new Date(b.matchDate).getTime() - new Date(a.matchDate).getTime())
+                        .map((match) => {
+                          const winner = getWinner(match);
+                          return (
+                            <div
+                              key={match.id}
+                              className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 hover:bg-slate-800/70 transition-colors"
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-4 flex-1">
+                                  {/* Team 1 */}
+                                  <div className="flex items-center space-x-2 min-w-0 flex-1">
+                                    <span className={`font-medium truncate ${
+                                      match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
+                                    }`}>
+                                      {match.team1Name}
+                                    </span>
+                                  </div>
+
+                                  {/* Score */}
+                                  <div className="flex items-center space-x-2 px-4">
+                                    <span className={`text-lg font-bold ${
+                                      match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-300'
+                                    }`}>
+                                      {match.team1Score}
+                                    </span>
+                                    <span className="text-gray-500">-</span>
+                                    <span className={`text-lg font-bold ${
+                                      match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
+                                    }`}>
+                                      {match.team2Score}
+                                    </span>
+                                  </div>
+
+                                  {/* Team 2 */}
+                                  <div className="flex items-center space-x-2 min-w-0 flex-1 justify-end">
+                                    <span className={`font-medium truncate ${
+                                      match.team2Score > match.team1Score ? 'text-green-400' : 'text-gray-300'
+                                    }`}>
+                                      {match.team2Name}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center space-x-3 ml-4">
+                                  <div className="text-right">
+                                    <div className="flex items-center text-gray-400 text-sm">
+                                      <Calendar className="h-4 w-4 mr-1" />
+                                      {formatDate(match.matchDate)}
+                                    </div>
+                                    {winner !== 'Egalitate' && (
+                                      <Badge variant="outline" className="mt-1 text-green-400 border-green-400">
+                                        Câștigător: {winner}
+                                      </Badge>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
   );
 }
