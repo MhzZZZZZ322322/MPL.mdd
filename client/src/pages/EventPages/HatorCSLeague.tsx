@@ -6,6 +6,7 @@ import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
 import MatchSchedule from "@/components/sections/MatchSchedule";
+import TournamentSchedule from "@/components/sections/TournamentSchedule";
 
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
@@ -362,6 +363,13 @@ const HatorCSLeague = () => {
           isExpanded={isGroupsExpanded}
           onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
         />
+
+        {/* Tournament Schedule Section */}
+        <div className="py-16 bg-gradient-to-b from-background/50 to-background">
+          <div className="container mx-auto px-4">
+            <TournamentSchedule />
+          </div>
+        </div>
 
         {/* Match Schedule Section */}
         <div className="py-16 bg-gradient-to-b from-background/50 to-background">
