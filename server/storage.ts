@@ -1369,12 +1369,14 @@ export class MemStorage implements IStorage {
   }
 
   // Scheduled Matches methods for MemStorage
+  private scheduledMatches: Map<string, any> = new Map();
+
   async getScheduledMatches(): Promise<any[]> {
     // Complete schedule data from 322_1750189809362.txt
     const scheduleData = [
       // 18.06.2025 - GRUPA A
-      { date: "18.06.2025", time: "18:00", team1: "Kamikaze Clan", team2: "Saponel", group: "A", stage: "Grupe", faceitUrl: "" },
-      { date: "18.06.2025", time: "18:00", team1: "Lean Vision", team2: "Ciocălău Team", group: "A", stage: "Grupe", faceitUrl: "" },
+      { date: "18.06.2025", time: "18:00", team1: "Kamikaze Clan", team2: "Saponel", group: "A", stage: "Grupe", faceitUrl: "https://www.faceit.com/en/cs2/room/1-kamikaze-vs-saponel" },
+      { date: "18.06.2025", time: "18:00", team1: "Lean Vision", team2: "Ciocălău Team", group: "A", stage: "Grupe", faceitUrl: "https://www.twitch.tv/moldovapro" },
       { date: "18.06.2025", time: "18:00", team1: "Muligambia", team2: "BPSP", group: "A", stage: "Grupe", faceitUrl: "" },
       { date: "18.06.2025", time: "18:45", team1: "BPSP", team2: "Saponel", group: "A", stage: "Grupe", faceitUrl: "" },
       { date: "18.06.2025", time: "18:45", team1: "Muligambia", team2: "Ciocălău Team", group: "A", stage: "Grupe", faceitUrl: "" },
