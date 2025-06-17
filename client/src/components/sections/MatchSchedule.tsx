@@ -246,9 +246,9 @@ export default function MatchSchedule() {
                       <div className="ml-2">
                         <Button
                           size="sm"
-                          variant="outline"
+                          variant="ghost"
                           onClick={() => window.open(match.result!.streamUrl!, '_blank')}
-                          className="h-6 w-6 p-0 text-orange-500 border-orange-500/50 hover:bg-orange-500/10"
+                          className="h-6 w-6 p-0 text-orange-500 hover:text-orange-400 hover:bg-transparent"
                           title="Vezi statistici și demo pe Faceit"
                         >
                           <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
