@@ -120,11 +120,11 @@ export default function TournamentAdmin() {
 
   const handleAddMatch = () => {
     if (newMatch.team1 && newMatch.team2 && newMatch.team1 !== newMatch.team2) {
-      // Validate CS2 score format (first to 16 rounds wins)
+      // Validate CS2 BO1 score format (first to 16 rounds wins, no ties possible)
       if (newMatch.team1Score < 16 && newMatch.team2Score < 16) {
         toast({
           title: "Scor invalid",
-          description: "În CS2, o echipă trebuie să câștige cel puțin 16 runde",
+          description: "În CS2 BO1, o echipă trebuie să câștige cu cel puțin 16 runde",
           variant: "destructive",
         });
         return;
@@ -132,7 +132,15 @@ export default function TournamentAdmin() {
       if (newMatch.team1Score >= 16 && newMatch.team2Score >= 16) {
         toast({
           title: "Scor invalid", 
-          description: "Nu poate fi egalitate la 16-16 în CS2",
+          description: "În CS2 BO1 nu poate fi egalitate - o echipă trebuie să câștige",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (newMatch.team1Score === newMatch.team2Score) {
+        toast({
+          title: "Scor invalid",
+          description: "Nu sunt permise egaluri în CS2 BO1",
           variant: "destructive",
         });
         return;
@@ -316,11 +324,11 @@ export default function TournamentAdmin() {
                         <span className="text-primary"> {newMatch.team2Score}</span> {newMatch.team2}
                       </p>
                       <p className="text-xs text-gray-400">
-                        Grupa {newMatch.groupName} • 
-                        {newMatch.team1Score >= 16 || newMatch.team2Score >= 16 ? (
+                        Grupa {newMatch.groupName} • CS2 BO1 • 
+                        {(newMatch.team1Score >= 16 || newMatch.team2Score >= 16) && newMatch.team1Score !== newMatch.team2Score ? (
                           <>Învingător: {newMatch.team1Score > newMatch.team2Score ? newMatch.team1 : newMatch.team2}</>
                         ) : (
-                          <span className="text-yellow-400">⚠️ Scor invalid pentru CS2</span>
+                          <span className="text-yellow-400">⚠️ Scor invalid pentru CS2 BO1</span>
                         )}
                       </p>
                     </div>

@@ -229,7 +229,8 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                       </div>
                     </div>
                     <div className="mt-3 text-center text-xs text-gray-400">
-                      Total: 22 echipe avansează în playoff (3×6 + 4×1 = 22)
+                      <div>Total: 22 echipe avansează în playoff (3×6 + 4×1 = 22)</div>
+                      <div className="mt-1">Format: CS2 BO1 (Best of 1) - fără egaluri</div>
                     </div>
                   </div>
                 </div>
