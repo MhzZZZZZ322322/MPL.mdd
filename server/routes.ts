@@ -445,6 +445,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin - Get scheduled matches with Faceit URLs
+  app.get("/api/admin/scheduled-matches", async (req, res) => {
+    try {
+      const matches = await storage.getScheduledMatches();
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching scheduled matches:", error);
+      res.status(500).json({ message: "Failed to fetch scheduled matches" });
+    }
+  });
+
+  // Admin - Update Faceit URL for a match
+  app.post("/api/admin/scheduled-matches", async (req, res) => {
+    try {
+      const { team1, team2, faceitUrl } = req.body;
+      
+      if (!team1 || !team2) {
+        return res.status(400).json({ message: "Team names are required" });
+      }
+
+      const updatedMatch = await storage.updateScheduledMatchFaceitUrl(team1, team2, faceitUrl);
+      res.json(updatedMatch);
+    } catch (error) {
+      console.error("Error updating Faceit URL:", error);
+      res.status(500).json({ message: "Failed to update Faceit URL" });
+    }
+  });
+
   // Admin authentication endpoint
   app.post("/api/admin/login", (req, res) => {
     try {

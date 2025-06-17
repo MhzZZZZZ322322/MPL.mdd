@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trophy, Settings } from "lucide-react";
+import { Trophy, Settings, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
+import ScheduleManager from "@/components/admin/ScheduleManager";
 
 export default function TournamentAdmin() {
   const queryClient = useQueryClient();
@@ -22,7 +23,7 @@ export default function TournamentAdmin() {
           </h1>
           
           <Tabs defaultValue="management" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-slate-800/50">
+            <TabsList className="grid w-full grid-cols-3 bg-slate-800/50">
               <TabsTrigger value="management" className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
                 Configurare Grupe
@@ -30,6 +31,10 @@ export default function TournamentAdmin() {
               <TabsTrigger value="results" className="flex items-center gap-2">
                 <Trophy className="w-4 h-4" />
                 Rezultate Meciuri
+              </TabsTrigger>
+              <TabsTrigger value="schedule" className="flex items-center gap-2">
+                <Calendar className="w-4 h-4" />
+                Program Meciuri
               </TabsTrigger>
             </TabsList>
             
@@ -39,6 +44,10 @@ export default function TournamentAdmin() {
             
             <TabsContent value="results" className="mt-6">
               <MatchResultsManager />
+            </TabsContent>
+            
+            <TabsContent value="schedule" className="mt-6">
+              <ScheduleManager />
             </TabsContent>
           </Tabs>
         </div>

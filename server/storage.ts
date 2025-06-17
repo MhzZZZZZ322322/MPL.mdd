@@ -85,6 +85,10 @@ export interface IStorage {
   createTeamMember(member: InsertTeamMember): Promise<TeamMember>;
   updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember>;
   deleteTeamMember(id: number): Promise<void>;
+  
+  // Scheduled Matches methods
+  getScheduledMatches(): Promise<any[]>;
+  updateScheduledMatchFaceitUrl(team1: string, team2: string, faceitUrl: string): Promise<any>;
 }
 
 export class MemStorage implements IStorage {
