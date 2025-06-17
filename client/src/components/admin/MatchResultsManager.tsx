@@ -525,7 +525,13 @@ export default function MatchResultsManager() {
                               </div>
                               
                               <div className="text-center px-4">
-                                <div className="flex items-center gap-2 text-xl font-bold text-white">
+                                <div 
+                                  className={`flex items-center gap-2 text-xl font-bold text-white ${
+                                    match.streamUrl ? 'cursor-pointer hover:text-orange-400 transition-colors' : ''
+                                  }`}
+                                  onClick={match.streamUrl ? () => window.open(match.streamUrl, '_blank') : undefined}
+                                  title={match.streamUrl ? "Vezi statistici și demo pe Faceit" : undefined}
+                                >
                                   <span className={
                                     match.team1Score > match.team2Score ? 'text-green-400' : 'text-gray-400'
                                   }>
@@ -567,19 +573,6 @@ export default function MatchResultsManager() {
                               </div>
                               
                               <div className="flex gap-2">
-                                {match.streamUrl && (
-                                  <Button
-                                    size="sm"
-                                    variant="ghost"
-                                    onClick={() => window.open(match.streamUrl, '_blank')}
-                                    className="h-8 w-8 p-0 text-orange-500 hover:text-orange-400 hover:bg-transparent"
-                                    title="Vezi statistici și demo pe Faceit"
-                                  >
-                                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
-                                      <path d="M14.4 10.8c-.8-.8-2.1-.8-2.9 0-.8.8-.8 2.1 0 2.9.8.8 2.1.8 2.9 0 .8-.8.8-2.1 0-2.9zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
-                                    </svg>
-                                  </Button>
-                                )}
                                 <Button
                                   size="sm"
                                   variant="outline"

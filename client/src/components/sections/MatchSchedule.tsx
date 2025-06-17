@@ -208,15 +208,31 @@ export default function MatchSchedule() {
                     {/* Scor */}
                     <div className="flex items-center space-x-2 px-3">
                       {match.result ? (
-                        <div className="flex items-center space-x-1 text-sm font-bold">
-                          <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
-                            {match.result.team1Score}
-                          </span>
-                          <span className="text-muted-foreground">-</span>
-                          <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
-                            {match.result.team2Score}
-                          </span>
-                        </div>
+                        match.result.streamUrl ? (
+                          <div 
+                            className="flex items-center space-x-1 text-sm font-bold cursor-pointer hover:text-orange-400 transition-colors"
+                            onClick={() => window.open(match.result!.streamUrl!, '_blank')}
+                            title="Vezi statistici și demo pe Faceit"
+                          >
+                            <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
+                              {match.result.team1Score}
+                            </span>
+                            <span className="text-muted-foreground">-</span>
+                            <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
+                              {match.result.team2Score}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center space-x-1 text-sm font-bold">
+                            <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
+                              {match.result.team1Score}
+                            </span>
+                            <span className="text-muted-foreground">-</span>
+                            <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
+                              {match.result.team2Score}
+                            </span>
+                          </div>
+                        )
                       ) : (
                         <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                           <span>-</span>
@@ -241,22 +257,7 @@ export default function MatchSchedule() {
                       />
                     </div>
 
-                    {/* Faceit button */}
-                    {match.result?.streamUrl && (
-                      <div className="ml-2">
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => window.open(match.result!.streamUrl!, '_blank')}
-                          className="h-6 w-6 p-0 text-orange-500 hover:text-orange-400 hover:bg-transparent"
-                          title="Vezi statistici și demo pe Faceit"
-                        >
-                          <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current">
-                            <path d="M14.4 10.8c-.8-.8-2.1-.8-2.9 0-.8.8-.8 2.1 0 2.9.8.8 2.1.8 2.9 0 .8-.8.8-2.1 0-2.9zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
-                          </svg>
-                        </Button>
-                      </div>
-                    )}
+
                   </div>
                 ))}
               </div>
