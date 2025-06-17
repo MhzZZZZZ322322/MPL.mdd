@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 17, 2025: **STANDARDIZED** - Aligned all button chevron positions to the right side for perfect visual consistency across all 3 main buttons
 - June 17, 2025: **FIXED** - Corrected TournamentGroups button styling to match all other buttons with border-primary/50 and outline variant
 - June 17, 2025: **UNIFIED** - Applied consistent styling to all 5 buttons across the page with border-primary/50 and hover effects
 - June 17, 2025: **TRANSLATED** - Added Russian translations for all 3 tournament buttons and unified styling with consistent border-primary/50 background
