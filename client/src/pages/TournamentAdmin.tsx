@@ -41,12 +41,12 @@ export default function TournamentAdmin() {
   const { toast } = useToast();
 
   // Fetch teams
-  const { data: teams = [] } = useQuery({
+  const { data: teams = [] } = useQuery<any[]>({
     queryKey: ['/api/teams'],
   });
 
   // Fetch current standings
-  const { data: standings = [], isLoading: standingsLoading } = useQuery({
+  const { data: standings = [], isLoading: standingsLoading } = useQuery<any[]>({
     queryKey: ['/api/admin/group-standings'],
     refetchInterval: 30000,
   });
@@ -159,7 +159,7 @@ export default function TournamentAdmin() {
     const teamsPerGroup = groupIndex === 6 ? 7 : 6; // Group G has 7 teams
     const startIndex = groupIndex === 6 ? 36 : groupIndex * 6;
     
-    return teams.slice(startIndex, startIndex + teamsPerGroup);
+    return (teams as any[]).slice(startIndex, startIndex + teamsPerGroup);
   };
 
   // Get standings for a specific group
