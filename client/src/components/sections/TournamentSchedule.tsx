@@ -74,7 +74,7 @@ const transformScheduleData = (matches: any[]) => {
       time: match.time,
       team1: match.team1,
       team2: match.team2,
-      group: `Grupa ${match.group}`,
+      group: match.group,
       stage: match.stage,
       faceitUrl: match.faceitUrl || ""
     });
@@ -138,6 +138,13 @@ export default function TournamentSchedule() {
           (r.team1Name === match.team2 && r.team2Name === match.team1)
         )
       );
+      
+      // Debug logging
+      if (match.team1 === "Kamikaze Clan" || match.team2 === "Kamikaze Clan") {
+        console.log("Match:", match.team1, "vs", match.team2, "Group:", match.group);
+        console.log("Found result:", result);
+        console.log("All results for group A:", matchResults.filter(r => r.groupName === "A"));
+      }
       
       return {
         time: match.time,
@@ -301,9 +308,10 @@ export default function TournamentSchedule() {
                         {/* Badges */}
                         <div className="flex items-center space-x-2 ml-4">
                           <span className="text-xs bg-purple-600/20 text-purple-300 px-2 py-1 rounded">
-                            {match.group}
+                            Grupa {match.group}
                           </span>
                           
+                          {/* LIVE Button */}
                           {match.faceitUrl && (
                             <Button
                               size="sm"
@@ -313,6 +321,19 @@ export default function TournamentSchedule() {
                             >
                               <ExternalLink className="w-4 h-4 mr-1" />
                               LIVE
+                            </Button>
+                          )}
+                          
+                          {/* Faceit Result Button */}
+                          {match.result?.streamUrl && (
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => window.open(match.result!.streamUrl!, '_blank')}
+                              className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10"
+                            >
+                              <ExternalLink className="w-4 h-4 mr-1" />
+                              Faceit
                             </Button>
                           )}
                         </div>
