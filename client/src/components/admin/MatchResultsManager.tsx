@@ -363,6 +363,19 @@ export default function MatchResultsManager() {
                 />
               </div>
 
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="technicalWin"
+                  checked={formData.technicalWin}
+                  onChange={(e) => setFormData({...formData, technicalWin: e.target.checked})}
+                  className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                />
+                <Label htmlFor="technicalWin" className="text-sm font-medium text-gray-900">
+                  Câștig tehnic
+                </Label>
+              </div>
+
               <div className="flex justify-end gap-2 pt-4">
                 <Button
                   type="button"
@@ -465,6 +478,19 @@ export default function MatchResultsManager() {
                 value={formData.streamUrl}
                 onChange={(e) => setFormData({...formData, streamUrl: e.target.value})}
               />
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="technicalWinEdit"
+                checked={formData.technicalWin}
+                onChange={(e) => setFormData({...formData, technicalWin: e.target.checked})}
+                className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+              />
+              <Label htmlFor="technicalWinEdit" className="text-sm font-medium text-gray-900">
+                Câștig tehnic
+              </Label>
             </div>
 
             <div className="flex justify-end gap-2 pt-4">
