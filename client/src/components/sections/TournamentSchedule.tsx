@@ -256,7 +256,7 @@ export default function TournamentSchedule() {
                         {/* Scor clickabil */}
                         <div className="flex items-center justify-center w-20">
                           {match.result ? (
-                            match.result.streamUrl ? (
+                            match.result.streamUrl && match.result.streamUrl.trim() !== "" ? (
                               <div 
                                 className="flex items-center space-x-1 text-sm font-bold cursor-pointer hover:text-orange-400 transition-colors"
                                 onClick={() => window.open(match.result!.streamUrl!, '_blank')}
