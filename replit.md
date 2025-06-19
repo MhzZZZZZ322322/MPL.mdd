@@ -116,7 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
-- June 19, 2025: **VISUAL** - Added ⚙️ technical win icon in match results to clearly indicate technical victories
+- June 19, 2025: **FIXED** - Match results now display exactly as entered in admin with correct team order and scores
+- June 19, 2025: **CORRECTED** - Technical win points calculation now recognizes technicalWinner field instead of score comparison
+- June 19, 2025: **VISUAL** - Added ⚙️ technical win icon next to winning team name in match results
 - June 18, 2025: **ENHANCED** - Added technical winner selection system with radio buttons to clearly specify which team won technically
 - June 18, 2025: **FLEXIBLE** - Removed all score validation restrictions - allows any score combination for technical wins and special cases
 - June 17, 2025: **ENHANCED** - Updated score validation to allow scores higher than 13 and changed "Link Stream" to "Link" for flexible Faceit/stream URLs

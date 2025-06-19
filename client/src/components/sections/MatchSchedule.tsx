@@ -88,40 +88,17 @@ export default function MatchSchedule() {
     syncMutation.mutate();
   };
 
-  // Generează meciurile programate pe baza configurației curente din grupe
+  // Convertește direct rezultatele din admin în meciuri pentru afișare
   const generateScheduledMatches = (): ScheduledMatch[] => {
-    if (!Array.isArray(groupConfig) || groupConfig.length === 0) return [];
+    if (!Array.isArray(matchResults)) return [];
     
-    // Construiește grupele pe baza configurației din baza de date
-    const groupTeams: Record<string, string[]> = {};
-    groupConfig.forEach((group: any) => {
-      if (group && group.groupName && Array.isArray(group.teams)) {
-        groupTeams[group.groupName] = group.teams.map((team: any) => team.name);
-      }
-    });
-
-    const matches: ScheduledMatch[] = [];
-    
-    Object.entries(groupTeams).forEach(([group, teamList]) => {
-      for (let i = 0; i < teamList.length; i++) {
-        for (let j = i + 1; j < teamList.length; j++) {
-          const existingResult = matchResults.find(result => 
-            result.groupName === group &&
-            ((result.team1Name === teamList[i] && result.team2Name === teamList[j]) ||
-             (result.team1Name === teamList[j] && result.team2Name === teamList[i]))
-          );
-
-          matches.push({
-            team1: teamList[i],
-            team2: teamList[j],
-            group,
-            result: existingResult
-          });
-        }
-      }
-    });
-
-    return matches;
+    // Convertește fiecare rezultat în format de meci pentru afișare
+    return matchResults.map(result => ({
+      team1: result.team1Name,
+      team2: result.team2Name,
+      group: result.groupName,
+      result: result
+    }));
   };
 
   const getTeamLogo = (teamName: string): string => {
