@@ -321,6 +321,111 @@ export default function TournamentSchedule() {
             ))}
           </div>
           
+          {/* Toggle pentru rezultate pe grupe */}
+          <div className="mt-8 border-t border-slate-600/20 pt-6">
+            <div 
+              className="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-700/30 transition-colors rounded-lg"
+              onClick={() => setShowResultsByGroup(!showResultsByGroup)}
+            >
+              <div className="flex items-center space-x-3">
+                <h4 className="text-lg font-bold text-white">Rezultate pe Grupe</h4>
+              </div>
+              {showResultsByGroup ? (
+                <ChevronUp className="w-5 h-5 text-purple-400" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-purple-400" />
+              )}
+            </div>
+
+            {showResultsByGroup && (
+              <div className="mt-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+                  {Object.entries(groupedResults).map(([groupName, matches]) => (
+                    <div key={groupName} className="bg-slate-700/30 rounded-lg border border-slate-600/20 overflow-hidden">
+                      <div className="bg-gradient-to-r from-purple-600/30 to-purple-500/20 p-4 border-b border-slate-600/30">
+                        <h3 className="text-lg font-bold text-white">Grupa {groupName}</h3>
+                        <p className="text-sm text-purple-300">{matches.length} meciuri completate</p>
+                      </div>
+                      
+                      <div className="p-4 space-y-3 max-h-96 overflow-y-auto">
+                        {matches.map((match: any, index: number) => (
+                          <div key={index} className="bg-slate-800/50 rounded-lg p-3 border border-slate-600/20">
+                            <div className="flex items-center justify-between">
+                              {/* Echipa 1 */}
+                              <div className="flex items-center space-x-2 flex-1">
+                                <img
+                                  src={getTeamLogo(match.team1)}
+                                  alt={match.team1}
+                                  className="w-5 h-5 rounded-sm object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = '/team-logos/default.png';
+                                  }}
+                                />
+                                <span className="text-sm font-medium text-white truncate flex items-center space-x-1">
+                                  <span>{match.team1}</span>
+                                  {match.result?.technicalWin && match.result?.technicalWinner === match.team1 && (
+                                    <span className="text-orange-500" title="Câștig tehnic">⚙️</span>
+                                  )}
+                                </span>
+                              </div>
+
+                              {/* Scor */}
+                              <div className="flex items-center space-x-2 px-3">
+                                {match.result?.streamUrl ? (
+                                  <div 
+                                    className="flex items-center space-x-1 text-sm font-bold cursor-pointer hover:text-orange-400 transition-colors"
+                                    onClick={() => window.open(match.result.streamUrl, '_blank')}
+                                    title="Vezi statistici și demo pe Faceit"
+                                  >
+                                    <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
+                                      {match.result.team1Score}
+                                    </span>
+                                    <span className="text-gray-400">-</span>
+                                    <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
+                                      {match.result.team2Score}
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <div className="flex items-center space-x-1 text-sm font-bold">
+                                    <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
+                                      {match.result.team1Score}
+                                    </span>
+                                    <span className="text-gray-400">-</span>
+                                    <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
+                                      {match.result.team2Score}
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Echipa 2 */}
+                              <div className="flex items-center space-x-2 flex-1 justify-end">
+                                <span className="text-sm font-medium text-white truncate flex items-center space-x-1">
+                                  <span>{match.team2}</span>
+                                  {match.result?.technicalWin && match.result?.technicalWinner === match.team2 && (
+                                    <span className="text-orange-500" title="Câștig tehnic">⚙️</span>
+                                  )}
+                                </span>
+                                <img
+                                  src={getTeamLogo(match.team2)}
+                                  alt={match.team2}
+                                  className="w-5 h-5 rounded-sm object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = '/team-logos/default.png';
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Note about schedule */}
           <div className="mt-6 p-3 bg-slate-700/20 rounded-lg border border-slate-600/20">
             <p className="text-xs text-gray-400 text-center">
