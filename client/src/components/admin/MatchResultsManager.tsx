@@ -365,17 +365,57 @@ export default function MatchResultsManager() {
                 />
               </div>
 
-              <div className="flex items-center space-x-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-                <input
-                  type="checkbox"
-                  id="technicalWin"
-                  checked={formData.technicalWin}
-                  onChange={(e) => setFormData({...formData, technicalWin: e.target.checked})}
-                  className="h-5 w-5 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2"
-                />
-                <Label htmlFor="technicalWin" className="text-sm font-semibold text-orange-800 cursor-pointer">
-                  🏆 Câștig tehnic (pentru victorii fără meci jucat)
-                </Label>
+              <div className="space-y-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    id="technicalWin"
+                    checked={formData.technicalWin}
+                    onChange={(e) => setFormData({...formData, technicalWin: e.target.checked, technicalWinner: e.target.checked ? '' : ''})}
+                    className="h-5 w-5 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2"
+                  />
+                  <Label htmlFor="technicalWin" className="text-sm font-semibold text-orange-800 cursor-pointer">
+                    🏆 Câștig tehnic (pentru victorii fără meci jucat)
+                  </Label>
+                </div>
+                
+                {formData.technicalWin && (
+                  <div>
+                    <Label className="text-sm font-medium text-orange-800">Echipa câștigătoare tehnic:</Label>
+                    <div className="mt-2 space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          id="tech_winner_team1"
+                          name="technicalWinner"
+                          value={formData.team1Name}
+                          checked={formData.technicalWinner === formData.team1Name}
+                          onChange={(e) => setFormData({...formData, technicalWinner: e.target.value})}
+                          className="h-4 w-4 text-orange-600"
+                          disabled={!formData.team1Name}
+                        />
+                        <Label htmlFor="tech_winner_team1" className="text-sm text-orange-700">
+                          {formData.team1Name || 'Selectează Echipa 1 mai întâi'}
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          id="tech_winner_team2"
+                          name="technicalWinner"
+                          value={formData.team2Name}
+                          checked={formData.technicalWinner === formData.team2Name}
+                          onChange={(e) => setFormData({...formData, technicalWinner: e.target.value})}
+                          className="h-4 w-4 text-orange-600"
+                          disabled={!formData.team2Name}
+                        />
+                        <Label htmlFor="tech_winner_team2" className="text-sm text-orange-700">
+                          {formData.team2Name || 'Selectează Echipa 2 mai întâi'}
+                        </Label>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="flex justify-end gap-2 pt-4">
@@ -480,17 +520,57 @@ export default function MatchResultsManager() {
               />
             </div>
 
-            <div className="flex items-center space-x-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-              <input
-                type="checkbox"
-                id="technicalWinEdit"
-                checked={formData.technicalWin}
-                onChange={(e) => setFormData({...formData, technicalWin: e.target.checked})}
-                className="h-5 w-5 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2"
-              />
-              <Label htmlFor="technicalWinEdit" className="text-sm font-semibold text-orange-800 cursor-pointer">
-                🏆 Câștig tehnic (pentru victorii fără meci jucat)
-              </Label>
+            <div className="space-y-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="technicalWinEdit"
+                  checked={formData.technicalWin}
+                  onChange={(e) => setFormData({...formData, technicalWin: e.target.checked, technicalWinner: e.target.checked ? '' : ''})}
+                  className="h-5 w-5 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2"
+                />
+                <Label htmlFor="technicalWinEdit" className="text-sm font-semibold text-orange-800 cursor-pointer">
+                  🏆 Câștig tehnic (pentru victorii fără meci jucat)
+                </Label>
+              </div>
+              
+              {formData.technicalWin && (
+                <div>
+                  <Label className="text-sm font-medium text-orange-800">Echipa câștigătoare tehnic:</Label>
+                  <div className="mt-2 space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="tech_winner_team1_edit"
+                        name="technicalWinnerEdit"
+                        value={formData.team1Name}
+                        checked={formData.technicalWinner === formData.team1Name}
+                        onChange={(e) => setFormData({...formData, technicalWinner: e.target.value})}
+                        className="h-4 w-4 text-orange-600"
+                        disabled={!formData.team1Name}
+                      />
+                      <Label htmlFor="tech_winner_team1_edit" className="text-sm text-orange-700">
+                        {formData.team1Name || 'Selectează Echipa 1 mai întâi'}
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="tech_winner_team2_edit"
+                        name="technicalWinnerEdit"
+                        value={formData.team2Name}
+                        checked={formData.technicalWinner === formData.team2Name}
+                        onChange={(e) => setFormData({...formData, technicalWinner: e.target.value})}
+                        className="h-4 w-4 text-orange-600"
+                        disabled={!formData.team2Name}
+                      />
+                      <Label htmlFor="tech_winner_team2_edit" className="text-sm text-orange-700">
+                        {formData.team2Name || 'Selectează Echipa 2 mai întâi'}
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex justify-end gap-2 pt-4">
@@ -608,7 +688,7 @@ export default function MatchResultsManager() {
                                 )}
                                 {match.technicalWin && (
                                   <Badge variant="outline" className="mt-1 text-orange-400 border-orange-400 bg-orange-50">
-                                    🏆 Câștig Tehnic
+                                    🏆 Câștig Tehnic: {match.technicalWinner || getWinner(match)}
                                   </Badge>
                                 )}
                               </div>
