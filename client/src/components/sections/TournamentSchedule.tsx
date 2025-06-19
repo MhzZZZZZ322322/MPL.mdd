@@ -91,9 +91,10 @@ const transformScheduleData = (matches: any[]) => {
 
 export default function TournamentSchedule() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showResultsByGroup, setShowResultsByGroup] = useState(false);
 
   // Fetch scheduled matches from API
-  const { data: scheduledMatches = [], isLoading } = useQuery({
+  const { data: scheduledMatchesData = [], isLoading } = useQuery({
     queryKey: ['/api/admin/scheduled-matches'],
     refetchInterval: 30000,
   });
@@ -110,6 +111,12 @@ export default function TournamentSchedule() {
     refetchInterval: 60000,
   });
 
+  // Fetch group configuration for results by group view
+  const { data: groupConfig = [] } = useQuery<any[]>({
+    queryKey: ['/api/admin/group-config'],
+    refetchInterval: 60000,
+  });
+
   // Function to get team logo
   const getTeamLogo = (teamName: string): string => {
     const team = teams.find(t => t.name === teamName);
@@ -117,7 +124,7 @@ export default function TournamentSchedule() {
   };
 
   // Transform scheduled matches data
-  const baseScheduleData = transformScheduleData(scheduledMatches) as any[];
+  const baseScheduleData = transformScheduleData(scheduledMatchesData) as any[];
   
   // Merge with results
   const scheduleData: ScheduleDay[] = baseScheduleData.map((day: any) => ({
@@ -146,6 +153,25 @@ export default function TournamentSchedule() {
       };
     })
   }));
+
+  // Generate scheduled matches from results for group view (like MatchSchedule)
+  const generateScheduledMatches = () => {
+    if (!Array.isArray(matchResults)) return [];
+    
+    return matchResults.map(result => ({
+      team1: result.team1Name,
+      team2: result.team2Name,
+      group: result.groupName,
+      result: result
+    }));
+  };
+
+  const resultMatches = generateScheduledMatches();
+  const groupedResults = resultMatches.reduce((acc, match) => {
+    if (!acc[match.group]) acc[match.group] = [];
+    acc[match.group].push(match);
+    return acc;
+  }, {} as Record<string, any[]>);
 
   if (isLoading) {
     return (

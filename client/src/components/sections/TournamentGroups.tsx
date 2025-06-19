@@ -327,16 +327,9 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                   </div>
                 </div>
 
-                {/* Orar Turneu Section */}
+                {/* Orar Turneu Section - Combinat cu Rezultate */}
                 <div className="mt-12">
-                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Orar Turneu</h2>
                   <TournamentSchedule />
-                </div>
-
-                {/* Rezultate Meciuri Section */}
-                <div className="mt-12">
-                  <h2 className="text-2xl font-bold text-white mb-6 text-center">Rezultate Meciuri</h2>
-                  <MatchSchedule />
                 </div>
                 
                 {/* Legenda */}
