@@ -324,11 +324,25 @@ export default function TournamentSchedule() {
                             Grupa {match.group}
                           </span>
                           
-                          {match.faceitUrl && (
+                          {match.result?.streamUrl && match.result.streamUrl.trim() !== "" && (
                             <Button
                               size="sm"
                               variant="default"
-                              onClick={() => window.open(match.faceitUrl, '_blank')}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                let url = match.result!.streamUrl!;
+                                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                                  url = 'https://' + url;
+                                }
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.target = '_blank';
+                                link.rel = 'noopener noreferrer';
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                              }}
                               className="bg-red-600 hover:bg-red-700 text-white animate-pulse flex-shrink-0"
                             >
                               <ExternalLink className="w-4 h-4 mr-1" />
