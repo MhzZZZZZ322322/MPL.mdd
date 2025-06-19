@@ -287,13 +287,9 @@ export function registerTournamentDatabaseAPI(app: Express) {
         });
       }
 
-      // Validate CS2 BO1 scores (minimum 13 rounds to win, no draws)
-      if (team1Score < 13 && team2Score < 13) {
-        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu minimum 13 runde" });
-      }
-
-      if (team1Score >= 13 && team2Score >= 13 && Math.abs(team1Score - team2Score) < 2) {
-        return res.status(400).json({ message: "În CS2 BO1, câștigătorul trebuie să aibă cu cel puțin 2 runde mai mult" });
+      // Validate that teams are not tied (no draws allowed in CS2)
+      if (team1Score === team2Score) {
+        return res.status(400).json({ message: "În CS2 BO1 nu pot fi egaluri. O echipă trebuie să câștige" });
       }
 
       // Check if teams have reached maximum matches for their group

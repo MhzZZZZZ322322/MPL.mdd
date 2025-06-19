@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 18, 2025: **FLEXIBLE** - Removed all score validation restrictions - allows any score combination for technical wins and special cases
 - June 17, 2025: **ENHANCED** - Updated score validation to allow scores higher than 13 and changed "Link Stream" to "Link" for flexible Faceit/stream URLs
 - June 17, 2025: **INTEGRATED** - Combined "Orar Turneu" and "Rezultate Meciuri" into "Grupe Turneu Stage 1" module for unified Stage 1 management
 - June 17, 2025: **RENAMED** - Changed button to "Grupe Turneu Stage 1" and section title to match for consistent tournament phase naming

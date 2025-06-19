@@ -314,7 +314,6 @@ export default function MatchResultsManager() {
                 <Input
                   type="number"
                   min="0"
-                  max="30"
                   value={formData.team1Score}
                   onChange={(e) => setFormData({...formData, team1Score: parseInt(e.target.value) || 0})}
                 />
@@ -345,7 +344,6 @@ export default function MatchResultsManager() {
                 <Input
                   type="number"
                   min="0"
-                  max="30"
                   value={formData.team2Score}
                   onChange={(e) => setFormData({...formData, team2Score: parseInt(e.target.value) || 0})}
                 />
@@ -426,7 +424,6 @@ export default function MatchResultsManager() {
               <Input
                 type="number"
                 min="0"
-                max="30"
                 value={formData.team1Score}
                 onChange={(e) => setFormData({...formData, team1Score: parseInt(e.target.value) || 0})}
               />
@@ -451,7 +448,6 @@ export default function MatchResultsManager() {
               <Input
                 type="number"
                 min="0"
-                max="30"
                 value={formData.team2Score}
                 onChange={(e) => setFormData({...formData, team2Score: parseInt(e.target.value) || 0})}
               />
