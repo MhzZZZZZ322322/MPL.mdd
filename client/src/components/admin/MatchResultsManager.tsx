@@ -195,17 +195,7 @@ export default function MatchResultsManager() {
       return;
     }
 
-    // CS2 BO1 validation - minimum 13 rounds to win
-    const maxScore = Math.max(formData.team1Score, formData.team2Score);
-    
-    if (maxScore < 13) {
-      toast({
-        title: "Eroare",
-        description: "În CS2 BO1, echipa câștigătoare trebuie să aibă minimum 13 runde",
-        variant: "destructive",
-      });
-      return;
-    }
+    // Removed CS2 BO1 minimum score validation to allow technical wins and special cases
 
     if (formData.team1Score === formData.team2Score) {
       toast({
