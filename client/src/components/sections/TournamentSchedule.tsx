@@ -227,44 +227,45 @@ export default function TournamentSchedule() {
                 
                 <div className="space-y-3">
                   {day.matches.map((match: ScheduleMatch, matchIndex: number) => (
-                    <div key={matchIndex} className="bg-slate-700/30 rounded-lg p-4 border border-slate-600/20">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 min-w-[60px]">
+                    <div key={matchIndex} className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/20">
+                      <div className="flex items-center justify-between w-full">
+                        {/* Ora */}
+                        <div className="flex items-center space-x-2 w-16">
                           <Clock className="w-4 h-4 text-orange-400" />
                           <span className="text-sm font-medium text-orange-400">{match.time}</span>
                         </div>
 
                         {/* Echipa 1 */}
-                        <div className="flex items-center space-x-2 flex-1">
+                        <div className="flex items-center space-x-2 flex-1 min-w-0">
                           <img
                             src={getTeamLogo(match.team1)}
                             alt={match.team1}
-                            className="w-6 h-6 rounded-sm object-cover"
+                            className="w-6 h-6 rounded-sm object-cover flex-shrink-0"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = '/team-logos/default.png';
                             }}
                           />
-                          <span className="text-sm font-medium truncate flex items-center space-x-1">
-                            <span className="text-white">{match.team1}</span>
+                          <span className="text-sm font-medium text-white truncate flex items-center space-x-1">
+                            <span>{match.team1}</span>
                             {match.result?.technicalWin && match.result?.technicalWinner === match.team1 && (
                               <span className="text-orange-500" title="Câștig tehnic">⚙️</span>
                             )}
                           </span>
                         </div>
 
-                        {/* Scor */}
-                        <div className="flex items-center space-x-2 px-3">
+                        {/* Scor clickabil */}
+                        <div className="flex items-center justify-center w-20">
                           {match.result ? (
                             match.result.streamUrl ? (
                               <div 
                                 className="flex items-center space-x-1 text-sm font-bold cursor-pointer hover:text-orange-400 transition-colors"
                                 onClick={() => window.open(match.result!.streamUrl!, '_blank')}
-                                title="Vezi statistici și demo pe Faceit"
+                                title="Apasă pentru statistici Faceit"
                               >
                                 <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
                                   {match.result.team1Score}
                                 </span>
-                                <span className="text-muted-foreground">-</span>
+                                <span className="text-gray-400">-</span>
                                 <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
                                   {match.result.team2Score}
                                 </span>
@@ -274,23 +275,21 @@ export default function TournamentSchedule() {
                                 <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
                                   {match.result.team1Score}
                                 </span>
-                                <span className="text-muted-foreground">-</span>
+                                <span className="text-gray-400">-</span>
                                 <span className={match.result.team2Score > match.result.team1Score ? 'text-green-400' : 'text-red-400'}>
                                   {match.result.team2Score}
                                 </span>
                               </div>
                             )
                           ) : (
-                            <div className="flex items-center space-x-1 text-xs text-muted-foreground">
-                              <span>vs</span>
-                            </div>
+                            <span className="text-xs text-gray-400">vs</span>
                           )}
                         </div>
 
                         {/* Echipa 2 */}
-                        <div className="flex items-center space-x-2 flex-1 justify-end">
-                          <span className="text-sm font-medium truncate flex items-center space-x-1">
-                            <span className="text-white">{match.team2}</span>
+                        <div className="flex items-center space-x-2 flex-1 justify-end min-w-0">
+                          <span className="text-sm font-medium text-white truncate flex items-center space-x-1">
+                            <span>{match.team2}</span>
                             {match.result?.technicalWin && match.result?.technicalWinner === match.team2 && (
                               <span className="text-orange-500" title="Câștig tehnic">⚙️</span>
                             )}
@@ -298,20 +297,19 @@ export default function TournamentSchedule() {
                           <img
                             src={getTeamLogo(match.team2)}
                             alt={match.team2}
-                            className="w-6 h-6 rounded-sm object-cover"
+                            className="w-6 h-6 rounded-sm object-cover flex-shrink-0"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = '/team-logos/default.png';
                             }}
                           />
                         </div>
 
-                        {/* Badges */}
+                        {/* Grupa și LIVE */}
                         <div className="flex items-center space-x-2 ml-4">
-                          <span className="text-xs bg-purple-600/20 text-purple-300 px-2 py-1 rounded">
+                          <span className="text-xs bg-purple-600/20 text-purple-300 px-2 py-1 rounded whitespace-nowrap">
                             Grupa {match.group}
                           </span>
                           
-                          {/* LIVE Button */}
                           {match.faceitUrl && (
                             <Button
                               size="sm"
@@ -321,19 +319,6 @@ export default function TournamentSchedule() {
                             >
                               <ExternalLink className="w-4 h-4 mr-1" />
                               LIVE
-                            </Button>
-                          )}
-                          
-                          {/* Faceit Result Button */}
-                          {match.result?.streamUrl && (
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              onClick={() => window.open(match.result!.streamUrl!, '_blank')}
-                              className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10"
-                            >
-                              <ExternalLink className="w-4 h-4 mr-1" />
-                              Faceit
                             </Button>
                           )}
                         </div>
