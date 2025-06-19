@@ -270,6 +270,9 @@ export const insertMatchResultSchema = createInsertSchema(matchResults).omit({
   id: true,
   createdAt: true,
   matchDate: true,
+}).extend({
+  team1Score: z.number().min(0),
+  team2Score: z.number().min(0),
 });
 
 export const insertGroupConfigurationSchema = createInsertSchema(groupConfiguration).omit({
