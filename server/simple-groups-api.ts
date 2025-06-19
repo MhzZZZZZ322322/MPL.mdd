@@ -370,7 +370,7 @@ export function registerSimpleGroupsAPI(app: Express) {
   // Add match result with validation
   app.post("/api/admin/add-match-result", (req, res) => {
     try {
-      const { groupName, team1, team2, team1Score, team2Score } = req.body;
+      const { groupName, team1, team2, team1Score, team2Score, technicalWin } = req.body;
 
       // Validation checks
       if (!groupName || !team1 || !team2 || team1Score === undefined || team2Score === undefined) {

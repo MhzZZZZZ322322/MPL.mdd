@@ -317,7 +317,6 @@ export default function MatchResultsManager() {
                 <Label htmlFor="team1Score">Scor Echipa 1</Label>
                 <Input
                   type="number"
-                  min="0"
                   value={formData.team1Score}
                   onChange={(e) => setFormData({...formData, team1Score: parseInt(e.target.value) || 0})}
                 />
@@ -347,7 +346,6 @@ export default function MatchResultsManager() {
                 <Label htmlFor="team2Score">Scor Echipa 2</Label>
                 <Input
                   type="number"
-                  min="0"
                   value={formData.team2Score}
                   onChange={(e) => setFormData({...formData, team2Score: parseInt(e.target.value) || 0})}
                 />
@@ -363,16 +361,16 @@ export default function MatchResultsManager() {
                 />
               </div>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
                 <input
                   type="checkbox"
                   id="technicalWin"
                   checked={formData.technicalWin}
                   onChange={(e) => setFormData({...formData, technicalWin: e.target.checked})}
-                  className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                  className="h-5 w-5 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2"
                 />
-                <Label htmlFor="technicalWin" className="text-sm font-medium text-gray-900">
-                  Câștig tehnic
+                <Label htmlFor="technicalWin" className="text-sm font-semibold text-orange-800 cursor-pointer">
+                  🏆 Câștig tehnic (pentru victorii fără meci jucat)
                 </Label>
               </div>
 
@@ -440,7 +438,6 @@ export default function MatchResultsManager() {
               <Label htmlFor="team1Score">Scor Echipa 1</Label>
               <Input
                 type="number"
-                min="0"
                 value={formData.team1Score}
                 onChange={(e) => setFormData({...formData, team1Score: parseInt(e.target.value) || 0})}
               />
@@ -464,7 +461,6 @@ export default function MatchResultsManager() {
               <Label htmlFor="team2Score">Scor Echipa 2</Label>
               <Input
                 type="number"
-                min="0"
                 value={formData.team2Score}
                 onChange={(e) => setFormData({...formData, team2Score: parseInt(e.target.value) || 0})}
               />
@@ -480,16 +476,16 @@ export default function MatchResultsManager() {
               />
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
               <input
                 type="checkbox"
                 id="technicalWinEdit"
                 checked={formData.technicalWin}
                 onChange={(e) => setFormData({...formData, technicalWin: e.target.checked})}
-                className="h-4 w-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                className="h-5 w-5 text-orange-600 bg-white border-orange-300 rounded focus:ring-orange-500 focus:ring-2"
               />
-              <Label htmlFor="technicalWinEdit" className="text-sm font-medium text-gray-900">
-                Câștig tehnic
+              <Label htmlFor="technicalWinEdit" className="text-sm font-semibold text-orange-800 cursor-pointer">
+                🏆 Câștig tehnic (pentru victorii fără meci jucat)
               </Label>
             </div>
 
@@ -604,6 +600,11 @@ export default function MatchResultsManager() {
                                 {winner && (
                                   <Badge variant="outline" className="mt-1 text-green-400 border-green-400">
                                     Câștigător: {winner}
+                                  </Badge>
+                                )}
+                                {match.technicalWin && (
+                                  <Badge variant="outline" className="mt-1 text-orange-400 border-orange-400 bg-orange-50">
+                                    🏆 Câștig Tehnic
                                   </Badge>
                                 )}
                               </div>
