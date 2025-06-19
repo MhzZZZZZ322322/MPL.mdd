@@ -62,7 +62,11 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
     refetchInterval: 60000, // Refetch every minute
   });
 
-  // No longer fetching match results here - they are displayed in MatchSchedule component
+  // Fetch match results to display within groups
+  const { data: matchResults = [] } = useQuery<MatchResult[]>({
+    queryKey: ['/api/match-results'],
+    refetchInterval: 30000, // Refetch every 30 seconds
+  });
 
   const { toast } = useToast();
 
