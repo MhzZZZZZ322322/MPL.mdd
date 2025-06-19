@@ -15,6 +15,8 @@ interface MatchResult {
   team2Score: number;
   streamUrl?: string;
   matchDate: string;
+  technicalWin?: boolean;
+  technicalWinner?: string;
 }
 
 interface Team {
@@ -214,6 +216,9 @@ export default function MatchSchedule() {
                             onClick={() => window.open(match.result!.streamUrl!, '_blank')}
                             title="Vezi statistici și demo pe Faceit"
                           >
+                            {match.result.technicalWin && (
+                              <span className="text-orange-500 mr-1" title="Câștig tehnic">⚙️</span>
+                            )}
                             <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
                               {match.result.team1Score}
                             </span>
@@ -224,6 +229,9 @@ export default function MatchSchedule() {
                           </div>
                         ) : (
                           <div className="flex items-center space-x-1 text-sm font-bold">
+                            {match.result.technicalWin && (
+                              <span className="text-orange-500 mr-1" title="Câștig tehnic">⚙️</span>
+                            )}
                             <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
                               {match.result.team1Score}
                             </span>
