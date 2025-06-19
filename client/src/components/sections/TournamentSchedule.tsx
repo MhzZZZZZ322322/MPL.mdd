@@ -259,12 +259,20 @@ export default function TournamentSchedule() {
                             match.result.streamUrl && match.result.streamUrl.trim() !== "" ? (
                               <div 
                                 className="flex items-center space-x-1 text-sm font-bold cursor-pointer hover:text-orange-400 transition-colors"
-                                onClick={() => {
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
                                   let url = match.result!.streamUrl!;
                                   if (!url.startsWith('http://') && !url.startsWith('https://')) {
                                     url = 'https://' + url;
                                   }
-                                  window.open(url, '_blank');
+                                  const link = document.createElement('a');
+                                  link.href = url;
+                                  link.target = '_blank';
+                                  link.rel = 'noopener noreferrer';
+                                  document.body.appendChild(link);
+                                  link.click();
+                                  document.body.removeChild(link);
                                 }}
                                 title="Apasă pentru statistici Faceit"
                               >
