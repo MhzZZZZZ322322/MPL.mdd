@@ -259,7 +259,13 @@ export default function TournamentSchedule() {
                             match.result.streamUrl && match.result.streamUrl.trim() !== "" ? (
                               <div 
                                 className="flex items-center space-x-1 text-sm font-bold cursor-pointer hover:text-orange-400 transition-colors"
-                                onClick={() => window.open(match.result!.streamUrl!, '_blank')}
+                                onClick={() => {
+                                  let url = match.result!.streamUrl!;
+                                  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                                    url = 'https://' + url;
+                                  }
+                                  window.open(url, '_blank');
+                                }}
                                 title="Apasă pentru statistici Faceit"
                               >
                                 <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
