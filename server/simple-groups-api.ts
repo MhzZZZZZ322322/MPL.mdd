@@ -112,13 +112,9 @@ export function registerSimpleGroupsAPI(app: Express) {
         return res.status(400).json({ message: "Scores cannot be negative" });
       }
 
-      // Validate CS2 scoring rules
-      if (team1Score < 13 && team2Score < 13) {
-        return res.status(400).json({ message: "În CS2 BO1, o echipă trebuie să câștige cu cel puțin 13 runde" });
-      }
-
-      if (team1Score >= 13 && team2Score >= 13) {
-        return res.status(400).json({ message: "În CS2 BO1, doar o echipă poate câștiga (nu pot fi ambele cu 13+ runde)" });
+      // Validate that teams are not tied (no draws allowed in CS2)
+      if (team1Score === team2Score) {
+        return res.status(400).json({ message: "În CS2 BO1 nu pot fi egaluri. O echipă trebuie să câștige" });
       }
 
       // Check if teams exist in the group

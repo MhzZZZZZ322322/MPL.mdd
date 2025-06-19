@@ -225,6 +225,7 @@ export const matchResults = pgTable("match_results", {
   winnerId: integer("winner_id"), // ID-ul echipei câștigătoare
   streamUrl: text("stream_url"), // Link-ul către stream
   technicalWin: boolean("technical_win").notNull().default(false), // Câștig tehnic
+  technicalWinner: text("technical_winner"), // Numele echipei care a câștigat tehnic
   tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
   matchDate: timestamp("match_date").defaultNow(),
   createdAt: timestamp("created_at").defaultNow(),

@@ -25,6 +25,7 @@ interface MatchFormData {
   team2Score: number;
   streamUrl: string;
   technicalWin: boolean;
+  technicalWinner: string;
   tournamentId: string;
 }
 
@@ -41,6 +42,7 @@ export default function MatchResultsManager() {
     team2Score: 0,
     streamUrl: '',
     technicalWin: false,
+    technicalWinner: '',
     tournamentId: 'hator-cs-league'
   });
 
@@ -166,6 +168,7 @@ export default function MatchResultsManager() {
       team2Score: 0,
       streamUrl: '',
       technicalWin: false,
+      technicalWinner: '',
       tournamentId: 'hator-cs-league'
     });
   };
@@ -230,6 +233,7 @@ export default function MatchResultsManager() {
       team2Score: match.team2Score,
       streamUrl: match.streamUrl || '',
       technicalWin: match.technicalWin || false,
+      technicalWinner: match.technicalWinner || '',
       tournamentId: match.tournamentId
     });
   };
