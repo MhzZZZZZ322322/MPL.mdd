@@ -543,7 +543,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = insertMatchResultSchema.safeParse(req.body);
       if (!result.success) {
         const errorMessage = fromZodError(result.error).message;
-        console.error("Validation error:", errorMessage);
+        console.error("Validation error for match result:", errorMessage);
+        console.error("Request body:", req.body);
+        console.error("Validation errors:", result.error.errors);
         return res.status(400).json({ message: errorMessage });
       }
 
