@@ -324,16 +324,14 @@ export default function TournamentSchedule() {
                             Grupa {match.group}
                           </span>
                           
-                          {((match.result?.streamUrl && match.result.streamUrl.trim() !== "") || (match.faceitUrl && match.faceitUrl.trim() !== "")) && (
+                          {(match.faceitUrl && match.faceitUrl.trim() !== "") && (
                             <Button
                               size="sm"
                               variant="default"
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                let url = (match.result?.streamUrl && match.result.streamUrl.trim() !== "") 
-                                  ? match.result.streamUrl 
-                                  : match.faceitUrl!;
+                                let url = match.faceitUrl!;
                                 if (!url.startsWith('http://') && !url.startsWith('https://')) {
                                   url = 'https://' + url;
                                 }
