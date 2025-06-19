@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 19, 2025: **UNIFIED** - Combined "Orar Turneu" and "Rezultate Meciuri" into single comprehensive schedule section with uniform layout
+- June 19, 2025: **ENHANCED** - Made match scores clickable hyperlinks to Faceit instead of separate buttons for cleaner UX
+- June 19, 2025: **OPTIMIZED** - Reorganized match display into uniform single-row layout with proper spacing and alignment
 - June 19, 2025: **FIXED** - Match results now display exactly as entered in admin with correct team order and scores
 - June 19, 2025: **CORRECTED** - Technical win points calculation now recognizes technicalWinner field instead of score comparison
 - June 19, 2025: **VISUAL** - Added ⚙️ technical win icon next to winning team name in match results

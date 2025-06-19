@@ -304,8 +304,8 @@ export default function TournamentSchedule() {
                           />
                         </div>
 
-                        {/* Grupa și LIVE */}
-                        <div className="flex items-center space-x-2 ml-4">
+                        {/* Grupa și LIVE - lățime fixă */}
+                        <div className="flex items-center justify-end space-x-2 ml-4 w-32">
                           <span className="text-xs bg-purple-600/20 text-purple-300 px-2 py-1 rounded whitespace-nowrap">
                             Grupa {match.group}
                           </span>
@@ -315,7 +315,7 @@ export default function TournamentSchedule() {
                               size="sm"
                               variant="default"
                               onClick={() => window.open(match.faceitUrl, '_blank')}
-                              className="bg-red-600 hover:bg-red-700 text-white animate-pulse"
+                              className="bg-red-600 hover:bg-red-700 text-white animate-pulse flex-shrink-0"
                             >
                               <ExternalLink className="w-4 h-4 mr-1" />
                               LIVE
