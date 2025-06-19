@@ -131,9 +131,12 @@ export default function TournamentSchedule() {
     date: day.date,
     dayName: day.dayName,
     matches: day.matches.map((match: any) => {
-      // Find corresponding result
+      // Find corresponding result (check both directions)
       const result = matchResults.find(r => 
-        r.team1Name === match.team1 && r.team2Name === match.team2 && r.groupName === match.group
+        r.groupName === match.group && (
+          (r.team1Name === match.team1 && r.team2Name === match.team2) ||
+          (r.team1Name === match.team2 && r.team2Name === match.team1)
+        )
       );
       
       return {
@@ -144,8 +147,8 @@ export default function TournamentSchedule() {
         stage: match.stage,
         faceitUrl: match.faceitUrl,
         result: result ? {
-          team1Score: result.team1Score,
-          team2Score: result.team2Score,
+          team1Score: (result.team1Name === match.team1) ? result.team1Score : result.team2Score,
+          team2Score: (result.team1Name === match.team1) ? result.team2Score : result.team1Score,
           technicalWin: result.technicalWin,
           technicalWinner: result.technicalWinner,
           streamUrl: result.streamUrl
