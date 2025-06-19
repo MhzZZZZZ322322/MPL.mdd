@@ -202,8 +202,11 @@ export default function MatchSchedule() {
                           (e.target as HTMLImageElement).src = '/team-logos/default.png';
                         }}
                       />
-                      <span className="text-sm font-medium truncate">
-                        {match.team1}
+                      <span className="text-sm font-medium truncate flex items-center space-x-1">
+                        <span>{match.team1}</span>
+                        {match.result?.technicalWin && match.result?.technicalWinner === match.team1 && (
+                          <span className="text-orange-500" title="Câștig tehnic">⚙️</span>
+                        )}
                       </span>
                     </div>
 
@@ -216,9 +219,6 @@ export default function MatchSchedule() {
                             onClick={() => window.open(match.result!.streamUrl!, '_blank')}
                             title="Vezi statistici și demo pe Faceit"
                           >
-                            {match.result.technicalWin && (
-                              <span className="text-orange-500 mr-1" title="Câștig tehnic">⚙️</span>
-                            )}
                             <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
                               {match.result.team1Score}
                             </span>
@@ -229,9 +229,6 @@ export default function MatchSchedule() {
                           </div>
                         ) : (
                           <div className="flex items-center space-x-1 text-sm font-bold">
-                            {match.result.technicalWin && (
-                              <span className="text-orange-500 mr-1" title="Câștig tehnic">⚙️</span>
-                            )}
                             <span className={match.result.team1Score > match.result.team2Score ? 'text-green-400' : 'text-red-400'}>
                               {match.result.team1Score}
                             </span>
@@ -252,8 +249,11 @@ export default function MatchSchedule() {
 
                     {/* Echipa 2 */}
                     <div className="flex items-center space-x-2 flex-1 justify-end">
-                      <span className="text-sm font-medium truncate">
-                        {match.team2}
+                      <span className="text-sm font-medium truncate flex items-center space-x-1">
+                        <span>{match.team2}</span>
+                        {match.result?.technicalWin && match.result?.technicalWinner === match.team2 && (
+                          <span className="text-orange-500" title="Câștig tehnic">⚙️</span>
+                        )}
                       </span>
                       <img
                         src={getTeamLogo(match.team2)}
