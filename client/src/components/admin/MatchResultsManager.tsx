@@ -346,10 +346,10 @@ export default function MatchResultsManager() {
               </div>
 
               <div>
-                <Label htmlFor="streamUrl">Link (opțional)</Label>
+                <Label htmlFor="streamUrl">Link Faceit (opțional)</Label>
                 <Input
                   type="url"
-                  placeholder="https://www.faceit.com/match/... sau https://www.twitch.tv/..."
+                  placeholder="https://www.faceit.com/match/... pentru statistici și demo"
                   value={formData.streamUrl}
                   onChange={(e) => setFormData({...formData, streamUrl: e.target.value})}
                 />
@@ -501,10 +501,10 @@ export default function MatchResultsManager() {
             </div>
 
             <div>
-              <Label htmlFor="streamUrl">Link (opțional)</Label>
+              <Label htmlFor="streamUrl">Link Faceit (opțional)</Label>
               <Input
                 type="url"
-                placeholder="https://www.faceit.com/match/... sau https://www.twitch.tv/..."
+                placeholder="https://www.faceit.com/match/... pentru statistici și demo"
                 value={formData.streamUrl}
                 onChange={(e) => setFormData({...formData, streamUrl: e.target.value})}
               />

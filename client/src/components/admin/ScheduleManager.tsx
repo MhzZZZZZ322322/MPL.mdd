@@ -239,7 +239,7 @@ export default function ScheduleManager() {
                               className="text-orange-400 border-orange-400/50 hover:bg-orange-400/10"
                             >
                               <Link className="w-4 h-4 mr-1" />
-                              {match.faceitUrl ? 'Editează' : 'Adaugă'} Link
+                              {match.faceitUrl ? 'Editează' : 'Adaugă'} Stream
                             </Button>
                             
                             {match.faceitUrl && (
@@ -269,7 +269,7 @@ export default function ScheduleManager() {
         <DialogContent className="bg-gray-800 border-gray-700">
           <DialogHeader>
             <DialogTitle className="text-white">
-              Setează Link pentru Meci
+              Setează Link Stream pentru Meci
             </DialogTitle>
           </DialogHeader>
           
@@ -285,7 +285,7 @@ export default function ScheduleManager() {
               </div>
               
               <div>
-                <Label htmlFor="faceitUrl" className="text-white">Link Meci</Label>
+                <Label htmlFor="faceitUrl" className="text-white">Link Stream</Label>
                 <Input
                   id="faceitUrl"
                   type="url"
