@@ -24,7 +24,18 @@ interface GroupTeam {
   lastUpdated: string;
 }
 
-// MatchResult interface removed - matches are now handled by MatchSchedule component
+interface MatchResult {
+  id: number;
+  groupName: string;
+  team1Name: string;
+  team2Name: string;
+  team1Score: number;
+  team2Score: number;
+  streamUrl?: string;
+  matchDate: string;
+  technicalWin?: boolean;
+  technicalWinner?: string;
+}
 
 interface TournamentGroup {
   id: number;
