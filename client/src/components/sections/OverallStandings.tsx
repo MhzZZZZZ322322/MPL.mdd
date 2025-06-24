@@ -164,7 +164,8 @@ export default function OverallStandings() {
     const interval = setInterval(() => {
       queryClient.invalidateQueries({ queryKey: ['/api/match-results'] });
       queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
-    }, 10000); // Check for updates every 10 seconds
+      queryClient.invalidateQueries({ queryKey: ['/api/teams'] });
+    }, 5000); // Check for updates every 5 seconds for faster response
 
     return () => clearInterval(interval);
   }, [queryClient]);
