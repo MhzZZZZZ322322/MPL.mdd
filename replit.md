@@ -116,10 +116,10 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
-- June 24, 2025: **INTEGRATED** - Added comprehensive Overall Standings within "Grupe Turneu Stage 1" module showing all teams ranked by points
-- June 24, 2025: **DYNAMIC** - Real-time standings calculation from database with automatic refresh every 15 seconds for match results
-- June 24, 2025: **QUALIFIED** - Correct Stage progression: Top 11 → Stage 3 Direct, Positions 12-21 → Stage 2, 22+ → Eliminated
-- June 24, 2025: **ENHANCED** - Smart sorting for teams with 0 points: teams with 0 round difference ranked above negative difference
+- June 24, 2025: **SIMPLIFIED** - Eliminated "Eliminat" status completely - all teams now show only "Stage 2" or "Stage 3 Direct" qualification
+- June 24, 2025: **SORTED** - Overall standings now ordered exclusively by round difference (highest to lowest) removing points-based sorting
+- June 24, 2025: **INTEGRATED** - Added comprehensive Overall Standings within "Grupe Turneu Stage 1" module showing all teams ranked by round difference
+- June 24, 2025: **DYNAMIC** - Real-time standings calculation from database with automatic refresh every 5 seconds for faster updates
 - June 24, 2025: **POSITIONED** - Overall Standings placed between tournament groups and Format Turneu for optimal user flow
 - June 19, 2025: **UNIFIED** - Combined "Orar Turneu" and "Rezultate Meciuri" into single comprehensive schedule section with uniform layout
 - June 19, 2025: **ENHANCED** - Made match scores clickable hyperlinks to Faceit instead of separate buttons for cleaner UX

@@ -163,7 +163,7 @@ export default function OverallStandings() {
     } else if (position <= 21) {
       return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'; // Stage 2
     } else {
-      return 'bg-red-500/20 text-red-400 border-red-500/30'; // Eliminat
+      return 'bg-red-500/20 text-red-400 border-red-500/30'; // Fond roșu fără text
     }
   };
 
@@ -173,7 +173,7 @@ export default function OverallStandings() {
     } else if (position <= 21) {
       return <Zap className="w-4 h-4" />;
     } else {
-      return null;
+      return null; // Fără iconiță pentru restul
     }
   };
 
@@ -183,7 +183,7 @@ export default function OverallStandings() {
     } else if (position <= 21) {
       return 'Stage 2';
     } else {
-      return 'Eliminat';
+      return ''; // Nu afișăm text pentru restul
     }
   };
 
@@ -285,10 +285,14 @@ export default function OverallStandings() {
                           </span>
                         </td>
                         <td className="px-4 py-3">
-                          <div className={`inline-flex items-center space-x-1 px-2 py-1 rounded text-xs font-medium ${getPositionStyle(position)}`}>
-                            {getPositionIcon(position)}
-                            <span>{getPositionText(position)}</span>
-                          </div>
+                          {position <= 21 ? (
+                            <div className={`inline-flex items-center space-x-1 px-2 py-1 rounded text-xs font-medium ${getPositionStyle(position)}`}>
+                              {getPositionIcon(position)}
+                              <span>{getPositionText(position)}</span>
+                            </div>
+                          ) : (
+                            <div className={`w-4 h-4 rounded ${getPositionStyle(position).split(' ')[0]}`}></div>
+                          )}
                         </td>
                       </tr>
                     );
@@ -314,10 +318,7 @@ export default function OverallStandings() {
                   <div className="w-3 h-3 rounded bg-yellow-500/30 border border-yellow-500/50"></div>
                   <span>Locurile 12-21: Calificare în Stage 2</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 rounded bg-red-500/30 border border-red-500/50"></div>
-                  <span>Locurile 22+: Eliminare</span>
-                </div>
+
               </div>
             </div>
           </div>
