@@ -139,20 +139,13 @@ export default function OverallStandings() {
     // Convert to array and sort
     return Object.values(teamStats)
       .sort((a, b) => {
-        // Sort by points first
+        // 1. Sort by points first (higher points = better position)
         if (b.points !== a.points) return b.points - a.points;
         
-        // For teams with same points (especially 0), teams with 0 difference should be above negative
-        if (a.points === 0 && b.points === 0) {
-          // Teams with 0 difference above teams with negative difference
-          if (a.roundDifference === 0 && b.roundDifference < 0) return -1;
-          if (b.roundDifference === 0 && a.roundDifference < 0) return 1;
-        }
-        
-        // Then by round difference
+        // 2. Then by round difference (higher difference = better position)
         if (b.roundDifference !== a.roundDifference) return b.roundDifference - a.roundDifference;
         
-        // Finally by rounds won
+        // 3. Finally by rounds won (higher rounds won = better position)
         return b.roundsWon - a.roundsWon;
       });
   };
