@@ -271,7 +271,9 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                         <div className="text-center">
                           <div className="text-green-400 font-semibold text-sm">7 grupe × 6 echipe = 42</div>
                           <div className="text-white text-xs mt-1">Round-robin: fiecare cu fiecare</div>
-                          <div className="text-gray-400 text-xs mt-1">Primele 3 din fiecare grupă → 21 echipe</div>
+                          <div className="text-gray-400 text-xs mt-1">Primele 3 din fiecare grupă → 21 echipe
+                          Înfrângerea tehnică: +6p adversarului, -6p echipei sancționate
+</div>
                         </div>
                       </div>
                     </div>
@@ -344,10 +346,6 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                     <div className="flex items-center space-x-2">
                       <div className="w-4 h-4 bg-green-600/30 border border-green-500/50 rounded"></div>
                       <span className="text-white">Avansează în playoff</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 bg-slate-700/30 border border-slate-600/50 rounded"></div>
-                      <span className="text-white">Eliminat</span>
                     </div>
                   </div>
                 </div>
