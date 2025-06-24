@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, Trophy, Star, Zap } from 'lucide-react';
 
@@ -41,21 +41,25 @@ interface GroupConfig {
 
 export default function OverallStandings() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const queryClient = useQueryClient();
 
-  // Fetch data
+  // Fetch data with aggressive refresh for real-time updates
   const { data: matchResults = [] } = useQuery<MatchResult[]>({
     queryKey: ['/api/match-results'],
-    refetchInterval: 30000,
+    refetchInterval: 15000, // Faster refresh for match results
+    staleTime: 0, // Always consider data stale
   });
 
   const { data: teams = [] } = useQuery<Team[]>({
     queryKey: ['/api/teams'],
-    refetchInterval: 60000,
+    refetchInterval: 30000,
+    staleTime: 0,
   });
 
   const { data: groupConfig = [] } = useQuery<GroupConfig[]>({
     queryKey: ['/api/admin/group-config'],
-    refetchInterval: 60000,
+    refetchInterval: 30000,
+    staleTime: 0,
   });
 
   // Function to get team logo
@@ -67,6 +71,11 @@ export default function OverallStandings() {
   // Calculate overall standings
   const calculateOverallStandings = (): TeamStanding[] => {
     const teamStats: { [key: string]: TeamStanding } = {};
+
+    // Debug log for data synchronization
+    if (matchResults.length > 0) {
+      console.log(`[OverallStandings] Recalculating with ${matchResults.length} match results and ${groupConfig.length} groups`);
+    }
 
     // Initialize all teams from group config
     groupConfig.forEach(group => {
@@ -149,6 +158,16 @@ export default function OverallStandings() {
   };
 
   const standings = calculateOverallStandings();
+
+  // Force refresh when new match results are added
+  useEffect(() => {
+    const interval = setInterval(() => {
+      queryClient.invalidateQueries({ queryKey: ['/api/match-results'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
+    }, 10000); // Check for updates every 10 seconds
+
+    return () => clearInterval(interval);
+  }, [queryClient]);
 
   const getPositionStyle = (position: number) => {
     if (position <= 11) {
