@@ -271,9 +271,8 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                         <div className="text-center">
                           <div className="text-green-400 font-semibold text-sm">7 grupe × 6 echipe = 42</div>
                           <div className="text-white text-xs mt-1">Round-robin: fiecare cu fiecare</div>
-                          <div className="text-gray-400 text-xs mt-1">Primele 3 din fiecare grupă → 21 echipe
-                          Înfrângerea tehnică: +6p adversarului, -6p echipei sancționate
-</div>
+                          <div className="text-gray-400 text-xs mt-1">Primele 3 din fiecare grupă → 21 echipe</div>
+                          <div className="text-gray-400 text-xs mt-1">Înfrângerea tehnică: +6p adversarului, -6p echipei sancționate</div>
                         </div>
                       </div>
                     </div>
