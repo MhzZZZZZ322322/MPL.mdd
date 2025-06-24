@@ -142,7 +142,7 @@ export default function OverallStandings() {
         // 1. Sort by points first (higher points = better position)
         if (b.points !== a.points) return b.points - a.points;
         
-        // 2. Then by round difference (higher difference = better position)
+        // 2. If points are equal, sort by round difference (higher difference = better position)
         return b.roundDifference - a.roundDifference;
       });
   };
@@ -203,7 +203,7 @@ export default function OverallStandings() {
             <div className="text-left">
               <h2 className="text-xl font-bold text-white">Clasament General</h2>
               <p className="text-sm text-gray-400">
-                Sortare: 1. Puncte, 2. Diferența de runde • Top 11 → Stage 3 • Locurile 12-21 → Stage 2
+                Sortare: 1. Puncte, 2. Diferența runde (tiebreaker) • Top 11 → Stage 3 • Locurile 12-21 → Stage 2
               </p>
             </div>
           </div>
