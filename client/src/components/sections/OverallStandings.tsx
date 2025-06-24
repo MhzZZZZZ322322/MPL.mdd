@@ -139,7 +139,10 @@ export default function OverallStandings() {
     // Convert to array and sort
     return Object.values(teamStats)
       .sort((a, b) => {
-        // Sort only by round difference (higher difference = better position)
+        // 1. Sort by points first (higher points = better position)
+        if (b.points !== a.points) return b.points - a.points;
+        
+        // 2. Then by round difference (higher difference = better position)
         return b.roundDifference - a.roundDifference;
       });
   };
@@ -200,7 +203,7 @@ export default function OverallStandings() {
             <div className="text-left">
               <h2 className="text-xl font-bold text-white">Clasament General</h2>
               <p className="text-sm text-gray-400">
-                Toate echipele din turneu • Top 11 → Stage 3 • Locurile 12-21 → Stage 2
+                Sortare: 1. Puncte, 2. Diferența de runde • Top 11 → Stage 3 • Locurile 12-21 → Stage 2
               </p>
             </div>
           </div>
