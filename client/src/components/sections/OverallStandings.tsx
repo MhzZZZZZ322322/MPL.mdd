@@ -139,14 +139,8 @@ export default function OverallStandings() {
     // Convert to array and sort
     return Object.values(teamStats)
       .sort((a, b) => {
-        // 1. Sort by points first (higher points = better position)
-        if (b.points !== a.points) return b.points - a.points;
-        
-        // 2. Then by round difference (higher difference = better position)
-        if (b.roundDifference !== a.roundDifference) return b.roundDifference - a.roundDifference;
-        
-        // 3. Finally by rounds won (higher rounds won = better position)
-        return b.roundsWon - a.roundsWon;
+        // Sort only by round difference (higher difference = better position)
+        return b.roundDifference - a.roundDifference;
       });
   };
 
