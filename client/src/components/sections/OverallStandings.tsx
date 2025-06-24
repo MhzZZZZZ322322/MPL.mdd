@@ -36,7 +36,7 @@ interface Team {
 interface GroupConfig {
   groupName: string;
   displayName: string;
-  teams: string[];
+  teams: Team[];
 }
 
 export default function OverallStandings() {
@@ -70,13 +70,12 @@ export default function OverallStandings() {
 
     // Initialize all teams from group config
     groupConfig.forEach(group => {
-      group.teams.forEach(teamName => {
-        if (!teamStats[teamName]) {
-          const team = teams.find(t => t.name === teamName);
-          teamStats[teamName] = {
-            id: team?.id || 0,
-            name: teamName,
-            logoUrl: getTeamLogo(teamName),
+      group.teams.forEach(team => {
+        if (!teamStats[team.name]) {
+          teamStats[team.name] = {
+            id: team.id,
+            name: team.name,
+            logoUrl: team.logoUrl,
             groupName: group.groupName,
             points: 0,
             wins: 0,
@@ -130,7 +129,6 @@ export default function OverallStandings() {
 
     // Convert to array and sort
     return Object.values(teamStats)
-      .filter(team => team.wins > 0 || team.losses > 0) // Only show teams that played
       .sort((a, b) => {
         // Sort by points first, then by round difference, then by rounds won
         if (b.points !== a.points) return b.points - a.points;
