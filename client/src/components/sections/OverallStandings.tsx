@@ -73,13 +73,9 @@ export default function OverallStandings() {
     const teamStats: { [key: string]: TeamStanding } = {};
 
     // Debug log for data synchronization
-    console.log(`[OverallStandings] Recalculating with ${matchResults.length} match results and ${groupConfig.length} groups`);
-    
-    // Debug: Check if Cadian Team results are included
-    const cadianResults = matchResults.filter(result => 
-      result.team1Name === 'Cadian Team' || result.team2Name === 'Cadian Team'
-    );
-    console.log(`[OverallStandings] Found ${cadianResults.length} results for Cadian Team:`, cadianResults);
+    if (matchResults.length > 0) {
+      console.log(`[OverallStandings] Recalculating with ${matchResults.length} match results and ${groupConfig.length} groups`);
+    }
 
     // Initialize all teams from group config
     groupConfig.forEach(group => {
@@ -106,17 +102,7 @@ export default function OverallStandings() {
       const team1 = teamStats[match.team1Name];
       const team2 = teamStats[match.team2Name];
 
-      if (!team1 || !team2) {
-        if (match.team1Name === 'Cadian Team' || match.team2Name === 'Cadian Team') {
-          console.log(`[OverallStandings] Missing team in stats for Cadian match:`, {
-            team1Name: match.team1Name,
-            team2Name: match.team2Name,
-            team1Exists: !!team1,
-            team2Exists: !!team2
-          });
-        }
-        return;
-      }
+      if (!team1 || !team2) return;
 
       // Add rounds
       team1.roundsWon += match.team1Score;
@@ -143,16 +129,10 @@ export default function OverallStandings() {
         team1.points += 3;
         team1.wins += 1;
         team2.losses += 1;
-        if (match.team1Name === 'Cadian Team') {
-          console.log(`[OverallStandings] Cadian Team won vs ${match.team2Name}, points: ${team1.points}`);
-        }
       } else if (winner === match.team2Name) {
         team2.points += 3;
         team2.wins += 1;
         team1.losses += 1;
-        if (match.team2Name === 'Cadian Team') {
-          console.log(`[OverallStandings] Cadian Team won vs ${match.team1Name}, points: ${team2.points}`);
-        }
       }
     });
 
