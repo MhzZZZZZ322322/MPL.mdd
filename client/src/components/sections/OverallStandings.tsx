@@ -130,9 +130,20 @@ export default function OverallStandings() {
     // Convert to array and sort
     return Object.values(teamStats)
       .sort((a, b) => {
-        // Sort by points first, then by round difference, then by rounds won
+        // Sort by points first
         if (b.points !== a.points) return b.points - a.points;
+        
+        // For teams with same points (especially 0), teams with 0 difference should be above negative
+        if (a.points === 0 && b.points === 0) {
+          // Teams with 0 difference above teams with negative difference
+          if (a.roundDifference === 0 && b.roundDifference < 0) return -1;
+          if (b.roundDifference === 0 && a.roundDifference < 0) return 1;
+        }
+        
+        // Then by round difference
         if (b.roundDifference !== a.roundDifference) return b.roundDifference - a.roundDifference;
+        
+        // Finally by rounds won
         return b.roundsWon - a.roundsWon;
       });
   };
@@ -142,7 +153,7 @@ export default function OverallStandings() {
   const getPositionStyle = (position: number) => {
     if (position <= 11) {
       return 'bg-green-500/20 text-green-400 border-green-500/30'; // Direct la Stage 3
-    } else if (position <= 22) {
+    } else if (position <= 21) {
       return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'; // Stage 2
     } else {
       return 'bg-red-500/20 text-red-400 border-red-500/30'; // Eliminat
@@ -152,7 +163,7 @@ export default function OverallStandings() {
   const getPositionIcon = (position: number) => {
     if (position <= 11) {
       return <Star className="w-4 h-4" />;
-    } else if (position <= 22) {
+    } else if (position <= 21) {
       return <Zap className="w-4 h-4" />;
     } else {
       return null;
@@ -162,7 +173,7 @@ export default function OverallStandings() {
   const getPositionText = (position: number) => {
     if (position <= 11) {
       return 'Stage 3 Direct';
-    } else if (position <= 22) {
+    } else if (position <= 21) {
       return 'Stage 2';
     } else {
       return 'Eliminat';
@@ -182,7 +193,7 @@ export default function OverallStandings() {
             <div className="text-left">
               <h2 className="text-xl font-bold text-white">Clasament General</h2>
               <p className="text-sm text-gray-400">
-                Toate echipele din turneu • Top 11 → Stage 3 • Locurile 12-22 → Stage 2
+                Toate echipele din turneu • Top 11 → Stage 3 • Locurile 12-21 → Stage 2
               </p>
             </div>
           </div>
@@ -217,7 +228,7 @@ export default function OverallStandings() {
                         key={team.name}
                         className={`border-t border-slate-700/30 hover:bg-slate-700/20 transition-colors ${
                           position <= 11 ? 'bg-green-500/5' : 
-                          position <= 22 ? 'bg-yellow-500/5' : 
+                          position <= 21 ? 'bg-yellow-500/5' : 
                           'bg-red-500/5'
                         }`}
                       >
@@ -294,11 +305,11 @@ export default function OverallStandings() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded bg-yellow-500/30 border border-yellow-500/50"></div>
-                  <span>Locurile 12-22: Calificare în Stage 2</span>
+                  <span>Locurile 12-21: Calificare în Stage 2</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded bg-red-500/30 border border-red-500/50"></div>
-                  <span>Locurile 23+: Eliminare</span>
+                  <span>Locurile 22+: Eliminare</span>
                 </div>
               </div>
             </div>
