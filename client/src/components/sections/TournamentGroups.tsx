@@ -6,6 +6,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import TournamentSchedule from "./TournamentSchedule";
 import MatchSchedule from "./MatchSchedule";
+import OverallStandings from "./OverallStandings";
 
 interface GroupTeam {
   id: number;
@@ -247,6 +248,11 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                   ))}
                 </div>
                 
+                {/* Overall Standings Section */}
+                <div className="mt-8">
+                  <OverallStandings />
+                </div>
+
                 {/* Tournament Stages - În rând separat */}
                 <div className="mt-8">
                   <h2 className="text-2xl font-bold text-white mb-6 text-center">Format Turneu</h2>

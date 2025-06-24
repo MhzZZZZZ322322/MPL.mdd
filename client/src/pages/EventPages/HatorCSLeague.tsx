@@ -5,7 +5,6 @@ import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
-import OverallStandings from "@/components/sections/OverallStandings";
 
 
 import { useLanguage } from "@/lib/LanguageContext";
@@ -363,11 +362,6 @@ const HatorCSLeague = () => {
           isExpanded={isGroupsExpanded}
           onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
         />
-
-        {/* Overall Standings Section */}
-        <div className="container mx-auto px-4">
-          <OverallStandings />
-        </div>
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
