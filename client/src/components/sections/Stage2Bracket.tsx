@@ -65,7 +65,7 @@ export function Stage2Bracket() {
               <div>
                 <h2 className="text-2xl font-bold text-white">Stage 2 - Eliminare Directă</h2>
                 <p className="text-orange-100 text-sm">
-                  10 echipe • 5 meciuri • 5 echipe calificate în Stage 3
+                  10 echipe • 5 meciuri BO3 • 5 echipe calificate
                 </p>
               </div>
             </div>
