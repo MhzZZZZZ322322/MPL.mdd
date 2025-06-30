@@ -188,9 +188,9 @@ export function Stage2Bracket() {
                         </span>
                       </div>
                       {match.isPlayed && match.winnerName && (
-                        <span className="text-green-200 font-bold text-lg">
-                          {match.winnerName === match.team1Name ? match.team1Score : match.team2Score}
-                        </span>
+                        <div className="text-green-400 text-xl font-bold">
+                          ✓
+                        </div>
                       )}
                     </div>
 
