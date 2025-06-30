@@ -41,7 +41,7 @@ export function Stage2BracketManager() {
   });
 
   // Fetch teams for dropdown
-  const { data: teams = [] } = useQuery({
+  const { data: teams = [] } = useQuery<Team[]>({
     queryKey: ["/api/teams"],
   });
 
@@ -233,7 +233,7 @@ export function Stage2BracketManager() {
                       <SelectValue placeholder="Selectează echipa 1" />
                     </SelectTrigger>
                     <SelectContent>
-                      {teams.map((team: Team) => (
+                      {(teams as Team[]).map((team: Team) => (
                         <SelectItem key={team.id} value={team.name}>
                           {team.name}
                         </SelectItem>
@@ -249,7 +249,7 @@ export function Stage2BracketManager() {
                       <SelectValue placeholder="Selectează echipa 2" />
                     </SelectTrigger>
                     <SelectContent>
-                      {teams.map((team: Team) => (
+                      {(teams as Team[]).map((team: Team) => (
                         <SelectItem key={team.id} value={team.name}>
                           {team.name}
                         </SelectItem>
@@ -341,7 +341,7 @@ export function Stage2BracketManager() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {teams.map((team: Team) => (
+                            {(teams as Team[]).map((team: Team) => (
                               <SelectItem key={team.id} value={team.name}>
                                 {team.name}
                               </SelectItem>
