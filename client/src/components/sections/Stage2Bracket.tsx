@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { Trophy, Users, Calendar, ExternalLink } from "lucide-react";
+import { Trophy, Users, Calendar, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 interface Stage2Match {
   id: number;
@@ -17,7 +18,12 @@ interface Stage2Match {
   matchDate?: string;
 }
 
-export function Stage2Bracket() {
+interface Stage2BracketProps {
+  isExpanded: boolean;
+  onToggle: () => void;
+}
+
+export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
   const { data: bracket = [], isLoading, error } = useQuery({
     queryKey: ["/api/stage2-bracket"],
     refetchInterval: 5000, // Auto-refresh every 5 seconds
@@ -69,27 +75,32 @@ export function Stage2Bracket() {
       transition={{ duration: 0.5 }}
     >
       <div className="bg-gradient-to-r from-zinc-900 to-black border border-orange-500/20 rounded-lg overflow-hidden">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-orange-600 to-orange-700 p-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Trophy className="w-8 h-8 text-white" />
-              <div>
-                <h2 className="text-2xl font-bold text-white">Stage 2 - Eliminare Directă</h2>
-                <p className="text-orange-100 text-sm">
-                  10 echipe • 5 meciuri BO3 • 5 echipe → Stage 3 (alături de 11 direct din grupe)
-                </p>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-white font-bold text-lg">{qualifiedTeams}/5</div>
-              <div className="text-orange-100 text-sm">Echipe calificate</div>
+        
+        {/* Toggle Button */}
+        <Button
+          onClick={onToggle}
+          variant="outline"
+          className="w-full justify-between p-6 h-auto bg-gradient-to-r from-orange-600 to-orange-700 border-0 rounded-none hover:from-orange-700 hover:to-orange-800 transition-all duration-300"
+        >
+          <div className="flex items-center space-x-3">
+            <Trophy className="w-8 h-8 text-white" />
+            <div className="text-left">
+              <h2 className="text-2xl font-bold text-white">Stage 2 - Eliminare Directă</h2>
+              <p className="text-orange-100 text-sm">
+                10 echipe • 5 meciuri BO3 • 5 echipe → Stage 3 (alături de 11 direct din grupe)
+              </p>
             </div>
           </div>
-        </div>
+          {isExpanded ? (
+            <ChevronUp className="w-6 h-6 text-white" />
+          ) : (
+            <ChevronDown className="w-6 h-6 text-white" />
+          )}
+        </Button>
 
-        {/* Tournament Bracket */}
-        <div className="p-6">
+        {/* Collapsible Content */}
+        {isExpanded && (
+          <div className="p-6">
           {matches.length === 0 ? (
             <div className="text-center py-12">
               <Users className="w-16 h-16 text-gray-500 mx-auto mb-4" />
@@ -246,7 +257,7 @@ export function Stage2Bracket() {
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </motion.div>
   );
