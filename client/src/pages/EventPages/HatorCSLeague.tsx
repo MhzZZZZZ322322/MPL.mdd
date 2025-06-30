@@ -5,6 +5,7 @@ import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
+import { Stage2Bracket } from "@/components/sections/Stage2Bracket";
 
 
 import { useLanguage } from "@/lib/LanguageContext";
@@ -362,6 +363,11 @@ const HatorCSLeague = () => {
           isExpanded={isGroupsExpanded}
           onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
         />
+
+        {/* Stage 2 Bracket Section */}
+        <div className="container mx-auto px-4">
+          <Stage2Bracket />
+        </div>
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">

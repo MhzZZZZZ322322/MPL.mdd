@@ -1538,6 +1538,23 @@ export class MemStorage implements IStorage {
       updated: true
     };
   }
+
+  // Stage 2 Bracket methods (placeholder for MemStorage)
+  async getStage2Bracket(): Promise<Stage2Bracket[]> {
+    return [];
+  }
+
+  async createStage2Match(match: InsertStage2Bracket): Promise<Stage2Bracket> {
+    throw new Error("MemStorage Stage 2 methods not implemented");
+  }
+
+  async updateStage2Match(id: number, match: Partial<InsertStage2Bracket>): Promise<Stage2Bracket> {
+    throw new Error("MemStorage Stage 2 methods not implemented");
+  }
+
+  async deleteStage2Match(id: number): Promise<void> {
+    throw new Error("MemStorage Stage 2 methods not implemented");
+  }
 }
 
 // DatabaseStorage implementation using PostgreSQL

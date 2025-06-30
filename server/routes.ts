@@ -655,6 +655,75 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Stage 2 Bracket API endpoints
+  app.get("/api/stage2-bracket", async (req, res) => {
+    try {
+      const bracket = await storage.getStage2Bracket();
+      res.json(bracket);
+    } catch (error) {
+      console.error("Error fetching Stage 2 bracket:", error);
+      res.status(500).json({ message: "Failed to fetch Stage 2 bracket" });
+    }
+  });
+
+  app.post("/api/admin/stage2-bracket", async (req, res) => {
+    try {
+      const { insertStage2BracketSchema } = await import("@shared/schema");
+      
+      const result = insertStage2BracketSchema.safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error for Stage 2 match:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const newMatch = await storage.createStage2Match(result.data);
+      res.status(201).json(newMatch);
+    } catch (error) {
+      console.error("Error creating Stage 2 match:", error);
+      res.status(500).json({ message: "Failed to create Stage 2 match" });
+    }
+  });
+
+  app.put("/api/admin/stage2-bracket/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 2 match ID" });
+      }
+
+      const { insertStage2BracketSchema } = await import("@shared/schema");
+      
+      const result = insertStage2BracketSchema.partial().safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const updatedMatch = await storage.updateStage2Match(id, result.data);
+      res.json(updatedMatch);
+    } catch (error) {
+      console.error("Error updating Stage 2 match:", error);
+      res.status(500).json({ message: "Failed to update Stage 2 match" });
+    }
+  });
+
+  app.delete("/api/admin/stage2-bracket/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 2 match ID" });
+      }
+
+      await storage.deleteStage2Match(id);
+      res.json({ message: "Stage 2 match deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting Stage 2 match:", error);
+      res.status(500).json({ message: "Failed to delete Stage 2 match" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 
