@@ -196,9 +196,9 @@ export function Stage2Bracket() {
               <div>
                 <div className="text-orange-400 font-medium mb-2">Format</div>
                 <ul className="space-y-1">
-                  <li>• 10 echipe (locurile 12-21 din Stage 1)</li>
-                  <li>• Eliminare directă (Best of 1)</li>
-                  <li>• 5 meciuri simultane</li>
+                  <li>• 10 echipe calificate din Stage 1</li>
+                  <li>• Eliminare directă (Best of 3)</li>
+                  <li>• 5 meciuri BO3 simultane</li>
                 </ul>
               </div>
               <div>
@@ -206,7 +206,7 @@ export function Stage2Bracket() {
                 <ul className="space-y-1">
                   <li>• 5 echipe câștigătoare → Stage 3</li>
                   <li>• 5 echipe eliminate din turneu</li>
-                  <li>• Un singur meci decisiv per echipă</li>
+                  <li>• Primul la 2 victorii câștigă meciul</li>
                 </ul>
               </div>
             </div>
