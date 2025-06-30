@@ -139,21 +139,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
               </Button>
             </div>
           ) : (
-            <div className="space-y-6">
-            {isLoading ? (
-              <div className="text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-                <p className="mt-4 text-gray-300">{t('tournament.groups.loading')}</p>
-              </div>
-            ) : error ? (
-              <div className="text-center py-12">
-                <p className="text-red-500 mb-4">{t('tournament.groups.error')}</p>
-                <Button onClick={() => refetch()} variant="outline">
-                  Încearcă din nou
-                </Button>
-              </div>
-            ) : (
-              <>
+            <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {groups.map((group) => (
                     <div key={group.id} className="group">
@@ -349,7 +335,6 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
                 </div>
               </>
             )}
-          </div>
         </div>
       </div>
     </div>
