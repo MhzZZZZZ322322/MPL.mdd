@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit2, Save, X, Trophy, Target, Link as LinkIcon, Trash2 } from "lucide-react";
+import { Edit2, Save, X, Trophy, Target, Link as LinkIcon, Trash2, Plus, Users } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -24,15 +24,46 @@ interface Stage2Match {
   matchDate?: string;
 }
 
+interface Team {
+  id: number;
+  name: string;
+}
+
 export function Stage2BracketManager() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [editingMatch, setEditingMatch] = useState<Stage2Match | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   // Fetch bracket data
   const { data: bracket = [], isLoading } = useQuery({
     queryKey: ["/api/stage2-bracket"],
     refetchInterval: 5000,
+  });
+
+  // Fetch teams for dropdown
+  const { data: teams = [] } = useQuery<Team[]>({
+    queryKey: ["/api/teams"],
+  });
+
+  // Create mutation
+  const createMutation = useMutation({
+    mutationFn: (matchData: any) => apiRequest("POST", "/api/admin/stage2-bracket", matchData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
+      setIsCreating(false);
+      toast({
+        title: "Success",
+        description: "Meciul a fost creat cu succes!",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Eroare",
+        description: error.message || "Eroare la crearea meciului",
+        variant: "destructive",
+      });
+    },
   });
 
   // Update mutation pentru actualizarea rezultatelor
@@ -73,6 +104,52 @@ export function Stage2BracketManager() {
       });
     },
   });
+
+  // Delete match mutation
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) => apiRequest("DELETE", `/api/admin/stage2-bracket/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
+      toast({
+        title: "Success",
+        description: "Meciul a fost șters cu succes!",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Eroare",
+        description: error.message || "Eroare la ștergerea meciului",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Handler pentru crearea meciului nou
+  const handleCreate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    
+    const matchData = {
+      team1Name: formData.get("team1Name") as string,
+      team2Name: formData.get("team2Name") as string,
+      bracketPosition: parseInt(formData.get("bracketPosition") as string),
+      streamUrl: formData.get("streamUrl") as string || "",
+      isPlayed: false,
+      technicalWin: false,
+      tournamentId: "hator-cs-league"
+    };
+
+    if (matchData.team1Name === matchData.team2Name) {
+      toast({
+        title: "Eroare",
+        description: "O echipă nu poate juca împotriva ei însăși",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    createMutation.mutate(matchData);
+  };
 
   // Handler pentru actualizarea rezultatelor
   const handleUpdateResult = (event: React.FormEvent<HTMLFormElement>) => {
@@ -143,10 +220,102 @@ export function Stage2BracketManager() {
           <Trophy className="w-5 h-5 text-orange-400" />
           <h2 className="text-xl font-bold text-white">Plasa Stage 2 - Administrare</h2>
         </div>
-        <div className="text-sm text-gray-400">
-          Echipe calificate: {qualifiedTeams}/5
+        <div className="flex items-center space-x-4">
+          <span className="text-sm text-gray-400">
+            Echipe calificate: {qualifiedTeams}/5
+          </span>
+          <Button
+            onClick={() => setIsCreating(true)}
+            className="bg-orange-500 hover:bg-orange-600"
+            disabled={isCreating}
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Adaugă Meci
+          </Button>
         </div>
       </div>
+
+      {/* Create Match Form */}
+      {isCreating && (
+        <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 mb-6">
+          <h3 className="text-lg font-bold text-white mb-4">Adaugă Meci Nou</h3>
+          <form onSubmit={handleCreate} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <Label className="text-white">Echipa 1</Label>
+                <select 
+                  name="team1Name" 
+                  required
+                  className="w-full bg-zinc-700 border border-zinc-600 text-white rounded-md px-3 py-2"
+                >
+                  <option value="">Selectează echipa 1</option>
+                  {teams.map((team) => (
+                    <option key={team.id} value={team.name}>
+                      {team.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <Label className="text-white">Echipa 2</Label>
+                <select 
+                  name="team2Name" 
+                  required
+                  className="w-full bg-zinc-700 border border-zinc-600 text-white rounded-md px-3 py-2"
+                >
+                  <option value="">Selectează echipa 2</option>
+                  {teams.map((team) => (
+                    <option key={team.id} value={team.name}>
+                      {team.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <Label className="text-white">Poziția în plasă</Label>
+                <Input
+                  type="number"
+                  name="bracketPosition"
+                  min="1"
+                  max="5"
+                  required
+                  className="bg-zinc-700 border-zinc-600 text-white"
+                  placeholder="1-5"
+                />
+              </div>
+
+              <div>
+                <Label className="text-white">Link Stream/Faceit</Label>
+                <Input
+                  type="url"
+                  name="streamUrl"
+                  className="bg-zinc-700 border-zinc-600 text-white"
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
+
+            <div className="flex space-x-2">
+              <Button 
+                type="submit" 
+                className="bg-green-600 hover:bg-green-700"
+                disabled={createMutation.isPending}
+              >
+                {createMutation.isPending ? "Se creează..." : "Creează Meci"}
+              </Button>
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={() => setIsCreating(false)}
+              >
+                Anulează
+              </Button>
+            </div>
+          </form>
+        </div>
+      )}
 
       {/* Bracket Grid - Similar cu site-ul dar editabil */}
       <div className="space-y-6">
@@ -184,15 +353,25 @@ export function Stage2BracketManager() {
                       </span>
                     )}
                   </div>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => setEditingMatch(match)}
-                    className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 text-xs"
-                  >
-                    <Edit2 className="w-3 h-3 mr-1" />
-                    Edit
-                  </Button>
+                  <div className="flex space-x-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setEditingMatch(match)}
+                      className="border-blue-500/50 text-blue-400 hover:bg-blue-500/10 text-xs"
+                    >
+                      <Edit2 className="w-3 h-3 mr-1" />
+                      Edit
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => deleteMutation.mutate(match.id)}
+                      className="border-red-500/50 text-red-400 hover:bg-red-500/10 text-xs"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Match Content */}
@@ -320,33 +499,27 @@ export function Stage2BracketManager() {
 
               <div className="space-y-2">
                 <Label className="text-white">Câștig tehnic</Label>
-                <Select name="technicalWin" defaultValue={editingMatch.technicalWin ? "true" : "false"}>
-                  <SelectTrigger className="bg-zinc-700 border-zinc-600 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="false">Nu</SelectItem>
-                    <SelectItem value="true">Da</SelectItem>
-                  </SelectContent>
-                </Select>
+                <select 
+                  name="technicalWin" 
+                  defaultValue={editingMatch.technicalWin ? "true" : "false"}
+                  className="w-full bg-zinc-700 border border-zinc-600 text-white rounded-md px-3 py-2"
+                >
+                  <option value="false">Nu</option>
+                  <option value="true">Da</option>
+                </select>
               </div>
 
               <div>
                 <Label className="text-white">Câștigător tehnic</Label>
-                <Select name="technicalWinner" defaultValue={editingMatch.technicalWinner || ""}>
-                  <SelectTrigger className="bg-zinc-700 border-zinc-600 text-white">
-                    <SelectValue placeholder="Selectează echipa câștigătoare" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="">(Niciunul)</SelectItem>
-                    <SelectItem value={editingMatch.team1Name}>
-                      {editingMatch.team1Name}
-                    </SelectItem>
-                    <SelectItem value={editingMatch.team2Name}>
-                      {editingMatch.team2Name}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
+                <select 
+                  name="technicalWinner" 
+                  defaultValue={editingMatch.technicalWinner || ""}
+                  className="w-full bg-zinc-700 border border-zinc-600 text-white rounded-md px-3 py-2"
+                >
+                  <option value="">(Niciunul)</option>
+                  <option value={editingMatch.team1Name}>{editingMatch.team1Name}</option>
+                  <option value={editingMatch.team2Name}>{editingMatch.team2Name}</option>
+                </select>
               </div>
 
               <div className="flex space-x-2 pt-4">
