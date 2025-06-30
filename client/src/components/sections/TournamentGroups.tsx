@@ -110,7 +110,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
   // Removed match result helpers - matches are now displayed only in MatchSchedule component
 
   return (
-    <div className="pt-2 pb-2 bg-gradient-to-b from-darkBg to-black">
+    <div className="pt-1 pb-1 bg-gradient-to-b from-darkBg to-black">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <Button 
