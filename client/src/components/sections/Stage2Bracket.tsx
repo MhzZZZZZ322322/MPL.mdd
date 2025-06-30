@@ -72,7 +72,7 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
   const qualifiedTeams = matches.filter(match => match.isPlayed && match.winnerName).length;
 
   return (
-    <div className="pt-1 pb-1 bg-gradient-to-b from-darkBg to-black">
+    <div className="pt-4 pb-2 bg-gradient-to-b from-darkBg to-black">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <Button 
