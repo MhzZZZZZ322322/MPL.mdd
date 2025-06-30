@@ -188,8 +188,8 @@ export function Stage2Bracket() {
                         </span>
                       </div>
                       {match.isPlayed && match.winnerName && (
-                        <div className="text-green-400 text-xl font-bold">
-                          ✓
+                        <div className="text-yellow-400 text-xl">
+                          🏆
                         </div>
                       )}
                     </div>
