@@ -67,7 +67,7 @@ export function Stage2BracketManager() {
 
   // Update mutation
   const updateMutation = useMutation({
-    mutationFn: ({ id, ...data }: any) => apiRequest(`/api/admin/stage2-bracket/${id}`, "PUT", data),
+    mutationFn: ({ id, ...data }: any) => apiRequest("PUT", `/api/admin/stage2-bracket/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
       setEditingMatch(null);
@@ -87,7 +87,7 @@ export function Stage2BracketManager() {
 
   // Delete mutation
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => apiRequest(`/api/admin/stage2-bracket/${id}`, "DELETE"),
+    mutationFn: (id: number) => apiRequest("DELETE", `/api/admin/stage2-bracket/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
       toast({
