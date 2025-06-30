@@ -47,7 +47,7 @@ export function Stage2BracketManager() {
 
   // Create mutation
   const createMutation = useMutation({
-    mutationFn: (matchData: any) => apiRequest("/api/admin/stage2-bracket", "POST", matchData),
+    mutationFn: (matchData: any) => apiRequest("POST", "/api/admin/stage2-bracket", matchData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
       setIsCreating(false);
