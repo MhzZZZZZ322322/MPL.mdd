@@ -357,7 +357,7 @@ export function Stage2BracketManager() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            {teams.map((team: Team) => (
+                            {(teams as Team[]).map((team: Team) => (
                               <SelectItem key={team.id} value={team.name}>
                                 {team.name}
                               </SelectItem>
