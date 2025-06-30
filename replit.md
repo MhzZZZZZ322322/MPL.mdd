@@ -116,6 +116,12 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- June 30, 2025: **COMPLETED** - Stage 2 Bracket fully functional with simplified admin interface for editing results
+- June 30, 2025: **FUNCTIONAL** - Added complete CRUD operations: create matches, edit results, delete matches and links
+- June 30, 2025: **VISUAL** - Stage 2 Bracket displays exactly like site with cards but editable in admin panel
+- June 30, 2025: **FIXED** - Resolved all parameter order issues in apiRequest calls (method, url, data sequence)
+- June 30, 2025: **CORRECTED** - Fixed Select component value errors by using native HTML select elements
+- June 30, 2025: **INTEGRATED** - Stage 2 Bracket shows real-time results on main site from admin panel updates
 - June 24, 2025: **PRIORITIZED** - Changed ranking system: Points (wins) first priority, round difference second priority for proper tournament standings
 - June 24, 2025: **SIMPLIFIED** - Eliminated "Eliminat" status completely - all teams now show only "Stage 2" or "Stage 3 Direct" qualification  
 - June 24, 2025: **VISUAL** - Updated standings description to clarify sorting criteria: "1. Puncte, 2. Diferența de runde"
