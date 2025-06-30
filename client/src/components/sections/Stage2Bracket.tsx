@@ -147,6 +147,21 @@ export function Stage2Bracket() {
                           <span className="text-white font-bold text-lg">{match.team2Score ?? 0}</span>
                         )}
                       </div>
+
+                      {/* Faceit Link */}
+                      {match.streamUrl && (
+                        <div className="mt-3 pt-2 border-t border-zinc-600">
+                          <a
+                            href={match.streamUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center space-x-2 text-orange-400 hover:text-orange-300 text-sm font-medium bg-orange-400/10 hover:bg-orange-400/20 py-2 px-3 rounded-lg transition-all"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            <span>Faceit</span>
+                          </a>
+                        </div>
+                      )}
                     </div>
 
                     {/* Connection Line */}
