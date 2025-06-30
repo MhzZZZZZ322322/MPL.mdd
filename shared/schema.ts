@@ -321,6 +321,8 @@ export const insertStage2BracketSchema = createInsertSchema(stage2Bracket).omit(
   id: true,
   createdAt: true,
   updatedAt: true,
+}).partial({
+  matchDate: true
 });
 
 export type InsertStage2Bracket = z.infer<typeof insertStage2BracketSchema>;
