@@ -359,19 +359,67 @@ const HatorCSLeague = () => {
           )}
         </div>
 
-        {/* Tournament Groups Section */}
-        <TournamentGroups 
-          isExpanded={isGroupsExpanded}
-          onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)}
-        />
+        {/* Tournament Sections - Combined Navigation */}
+        <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
+          <div className="container mx-auto px-4">
+            {/* Buttons Row */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              <Button 
+                onClick={() => setIsGroupsExpanded(!isGroupsExpanded)}
+                variant="outline"
+                className="border-primary/50 text-primary hover:bg-primary/10 px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+              >
+                {isGroupsExpanded ? (
+                  <>
+                    Grupe Turneu Stage 1
+                    <ChevronUp className="w-4 h-4" />
+                  </>
+                ) : (
+                  <>
+                    Grupe Turneu Stage 1
+                    <ChevronDown className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
 
-        {/* Stage 2 Bracket Section */}
-        <div className="container mx-auto px-4">
-          <Stage2Bracket 
-            isExpanded={isStage2Expanded}
-            onToggle={() => setIsStage2Expanded(!isStage2Expanded)}
-          />
+              <Button 
+                onClick={() => setIsStage2Expanded(!isStage2Expanded)}
+                variant="outline"
+                className="border-primary/50 text-primary hover:bg-primary/10 px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+              >
+                {isStage2Expanded ? (
+                  <>
+                    Stage 2 - Eliminare Directă
+                    <ChevronUp className="w-4 h-4" />
+                  </>
+                ) : (
+                  <>
+                    Stage 2 - Eliminare Directă  
+                    <ChevronDown className="w-4 h-4" />
+                  </>
+                )}
+              </Button>
+            </div>
+
+
+          </div>
         </div>
+
+        {/* Tournament Groups Content */}
+        {isGroupsExpanded && (
+          <TournamentGroups 
+            isExpanded={true}
+            onToggle={() => {}}
+          />
+        )}
+
+        {/* Stage 2 Bracket Content */}
+        {isStage2Expanded && (
+          <Stage2Bracket 
+            isExpanded={true}
+            onToggle={() => {}}
+          />
+        )}
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
