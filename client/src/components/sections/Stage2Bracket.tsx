@@ -87,216 +87,62 @@ export function Stage2Bracket() {
               </p>
             </div>
           ) : (
-            <div className="tournament-bracket relative overflow-x-auto">
-              {/* Tournament Bracket with SVG Connections */}
-              <div className="relative min-w-[1000px] min-h-[700px] bg-gradient-to-br from-zinc-900 to-zinc-800 p-8 rounded-lg">
-                
-                {/* SVG for direct match connections */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-                  <defs>
-                    <marker id="arrowhead" markerWidth="8" markerHeight="6" 
-                      refX="7" refY="3" orient="auto">
-                      <polygon points="0 0, 8 3, 0 6" fill="#fb923c" />
-                    </marker>
-                  </defs>
-                  
-                  {/* Direct connections from each match to corresponding winner slot */}
-                  {matches.slice(0, 5).map((match, index) => (
-                    <g key={index}>
-                      {/* Direct line from match to winner slot */}
-                      <line
-                        x1="300"
-                        y1={80 + (index * 130)}
-                        x2="620"
-                        y2={120 + (index * 65)}
-                        stroke={match.isPlayed && match.winnerName ? "#22c55e" : "#71717a"}
-                        strokeWidth={match.isPlayed && match.winnerName ? "3" : "2"}
-                        markerEnd="url(#arrowhead)"
-                        strokeDasharray={match.isPlayed && match.winnerName ? "0" : "5,5"}
-                      />
-                      {/* Connection dot at match */}
-                      <circle 
-                        cx="300" 
-                        cy={80 + (index * 130)} 
-                        r="4" 
-                        fill={match.isPlayed && match.winnerName ? "#22c55e" : "#fb923c"} 
-                      />
-                      {/* Connection dot at winner slot */}
-                      <circle 
-                        cx="620" 
-                        cy={120 + (index * 65)} 
-                        r="3" 
-                        fill={match.isPlayed && match.winnerName ? "#22c55e" : "#71717a"} 
-                      />
-                    </g>
-                  ))}
-                </svg>
-
-                {/* Left Column - Tournament Matches */}
-                <div className="absolute left-0 top-0 space-y-4" style={{ zIndex: 2 }}>
-                  {matches.slice(0, 5).map((match, index) => (
-                    <motion.div
-                      key={match.id}
-                      className="bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden w-72 shadow-lg"
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      style={{ marginTop: `${index * 130}px` }}
-                    >
-                      {/* Match Header */}
-                      <div className="bg-zinc-700 p-2 flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse"></div>
-                          <span className="text-white font-medium text-sm">
-                            Meci {match.bracketPosition}
-                          </span>
+            <div className="space-y-6">
+              {matches.slice(0, 5).map((match, index) => (
+                <div key={match.id} className="relative">
+                  {/* Single Match Bracket Element */}
+                  <div className="flex items-center space-x-4">
+                    
+                    {/* Left Team */}
+                    <div className={`flex items-center justify-between p-3 rounded-lg w-48 ${
+                      match.winnerName === match.team1Name 
+                        ? 'bg-green-600/30 border-2 border-green-500/70' 
+                        : 'bg-zinc-700/70 border border-zinc-600'
+                    }`}>
+                      <div className="flex items-center space-x-2">
+                        <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">C</span>
                         </div>
-                        {match.isPlayed && (
-                          <div className="text-green-400 text-xs font-bold bg-green-400/20 px-2 py-1 rounded">
-                            FINALIZAT
-                          </div>
-                        )}
+                        <span className="text-white font-medium text-sm">{match.team1Name}</span>
                       </div>
+                      {match.isPlayed && (
+                        <span className="text-white font-bold text-lg">{match.team1Score ?? 0}</span>
+                      )}
+                    </div>
 
-                      {/* Teams */}
-                      <div className="p-3 space-y-2">
-                        {/* Team 1 */}
-                        <div className={`flex items-center justify-between p-3 rounded-lg transition-all ${
-                          match.winnerName === match.team1Name 
-                            ? 'bg-green-600/30 border-2 border-green-500/70 shadow-green-500/20 shadow-lg' 
-                            : 'bg-zinc-700/70 border border-zinc-600'
-                        }`}>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 rounded-full ${
-                              match.winnerName === match.team1Name ? 'bg-green-400' : 'bg-gray-500'
-                            }`}></div>
-                            <span className={`font-semibold text-sm ${
-                              match.winnerName === match.team1Name ? 'text-green-200' : 'text-white'
-                            }`}>
-                              {match.team1Name}
-                            </span>
-                          </div>
-                          {match.isPlayed && (
-                            <span className={`font-bold text-lg ${
-                              match.winnerName === match.team1Name ? 'text-green-200' : 'text-gray-300'
-                            }`}>
-                              {match.team1Score ?? 0}
-                            </span>
-                          )}
+                    {/* Connection Line */}
+                    <div className="flex items-center">
+                      <div className="w-16 h-px bg-zinc-500"></div>
+                      <div className="w-2 h-2 bg-orange-400 rounded-full mx-1"></div>
+                      <div className="w-16 h-px bg-zinc-500"></div>
+                    </div>
+
+                    {/* Right Team (Winner) */}
+                    <div className={`flex items-center justify-between p-3 rounded-lg w-48 ${
+                      match.winnerName === match.team2Name 
+                        ? 'bg-green-600/30 border-2 border-green-500/70' 
+                        : match.winnerName === match.team1Name
+                        ? 'bg-green-600/30 border-2 border-green-500/70'
+                        : 'bg-zinc-700/70 border border-zinc-600'
+                    }`}>
+                      <div className="flex items-center space-x-2">
+                        <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">C</span>
                         </div>
-
-                        {/* VS Divider */}
-                        <div className="text-center text-orange-400 text-sm font-bold">VS</div>
-
-                        {/* Team 2 */}
-                        <div className={`flex items-center justify-between p-3 rounded-lg transition-all ${
-                          match.winnerName === match.team2Name 
-                            ? 'bg-green-600/30 border-2 border-green-500/70 shadow-green-500/20 shadow-lg' 
-                            : 'bg-zinc-700/70 border border-zinc-600'
-                        }`}>
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 rounded-full ${
-                              match.winnerName === match.team2Name ? 'bg-green-400' : 'bg-gray-500'
-                            }`}></div>
-                            <span className={`font-semibold text-sm ${
-                              match.winnerName === match.team2Name ? 'text-green-200' : 'text-white'
-                            }`}>
-                              {match.team2Name}
-                            </span>
-                          </div>
-                          {match.isPlayed && (
-                            <span className={`font-bold text-lg ${
-                              match.winnerName === match.team2Name ? 'text-green-200' : 'text-gray-300'
-                            }`}>
-                              {match.team2Score ?? 0}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Faceit Link */}
-                        {match.streamUrl && (
-                          <div className="pt-2">
-                            <a
-                              href={match.streamUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center space-x-2 text-orange-400 hover:text-orange-300 text-sm font-medium bg-orange-400/10 hover:bg-orange-400/20 py-2 px-3 rounded-lg transition-all"
-                            >
-                              <ExternalLink className="w-4 h-4" />
-                              <span>Faceit</span>
-                            </a>
-                          </div>
-                        )}
+                        <span className="text-white font-medium text-sm">
+                          {match.winnerName || match.team2Name}
+                        </span>
                       </div>
-                    </motion.div>
-                  ))}
+                      {match.isPlayed && match.winnerName && (
+                        <span className="text-white font-bold text-lg">
+                          {match.winnerName === match.team1Name ? match.team1Score : match.team2Score}
+                        </span>
+                      )}
+                    </div>
+
+                  </div>
                 </div>
-
-                {/* Right Column - Individual Winner Slots */}
-                <motion.div 
-                  className="absolute right-0 top-0 bg-zinc-800 border-2 border-zinc-700 rounded-xl p-6 w-80 shadow-2xl"
-                  style={{ zIndex: 2 }}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 1 }}
-                >
-                  <div className="bg-gradient-to-r from-green-600 to-green-500 p-3 rounded-lg mb-4">
-                    <h3 className="text-white font-bold text-lg text-center">
-                      Echipe Calificate în Stage 3
-                    </h3>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {matches.slice(0, 5).map((match, index) => (
-                      <motion.div 
-                        key={index}
-                        className={`rounded-lg p-3 shadow-lg border-2 transition-all ${
-                          match.isPlayed && match.winnerName
-                            ? 'bg-green-600/30 border-green-500/70'
-                            : 'bg-zinc-700/50 border-zinc-600 border-dashed'
-                        }`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: 1.2 + (index * 0.1) }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-4 h-4 rounded-full ${
-                              match.isPlayed && match.winnerName 
-                                ? 'bg-green-400 animate-pulse' 
-                                : 'bg-gray-500 opacity-50'
-                            }`}></div>
-                            <span className={`font-bold text-sm ${
-                              match.isPlayed && match.winnerName 
-                                ? 'text-green-200' 
-                                : 'text-gray-400'
-                            }`}>
-                              {match.isPlayed && match.winnerName 
-                                ? match.winnerName 
-                                : `Câștigător Meci ${index + 1}`
-                              }
-                            </span>
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            M{index + 1}
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 text-center border-t-2 border-zinc-700 pt-4">
-                    <div className="text-orange-400 text-lg font-bold">
-                      {matches.filter(m => m.isPlayed && m.winnerName).length}/5 Calificate
-                    </div>
-                    <div className="text-gray-300 text-sm mt-2 bg-zinc-700/50 rounded p-2">
-                      + 11 echipe direct din grupe<br />
-                      = <span className="text-white font-bold">16 echipe în Stage 3</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-              </div>
+              ))}
             </div>
           )}
 
