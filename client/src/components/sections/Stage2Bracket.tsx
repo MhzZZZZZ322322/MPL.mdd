@@ -23,6 +23,18 @@ export function Stage2Bracket() {
     refetchInterval: 5000, // Auto-refresh every 5 seconds
   });
 
+  // Get teams data for logos
+  const { data: teams = [] } = useQuery({
+    queryKey: ["/api/teams"],
+  });
+
+  // Helper function to get team logo
+  const getTeamLogo = (teamName: string) => {
+    const teamsArray = teams as Array<{ name: string; logoUrl: string }>;
+    const team = teamsArray.find((t) => t.name === teamName);
+    return team?.logoUrl || '/team-logos/default.png';
+  };
+
   if (isLoading) {
     return (
       <div className="mb-12">
@@ -98,9 +110,15 @@ export function Stage2Bracket() {
                       {/* Team 1 */}
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center space-x-2">
-                          <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">C</span>
-                          </div>
+                          <img 
+                            src={getTeamLogo(match.team1Name)} 
+                            alt={match.team1Name}
+                            className="w-6 h-6 object-contain rounded-sm"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = '/team-logos/default.png';
+                            }}
+                          />
                           <span className="text-white font-medium text-sm">{match.team1Name}</span>
                         </div>
                         {match.isPlayed && (
@@ -114,9 +132,15 @@ export function Stage2Bracket() {
                       {/* Team 2 */}
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">C</span>
-                          </div>
+                          <img 
+                            src={getTeamLogo(match.team2Name)} 
+                            alt={match.team2Name}
+                            className="w-6 h-6 object-contain rounded-sm"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = '/team-logos/default.png';
+                            }}
+                          />
                           <span className="text-white font-medium text-sm">{match.team2Name}</span>
                         </div>
                         {match.isPlayed && (
@@ -139,9 +163,21 @@ export function Stage2Bracket() {
                         : 'bg-zinc-700/50 border border-zinc-600 border-dashed'
                     }`}>
                       <div className="flex items-center space-x-2">
-                        <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
-                          <span className="text-white text-xs font-bold">C</span>
-                        </div>
+                        {match.isPlayed && match.winnerName ? (
+                          <img 
+                            src={getTeamLogo(match.winnerName)} 
+                            alt={match.winnerName}
+                            className="w-6 h-6 object-contain rounded-sm"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = '/team-logos/default.png';
+                            }}
+                          />
+                        ) : (
+                          <div className="w-6 h-6 bg-gray-500 rounded-sm flex items-center justify-center opacity-50">
+                            <span className="text-white text-xs font-bold">?</span>
+                          </div>
+                        )}
                         <span className={`font-medium text-sm ${
                           match.isPlayed && match.winnerName ? 'text-green-200' : 'text-gray-400'
                         }`}>
