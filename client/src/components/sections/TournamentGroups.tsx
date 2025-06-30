@@ -112,41 +112,34 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
   return (
     <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <Button 
-            onClick={onToggle}
+        <div className="flex justify-end items-center mb-8">
+          <Button
+            onClick={handleManualSync}
+            disabled={syncMutation.isPending}
             variant="outline"
-            className="border-primary/50 text-primary hover:bg-primary/10 px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+            size="sm"
+            className="border-primary/50 text-primary hover:bg-primary/10"
           >
-            {isExpanded ? (
-              <>
-                {t('tournament.groups.button')}
-                <ChevronUp className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                {t('tournament.groups.button')}
-                <ChevronDown className="w-4 h-4" />
-              </>
-            )}
+            <RefreshCw className={`w-4 h-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
+            {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizare'}
           </Button>
-
-          {isExpanded && (
-            <Button
-              onClick={handleManualSync}
-              disabled={syncMutation.isPending}
-              variant="outline"
-              size="sm"
-              className="border-primary/50 text-primary hover:bg-primary/10"
-            >
-              <RefreshCw className={`w-4 h-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
-              {syncMutation.isPending ? 'Sincronizare...' : 'Sincronizare'}
-            </Button>
-          )}
         </div>
 
-        {isExpanded && (
-          <div className="space-y-6">
+        <div className="space-y-6">
+          {isLoading ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              <p className="mt-4 text-gray-300">{t('tournament.groups.loading')}</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <p className="text-red-500 mb-4">{t('tournament.groups.error')}</p>
+              <Button onClick={() => refetch()} variant="outline">
+                Încearcă din nou
+              </Button>
+            </div>
+          ) : (
+            <div className="space-y-6">
             {isLoading ? (
               <div className="text-center py-12">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
@@ -357,7 +350,7 @@ export default function TournamentGroups({ isExpanded, onToggle }: TournamentGro
               </>
             )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
