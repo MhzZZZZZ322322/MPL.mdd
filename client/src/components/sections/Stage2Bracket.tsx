@@ -43,11 +43,13 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
 
   if (isLoading) {
     return (
-      <div className="mb-12">
-        <div className="bg-gradient-to-r from-zinc-900 to-black border border-orange-500/20 rounded-lg p-8">
-          <div className="flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-400"></div>
-            <span className="ml-3 text-white">Se încarcă plasa Stage 2...</span>
+      <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-r from-zinc-900 to-black border border-orange-500/20 rounded-lg p-8">
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-400"></div>
+              <span className="ml-3 text-white">Se încarcă plasa Stage 2...</span>
+            </div>
           </div>
         </div>
       </div>
@@ -56,9 +58,11 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
 
   if (error) {
     return (
-      <div className="mb-12">
-        <div className="bg-gradient-to-r from-red-900/20 to-red-800/20 border border-red-500/30 rounded-lg p-6">
-          <p className="text-red-400 text-center">Eroare la încărcarea plasei Stage 2</p>
+      <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-r from-red-900/20 to-red-800/20 border border-red-500/30 rounded-lg p-6">
+            <p className="text-red-400 text-center">Eroare la încărcarea plasei Stage 2</p>
+          </div>
         </div>
       </div>
     );
@@ -68,39 +72,31 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
   const qualifiedTeams = matches.filter(match => match.isPlayed && match.winnerName).length;
 
   return (
-    <motion.div 
-      className="mb-12"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="bg-gradient-to-r from-zinc-900 to-black border border-orange-500/20 rounded-lg overflow-hidden">
-        
-        {/* Toggle Button */}
-        <Button
-          onClick={onToggle}
-          variant="outline"
-          className="w-full justify-between p-6 h-auto bg-gradient-to-r from-orange-600 to-orange-700 border-0 rounded-none hover:from-orange-700 hover:to-orange-800 transition-all duration-300"
-        >
-          <div className="flex items-center space-x-3">
-            <Trophy className="w-8 h-8 text-white" />
-            <div className="text-left">
-              <h2 className="text-2xl font-bold text-white">Stage 2 - Eliminare Directă</h2>
-              <p className="text-orange-100 text-sm">
-                10 echipe • 5 meciuri BO3 • 5 echipe → Stage 3 (alături de 11 direct din grupe)
-              </p>
-            </div>
-          </div>
-          {isExpanded ? (
-            <ChevronUp className="w-6 h-6 text-white" />
-          ) : (
-            <ChevronDown className="w-6 h-6 text-white" />
-          )}
-        </Button>
+    <div className="py-8 sm:py-16 bg-gradient-to-b from-darkBg to-black">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center mb-8">
+          <Button 
+            onClick={onToggle}
+            variant="outline"
+            className="border-primary/50 text-primary hover:bg-primary/10 px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+          >
+            {isExpanded ? (
+              <>
+                Stage 2 - Eliminare Directă
+                <ChevronUp className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                Stage 2 - Eliminare Directă  
+                <ChevronDown className="w-4 h-4" />
+              </>
+            )}
+          </Button>
+        </div>
 
         {/* Collapsible Content */}
         {isExpanded && (
-          <div className="p-6">
+          <div className="bg-gradient-to-r from-zinc-900 to-black border border-orange-500/20 rounded-lg p-6">
             {matches.length === 0 ? (
               <div className="text-center py-12">
                 <Users className="w-16 h-16 text-gray-500 mx-auto mb-4" />
@@ -244,6 +240,6 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }
