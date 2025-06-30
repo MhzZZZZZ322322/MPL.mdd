@@ -87,17 +87,14 @@ export function Stage2Bracket() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {matches.map((match) => (
                 <motion.div
                   key={match.id}
-                  className={`bg-zinc-800 border rounded-lg overflow-hidden ${
-                    match.isPlayed 
-                      ? 'border-green-500/30 bg-green-900/10' 
-                      : 'border-orange-500/30 hover:border-orange-500/50'
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
+                  className="bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: match.bracketPosition * 0.1 }}
                 >
                   {/* Match Header */}
                   <div className="bg-zinc-700 p-3 flex items-center justify-between">
@@ -108,81 +105,87 @@ export function Stage2Bracket() {
                       </span>
                     </div>
                     {match.isPlayed && (
-                      <div className="text-green-400 text-xs font-medium">FINALIZAT</div>
+                      <div className="text-green-400 text-xs font-medium bg-green-400/10 px-2 py-1 rounded">
+                        FINALIZAT
+                      </div>
                     )}
                   </div>
 
                   {/* Teams */}
-                  <div className="p-4">
-                    <div className="space-y-3">
-                      {/* Team 1 */}
-                      <div className={`flex items-center justify-between p-3 rounded ${
-                        match.winnerName === match.team1Name 
-                          ? 'bg-green-600/20 border border-green-500/30' 
-                          : 'bg-zinc-700'
-                      }`}>
-                        <div className="flex items-center space-x-2">
-                          <div className={`w-3 h-3 rounded-full ${
-                            match.winnerName === match.team1Name ? 'bg-green-400' : 'bg-gray-400'
-                          }`}></div>
-                          <span className="text-white font-medium">{match.team1Name}</span>
-                          {match.technicalWin && match.technicalWinner === match.team1Name && (
-                            <span className="text-orange-400 text-xs">⚙️</span>
-                          )}
-                        </div>
-                        {match.isPlayed && (
-                          <span className="text-white font-bold text-lg">
-                            {match.team1Score ?? 0}
-                          </span>
+                  <div className="p-4 space-y-3">
+                    {/* Team 1 */}
+                    <div className={`flex items-center justify-between p-3 rounded-lg border ${
+                      match.winnerName === match.team1Name 
+                        ? 'bg-green-600/20 border-green-500/50' 
+                        : 'bg-zinc-700/50 border-zinc-600'
+                    }`}>
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-3 h-3 rounded-full ${
+                          match.winnerName === match.team1Name ? 'bg-green-400' : 'bg-gray-400'
+                        }`}></div>
+                        <span className={`font-medium text-sm ${
+                          match.winnerName === match.team1Name ? 'text-green-300' : 'text-white'
+                        }`}>
+                          {match.team1Name}
+                        </span>
+                        {match.technicalWin && match.technicalWinner === match.team1Name && (
+                          <span className="text-orange-400 text-xs">⚙️</span>
                         )}
                       </div>
-
-                      {/* VS Divider */}
-                      <div className="text-center text-gray-400 text-sm font-medium">VS</div>
-
-                      {/* Team 2 */}
-                      <div className={`flex items-center justify-between p-3 rounded ${
-                        match.winnerName === match.team2Name 
-                          ? 'bg-green-600/20 border border-green-500/30' 
-                          : 'bg-zinc-700'
-                      }`}>
-                        <div className="flex items-center space-x-2">
-                          <div className={`w-3 h-3 rounded-full ${
-                            match.winnerName === match.team2Name ? 'bg-green-400' : 'bg-gray-400'
-                          }`}></div>
-                          <span className="text-white font-medium">{match.team2Name}</span>
-                          {match.technicalWin && match.technicalWinner === match.team2Name && (
-                            <span className="text-orange-400 text-xs">⚙️</span>
-                          )}
-                        </div>
-                        {match.isPlayed && (
-                          <span className="text-white font-bold text-lg">
-                            {match.team2Score ?? 0}
-                          </span>
-                        )}
-                      </div>
+                      {match.isPlayed && (
+                        <span className={`font-bold text-lg ${
+                          match.winnerName === match.team1Name ? 'text-green-300' : 'text-white'
+                        }`}>
+                          {match.team1Score ?? 0}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Match Info */}
-                    <div className="mt-4 flex items-center justify-between">
-                      {match.matchDate && (
-                        <div className="flex items-center space-x-1 text-gray-400 text-sm">
-                          <Calendar className="w-4 h-4" />
-                          <span>{new Date(match.matchDate).toLocaleDateString('ro-RO')}</span>
-                        </div>
+                    {/* VS Divider */}
+                    <div className="text-center text-gray-400 text-xs font-medium">VS</div>
+
+                    {/* Team 2 */}
+                    <div className={`flex items-center justify-between p-3 rounded-lg border ${
+                      match.winnerName === match.team2Name 
+                        ? 'bg-green-600/20 border-green-500/50' 
+                        : 'bg-zinc-700/50 border-zinc-600'
+                    }`}>
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-3 h-3 rounded-full ${
+                          match.winnerName === match.team2Name ? 'bg-green-400' : 'bg-gray-400'
+                        }`}></div>
+                        <span className={`font-medium text-sm ${
+                          match.winnerName === match.team2Name ? 'text-green-300' : 'text-white'
+                        }`}>
+                          {match.team2Name}
+                        </span>
+                        {match.technicalWin && match.technicalWinner === match.team2Name && (
+                          <span className="text-orange-400 text-xs">⚙️</span>
+                        )}
+                      </div>
+                      {match.isPlayed && (
+                        <span className={`font-bold text-lg ${
+                          match.winnerName === match.team2Name ? 'text-green-300' : 'text-white'
+                        }`}>
+                          {match.team2Score ?? 0}
+                        </span>
                       )}
-                      {match.streamUrl && (
+                    </div>
+
+                    {/* Match Link */}
+                    {match.streamUrl && (
+                      <div className="pt-2">
                         <a
                           href={match.streamUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center space-x-1 text-orange-400 hover:text-orange-300 text-sm font-medium"
+                          className="flex items-center justify-center space-x-1 text-orange-400 hover:text-orange-300 text-xs font-medium bg-orange-400/10 hover:bg-orange-400/20 py-2 px-3 rounded-lg transition-colors"
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <ExternalLink className="w-3 h-3" />
                           <span>Faceit</span>
                         </a>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
