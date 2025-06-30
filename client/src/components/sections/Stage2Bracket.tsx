@@ -101,161 +101,146 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
         {/* Collapsible Content */}
         {isExpanded && (
           <div className="p-6">
-          {matches.length === 0 ? (
-            <div className="text-center py-12">
-              <Users className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">Plasa Stage 2 în preparare</h3>
-              <p className="text-gray-400">
-                Echipele pentru Stage 2 vor fi anunțate după finalizarea Stage 1
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {matches.slice(0, 5).map((match, index) => (
-                <div key={match.id} className="relative">
-                  {/* Match with two teams playing */}
-                  <div className="flex items-center space-x-6">
-                    
-                    {/* Match Box - Two Teams Playing */}
-                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 w-80">
-                      {/* Team 1 */}
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-2">
-                          <img 
-                            src={getTeamLogo(match.team1Name)} 
-                            alt={match.team1Name}
-                            className="w-6 h-6 object-contain rounded-sm"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/team-logos/default.png';
-                            }}
-                          />
-                          <span className="text-white font-medium text-sm">{match.team1Name}</span>
+            {matches.length === 0 ? (
+              <div className="text-center py-12">
+                <Users className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">Plasa Stage 2 în preparare</h3>
+                <p className="text-gray-400">
+                  Echipele pentru Stage 2 vor fi anunțate după finalizarea Stage 1
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {matches.slice(0, 5).map((match, index) => (
+                  <div key={match.id} className="relative">
+                    {/* Match with two teams playing */}
+                    <div className="flex items-center space-x-6">
+                      
+                      {/* Match Box - Two Teams Playing */}
+                      <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 w-80">
+                        {/* Team 1 */}
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center space-x-2">
+                            <img 
+                              src={getTeamLogo(match.team1Name)} 
+                              alt={match.team1Name}
+                              className="w-6 h-6 object-contain rounded-sm"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/team-logos/default.png';
+                              }}
+                            />
+                            <span className="text-white font-medium text-sm">{match.team1Name}</span>
+                          </div>
+                          {match.isPlayed && (
+                            match.streamUrl ? (
+                              <a
+                                href={match.streamUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-orange-400 hover:text-orange-300 font-bold text-lg underline-offset-4 hover:underline transition-colors"
+                              >
+                                {match.team1Score ?? 0}
+                              </a>
+                            ) : (
+                              <span className="text-white font-bold text-lg">{match.team1Score ?? 0}</span>
+                            )
+                          )}
                         </div>
-                        {match.isPlayed && (
-                          match.streamUrl ? (
-                            <a
-                              href={match.streamUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-orange-400 hover:text-orange-300 font-bold text-lg underline-offset-4 hover:underline transition-colors"
-                            >
-                              {match.team1Score ?? 0}
-                            </a>
-                          ) : (
-                            <span className="text-white font-bold text-lg">{match.team1Score ?? 0}</span>
-                          )
-                        )}
+
+                        {/* VS Separator */}
+                        <div className="text-center text-orange-400 text-xs font-bold my-1">VS</div>
+
+                        {/* Team 2 */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <img 
+                              src={getTeamLogo(match.team2Name)} 
+                              alt={match.team2Name}
+                              className="w-6 h-6 object-contain rounded-sm"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/team-logos/default.png';
+                              }}
+                            />
+                            <span className="text-white font-medium text-sm">{match.team2Name}</span>
+                          </div>
+                          {match.isPlayed && (
+                            match.streamUrl ? (
+                              <a
+                                href={match.streamUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-orange-400 hover:text-orange-300 font-bold text-lg underline-offset-4 hover:underline transition-colors"
+                              >
+                                {match.team2Score ?? 0}
+                              </a>
+                            ) : (
+                              <span className="text-white font-bold text-lg">{match.team2Score ?? 0}</span>
+                            )
+                          )}
+                        </div>
                       </div>
 
-                      {/* VS Separator */}
-                      <div className="text-center text-orange-400 text-xs font-bold my-1">VS</div>
-
-                      {/* Team 2 */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <img 
-                            src={getTeamLogo(match.team2Name)} 
-                            alt={match.team2Name}
-                            className="w-6 h-6 object-contain rounded-sm"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/team-logos/default.png';
-                            }}
-                          />
-                          <span className="text-white font-medium text-sm">{match.team2Name}</span>
-                        </div>
-                        {match.isPlayed && (
-                          match.streamUrl ? (
-                            <a
-                              href={match.streamUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-orange-400 hover:text-orange-300 font-bold text-lg underline-offset-4 hover:underline transition-colors"
-                            >
-                              {match.team2Score ?? 0}
-                            </a>
-                          ) : (
-                            <span className="text-white font-bold text-lg">{match.team2Score ?? 0}</span>
-                          )
-                        )}
+                      {/* Connection Line */}
+                      <div className="flex items-center">
+                        <div className="w-8 h-0.5 bg-orange-400"></div>
+                        <div className="w-3 h-3 bg-orange-400 rounded-full mx-1"></div>
+                        <div className="w-8 h-0.5 bg-orange-400"></div>
                       </div>
 
-
-                    </div>
-
-                    {/* Connection Line */}
-                    <div className="flex items-center">
-                      <div className="w-16 h-px bg-zinc-500"></div>
-                      <div className="w-3 h-3 bg-orange-400 rounded-full mx-1"></div>
-                      <div className="w-16 h-px bg-zinc-500"></div>
-                    </div>
-
-                    {/* Winner Box - Only the winner advances */}
-                    <div className={`flex items-center justify-between p-3 rounded-lg w-48 ${
-                      match.isPlayed && match.winnerName
-                        ? 'bg-green-600/30 border-2 border-green-500/70' 
-                        : 'bg-zinc-700/50 border border-zinc-600 border-dashed'
-                    }`}>
-                      <div className="flex items-center space-x-2">
+                      {/* Winner Box */}
+                      <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 w-64">
                         {match.isPlayed && match.winnerName ? (
-                          <img 
-                            src={getTeamLogo(match.winnerName)} 
-                            alt={match.winnerName}
-                            className="w-6 h-6 object-contain rounded-sm"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/team-logos/default.png';
-                            }}
-                          />
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <img 
+                                src={getTeamLogo(match.winnerName)} 
+                                alt={match.winnerName}
+                                className="w-6 h-6 object-contain rounded-sm"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = '/team-logos/default.png';
+                                }}
+                              />
+                              <span className="text-white font-medium text-sm">{match.winnerName}</span>
+                            </div>
+                            <span className="text-yellow-400 text-xl">🏆</span>
+                          </div>
                         ) : (
-                          <div className="w-6 h-6 bg-gray-500 rounded-sm flex items-center justify-center opacity-50">
-                            <span className="text-white text-xs font-bold">?</span>
+                          <div className="text-center text-gray-400 text-sm">
+                            Câștigător TBD
                           </div>
                         )}
-                        <span className={`font-medium text-sm ${
-                          match.isPlayed && match.winnerName ? 'text-green-200' : 'text-gray-400'
-                        }`}>
-                          {match.isPlayed && match.winnerName 
-                            ? match.winnerName 
-                            : 'Câștigător'
-                          }
-                        </span>
                       </div>
-                      {match.isPlayed && match.winnerName && (
-                        <div className="text-yellow-400 text-xl">
-                          🏆
-                        </div>
-                      )}
                     </div>
+                  </div>
+                ))}
 
+                {/* Tournament Information */}
+                <div className="mt-8 bg-zinc-800/50 rounded-lg p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <div className="text-orange-400 font-medium mb-2">Format Turneu</div>
+                      <ul className="space-y-1">
+                        <li>• 10 echipe participante</li>
+                        <li>• 5 meciuri eliminatorii BO3</li>
+                        <li>• 1 vs 1 eliminare directă</li>
+                        <li>• 5 echipe câștigătoare avansează</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-orange-400 font-medium mb-2">Progresie în Stage 3</div>
+                      <ul className="space-y-1">
+                        <li>• 5 echipe câștigătoare din Stage 2</li>
+                        <li>• + 11 echipe direct din grupe (top 1-11)</li>
+                        <li>• = 16 echipe în total în Stage 3</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
-
-          {/* Stage 2 Rules */}
-          <div className="mt-8 bg-zinc-800 border border-zinc-700 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Regulament Stage 2</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
-              <div>
-                <div className="text-orange-400 font-medium mb-2">Format</div>
-                <ul className="space-y-1">
-                  <li>• 10 echipe (locurile 12-21 din grupe)</li>
-                  <li>• Eliminare directă (Best of 3)</li>
-                  <li>• 5 meciuri BO3 simultane</li>
-                </ul>
               </div>
-              <div>
-                <div className="text-orange-400 font-medium mb-2">Progresie în Stage 3</div>
-                <ul className="space-y-1">
-                  <li>• 5 echipe câștigătoare din Stage 2</li>
-                  <li>• + 11 echipe direct din grupe (top 1-11)</li>
-                  <li>• = 16 echipe în total în Stage 3</li>
-                </ul>
-              </div>
-            </div>
+            )}
           </div>
         )}
       </div>

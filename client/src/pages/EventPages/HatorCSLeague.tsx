@@ -19,6 +19,7 @@ const HatorCSLeague = () => {
   const [isTeamsExpanded, setIsTeamsExpanded] = useState(false);
   const [isGroupsExpanded, setIsGroupsExpanded] = useState(false);
   const [isMatchesExpanded, setIsMatchesExpanded] = useState(false);
+  const [isStage2Expanded, setIsStage2Expanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   // Team logo mapping - uses actual team logos from database
@@ -366,7 +367,10 @@ const HatorCSLeague = () => {
 
         {/* Stage 2 Bracket Section */}
         <div className="container mx-auto px-4">
-          <Stage2Bracket />
+          <Stage2Bracket 
+            isExpanded={isStage2Expanded}
+            onToggle={() => setIsStage2Expanded(!isStage2Expanded)}
+          />
         </div>
 
         {/* Details Section */}
