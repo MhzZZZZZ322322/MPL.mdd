@@ -366,12 +366,10 @@ const HatorCSLeague = () => {
         />
 
         {/* Stage 2 Bracket Section */}
-        <div className="container mx-auto px-4">
-          <Stage2Bracket 
-            isExpanded={isStage2Expanded}
-            onToggle={() => setIsStage2Expanded(!isStage2Expanded)}
-          />
-        </div>
+        <Stage2Bracket 
+          isExpanded={isStage2Expanded}
+          onToggle={() => setIsStage2Expanded(!isStage2Expanded)}
+        />
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">
