@@ -78,7 +78,7 @@ export function Stage2Bracket({ isExpanded, onToggle }: Stage2BracketProps) {
           <Button 
             onClick={onToggle}
             variant="outline"
-            className="border-primary/50 text-primary hover:bg-primary/10 px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2"
+            className="border-primary/50 text-primary hover:bg-primary/10 text-sm sm:text-base flex items-center gap-2 font-medium"
           >
             {isExpanded ? (
               <>

@@ -249,7 +249,7 @@ const HatorCSLeague = () => {
         {/* Teams Profile Section */}
         <div className="pt-8 pb-0 sm:pt-16 sm:pb-0 container mx-auto px-4">
           <Button 
-            className="border-primary/50 text-primary hover:bg-primary/10 mb-4 sm:mb-6 w-full sm:w-auto text-sm sm:text-base flex items-center gap-2"
+            className="border-primary/50 text-primary hover:bg-primary/10 mb-4 sm:mb-6 w-full sm:w-auto text-sm sm:text-base flex items-center gap-2 font-medium"
             variant="outline"
             onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
           >
