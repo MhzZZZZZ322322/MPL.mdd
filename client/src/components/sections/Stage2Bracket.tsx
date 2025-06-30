@@ -90,51 +90,69 @@ export function Stage2Bracket() {
             <div className="space-y-6">
               {matches.slice(0, 5).map((match, index) => (
                 <div key={match.id} className="relative">
-                  {/* Single Match Bracket Element */}
-                  <div className="flex items-center space-x-4">
+                  {/* Match with two teams playing */}
+                  <div className="flex items-center space-x-6">
                     
-                    {/* Left Team */}
-                    <div className={`flex items-center justify-between p-3 rounded-lg w-48 ${
-                      match.winnerName === match.team1Name 
-                        ? 'bg-green-600/30 border-2 border-green-500/70' 
-                        : 'bg-zinc-700/70 border border-zinc-600'
-                    }`}>
-                      <div className="flex items-center space-x-2">
-                        <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
-                          <span className="text-white text-xs font-bold">C</span>
+                    {/* Match Box - Two Teams Playing */}
+                    <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 w-80">
+                      {/* Team 1 */}
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
+                            <span className="text-white text-xs font-bold">C</span>
+                          </div>
+                          <span className="text-white font-medium text-sm">{match.team1Name}</span>
                         </div>
-                        <span className="text-white font-medium text-sm">{match.team1Name}</span>
+                        {match.isPlayed && (
+                          <span className="text-white font-bold text-lg">{match.team1Score ?? 0}</span>
+                        )}
                       </div>
-                      {match.isPlayed && (
-                        <span className="text-white font-bold text-lg">{match.team1Score ?? 0}</span>
-                      )}
+
+                      {/* VS Separator */}
+                      <div className="text-center text-orange-400 text-xs font-bold my-1">VS</div>
+
+                      {/* Team 2 */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
+                            <span className="text-white text-xs font-bold">C</span>
+                          </div>
+                          <span className="text-white font-medium text-sm">{match.team2Name}</span>
+                        </div>
+                        {match.isPlayed && (
+                          <span className="text-white font-bold text-lg">{match.team2Score ?? 0}</span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Connection Line */}
                     <div className="flex items-center">
                       <div className="w-16 h-px bg-zinc-500"></div>
-                      <div className="w-2 h-2 bg-orange-400 rounded-full mx-1"></div>
+                      <div className="w-3 h-3 bg-orange-400 rounded-full mx-1"></div>
                       <div className="w-16 h-px bg-zinc-500"></div>
                     </div>
 
-                    {/* Right Team (Winner) */}
+                    {/* Winner Box - Only the winner advances */}
                     <div className={`flex items-center justify-between p-3 rounded-lg w-48 ${
-                      match.winnerName === match.team2Name 
+                      match.isPlayed && match.winnerName
                         ? 'bg-green-600/30 border-2 border-green-500/70' 
-                        : match.winnerName === match.team1Name
-                        ? 'bg-green-600/30 border-2 border-green-500/70'
-                        : 'bg-zinc-700/70 border border-zinc-600'
+                        : 'bg-zinc-700/50 border border-zinc-600 border-dashed'
                     }`}>
                       <div className="flex items-center space-x-2">
                         <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center">
                           <span className="text-white text-xs font-bold">C</span>
                         </div>
-                        <span className="text-white font-medium text-sm">
-                          {match.winnerName || match.team2Name}
+                        <span className={`font-medium text-sm ${
+                          match.isPlayed && match.winnerName ? 'text-green-200' : 'text-gray-400'
+                        }`}>
+                          {match.isPlayed && match.winnerName 
+                            ? match.winnerName 
+                            : 'Câștigător'
+                          }
                         </span>
                       </div>
                       {match.isPlayed && match.winnerName && (
-                        <span className="text-white font-bold text-lg">
+                        <span className="text-green-200 font-bold text-lg">
                           {match.winnerName === match.team1Name ? match.team1Score : match.team2Score}
                         </span>
                       )}
