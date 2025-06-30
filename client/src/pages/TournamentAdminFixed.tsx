@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
 import ScheduleManager from "@/components/admin/ScheduleManager";
+import { Stage2BracketManager } from "@/components/admin/Stage2BracketManager";
 
 export default function TournamentAdmin() {
   const queryClient = useQueryClient();
@@ -23,7 +24,7 @@ export default function TournamentAdmin() {
           </h1>
           
           <Tabs defaultValue="management" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-slate-800/50">
+            <TabsList className="grid w-full grid-cols-4 bg-slate-800/50">
               <TabsTrigger value="management" className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
                 Configurare Grupe
@@ -35,6 +36,10 @@ export default function TournamentAdmin() {
               <TabsTrigger value="schedule" className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 Program Meciuri
+              </TabsTrigger>
+              <TabsTrigger value="stage2" className="flex items-center gap-2">
+                <Trophy className="w-4 h-4" />
+                Stage 2 Bracket
               </TabsTrigger>
             </TabsList>
             
@@ -48,6 +53,10 @@ export default function TournamentAdmin() {
             
             <TabsContent value="schedule" className="mt-6">
               <ScheduleManager />
+            </TabsContent>
+            
+            <TabsContent value="stage2" className="mt-6">
+              <Stage2BracketManager />
             </TabsContent>
           </Tabs>
         </div>
