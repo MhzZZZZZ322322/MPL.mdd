@@ -116,7 +116,6 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
-- June 30, 2025: **HORIZONTAL** - Arranged tournament navigation buttons (Grupe Turneu Stage 1, Stage 2) in single horizontal line with responsive flex layout
 - June 30, 2025: **COMPLETED** - Stage 2 Tournament Bracket with professional SVG connections and real-time qualification tracking
 - June 30, 2025: **VISUAL** - Created complete bracket visualization with matches → central hub → qualified teams flow
 - June 30, 2025: **COMPLETED** - Stage 2 Bracket fully functional with simplified admin interface for editing results
