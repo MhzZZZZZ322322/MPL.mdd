@@ -91,44 +91,45 @@ export function Stage2Bracket() {
               {/* Tournament Bracket with SVG Connections */}
               <div className="relative min-w-[1000px] min-h-[700px] bg-gradient-to-br from-zinc-900 to-zinc-800 p-8 rounded-lg">
                 
-                {/* SVG for all bracket connections */}
+                {/* SVG for direct match connections */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
                   <defs>
-                    <marker id="arrowhead" markerWidth="10" markerHeight="7" 
-                      refX="9" refY="3.5" orient="auto">
-                      <polygon points="0 0, 10 3.5, 0 7" fill="#fb923c" />
+                    <marker id="arrowhead" markerWidth="8" markerHeight="6" 
+                      refX="7" refY="3" orient="auto">
+                      <polygon points="0 0, 8 3, 0 6" fill="#fb923c" />
                     </marker>
                   </defs>
                   
-                  {/* Connections from matches to center collection */}
-                  {[0, 1, 2, 3, 4].map((index) => (
+                  {/* Direct connections from each match to corresponding winner slot */}
+                  {matches.slice(0, 5).map((match, index) => (
                     <g key={index}>
-                      {/* Horizontal line from match */}
+                      {/* Direct line from match to winner slot */}
                       <line
                         x1="300"
                         y1={80 + (index * 130)}
-                        x2="450"
-                        y2={80 + (index * 130)}
-                        stroke="#71717a"
-                        strokeWidth="2"
+                        x2="620"
+                        y2={120 + (index * 65)}
+                        stroke={match.isPlayed && match.winnerName ? "#22c55e" : "#71717a"}
+                        strokeWidth={match.isPlayed && match.winnerName ? "3" : "2"}
+                        markerEnd="url(#arrowhead)"
+                        strokeDasharray={match.isPlayed && match.winnerName ? "0" : "5,5"}
                       />
-                      {/* Vertical line to central collection point */}
-                      <line
-                        x1="450"
-                        y1={80 + (index * 130)}
-                        x2="500"
-                        y2={300}
-                        stroke="#71717a"
-                        strokeWidth="2"
+                      {/* Connection dot at match */}
+                      <circle 
+                        cx="300" 
+                        cy={80 + (index * 130)} 
+                        r="4" 
+                        fill={match.isPlayed && match.winnerName ? "#22c55e" : "#fb923c"} 
                       />
-                      {/* Connection dots */}
-                      <circle cx="450" cy={80 + (index * 130)} r="4" fill="#fb923c" />
+                      {/* Connection dot at winner slot */}
+                      <circle 
+                        cx="620" 
+                        cy={120 + (index * 65)} 
+                        r="3" 
+                        fill={match.isPlayed && match.winnerName ? "#22c55e" : "#71717a"} 
+                      />
                     </g>
                   ))}
-                  
-                  {/* Central collection to winners */}
-                  <line x1="500" y1="300" x2="650" y2="300" stroke="#71717a" strokeWidth="3" markerEnd="url(#arrowhead)" />
-                  <circle cx="500" cy="300" r="6" fill="#fb923c" />
                 </svg>
 
                 {/* Left Column - Tournament Matches */}
@@ -231,18 +232,7 @@ export function Stage2Bracket() {
                   ))}
                 </div>
 
-                {/* Center Collection Point */}
-                <motion.div 
-                  className="absolute bg-orange-500/20 border-2 border-orange-400 rounded-full w-16 h-16 flex items-center justify-center"
-                  style={{ left: '480px', top: '280px', zIndex: 3 }}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                >
-                  <div className="text-orange-400 font-bold text-xs text-center">STAGE<br/>2</div>
-                </motion.div>
-
-                {/* Right Column - Qualified Teams */}
+                {/* Right Column - Individual Winner Slots */}
                 <motion.div 
                   className="absolute right-0 top-0 bg-zinc-800 border-2 border-zinc-700 rounded-xl p-6 w-80 shadow-2xl"
                   style={{ zIndex: 2 }}
@@ -257,29 +247,41 @@ export function Stage2Bracket() {
                   </div>
                   
                   <div className="space-y-3">
-                    {matches.filter(m => m.isPlayed && m.winnerName).map((match, index) => (
+                    {matches.slice(0, 5).map((match, index) => (
                       <motion.div 
-                        key={match.id} 
-                        className="bg-green-600/30 border-2 border-green-500/70 rounded-lg p-3 shadow-lg"
+                        key={index}
+                        className={`rounded-lg p-3 shadow-lg border-2 transition-all ${
+                          match.isPlayed && match.winnerName
+                            ? 'bg-green-600/30 border-green-500/70'
+                            : 'bg-zinc-700/50 border-zinc-600 border-dashed'
+                        }`}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: 1.2 + (index * 0.1) }}
                       >
-                        <div className="flex items-center space-x-3">
-                          <div className="w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-green-200 font-bold text-sm">{match.winnerName}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-4 h-4 rounded-full ${
+                              match.isPlayed && match.winnerName 
+                                ? 'bg-green-400 animate-pulse' 
+                                : 'bg-gray-500 opacity-50'
+                            }`}></div>
+                            <span className={`font-bold text-sm ${
+                              match.isPlayed && match.winnerName 
+                                ? 'text-green-200' 
+                                : 'text-gray-400'
+                            }`}>
+                              {match.isPlayed && match.winnerName 
+                                ? match.winnerName 
+                                : `Câștigător Meci ${index + 1}`
+                              }
+                            </span>
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            M{index + 1}
+                          </div>
                         </div>
                       </motion.div>
-                    ))}
-                    
-                    {/* Empty slots for remaining winners */}
-                    {Array.from({ length: 5 - matches.filter(m => m.isPlayed && m.winnerName).length }).map((_, index) => (
-                      <div key={`empty-${index}`} className="bg-zinc-700/50 border-2 border-zinc-600 rounded-lg p-3 border-dashed">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-4 h-4 bg-gray-500 rounded-full opacity-50"></div>
-                          <span className="text-gray-400 text-sm">Calificare în curs...</span>
-                        </div>
-                      </div>
                     ))}
                   </div>
 
