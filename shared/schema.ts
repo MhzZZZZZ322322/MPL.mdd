@@ -298,6 +298,34 @@ export type GroupConfiguration = typeof groupConfiguration.$inferSelect;
 export type InsertGroupStandings = z.infer<typeof insertGroupStandingsSchema>;
 export type GroupStandings = typeof groupStandings.$inferSelect;
 
+// Stage 2 Bracket - Plasa Stage 2 cu 10 echipe
+export const stage2Bracket = pgTable("stage2_bracket", {
+  id: serial("id").primaryKey(),
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score"), // null dacă meciul nu a fost jucat
+  team2Score: integer("team2_score"), // null dacă meciul nu a fost jucat
+  winnerName: text("winner_name"), // numele echipei câștigătoare
+  bracketPosition: integer("bracket_position").notNull(), // poziția în plasă (1-5 pentru 5 meciuri)
+  isPlayed: boolean("is_played").notNull().default(false),
+  streamUrl: text("stream_url"), // link către stream/faceit
+  technicalWin: boolean("technical_win").notNull().default(false),
+  technicalWinner: text("technical_winner"),
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  matchDate: timestamp("match_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertStage2BracketSchema = createInsertSchema(stage2Bracket).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertStage2Bracket = z.infer<typeof insertStage2BracketSchema>;
+export type Stage2Bracket = typeof stage2Bracket.$inferSelect;
+
 // Matches - Meciurile din turneu
 export const matches = pgTable("matches", {
   id: serial("id").primaryKey(),

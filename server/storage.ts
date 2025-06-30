@@ -7,7 +7,8 @@ import {
   seoSettings, type SeoSettings, type InsertSeo,
   analyticsSettings, type AnalyticsSettings, type InsertAnalytics,
   teams, type Team, type InsertTeam,
-  teamMembers, type TeamMember, type InsertTeamMember
+  teamMembers, type TeamMember, type InsertTeamMember,
+  stage2Bracket, type Stage2Bracket, type InsertStage2Bracket
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
 import { db } from "./db";
@@ -89,6 +90,12 @@ export interface IStorage {
   // Scheduled Matches methods
   getScheduledMatches(): Promise<any[]>;
   updateScheduledMatchFaceitUrl(team1: string, team2: string, faceitUrl: string): Promise<any>;
+  
+  // Stage 2 Bracket methods
+  getStage2Bracket(): Promise<Stage2Bracket[]>;
+  createStage2Match(match: InsertStage2Bracket): Promise<Stage2Bracket>;
+  updateStage2Match(id: number, match: Partial<InsertStage2Bracket>): Promise<Stage2Bracket>;
+  deleteStage2Match(id: number): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -1736,6 +1743,28 @@ export class DatabaseStorage implements IStorage {
 
   async updateScheduledMatchFaceitUrl(team1: string, team2: string, faceitUrl: string): Promise<any> {
     return this.memStorage.updateScheduledMatchFaceitUrl(team1, team2, faceitUrl);
+  }
+
+  // Stage 2 Bracket methods
+  async getStage2Bracket(): Promise<Stage2Bracket[]> {
+    return await db.select().from(stage2Bracket).orderBy(stage2Bracket.bracketPosition);
+  }
+
+  async createStage2Match(match: InsertStage2Bracket): Promise<Stage2Bracket> {
+    const [newMatch] = await db.insert(stage2Bracket).values(match).returning();
+    return newMatch;
+  }
+
+  async updateStage2Match(id: number, match: Partial<InsertStage2Bracket>): Promise<Stage2Bracket> {
+    const [updatedMatch] = await db.update(stage2Bracket).set({
+      ...match,
+      updatedAt: new Date()
+    }).where(eq(stage2Bracket.id, id)).returning();
+    return updatedMatch;
+  }
+
+  async deleteStage2Match(id: number): Promise<void> {
+    await db.delete(stage2Bracket).where(eq(stage2Bracket.id, id));
   }
 }
 
