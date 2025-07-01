@@ -276,7 +276,7 @@ export function SwissVisualizer() {
         </div>
 
         {/* Elimination area */}
-        <div className="absolute" style={{ left: '20px', top: '320px' }}>
+        <div className="absolute" style={{ left: '200px', top: '380px' }}>
           <div className="bg-red-900/50 border-2 border-red-400 rounded-lg p-3 w-36">
             <div className="flex items-center justify-center mb-2">
               <X className="w-4 h-4 text-red-400 mr-1" />
