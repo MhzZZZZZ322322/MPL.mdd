@@ -60,44 +60,22 @@ export function SwissVisualizer() {
     return records;
   };
 
-  // Generate positions for Swiss visualization - using demo data structure like in image
+  // Generate positions for Swiss visualization - only real teams from database
   const generateSwissLayout = () => {
-    // Demo Swiss layout similar to the image
-    const demoLayout = [
-      // Starting teams (0-0)
-      { teamName: 'Cadian', wins: 0, losses: 0, status: 'active', x: 70, y: 20 },
-      { teamName: 'Japon', wins: 0, losses: 0, status: 'active', x: 70, y: 50 },
-      { teamName: 'Auratix', wins: 0, losses: 0, status: 'active', x: 70, y: 80 },
-      { teamName: 'VGT', wins: 0, losses: 0, status: 'active', x: 70, y: 110 },
-      { teamName: 'Trigger', wins: 0, losses: 0, status: 'active', x: 70, y: 140 },
-      { teamName: 'BPSP', wins: 0, losses: 0, status: 'active', x: 70, y: 170 },
-      { teamName: 'Duke Z', wins: 0, losses: 0, status: 'active', x: 70, y: 200 },
-      
-      // 1-0 teams
-      { teamName: 'XPlosion', wins: 3, losses: 0, status: 'qualified', x: 350, y: 50 },
-      
-      // 2-0 teams  
-      { teamName: '', wins: 2, losses: 0, status: 'active', x: 250, y: 80 },
-      
-      // Other positions
-      { teamName: '', wins: 1, losses: 1, status: 'active', x: 180, y: 140 },
-      { teamName: '', wins: 0, losses: 1, status: 'active', x: 120, y: 170 },
-    ];
-
-    // If we have real data, merge it with demo structure
+    // Use only teams from database, positioned by their actual record
     if (standings.length > 0) {
-      const realTeams = standings.slice(0, 8); // Take first 8 teams
-      return realTeams.map((team, index) => ({
+      return standings.map((team) => ({
         teamName: team.teamName,
         wins: team.wins,
         losses: team.losses,
         status: team.status,
-        x: 70 + (team.wins * 80) - (team.losses * 30),
-        y: 20 + (index * 25)
+        x: 0, // Will be positioned in columns based on wins/losses
+        y: 0  // Will be positioned vertically
       }));
     }
 
-    return demoLayout.filter(team => team.teamName !== '');
+    // If no teams in database yet, show empty state
+    return [];
   };
 
   const teamPositions = generateSwissLayout();
@@ -152,7 +130,7 @@ export function SwissVisualizer() {
         {/* Starting column (0-0) */}
         <div className="absolute left-0 top-4">
           <div className="text-xs text-blue-400 font-semibold mb-2 text-center">0-0</div>
-          {teamPositions.slice(0, 8).map((team, index) => (
+          {teamPositions.filter(t => t.wins === 0 && t.losses === 0).map((team, index) => (
             <motion.div
               key={`start-${index}`}
               className="w-16 h-6 bg-blue-600/80 border border-blue-400 rounded text-xs text-white flex items-center justify-center mb-1"
