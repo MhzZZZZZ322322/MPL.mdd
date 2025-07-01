@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Trophy, Target, Calendar, ExternalLink, ChevronDown, ChevronUp, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { SwissVisualizer } from "@/components/SwissVisualizer";
 
 interface Stage3SwissTeam {
   id: number;
@@ -164,6 +165,9 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                 <div className="text-gray-300 text-sm">În Concurs</div>
               </div>
             </div>
+
+            {/* Swiss Visual Schema */}
+            <SwissVisualizer />
 
             {/* Swiss Standings */}
             <div className="bg-gradient-to-r from-zinc-900 to-black border border-blue-500/20 rounded-lg overflow-hidden">
