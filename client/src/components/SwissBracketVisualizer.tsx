@@ -100,6 +100,9 @@ export function SwissBracketVisualizer() {
     const teams = teamsByRecord[record] || [];
     const maxTeams = 8; // Maximum teams per column
     
+    // Sort teams alphabetically for consistent display
+    const sortedTeams = [...teams].sort((a, b) => a.teamName.localeCompare(b.teamName));
+    
     return (
       <div className="flex flex-col items-center">
         {/* Column Header */}
@@ -110,7 +113,7 @@ export function SwissBracketVisualizer() {
         {/* Teams in this column */}
         <div className="space-y-1">
           {Array.from({ length: maxTeams }, (_, index) => {
-            const team = teams[index];
+            const team = sortedTeams[index];
             return (
               <motion.div
                 key={`${record}-${index}`}
@@ -134,10 +137,10 @@ export function SwissBracketVisualizer() {
         </div>
         
         {/* Connection indicators */}
-        {record !== '3-0' && record !== '3-1' && record !== '3-2' && record !== '0-3' && record !== '1-3' && record !== '2-3' && (
+        {record !== '3-0' && record !== '3-1' && record !== '3-2' && record !== '0-3' && record !== '1-3' && record !== '2-3' && sortedTeams.length > 0 && (
           <div className="absolute right-[-30px] top-[50px]">
             <div className="space-y-[36px]">
-              {Array.from({ length: Math.min(teams.length, 4) }, (_, i) => (
+              {Array.from({ length: Math.min(sortedTeams.length, 4) }, (_, i) => (
                 <div key={i} className="text-gray-400 text-xs font-bold bg-slate-800 px-1 rounded">vs</div>
               ))}
             </div>

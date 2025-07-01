@@ -116,6 +116,10 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 01, 2025: **VISUAL** - Swiss Bracket acum are aspect identic cu imaginile CS2 Major cu linii de conectare SVG între coloane
+- July 01, 2025: **INTEGRATED** - Swiss Bracket conectat la rezultatele din admin - calculează pozițiile echipelor în timp real din meciurile jucate
+- July 01, 2025: **ENHANCED** - Adăugat SwissBracketManager în admin cu butoane W/L pentru gestionarea manuală a progresiei echipelor
+- July 01, 2025: **REALTIME** - Standings calculate dinamic din meciurile Stage 3 cu afișarea rundei curente și progresului
 - July 01, 2025: **OPTIMIZED** - Redus traficul API pentru Stage 3 Swiss prin eliminarea request-urilor duplicate și ajustarea intervalelor de refresh
 - July 01, 2025: **COMPLETED** - Endpoints API pentru meciuri Stage 3 Swiss (POST/PUT/DELETE) implementate și funcționale în admin panel
 - July 01, 2025: **FILTERED** - Dropdown-urile admin afișează doar echipele calificate în Stage 3 (16 echipe) în loc de toate echipele turneului
