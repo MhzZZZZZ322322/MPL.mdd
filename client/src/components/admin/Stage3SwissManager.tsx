@@ -72,10 +72,11 @@ export function Stage3SwissManager() {
     refetchInterval: 5000,
   });
 
-  // Fetch teams for dropdown
-  const { data: teams = [] } = useQuery<Team[]>({
-    queryKey: ["/api/teams"],
-  });
+  // Use qualified teams from Stage 3 standings instead of all teams
+  const qualifiedTeams = standings.map(standing => ({
+    id: 0, // Not needed for dropdown
+    name: standing.teamName
+  }));
 
   // Create match mutation
   const createMatchMutation = useMutation({
@@ -501,8 +502,8 @@ export function Stage3SwissManager() {
                     className="w-full p-2 bg-darkBg border border-primary/20 text-white rounded-md"
                   >
                     <option value="">Selectează echipa</option>
-                    {teams.map((team) => (
-                      <option key={team.id} value={team.name}>
+                    {qualifiedTeams.map((team, index) => (
+                      <option key={index} value={team.name}>
                         {team.name}
                       </option>
                     ))}
@@ -516,8 +517,8 @@ export function Stage3SwissManager() {
                     className="w-full p-2 bg-darkBg border border-primary/20 text-white rounded-md"
                   >
                     <option value="">Selectează echipa</option>
-                    {teams.map((team) => (
-                      <option key={team.id} value={team.name}>
+                    {qualifiedTeams.map((team, index) => (
+                      <option key={index} value={team.name}>
                         {team.name}
                       </option>
                     ))}
