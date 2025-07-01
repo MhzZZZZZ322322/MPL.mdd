@@ -109,17 +109,56 @@ export function SwissVisualizer() {
     );
   }
 
-  // Generate Swiss rounds with proper matchups
+  // Generate Swiss matchups for next rounds
+  const generateNextRoundMatchups = (roundNumber: number) => {
+    // Get teams that are still active (not qualified or eliminated)
+    const activeTeams = standings.filter(team => 
+      team.status === 'active' && 
+      team.wins < 3 && 
+      team.losses < 3
+    );
+
+    if (activeTeams.length === 0) return [];
+
+    // Group teams by record
+    const recordGroups: { [key: string]: any[] } = {};
+    activeTeams.forEach(team => {
+      const record = `${team.wins}-${team.losses}`;
+      if (!recordGroups[record]) recordGroups[record] = [];
+      recordGroups[record].push(team);
+    });
+
+    // Generate matchups within same record groups
+    const suggestedMatchups: Array<{team1: string, team2: string, record: string}> = [];
+    Object.values(recordGroups).forEach(group => {
+      for (let i = 0; i < group.length - 1; i += 2) {
+        if (group[i + 1]) {
+          suggestedMatchups.push({
+            team1: group[i].teamName,
+            team2: group[i + 1].teamName,
+            record: `${group[i].wins}-${group[i].losses}`
+          });
+        }
+      }
+    });
+
+    return suggestedMatchups;
+  };
+
+  // Generate Swiss rounds with matches and suggested matchups
   const generateSwissRounds = () => {
     const rounds = [];
     
-    // Round 1 - all teams start at 0-0
-    const startingTeams = teamPositions.filter(t => t.wins === 0 && t.losses === 0);
-    
     for (let round = 1; round <= 5; round++) {
+      const roundMatches = matches.filter(m => m.roundNumber === round);
+      const suggestedMatchups = round > Math.max(...matches.map(m => m.roundNumber), 0) 
+        ? generateNextRoundMatchups(round) 
+        : [];
+
       rounds.push({
         roundNumber: round,
-        matches: matches.filter(m => m.roundNumber === round)
+        matches: roundMatches,
+        suggestedMatchups
       });
     }
     
@@ -290,6 +329,41 @@ export function SwissVisualizer() {
             ))}
           </div>
         </div>
+
+        {/* Next Round Matchups */}
+        {(() => {
+          const currentRound = Math.max(...matches.map(m => m.roundNumber), 0);
+          const nextRound = currentRound + 1;
+          const nextMatchups = generateNextRoundMatchups(nextRound);
+          
+          if (nextMatchups.length > 0 && nextRound <= 5) {
+            return (
+              <div className="absolute" style={{ left: '400px', top: '350px' }}>
+                <div className="bg-blue-900/50 border-2 border-blue-400 rounded-lg p-3 w-48">
+                  <div className="flex items-center justify-center mb-2">
+                    <Trophy className="w-4 h-4 text-blue-400 mr-1" />
+                    <span className="text-xs text-blue-400 font-bold">URMĂTOAREA RUNDĂ {nextRound}</span>
+                  </div>
+                  <div className="space-y-1">
+                    {nextMatchups.map((matchup, index) => (
+                      <div key={`next-${index}`} className="bg-slate-700/80 border border-slate-500 rounded p-2">
+                        <div className="text-center text-[10px] text-gray-300 mb-1">
+                          Record: {matchup.record}
+                        </div>
+                        <div className="flex items-center justify-between text-[10px] text-white">
+                          <span className="truncate w-16 text-left">{matchup.team1}</span>
+                          <span className="text-gray-400 text-[8px]">VS</span>
+                          <span className="truncate w-16 text-right">{matchup.team2}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
       </div>
     </div>
   );
