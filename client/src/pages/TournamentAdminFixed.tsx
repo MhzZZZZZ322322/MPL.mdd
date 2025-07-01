@@ -9,6 +9,7 @@ import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
 import ScheduleManager from "@/components/admin/ScheduleManager";
 import { Stage2BracketManager } from "@/components/admin/Stage2BracketManager";
+import { Stage3SwissManager } from "@/components/admin/Stage3SwissManager";
 
 export default function TournamentAdmin() {
   const queryClient = useQueryClient();
