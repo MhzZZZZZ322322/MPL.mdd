@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { motion } from "framer-motion";
 
 interface SwissStanding {
+  id: number;
   teamName: string;
   wins: number;
   losses: number;
@@ -29,8 +30,8 @@ export function SwissBracketManager() {
 
   // Mutation to update team positions
   const updateTeamMutation = useMutation({
-    mutationFn: (data: { teamName: string; wins: number; losses: number; status: string }) =>
-      apiRequest("PUT", `/api/admin/stage3-swiss-team/${data.teamName}`, data),
+    mutationFn: (data: { id: number; wins: number; losses: number; status: string }) =>
+      apiRequest("PUT", `/api/admin/stage3-swiss-team/${data.id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-standings"] });
       toast({
@@ -63,10 +64,10 @@ export function SwissBracketManager() {
   const teamsByRecord = getTeamsByRecord();
 
   // Move team to different record
-  const moveTeam = (teamName: string, newWins: number, newLosses: number) => {
+  const moveTeam = (team: SwissStanding, newWins: number, newLosses: number) => {
     const status = newWins >= 3 ? 'qualified' : newLosses >= 3 ? 'eliminated' : 'active';
     updateTeamMutation.mutate({
-      teamName,
+      id: team.id,
       wins: newWins,
       losses: newLosses,
       status
