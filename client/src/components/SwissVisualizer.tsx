@@ -34,15 +34,13 @@ interface TeamPosition {
 }
 
 export function SwissVisualizer() {
-  // Fetch data
+  // Fetch data - no refresh interval since Stage3Swiss component already handles it
   const { data: standings = [] } = useQuery<SwissStanding[]>({
     queryKey: ["/api/stage3-swiss-standings"],
-    refetchInterval: 5000,
   });
 
   const { data: matches = [] } = useQuery<SwissMatch[]>({
     queryKey: ["/api/stage3-swiss-matches"],
-    refetchInterval: 5000,
   });
 
   // Group teams by their record (wins-losses)

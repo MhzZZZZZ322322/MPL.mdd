@@ -39,12 +39,12 @@ interface Stage3SwissProps {
 export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
   const { data: standings = [], isLoading: standingsLoading, error: standingsError } = useQuery({
     queryKey: ["/api/stage3-swiss-standings"],
-    refetchInterval: 5000, // Auto-refresh every 5 seconds
+    refetchInterval: 15000, // Reduced frequency - refresh every 15 seconds
   });
 
   const { data: matches = [], isLoading: matchesLoading, error: matchesError } = useQuery({
     queryKey: ["/api/stage3-swiss-matches"],
-    refetchInterval: 5000, // Auto-refresh every 5 seconds
+    refetchInterval: 15000, // Reduced frequency - refresh every 15 seconds
   });
 
   // Get teams data for logos

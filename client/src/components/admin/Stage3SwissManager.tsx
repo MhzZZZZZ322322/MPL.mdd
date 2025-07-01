@@ -63,13 +63,13 @@ export function Stage3SwissManager() {
   // Fetch standings
   const { data: standings = [], isLoading: standingsLoading } = useQuery<SwissStanding[]>({
     queryKey: ["/api/stage3-swiss-standings"],
-    refetchInterval: 5000,
+    refetchInterval: 10000, // Slower refresh for admin panel
   });
 
   // Fetch matches
   const { data: matches = [], isLoading: matchesLoading } = useQuery<SwissMatch[]>({
     queryKey: ["/api/stage3-swiss-matches"],
-    refetchInterval: 5000,
+    refetchInterval: 10000, // Slower refresh for admin panel
   });
 
   // Use qualified teams from Stage 3 standings instead of all teams
