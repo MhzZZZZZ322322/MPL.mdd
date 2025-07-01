@@ -724,6 +724,92 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Stage 3 Swiss routes
+  app.get("/api/stage3-swiss-standings", async (req, res) => {
+    try {
+      const standings = await storage.getStage3SwissStandings();
+      res.json(standings);
+    } catch (error) {
+      console.error("Error fetching Stage 3 Swiss standings:", error);
+      res.status(500).json({ message: "Failed to fetch Stage 3 Swiss standings" });
+    }
+  });
+
+  app.get("/api/stage3-swiss-matches", async (req, res) => {
+    try {
+      const matches = await storage.getStage3SwissMatches();
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching Stage 3 Swiss matches:", error);
+      res.status(500).json({ message: "Failed to fetch Stage 3 Swiss matches" });
+    }
+  });
+
+  app.post("/api/admin/stage3-swiss-team", async (req, res) => {
+    try {
+      const team = await storage.createStage3Team(req.body);
+      res.json(team);
+    } catch (error) {
+      console.error("Error creating Stage 3 team:", error);
+      res.status(500).json({ message: "Failed to create Stage 3 team" });
+    }
+  });
+
+  app.put("/api/admin/stage3-swiss-team/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 3 team ID" });
+      }
+
+      const team = await storage.updateStage3Team(id, req.body);
+      res.json(team);
+    } catch (error) {
+      console.error("Error updating Stage 3 team:", error);
+      res.status(500).json({ message: "Failed to update Stage 3 team" });
+    }
+  });
+
+  app.post("/api/admin/stage3-swiss-match", async (req, res) => {
+    try {
+      const match = await storage.createStage3Match(req.body);
+      res.json(match);
+    } catch (error) {
+      console.error("Error creating Stage 3 match:", error);
+      res.status(500).json({ message: "Failed to create Stage 3 match" });
+    }
+  });
+
+  app.put("/api/admin/stage3-swiss-match/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 3 match ID" });
+      }
+
+      const match = await storage.updateStage3Match(id, req.body);
+      res.json(match);
+    } catch (error) {
+      console.error("Error updating Stage 3 match:", error);
+      res.status(500).json({ message: "Failed to update Stage 3 match" });
+    }
+  });
+
+  app.delete("/api/admin/stage3-swiss-match/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 3 match ID" });
+      }
+
+      await storage.deleteStage3Match(id);
+      res.json({ message: "Stage 3 match deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting Stage 3 match:", error);
+      res.status(500).json({ message: "Failed to delete Stage 3 match" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 

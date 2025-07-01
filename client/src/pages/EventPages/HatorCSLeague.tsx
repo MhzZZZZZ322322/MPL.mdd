@@ -6,6 +6,7 @@ import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
 import { Stage2Bracket } from "@/components/sections/Stage2Bracket";
+import { Stage3Swiss } from "@/components/sections/Stage3Swiss";
 
 
 import { useLanguage } from "@/lib/LanguageContext";
@@ -20,6 +21,7 @@ const HatorCSLeague = () => {
   const [isGroupsExpanded, setIsGroupsExpanded] = useState(false);
   const [isMatchesExpanded, setIsMatchesExpanded] = useState(false);
   const [isStage2Expanded, setIsStage2Expanded] = useState(false);
+  const [isStage3Expanded, setIsStage3Expanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   // Team logo mapping - uses actual team logos from database
@@ -369,6 +371,12 @@ const HatorCSLeague = () => {
         <Stage2Bracket 
           isExpanded={isStage2Expanded}
           onToggle={() => setIsStage2Expanded(!isStage2Expanded)}
+        />
+
+        {/* Stage 3 Swiss Section */}
+        <Stage3Swiss 
+          isExpanded={isStage3Expanded}
+          onToggle={() => setIsStage3Expanded(!isStage3Expanded)}
         />
 
         {/* Details Section */}
