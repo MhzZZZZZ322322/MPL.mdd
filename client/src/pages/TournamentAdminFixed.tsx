@@ -24,7 +24,7 @@ export default function TournamentAdmin() {
           </h1>
           
           <Tabs defaultValue="management" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 bg-slate-800/50">
+            <TabsList className="grid w-full grid-cols-5 bg-slate-800/50">
               <TabsTrigger value="management" className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
                 Configurare Grupe
@@ -40,6 +40,10 @@ export default function TournamentAdmin() {
               <TabsTrigger value="stage2" className="flex items-center gap-2">
                 <Trophy className="w-4 h-4" />
                 Stage 2 Bracket
+              </TabsTrigger>
+              <TabsTrigger value="stage3" className="flex items-center gap-2">
+                <Trophy className="w-4 h-4" />
+                Stage 3 Swiss
               </TabsTrigger>
             </TabsList>
             
@@ -57,6 +61,10 @@ export default function TournamentAdmin() {
             
             <TabsContent value="stage2" className="mt-6">
               <Stage2BracketManager />
+            </TabsContent>
+            
+            <TabsContent value="stage3" className="mt-6">
+              <Stage3SwissManager />
             </TabsContent>
           </Tabs>
         </div>
