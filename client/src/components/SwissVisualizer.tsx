@@ -60,40 +60,44 @@ export function SwissVisualizer() {
     return records;
   };
 
-  // Generate positions for Swiss visualization
+  // Generate positions for Swiss visualization - using demo data structure like in image
   const generateSwissLayout = () => {
-    const teamsByRecord = getTeamsByRecord();
-    const positions: TeamPosition[] = [];
-    
-    // Define column positions based on record
-    const columns = [
-      { record: '0-0', x: 50, label: '0-0', color: 'border-blue-400' },
-      { record: '1-0', x: 150, label: '1-0', color: 'border-green-400' },
-      { record: '2-0', x: 250, label: '2-0', color: 'border-green-400' },
-      { record: '3-0', x: 350, label: '3-0', color: 'border-yellow-400' },
-      { record: '2-1', x: 200, label: '2-1', color: 'border-blue-400' },
-      { record: '1-1', x: 150, label: '1-1', color: 'border-gray-400' },
-      { record: '0-1', x: 100, label: '0-1', color: 'border-orange-400' },
-      { record: '1-2', x: 100, label: '1-2', color: 'border-red-400' },
-      { record: '0-2', x: 50, label: '0-2', color: 'border-red-400' },
-      { record: '0-3', x: 0, label: '0-3', color: 'border-red-600' },
+    // Demo Swiss layout similar to the image
+    const demoLayout = [
+      // Starting teams (0-0)
+      { teamName: 'Cadian', wins: 0, losses: 0, status: 'active', x: 70, y: 20 },
+      { teamName: 'Japon', wins: 0, losses: 0, status: 'active', x: 70, y: 50 },
+      { teamName: 'Auratix', wins: 0, losses: 0, status: 'active', x: 70, y: 80 },
+      { teamName: 'VGT', wins: 0, losses: 0, status: 'active', x: 70, y: 110 },
+      { teamName: 'Trigger', wins: 0, losses: 0, status: 'active', x: 70, y: 140 },
+      { teamName: 'BPSP', wins: 0, losses: 0, status: 'active', x: 70, y: 170 },
+      { teamName: 'Duke Z', wins: 0, losses: 0, status: 'active', x: 70, y: 200 },
+      
+      // 1-0 teams
+      { teamName: 'XPlosion', wins: 3, losses: 0, status: 'qualified', x: 350, y: 50 },
+      
+      // 2-0 teams  
+      { teamName: '', wins: 2, losses: 0, status: 'active', x: 250, y: 80 },
+      
+      // Other positions
+      { teamName: '', wins: 1, losses: 1, status: 'active', x: 180, y: 140 },
+      { teamName: '', wins: 0, losses: 1, status: 'active', x: 120, y: 170 },
     ];
 
-    columns.forEach(col => {
-      const teams = teamsByRecord[col.record] || [];
-      teams.forEach((team, index) => {
-        positions.push({
-          teamName: team.teamName,
-          wins: team.wins,
-          losses: team.losses,
-          status: team.status,
-          x: col.x,
-          y: index * 60 + 50
-        });
-      });
-    });
+    // If we have real data, merge it with demo structure
+    if (standings.length > 0) {
+      const realTeams = standings.slice(0, 8); // Take first 8 teams
+      return realTeams.map((team, index) => ({
+        teamName: team.teamName,
+        wins: team.wins,
+        losses: team.losses,
+        status: team.status,
+        x: 70 + (team.wins * 80) - (team.losses * 30),
+        y: 20 + (index * 25)
+      }));
+    }
 
-    return positions;
+    return demoLayout.filter(team => team.teamName !== '');
   };
 
   const teamPositions = generateSwissLayout();
@@ -130,119 +134,186 @@ export function SwissVisualizer() {
   }
 
   return (
-    <div className="relative w-full h-96 bg-gradient-to-br from-blue-900/20 to-purple-900/20 rounded-lg border border-primary/20 overflow-hidden">
+    <div className="relative w-full h-80 bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-lg border border-blue-500/30 overflow-hidden">
       {/* Header */}
-      <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
+      <div className="absolute top-3 left-4 right-4 flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-bold text-yellow-400">SWISS STAGE</h3>
-          <p className="text-sm text-gray-300">Top 8 echipe avansează</p>
+          <h3 className="text-lg font-bold text-yellow-400">SWISS STAGE</h3>
+          <p className="text-xs text-gray-300">Top 8 echipe avansează</p>
         </div>
-        <div className="text-right">
+        <div className="text-right text-xs">
           <p className="text-green-400 font-semibold">3 WINS: ADVANCE</p>
           <p className="text-red-400 font-semibold">3 LOSSES: ELIMINATED</p>
         </div>
       </div>
 
-      {/* Swiss visualization */}
-      <div className="absolute inset-6 top-20">
-        <svg width="100%" height="100%" className="absolute inset-0">
-          {/* Draw connection lines between rounds */}
-          {matches
-            .filter(match => match.isPlayed)
-            .map((match, index) => {
-              const team1Pos = teamPositions.find(p => p.teamName === match.team1Name);
-              const team2Pos = teamPositions.find(p => p.teamName === match.team2Name);
-              
-              if (!team1Pos || !team2Pos) return null;
+      {/* Swiss bracket visualization */}
+      <div className="absolute inset-4 top-16">
+        {/* Starting column (0-0) */}
+        <div className="absolute left-0 top-4">
+          <div className="text-xs text-blue-400 font-semibold mb-2 text-center">0-0</div>
+          {teamPositions.slice(0, 8).map((team, index) => (
+            <motion.div
+              key={`start-${index}`}
+              className="w-16 h-6 bg-blue-600/80 border border-blue-400 rounded text-xs text-white flex items-center justify-center mb-1"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <span className="truncate text-[10px]">{team.teamName}</span>
+            </motion.div>
+          ))}
+        </div>
 
-              return (
-                <motion.line
-                  key={`match-${match.id}`}
-                  x1={team1Pos.x + 40}
-                  y1={team1Pos.y + 15}
-                  x2={team2Pos.x + 40}
-                  y2={team2Pos.y + 15}
-                  stroke={match.winnerName ? "#22c55e" : "#6b7280"}
-                  strokeWidth="2"
-                  strokeOpacity="0.6"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                />
-              );
-            })}
-        </svg>
+        {/* 1-0 Column */}
+        <div className="absolute left-24 top-4">
+          <div className="text-xs text-green-400 font-semibold mb-2 text-center">1-0</div>
+          {teamPositions.filter(t => t.wins === 1 && t.losses === 0).map((team, index) => (
+            <motion.div
+              key={`1-0-${index}`}
+              className="w-16 h-6 bg-green-600/80 border border-green-400 rounded text-xs text-white flex items-center justify-center mb-1"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 + index * 0.1 }}
+            >
+              <span className="truncate text-[10px]">{team.teamName}</span>
+            </motion.div>
+          ))}
+        </div>
 
-        {/* Team cards */}
-        {teamPositions.map((team, index) => (
-          <motion.div
-            key={team.teamName}
-            className={`absolute w-20 h-8 rounded border-2 ${getStatusColor(team.status, team.wins, team.losses)} 
-                       flex items-center justify-center text-xs font-medium text-white shadow-lg`}
-            style={{
-              left: `${team.x}px`,
-              top: `${team.y}px`,
-            }}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
-            whileHover={{ scale: 1.05 }}
-          >
-            <div className="flex items-center space-x-1">
-              {getStatusIcon(team.status)}
-              <span className="truncate max-w-12" title={team.teamName}>
-                {team.teamName.length > 6 ? team.teamName.substring(0, 6) : team.teamName}
-              </span>
+        {/* 2-0 Column */}
+        <div className="absolute left-48 top-4">
+          <div className="text-xs text-green-400 font-semibold mb-2 text-center">2-0</div>
+          {teamPositions.filter(t => t.wins === 2 && t.losses === 0).map((team, index) => (
+            <motion.div
+              key={`2-0-${index}`}
+              className="w-16 h-6 bg-green-500/80 border border-green-300 rounded text-xs text-white flex items-center justify-center mb-1"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.0 + index * 0.1 }}
+            >
+              <span className="truncate text-[10px]">{team.teamName}</span>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* 3-0 Column (Qualified) */}
+        <div className="absolute right-4 top-4">
+          <div className="text-xs text-yellow-400 font-semibold mb-2 text-center">3-0</div>
+          <div className="bg-green-900/50 border-2 border-green-400 rounded-lg p-2">
+            <div className="flex items-center justify-center mb-2">
+              <Crown className="w-4 h-4 text-yellow-400 mr-1" />
+              <span className="text-xs text-green-400 font-bold">QUALIFIED</span>
             </div>
-            
-            {/* Record badge */}
-            <div className="absolute -bottom-2 -right-1 bg-darkBg text-xs px-1 rounded border border-primary/30">
-              {team.wins}-{team.losses}
+            <div className="text-xs text-gray-300 text-center">
+              {standings.filter(t => t.status === 'qualified' || t.wins >= 3).length}/8
             </div>
-          </motion.div>
-        ))}
-
-        {/* Round indicators */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-8">
-          {[1, 2, 3, 4, 5].map(round => {
-            const roundMatches = matches.filter(m => m.roundNumber === round);
-            const isActive = roundMatches.some(m => !m.isPlayed);
-            const isComplete = roundMatches.length > 0 && roundMatches.every(m => m.isPlayed);
-            
-            return (
-              <div
-                key={round}
-                className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-bold
-                           ${isComplete ? 'border-green-400 bg-green-400/20 text-green-400' :
-                             isActive ? 'border-yellow-400 bg-yellow-400/20 text-yellow-400' :
-                             'border-gray-600 bg-gray-600/20 text-gray-400'}`}
-              >
-                {round}
+            {teamPositions.filter(t => t.wins >= 3 || t.status === 'qualified').map((team, index) => (
+              <div key={`qualified-${index}`} className="w-16 h-5 bg-yellow-500/80 border border-yellow-300 rounded text-[10px] text-black flex items-center justify-center mb-1">
+                <span className="truncate font-medium">{team.teamName}</span>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Qualification zones */}
-        <div className="absolute top-0 right-0 w-24 h-32 border-2 border-green-400/30 bg-green-400/5 rounded">
-          <div className="text-center p-2">
-            <Trophy className="w-6 h-6 mx-auto text-green-400 mb-1" />
-            <span className="text-xs text-green-400 font-semibold">QUALIFIED</span>
-            <div className="text-xs text-gray-300 mt-1">
-              {standings.filter(t => t.status === 'qualified' || t.wins === 3).length}/8
-            </div>
+            ))}
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 w-24 h-32 border-2 border-red-400/30 bg-red-400/5 rounded">
-          <div className="text-center p-2">
-            <X className="w-6 h-6 mx-auto text-red-400 mb-1" />
-            <span className="text-xs text-red-400 font-semibold">ELIMINATED</span>
-            <div className="text-xs text-gray-300 mt-1">
-              {standings.filter(t => t.status === 'eliminated' || t.losses === 3).length}
+        {/* 1-1 Middle area */}
+        <div className="absolute left-32 top-20">
+          <div className="text-xs text-gray-400 font-semibold mb-2 text-center">1-1</div>
+          {teamPositions.filter(t => t.wins === 1 && t.losses === 1).map((team, index) => (
+            <div key={`1-1-${index}`} className="w-16 h-6 bg-gray-600/80 border border-gray-400 rounded text-xs text-white flex items-center justify-center mb-1">
+              <span className="truncate text-[10px]">{team.teamName}</span>
             </div>
+          ))}
+        </div>
+
+        {/* 0-1 Column */}
+        <div className="absolute left-16 top-32">
+          <div className="text-xs text-orange-400 font-semibold mb-2 text-center">0-1</div>
+          {teamPositions.filter(t => t.wins === 0 && t.losses === 1).map((team, index) => (
+            <div key={`0-1-${index}`} className="w-16 h-6 bg-orange-600/80 border border-orange-400 rounded text-xs text-white flex items-center justify-center mb-1">
+              <span className="truncate text-[10px]">{team.teamName}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* 0-2 Column */}
+        <div className="absolute left-8 top-44">
+          <div className="text-xs text-red-400 font-semibold mb-2 text-center">0-2</div>
+          {teamPositions.filter(t => t.wins === 0 && t.losses === 2).map((team, index) => (
+            <div key={`0-2-${index}`} className="w-16 h-6 bg-red-600/80 border border-red-400 rounded text-xs text-white flex items-center justify-center mb-1">
+              <span className="truncate text-[10px]">{team.teamName}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Eliminated area (0-3) */}
+        <div className="absolute left-0 bottom-0">
+          <div className="bg-red-900/50 border-2 border-red-400 rounded-lg p-2">
+            <div className="flex items-center justify-center mb-2">
+              <X className="w-4 h-4 text-red-400 mr-1" />
+              <span className="text-xs text-red-400 font-bold">ELIMINATED</span>
+            </div>
+            <div className="text-xs text-gray-300 text-center mb-1">
+              {standings.filter(t => t.status === 'eliminated' || t.losses >= 3).length}
+            </div>
+            {teamPositions.filter(t => t.losses >= 3 || t.status === 'eliminated').map((team, index) => (
+              <div key={`eliminated-${index}`} className="w-16 h-5 bg-red-600/80 border border-red-400 rounded text-[10px] text-white flex items-center justify-center mb-1">
+                <span className="truncate">{team.teamName}</span>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Demo connection lines */}
+        <svg width="100%" height="100%" className="absolute inset-0 pointer-events-none">
+          {/* Yellow connecting lines for advancement */}
+          <motion.path
+            d="M80 40 L120 50"
+            stroke="#eab308"
+            strokeWidth="2"
+            strokeOpacity="0.7"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1, delay: 1.5 }}
+          />
+          <motion.path
+            d="M140 50 L180 60"
+            stroke="#eab308"
+            strokeWidth="2"
+            strokeOpacity="0.7"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1, delay: 2 }}
+          />
+          {/* Red connecting lines for elimination */}
+          <motion.path
+            d="M80 80 L120 100"
+            stroke="#dc2626"
+            strokeWidth="2"
+            strokeOpacity="0.7"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1, delay: 2.5 }}
+          />
+        </svg>
+      </div>
+
+      {/* Round indicators */}
+      <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-4">
+        {[1, 2, 3, 4, 5].map(round => (
+          <div
+            key={round}
+            className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold
+                       ${round <= 2 ? 'border-green-400 bg-green-400/20 text-green-400' :
+                         round === 3 ? 'border-yellow-400 bg-yellow-400/20 text-yellow-400' :
+                         'border-gray-600 bg-gray-600/20 text-gray-400'}`}
+          >
+            {round}
+          </div>
+        ))}
       </div>
     </div>
   );
