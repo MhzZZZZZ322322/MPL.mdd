@@ -780,7 +780,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: errorMessage });
       }
 
-      const updatedMatch = await storage.updateStage3SwissMatch(id, result.data);
+      const updatedMatch = await storage.updateStage3Match(id, result.data);
       if (!updatedMatch) {
         return res.status(404).json({ message: "Stage 3 Swiss match not found" });
       }
@@ -799,7 +799,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid Stage 3 Swiss match ID" });
       }
 
-      const success = await storage.deleteStage3SwissMatch(id);
+      await storage.deleteStage3Match(id);
+      const success = true;
       if (!success) {
         return res.status(404).json({ message: "Stage 3 Swiss match not found" });
       }
