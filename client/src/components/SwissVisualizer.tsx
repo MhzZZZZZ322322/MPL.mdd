@@ -111,187 +111,152 @@ export function SwissVisualizer() {
     );
   }
 
+  // Generate Swiss rounds with proper matchups
+  const generateSwissRounds = () => {
+    const rounds = [];
+    
+    // Round 1 - all teams start at 0-0
+    const startingTeams = teamPositions.filter(t => t.wins === 0 && t.losses === 0);
+    
+    for (let round = 1; round <= 5; round++) {
+      rounds.push({
+        roundNumber: round,
+        matches: matches.filter(m => m.roundNumber === round)
+      });
+    }
+    
+    return rounds;
+  };
+
+  const swissRounds = generateSwissRounds();
+
   return (
-    <div className="relative w-full h-96 bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-lg border border-blue-500/30 overflow-hidden">
+    <div className="relative w-full h-[500px] bg-gradient-to-br from-slate-900/95 to-slate-800/90 rounded-lg border border-slate-600/50 overflow-hidden">
       {/* Header */}
-      <div className="absolute top-3 left-4 right-4 flex justify-between items-center">
+      <div className="absolute top-4 left-6 right-6 flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-bold text-yellow-400">SWISS STAGE</h3>
-          <p className="text-xs text-gray-300">Top 8 echipe avansează</p>
+          <h3 className="text-xl font-bold text-yellow-400">SWISS STAGE</h3>
+          <p className="text-sm text-gray-300">16 echipe → 8 calificate</p>
         </div>
-        <div className="text-right text-xs">
-          <p className="text-green-400 font-semibold">3 WINS: ADVANCE</p>
-          <p className="text-red-400 font-semibold">3 LOSSES: ELIMINATED</p>
+        <div className="text-right">
+          <p className="text-green-400 font-semibold text-sm">3 WINS: ADVANCE</p>
+          <p className="text-red-400 font-semibold text-sm">3 LOSSES: ELIMINATED</p>
         </div>
       </div>
 
-      {/* Swiss bracket visualization */}
-      <div className="absolute inset-4 top-16">
-        {/* Starting column (0-0) */}
-        <div className="absolute left-2 top-6">
-          <div className="text-xs text-blue-400 font-semibold mb-2 text-center">0-0</div>
-          {teamPositions.filter(t => t.wins === 0 && t.losses === 0).map((team, index) => (
-            <motion.div
-              key={`start-${index}`}
-              className="w-18 h-5 bg-blue-600/80 border border-blue-400 rounded text-xs text-white flex items-center justify-center mb-1"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <span className="truncate text-[9px] font-medium">{team.teamName}</span>
-            </motion.div>
-          ))}
-        </div>
+      {/* Swiss progression visualization */}
+      <div className="absolute inset-6 top-20">
+        <svg width="100%" height="100%" className="absolute inset-0">
+          {/* Background grid */}
+          <defs>
+            <pattern id="grid" width="50" height="30" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 30" fill="none" stroke="#374151" strokeWidth="0.5" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
 
-        {/* 1-0 Column */}
-        <div className="absolute left-24 top-6">
-          <div className="text-xs text-green-400 font-semibold mb-2 text-center">1-0</div>
-          {teamPositions.filter(t => t.wins === 1 && t.losses === 0).map((team, index) => (
-            <motion.div
-              key={`1-0-${index}`}
-              className="w-18 h-5 bg-green-600/80 border border-green-400 rounded text-xs text-white flex items-center justify-center mb-1"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 + index * 0.1 }}
-            >
-              <span className="truncate text-[9px] font-medium">{team.teamName}</span>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* 2-0 Column */}
-        <div className="absolute left-48 top-6">
-          <div className="text-xs text-green-400 font-semibold mb-2 text-center">2-0</div>
-          {teamPositions.filter(t => t.wins === 2 && t.losses === 0).map((team, index) => (
-            <motion.div
-              key={`2-0-${index}`}
-              className="w-18 h-5 bg-green-500/80 border border-green-300 rounded text-xs text-white flex items-center justify-center mb-1"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.0 + index * 0.1 }}
-            >
-              <span className="truncate text-[9px] font-medium">{team.teamName}</span>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* 3-0 Column (Qualified) */}
-        <div className="absolute right-4 top-6">
-          <div className="text-xs text-yellow-400 font-semibold mb-2 text-center">3-0</div>
-          <div className="bg-green-900/50 border-2 border-green-400 rounded-lg p-2 w-20">
-            <div className="flex items-center justify-center mb-2">
-              <Crown className="w-3 h-3 text-yellow-400 mr-1" />
-              <span className="text-[10px] text-green-400 font-bold">QUALIFIED</span>
+        {/* Round columns */}
+        {[0, 1, 2, 3, 4].map((roundIndex) => (
+          <div key={roundIndex} className="absolute" style={{ left: `${roundIndex * 180 + 20}px`, top: '20px' }}>
+            {/* Round header */}
+            <div className="text-center mb-4">
+              <div className={`inline-block px-3 py-1 rounded-full text-sm font-bold border-2 
+                ${roundIndex === 0 ? 'border-blue-400 bg-blue-400/20 text-blue-400' :
+                  'border-gray-600 bg-gray-600/20 text-gray-400'}`}>
+                {roundIndex === 0 ? 'START' : `R${roundIndex}`}
+              </div>
             </div>
-            <div className="text-[10px] text-gray-300 text-center mb-1">
+
+            {/* Teams in this round */}
+            <div className="space-y-2">
+              {roundIndex === 0 ? (
+                // Starting position - all 16 teams
+                teamPositions.slice(0, 16).map((team, index) => (
+                  <motion.div
+                    key={`start-${index}`}
+                    className="w-32 h-8 bg-slate-700/80 border border-slate-500 rounded flex items-center justify-center text-xs font-medium text-white"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <span className="truncate px-2">{team.teamName}</span>
+                  </motion.div>
+                ))
+              ) : (
+                // Show teams based on their record after each round
+                ['3-0', '2-1', '1-2', '0-3'].map((record, recordIndex) => {
+                  const [wins, losses] = record.split('-').map(Number);
+                  const teamsWithRecord = teamPositions.filter(t => 
+                    t.wins === wins && t.losses === losses
+                  );
+                  
+                  if (teamsWithRecord.length === 0) return null;
+                  
+                  return (
+                    <div key={record} className="mb-4">
+                      <div className={`text-xs font-semibold mb-1 text-center
+                        ${wins === 3 ? 'text-green-400' :
+                          losses === 3 ? 'text-red-400' : 'text-gray-300'}`}>
+                        {record}
+                      </div>
+                      {teamsWithRecord.map((team, teamIndex) => (
+                        <motion.div
+                          key={`${record}-${teamIndex}`}
+                          className={`w-32 h-7 border rounded flex items-center justify-center text-xs font-medium mb-1
+                            ${wins === 3 ? 'bg-green-600/80 border-green-400 text-white' :
+                              losses === 3 ? 'bg-red-600/80 border-red-400 text-white' :
+                              'bg-slate-600/80 border-slate-400 text-white'}`}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: (roundIndex * 0.3) + (teamIndex * 0.1) }}
+                        >
+                          <span className="truncate px-2">{team.teamName}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        ))}
+
+        {/* Qualification area */}
+        <div className="absolute right-6 top-20">
+          <div className="bg-green-900/40 border-2 border-green-400 rounded-lg p-4 w-40">
+            <div className="flex items-center justify-center mb-3">
+              <Crown className="w-5 h-5 text-yellow-400 mr-2" />
+              <span className="text-sm text-green-400 font-bold">QUALIFIED</span>
+            </div>
+            <div className="text-center text-xs text-gray-300 mb-3">
               {standings.filter(t => t.status === 'qualified' || t.wins >= 3).length}/8
             </div>
             {teamPositions.filter(t => t.wins >= 3 || t.status === 'qualified').map((team, index) => (
-              <div key={`qualified-${index}`} className="w-16 h-4 bg-yellow-500/80 border border-yellow-300 rounded text-[9px] text-black flex items-center justify-center mb-1">
-                <span className="truncate font-medium">{team.teamName}</span>
+              <div key={`qualified-${index}`} className="w-full h-6 bg-yellow-500/80 border border-yellow-300 rounded text-xs text-black flex items-center justify-center mb-1 font-medium">
+                <span className="truncate px-2">{team.teamName}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* 1-1 Middle area */}
-        <div className="absolute left-32 top-24">
-          <div className="text-xs text-gray-400 font-semibold mb-2 text-center">1-1</div>
-          {teamPositions.filter(t => t.wins === 1 && t.losses === 1).map((team, index) => (
-            <div key={`1-1-${index}`} className="w-18 h-5 bg-gray-600/80 border border-gray-400 rounded text-xs text-white flex items-center justify-center mb-1">
-              <span className="truncate text-[9px] font-medium">{team.teamName}</span>
+        {/* Elimination area */}
+        <div className="absolute left-6 bottom-6">
+          <div className="bg-red-900/40 border-2 border-red-400 rounded-lg p-4 w-40">
+            <div className="flex items-center justify-center mb-3">
+              <X className="w-5 h-5 text-red-400 mr-2" />
+              <span className="text-sm text-red-400 font-bold">ELIMINATED</span>
             </div>
-          ))}
-        </div>
-
-        {/* 0-1 Column */}
-        <div className="absolute left-16 top-36">
-          <div className="text-xs text-orange-400 font-semibold mb-2 text-center">0-1</div>
-          {teamPositions.filter(t => t.wins === 0 && t.losses === 1).map((team, index) => (
-            <div key={`0-1-${index}`} className="w-18 h-5 bg-orange-600/80 border border-orange-400 rounded text-xs text-white flex items-center justify-center mb-1">
-              <span className="truncate text-[9px] font-medium">{team.teamName}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* 0-2 Column */}
-        <div className="absolute left-8 top-48">
-          <div className="text-xs text-red-400 font-semibold mb-2 text-center">0-2</div>
-          {teamPositions.filter(t => t.wins === 0 && t.losses === 2).map((team, index) => (
-            <div key={`0-2-${index}`} className="w-18 h-5 bg-red-600/80 border border-red-400 rounded text-xs text-white flex items-center justify-center mb-1">
-              <span className="truncate text-[9px] font-medium">{team.teamName}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Eliminated area (0-3) */}
-        <div className="absolute left-2 bottom-4">
-          <div className="bg-red-900/50 border-2 border-red-400 rounded-lg p-2 w-20">
-            <div className="flex items-center justify-center mb-2">
-              <X className="w-3 h-3 text-red-400 mr-1" />
-              <span className="text-[10px] text-red-400 font-bold">ELIMINATED</span>
-            </div>
-            <div className="text-[10px] text-gray-300 text-center mb-1">
+            <div className="text-center text-xs text-gray-300 mb-3">
               {standings.filter(t => t.status === 'eliminated' || t.losses >= 3).length}
             </div>
             {teamPositions.filter(t => t.losses >= 3 || t.status === 'eliminated').map((team, index) => (
-              <div key={`eliminated-${index}`} className="w-16 h-4 bg-red-600/80 border border-red-400 rounded text-[9px] text-white flex items-center justify-center mb-1">
-                <span className="truncate font-medium">{team.teamName}</span>
+              <div key={`eliminated-${index}`} className="w-full h-6 bg-red-600/80 border border-red-400 rounded text-xs text-white flex items-center justify-center mb-1 font-medium">
+                <span className="truncate px-2">{team.teamName}</span>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Demo connection lines */}
-        <svg width="100%" height="100%" className="absolute inset-0 pointer-events-none">
-          {/* Yellow connecting lines for advancement */}
-          <motion.path
-            d="M80 40 L120 50"
-            stroke="#eab308"
-            strokeWidth="2"
-            strokeOpacity="0.7"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-          />
-          <motion.path
-            d="M140 50 L180 60"
-            stroke="#eab308"
-            strokeWidth="2"
-            strokeOpacity="0.7"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1, delay: 2 }}
-          />
-          {/* Red connecting lines for elimination */}
-          <motion.path
-            d="M80 80 L120 100"
-            stroke="#dc2626"
-            strokeWidth="2"
-            strokeOpacity="0.7"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1, delay: 2.5 }}
-          />
-        </svg>
-      </div>
-
-      {/* Round indicators */}
-      <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-4">
-        {[1, 2, 3, 4, 5].map(round => (
-          <div
-            key={round}
-            className={`w-7 h-7 rounded-full border-2 flex items-center justify-center text-sm font-bold
-                       ${round <= 0 ? 'border-green-400 bg-green-400/20 text-green-400' :
-                         round === 1 ? 'border-yellow-400 bg-yellow-400/20 text-yellow-400' :
-                         'border-gray-600 bg-gray-600/20 text-gray-400'}`}
-          >
-            {round}
-          </div>
-        ))}
       </div>
     </div>
   );
