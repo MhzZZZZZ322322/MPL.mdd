@@ -328,6 +328,60 @@ export const insertStage2BracketSchema = createInsertSchema(stage2Bracket).omit(
 export type InsertStage2Bracket = z.infer<typeof insertStage2BracketSchema>;
 export type Stage2Bracket = typeof stage2Bracket.$inferSelect;
 
+// Stage 3 Swiss - Swiss system pentru 16 echipe
+export const stage3Swiss = pgTable("stage3_swiss", {
+  id: serial("id").primaryKey(),
+  teamName: text("team_name").notNull(),
+  wins: integer("wins").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  roundsWon: integer("rounds_won").notNull().default(0),
+  roundsLost: integer("rounds_lost").notNull().default(0),
+  status: text("status").notNull().default("active"), // active, qualified, eliminated
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Stage 3 Swiss Matches - Meciurile din swiss system
+export const stage3SwissMatches = pgTable("stage3_swiss_matches", {
+  id: serial("id").primaryKey(),
+  roundNumber: integer("round_number").notNull(), // runda 1-8
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score"), // null dacă meciul nu a fost jucat
+  team2Score: integer("team2_score"), // null dacă meciul nu a fost jucat
+  winnerName: text("winner_name"), // numele echipei câștigătoare
+  isPlayed: boolean("is_played").notNull().default(false),
+  streamUrl: text("stream_url"), // link către stream/faceit
+  technicalWin: boolean("technical_win").notNull().default(false),
+  technicalWinner: text("technical_winner"),
+  matchType: text("match_type").notNull().default("BO1"), // BO1 sau BO3 pentru decisive matches
+  isDecisive: boolean("is_decisive").notNull().default(false), // true pentru 2-2 vs 2-2 meciuri
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  matchDate: timestamp("match_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertStage3SwissSchema = createInsertSchema(stage3Swiss).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertStage3SwissMatchSchema = createInsertSchema(stage3SwissMatches).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+}).partial({
+  matchDate: true
+});
+
+export type InsertStage3Swiss = z.infer<typeof insertStage3SwissSchema>;
+export type Stage3Swiss = typeof stage3Swiss.$inferSelect;
+export type InsertStage3SwissMatch = z.infer<typeof insertStage3SwissMatchSchema>;
+export type Stage3SwissMatch = typeof stage3SwissMatches.$inferSelect;
+
 // Matches - Meciurile din turneu
 export const matches = pgTable("matches", {
   id: serial("id").primaryKey(),

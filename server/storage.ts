@@ -8,7 +8,9 @@ import {
   analyticsSettings, type AnalyticsSettings, type InsertAnalytics,
   teams, type Team, type InsertTeam,
   teamMembers, type TeamMember, type InsertTeamMember,
-  stage2Bracket, type Stage2Bracket, type InsertStage2Bracket
+  stage2Bracket, type Stage2Bracket, type InsertStage2Bracket,
+  stage3Swiss, type Stage3Swiss, type InsertStage3Swiss,
+  stage3SwissMatches, type Stage3SwissMatch, type InsertStage3SwissMatch
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
 import { db } from "./db";
@@ -96,6 +98,15 @@ export interface IStorage {
   createStage2Match(match: InsertStage2Bracket): Promise<Stage2Bracket>;
   updateStage2Match(id: number, match: Partial<InsertStage2Bracket>): Promise<Stage2Bracket>;
   deleteStage2Match(id: number): Promise<void>;
+  
+  // Stage 3 Swiss methods
+  getStage3SwissStandings(): Promise<Stage3Swiss[]>;
+  getStage3SwissMatches(): Promise<Stage3SwissMatch[]>;
+  createStage3Team(team: InsertStage3Swiss): Promise<Stage3Swiss>;
+  updateStage3Team(id: number, team: Partial<InsertStage3Swiss>): Promise<Stage3Swiss>;
+  createStage3Match(match: InsertStage3SwissMatch): Promise<Stage3SwissMatch>;
+  updateStage3Match(id: number, match: Partial<InsertStage3SwissMatch>): Promise<Stage3SwissMatch>;
+  deleteStage3Match(id: number): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -1555,6 +1566,35 @@ export class MemStorage implements IStorage {
   async deleteStage2Match(id: number): Promise<void> {
     throw new Error("MemStorage Stage 2 methods not implemented");
   }
+
+  // Stage 3 Swiss methods (not implemented in MemStorage)
+  async getStage3SwissStandings(): Promise<Stage3Swiss[]> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
+
+  async getStage3SwissMatches(): Promise<Stage3SwissMatch[]> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
+
+  async createStage3Team(team: InsertStage3Swiss): Promise<Stage3Swiss> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
+
+  async updateStage3Team(id: number, team: Partial<InsertStage3Swiss>): Promise<Stage3Swiss> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
+
+  async createStage3Match(match: InsertStage3SwissMatch): Promise<Stage3SwissMatch> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
+
+  async updateStage3Match(id: number, match: Partial<InsertStage3SwissMatch>): Promise<Stage3SwissMatch> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
+
+  async deleteStage3Match(id: number): Promise<void> {
+    throw new Error("MemStorage Stage 3 methods not implemented");
+  }
 }
 
 // DatabaseStorage implementation using PostgreSQL
@@ -1782,6 +1822,45 @@ export class DatabaseStorage implements IStorage {
 
   async deleteStage2Match(id: number): Promise<void> {
     await db.delete(stage2Bracket).where(eq(stage2Bracket.id, id));
+  }
+
+  // Stage 3 Swiss methods
+  async getStage3SwissStandings(): Promise<Stage3Swiss[]> {
+    return await db.select().from(stage3Swiss).orderBy(stage3Swiss.wins, stage3Swiss.roundsWon);
+  }
+
+  async getStage3SwissMatches(): Promise<Stage3SwissMatch[]> {
+    return await db.select().from(stage3SwissMatches).orderBy(stage3SwissMatches.roundNumber, stage3SwissMatches.id);
+  }
+
+  async createStage3Team(team: InsertStage3Swiss): Promise<Stage3Swiss> {
+    const [newTeam] = await db.insert(stage3Swiss).values(team).returning();
+    return newTeam;
+  }
+
+  async updateStage3Team(id: number, team: Partial<InsertStage3Swiss>): Promise<Stage3Swiss> {
+    const [updatedTeam] = await db.update(stage3Swiss).set({
+      ...team,
+      updatedAt: new Date()
+    }).where(eq(stage3Swiss.id, id)).returning();
+    return updatedTeam;
+  }
+
+  async createStage3Match(match: InsertStage3SwissMatch): Promise<Stage3SwissMatch> {
+    const [newMatch] = await db.insert(stage3SwissMatches).values(match).returning();
+    return newMatch;
+  }
+
+  async updateStage3Match(id: number, match: Partial<InsertStage3SwissMatch>): Promise<Stage3SwissMatch> {
+    const [updatedMatch] = await db.update(stage3SwissMatches).set({
+      ...match,
+      updatedAt: new Date()
+    }).where(eq(stage3SwissMatches.id, id)).returning();
+    return updatedMatch;
+  }
+
+  async deleteStage3Match(id: number): Promise<void> {
+    await db.delete(stage3SwissMatches).where(eq(stage3SwissMatches.id, id));
   }
 }
 
