@@ -97,23 +97,23 @@ export function SwissBracketManager() {
               <div className="flex items-center justify-between mb-2">
                 <span className="text-white font-medium text-sm">{team.teamName}</span>
                 <div className="flex space-x-1">
-                  {wins < 3 && (
+                  {team.wins < 3 && (
                     <Button
                       size="sm"
                       variant="outline"
                       className="h-6 px-2 text-xs bg-green-600 hover:bg-green-700 text-white border-green-500"
-                      onClick={() => moveTeam(team.teamName, wins + 1, losses)}
+                      onClick={() => moveTeam(team, team.wins + 1, team.losses)}
                       disabled={updateTeamMutation.isPending}
                     >
                       W
                     </Button>
                   )}
-                  {losses < 3 && (
+                  {team.losses < 3 && (
                     <Button
                       size="sm"
                       variant="outline"
                       className="h-6 px-2 text-xs bg-red-600 hover:bg-red-700 text-white border-red-500"
-                      onClick={() => moveTeam(team.teamName, wins, losses + 1)}
+                      onClick={() => moveTeam(team, team.wins, team.losses + 1)}
                       disabled={updateTeamMutation.isPending}
                     >
                       L
