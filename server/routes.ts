@@ -735,6 +735,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/stage3-qualified-teams", async (req, res) => {
+    try {
+      const qualifiedTeams = await storage.getStage3QualifiedTeams();
+      res.json(qualifiedTeams);
+    } catch (error) {
+      console.error("Error fetching Stage 3 qualified teams:", error);
+      res.status(500).json({ message: "Failed to fetch Stage 3 qualified teams" });
+    }
+  });
+
   app.get("/api/stage3-swiss-matches", async (req, res) => {
     try {
       const matches = await storage.getStage3SwissMatches();

@@ -54,19 +54,17 @@ export function Stage3SwissRoundsManager() {
     refetchInterval: 10000,
   });
 
-  const { data: teams = [] } = useQuery<Team[]>({
+  // Get qualified teams from calculation
+  const { data: qualifiedTeamNames = [] } = useQuery<string[]>({
+    queryKey: ["/api/stage3-qualified-teams"],
+  });
+
+  const { data: allTeams = [] } = useQuery<Team[]>({
     queryKey: ["/api/teams"],
   });
 
-  // Get teams qualified for Stage 3 (16 teams)
-  const stage3Teams = teams.filter(team => {
-    const qualifiedTeams = [
-      "Auratix", "BPSP", "Japon", "K9 Team", "Rebel Force",
-      "VGT", "SaV", "Anykill", "Dragunov", "RCBVR",
-      "LoneWolves", "LYSQ", "TBD_1", "TBD_2", "TBD_3", "TBD_4", "TBD_5"
-    ];
-    return qualifiedTeams.includes(team.name);
-  });
+  // Filter to only show qualified teams
+  const stage3Teams = allTeams.filter(team => qualifiedTeamNames.includes(team.name));
 
   // Round descriptions
   const roundDescriptions: Record<number, { title: string; description: string; color: string }> = {

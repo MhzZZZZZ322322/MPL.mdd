@@ -102,6 +102,7 @@ export interface IStorage {
   // Stage 3 Swiss methods
   getStage3SwissStandings(): Promise<Stage3Swiss[]>;
   getStage3SwissMatches(): Promise<Stage3SwissMatch[]>;
+  getStage3QualifiedTeams(): Promise<string[]>;
   createStage3Team(team: InsertStage3Swiss): Promise<Stage3Swiss>;
   updateStage3Team(id: number, team: Partial<InsertStage3Swiss>): Promise<Stage3Swiss>;
   createStage3Match(match: InsertStage3SwissMatch): Promise<Stage3SwissMatch>;
@@ -1386,6 +1387,87 @@ export class MemStorage implements IStorage {
     });
   }
 
+  // Get Stage 3 Qualified Teams
+  async getStage3QualifiedTeams(): Promise<string[]> {
+    // Get top 3 teams from each group (Stage 1 qualified)
+    const stage1Qualified: string[] = [];
+    const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    
+    for (const groupName of groups) {
+      const matchResults = await this.getMatchResults();
+      const groupMatches = matchResults.filter(match => match.groupName === groupName);
+      
+      // Calculate standings
+      const teamStats = new Map();
+      
+      groupMatches.forEach(match => {
+        const team1 = match.team1Name;
+        const team2 = match.team2Name;
+        
+        if (!teamStats.has(team1)) {
+          teamStats.set(team1, { wins: 0, losses: 0, roundsFor: 0, roundsAgainst: 0 });
+        }
+        if (!teamStats.has(team2)) {
+          teamStats.set(team2, { wins: 0, losses: 0, roundsFor: 0, roundsAgainst: 0 });
+        }
+        
+        if (match.team1Score !== null && match.team2Score !== null) {
+          const team1Stats = teamStats.get(team1);
+          const team2Stats = teamStats.get(team2);
+          
+          team1Stats.roundsFor += match.team1Score;
+          team1Stats.roundsAgainst += match.team2Score;
+          team2Stats.roundsFor += match.team2Score;
+          team2Stats.roundsAgainst += match.team1Score;
+          
+          if (match.team1Score > match.team2Score) {
+            team1Stats.wins += 1;
+            team2Stats.losses += 1;
+          } else {
+            team2Stats.wins += 1;
+            team1Stats.losses += 1;
+          }
+        }
+      });
+      
+      // Convert to array and sort
+      const standings = Array.from(teamStats.entries()).map(([teamName, stats]: [string, any]) => ({
+        teamName,
+        points: stats.wins,
+        roundDifference: stats.roundsFor - stats.roundsAgainst
+      }));
+      
+      standings.sort((a, b) => {
+        if (b.points !== a.points) {
+          return b.points - a.points;
+        }
+        return b.roundDifference - a.roundDifference;
+      });
+      
+      // Take top 3 from each group
+      const topTeams = standings.slice(0, 3);
+      stage1Qualified.push(...topTeams.map(team => team.teamName));
+    }
+    
+    // Get qualified teams from Stage 2 bracket
+    const stage2Bracket = await this.getStage2Bracket();
+    const stage2Qualified: string[] = [];
+    
+    // Find winners from Stage 2 bracket matches
+    for (const match of stage2Bracket) {
+      if (match.winnerName) {
+        stage2Qualified.push(match.winnerName);
+      }
+    }
+    
+    // Combine all qualified teams (11 direct + 5 from Stage 2 = 16 total)
+    const allQualified = [...stage1Qualified, ...stage2Qualified];
+    
+    // Remove duplicates and return exactly 16 teams
+    const uniqueQualified = Array.from(new Set(allQualified));
+    return uniqueQualified.slice(0, 16);
+  }
+
   // Scheduled Matches methods for MemStorage
   private scheduledMatches: Map<string, any> = new Map();
 
@@ -1861,6 +1943,23 @@ export class DatabaseStorage implements IStorage {
 
   async deleteStage3Match(id: number): Promise<void> {
     await db.delete(stage3SwissMatches).where(eq(stage3SwissMatches.id, id));
+  }
+
+  async getStage3QualifiedTeams(): Promise<string[]> {
+    // For now, return hardcoded qualified teams based on current tournament state
+    // This will be calculated from actual results later
+    const qualifiedTeams = [
+      "Auratix", "BPSP", "Japon", "K9 Team", "Rebel Force",
+      "VGT", "SaV", "Anykill", "Dragunov", "RCBVR",
+      "LoneWolves", "LYSQ"
+    ];
+    
+    // Add placeholders for Stage 2 winners (5 teams)
+    for (let i = 1; i <= 4; i++) {
+      qualifiedTeams.push(`Echipa_Stage2_${i}`);
+    }
+    
+    return qualifiedTeams;
   }
 }
 
