@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 03, 2025: **UPDATED** - Schimbat numele jucătorului din echipa Xtreme Players: "enthys1astyl" → "enthusiastul" în baza de date PostgreSQL cu actualizarea linkului FACEIT
 - July 03, 2025: **UPDATED** - Actualizat complet toate linkurile TikTok și @domnukrot către contul oficial @moldova.pro.league în Footer, Contact, SimpleContactForm, EventDetails și CsServerStatus
 - July 03, 2025: **FIXED** - Admin interface acum afișează toate cele 6 runde Swiss (1-6) cu descrieri corecte pentru fiecare rundă
 - July 03, 2025: **UPDATED** - Rundele Swiss System corecte: Runda 1 (0:0 BO1), Runda 2 (0:1 & 1:0 BO1), Runda 3 (1:1 BO1), Runda 4 (0:2 & 2:0 BO3), Runda 5 (1:2 & 2:1 BO3), Runda 6 (2:2 BO3)
