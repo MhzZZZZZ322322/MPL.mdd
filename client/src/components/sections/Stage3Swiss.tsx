@@ -275,41 +275,46 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                   });
                   
                   return Object.entries(matchesByRound)
-                    .sort(([a], [b]) => Number(a) - Number(b)) // Sort by round number
+                    .sort(([a], [b]) => Number(a) - Number(b))
                     .map(([roundNum, roundMatches]) => {
                       const round = Number(roundNum);
                       
-                      // Round descriptions
                       const roundDescriptions: Record<number, { title: string; description: string; bgColor: string; borderColor: string }> = {
                         1: {
-                          title: "Runda 1 - Toate echipele 0:0",
-                          description: "Meciuri 0:0 vs 0:0 - repartizare pe seed (8 meciuri)",
+                          title: "Runda 1 - 0:0 (BO1)",
+                          description: "Toate echipele încep cu record curat - 8 meciuri BO1",
                           bgColor: "bg-blue-900/20",
                           borderColor: "border-blue-500/30"
                         },
                         2: {
-                          title: "Runda 2 - 1:0 vs 0:1",
-                          description: "Câștigătorii (1:0) vs învinșii (0:1) din Runda 1",
+                          title: "Runda 2 - 1:0 vs 0:1 (BO1)",
+                          description: "Câștigătorii vs învinșii din Runda 1 - meciuri BO1",
                           bgColor: "bg-green-900/20",
                           borderColor: "border-green-500/30"
                         },
                         3: {
-                          title: "Runda 3 - 2:0 vs 1:1 + eliminări 0:2",
-                          description: "Primele calificări (3:0) și primele eliminări (0:3)",
+                          title: "Runda 3 - 1:1 (BO1)",
+                          description: "Echipele cu record egal după 2 runde - meciuri BO1",
                           bgColor: "bg-yellow-900/20",
                           borderColor: "border-yellow-500/30"
                         },
                         4: {
-                          title: "Runda 4 - 2:1 vs 1:2",
-                          description: "Calificate cu 3:1 și eliminate cu 1:3",
+                          title: "Runda 4 - 2:0 vs 0:2 (BO3)",
+                          description: "Calificări și eliminări - meciuri decisive BO3",
                           bgColor: "bg-orange-900/20",
                           borderColor: "border-orange-500/30"
                         },
                         5: {
-                          title: "Runda 5 - Meciuri finale 2:2",
-                          description: "Ultimele calificări (3:2) și eliminări finale (2:3)",
+                          title: "Runda 5 - 2:1 vs 1:2 (BO3)",
+                          description: "Calificări cu 3:1 și eliminări cu 1:3 - meciuri BO3",
                           bgColor: "bg-purple-900/20",
                           borderColor: "border-purple-500/30"
+                        },
+                        6: {
+                          title: "Runda 6 - 2:2 (BO3)",
+                          description: "Ultimele calificări cu 3:2 - meciuri finale BO3",
+                          bgColor: "bg-red-900/20",
+                          borderColor: "border-red-500/30"
                         }
                       };
                       
@@ -319,6 +324,27 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                         bgColor: "bg-gray-900/20",
                         borderColor: "border-gray-500/30"
                       };
+
+                      const getMatchTypes = (roundNum: number) => {
+                        switch (roundNum) {
+                          case 1:
+                            return [{ type: "0:0 vs 0:0 (BO1)", color: "text-blue-400", desc: "Toate echipele încep cu record curat" }];
+                          case 2:
+                            return [{ type: "1:0 vs 0:1 (BO1)", color: "text-green-400", desc: "Câștigătorii vs învinșii din Runda 1" }];
+                          case 3:
+                            return [{ type: "1:1 vs 1:1 (BO1)", color: "text-yellow-400", desc: "Echipele cu record egal după 2 runde" }];
+                          case 4:
+                            return [{ type: "2:0 vs 0:2 (BO3)", color: "text-orange-400", desc: "Calificări și eliminări - meciuri decisive" }];
+                          case 5:
+                            return [{ type: "2:1 vs 1:2 (BO3)", color: "text-purple-400", desc: "Calificări cu 3:1 și eliminări cu 1:3" }];
+                          case 6:
+                            return [{ type: "2:2 vs 2:2 (BO3)", color: "text-red-400", desc: "Ultimele calificări cu 3:2" }];
+                          default:
+                            return [];
+                        }
+                      };
+
+                      const matchTypes = getMatchTypes(round);
                       
                       return (
                         <div key={roundNum} className={`${config.bgColor} border ${config.borderColor} rounded-lg overflow-hidden`}>
@@ -337,6 +363,15 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                           </div>
                         
                           <div className="p-6">
+                            <div className="mb-4 grid gap-2">
+                              {matchTypes.map((mt, idx) => (
+                                <div key={idx} className="flex items-center gap-2 text-xs">
+                                  <span className={`font-semibold ${mt.color}`}>{mt.type}</span>
+                                  <span className="text-gray-400">- {mt.desc}</span>
+                                </div>
+                              ))}
+                            </div>
+
                             <div className="grid gap-4">
                               {roundMatches.map((match) => (
                                 <div
@@ -345,7 +380,6 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                                 >
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4 flex-1">
-                                      {/* Team 1 */}
                                       <div className="flex items-center gap-3 min-w-0 flex-1">
                                         <img
                                           src={getTeamLogo(match.team1Name)}
@@ -360,7 +394,6 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                                         </div>
                                       </div>
 
-                                      {/* Score */}
                                       <div className="text-center px-4">
                                         {match.isPlayed ? (
                                           <div className="text-white font-bold text-lg">
@@ -391,7 +424,6 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                                         </div>
                                       </div>
 
-                                      {/* Team 2 */}
                                       <div className="flex items-center gap-3 min-w-0 flex-1 justify-end">
                                         <div className="flex items-center gap-2">
                                           {match.isPlayed && match.winnerName === match.team2Name && (
@@ -406,8 +438,6 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                                         />
                                       </div>
                                     </div>
-
-
                                   </div>
                                 </div>
                               ))}
@@ -415,8 +445,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                           </div>
                         </div>
                       );
-                    });
-                })()}
+                    })
               </div>
             )}
 
