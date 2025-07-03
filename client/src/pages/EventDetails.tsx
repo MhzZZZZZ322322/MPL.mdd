@@ -223,7 +223,7 @@ const EventDetails = () => {
                 <p className="text-gray-300 mb-4">
                   Participanții vor concura în mai multe etape, începând cu faza grupelor, urmată de playoff-uri și marea finală.
                   Toate meciurile vor fi transmise live pe canalele noastre de Twitch și YouTube de către streameri parteneri precum
-                  @domnukrot, @faceofmadness, @rage.md și @catalinciobanu.
+                  @moldova.pro.league, @faceofmadness, @rage.md și @catalinciobanu.
                 </p>
                 
                 {event.title && (event.title.includes('HATOR') || event.title.includes('Hator')) && (

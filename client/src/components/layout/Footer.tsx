@@ -72,7 +72,7 @@ const Footer = () => {
                 <SocialIcon href="https://www.twitch.tv/MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaTwitch} />
                 <SocialIcon href="https://www.youtube.com/@MoldovaProLeague" target="_blank" rel="noopener noreferrer" icon={FaYoutube} />
                 <SocialIcon href="https://discord.gg/Ek4qvWE5qB" target="_blank" rel="noopener noreferrer" icon={FaDiscord} />
-                <SocialIcon href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
+                <SocialIcon href="https://www.tiktok.com/@moldova.pro.league" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
               </div>
               <Button 
                 onClick={() => window.location.href = "/mef"}
