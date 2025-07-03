@@ -167,7 +167,7 @@ export function SwissBracketVisualizer() {
   const currentRound = currentRoundMatches.length > 0 ? Math.max(...currentRoundMatches.map(m => m.roundNumber)) : 1;
 
   return (
-    <div className="relative w-full min-h-[600px] bg-gradient-to-br from-slate-900/95 to-slate-800/90 rounded-lg border border-slate-600/50 p-6 overflow-auto">
+    <>
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-white mb-2">SWISS BRACKET</h2>
@@ -335,6 +335,6 @@ export function SwissBracketVisualizer() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
