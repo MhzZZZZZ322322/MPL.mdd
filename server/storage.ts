@@ -1908,7 +1908,72 @@ export class DatabaseStorage implements IStorage {
 
   // Stage 3 Swiss methods
   async getStage3SwissStandings(): Promise<Stage3Swiss[]> {
-    return await db.select().from(stage3Swiss).orderBy(stage3Swiss.wins, stage3Swiss.roundsWon);
+    // Get base teams from stage3Swiss table
+    const baseTeams = await db.select().from(stage3Swiss);
+    
+    // Get all played matches
+    const matches = await db.select().from(stage3SwissMatches).where(eq(stage3SwissMatches.isPlayed, true));
+    
+    // Calculate standings from matches
+    const teamStats: Record<string, { wins: number; losses: number; roundsWon: number; roundsLost: number }> = {};
+    
+    // Initialize all teams with 0-0 record
+    baseTeams.forEach(team => {
+      teamStats[team.teamName] = { wins: 0, losses: 0, roundsWon: 0, roundsLost: 0 };
+    });
+    
+    // Calculate statistics from matches
+    matches.forEach(match => {
+      if (match.winnerName && match.team1Score !== null && match.team2Score !== null) {
+        const team1 = match.team1Name;
+        const team2 = match.team2Name;
+        
+        if (teamStats[team1] && teamStats[team2]) {
+          // Add rounds
+          teamStats[team1].roundsWon += match.team1Score;
+          teamStats[team1].roundsLost += match.team2Score;
+          teamStats[team2].roundsWon += match.team2Score;
+          teamStats[team2].roundsLost += match.team1Score;
+          
+          // Add wins/losses
+          if (match.winnerName === team1) {
+            teamStats[team1].wins += 1;
+            teamStats[team2].losses += 1;
+          } else if (match.winnerName === team2) {
+            teamStats[team2].wins += 1;
+            teamStats[team1].losses += 1;
+          }
+        }
+      }
+    });
+    
+    // Create updated standings with calculated statistics
+    const updatedStandings = baseTeams.map(team => {
+      const stats = teamStats[team.teamName];
+      let status: 'active' | 'qualified' | 'eliminated' = 'active';
+      
+      // Determine status based on Swiss System rules
+      if (stats.wins >= 3) {
+        status = 'qualified';
+      } else if (stats.losses >= 3) {
+        status = 'eliminated';
+      }
+      
+      return {
+        ...team,
+        wins: stats.wins,
+        losses: stats.losses,
+        roundsWon: stats.roundsWon,
+        roundsLost: stats.roundsLost,
+        status: status as any
+      };
+    });
+    
+    // Sort by wins (desc), then by round difference (desc)
+    return updatedStandings.sort((a, b) => {
+      if (b.wins !== a.wins) return b.wins - a.wins;
+      return (b.roundsWon - b.roundsLost) - (a.roundsWon - a.roundsLost);
+    });
   }
 
   async getStage3SwissMatches(): Promise<Stage3SwissMatch[]> {
