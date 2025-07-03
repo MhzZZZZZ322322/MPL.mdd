@@ -63,8 +63,9 @@ export function Stage3SwissRoundsManager() {
     queryKey: ["/api/teams"],
   });
 
-  // Filter to only show qualified teams
-  const stage3Teams = allTeams.filter(team => qualifiedTeamNames.includes(team.name));
+  // Use qualified team names directly for dropdowns
+  // This ensures all 16 qualified teams appear even if not in teams table with logos
+  const stage3TeamNames = qualifiedTeamNames;
 
   // Round descriptions
   const roundDescriptions: Record<number, { title: string; description: string; color: string }> = {
@@ -294,9 +295,9 @@ export function Stage3SwissRoundsManager() {
                 className="w-full mt-1 p-2 border border-gray-600 rounded bg-gray-700 text-white"
               >
                 <option value="">Selectează echipa</option>
-                {stage3Teams.map((team) => (
-                  <option key={team.id} value={team.name}>
-                    {team.name}
+                {stage3TeamNames.map((teamName) => (
+                  <option key={teamName} value={teamName}>
+                    {teamName}
                   </option>
                 ))}
               </select>
@@ -310,9 +311,9 @@ export function Stage3SwissRoundsManager() {
                 className="w-full mt-1 p-2 border border-gray-600 rounded bg-gray-700 text-white"
               >
                 <option value="">Selectează echipa</option>
-                {stage3Teams.map((team) => (
-                  <option key={team.id} value={team.name}>
-                    {team.name}
+                {stage3TeamNames.map((teamName) => (
+                  <option key={teamName} value={teamName}>
+                    {teamName}
                   </option>
                 ))}
               </select>
@@ -525,9 +526,9 @@ export function Stage3SwissRoundsManager() {
                     onChange={(e) => setEditingMatch({ ...editingMatch, team1Name: e.target.value })}
                     className="w-full mt-1 p-2 border border-gray-600 rounded bg-gray-700 text-white"
                   >
-                    {stage3Teams.map((team) => (
-                      <option key={team.id} value={team.name}>
-                        {team.name}
+                    {stage3TeamNames.map((teamName) => (
+                      <option key={teamName} value={teamName}>
+                        {teamName}
                       </option>
                     ))}
                   </select>
@@ -539,9 +540,9 @@ export function Stage3SwissRoundsManager() {
                     onChange={(e) => setEditingMatch({ ...editingMatch, team2Name: e.target.value })}
                     className="w-full mt-1 p-2 border border-gray-600 rounded bg-gray-700 text-white"
                   >
-                    {stage3Teams.map((team) => (
-                      <option key={team.id} value={team.name}>
-                        {team.name}
+                    {stage3TeamNames.map((teamName) => (
+                      <option key={teamName} value={teamName}>
+                        {teamName}
                       </option>
                     ))}
                   </select>
