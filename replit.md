@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 03, 2025: **VISUAL** - Logo cu cupa (🏆) se afișează lângă numele echipei câștigătoare în meciurile Stage 3
+- July 03, 2025: **ENHANCED** - Readăugat explicațiile pentru rundele Swiss System (0-0, 1-0, 2-0, etc.) cu culori specifice
+- July 03, 2025: **REALTIME** - Clasamentul Stage 3 Swiss se calculează în timp real din meciurile jucate (victorii, înfrângeri, runde)
 - July 03, 2025: **STRICT** - Stage 3 Swiss afișează doar date din baza de date - fără meciuri = nimic afișat pe site
 - July 03, 2025: **UPDATED** - Echipe reale calificate în Stage 3: LitEnergy, K9 Team, La Passion, XPlosion, VeryGoodTeam, Saponel, Wenzo, BobB3rs, Golden Five, Cadian Team, Into the Beach + 5 din Stage 2
 - July 03, 2025: **COMPLETED** - Sistem automat pentru echipele calificate în Stage 3 (16 echipe) din rezultatele anterioare

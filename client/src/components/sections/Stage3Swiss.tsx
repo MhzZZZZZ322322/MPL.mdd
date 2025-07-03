@@ -279,17 +279,59 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                     .map(([roundNum, roundMatches]) => {
                       const round = Number(roundNum);
                       
+                      // Round descriptions
+                      const roundDescriptions: Record<number, { title: string; description: string; bgColor: string; borderColor: string }> = {
+                        1: {
+                          title: "Runda 1 - Toate echipele 0-0",
+                          description: "Repartizare pe seed - 8 meciuri pentru 16 echipe",
+                          bgColor: "bg-blue-900/20",
+                          borderColor: "border-blue-500/30"
+                        },
+                        2: {
+                          title: "Runda 2 - 1-0 vs 1-0 și 0-1 vs 0-1",
+                          description: "Echipele cu același record se înfruntă",
+                          bgColor: "bg-green-900/20",
+                          borderColor: "border-green-500/30"
+                        },
+                        3: {
+                          title: "Runda 3 - Prima rundă cu calificări",
+                          description: "2-0 vs 2-0 → primele calificate (3-0)",
+                          bgColor: "bg-yellow-900/20",
+                          borderColor: "border-yellow-500/30"
+                        },
+                        4: {
+                          title: "Runda 4 - Calificări 3-1",
+                          description: "2-1 vs 2-1 → calificate cu 3-1",
+                          bgColor: "bg-orange-900/20",
+                          borderColor: "border-orange-500/30"
+                        },
+                        5: {
+                          title: "Runda 5 - Ultima rundă",
+                          description: "2-2 vs 2-2 → ultimele calificate (3-2)",
+                          bgColor: "bg-purple-900/20",
+                          borderColor: "border-purple-500/30"
+                        }
+                      };
+                      
+                      const config = roundDescriptions[round] || {
+                        title: `Runda ${round}`,
+                        description: "Meciuri Swiss System",
+                        bgColor: "bg-gray-900/20",
+                        borderColor: "border-gray-500/30"
+                      };
+                      
                       return (
-                        <div key={roundNum} className="bg-gray-900/20 border border-gray-500/30 rounded-lg overflow-hidden">
+                        <div key={roundNum} className={`${config.bgColor} border ${config.borderColor} rounded-lg overflow-hidden`}>
                           <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-blue-500/30">
                             <div className="flex items-center gap-2 mb-2">
                               <span className="text-green-400 text-lg">⚽</span>
-                              <h4 className="text-lg font-bold text-white">Runda {round}</h4>
+                              <h4 className="text-lg font-bold text-white">{config.title}</h4>
                             </div>
-                            <p className="text-xs text-blue-400">
+                            <p className="text-sm text-gray-300">{config.description}</p>
+                            <p className="text-xs text-blue-400 mt-1">
                               {roundMatches.length} {roundMatches.length === 1 ? 'meci' : 'meciuri'}
                               {roundMatches.filter(m => m.isPlayed).length > 0 && 
-                                ` - ${roundMatches.filter(m => m.isPlayed).length} completate`
+                                ` - ${roundMatches.filter(m => m.isPlayed).length} jucate`
                               }
                             </p>
                           </div>
@@ -299,7 +341,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                               {roundMatches.map((match) => (
                                 <div
                                   key={match.id}
-                                  className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50"
+                                  className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50 relative"
                                 >
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-4 flex-1">
@@ -310,7 +352,12 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                                           alt={match.team1Name}
                                           className="w-10 h-10 object-contain rounded"
                                         />
-                                        <span className="text-white font-medium truncate">{match.team1Name}</span>
+                                        <div className="flex items-center gap-2">
+                                          <span className="text-white font-medium truncate">{match.team1Name}</span>
+                                          {match.isPlayed && match.winnerName === match.team1Name && (
+                                            <span className="text-yellow-400 text-lg">🏆</span>
+                                          )}
+                                        </div>
                                       </div>
 
                                       {/* Score */}
@@ -346,7 +393,12 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
 
                                       {/* Team 2 */}
                                       <div className="flex items-center gap-3 min-w-0 flex-1 justify-end">
-                                        <span className="text-white font-medium truncate">{match.team2Name}</span>
+                                        <div className="flex items-center gap-2">
+                                          {match.isPlayed && match.winnerName === match.team2Name && (
+                                            <span className="text-yellow-400 text-lg">🏆</span>
+                                          )}
+                                          <span className="text-white font-medium truncate">{match.team2Name}</span>
+                                        </div>
                                         <img
                                           src={getTeamLogo(match.team2Name)}
                                           alt={match.team2Name}
@@ -355,12 +407,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                                       </div>
                                     </div>
 
-                                    {/* Winner indicator */}
-                                    {match.isPlayed && match.winnerName && (
-                                      <div className="ml-4">
-                                        <span className="text-yellow-400 text-2xl">🏆</span>
-                                      </div>
-                                    )}
+
                                   </div>
                                 </div>
                               ))}
