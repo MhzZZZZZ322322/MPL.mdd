@@ -1946,16 +1946,14 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getStage3QualifiedTeams(): Promise<string[]> {
-    // Return all 16 teams qualified for Stage 3 Swiss System
+    // Return all 16 teams qualified for Stage 3 Swiss System based on real standings
     const qualifiedTeams = [
-      // 11 teams directly qualified from groups (top positions)
-      "Auratix", "BPSP", "Japon", // Group A
-      "K9 Team", "Rebel Force", "VGT", // Group B  
-      "SaV", "Anykill", "Dragunov", // Group C
-      "RCBVR", "LoneWolves", // Group D
+      // 11 teams directly qualified from groups (from actual standings)
+      "LitEnergy", "K9 Team", "La Passion", "XPlosion", "VeryGoodTeam",
+      "Saponel", "Wenzo", "BobB3rs", "Golden Five", "Cadian Team", "Into the Beach",
       
-      // 5 teams from Stage 2 bracket winners
-      "LYSQ", "TBD_Stage2_2", "TBD_Stage2_3", "TBD_Stage2_4", "TBD_Stage2_5"
+      // 5 teams from Stage 2 bracket winners (to be determined)
+      "TBD_Stage2_1", "TBD_Stage2_2", "TBD_Stage2_3", "TBD_Stage2_4", "TBD_Stage2_5"
     ];
     
     return qualifiedTeams;
