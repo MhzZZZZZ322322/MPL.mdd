@@ -324,7 +324,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                         <div key={roundNum} className={`${config.bgColor} border ${config.borderColor} rounded-lg overflow-hidden`}>
                           <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-blue-500/30">
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-green-400 text-lg">⚽</span>
+                              <span className="text-orange-400 text-lg">💥</span>
                               <h4 className="text-lg font-bold text-white">{config.title}</h4>
                             </div>
                             <p className="text-sm text-gray-300">{config.description}</p>
