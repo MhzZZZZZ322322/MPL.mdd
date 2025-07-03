@@ -445,7 +445,8 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                           </div>
                         </div>
                       );
-                    })
+                    });
+                })()}
               </div>
             )}
 
