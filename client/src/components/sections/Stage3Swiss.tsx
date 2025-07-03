@@ -381,11 +381,98 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
               </div>
             )}
 
-            {/* Swiss System Explanation */}
+            {/* Swiss System Rounds Explanation */}
+            <div className="bg-gradient-to-r from-zinc-900 to-black border border-blue-500/20 rounded-lg p-6">
+              <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-yellow-400" />
+                Clasificare Swiss System – Rundele
+              </h3>
+              
+              <div className="space-y-6">
+                {/* Runda 1 */}
+                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-green-400 text-lg">✅</span>
+                    <h4 className="text-white font-bold">Runda 1</h4>
+                  </div>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>Toate echipele sunt 0-0</p>
+                    <p>Se trag la sorți sau pe seed</p>
+                    <p className="text-blue-400 font-medium">8 meciuri: 16 echipe → 8 câștigă (1-0), 8 pierd (0-1)</p>
+                  </div>
+                </div>
+
+                {/* Runda 2 */}
+                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-green-400 text-lg">✅</span>
+                    <h4 className="text-white font-bold">Runda 2</h4>
+                  </div>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>1-0 vs 1-0 → 4 meciuri → 4 echipe devin 2-0</p>
+                    <p>0-1 vs 0-1 → 4 meciuri → 4 echipe devin 0-2</p>
+                    <p className="text-yellow-400 font-medium">Restul: 4 echipe rămân 1-1</p>
+                  </div>
+                </div>
+
+                {/* Runda 3 */}
+                <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-green-400 text-lg">✅</span>
+                    <h4 className="text-white font-bold">Runda 3</h4>
+                  </div>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>2-0 vs 2-0 → 2 meciuri → <span className="text-yellow-400 font-bold">2 echipe devin 3-0 ✅ CALIFICATE</span></p>
+                    <p>1-1 vs 1-1 → 4 meciuri → 4 echipe devin 2-1, 4 devin 1-2</p>
+                    <p>0-2 vs 0-2 → 2 meciuri → 2 echipe devin 1-2, <span className="text-red-400 font-bold">2 eliminări (0-3)</span></p>
+                  </div>
+                </div>
+
+                {/* Runda 4 */}
+                <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-green-400 text-lg">✅</span>
+                    <h4 className="text-white font-bold">Runda 4</h4>
+                  </div>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>2-1 vs 2-1 → 2 meciuri → <span className="text-yellow-400 font-bold">2 echipe devin 3-1 ✅ CALIFICATE</span></p>
+                    <p>1-2 vs 1-2 → 4 meciuri → 2 echipe devin 2-2, <span className="text-red-400 font-bold">2 eliminări (1-3)</span></p>
+                    <p>1-2 vs 2-1 (restul) → 2 meciuri → echipele se reechilibrează</p>
+                  </div>
+                </div>
+
+                {/* Runda 5 */}
+                <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-green-400 text-lg">✅</span>
+                    <h4 className="text-white font-bold">Runda 5</h4>
+                  </div>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>Doar echipe cu 2-2 → 4 meciuri</p>
+                    <p><span className="text-yellow-400 font-bold">Câștigătoarele devin 3-2 ✅ CALIFICATE</span></p>
+                    <p><span className="text-red-400 font-bold">Pierzătoarele devin 2-3 ❌ ELIMINATE</span></p>
+                  </div>
+                </div>
+
+                {/* Rezultat final */}
+                <div className="bg-gradient-to-r from-yellow-900/30 to-green-900/30 border border-yellow-500/50 rounded-lg p-4 mt-6">
+                  <h4 className="text-yellow-400 font-bold mb-2 flex items-center gap-2">
+                    <Trophy className="w-4 h-4" />
+                    Rezultat Final
+                  </h4>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p><span className="text-green-400 font-bold">8 echipe calificate:</span> 2 echipe (3-0) + 2 echipe (3-1) + 4 echipe (3-2)</p>
+                    <p><span className="text-red-400 font-bold">8 echipe eliminate:</span> 2 echipe (0-3) + 2 echipe (1-3) + 4 echipe (2-3)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Swiss System Format Details */}
             <div className="bg-gradient-to-r from-zinc-900 to-black border border-blue-500/20 rounded-lg p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <Users className="w-5 h-5 text-blue-400" />
-                Formatul Swiss System
+                Detalii Format Swiss System
               </h3>
               <div className="grid md:grid-cols-2 gap-4 text-sm">
                 <div>

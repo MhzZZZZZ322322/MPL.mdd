@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 01, 2025: **ADDED** - Explicație completă rundelor Swiss System cu detalii pentru fiecare rundă (1-5) și rezultatele finale
 - July 01, 2025: **ENHANCED** - Organizat meciurile Swiss System în funcție de tipul lor (0-0, 1-0, 2-0, etc.) pentru claritate
 - July 01, 2025: **REMOVED** - Eliminată afișarea grafică Swiss Bracket din Stage 3 - păstrat doar clasamentul și statisticile
 - July 01, 2025: **UPDATED** - Echipa "Lean Vision" înlocuită cu "LYSQ" în Stage 2 bracket conform cererii utilizatorului cu logo oficial
