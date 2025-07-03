@@ -36,12 +36,12 @@ interface Stage3SwissProps {
 }
 
 export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
-  const { data: standings = [], isLoading: standingsLoading, error: standingsError } = useQuery({
+  const { data: standings = [], isLoading: standingsLoading, error: standingsError } = useQuery<Stage3SwissTeam[]>({
     queryKey: ["/api/stage3-swiss-standings"],
     refetchInterval: 15000, // Reduced frequency - refresh every 15 seconds
   });
 
-  const { data: matches = [], isLoading: matchesLoading, error: matchesError } = useQuery({
+  const { data: matches = [], isLoading: matchesLoading, error: matchesError } = useQuery<Stage3SwissMatch[]>({
     queryKey: ["/api/stage3-swiss-matches"],
     refetchInterval: 15000, // Reduced frequency - refresh every 15 seconds
   });
@@ -248,96 +248,136 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
               </div>
             </div>
 
-            {/* Swiss Rounds */}
-            {Object.keys(matchesByRound).length > 0 && (
+            {/* Swiss Rounds by Match Type */}
+            {matches.length > 0 && (
               <div className="space-y-6">
                 <h3 className="text-xl font-bold text-white flex items-center gap-2">
                   <Target className="w-5 h-5 text-blue-400" />
                   Meciurile Swiss System
                 </h3>
                 
-                {Object.entries(matchesByRound)
-                  .sort(([a], [b]) => Number(b) - Number(a)) // Most recent rounds first
-                  .map(([roundNum, roundMatches]) => (
-                    <div key={roundNum} className="bg-gradient-to-r from-zinc-900 to-black border border-blue-500/20 rounded-lg overflow-hidden">
-                      <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-blue-500/30">
-                        <h4 className="text-lg font-bold text-white">Runda {roundNum}</h4>
-                      </div>
+                {/* Group matches by their type */}
+                {(() => {
+                  // Group matches by match type (0-0, 1-0, 2-0, etc.)
+                  const matchesByType: Record<string, Stage3SwissMatch[]> = {};
+                  
+                  matches.forEach((match) => {
+                    // Determine match type based on teams' current records
+                    const team1Stats = standingsArray.find(t => t.teamName === match.team1Name);
+                    const team2Stats = standingsArray.find(t => t.teamName === match.team2Name);
+                    
+                    if (team1Stats && team2Stats) {
+                      const record1 = `${team1Stats.wins}-${team1Stats.losses}`;
+                      const record2 = `${team2Stats.wins}-${team2Stats.losses}`;
                       
-                      <div className="p-6">
-                        <div className="grid gap-4">
-                          {roundMatches.map((match) => (
-                            <div
-                              key={match.id}
-                              className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50"
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-4 flex-1">
-                                  {/* Team 1 */}
-                                  <div className="flex items-center gap-3 min-w-0 flex-1">
-                                    <img
-                                      src={getTeamLogo(match.team1Name)}
-                                      alt={match.team1Name}
-                                      className="w-10 h-10 object-contain rounded"
-                                    />
-                                    <span className="text-white font-medium truncate">{match.team1Name}</span>
-                                  </div>
+                      // Use the most common record as the match type
+                      const matchType = record1 === record2 ? record1 : `${record1} vs ${record2}`;
+                      
+                      if (!matchesByType[matchType]) {
+                        matchesByType[matchType] = [];
+                      }
+                      matchesByType[matchType].push(match);
+                    }
+                  });
+                  
+                  // Define order priority for match types
+                  const typeOrder = ['0-0', '1-0', '2-0', '1-1', '2-1', '0-1', '0-2', '1-2', '2-2'];
+                  
+                  return Object.entries(matchesByType)
+                    .sort(([a], [b]) => {
+                      const aIndex = typeOrder.indexOf(a);
+                      const bIndex = typeOrder.indexOf(b);
+                      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+                      if (aIndex !== -1) return -1;
+                      if (bIndex !== -1) return 1;
+                      return a.localeCompare(b);
+                    })
+                    .map(([matchType, typeMatches]) => (
+                      <div key={matchType} className="bg-gradient-to-r from-zinc-900 to-black border border-blue-500/20 rounded-lg overflow-hidden">
+                        <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-blue-500/30">
+                          <h4 className="text-lg font-bold text-white">
+                            Meciuri {matchType}
+                          </h4>
+                          <p className="text-sm text-gray-300">
+                            {typeMatches.length} {typeMatches.length === 1 ? 'meci' : 'meciuri'}
+                          </p>
+                        </div>
+                      
+                        <div className="p-6">
+                          <div className="grid gap-4">
+                            {typeMatches.map((match) => (
+                              <div
+                                key={match.id}
+                                className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-4 flex-1">
+                                    {/* Team 1 */}
+                                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                                      <img
+                                        src={getTeamLogo(match.team1Name)}
+                                        alt={match.team1Name}
+                                        className="w-10 h-10 object-contain rounded"
+                                      />
+                                      <span className="text-white font-medium truncate">{match.team1Name}</span>
+                                    </div>
 
-                                  {/* Score */}
-                                  <div className="text-center px-4">
-                                    {match.isPlayed ? (
-                                      <div className="text-white font-bold text-lg">
-                                        {match.streamUrl ? (
-                                          <a
-                                            href={match.streamUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-orange-400 hover:text-orange-300 transition-colors"
-                                          >
-                                            {match.team1Score} - {match.team2Score}
-                                          </a>
-                                        ) : (
-                                          `${match.team1Score} - ${match.team2Score}`
-                                        )}
-                                        {match.technicalWin && (
-                                          <span className="text-xs text-yellow-400 ml-2">⚙️</span>
+                                    {/* Score */}
+                                    <div className="text-center px-4">
+                                      {match.isPlayed ? (
+                                        <div className="text-white font-bold text-lg">
+                                          {match.streamUrl ? (
+                                            <a
+                                              href={match.streamUrl}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="text-orange-400 hover:text-orange-300 transition-colors"
+                                            >
+                                              {match.team1Score} - {match.team2Score}
+                                            </a>
+                                          ) : (
+                                            `${match.team1Score} - ${match.team2Score}`
+                                          )}
+                                          {match.technicalWin && (
+                                            <span className="text-xs text-yellow-400 ml-2">⚙️</span>
+                                          )}
+                                        </div>
+                                      ) : (
+                                        <div className="text-gray-400 text-sm">vs</div>
+                                      )}
+                                      <div className="text-xs text-gray-500 mt-1">
+                                        {match.matchType}
+                                        {match.isDecisive && (
+                                          <span className="text-yellow-400 ml-1">📌</span>
                                         )}
                                       </div>
-                                    ) : (
-                                      <div className="text-gray-400 text-sm">vs</div>
-                                    )}
-                                    <div className="text-xs text-gray-500 mt-1">
-                                      {match.matchType}
-                                      {match.isDecisive && (
-                                        <span className="text-yellow-400 ml-1">📌</span>
-                                      )}
+                                    </div>
+
+                                    {/* Team 2 */}
+                                    <div className="flex items-center gap-3 min-w-0 flex-1 justify-end">
+                                      <span className="text-white font-medium truncate">{match.team2Name}</span>
+                                      <img
+                                        src={getTeamLogo(match.team2Name)}
+                                        alt={match.team2Name}
+                                        className="w-10 h-10 object-contain rounded"
+                                      />
                                     </div>
                                   </div>
 
-                                  {/* Team 2 */}
-                                  <div className="flex items-center gap-3 min-w-0 flex-1 justify-end">
-                                    <span className="text-white font-medium truncate">{match.team2Name}</span>
-                                    <img
-                                      src={getTeamLogo(match.team2Name)}
-                                      alt={match.team2Name}
-                                      className="w-10 h-10 object-contain rounded"
-                                    />
-                                  </div>
+                                  {/* Winner indicator */}
+                                  {match.isPlayed && match.winnerName && (
+                                    <div className="ml-4">
+                                      <span className="text-yellow-400 text-2xl">🏆</span>
+                                    </div>
+                                  )}
                                 </div>
-
-                                {/* Winner indicator */}
-                                {match.isPlayed && match.winnerName && (
-                                  <div className="ml-4">
-                                    <span className="text-yellow-400 text-2xl">🏆</span>
-                                  </div>
-                                )}
                               </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ));
+                })()}
               </div>
             )}
 
