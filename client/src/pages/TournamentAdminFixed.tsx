@@ -9,8 +9,6 @@ import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
 import ScheduleManager from "@/components/admin/ScheduleManager";
 import { Stage2BracketManager } from "@/components/admin/Stage2BracketManager";
-import { Stage3SwissManager } from "@/components/admin/Stage3SwissManager";
-import { SwissBracketManager } from "@/components/admin/SwissBracketManager";
 import { Stage3SwissRoundsManager } from "@/components/admin/Stage3SwissRoundsManager";
 
 export default function TournamentAdmin() {
@@ -44,17 +42,9 @@ export default function TournamentAdmin() {
                 <Trophy className="w-4 h-4" />
                 Stage 2 Bracket
               </TabsTrigger>
-              <TabsTrigger value="stage3" className="flex items-center gap-2">
-                <Trophy className="w-4 h-4" />
-                Stage 3 Swiss
-              </TabsTrigger>
               <TabsTrigger value="stage3-rounds" className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
                 Stage 3 Runde
-              </TabsTrigger>
-              <TabsTrigger value="swiss-bracket" className="flex items-center gap-2">
-                <Settings className="w-4 h-4" />
-                Swiss Bracket
               </TabsTrigger>
             </TabsList>
             
@@ -74,16 +64,8 @@ export default function TournamentAdmin() {
               <Stage2BracketManager />
             </TabsContent>
             
-            <TabsContent value="stage3" className="mt-6">
-              <Stage3SwissManager />
-            </TabsContent>
-            
             <TabsContent value="stage3-rounds" className="mt-6">
               <Stage3SwissRoundsManager />
-            </TabsContent>
-            
-            <TabsContent value="swiss-bracket" className="mt-6">
-              <SwissBracketManager />
             </TabsContent>
           </Tabs>
         </div>
