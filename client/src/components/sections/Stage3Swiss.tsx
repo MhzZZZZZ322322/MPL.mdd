@@ -397,7 +397,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                   </div>
                   <div className="text-gray-300 text-sm space-y-1">
                     <p>Toate echipele sunt 0-0</p>
-                    <p>Se trag la sorți sau pe seed</p>
+                    <p>Repartizare pe  seed</p>
                     <p className="text-blue-400 font-medium">8 meciuri: 16 echipe → 8 câștigă (1-0), 8 pierd (0-1)</p>
                   </div>
                 </div>
