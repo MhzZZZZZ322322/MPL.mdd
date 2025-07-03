@@ -116,6 +116,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 03, 2025: **STRICT** - Stage 3 Swiss afișează doar date din baza de date - fără meciuri = nimic afișat pe site
+- July 03, 2025: **COMPLETED** - Sistem automat pentru echipele calificate în Stage 3 (16 echipe) din rezultatele anterioare
 - July 01, 2025: **SIMPLIFIED** - Eliminat tab-urile redundante din admin (Stage 3 Swiss, Swiss Bracket) - păstrat doar "Stage 3 Runde"
 - July 01, 2025: **ADDED** - Manager admin pentru meciurile Stage 3 Swiss organizate pe runde cu interfață completă CRUD
 - July 01, 2025: **INTEGRATED** - Conectat meciurile reale din baza de date la rundele Swiss System cu descrieri detaliate pentru fiecare rundă

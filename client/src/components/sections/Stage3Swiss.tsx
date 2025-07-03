@@ -88,6 +88,11 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
   const standingsArray = standings as Stage3SwissTeam[];
   const matchesArray = matches as Stage3SwissMatch[];
   
+  // If no matches exist in database, don't show anything
+  if (matchesArray.length === 0) {
+    return null;
+  }
+  
   // Calculate Swiss statistics
   const totalTeams = standingsArray.length;
   const qualifiedTeams = standingsArray.filter(team => team.status === 'qualified').length;
