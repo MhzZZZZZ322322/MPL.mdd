@@ -70,29 +70,34 @@ export function Stage3SwissRoundsManager() {
   // Round descriptions
   const roundDescriptions: Record<number, { title: string; description: string; color: string }> = {
     1: {
-      title: "Runda 1 - Toate echipele 0-0",
-      description: "Repartizare pe seed - 8 meciuri pentru 16 echipe",
+      title: "Runda 1 - 0:0 (BO1)",
+      description: "Toate echipele încep cu record curat - 8 meciuri BO1",
       color: "bg-blue-900/20 border-blue-500/30"
     },
     2: {
-      title: "Runda 2 - 1-0 vs 1-0 și 0-1 vs 0-1",
-      description: "Echipele cu același record se înfruntă",
+      title: "Runda 2 - 0:1 & 1:0 (BO1)",
+      description: "Câștigătorii vs învinșii din Runda 1 - meciuri BO1",
       color: "bg-green-900/20 border-green-500/30"
     },
     3: {
-      title: "Runda 3 - Prima rundă cu calificări",
-      description: "2-0 vs 2-0 → primele calificate (3-0)",
+      title: "Runda 3 - 1:1 (BO1)",
+      description: "Echipele cu record egal după 2 runde - meciuri BO1",
       color: "bg-yellow-900/20 border-yellow-500/30"
     },
     4: {
-      title: "Runda 4 - Calificări 3-1",
-      description: "2-1 vs 2-1 → calificate cu 3-1",
+      title: "Runda 4 - 0:2 & 2:0 (BO3)",
+      description: "Calificări și eliminări - meciuri decisive BO3",
       color: "bg-orange-900/20 border-orange-500/30"
     },
     5: {
-      title: "Runda 5 - Ultima rundă",
-      description: "2-2 vs 2-2 → ultimele calificate (3-2)",
+      title: "Runda 5 - 1:2 & 2:1 (BO3)",
+      description: "Calificări cu 3:1 și eliminări cu 1:3 - meciuri BO3",
       color: "bg-purple-900/20 border-purple-500/30"
+    },
+    6: {
+      title: "Runda 6 - 2:2 (BO3)",
+      description: "Ultimele calificări cu 3:2 - meciuri finale BO3",
+      color: "bg-red-900/20 border-red-500/30"
     }
   };
 
@@ -257,7 +262,7 @@ export function Stage3SwissRoundsManager() {
             Gestionare Meciuri Stage 3 Swiss - Pe Runde
           </CardTitle>
           <p className="text-gray-300 text-sm">
-            Administrează meciurile Stage 3 Swiss System organizate pe runde (1-5). Fiecare rundă are explicația și echipele corespunzătoare.
+            Administrează meciurile Stage 3 Swiss System organizate pe runde (1-6). Fiecare rundă are explicația și echipele corespunzătoare.
           </p>
         </CardHeader>
       </Card>
@@ -279,7 +284,7 @@ export function Stage3SwissRoundsManager() {
                 onChange={(e) => setNewMatch({ ...newMatch, roundNumber: parseInt(e.target.value) })}
                 className="w-full mt-1 p-2 border border-gray-600 rounded bg-gray-700 text-white"
               >
-                {[1, 2, 3, 4, 5].map(round => (
+                {[1, 2, 3, 4, 5, 6].map(round => (
                   <option key={round} value={round}>
                     Runda {round}
                   </option>
@@ -425,7 +430,7 @@ export function Stage3SwissRoundsManager() {
 
       {/* Matches by Round */}
       <div className="space-y-6">
-        {[1, 2, 3, 4, 5].map(roundNum => {
+        {[1, 2, 3, 4, 5, 6].map(roundNum => {
           const roundMatches = matchesByRound[roundNum] || [];
           const roundConfig = roundDescriptions[roundNum];
 
