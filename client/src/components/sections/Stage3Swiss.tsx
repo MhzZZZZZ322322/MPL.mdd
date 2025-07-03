@@ -282,32 +282,32 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                       // Round descriptions
                       const roundDescriptions: Record<number, { title: string; description: string; bgColor: string; borderColor: string }> = {
                         1: {
-                          title: "Runda 1 - Toate echipele 0-0",
-                          description: "Repartizare pe seed - 8 meciuri pentru 16 echipe",
+                          title: "Runda 1 - Toate echipele 0:0",
+                          description: "Meciuri 0:0 vs 0:0 - repartizare pe seed (8 meciuri)",
                           bgColor: "bg-blue-900/20",
                           borderColor: "border-blue-500/30"
                         },
                         2: {
-                          title: "Runda 2 - 1-0 vs 1-0 și 0-1 vs 0-1",
-                          description: "Echipele cu același record se înfruntă",
+                          title: "Runda 2 - 1:0 vs 0:1",
+                          description: "Câștigătorii (1:0) vs învinșii (0:1) din Runda 1",
                           bgColor: "bg-green-900/20",
                           borderColor: "border-green-500/30"
                         },
                         3: {
-                          title: "Runda 3 - Prima rundă cu calificări",
-                          description: "2-0 vs 2-0 → primele calificate (3-0)",
+                          title: "Runda 3 - 2:0 vs 1:1 + eliminări 0:2",
+                          description: "Primele calificări (3:0) și primele eliminări (0:3)",
                           bgColor: "bg-yellow-900/20",
                           borderColor: "border-yellow-500/30"
                         },
                         4: {
-                          title: "Runda 4 - Calificări 3-1",
-                          description: "2-1 vs 2-1 → calificate cu 3-1",
+                          title: "Runda 4 - 2:1 vs 1:2",
+                          description: "Calificate cu 3:1 și eliminate cu 1:3",
                           bgColor: "bg-orange-900/20",
                           borderColor: "border-orange-500/30"
                         },
                         5: {
-                          title: "Runda 5 - Ultima rundă",
-                          description: "2-2 vs 2-2 → ultimele calificate (3-2)",
+                          title: "Runda 5 - Meciuri finale 2:2",
+                          description: "Ultimele calificări (3:2) și eliminări finale (2:3)",
                           bgColor: "bg-purple-900/20",
                           borderColor: "border-purple-500/30"
                         }
