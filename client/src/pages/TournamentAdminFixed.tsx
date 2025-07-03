@@ -11,6 +11,7 @@ import ScheduleManager from "@/components/admin/ScheduleManager";
 import { Stage2BracketManager } from "@/components/admin/Stage2BracketManager";
 import { Stage3SwissManager } from "@/components/admin/Stage3SwissManager";
 import { SwissBracketManager } from "@/components/admin/SwissBracketManager";
+import { Stage3SwissRoundsManager } from "@/components/admin/Stage3SwissRoundsManager";
 
 export default function TournamentAdmin() {
   const queryClient = useQueryClient();
@@ -47,6 +48,10 @@ export default function TournamentAdmin() {
                 <Trophy className="w-4 h-4" />
                 Stage 3 Swiss
               </TabsTrigger>
+              <TabsTrigger value="stage3-rounds" className="flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                Stage 3 Runde
+              </TabsTrigger>
               <TabsTrigger value="swiss-bracket" className="flex items-center gap-2">
                 <Settings className="w-4 h-4" />
                 Swiss Bracket
@@ -71,6 +76,10 @@ export default function TournamentAdmin() {
             
             <TabsContent value="stage3" className="mt-6">
               <Stage3SwissManager />
+            </TabsContent>
+            
+            <TabsContent value="stage3-rounds" className="mt-6">
+              <Stage3SwissRoundsManager />
             </TabsContent>
             
             <TabsContent value="swiss-bracket" className="mt-6">
