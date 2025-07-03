@@ -248,7 +248,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
               </div>
             </div>
 
-            {/* Swiss Rounds by Match Type */}
+            {/* Swiss Rounds with Real Matches */}
             {matches.length > 0 && (
               <div className="space-y-6">
                 <h3 className="text-xl font-bold text-white flex items-center gap-2">
@@ -256,127 +256,155 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                   Meciurile Swiss System
                 </h3>
                 
-                {/* Group matches by their type */}
+                {/* Group matches by round number */}
                 {(() => {
-                  // Group matches by match type (0-0, 1-0, 2-0, etc.)
-                  const matchesByType: Record<string, Stage3SwissMatch[]> = {};
+                  // Group matches by round
+                  const matchesByRound: Record<number, Stage3SwissMatch[]> = {};
                   
                   matches.forEach((match) => {
-                    // Determine match type based on teams' current records
-                    const team1Stats = standingsArray.find(t => t.teamName === match.team1Name);
-                    const team2Stats = standingsArray.find(t => t.teamName === match.team2Name);
-                    
-                    if (team1Stats && team2Stats) {
-                      const record1 = `${team1Stats.wins}-${team1Stats.losses}`;
-                      const record2 = `${team2Stats.wins}-${team2Stats.losses}`;
-                      
-                      // Use the most common record as the match type
-                      const matchType = record1 === record2 ? record1 : `${record1} vs ${record2}`;
-                      
-                      if (!matchesByType[matchType]) {
-                        matchesByType[matchType] = [];
-                      }
-                      matchesByType[matchType].push(match);
+                    const round = match.roundNumber;
+                    if (!matchesByRound[round]) {
+                      matchesByRound[round] = [];
                     }
+                    matchesByRound[round].push(match);
                   });
                   
-                  // Define order priority for match types
-                  const typeOrder = ['0-0', '1-0', '2-0', '1-1', '2-1', '0-1', '0-2', '1-2', '2-2'];
+                  // Round configurations with descriptions
+                  const roundDescriptions: Record<number, { title: string; description: string; bgColor: string; borderColor: string }> = {
+                    1: {
+                      title: "Runda 1 - Toate echipele 0-0",
+                      description: "Repartizare pe seed - 8 meciuri pentru 16 echipe",
+                      bgColor: "bg-blue-900/20",
+                      borderColor: "border-blue-500/30"
+                    },
+                    2: {
+                      title: "Runda 2 - 1-0 vs 1-0 și 0-1 vs 0-1",
+                      description: "Echipele cu același record se înfruntă",
+                      bgColor: "bg-green-900/20",
+                      borderColor: "border-green-500/30"
+                    },
+                    3: {
+                      title: "Runda 3 - Prima rundă cu calificări",
+                      description: "2-0 vs 2-0 → primele calificate (3-0)",
+                      bgColor: "bg-yellow-900/20",
+                      borderColor: "border-yellow-500/30"
+                    },
+                    4: {
+                      title: "Runda 4 - Calificări 3-1",
+                      description: "2-1 vs 2-1 → calificate cu 3-1",
+                      bgColor: "bg-orange-900/20",
+                      borderColor: "border-orange-500/30"
+                    },
+                    5: {
+                      title: "Runda 5 - Ultima rundă",
+                      description: "2-2 vs 2-2 → ultimele calificate (3-2)",
+                      bgColor: "bg-purple-900/20",
+                      borderColor: "border-purple-500/30"
+                    }
+                  };
                   
-                  return Object.entries(matchesByType)
-                    .sort(([a], [b]) => {
-                      const aIndex = typeOrder.indexOf(a);
-                      const bIndex = typeOrder.indexOf(b);
-                      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
-                      if (aIndex !== -1) return -1;
-                      if (bIndex !== -1) return 1;
-                      return a.localeCompare(b);
-                    })
-                    .map(([matchType, typeMatches]) => (
-                      <div key={matchType} className="bg-gradient-to-r from-zinc-900 to-black border border-blue-500/20 rounded-lg overflow-hidden">
-                        <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-blue-500/30">
-                          <h4 className="text-lg font-bold text-white">
-                            Meciuri {matchType}
-                          </h4>
-                          <p className="text-sm text-gray-300">
-                            {typeMatches.length} {typeMatches.length === 1 ? 'meci' : 'meciuri'}
-                          </p>
-                        </div>
+                  return Object.entries(matchesByRound)
+                    .sort(([a], [b]) => Number(a) - Number(b)) // Sort by round number
+                    .map(([roundNum, roundMatches]) => {
+                      const round = Number(roundNum);
+                      const config = roundDescriptions[round] || {
+                        title: `Runda ${round}`,
+                        description: "Meciuri Swiss System",
+                        bgColor: "bg-gray-900/20",
+                        borderColor: "border-gray-500/30"
+                      };
                       
-                        <div className="p-6">
-                          <div className="grid gap-4">
-                            {typeMatches.map((match) => (
-                              <div
-                                key={match.id}
-                                className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50"
-                              >
-                                <div className="flex items-center justify-between">
-                                  <div className="flex items-center gap-4 flex-1">
-                                    {/* Team 1 */}
-                                    <div className="flex items-center gap-3 min-w-0 flex-1">
-                                      <img
-                                        src={getTeamLogo(match.team1Name)}
-                                        alt={match.team1Name}
-                                        className="w-10 h-10 object-contain rounded"
-                                      />
-                                      <span className="text-white font-medium truncate">{match.team1Name}</span>
-                                    </div>
+                      return (
+                        <div key={roundNum} className={`${config.bgColor} border ${config.borderColor} rounded-lg overflow-hidden`}>
+                          <div className="bg-gradient-to-r from-blue-600/30 to-blue-500/20 p-4 border-b border-blue-500/30">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-green-400 text-lg">✅</span>
+                              <h4 className="text-lg font-bold text-white">{config.title}</h4>
+                            </div>
+                            <p className="text-sm text-gray-300">{config.description}</p>
+                            <p className="text-xs text-blue-400 mt-1">
+                              {roundMatches.length} {roundMatches.length === 1 ? 'meci' : 'meciuri'} 
+                              {roundMatches.filter(m => m.isPlayed).length > 0 && 
+                                ` - ${roundMatches.filter(m => m.isPlayed).length} jucate`
+                              }
+                            </p>
+                          </div>
+                        
+                          <div className="p-6">
+                            <div className="grid gap-4">
+                              {roundMatches.map((match) => (
+                                <div
+                                  key={match.id}
+                                  className="bg-gray-800/50 rounded-lg p-4 border border-gray-700/50"
+                                >
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-4 flex-1">
+                                      {/* Team 1 */}
+                                      <div className="flex items-center gap-3 min-w-0 flex-1">
+                                        <img
+                                          src={getTeamLogo(match.team1Name)}
+                                          alt={match.team1Name}
+                                          className="w-10 h-10 object-contain rounded"
+                                        />
+                                        <span className="text-white font-medium truncate">{match.team1Name}</span>
+                                      </div>
 
-                                    {/* Score */}
-                                    <div className="text-center px-4">
-                                      {match.isPlayed ? (
-                                        <div className="text-white font-bold text-lg">
-                                          {match.streamUrl ? (
-                                            <a
-                                              href={match.streamUrl}
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                              className="text-orange-400 hover:text-orange-300 transition-colors"
-                                            >
-                                              {match.team1Score} - {match.team2Score}
-                                            </a>
-                                          ) : (
-                                            `${match.team1Score} - ${match.team2Score}`
-                                          )}
-                                          {match.technicalWin && (
-                                            <span className="text-xs text-yellow-400 ml-2">⚙️</span>
+                                      {/* Score */}
+                                      <div className="text-center px-4">
+                                        {match.isPlayed ? (
+                                          <div className="text-white font-bold text-lg">
+                                            {match.streamUrl ? (
+                                              <a
+                                                href={match.streamUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-orange-400 hover:text-orange-300 transition-colors"
+                                              >
+                                                {match.team1Score} - {match.team2Score}
+                                              </a>
+                                            ) : (
+                                              `${match.team1Score} - ${match.team2Score}`
+                                            )}
+                                            {match.technicalWin && (
+                                              <span className="text-xs text-yellow-400 ml-2">⚙️</span>
+                                            )}
+                                          </div>
+                                        ) : (
+                                          <div className="text-gray-400 text-sm">vs</div>
+                                        )}
+                                        <div className="text-xs text-gray-500 mt-1">
+                                          {match.matchType}
+                                          {match.isDecisive && (
+                                            <span className="text-yellow-400 ml-1">📌</span>
                                           )}
                                         </div>
-                                      ) : (
-                                        <div className="text-gray-400 text-sm">vs</div>
-                                      )}
-                                      <div className="text-xs text-gray-500 mt-1">
-                                        {match.matchType}
-                                        {match.isDecisive && (
-                                          <span className="text-yellow-400 ml-1">📌</span>
-                                        )}
+                                      </div>
+
+                                      {/* Team 2 */}
+                                      <div className="flex items-center gap-3 min-w-0 flex-1 justify-end">
+                                        <span className="text-white font-medium truncate">{match.team2Name}</span>
+                                        <img
+                                          src={getTeamLogo(match.team2Name)}
+                                          alt={match.team2Name}
+                                          className="w-10 h-10 object-contain rounded"
+                                        />
                                       </div>
                                     </div>
 
-                                    {/* Team 2 */}
-                                    <div className="flex items-center gap-3 min-w-0 flex-1 justify-end">
-                                      <span className="text-white font-medium truncate">{match.team2Name}</span>
-                                      <img
-                                        src={getTeamLogo(match.team2Name)}
-                                        alt={match.team2Name}
-                                        className="w-10 h-10 object-contain rounded"
-                                      />
-                                    </div>
+                                    {/* Winner indicator */}
+                                    {match.isPlayed && match.winnerName && (
+                                      <div className="ml-4">
+                                        <span className="text-yellow-400 text-2xl">🏆</span>
+                                      </div>
+                                    )}
                                   </div>
-
-                                  {/* Winner indicator */}
-                                  {match.isPlayed && match.winnerName && (
-                                    <div className="ml-4">
-                                      <span className="text-yellow-400 text-2xl">🏆</span>
-                                    </div>
-                                  )}
                                 </div>
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ));
+                      );
+                    });
                 })()}
               </div>
             )}
