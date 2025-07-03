@@ -287,7 +287,7 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                           borderColor: "border-blue-500/30"
                         },
                         2: {
-                          title: "Runda 2 - 1:0 vs 0:1 (BO1)",
+                          title: "Runda 2 - 0:1 & 1:0 (BO1)",
                           description: "Câștigătorii vs învinșii din Runda 1 - meciuri BO1",
                           bgColor: "bg-green-900/20",
                           borderColor: "border-green-500/30"
@@ -299,13 +299,13 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                           borderColor: "border-yellow-500/30"
                         },
                         4: {
-                          title: "Runda 4 - 2:0 vs 0:2 (BO3)",
+                          title: "Runda 4 - 0:2 & 2:0 (BO3)",
                           description: "Calificări și eliminări - meciuri decisive BO3",
                           bgColor: "bg-orange-900/20",
                           borderColor: "border-orange-500/30"
                         },
                         5: {
-                          title: "Runda 5 - 2:1 vs 1:2 (BO3)",
+                          title: "Runda 5 - 1:2 & 2:1 (BO3)",
                           description: "Calificări cu 3:1 și eliminări cu 1:3 - meciuri BO3",
                           bgColor: "bg-purple-900/20",
                           borderColor: "border-purple-500/30"
@@ -328,17 +328,17 @@ export function Stage3Swiss({ isExpanded, onToggle }: Stage3SwissProps) {
                       const getMatchTypes = (roundNum: number) => {
                         switch (roundNum) {
                           case 1:
-                            return [{ type: "0:0 vs 0:0 (BO1)", color: "text-blue-400", desc: "Toate echipele încep cu record curat" }];
+                            return [{ type: "0:0 (BO1)", color: "text-blue-400", desc: "Toate echipele încep cu record curat" }];
                           case 2:
-                            return [{ type: "1:0 vs 0:1 (BO1)", color: "text-green-400", desc: "Câștigătorii vs învinșii din Runda 1" }];
+                            return [{ type: "0:1 & 1:0 (BO1)", color: "text-green-400", desc: "Câștigătorii vs învinșii din Runda 1" }];
                           case 3:
-                            return [{ type: "1:1 vs 1:1 (BO1)", color: "text-yellow-400", desc: "Echipele cu record egal după 2 runde" }];
+                            return [{ type: "1:1 (BO1)", color: "text-yellow-400", desc: "Echipele cu record egal după 2 runde" }];
                           case 4:
-                            return [{ type: "2:0 vs 0:2 (BO3)", color: "text-orange-400", desc: "Calificări și eliminări - meciuri decisive" }];
+                            return [{ type: "0:2 & 2:0 (BO3)", color: "text-orange-400", desc: "Calificări și eliminări - meciuri decisive" }];
                           case 5:
-                            return [{ type: "2:1 vs 1:2 (BO3)", color: "text-purple-400", desc: "Calificări cu 3:1 și eliminări cu 1:3" }];
+                            return [{ type: "1:2 & 2:1 (BO3)", color: "text-purple-400", desc: "Calificări cu 3:1 și eliminări cu 1:3" }];
                           case 6:
-                            return [{ type: "2:2 vs 2:2 (BO3)", color: "text-red-400", desc: "Ultimele calificări cu 3:2" }];
+                            return [{ type: "2:2 (BO3)", color: "text-red-400", desc: "Ultimele calificări cu 3:2" }];
                           default:
                             return [];
                         }
