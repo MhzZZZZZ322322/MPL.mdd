@@ -142,7 +142,7 @@ const SimpleContactForm = () => {
     },
     { 
       name: 'TikTok', 
-      url: 'https://www.tiktok.com/@domnukrot', 
+      url: 'https://www.tiktok.com/@moldova.pro.league', 
       icon: <FaTiktok className="mr-2 text-xl" />,
       className: 'bg-black hover:bg-black/80 border-[#8B5CF6]/50 hover:border-[#8B5CF6]'
     }

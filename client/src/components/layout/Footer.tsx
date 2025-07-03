@@ -133,7 +133,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-secondary mt-1 mr-2"><FaTiktok /></span>
-                <a href="https://www.tiktok.com/@domnukrot" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                <a href="https://www.tiktok.com/@moldova.pro.league" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
                   TikTok
                 </a>
               </li>
