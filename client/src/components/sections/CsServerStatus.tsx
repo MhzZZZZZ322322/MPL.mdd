@@ -437,8 +437,8 @@ export const CsServerStatus: React.FC = () => {
         <div className="flex flex-col justify-center items-center mt-10 gap-4 p-6 bg-black/5 dark:bg-white/5 rounded-lg border border-primary/10">
           <p className="text-sm text-center">
             {t('servers.thanks.start')}
-            <a href="https://www.tiktok.com/@moldova.pro.league" target="_blank" rel="noopener noreferrer" 
-               className="text-primary hover:underline font-medium">@moldova.pro.league</a>
+            <a href="https://www.tiktok.com/@faceofmadness" target="_blank" rel="noopener noreferrer" 
+               className="text-primary hover:underline font-medium">@faceofmadness</a>
             {t('servers.thanks.end')}
           </p>
         </div>

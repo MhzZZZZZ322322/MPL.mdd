@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 04, 2025: **UPDATED** - Schimbat linkul de mulțumire din CsServerStatus către @faceofmadness (https://www.tiktok.com/@faceofmadness)
 - July 04, 2025: **UPDATED** - Schimbat parola de admin din "Admin322" în "Admin322228" în toate bazele de date și storage-ul aplicației
 - July 03, 2025: **UPDATED** - Schimbat numele jucătorului din echipa Xtreme Players: "enthys1astyl" → "enthusiastul" în baza de date PostgreSQL cu actualizarea linkului FACEIT
 - July 03, 2025: **UPDATED** - Actualizat complet toate linkurile TikTok și @domnukrot către contul oficial @moldova.pro.league în Footer, Contact, SimpleContactForm, EventDetails și CsServerStatus
