@@ -57,6 +57,8 @@ export function Stage3SwissRoundsManager() {
   // Get qualified teams from calculation
   const { data: qualifiedTeamNames = [] } = useQuery<string[]>({
     queryKey: ["/api/stage3-qualified-teams"],
+    refetchInterval: 5000, // Refresh every 5 seconds to ensure fresh data
+    staleTime: 0, // Always consider data stale to force refresh
   });
 
   const { data: allTeams = [] } = useQuery<Team[]>({
@@ -107,6 +109,7 @@ export function Stage3SwissRoundsManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-matches"] });
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-standings"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stage3-qualified-teams"] });
       setNewMatch({
         roundNumber: 1,
         team1Name: "",
@@ -141,6 +144,7 @@ export function Stage3SwissRoundsManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-matches"] });
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-standings"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stage3-qualified-teams"] });
       setEditingMatch(null);
       toast({
         title: "Succes",
@@ -162,6 +166,7 @@ export function Stage3SwissRoundsManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-matches"] });
       queryClient.invalidateQueries({ queryKey: ["/api/stage3-swiss-standings"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stage3-qualified-teams"] });
       toast({
         title: "Succes",
         description: "Meciul a fost șters!",
