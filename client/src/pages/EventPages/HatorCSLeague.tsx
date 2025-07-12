@@ -229,21 +229,30 @@ const HatorCSLeague = () => {
                 </div>
               </a>
 
-              <div className="group block md:col-span-2 lg:col-span-1 md:max-w-md lg:max-w-full md:mx-auto lg:mx-0">
+              <a 
+                href="https://darwin.md/covoras-pentru-mouse-hator-esport-3xl-monte-edition-blue.html" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group block md:col-span-2 lg:col-span-1 md:max-w-md lg:max-w-full md:mx-auto lg:mx-0"
+              >
                 <div className="bg-gradient-to-br from-purple-500/30 to-purple-700/30 p-4 sm:p-6 rounded-lg border border-purple-500/40 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30 h-full flex flex-col">
                   <div className="flex items-center mb-4">
                     <Gift className="text-purple-400 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
                     <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">{t('event.prize.secret')}</h3>
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow flex items-center justify-center bg-darkGray/60">
-                    <Sparkles className="text-purple-300 h-20 w-20 opacity-80" />
+                    <img 
+                      src="/attached_assets/image_1752297114131.png"
+                      alt="Covoraș pentru mouse Hator eSport 3XL MONTE edition"
+                      className="w-full h-full object-contain rounded"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-8">
-                      <p className="text-purple-300 text-lg sm:text-xl font-semibold">{t('event.prize.secret.description')}</p>
+                      <p className="text-purple-300 text-lg sm:text-xl font-semibold">Covoraș pentru mouse</p>
                     </div>
                   </div>
-                  <p className="text-white text-center text-base sm:text-lg">{t('event.prize.special')}</p>
+                  <p className="text-white text-center text-base sm:text-lg">Hator eSport 3XL MONTE edition</p>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
