@@ -245,9 +245,7 @@ const HatorCSLeague = () => {
                       alt="Covoraș pentru mouse Hator eSport 3XL MONTE edition"
                       className="w-full h-full object-contain rounded transform scale-130 origin-left"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-8">
-                      <p className="text-purple-300 text-lg sm:text-xl font-semibold">Covoraș pentru mouse</p>
-                    </div>
+                    
                   </div>
                   <p className="text-white text-center text-base sm:text-lg">5X Hator eSport 3XL MONTE edition </p>
                 </div>
