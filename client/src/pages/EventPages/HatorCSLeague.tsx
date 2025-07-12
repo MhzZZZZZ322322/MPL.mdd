@@ -237,7 +237,7 @@ const HatorCSLeague = () => {
                 <div className="bg-gradient-to-br from-purple-500/30 to-purple-700/30 p-4 sm:p-6 rounded-lg border border-purple-500/40 transform group-hover:-translate-y-2 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/30 h-full flex flex-col">
                   <div className="flex items-center mb-4">
                     <Gift className="text-purple-400 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
-                    <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">{t('event.prize.secret')}</h3>
+                    <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">Ace of Aces &lt;3</h3>
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow">
                     <img 
