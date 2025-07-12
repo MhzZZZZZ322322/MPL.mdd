@@ -243,7 +243,7 @@ const HatorCSLeague = () => {
                     <img 
                       src="/hator-mousepad-monte.png"
                       alt="Covoraș pentru mouse Hator eSport 3XL MONTE edition"
-                      className="w-full h-full object-cover rounded"
+                      className="w-full h-full object-cover object-left rounded"
                     />
                   </div>
                   <p className="text-white text-center text-base sm:text-lg">5X Hator eSport 3XL MONTE edition </p>
