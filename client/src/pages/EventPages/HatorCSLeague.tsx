@@ -81,7 +81,6 @@ const HatorCSLeague = () => {
         <meta name="description" content="HATOR CS2 LEAGUE MOLDOVA - Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de comunitatea MPL în parteneriat cu HATOR." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-
       <div className="bg-black min-h-screen">
         {/* Hero Section */}
         <div className="relative h-[70vh] bg-gradient-to-b from-black to-darkBg overflow-hidden">
@@ -250,7 +249,7 @@ const HatorCSLeague = () => {
                       <p className="text-purple-300 text-lg sm:text-xl font-semibold">Covoraș pentru mouse</p>
                     </div>
                   </div>
-                  <p className="text-white text-center text-base sm:text-lg">Hator eSport 3XL MONTE edition</p>
+                  <p className="text-white text-center text-base sm:text-lg">5X Hator eSport 3XL MONTE edition </p>
                 </div>
               </a>
             </div>
@@ -695,8 +694,6 @@ const HatorCSLeague = () => {
           </div>
         </div>
       </div>
-
-
     </>
   );
 };
