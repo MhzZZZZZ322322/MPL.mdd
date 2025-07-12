@@ -239,11 +239,11 @@ const HatorCSLeague = () => {
                     <Gift className="text-purple-400 h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3" />
                     <h3 className="text-purple-400 text-xl sm:text-2xl font-bold">{t('event.prize.secret')}</h3>
                   </div>
-                  <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow flex items-center justify-center bg-darkGray/60">
+                  <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow flex items-center justify-start bg-darkGray/60">
                     <img 
                       src="/hator-mousepad-monte.png"
                       alt="Covoraș pentru mouse Hator eSport 3XL MONTE edition"
-                      className="w-full h-full object-contain rounded"
+                      className="w-full h-full object-contain rounded transform scale-130 origin-left"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-8">
                       <p className="text-purple-300 text-lg sm:text-xl font-semibold">Covoraș pentru mouse</p>
