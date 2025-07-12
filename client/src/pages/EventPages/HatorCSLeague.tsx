@@ -242,7 +242,7 @@ const HatorCSLeague = () => {
                   </div>
                   <div className="relative h-52 sm:h-64 overflow-hidden rounded mb-4 flex-grow flex items-center justify-center bg-darkGray/60">
                     <img 
-                      src="/attached_assets/image_1752297114131.png"
+                      src="/hator-mousepad-monte.png"
                       alt="Covoraș pentru mouse Hator eSport 3XL MONTE edition"
                       className="w-full h-full object-contain rounded"
                     />
