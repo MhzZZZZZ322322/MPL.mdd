@@ -116,6 +116,7 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 13, 2025: **VERIFIED** - Confirmat că calculul rundelor Stage 3 Swiss funcționează perfect - toate echipele au numărul corect de runde din meciurile jucate în sistem Swiss
 - July 04, 2025: **UPDATED** - Adăugat premiul secret Covoraș pentru mouse Hator eSport 3XL MONTE edition cu link către Darwin.md în secțiunea premii
 - July 04, 2025: **UPDATED** - Actualizat Stage 3 Swiss cu echipele reale: 11 din grupe + 5 câștigătoare din Stage 2 (BaitMD, Muligambia, Killuminaty, Xtreme Players, Golden Five)
 - July 04, 2025: **UPDATED** - Schimbat linkul de mulțumire din CsServerStatus către @faceofmadness (https://www.tiktok.com/@faceofmadness)
