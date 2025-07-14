@@ -160,7 +160,7 @@ export default function Stage4PlayoffManager() {
       playDate: newMatch.matchDate,
       streamUrl: newMatch.faceitUrl || null,
       matchDate: newMatch.matchDate && newMatch.matchTime ? 
-        new Date(`${newMatch.matchDate}T${newMatch.matchTime}:00`).toISOString() : null
+        `${newMatch.matchDate}T${newMatch.matchTime}:00` : null
     };
 
     createMutation.mutate(matchToCreate);

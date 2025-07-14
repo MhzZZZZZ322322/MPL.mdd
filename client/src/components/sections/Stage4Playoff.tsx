@@ -19,32 +19,30 @@ interface Stage4PlayoffMatch {
   updatedAt: string;
 }
 
-const getBracketPositionInfo = (position: string) => {
-  const positions: Record<string, { stage: string; match: string; color: string }> = {
-    // Quarter-finals (8 teams → 4 teams)
-    'QF1': { stage: 'Sferturile de finală', match: 'Meciul 1', color: 'bg-blue-500' },
-    'QF2': { stage: 'Sferturile de finală', match: 'Meciul 2', color: 'bg-blue-500' },
-    'QF3': { stage: 'Sferturile de finală', match: 'Meciul 3', color: 'bg-blue-500' },
-    'QF4': { stage: 'Sferturile de finală', match: 'Meciul 4', color: 'bg-blue-500' },
-    
-    // Semi-finals (4 teams → 2 teams)
-    'SF1': { stage: 'Semifinalele', match: 'Meciul 1', color: 'bg-orange-500' },
-    'SF2': { stage: 'Semifinalele', match: 'Meciul 2', color: 'bg-orange-500' },
-    
-    // Final (2 teams → 1 team)
-    'FINAL': { stage: 'Finala', match: 'Marea Finală', color: 'bg-red-500' }
+const getBracketPositionInfo = (bracketRound: string, bracketPosition: number) => {
+  const roundInfo: Record<string, { stage: string; color: string }> = {
+    'quarterfinals': { stage: 'Sferturile de finală', color: 'bg-blue-500' },
+    'semifinals': { stage: 'Semifinalele', color: 'bg-orange-500' },
+    'final': { stage: 'Finala', color: 'bg-red-500' },
+    'third_place': { stage: 'Locul 3', color: 'bg-yellow-500' }
   };
   
-  return positions[position] || { stage: 'Necunoscut', match: 'Necunoscut', color: 'bg-gray-500' };
+  const info = roundInfo[bracketRound] || { stage: 'Necunoscut', color: 'bg-gray-500' };
+  
+  return {
+    stage: info.stage,
+    match: `Meciul ${bracketPosition}`,
+    color: info.color
+  };
 };
 
-const getDayFromPosition = (position: string): string => {
+const getDayFromPosition = (bracketRound: string): string => {
   // Day 1 (18 iulie): Quarter-finals
-  if (position.startsWith('QF')) return '18 iulie 2025';
+  if (bracketRound === 'quarterfinals') return '18 iulie 2025';
   // Day 2 (19 iulie): Semi-finals  
-  if (position.startsWith('SF')) return '19 iulie 2025';
+  if (bracketRound === 'semifinals') return '19 iulie 2025';
   // Day 3 (20 iulie): Final
-  if (position === 'FINAL') return '20 iulie 2025';
+  if (bracketRound === 'final') return '20 iulie 2025';
   return 'Data necunoscută';
 };
 
@@ -76,7 +74,7 @@ export default function Stage4Playoff() {
 
   // Group matches by day
   const matchesByDay = matches.reduce((acc, match) => {
-    const day = getDayFromPosition(match.bracketPosition);
+    const day = getDayFromPosition(match.bracketRound);
     if (!acc[day]) acc[day] = [];
     acc[day].push(match);
     return acc;
@@ -128,9 +126,9 @@ export default function Stage4Playoff() {
               </h3>
               <div className="grid gap-3">
                 {matchesByDay[day]
-                  .sort((a, b) => a.bracketPosition.localeCompare(b.bracketPosition))
+                  .sort((a, b) => a.bracketPosition - b.bracketPosition)
                   .map(match => {
-                    const positionInfo = getBracketPositionInfo(match.bracketPosition);
+                    const positionInfo = getBracketPositionInfo(match.bracketRound, match.bracketPosition);
                     return (
                       <Card 
                         key={match.id}
