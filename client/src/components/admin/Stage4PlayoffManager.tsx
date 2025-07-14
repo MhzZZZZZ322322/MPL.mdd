@@ -49,12 +49,6 @@ const BRACKET_POSITIONS = [
   { value: 'FINAL', label: 'Finala' },
 ];
 
-// Stage 3 Swiss qualified teams (top 8)
-const QUALIFIED_TEAMS = [
-  "LitEnergy", "K9 Team", "La Passion", "XPlosion", "VeryGoodTeam", 
-  "Saponel", "Wenzo", "Bobb3rs"
-];
-
 export default function Stage4PlayoffManager() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -76,6 +70,11 @@ export default function Stage4PlayoffManager() {
   const { data: matches = [], isLoading } = useQuery<Stage4PlayoffMatch[]>({
     queryKey: ['/api/stage4-playoff'],
     refetchInterval: 5000,
+  });
+
+  // Fetch qualified teams from Stage 3
+  const { data: qualifiedTeams = [], isLoading: isLoadingTeams } = useQuery<string[]>({
+    queryKey: ['/api/stage3-qualified-teams'],
   });
 
   const createMutation = useMutation({
@@ -188,13 +187,14 @@ export default function Stage4PlayoffManager() {
     });
   };
 
-  if (isLoading) {
+  if (isLoading || isLoadingTeams) {
     return (
       <Card>
         <CardHeader>
           <CardTitle>Gestionare Stage 4 Playoff</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <p className="text-muted-foreground">Se încarcă meciurile și echipele calificate din Stage 3...</p>
           {[...Array(3)].map((_, i) => (
             <Skeleton key={i} className="h-20 w-full" />
           ))}
@@ -238,7 +238,7 @@ export default function Stage4PlayoffManager() {
                 className="w-full p-2 border rounded-md bg-background"
               >
                 <option value="">Selectează echipa 1</option>
-                {QUALIFIED_TEAMS.map(team => (
+                {qualifiedTeams.map(team => (
                   <option key={team} value={team}>{team}</option>
                 ))}
               </select>
@@ -253,7 +253,7 @@ export default function Stage4PlayoffManager() {
                 className="w-full p-2 border rounded-md bg-background"
               >
                 <option value="">Selectează echipa 2</option>
-                {QUALIFIED_TEAMS.map(team => (
+                {qualifiedTeams.map(team => (
                   <option key={team} value={team}>{team}</option>
                 ))}
               </select>
@@ -340,7 +340,7 @@ export default function Stage4PlayoffManager() {
                             className="w-full p-2 border rounded-md bg-background"
                           >
                             <option value="">Selectează echipa 1</option>
-                            {QUALIFIED_TEAMS.map(team => (
+                            {qualifiedTeams.map(team => (
                               <option key={team} value={team}>{team}</option>
                             ))}
                           </select>
@@ -354,7 +354,7 @@ export default function Stage4PlayoffManager() {
                             className="w-full p-2 border rounded-md bg-background"
                           >
                             <option value="">Selectează echipa 2</option>
-                            {QUALIFIED_TEAMS.map(team => (
+                            {qualifiedTeams.map(team => (
                               <option key={team} value={team}>{team}</option>
                             ))}
                           </select>
@@ -366,7 +366,7 @@ export default function Stage4PlayoffManager() {
                             type="number"
                             min="0"
                             value={editingMatch.team1Score || ''}
-                            onChange={(e) => setEditingMatch(prev => prev ? { ...prev, team1Score: e.target.value ? parseInt(e.target.value) : null } : null)}
+                            onChange={(e) => setEditingMatch(prev => prev ? { ...prev, team1Score: e.target.value && !isNaN(parseInt(e.target.value)) ? parseInt(e.target.value) : null } : null)}
                           />
                         </div>
                         
@@ -376,7 +376,7 @@ export default function Stage4PlayoffManager() {
                             type="number"
                             min="0"
                             value={editingMatch.team2Score || ''}
-                            onChange={(e) => setEditingMatch(prev => prev ? { ...prev, team2Score: e.target.value ? parseInt(e.target.value) : null } : null)}
+                            onChange={(e) => setEditingMatch(prev => prev ? { ...prev, team2Score: e.target.value && !isNaN(parseInt(e.target.value)) ? parseInt(e.target.value) : null } : null)}
                           />
                         </div>
                         

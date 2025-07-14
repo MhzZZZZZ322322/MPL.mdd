@@ -898,6 +898,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get Stage 3 qualified teams (top 8 for Stage 4 Playoff)
+  app.get("/api/stage3-qualified-teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { stage3Swiss } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      // Get top 8 teams based on Stage 3 Swiss standings
+      const qualifiedTeams = await db
+        .select({ teamName: stage3Swiss.teamName })
+        .from(stage3Swiss)
+        .orderBy(desc(stage3Swiss.wins), desc(stage3Swiss.roundDifference))
+        .limit(8);
+      
+      const teamNames = qualifiedTeams.map(team => team.teamName);
+      res.json(teamNames);
+    } catch (error) {
+      console.error("Error fetching Stage 3 qualified teams:", error);
+      res.status(500).json({ message: "Failed to fetch Stage 3 qualified teams" });
+    }
+  });
+
   app.post("/api/admin/stage4-playoff", async (req, res) => {
     try {
       const { insertStage4PlayoffSchema } = await import("@shared/schema");
