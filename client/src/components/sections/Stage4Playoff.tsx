@@ -325,7 +325,7 @@ export default function Stage4Playoff() {
             </div>
 
             {/* Legend */}
-            <div className="mt-6 text-center">
+            <div className="mt-16 text-center">
               <div className="flex justify-center gap-4 text-sm text-gray-400 flex-wrap">
                 <span className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-blue-500 rounded"></div>
