@@ -120,7 +120,7 @@ export default function Stage4Playoff() {
           </div>
         ) : (
           <div className="w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               
               {/* Quarter-finals */}
               <div>
@@ -222,7 +222,7 @@ export default function Stage4Playoff() {
               {/* Final */}
               <div className="mt-[230px]">
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center">
                   {matches
                     .filter(m => m.bracketRound === 'final')
                     .map((match) => (
@@ -268,8 +268,10 @@ export default function Stage4Playoff() {
                       </Card>
                     ))}
                 </div>
-                
-                {/* Third Place Match */}
+              </div>
+
+              {/* Third Place Match */}
+              <div className="mt-[230px]">
                 <h3 className="text-lg font-bold text-amber-400 mb-4 text-center">Meciul pentru Locul 3</h3>
                 <div className="flex justify-center">
                   {matches
