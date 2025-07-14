@@ -46,6 +46,7 @@ const BRACKET_POSITIONS = [
   { value: 'QF4', label: 'Sferturi - Meciul 4' },
   { value: 'SF1', label: 'Semifinale - Meciul 1' },
   { value: 'SF2', label: 'Semifinale - Meciul 2' },
+  { value: 'THIRD_PLACE', label: 'Meciul pentru locul 3' },
   { value: 'FINAL', label: 'Finala' },
 ];
 
