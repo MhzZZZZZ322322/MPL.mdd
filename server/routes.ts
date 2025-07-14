@@ -887,6 +887,79 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Stage 4 Playoff routes
+  app.get("/api/stage4-playoff", async (req, res) => {
+    try {
+      const matches = await storage.getStage4PlayoffMatches();
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching Stage 4 Playoff matches:", error);
+      res.status(500).json({ message: "Failed to fetch Stage 4 Playoff matches" });
+    }
+  });
+
+  app.post("/api/admin/stage4-playoff", async (req, res) => {
+    try {
+      const { insertStage4PlayoffSchema } = await import("@shared/schema");
+      
+      const result = insertStage4PlayoffSchema.safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error for Stage 4 Playoff match:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const newMatch = await storage.createStage4Match(result.data);
+      res.status(201).json(newMatch);
+    } catch (error) {
+      console.error("Error creating Stage 4 Playoff match:", error);
+      res.status(500).json({ message: "Failed to create Stage 4 Playoff match" });
+    }
+  });
+
+  app.put("/api/admin/stage4-playoff/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 4 Playoff match ID" });
+      }
+
+      const { insertStage4PlayoffSchema } = await import("@shared/schema");
+      
+      const result = insertStage4PlayoffSchema.partial().safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        console.error("Validation error:", errorMessage);
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const updatedMatch = await storage.updateStage4Match(id, result.data);
+      if (!updatedMatch) {
+        return res.status(404).json({ message: "Stage 4 Playoff match not found" });
+      }
+      
+      res.json(updatedMatch);
+    } catch (error) {
+      console.error("Error updating Stage 4 Playoff match:", error);
+      res.status(500).json({ message: "Failed to update Stage 4 Playoff match" });
+    }
+  });
+
+  app.delete("/api/admin/stage4-playoff/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "Invalid Stage 4 Playoff match ID" });
+      }
+
+      await storage.deleteStage4Match(id);
+      res.json({ message: "Stage 4 Playoff match deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting Stage 4 Playoff match:", error);
+      res.status(500).json({ message: "Failed to delete Stage 4 Playoff match" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 

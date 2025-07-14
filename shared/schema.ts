@@ -390,6 +390,39 @@ export type Stage3Swiss = typeof stage3Swiss.$inferSelect;
 export type InsertStage3SwissMatch = z.infer<typeof insertStage3SwissMatchSchema>;
 export type Stage3SwissMatch = typeof stage3SwissMatches.$inferSelect;
 
+// Stage 4 Playoff - Playoff bracket cu 8 echipe calificate din Stage 3
+export const stage4Playoff = pgTable("stage4_playoff", {
+  id: serial("id").primaryKey(),
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score"), // null dacă meciul nu a fost jucat
+  team2Score: integer("team2_score"), // null dacă meciul nu a fost jucat
+  winnerName: text("winner_name"), // numele echipei câștigătoare
+  bracketRound: text("bracket_round").notNull(), // 'quarterfinals', 'semifinals', 'final', 'third_place'
+  bracketPosition: integer("bracket_position").notNull(), // poziția în plasă
+  isPlayed: boolean("is_played").notNull().default(false),
+  streamUrl: text("stream_url"), // link către stream/faceit
+  technicalWin: boolean("technical_win").notNull().default(false),
+  technicalWinner: text("technical_winner"),
+  matchType: text("match_type").notNull().default("BO3"), // BO3 pentru toate meciurile playoff
+  playDate: text("play_date"), // "18.07.2025", "19.07.2025", "20.07.2025"
+  tournamentId: text("tournament_id").notNull().default("hator-cs-league"),
+  matchDate: timestamp("match_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertStage4PlayoffSchema = createInsertSchema(stage4Playoff).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+}).partial({
+  matchDate: true
+});
+
+export type InsertStage4Playoff = z.infer<typeof insertStage4PlayoffSchema>;
+export type Stage4Playoff = typeof stage4Playoff.$inferSelect;
+
 // Matches - Meciurile din turneu
 export const matches = pgTable("matches", {
   id: serial("id").primaryKey(),

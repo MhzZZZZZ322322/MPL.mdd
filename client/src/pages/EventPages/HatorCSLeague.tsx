@@ -7,6 +7,7 @@ import CountdownTimer from "@/components/ui/countdown-timer";
 import TournamentGroups from "@/components/sections/TournamentGroups";
 import { Stage2Bracket } from "@/components/sections/Stage2Bracket";
 import { Stage3Swiss } from "@/components/sections/Stage3Swiss";
+import Stage4Playoff from "@/components/sections/Stage4Playoff";
 
 
 import { useLanguage } from "@/lib/LanguageContext";
@@ -22,6 +23,7 @@ const HatorCSLeague = () => {
   const [isMatchesExpanded, setIsMatchesExpanded] = useState(false);
   const [isStage2Expanded, setIsStage2Expanded] = useState(false);
   const [isStage3Expanded, setIsStage3Expanded] = useState(false);
+  const [isStage4Expanded, setIsStage4Expanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   // Team logo mapping - uses actual team logos from database
@@ -383,6 +385,26 @@ const HatorCSLeague = () => {
           isExpanded={isStage3Expanded}
           onToggle={() => setIsStage3Expanded(!isStage3Expanded)}
         />
+
+        {/* Stage 4 Playoff Section */}
+        <div className="py-8 container mx-auto px-4">
+          <div className="flex justify-center">
+            <Button
+              onClick={() => setIsStage4Expanded(!isStage4Expanded)}
+              variant="outline"
+              className="w-full max-w-md text-lg font-semibold bg-red-500/10 border-red-500/50 text-red-400 hover:bg-red-500/20 hover:border-red-500/70 hover:text-red-300 transition-all duration-300"
+            >
+              🏆 Stage 4 - Playoff (8 echipe)
+              {isStage4Expanded ? <ChevronUp className="ml-2 h-5 w-5" /> : <ChevronDown className="ml-2 h-5 w-5" />}
+            </Button>
+          </div>
+          
+          {isStage4Expanded && (
+            <div className="mt-8">
+              <Stage4Playoff />
+            </div>
+          )}
+        </div>
 
         {/* Details Section */}
         <div className="py-16 container mx-auto px-4">

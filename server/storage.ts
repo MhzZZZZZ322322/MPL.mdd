@@ -10,7 +10,8 @@ import {
   teamMembers, type TeamMember, type InsertTeamMember,
   stage2Bracket, type Stage2Bracket, type InsertStage2Bracket,
   stage3Swiss, type Stage3Swiss, type InsertStage3Swiss,
-  stage3SwissMatches, type Stage3SwissMatch, type InsertStage3SwissMatch
+  stage3SwissMatches, type Stage3SwissMatch, type InsertStage3SwissMatch,
+  stage4Playoff, type Stage4Playoff, type InsertStage4Playoff
 } from "@shared/schema";
 import { type CsServer, type InsertCsServer } from '@shared/schema-cs-servers';
 import { db } from "./db";
@@ -108,6 +109,15 @@ export interface IStorage {
   createStage3Match(match: InsertStage3SwissMatch): Promise<Stage3SwissMatch>;
   updateStage3Match(id: number, match: Partial<InsertStage3SwissMatch>): Promise<Stage3SwissMatch>;
   deleteStage3Match(id: number): Promise<void>;
+
+  // Stage 4 Playoff methods
+  getStage4PlayoffMatches(): Promise<Stage4Playoff[]>;
+  createStage4Match(match: InsertStage4Playoff): Promise<Stage4Playoff>;
+  updateStage4Match(id: number, match: Partial<InsertStage4Playoff>): Promise<Stage4Playoff>;
+  deleteStage4Match(id: number): Promise<void>;
+  createStage4Match(match: InsertStage4Playoff): Promise<Stage4Playoff>;
+  updateStage4Match(id: number, match: Partial<InsertStage4Playoff>): Promise<Stage4Playoff>;
+  deleteStage4Match(id: number): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -1677,6 +1687,23 @@ export class MemStorage implements IStorage {
   async deleteStage3Match(id: number): Promise<void> {
     throw new Error("MemStorage Stage 3 methods not implemented");
   }
+
+  // Stage 4 Playoff methods (not implemented in MemStorage)
+  async getStage4PlayoffMatches(): Promise<Stage4Playoff[]> {
+    throw new Error("MemStorage Stage 4 methods not implemented");
+  }
+
+  async createStage4Match(match: InsertStage4Playoff): Promise<Stage4Playoff> {
+    throw new Error("MemStorage Stage 4 methods not implemented");
+  }
+
+  async updateStage4Match(id: number, match: Partial<InsertStage4Playoff>): Promise<Stage4Playoff> {
+    throw new Error("MemStorage Stage 4 methods not implemented");
+  }
+
+  async deleteStage4Match(id: number): Promise<void> {
+    throw new Error("MemStorage Stage 4 methods not implemented");
+  }
 }
 
 // DatabaseStorage implementation using PostgreSQL
@@ -2008,6 +2035,28 @@ export class DatabaseStorage implements IStorage {
 
   async deleteStage3Match(id: number): Promise<void> {
     await db.delete(stage3SwissMatches).where(eq(stage3SwissMatches.id, id));
+  }
+
+  // Stage 4 Playoff methods
+  async getStage4PlayoffMatches(): Promise<Stage4Playoff[]> {
+    return await db.select().from(stage4Playoff).orderBy(stage4Playoff.bracketRound, stage4Playoff.bracketPosition);
+  }
+
+  async createStage4Match(match: InsertStage4Playoff): Promise<Stage4Playoff> {
+    const [newMatch] = await db.insert(stage4Playoff).values(match).returning();
+    return newMatch;
+  }
+
+  async updateStage4Match(id: number, match: Partial<InsertStage4Playoff>): Promise<Stage4Playoff> {
+    const [updatedMatch] = await db.update(stage4Playoff).set({
+      ...match,
+      updatedAt: new Date()
+    }).where(eq(stage4Playoff.id, id)).returning();
+    return updatedMatch;
+  }
+
+  async deleteStage4Match(id: number): Promise<void> {
+    await db.delete(stage4Playoff).where(eq(stage4Playoff.id, id));
   }
 
   async getStage3QualifiedTeams(): Promise<string[]> {
