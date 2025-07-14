@@ -170,12 +170,17 @@ export default function Stage4Playoff() {
               {/* Semi-finals */}
               <div className="relative">
                 <h3 className="text-lg font-bold text-orange-400 mb-4 text-center">Semifinale</h3>
-                <div className="space-y-0">
+                <div className="relative min-h-96">
                   {matches
                     .filter(m => m.bracketRound === 'semifinals')
                     .sort((a, b) => a.bracketPosition - b.bracketPosition)
-                    .map((match, index) => (
-                      <div key={match.id} className={`${index === 0 ? 'mt-16' : 'mt-32'}`}>
+                    .map((match) => (
+                      <div 
+                        key={match.id} 
+                        className={`absolute w-full ${
+                          match.bracketPosition === 1 ? 'top-16' : 'top-80'
+                        }`}
+                      >
                         <Card className="bg-gradient-to-r from-orange-900/60 to-orange-800/60 border-orange-400/50 hover:border-orange-300 transition-all">
                           <CardContent className="p-3">
                             <div className="text-xs text-orange-300 mb-2 font-semibold text-center">
