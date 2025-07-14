@@ -16,7 +16,7 @@
   {
     "id": 3,
     "status": true,
-    "players": 3,
+    "players": 2,
     "name": "FFA/DM",
     "maxplayers": 16
   }
