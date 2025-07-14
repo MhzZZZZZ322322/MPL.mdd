@@ -175,7 +175,7 @@ export default function Stage4Playoff() {
                     .filter(m => m.bracketRound === 'semifinals')
                     .sort((a, b) => a.bracketPosition - b.bracketPosition)
                     .map((match, index) => (
-                      <div key={match.id} className={`${index === 0 ? 'mt-6' : 'mt-36'}`}>
+                      <div key={match.id} className={`${index === 0 ? 'mt-8' : 'mt-20'}`}>
                         <Card className="bg-gradient-to-r from-orange-900/60 to-orange-800/60 border-orange-400/50 hover:border-orange-300 transition-all">
                           <CardContent className="p-3">
                             <div className="text-xs text-orange-300 mb-2 font-semibold text-center">
