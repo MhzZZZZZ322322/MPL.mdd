@@ -12,7 +12,8 @@ import { Trash2, Save, Plus } from 'lucide-react';
 
 interface Stage4PlayoffMatch {
   id: number;
-  bracketPosition: string;
+  bracketPosition: number;
+  bracketRound: string;
   team1Name: string | null;
   team2Name: string | null;
   team1Score: number | null;
@@ -323,8 +324,32 @@ export default function Stage4PlayoffManager() {
                         <div>
                           <Label>Poziția în bracket</Label>
                           <select
-                            value={editingMatch.bracketPosition}
-                            onChange={(e) => setEditingMatch(prev => prev ? { ...prev, bracketPosition: e.target.value } : null)}
+                            value={
+                              editingMatch.bracketRound === 'quarterfinals' ? `QF${editingMatch.bracketPosition}` :
+                              editingMatch.bracketRound === 'semifinals' ? `SF${editingMatch.bracketPosition}` :
+                              editingMatch.bracketRound === 'final' ? 'FINAL' :
+                              editingMatch.bracketRound === 'third_place' ? 'THIRD_PLACE' : ''
+                            }
+                            onChange={(e) => {
+                              let bracketRound = 'quarterfinals';
+                              let bracketPosition = 1;
+                              
+                              if (e.target.value.startsWith('QF')) {
+                                bracketRound = 'quarterfinals';
+                                bracketPosition = parseInt(e.target.value.replace('QF', ''));
+                              } else if (e.target.value.startsWith('SF')) {
+                                bracketRound = 'semifinals';
+                                bracketPosition = parseInt(e.target.value.replace('SF', ''));
+                              } else if (e.target.value === 'FINAL') {
+                                bracketRound = 'final';
+                                bracketPosition = 1;
+                              } else if (e.target.value === 'THIRD_PLACE') {
+                                bracketRound = 'third_place';
+                                bracketPosition = 1;
+                              }
+                              
+                              setEditingMatch(prev => prev ? { ...prev, bracketRound, bracketPosition } : null);
+                            }}
                             className="w-full p-2 border rounded-md bg-background"
                           >
                             {BRACKET_POSITIONS.map(pos => (
@@ -437,13 +462,18 @@ export default function Stage4PlayoffManager() {
                     <div className="flex items-center justify-between">
                       <div className="space-y-2">
                         <div className="flex items-center gap-3">
-                          <Badge variant="secondary">{match.bracketPosition}</Badge>
+                          <Badge variant="secondary">
+                            {match.bracketRound === 'quarterfinals' && `QF${match.bracketPosition}`}
+                            {match.bracketRound === 'semifinals' && `SF${match.bracketPosition}`}
+                            {match.bracketRound === 'final' && 'FINAL'}
+                            {match.bracketRound === 'third_place' && '🥉 LOCUL 3'}
+                          </Badge>
                           <span className="font-medium">
                             {match.team1Name || 'TBD'} vs {match.team2Name || 'TBD'}
                           </span>
                           {match.isPlayed && match.winnerName && (
-                            <Badge className="bg-green-600">
-                              🏆 {match.winnerName}
+                            <Badge className={match.bracketRound === 'third_place' ? 'bg-yellow-600' : 'bg-green-600'}>
+                              {match.bracketRound === 'third_place' ? '🥉' : '🏆'} {match.winnerName}
                             </Badge>
                           )}
                         </div>
