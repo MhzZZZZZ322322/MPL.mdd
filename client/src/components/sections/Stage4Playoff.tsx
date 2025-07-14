@@ -222,7 +222,7 @@ export default function Stage4Playoff() {
               {/* Final */}
               <div className="mt-[230px]">
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
-                <div className="flex justify-center">
+                <div className="flex justify-center mb-6">
                   {matches
                     .filter(m => m.bracketRound === 'final')
                     .map((match) => (
@@ -268,10 +268,8 @@ export default function Stage4Playoff() {
                       </Card>
                     ))}
                 </div>
-              </div>
-
-              {/* Third Place Match */}
-              <div className="mt-8">
+                
+                {/* Third Place Match */}
                 <h3 className="text-lg font-bold text-amber-400 mb-4 text-center">Meciul pentru Locul 3</h3>
                 <div className="flex justify-center">
                   {matches
