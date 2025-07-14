@@ -139,7 +139,7 @@ export default function Stage4Playoff() {
                             <div className={`text-sm px-2 py-1 rounded transition-colors ${
                               match.winnerName === match.team1Name 
                                 ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                : 'text-white bg-gray-700/40'
+                                : 'text-white bg-slate-800/80 border border-slate-600/50'
                             }`}>
                               {match.winnerName === match.team1Name && '👑 '}
                               {match.team1Name}
@@ -151,7 +151,7 @@ export default function Stage4Playoff() {
                             <div className={`text-sm px-2 py-1 rounded transition-colors ${
                               match.winnerName === match.team2Name 
                                 ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                : 'text-white bg-gray-700/40'
+                                : 'text-white bg-slate-800/80 border border-slate-600/50'
                             }`}>
                               {match.winnerName === match.team2Name && '👑 '}
                               {match.team2Name}
@@ -190,7 +190,7 @@ export default function Stage4Playoff() {
                               <div className={`text-sm px-2 py-1 rounded transition-colors ${
                                 match.winnerName === match.team1Name 
                                   ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                  : 'text-white bg-gray-700/40'
+                                  : 'text-white bg-slate-800/80 border border-slate-600/50'
                               }`}>
                                 {match.winnerName === match.team1Name && '👑 '}
                                 {match.team1Name || (match.bracketPosition === 1 ? `Câștigător QF1` : `Câștigător QF3`)}
@@ -202,7 +202,7 @@ export default function Stage4Playoff() {
                               <div className={`text-sm px-2 py-1 rounded transition-colors ${
                                 match.winnerName === match.team2Name 
                                   ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                  : 'text-white bg-gray-700/40'
+                                  : 'text-white bg-slate-800/80 border border-slate-600/50'
                               }`}>
                                 {match.winnerName === match.team2Name && '👑 '}
                                 {match.team2Name || (match.bracketPosition === 1 ? `Câștigător QF2` : `Câștigător QF4`)}
@@ -237,7 +237,7 @@ export default function Stage4Playoff() {
                             <div className={`text-lg px-4 py-3 rounded-lg font-semibold transition-colors ${
                               match.winnerName === match.team1Name 
                                 ? 'bg-yellow-600/60 text-yellow-200 font-bold border-2 border-yellow-400/70 shadow-lg shadow-yellow-500/20' 
-                                : 'text-white bg-gray-700/50 border border-gray-600/50'
+                                : 'text-white bg-slate-800/90 border-2 border-slate-600/70'
                             }`}>
                               {match.winnerName === match.team1Name && '🏆 '}
                               {match.team1Name || 'TBD'}
@@ -249,7 +249,7 @@ export default function Stage4Playoff() {
                             <div className={`text-lg px-4 py-3 rounded-lg font-semibold transition-colors ${
                               match.winnerName === match.team2Name 
                                 ? 'bg-yellow-600/60 text-yellow-200 font-bold border-2 border-yellow-400/70 shadow-lg shadow-yellow-500/20' 
-                                : 'text-white bg-gray-700/50 border border-gray-600/50'
+                                : 'text-white bg-slate-800/90 border-2 border-slate-600/70'
                             }`}>
                               {match.winnerName === match.team2Name && '🏆 '}
                               {match.team2Name || 'TBD'}
@@ -286,7 +286,7 @@ export default function Stage4Playoff() {
                             <div className={`text-sm px-2 py-1 rounded transition-colors ${
                               match.winnerName === match.team1Name 
                                 ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-gray-700/40'
+                                : 'text-white bg-slate-800/80 border border-slate-600/50'
                             }`}>
                               {match.winnerName === match.team1Name && '🥉 '}
                               {match.team1Name || 'TBD'}
@@ -298,7 +298,7 @@ export default function Stage4Playoff() {
                             <div className={`text-sm px-2 py-1 rounded transition-colors ${
                               match.winnerName === match.team2Name 
                                 ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-gray-700/40'
+                                : 'text-white bg-slate-800/80 border border-slate-600/50'
                             }`}>
                               {match.winnerName === match.team2Name && '🥉 '}
                               {match.team2Name || 'TBD'}
