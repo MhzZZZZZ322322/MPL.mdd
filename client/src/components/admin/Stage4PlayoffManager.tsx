@@ -47,7 +47,6 @@ const BRACKET_POSITIONS = [
   { value: 'SF1', label: 'Semifinale - Meciul 1' },
   { value: 'SF2', label: 'Semifinale - Meciul 2' },
   { value: 'FINAL', label: 'Finala' },
-  { value: 'THIRD_PLACE', label: 'Meciul pentru Locul 3' },
 ];
 
 export default function Stage4PlayoffManager() {

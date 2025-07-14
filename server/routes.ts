@@ -966,23 +966,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await storage.updateStage4Match(semiFinal.id, updateData);
         }
       } else if (updatedMatch.bracketRound === 'semifinals') {
-        // Find final match and advance winner
+        // Find final match
         const finalMatch = allMatches.find(m => m.bracketRound === 'final');
         
         if (finalMatch) {
           const teamSlot = updatedMatch.bracketPosition === 1 ? 'team1Name' : 'team2Name';
           const updateData = { [teamSlot]: updatedMatch.winnerName };
           await storage.updateStage4Match(finalMatch.id, updateData);
-        }
-        
-        // Find third place match and advance loser
-        const thirdPlaceMatch = allMatches.find(m => m.bracketRound === 'third_place');
-        
-        if (thirdPlaceMatch) {
-          const loserName = updatedMatch.team1Name === updatedMatch.winnerName ? updatedMatch.team2Name : updatedMatch.team1Name;
-          const teamSlot = updatedMatch.bracketPosition === 1 ? 'team1Name' : 'team2Name';
-          const updateData = { [teamSlot]: loserName };
-          await storage.updateStage4Match(thirdPlaceMatch.id, updateData);
         }
       }
     } catch (error) {

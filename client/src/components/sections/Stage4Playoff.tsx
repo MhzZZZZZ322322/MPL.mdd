@@ -120,7 +120,7 @@ export default function Stage4Playoff() {
           </div>
         ) : (
           <div className="w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               
               {/* Quarter-finals */}
               <div>
@@ -220,7 +220,7 @@ export default function Stage4Playoff() {
               </div>
 
               {/* Final */}
-              <div className="mt-[230px]">
+              <div className="mt-[250px]">
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
                 <div className="flex justify-center">
                   {matches
@@ -269,57 +269,6 @@ export default function Stage4Playoff() {
                     ))}
                 </div>
               </div>
-
-              {/* Third Place Match */}
-              <div className="mt-[230px]">
-                <h3 className="text-lg font-bold text-amber-400 mb-4 text-center">Meciul pentru Locul 3</h3>
-                <div className="flex justify-center">
-                  {matches
-                    .filter(m => m.bracketRound === 'third_place')
-                    .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-amber-900/60 to-amber-800/60 border-amber-400/50 hover:border-amber-300 transition-all w-full">
-                        <CardContent className="p-4">
-                          <div className="text-sm text-amber-300 mb-3 font-bold text-center">
-                            🥉 LOCUL 3 • 20 iulie
-                          </div>
-                          <div className="space-y-2">
-                            <div className={`text-sm px-2 py-2 rounded transition-colors ${
-                              match.winnerName === match.team1Name 
-                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-gray-700/40'
-                            }`}>
-                              {match.winnerName === match.team1Name && '🥉 '}
-                              {match.team1Name || 'Pierzător SF1'}
-                              {match.isPlayed && match.team1Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
-                              )}
-                            </div>
-                            <div className="text-center text-gray-400 text-sm font-bold">VS</div>
-                            <div className={`text-sm px-2 py-2 rounded transition-colors ${
-                              match.winnerName === match.team2Name 
-                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-gray-700/40'
-                            }`}>
-                              {match.winnerName === match.team2Name && '🥉 '}
-                              {match.team2Name || 'Pierzător SF2'}
-                              {match.isPlayed && match.team2Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
-                              )}
-                            </div>
-                          </div>
-                          {match.winnerName && (
-                            <div className="mt-3 text-center">
-                              <Badge className="bg-amber-600 text-white font-bold text-sm px-3 py-1">
-                                🥉 LOCUL 3: {match.winnerName}
-                              </Badge>
-                            </div>
-                          )}
-                          <div className="text-sm text-amber-200 mt-3 text-center font-medium">BO3</div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
             </div>
 
             {/* Legend */}
@@ -337,12 +286,8 @@ export default function Stage4Playoff() {
                   <div className="w-3 h-3 bg-red-500 rounded"></div>
                   Finala (20 iulie)
                 </span>
-                <span className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-amber-500 rounded"></div>
-                  Locul 3 (20 iulie)
-                </span>
               </div>
-              <p className="text-gray-500 text-sm mt-2">👑 = Câștigător • 🏆 = Campion • 🥉 = Locul 3 • Toate meciurile sunt BO3</p>
+              <p className="text-gray-500 text-sm mt-2">👑 = Câștigător • 🏆 = Campion • Toate meciurile sunt BO3</p>
             </div>
           </div>
         )}
