@@ -116,6 +116,9 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 14, 2025: **PROGRESSION** - Implementat logica de progresie automată pentru Stage 4 Playoff - echipele câștigătoare avansează automat în rundele următoare
+- July 14, 2025: **FIXED** - Corectat eroarea de sortare din admin interface Stage 4 (bracketPosition numeric nu string)
+- July 14, 2025: **RESPONSIVE** - Redesignat complet bracket-ul Stage 4 cu layout responsive fără scroll orizontal, organizat pe 3 coloane
 - July 14, 2025: **COMPLETED** - Implementat complet Stage 4 Playoff cu sistem bracket pentru 8 echipe calificate din Stage 3 Swiss
 - July 14, 2025: **FUNCTIONAL** - Adăugat schema baza de date stage4_playoff cu toate câmpurile necesare (bracket_round, bracket_position, etc.)
 - July 14, 2025: **INTEGRATED** - Creat API endpoints complet funcționale pentru Stage 4 (/api/stage4-playoff, /api/admin/stage4-playoff)

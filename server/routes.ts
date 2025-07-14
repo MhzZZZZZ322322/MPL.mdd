@@ -917,6 +917,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Auto-progression function for Stage 4 Playoff
+  async function updateStage4Progression(updatedMatch: any) {
+    try {
+      if (!updatedMatch.isPlayed || !updatedMatch.winnerName) {
+        return; // Only proceed if match is played and has winner
+      }
+
+      const allMatches = await storage.getStage4PlayoffMatches();
+      
+      // QF1 winner goes to SF1 team1, QF2 winner goes to SF1 team2
+      // QF3 winner goes to SF2 team1, QF4 winner goes to SF2 team2
+      // SF1 winner goes to Final team1, SF2 winner goes to Final team2
+      
+      if (updatedMatch.bracketRound === 'quarterfinals') {
+        // Find corresponding semifinal
+        const semiFinalPosition = updatedMatch.bracketPosition <= 2 ? 1 : 2;
+        const teamSlot = updatedMatch.bracketPosition % 2 === 1 ? 'team1Name' : 'team2Name';
+        
+        const semiFinal = allMatches.find(m => 
+          m.bracketRound === 'semifinals' && m.bracketPosition === semiFinalPosition
+        );
+        
+        if (semiFinal) {
+          const updateData = { [teamSlot]: updatedMatch.winnerName };
+          await storage.updateStage4Match(semiFinal.id, updateData);
+        }
+      } else if (updatedMatch.bracketRound === 'semifinals') {
+        // Find final match
+        const finalMatch = allMatches.find(m => m.bracketRound === 'final');
+        
+        if (finalMatch) {
+          const teamSlot = updatedMatch.bracketPosition === 1 ? 'team1Name' : 'team2Name';
+          const updateData = { [teamSlot]: updatedMatch.winnerName };
+          await storage.updateStage4Match(finalMatch.id, updateData);
+        }
+      }
+    } catch (error) {
+      console.error("Error in Stage 4 auto-progression:", error);
+    }
+  }
+
   app.put("/api/admin/stage4-playoff/:id", async (req, res) => {
     try {
       const id = parseInt(req.params.id);
@@ -937,6 +978,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!updatedMatch) {
         return res.status(404).json({ message: "Stage 4 Playoff match not found" });
       }
+      
+      // Auto-progression logic - advance winners to next round
+      await updateStage4Progression(updatedMatch);
       
       res.json(updatedMatch);
     } catch (error) {
