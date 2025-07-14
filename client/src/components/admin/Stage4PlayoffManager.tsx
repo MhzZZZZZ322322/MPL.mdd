@@ -68,6 +68,24 @@ export default function Stage4PlayoffManager() {
     faceitUrl: ''
   });
 
+  // Update default date based on bracket position
+  const handleBracketPositionChange = (position: string) => {
+    let defaultDate = '2025-07-18'; // Quarterfinals
+    if (position.startsWith('SF') || position === 'THIRD_PLACE') {
+      defaultDate = '2025-07-19'; // Semifinals and Third Place
+    } else if (position === 'FINAL') {
+      defaultDate = '2025-07-20'; // Final
+    }
+    
+    setNewMatch(prev => ({ 
+      ...prev, 
+      bracketPosition: position,
+      matchDate: defaultDate,
+      team1Name: position === 'FINAL' || position === 'THIRD_PLACE' ? 'TBD' : '',
+      team2Name: position === 'FINAL' || position === 'THIRD_PLACE' ? 'TBD' : ''
+    }));
+  };
+
   const { data: matches = [], isLoading } = useQuery<Stage4PlayoffMatch[]>({
     queryKey: ['/api/stage4-playoff'],
     refetchInterval: 5000,
@@ -130,7 +148,7 @@ export default function Stage4PlayoffManager() {
       toast({ title: "Eroare", description: "Selectează ambele echipe.", variant: "destructive" });
       return;
     }
-    if (newMatch.team1Name === newMatch.team2Name) {
+    if (newMatch.team1Name === newMatch.team2Name && newMatch.team1Name !== "TBD") {
       toast({ title: "Eroare", description: "O echipă nu poate juca împotriva sa.", variant: "destructive" });
       return;
     }
@@ -145,10 +163,10 @@ export default function Stage4PlayoffManager() {
     } else if (newMatch.bracketPosition.startsWith('SF')) {
       bracketRound = 'semifinals';
       bracketPositionNum = parseInt(newMatch.bracketPosition.replace('SF', ''));
-    } else if (newMatch.bracketPosition === 'F') {
+    } else if (newMatch.bracketPosition === 'FINAL') {
       bracketRound = 'final';
       bracketPositionNum = 1;
-    } else if (newMatch.bracketPosition === 'TP') {
+    } else if (newMatch.bracketPosition === 'THIRD_PLACE') {
       bracketRound = 'third_place';
       bracketPositionNum = 1;
     }
@@ -221,7 +239,7 @@ export default function Stage4PlayoffManager() {
               <select
                 id="bracketPosition"
                 value={newMatch.bracketPosition}
-                onChange={(e) => setNewMatch(prev => ({ ...prev, bracketPosition: e.target.value }))}
+                onChange={(e) => handleBracketPositionChange(e.target.value)}
                 className="w-full p-2 border rounded-md bg-background"
               >
                 {BRACKET_POSITIONS.map(pos => (
@@ -239,6 +257,7 @@ export default function Stage4PlayoffManager() {
                 className="w-full p-2 border rounded-md bg-background"
               >
                 <option value="">Selectează echipa 1</option>
+                <option value="TBD">TBD (To Be Determined)</option>
                 {qualifiedTeams.map(team => (
                   <option key={team} value={team}>{team}</option>
                 ))}
@@ -254,6 +273,7 @@ export default function Stage4PlayoffManager() {
                 className="w-full p-2 border rounded-md bg-background"
               >
                 <option value="">Selectează echipa 2</option>
+                <option value="TBD">TBD (To Be Determined)</option>
                 {qualifiedTeams.map(team => (
                   <option key={team} value={team}>{team}</option>
                 ))}

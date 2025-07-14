@@ -116,11 +116,11 @@ Moldova Pro League is a web application for a gaming esports organization from M
 Preferred communication style: Simple, everyday language.
 
 ## Recent Changes  
+- July 14, 2025: **ENHANCED_ADMIN** - Adăugat suport complet pentru meciul pentru locul 3 și finala în admin interface cu opțiuni TBD și date automate
+- July 14, 2025: **VISUAL_HIERARCHY** - Finala mărită (scale-110) cu borduri mai groase, umbră și text mai mare pentru a evidenția importanța meciului
+- July 14, 2025: **PERFECT_POSITIONING** - Finala la top-[200px], meciul pentru locul 3 la top-[580px], legenda la mt-16 pentru distanță perfectă
 - July 14, 2025: **LAYOUT** - Reorganizat bracket-ul Stage 4 conform imaginii: coloana stânga (sferturi), mijloc (semifinale), dreapta (finala deasupra + locul 3 dedesubt)
 - July 14, 2025: **THIRD_PLACE** - Adăugat meciul pentru locul 3 în bracket-ul Stage 4 Playoff cu tema amber/bronz (🥉) și poziționare corectă
-- July 14, 2025: **POSITIONING** - Finala poziționată deasupra și meciul pentru locul 3 dedesubt în aceeași coloană din dreapta
-- July 14, 2025: **BRACKETING** - Aranjat semifinalele conform cerințelor: QF1&2→SF1, QF3&4→SF2 (LitEnergy vs Xtreme Players, Legalize vs VeryGoodTeam)
-- July 14, 2025: **STRUCTURED** - Recreat complet bracket-ul Stage 4 cu poziții corecte: QF1-4, SF1-2, Final conform imaginii utilizatorului
 - July 14, 2025: **QUALIFIED** - Conectat dropdown-urile admin la echipele calificate din Stage 3 Swiss (top 8 echipe din clasamentul Buchholz)
 - July 14, 2025: **PROGRESSIVE** - Logica de progresie automată funcțională - câștigătorii din sferturi avansează automat în semifinalele corecte
 - July 14, 2025: **PROGRESSION** - Implementat logica de progresie automată pentru Stage 4 Playoff - echipele câștigătoare avansează automat în rundele următoare
