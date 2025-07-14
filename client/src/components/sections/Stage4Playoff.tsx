@@ -271,7 +271,7 @@ export default function Stage4Playoff() {
               </div>
 
               {/* Third Place Match */}
-              <div className="mt-12">
+              <div className="mt-12 ml-[400px]">
                 <h3 className="text-lg font-bold text-yellow-400 mb-4 text-center">Meciul pentru locul 3</h3>
                 <div className="flex justify-center">
                   {matches
