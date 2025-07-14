@@ -312,7 +312,7 @@ export default function Stage4PlayoffManager() {
             </p>
           ) : (
             matches
-              .sort((a, b) => a.bracketPosition.localeCompare(b.bracketPosition))
+              .sort((a, b) => a.bracketPosition - b.bracketPosition)
               .map(match => (
                 <Card key={match.id} className="p-4">
                   {editingMatch?.id === match.id ? (
