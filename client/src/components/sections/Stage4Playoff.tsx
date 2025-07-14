@@ -178,7 +178,7 @@ export default function Stage4Playoff() {
                       <div 
                         key={match.id} 
                         className={`absolute w-full ${
-                          match.bracketPosition === 1 ? 'top-24' : 'top-96'
+                          match.bracketPosition === 1 ? 'top-24' : 'top-72'
                         }`}
                       >
                         <Card className="bg-gradient-to-r from-orange-900/60 to-orange-800/60 border-orange-400/50 hover:border-orange-300 transition-all">
