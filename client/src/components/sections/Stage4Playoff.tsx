@@ -219,59 +219,8 @@ export default function Stage4Playoff() {
                 </div>
               </div>
 
-              {/* Third Place Match */}
-              <div className="mt-[200px]">
-                <h3 className="text-lg font-bold text-amber-400 mb-4 text-center">Meciul pentru locul 3</h3>
-                <div className="flex justify-center">
-                  {matches
-                    .filter(m => m.bracketRound === 'third_place')
-                    .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-amber-900/60 to-amber-800/60 border-amber-400/50 hover:border-amber-300 transition-all w-full">
-                        <CardContent className="p-4">
-                          <div className="text-sm text-amber-300 mb-3 font-bold text-center">
-                            🥉 LOCUL 3 • 19 iulie
-                          </div>
-                          <div className="space-y-2">
-                            <div className={`text-sm px-2 py-2 rounded transition-colors ${
-                              match.winnerName === match.team1Name 
-                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-gray-700/40'
-                            }`}>
-                              {match.winnerName === match.team1Name && '🥉 '}
-                              {match.team1Name || 'Înfrânt SF1'}
-                              {match.isPlayed && match.team1Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
-                              )}
-                            </div>
-                            <div className="text-center text-gray-400 text-sm font-bold">VS</div>
-                            <div className={`text-sm px-2 py-2 rounded transition-colors ${
-                              match.winnerName === match.team2Name 
-                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-gray-700/40'
-                            }`}>
-                              {match.winnerName === match.team2Name && '🥉 '}
-                              {match.team2Name || 'Înfrânt SF2'}
-                              {match.isPlayed && match.team2Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
-                              )}
-                            </div>
-                          </div>
-                          {match.winnerName && (
-                            <div className="mt-3 text-center">
-                              <Badge className="bg-amber-600 text-white font-bold text-sm px-3 py-1">
-                                🥉 LOCUL 3: {match.winnerName}
-                              </Badge>
-                            </div>
-                          )}
-                          <div className="text-sm text-amber-200 mt-3 text-center font-medium">BO3</div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
-
               {/* Final */}
-              <div className="mt-[50px]">
+              <div className="mt-[200px]">
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
                 <div className="flex justify-center">
                   {matches
@@ -315,6 +264,57 @@ export default function Stage4Playoff() {
                             </div>
                           )}
                           <div className="text-sm text-red-200 mt-3 text-center font-medium">BO3</div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                </div>
+              </div>
+
+              {/* Third Place Match */}
+              <div className="mt-[80px]">
+                <h3 className="text-lg font-bold text-amber-400 mb-4 text-center">Meciul pentru locul 3</h3>
+                <div className="flex justify-center">
+                  {matches
+                    .filter(m => m.bracketRound === 'third_place')
+                    .map((match) => (
+                      <Card key={match.id} className="bg-gradient-to-r from-amber-900/60 to-amber-800/60 border-amber-400/50 hover:border-amber-300 transition-all w-full">
+                        <CardContent className="p-4">
+                          <div className="text-sm text-amber-300 mb-3 font-bold text-center">
+                            🥉 LOCUL 3 • 19 iulie
+                          </div>
+                          <div className="space-y-2">
+                            <div className={`text-sm px-2 py-2 rounded transition-colors ${
+                              match.winnerName === match.team1Name 
+                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
+                                : 'text-white bg-gray-700/40'
+                            }`}>
+                              {match.winnerName === match.team1Name && '🥉 '}
+                              {match.team1Name || 'Înfrânt SF1'}
+                              {match.isPlayed && match.team1Score !== null && (
+                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
+                              )}
+                            </div>
+                            <div className="text-center text-gray-400 text-sm font-bold">VS</div>
+                            <div className={`text-sm px-2 py-2 rounded transition-colors ${
+                              match.winnerName === match.team2Name 
+                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
+                                : 'text-white bg-gray-700/40'
+                            }`}>
+                              {match.winnerName === match.team2Name && '🥉 '}
+                              {match.team2Name || 'Înfrânt SF2'}
+                              {match.isPlayed && match.team2Score !== null && (
+                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
+                              )}
+                            </div>
+                          </div>
+                          {match.winnerName && (
+                            <div className="mt-3 text-center">
+                              <Badge className="bg-amber-600 text-white font-bold text-sm px-3 py-1">
+                                🥉 LOCUL 3: {match.winnerName}
+                              </Badge>
+                            </div>
+                          )}
+                          <div className="text-sm text-amber-200 mt-3 text-center font-medium">BO3</div>
                         </CardContent>
                       </Card>
                     ))}
