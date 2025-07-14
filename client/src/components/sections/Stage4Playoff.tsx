@@ -271,13 +271,13 @@ export default function Stage4Playoff() {
               </div>
 
               {/* Third Place Match */}
-              <div className="mt-8 flex justify-center">
-                <div className="ml-[400px]">
-                  <h3 className="text-lg font-bold text-yellow-400 mb-4 text-center">Meciul pentru locul 3</h3>
+              <div className="mt-12 ml-[400px]">
+                <h3 className="text-lg font-bold text-yellow-400 mb-4 text-center">Meciul pentru locul 3</h3>
+                <div className="flex justify-center">
                   {matches
                     .filter(m => m.bracketRound === 'third_place')
                     .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-yellow-900/60 to-yellow-800/60 border-yellow-400/50 hover:border-yellow-300 transition-all max-w-sm">
+                      <Card key={match.id} className="bg-gradient-to-r from-yellow-900/60 to-yellow-800/60 border-yellow-400/50 hover:border-yellow-300 transition-all w-full max-w-sm">
                         <CardContent className="p-4">
                           <div className="text-sm text-yellow-300 mb-3 font-bold text-center">
                             🥉 LOCUL 3 • 20 iulie
