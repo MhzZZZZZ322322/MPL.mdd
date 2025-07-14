@@ -281,9 +281,7 @@ export default function Stage4Playoff() {
                     .map((match) => (
                       <Card key={match.id} className="bg-gradient-to-r from-amber-900/60 to-amber-800/60 border-amber-400/50 hover:border-amber-300 transition-all w-full">
                         <CardContent className="p-3">
-                          <div className="text-xs text-amber-300 mb-2 font-semibold text-center">
-                            🥉 LOCUL 3 • 19 iulie
-                          </div>
+                          <div className="text-xs text-amber-300 mb-2 font-semibold text-center">🥉 LOCUL 3 • 20 iulie</div>
                           <div className="space-y-1">
                             <div className={`text-sm px-2 py-1 rounded transition-colors ${
                               match.winnerName === match.team1Name 
