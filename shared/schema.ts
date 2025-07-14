@@ -416,8 +416,19 @@ export const insertStage4PlayoffSchema = createInsertSchema(stage4Playoff).omit(
   id: true,
   createdAt: true,
   updatedAt: true,
-}).partial({
-  matchDate: true
+}).extend({
+  bracketPosition: z.union([z.string(), z.number()]).transform(val => {
+    if (typeof val === 'string') return parseInt(val, 10);
+    return val;
+  }),
+  matchDate: z.union([z.string(), z.date(), z.null()]).optional().transform(val => {
+    if (!val || val === '' || val === null) return null;
+    if (typeof val === 'string') {
+      if (val.trim() === '') return null;
+      return new Date(val);
+    }
+    return val;
+  })
 });
 
 export type InsertStage4Playoff = z.infer<typeof insertStage4PlayoffSchema>;

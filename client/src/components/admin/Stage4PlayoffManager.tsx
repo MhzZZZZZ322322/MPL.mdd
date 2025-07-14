@@ -134,15 +134,57 @@ export default function Stage4PlayoffManager() {
       toast({ title: "Eroare", description: "O echipă nu poate juca împotriva sa.", variant: "destructive" });
       return;
     }
-    createMutation.mutate(newMatch);
+
+    // Determinăm bracketRound din bracketPosition
+    let bracketRound = 'quarterfinals';
+    let bracketPositionNum = 1;
+    
+    if (newMatch.bracketPosition.startsWith('QF')) {
+      bracketRound = 'quarterfinals';
+      bracketPositionNum = parseInt(newMatch.bracketPosition.replace('QF', ''));
+    } else if (newMatch.bracketPosition.startsWith('SF')) {
+      bracketRound = 'semifinals';
+      bracketPositionNum = parseInt(newMatch.bracketPosition.replace('SF', ''));
+    } else if (newMatch.bracketPosition === 'F') {
+      bracketRound = 'final';
+      bracketPositionNum = 1;
+    } else if (newMatch.bracketPosition === 'TP') {
+      bracketRound = 'third_place';
+      bracketPositionNum = 1;
+    }
+
+    const matchToCreate = {
+      ...newMatch,
+      bracketRound,
+      bracketPosition: bracketPositionNum,
+      playDate: newMatch.matchDate,
+      streamUrl: newMatch.faceitUrl || null,
+      matchDate: newMatch.matchDate && newMatch.matchTime ? 
+        new Date(`${newMatch.matchDate}T${newMatch.matchTime}:00`).toISOString() : null
+    };
+
+    createMutation.mutate(matchToCreate);
   };
 
   const handleUpdateMatch = () => {
     if (!editingMatch) return;
     
+    // Formatăm datele pentru update similar cu create
+    let bracketRound = editingMatch.bracketRound || 'quarterfinals';
+    let bracketPositionNum = editingMatch.bracketPosition;
+    
+    const matchToUpdate = {
+      ...editingMatch,
+      bracketRound,
+      bracketPosition: bracketPositionNum,
+      playDate: editingMatch.matchDate || editingMatch.playDate,
+      streamUrl: editingMatch.faceitUrl || editingMatch.streamUrl || null,
+      matchDate: editingMatch.matchDate ? new Date(editingMatch.matchDate).toISOString() : null
+    };
+    
     updateMutation.mutate({
       id: editingMatch.id,
-      match: editingMatch
+      match: matchToUpdate
     });
   };
 
