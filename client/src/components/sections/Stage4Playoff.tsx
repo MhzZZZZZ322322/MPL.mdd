@@ -220,7 +220,7 @@ export default function Stage4Playoff() {
               </div>
 
               {/* Final */}
-              <div className="mt-[250px]">
+              <div className="mt-[230px]">
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
                 <div className="flex justify-center">
                   {matches
