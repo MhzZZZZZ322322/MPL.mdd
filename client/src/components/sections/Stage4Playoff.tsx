@@ -335,7 +335,7 @@ export default function Stage4Playoff() {
                 </span>
                 <span className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-amber-500 rounded"></div>
-                  Locul 3 (19 iulie)
+                  Locul 3 (20 iulie)
                 </span>
                 <span className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-red-500 rounded"></div>

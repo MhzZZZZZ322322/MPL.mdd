@@ -71,10 +71,10 @@ export default function Stage4PlayoffManager() {
   // Update default date based on bracket position
   const handleBracketPositionChange = (position: string) => {
     let defaultDate = '2025-07-18'; // Quarterfinals
-    if (position.startsWith('SF') || position === 'THIRD_PLACE') {
-      defaultDate = '2025-07-19'; // Semifinals and Third Place
-    } else if (position === 'FINAL') {
-      defaultDate = '2025-07-20'; // Final
+    if (position.startsWith('SF')) {
+      defaultDate = '2025-07-19'; // Semifinals
+    } else if (position === 'THIRD_PLACE' || position === 'FINAL') {
+      defaultDate = '2025-07-20'; // Third Place and Final
     }
     
     setNewMatch(prev => ({ 
