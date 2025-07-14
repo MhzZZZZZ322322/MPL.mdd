@@ -223,49 +223,51 @@ export default function Stage4Playoff() {
               <div className="relative">
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
                 
-                {/* Final Match */}
-                <div className="absolute top-[280px] w-full">
+                {/* Final Match - Enlarged and highlighted */}
+                <div className="absolute top-[280px] w-full px-4">
                   {matches
                     .filter(m => m.bracketRound === 'final')
                     .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-red-900/60 to-red-800/60 border-red-400/50 hover:border-red-300 transition-all w-full">
-                        <CardContent className="p-3">
-                          <div className="text-xs text-red-300 mb-2 font-semibold text-center">
+                      <Card key={match.id} className="bg-gradient-to-r from-red-900/80 to-red-800/80 border-2 border-red-400/80 hover:border-red-300 transition-all w-full shadow-2xl shadow-red-500/20 scale-110">
+                        <CardContent className="p-6">
+                          <div className="text-lg text-red-300 mb-4 font-bold text-center bg-red-900/30 py-2 px-4 rounded-lg border border-red-400/50">
                             🏆 FINALA • 20 iulie
                           </div>
-                          <div className="space-y-1">
-                            <div className={`text-sm px-2 py-1 rounded transition-colors ${
+                          <div className="space-y-3">
+                            <div className={`text-lg px-4 py-3 rounded-lg font-semibold transition-colors ${
                               match.winnerName === match.team1Name 
-                                ? 'bg-yellow-600/50 text-yellow-200 font-bold border border-yellow-400/50' 
-                                : 'text-white bg-gray-700/40'
+                                ? 'bg-yellow-600/60 text-yellow-200 font-bold border-2 border-yellow-400/70 shadow-lg shadow-yellow-500/20' 
+                                : 'text-white bg-gray-700/50 border border-gray-600/50'
                             }`}>
                               {match.winnerName === match.team1Name && '🏆 '}
                               {match.team1Name || 'TBD'}
                               {match.isPlayed && match.team1Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
+                                <span className="ml-3 text-sm bg-gray-600 px-2 py-1 rounded font-bold">{match.team1Score}</span>
                               )}
                             </div>
-                            <div className="text-center text-gray-400 text-xs">VS</div>
-                            <div className={`text-sm px-2 py-1 rounded transition-colors ${
+                            <div className="text-center text-gray-400 text-lg font-bold py-2">VS</div>
+                            <div className={`text-lg px-4 py-3 rounded-lg font-semibold transition-colors ${
                               match.winnerName === match.team2Name 
-                                ? 'bg-yellow-600/50 text-yellow-200 font-bold border border-yellow-400/50' 
-                                : 'text-white bg-gray-700/40'
+                                ? 'bg-yellow-600/60 text-yellow-200 font-bold border-2 border-yellow-400/70 shadow-lg shadow-yellow-500/20' 
+                                : 'text-white bg-gray-700/50 border border-gray-600/50'
                             }`}>
                               {match.winnerName === match.team2Name && '🏆 '}
                               {match.team2Name || 'TBD'}
                               {match.isPlayed && match.team2Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
+                                <span className="ml-3 text-sm bg-gray-600 px-2 py-1 rounded font-bold">{match.team2Score}</span>
                               )}
                             </div>
                           </div>
                           {match.winnerName && (
-                            <div className="mt-2 text-center">
-                              <Badge className="bg-yellow-600 text-white font-bold text-xs px-2 py-1">
+                            <div className="mt-4 text-center">
+                              <Badge className="bg-yellow-600 text-white font-bold text-lg px-6 py-2 shadow-lg shadow-yellow-500/30">
                                 🏆 CAMPIONUL: {match.winnerName}
                               </Badge>
                             </div>
                           )}
-                          <div className="text-xs text-red-200 mt-2 text-center font-medium">BO3</div>
+                          <div className="text-sm text-red-200 mt-4 text-center font-bold bg-red-900/30 py-2 px-4 rounded-lg">
+                            BO3 • MECIUL DECISIV
+                          </div>
                         </CardContent>
                       </Card>
                     ))}
