@@ -224,7 +224,7 @@ export default function Stage4Playoff() {
                 <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
                 
                 {/* Final Match - Enlarged and highlighted */}
-                <div className="absolute top-[280px] w-full px-4">
+                <div className="absolute top-[200px] w-full px-4">
                   {matches
                     .filter(m => m.bracketRound === 'final')
                     .map((match) => (
