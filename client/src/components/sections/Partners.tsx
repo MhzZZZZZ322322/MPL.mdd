@@ -4,6 +4,7 @@ import { Check } from 'lucide-react';
 import NeonBorder from '@/components/animations/NeonBorder';
 import darwinLogo from '@/assets/darwin-logo.png';
 import hatorLogo from '@/assets/hator-logo-yellow.png';
+const hyperxLogo = '/hyperx-logo.png';
 import iziplayLogo from '@/assets/iziplay-logo.png';
 import kingstonLogo from '@/assets/kingston-fury-logo.png';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -141,11 +142,16 @@ const Partners = () => {
                     <img src={kingstonLogo} alt="Kingston Fury Logo" className="h-full w-auto object-contain" />
                   </div>
                 </a>
-                <div 
-                  className="aspect-video bg-black/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
+                <a 
+                  href="https://hyperx.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="aspect-video bg-black/40 rounded flex items-center justify-center p-4 hover:bg-black/60 transition-colors"
                 >
-                  <span className="text-gray-400 text-sm">{t('partners.sponsor.spot')}</span>
-                </div>
+                  <div className="h-16 flex items-center justify-center">
+                    <img src={hyperxLogo} alt="HyperX Logo" className="h-full w-auto object-contain" />
+                  </div>
+                </a>
                 <div 
                   className="aspect-video bg-black/40 rounded flex items-center justify-center border border-dashed border-gray-600 hover:border-secondary transition-colors"
                 >
