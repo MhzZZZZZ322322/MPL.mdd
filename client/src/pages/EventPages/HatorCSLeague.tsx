@@ -162,6 +162,13 @@ const HatorCSLeague = () => {
                   <div className="text-center">
                     <div className="text-6xl mb-2">🥈</div>
                     <h3 className="text-slate-300 text-xl font-bold mb-2">LOCUL 2</h3>
+                    <div className="w-24 h-24 mx-auto mb-3 bg-slate-800 rounded-lg flex items-center justify-center p-2">
+                      <img 
+                        src="/team-logos/Xtreme_Players.webp" 
+                        alt="Xtreme Players" 
+                        className="w-full h-full object-contain filter brightness-110"
+                      />
+                    </div>
                     <p className="text-white text-2xl font-rajdhani font-bold">Xtreme Players</p>
                   </div>
                 </div>
@@ -176,6 +183,13 @@ const HatorCSLeague = () => {
                   <div className="text-center">
                     <div className="text-8xl mb-3">🏆</div>
                     <h3 className="text-amber-400 text-2xl font-bold mb-3">LOCUL 1</h3>
+                    <div className="w-32 h-32 mx-auto mb-4 bg-slate-800 rounded-lg flex items-center justify-center p-3">
+                      <img 
+                        src="/team-logos/LitEnergy.png" 
+                        alt="LIT Energy" 
+                        className="w-full h-full object-contain filter brightness-110"
+                      />
+                    </div>
                     <p className="text-white text-3xl font-rajdhani font-bold">LIT Energy</p>
                   </div>
                 </div>
@@ -190,7 +204,14 @@ const HatorCSLeague = () => {
                   <div className="text-center">
                     <div className="text-6xl mb-2">🥉</div>
                     <h3 className="text-amber-700 text-xl font-bold mb-2">LOCUL 3</h3>
-                    <p className="text-white text-2xl font-rajdhani font-bold">Legalais</p>
+                    <div className="w-24 h-24 mx-auto mb-3 bg-slate-800 rounded-lg flex items-center justify-center p-2">
+                      <img 
+                        src="/team-logos/Legalize.png" 
+                        alt="Legalize" 
+                        className="w-full h-full object-contain filter brightness-110"
+                      />
+                    </div>
+                    <p className="text-white text-2xl font-rajdhani font-bold">Legalize</p>
                   </div>
                 </div>
                 <div className="bg-amber-700 w-28 h-16 rounded-t-lg flex items-center justify-center">
