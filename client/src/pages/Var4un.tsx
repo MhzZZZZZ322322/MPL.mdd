@@ -50,7 +50,7 @@ const Var4un = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 p-3 sm:p-8">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="pt-8 sm:pt-20 pb-6 sm:pb-12">
+        <div className="sm:pt-20 sm:pb-12 pt-[100px] pb-[100px]">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-yellow-400 mb-6 sm:mb-12 font-rajdhani tracking-wider animate-pulse drop-shadow-2xl relative z-10 text-shadow-lg">
             🎖️ VAR4UN 🎖️
           </h1>
