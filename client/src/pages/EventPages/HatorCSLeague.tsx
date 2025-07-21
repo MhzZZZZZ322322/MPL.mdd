@@ -149,6 +149,58 @@ const HatorCSLeague = () => {
           </div>
         </div>
 
+        {/* Podium Section */}
+        <div className="py-16 bg-gradient-to-b from-darkBg via-black to-darkBg">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-white mb-12 font-rajdhani text-center">🏆 CÂȘTIGĂTORII TURNEULUI 🏆</h2>
+            
+            {/* Podium */}
+            <div className="flex justify-center items-end gap-4 mb-12 max-w-4xl mx-auto">
+              {/* Locul 2 - Stânga */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-br from-slate-400/30 to-slate-600/30 p-6 rounded-lg border border-slate-400/50 mb-4 shadow-lg shadow-slate-400/20">
+                  <div className="text-center">
+                    <div className="text-6xl mb-2">🥈</div>
+                    <h3 className="text-slate-300 text-xl font-bold mb-2">LOCUL 2</h3>
+                    <p className="text-white text-2xl font-rajdhani font-bold">Xtreme Players</p>
+                  </div>
+                </div>
+                <div className="bg-slate-600 w-32 h-24 rounded-t-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">2</span>
+                </div>
+              </div>
+
+              {/* Locul 1 - Centru (cel mai înalt) */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-br from-amber-400/30 to-amber-600/30 p-8 rounded-lg border border-amber-500/50 mb-4 shadow-xl shadow-amber-500/30 transform scale-110">
+                  <div className="text-center">
+                    <div className="text-8xl mb-3">🏆</div>
+                    <h3 className="text-amber-400 text-2xl font-bold mb-3">LOCUL 1</h3>
+                    <p className="text-white text-3xl font-rajdhani font-bold">LIT Energy</p>
+                  </div>
+                </div>
+                <div className="bg-amber-500 w-36 h-32 rounded-t-lg flex items-center justify-center">
+                  <span className="text-black font-bold text-2xl">1</span>
+                </div>
+              </div>
+
+              {/* Locul 3 - Dreapta */}
+              <div className="flex flex-col items-center">
+                <div className="bg-gradient-to-br from-amber-700/30 to-amber-900/30 p-6 rounded-lg border border-amber-700/50 mb-4 shadow-lg shadow-amber-700/20">
+                  <div className="text-center">
+                    <div className="text-6xl mb-2">🥉</div>
+                    <h3 className="text-amber-700 text-xl font-bold mb-2">LOCUL 3</h3>
+                    <p className="text-white text-2xl font-rajdhani font-bold">Legalais</p>
+                  </div>
+                </div>
+                <div className="bg-amber-700 w-28 h-16 rounded-t-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Premii Section */}
         <div className="py-12 bg-gradient-to-b from-darkBg to-black">
           <div className="container mx-auto px-4">
