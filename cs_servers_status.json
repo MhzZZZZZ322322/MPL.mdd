@@ -2,21 +2,21 @@
   {
     "id": 1,
     "status": true,
-    "players": 3,
+    "players": 4,
     "name": "Retake 1",
     "maxplayers": 16
   },
   {
     "id": 2,
     "status": true,
-    "players": 2,
+    "players": 4,
     "name": "Retake 2",
     "maxplayers": 16
   },
   {
     "id": 3,
     "status": true,
-    "players": 5,
+    "players": 2,
     "name": "FFA/DM",
     "maxplayers": 16
   }
