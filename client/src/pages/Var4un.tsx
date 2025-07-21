@@ -90,7 +90,7 @@ const V0R4yn = () => {
             {/* Like Counter - Gest Onoare */}
             <div className="flex items-center justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 p-4 sm:p-6 bg-yellow-600/20 rounded-lg sm:rounded-xl border border-yellow-400/40">
               <div className="text-center w-full max-w-xs">
-                <div className="text-yellow-300 font-semibold text-base sm:text-lg mb-2 sm:mb-3">Gest - Onoare</div>
+                <div className="text-yellow-300 font-semibold text-base sm:text-lg mb-2 sm:mb-3">Respect</div>
                 <div className="flex flex-col items-center justify-center mb-3 sm:mb-4 space-y-1 sm:space-y-2">
                   <img src="/salute-emoji.png" alt="Salut militar" className="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0" />
                   <div className="text-2xl sm:text-4xl font-bold text-yellow-400 break-all text-center leading-tight">{likes.toLocaleString()}</div>
