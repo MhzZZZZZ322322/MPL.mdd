@@ -1,7 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Var4un = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
+
+  // Load likes from localStorage on component mount
+  useEffect(() => {
+    const savedLikes = localStorage.getItem('var4un-likes');
+    const userHasLiked = localStorage.getItem('var4un-user-liked');
+    
+    if (savedLikes) {
+      setLikes(parseInt(savedLikes));
+    }
+    
+    if (userHasLiked === 'true') {
+      setHasLiked(true);
+    }
+  }, []);
+
+  const handleLike = () => {
+    if (!hasLiked) {
+      const newLikes = likes + 1;
+      setLikes(newLikes);
+      setHasLiked(true);
+      
+      // Save to localStorage
+      localStorage.setItem('var4un-likes', newLikes.toString());
+      localStorage.setItem('var4un-user-liked', 'true');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 p-8">
@@ -37,11 +65,30 @@ const Var4un = () => {
           
           <div className="bg-green-800/50 rounded-2xl p-6 border-2 border-yellow-400/30">
             <h3 className="text-xl font-bold text-yellow-400 mb-3">Misiunea completă!</h3>
-            <p className="text-green-100 text-lg">
+            <p className="text-green-100 text-lg mb-4">
               Ai găsit pagina secretă a celui mai curajos soldat din Moldova Pro League.
               <br />
               Var4un - SHORT-TIMER este gata pentru orice provocare!
             </p>
+            
+            {/* Like Counter - Gest Onoare */}
+            <div className="flex items-center justify-center gap-4 mt-6 p-4 bg-yellow-600/20 rounded-xl border border-yellow-400/40">
+              <div className="text-center">
+                <div className="text-yellow-300 font-semibold text-lg mb-1">Gest - Onoare</div>
+                <div className="text-4xl font-bold text-yellow-400 mb-2">{likes}</div>
+                <button
+                  onClick={handleLike}
+                  disabled={hasLiked}
+                  className={`px-6 py-2 rounded-full font-bold text-lg transition-all duration-300 transform ${
+                    hasLiked 
+                      ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
+                      : 'bg-yellow-600 hover:bg-yellow-500 text-black hover:scale-105 shadow-lg'
+                  }`}
+                >
+                  {hasLiked ? '🫡 Onoare dată' : '🫡 Onorează'}
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-3 gap-4 mt-8">
