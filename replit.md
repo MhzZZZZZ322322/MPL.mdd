@@ -115,7 +115,8 @@ Moldova Pro League is a web application for a gaming esports organization from M
 
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes  
+## Recent Changes
+- July 21, 2025: **USERNAME_CORRECTION** - Corregat numele utilizator din "VAR4UN" în "V0R4YN" prin toată aplicația (pagină, API endpoints, link-uri, localStorage keys)  
 - July 14, 2025: **ENHANCED_ADMIN** - Adăugat suport complet pentru meciul pentru locul 3 și finala în admin interface cu opțiuni TBD și date automate
 - July 14, 2025: **VISUAL_HIERARCHY** - Finala mărită (scale-110) cu borduri mai groase, umbră și text mai mare pentru a evidenția importanța meciului
 - July 14, 2025: **PERFECT_POSITIONING** - Finala la top-[200px], meciul pentru locul 3 la top-[580px], legenda la mt-16 pentru distanță perfectă

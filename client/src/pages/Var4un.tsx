@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-const Var4un = () => {
+const V0R4yn = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [hasLiked, setHasLiked] = useState(false);
   const queryClient = useQueryClient();
 
   // Load user like status from localStorage
   useEffect(() => {
-    const userHasLiked = localStorage.getItem('var4un-user-liked');
+    const userHasLiked = localStorage.getItem('v0r4yn-user-liked');
     if (userHasLiked === 'true') {
       setHasLiked(true);
     }
@@ -16,14 +16,14 @@ const Var4un = () => {
 
   // Fetch counter from database
   const { data: counter, isLoading } = useQuery({
-    queryKey: ['/api/var4un-counter'],
+    queryKey: ['/api/v0r4yn-counter'],
     staleTime: 1000 * 30, // 30 seconds
   });
 
   // Increment counter mutation
   const incrementMutation = useMutation({
     mutationFn: async () => {
-      const response = await fetch('/api/var4un-counter/increment', {
+      const response = await fetch('/api/v0r4yn-counter/increment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -33,9 +33,9 @@ const Var4un = () => {
     onSuccess: () => {
       // Update local state and localStorage
       setHasLiked(true);
-      localStorage.setItem('var4un-user-liked', 'true');
+      localStorage.setItem('v0r4yn-user-liked', 'true');
       // Invalidate and refetch the counter
-      queryClient.invalidateQueries({ queryKey: ['/api/var4un-counter'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/v0r4yn-counter'] });
     },
   });
 
@@ -52,7 +52,7 @@ const Var4un = () => {
       <div className="max-w-4xl mx-auto text-center">
         <div className="sm:pt-20 sm:pb-12 pt-[100px] pb-[100px]">
           <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold text-yellow-400 mb-6 sm:mb-12 font-rajdhani tracking-wider animate-pulse drop-shadow-2xl relative z-10 text-shadow-lg">
-            🎖️ VAR4UN 🎖️
+            🎖️ V0R4YN 🎖️
           </h1>
         </div>
         
@@ -66,7 +66,7 @@ const Var4un = () => {
               )}
               <img 
                 src="/var4un-short-timer.png" 
-                alt="Var4un - SHORT-TIMER" 
+                alt="V0R4YN - SHORT-TIMER" 
                 className={`w-full h-auto rounded-xl sm:rounded-2xl shadow-2xl border-2 sm:border-4 border-yellow-400/30 ${!imageLoaded ? 'hidden' : ''}`}
                 onLoad={() => setImageLoaded(true)}
                 onError={() => setImageLoaded(true)}
@@ -84,7 +84,7 @@ const Var4un = () => {
             <p className="text-green-100 text-sm sm:text-lg mb-3 sm:mb-4 leading-relaxed">
               Ai găsit pagina secretă a celui mai curajos soldat din Moldova Pro League.
               <br />
-              Var4un - SHORT-TIMER este gata pentru orice provocare!
+              V0R4YN - SHORT-TIMER este gata pentru orice provocare!
             </p>
             
             {/* Like Counter - Gest Onoare */}
@@ -140,4 +140,4 @@ const Var4un = () => {
   );
 };
 
-export default Var4un;
+export default V0R4yn;

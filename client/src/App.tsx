@@ -14,7 +14,7 @@ import ComingSoon from "@/pages/ComingSoon";
 import MPLPilotCup from "@/pages/EventPages/MPLPilotCup";
 import HatorCSLeague from "@/pages/EventPages/HatorCSLeague";
 import MefPage from "@/pages/MefPage";
-import Var4un from "@/pages/Var4un";
+import V0R4yn from "@/pages/Var4un";
 import { LanguageProvider } from "@/lib/LanguageContext";
 
 // Importăm paginile de administrare
@@ -35,7 +35,8 @@ function Router() {
       <Route path="/rankings" component={AllRankings} />
       <Route path="/community" component={CommunityPage} />
       <Route path="/mef" component={MefPage} />
-      <Route path="/var4un" component={Var4un} />
+      <Route path="/v0r4yn" component={V0R4yn} />
+      <Route path="/var4un" component={V0R4yn} />
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />

@@ -75,7 +75,7 @@ const Footer = () => {
                 <SocialIcon href="https://www.tiktok.com/@moldova.pro.league" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
               </div>
               <Button 
-                onClick={() => window.location.href = "/var4un"}
+                onClick={() => window.location.href = "/v0r4yn"}
                 variant="ghost" 
                 className="bg-green-600/20 hover:bg-green-600/30 text-green-400 rounded-full px-3 py-2 text-xl mr-2"
               >

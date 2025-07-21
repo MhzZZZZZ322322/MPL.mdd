@@ -1026,8 +1026,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Var4un Counter routes
-  app.get("/api/var4un-counter", async (req, res) => {
+  // V0R4YN Counter routes
+  app.get("/api/v0r4yn-counter", async (req, res) => {
     try {
       const { db } = await import("./db");
       const { var4unCounter } = await import("@shared/schema");
@@ -1044,12 +1044,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(counter);
     } catch (error) {
-      console.error("Error fetching Var4un counter:", error);
-      res.status(500).json({ message: "Failed to fetch Var4un counter" });
+      console.error("Error fetching V0R4YN counter:", error);
+      res.status(500).json({ message: "Failed to fetch V0R4YN counter" });
     }
   });
 
-  app.post("/api/var4un-counter/increment", async (req, res) => {
+  app.post("/api/v0r4yn-counter/increment", async (req, res) => {
     try {
       const { db } = await import("./db");
       const { var4unCounter } = await import("@shared/schema");
@@ -1073,8 +1073,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json(updatedCounter);
     } catch (error) {
-      console.error("Error incrementing Var4un counter:", error);
-      res.status(500).json({ message: "Failed to increment Var4un counter" });
+      console.error("Error incrementing V0R4YN counter:", error);
+      res.status(500).json({ message: "Failed to increment V0R4YN counter" });
     }
   });
 
