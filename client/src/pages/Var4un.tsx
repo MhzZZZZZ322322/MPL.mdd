@@ -76,7 +76,7 @@ const Var4un = () => {
               <div className="text-center">
                 <div className="text-yellow-300 font-semibold text-lg mb-1">Gest - Onoare</div>
                 <div className="flex items-center justify-center gap-3 mb-2">
-                  <div className="text-6xl">👨‍✈️</div>
+                  <div className="text-6xl">🫡</div>
                   <div className="text-4xl font-bold text-yellow-400">{likes}</div>
                 </div>
                 <button
@@ -88,7 +88,7 @@ const Var4un = () => {
                       : 'bg-yellow-600 hover:bg-yellow-500 text-black hover:scale-105 shadow-lg'
                   }`}
                 >
-                  {hasLiked ? '👨‍✈️ Onoare dată' : '👨‍✈️ Onorează'}
+                  {hasLiked ? '🫡 Onoare dată' : '🫡 Onorează'}
                 </button>
               </div>
             </div>
