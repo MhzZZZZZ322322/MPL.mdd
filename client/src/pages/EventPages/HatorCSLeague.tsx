@@ -150,72 +150,72 @@ const HatorCSLeague = () => {
         </div>
 
         {/* Podium Section */}
-        <div className="py-16 bg-gradient-to-b from-darkBg via-black to-darkBg">
+        <div className="py-24 bg-gradient-to-b from-darkBg via-black to-darkBg">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-white mb-12 font-rajdhani text-center">🏆 CÂȘTIGĂTORII TURNEULUI 🏆</h2>
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-16 font-rajdhani text-center">🏆 CÂȘTIGĂTORII TURNEULUI 🏆</h2>
             
             {/* Podium */}
-            <div className="flex justify-center items-end gap-4 mb-12 max-w-4xl mx-auto">
+            <div className="flex justify-center items-end gap-8 mb-16 max-w-6xl mx-auto">
               {/* Locul 2 - Stânga */}
               <div className="flex flex-col items-center">
-                <div className="bg-gradient-to-br from-slate-400/30 to-slate-600/30 p-6 rounded-lg border border-slate-400/50 mb-4 shadow-lg shadow-slate-400/20">
+                <div className="bg-gradient-to-br from-slate-400/30 to-slate-600/30 p-10 rounded-xl border border-slate-400/50 mb-6 shadow-2xl shadow-slate-400/30 transform hover:scale-105 transition-all duration-300">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">🥈</div>
-                    <h3 className="text-slate-300 text-xl font-bold mb-2">LOCUL 2</h3>
-                    <div className="w-24 h-24 mx-auto mb-3 bg-slate-800 rounded-lg flex items-center justify-center p-2">
+                    <div className="text-8xl mb-4">🥈</div>
+                    <h3 className="text-slate-300 text-2xl font-bold mb-4">LOCUL 2</h3>
+                    <div className="w-32 h-32 mx-auto mb-4 bg-slate-800 rounded-xl flex items-center justify-center p-3 border-2 border-slate-400/30">
                       <img 
                         src="/team-logos/Xtreme_Players.webp" 
                         alt="Xtreme Players" 
                         className="w-full h-full object-contain filter brightness-110"
                       />
                     </div>
-                    <p className="text-white text-2xl font-rajdhani font-bold">Xtreme Players</p>
+                    <p className="text-white text-3xl font-rajdhani font-bold">Xtreme Players</p>
                   </div>
                 </div>
-                <div className="bg-slate-600 w-32 h-24 rounded-t-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">2</span>
+                <div className="bg-slate-600 w-40 h-32 rounded-t-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-3xl">2</span>
                 </div>
               </div>
 
               {/* Locul 1 - Centru (cel mai înalt) */}
               <div className="flex flex-col items-center">
-                <div className="bg-gradient-to-br from-amber-400/30 to-amber-600/30 p-8 rounded-lg border border-amber-500/50 mb-4 shadow-xl shadow-amber-500/30 transform scale-110">
+                <div className="bg-gradient-to-br from-amber-400/40 to-amber-600/40 p-12 rounded-xl border-2 border-amber-500/60 mb-6 shadow-2xl shadow-amber-500/40 transform scale-125 hover:scale-130 transition-all duration-300">
                   <div className="text-center">
-                    <div className="text-8xl mb-3">🏆</div>
-                    <h3 className="text-amber-400 text-2xl font-bold mb-3">LOCUL 1</h3>
-                    <div className="w-32 h-32 mx-auto mb-4 bg-slate-800 rounded-lg flex items-center justify-center p-3">
+                    <div className="text-10xl mb-6">🏆</div>
+                    <h3 className="text-amber-400 text-3xl font-bold mb-6">LOCUL 1</h3>
+                    <div className="w-40 h-40 mx-auto mb-6 bg-slate-800 rounded-xl flex items-center justify-center p-4 border-2 border-amber-500/50">
                       <img 
                         src="/team-logos/LitEnergy.png" 
                         alt="LIT Energy" 
                         className="w-full h-full object-contain filter brightness-110"
                       />
                     </div>
-                    <p className="text-white text-3xl font-rajdhani font-bold">LIT Energy</p>
+                    <p className="text-white text-4xl font-rajdhani font-bold">LIT Energy</p>
                   </div>
                 </div>
-                <div className="bg-amber-500 w-36 h-32 rounded-t-lg flex items-center justify-center">
-                  <span className="text-black font-bold text-2xl">1</span>
+                <div className="bg-amber-500 w-48 h-40 rounded-t-xl flex items-center justify-center shadow-2xl">
+                  <span className="text-black font-bold text-4xl">1</span>
                 </div>
               </div>
 
               {/* Locul 3 - Dreapta */}
               <div className="flex flex-col items-center">
-                <div className="bg-gradient-to-br from-amber-700/30 to-amber-900/30 p-6 rounded-lg border border-amber-700/50 mb-4 shadow-lg shadow-amber-700/20">
+                <div className="bg-gradient-to-br from-amber-700/30 to-amber-900/30 p-10 rounded-xl border border-amber-700/50 mb-6 shadow-2xl shadow-amber-700/30 transform hover:scale-105 transition-all duration-300">
                   <div className="text-center">
-                    <div className="text-6xl mb-2">🥉</div>
-                    <h3 className="text-amber-700 text-xl font-bold mb-2">LOCUL 3</h3>
-                    <div className="w-24 h-24 mx-auto mb-3 bg-slate-800 rounded-lg flex items-center justify-center p-2">
+                    <div className="text-8xl mb-4">🥉</div>
+                    <h3 className="text-amber-700 text-2xl font-bold mb-4">LOCUL 3</h3>
+                    <div className="w-32 h-32 mx-auto mb-4 bg-slate-800 rounded-xl flex items-center justify-center p-3 border-2 border-amber-700/30">
                       <img 
                         src="/team-logos/Legalize.png" 
                         alt="Legalize" 
                         className="w-full h-full object-contain filter brightness-110"
                       />
                     </div>
-                    <p className="text-white text-2xl font-rajdhani font-bold">Legalize</p>
+                    <p className="text-white text-3xl font-rajdhani font-bold">Legalize</p>
                   </div>
                 </div>
-                <div className="bg-amber-700 w-28 h-16 rounded-t-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">3</span>
+                <div className="bg-amber-700 w-36 h-24 rounded-t-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-2xl">3</span>
                 </div>
               </div>
             </div>
