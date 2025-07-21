@@ -160,7 +160,7 @@ const HatorCSLeague = () => {
               <div className="flex flex-col items-center">
                 <div className="bg-gradient-to-br from-slate-400/40 to-slate-600/40 p-20 rounded-3xl border-4 border-slate-400/70 mb-12 shadow-2xl shadow-slate-400/50 transform hover:scale-105 transition-all duration-300">
                   <div className="text-center">
-                    <div className="text-10xl mb-12">🥈</div>
+                    <div className="text-[12rem] mb-12">🥈</div>
                     <h3 className="text-slate-300 text-5xl font-bold mb-12 tracking-wider">LOCUL 2</h3>
                     <div className="w-64 h-64 mx-auto mb-12 bg-slate-800 rounded-3xl flex items-center justify-center p-8 border-4 border-slate-400/50 shadow-2xl">
                       <img 
@@ -181,7 +181,7 @@ const HatorCSLeague = () => {
               <div className="flex flex-col items-center">
                 <div className="bg-gradient-to-br from-amber-400/50 to-amber-600/50 p-24 rounded-3xl border-4 border-amber-500/80 mb-12 shadow-2xl shadow-amber-500/60 transform scale-175 hover:scale-180 transition-all duration-300">
                   <div className="text-center">
-                    <div className="text-12xl mb-16">🏆</div>
+                    <div className="text-[16rem] mb-16">🏆</div>
                     <h3 className="text-amber-400 text-6xl font-bold mb-16 tracking-wider">LOCUL 1</h3>
                     <div className="w-72 h-72 mx-auto mb-16 bg-slate-800 rounded-3xl flex items-center justify-center p-10 border-4 border-amber-500/70 shadow-2xl">
                       <img 
@@ -202,7 +202,7 @@ const HatorCSLeague = () => {
               <div className="flex flex-col items-center">
                 <div className="bg-gradient-to-br from-amber-700/40 to-amber-900/40 p-20 rounded-3xl border-4 border-amber-700/70 mb-12 shadow-2xl shadow-amber-700/50 transform hover:scale-105 transition-all duration-300">
                   <div className="text-center">
-                    <div className="text-10xl mb-12">🥉</div>
+                    <div className="text-[12rem] mb-12">🥉</div>
                     <h3 className="text-amber-700 text-5xl font-bold mb-12 tracking-wider">LOCUL 3</h3>
                     <div className="w-64 h-64 mx-auto mb-12 bg-slate-800 rounded-3xl flex items-center justify-center p-8 border-4 border-amber-700/50 shadow-2xl">
                       <img 
