@@ -124,11 +124,6 @@ const HatorCSLeague = () => {
                 {t('event.hator.description')}
               </p>
 
-              {/* Countdown timer până la începerea jocurilor */}
-              <div className="mb-8">
-                <p className="text-center text-white mb-2">{t('event.countdown')}</p>
-                <CountdownTimer targetDate="2025-06-16T18:00:00" className="max-w-3xl" />
-              </div>
 
               <div className="flex flex-wrap gap-4">
                 <a href="https://discord.gg/KgXXUebhVM" target="_blank" rel="noopener noreferrer">
