@@ -75,18 +75,18 @@ const Footer = () => {
                 <SocialIcon href="https://www.tiktok.com/@moldova.pro.league" target="_blank" rel="noopener noreferrer" icon={FaTiktok} />
               </div>
               <Button 
+                onClick={() => window.location.href = "/var4un"}
+                variant="ghost" 
+                className="bg-green-600/20 hover:bg-green-600/30 text-green-400 rounded-full px-3 py-2 text-xl mr-2"
+              >
+                👴
+              </Button>
+              <Button 
                 onClick={() => window.location.href = "/mef"}
                 variant="ghost" 
                 className="bg-primary/10 hover:bg-primary/20 text-primary rounded-full px-4 py-2 text-sm font-bold flex items-center gap-1"
               >
                 MEF <span className="text-lg">💩</span>
-              </Button>
-              <Button 
-                onClick={() => window.location.href = "/var4un"}
-                variant="ghost" 
-                className="bg-green-600/20 hover:bg-green-600/30 text-green-400 rounded-full px-3 py-2 text-xl ml-2"
-              >
-                👴
               </Button>
             </div>
           </div>
