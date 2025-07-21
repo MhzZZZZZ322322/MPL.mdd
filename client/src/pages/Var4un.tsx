@@ -10,7 +10,7 @@ const Var4un = () => {
         <div className="bg-black/30 rounded-3xl p-8 mb-8 border-4 border-yellow-400/50 shadow-2xl">
           <div className="max-w-2xl mx-auto">
             <img 
-              src="/attached_assets/image_1753083880744.png" 
+              src="/var4un-short-timer.png" 
               alt="Var4un - SHORT-TIMER" 
               className="w-full h-auto rounded-2xl shadow-2xl border-4 border-yellow-400/30"
             />
