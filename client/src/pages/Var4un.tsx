@@ -4,11 +4,13 @@ const Var4un = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 flex flex-col items-center justify-center p-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 p-8">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-6xl font-bold text-yellow-400 mb-8 font-rajdhani tracking-wider animate-pulse">
-          🎖️ VAR4UN 🎖️
-        </h1>
+        <div className="pt-8 pb-8">
+          <h1 className="text-7xl font-bold text-yellow-400 mb-8 font-rajdhani tracking-wider animate-pulse drop-shadow-2xl relative z-10">
+            🎖️ VAR4UN 🎖️
+          </h1>
+        </div>
         
         <div className="bg-black/30 rounded-3xl p-8 mb-8 border-4 border-yellow-400/50 shadow-2xl">
           <div className="max-w-2xl mx-auto">
