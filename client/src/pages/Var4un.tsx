@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 const Var4un = () => {
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 flex flex-col items-center justify-center p-8">
@@ -8,11 +11,18 @@ const Var4un = () => {
         </h1>
         
         <div className="bg-black/30 rounded-3xl p-8 mb-8 border-4 border-yellow-400/50 shadow-2xl">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto relative">
+            {!imageLoaded && (
+              <div className="w-full h-96 bg-green-800/50 rounded-2xl flex items-center justify-center">
+                <div className="text-yellow-400 text-2xl font-bold animate-pulse">Loading...</div>
+              </div>
+            )}
             <img 
               src="/var4un-short-timer.png" 
               alt="Var4un - SHORT-TIMER" 
-              className="w-full h-auto rounded-2xl shadow-2xl border-4 border-yellow-400/30"
+              className={`w-full h-auto rounded-2xl shadow-2xl border-4 border-yellow-400/30 ${!imageLoaded ? 'hidden' : ''}`}
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
             />
           </div>
         </div>
