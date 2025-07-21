@@ -11,19 +11,21 @@ const Var4un = () => {
         </h1>
         
         <div className="bg-black/30 rounded-3xl p-8 mb-8 border-4 border-yellow-400/50 shadow-2xl">
-          <div className="max-w-2xl mx-auto relative">
-            {!imageLoaded && (
-              <div className="w-full h-96 bg-green-800/50 rounded-2xl flex items-center justify-center">
-                <div className="text-yellow-400 text-2xl font-bold animate-pulse">Loading...</div>
-              </div>
-            )}
-            <img 
-              src="/var4un-short-timer.png" 
-              alt="Var4un - SHORT-TIMER" 
-              className={`w-full h-auto rounded-2xl shadow-2xl border-4 border-yellow-400/30 ${!imageLoaded ? 'hidden' : ''}`}
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageLoaded(true)}
-            />
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              {!imageLoaded && (
+                <div className="w-full h-96 bg-green-800/50 rounded-2xl flex items-center justify-center">
+                  <div className="text-yellow-400 text-2xl font-bold animate-pulse">Loading...</div>
+                </div>
+              )}
+              <img 
+                src="/var4un-short-timer.png" 
+                alt="Var4un - SHORT-TIMER" 
+                className={`w-full h-auto rounded-2xl shadow-2xl border-4 border-yellow-400/30 ${!imageLoaded ? 'hidden' : ''}`}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageLoaded(true)}
+              />
+            </div>
           </div>
         </div>
 
