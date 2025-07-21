@@ -1026,6 +1026,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Var4un Counter routes
+  app.get("/api/var4un-counter", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { var4unCounter } = await import("@shared/schema");
+      
+      const [counter] = await db.select().from(var4unCounter).limit(1);
+      
+      if (!counter) {
+        // Initialize counter if it doesn't exist
+        const [newCounter] = await db.insert(var4unCounter)
+          .values({ totalLikes: 0 })
+          .returning();
+        return res.json(newCounter);
+      }
+      
+      res.json(counter);
+    } catch (error) {
+      console.error("Error fetching Var4un counter:", error);
+      res.status(500).json({ message: "Failed to fetch Var4un counter" });
+    }
+  });
+
+  app.post("/api/var4un-counter/increment", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { var4unCounter } = await import("@shared/schema");
+      const { sql } = await import("drizzle-orm");
+      
+      // Increment counter atomically
+      const [updatedCounter] = await db.update(var4unCounter)
+        .set({ 
+          totalLikes: sql`${var4unCounter.totalLikes} + 1`,
+          lastUpdated: new Date()
+        })
+        .returning();
+      
+      if (!updatedCounter) {
+        // Counter doesn't exist, create it with 1 like
+        const [newCounter] = await db.insert(var4unCounter)
+          .values({ totalLikes: 1 })
+          .returning();
+        return res.json(newCounter);
+      }
+      
+      res.json(updatedCounter);
+    } catch (error) {
+      console.error("Error incrementing Var4un counter:", error);
+      res.status(500).json({ message: "Failed to increment Var4un counter" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 

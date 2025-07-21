@@ -1,35 +1,51 @@
 import { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const Var4un = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
+  const queryClient = useQueryClient();
 
-  // Load likes from localStorage on component mount
+  // Load user like status from localStorage
   useEffect(() => {
-    const savedLikes = localStorage.getItem('var4un-likes');
     const userHasLiked = localStorage.getItem('var4un-user-liked');
-    
-    if (savedLikes) {
-      setLikes(parseInt(savedLikes));
-    }
-    
     if (userHasLiked === 'true') {
       setHasLiked(true);
     }
   }, []);
 
-  const handleLike = () => {
-    if (!hasLiked) {
-      const newLikes = likes + 1;
-      setLikes(newLikes);
+  // Fetch counter from database
+  const { data: counter, isLoading } = useQuery({
+    queryKey: ['/api/var4un-counter'],
+    staleTime: 1000 * 30, // 30 seconds
+  });
+
+  // Increment counter mutation
+  const incrementMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/var4un-counter/increment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) throw new Error('Failed to increment counter');
+      return response.json();
+    },
+    onSuccess: () => {
+      // Update local state and localStorage
       setHasLiked(true);
-      
-      // Save to localStorage
-      localStorage.setItem('var4un-likes', newLikes.toString());
       localStorage.setItem('var4un-user-liked', 'true');
+      // Invalidate and refetch the counter
+      queryClient.invalidateQueries({ queryKey: ['/api/var4un-counter'] });
+    },
+  });
+
+  const handleLike = () => {
+    if (!hasLiked && !incrementMutation.isPending) {
+      incrementMutation.mutate();
     }
   };
+
+  const likes = counter?.totalLikes || 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700 p-3 sm:p-8">
@@ -81,14 +97,14 @@ const Var4un = () => {
                 </div>
                 <button
                   onClick={handleLike}
-                  disabled={hasLiked}
+                  disabled={hasLiked || incrementMutation.isPending}
                   className={`px-4 sm:px-6 py-2 rounded-full font-bold text-sm sm:text-lg transition-all duration-300 transform ${
-                    hasLiked 
+                    hasLiked || incrementMutation.isPending
                       ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
                       : 'bg-yellow-600 hover:bg-yellow-500 text-black hover:scale-105 shadow-lg'
                   }`}
                 >
-                  {hasLiked ? '✋ Onoare dată' : '✋ Onorează'}
+                  {incrementMutation.isPending ? '⏳ Se salvează...' : hasLiked ? '✋ Onoare dată' : '✋ Onorează'}
                 </button>
               </div>
             </div>
