@@ -61,7 +61,7 @@ const Var4un = () => {
 
         <div className="space-y-6 text-center">
           <h2 className="text-4xl font-bold text-yellow-300 mb-4">SHORT-TIMER</h2>
-          <p className="text-2xl text-green-200 mb-6">🪖 Soldatul de elită al MPL 🪖</p>
+          <p className="text-2xl text-green-200 mb-6">Soldatul de elită din comunitatea MPL </p>
           
           <div className="bg-green-800/50 rounded-2xl p-6 border-2 border-yellow-400/30">
             <h3 className="text-xl font-bold text-yellow-400 mb-3">Misiunea completă!</h3>
