@@ -474,17 +474,17 @@ export type GroupTeam = typeof groupTeams.$inferSelect;
 export type InsertMatch = z.infer<typeof insertMatchSchema>;
 export type Match = typeof matches.$inferSelect;
 
-// Var4un Counter - Counter pentru onori pe pagina secretă
+// V0R4YN Counter - Counter pentru onori pe pagina secretă
 export const var4unCounter = pgTable("var4un_counter", {
   id: serial("id").primaryKey(),
   totalLikes: integer("total_likes").notNull().default(0),
   lastUpdated: timestamp("last_updated").defaultNow(),
 });
 
-export const insertVar4unCounterSchema = createInsertSchema(var4unCounter).omit({
+export const insertV0r4ynCounterSchema = createInsertSchema(var4unCounter).omit({
   id: true,
   lastUpdated: true,
 });
 
-export type InsertVar4unCounter = z.infer<typeof insertVar4unCounterSchema>;
-export type Var4unCounter = typeof var4unCounter.$inferSelect;
+export type InsertV0r4ynCounter = z.infer<typeof insertV0r4ynCounterSchema>;
+export type V0r4ynCounter = typeof var4unCounter.$inferSelect;
