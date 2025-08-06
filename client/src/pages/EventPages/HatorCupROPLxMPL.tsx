@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Trophy, Users, ExternalLink, Flag } from 'lucide-react';
+import { Calendar, Trophy, Users, ExternalLink, Flag, Tv, Youtube, Instagram, Facebook } from 'lucide-react';
+import { FaTwitch, FaTiktok } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -376,6 +378,179 @@ const HatorCupROPLxMPL = () => {
                         *Programul poate fi ajustat în funcție de numărul de echipe înscrise
                       </p>
                     </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Streaming & Social Media */}
+        <section className="px-4 py-16 bg-gradient-to-r from-primary/10 to-secondary/10">
+          <div className="container mx-auto max-w-6xl">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center font-rajdhani" data-aos="fade-up">
+              Urmărește Live
+            </h3>
+            
+            {/* Streaming Platforms */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-right">
+                <CardHeader>
+                  <CardTitle className="text-primary font-rajdhani flex items-center">
+                    <FaTwitch className="mr-2 text-2xl" />
+                    Stream în Română
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300 font-inter mb-4">
+                    Comentariu în română pe canalul oficial ROPL
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-primary/50 text-primary hover:bg-primary/10 font-rajdhani"
+                    onClick={() => window.open('https://www.twitch.tv/romanianproleague', '_blank')}
+                  >
+                    <FaTwitch className="mr-2" />
+                    twitch.tv/romanianproleague
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-left">
+                <CardHeader>
+                  <CardTitle className="text-secondary font-rajdhani flex items-center">
+                    <FaTwitch className="mr-2 text-2xl" />
+                    Stream în Rusă
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300 font-inter mb-4">
+                    Comentariu în rusă pe canalul oficial MPL
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-secondary/50 text-secondary hover:bg-secondary/10 font-rajdhani"
+                    onClick={() => window.open('https://www.twitch.tv/MoldovaProLeague', '_blank')}
+                  >
+                    <FaTwitch className="mr-2" />
+                    twitch.tv/MoldovaProLeague
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Social Media Networks */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-up">
+                <CardHeader>
+                  <CardTitle className="text-primary font-rajdhani">
+                    Urmărește ROPL
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-primary font-inter"
+                      onClick={() => window.open('https://www.youtube.com/@romanianproleague', '_blank')}
+                    >
+                      <Youtube className="mr-2 h-4 w-4" />
+                      YouTube
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-primary font-inter"
+                      onClick={() => window.open('https://x.com/roproleague', '_blank')}
+                    >
+                      <FaXTwitter className="mr-2 h-4 w-4" />
+                      X (Twitter)
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-primary font-inter"
+                      onClick={() => window.open('https://www.instagram.com/romanianproleague/', '_blank')}
+                    >
+                      <Instagram className="mr-2 h-4 w-4" />
+                      Instagram
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-primary font-inter"
+                      onClick={() => window.open('https://www.facebook.com/romanianproleague', '_blank')}
+                    >
+                      <Facebook className="mr-2 h-4 w-4" />
+                      Facebook
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-primary font-inter col-span-2"
+                      onClick={() => window.open('https://www.tiktok.com/@romanianproleague', '_blank')}
+                    >
+                      <FaTiktok className="mr-2 h-4 w-4" />
+                      TikTok
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <CardHeader>
+                  <CardTitle className="text-secondary font-rajdhani">
+                    Urmărește MPL
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-secondary font-inter"
+                      onClick={() => window.open('https://moldovapro.com/', '_blank')}
+                    >
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Site oficial
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-secondary font-inter"
+                      onClick={() => window.open('https://moldovapro.com/discord', '_blank')}
+                    >
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Discord
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-secondary font-inter"
+                      onClick={() => window.open('https://www.facebook.com/moldovapro', '_blank')}
+                    >
+                      <Facebook className="mr-2 h-4 w-4" />
+                      Facebook
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-secondary font-inter"
+                      onClick={() => window.open('https://www.instagram.com/moldovapro/', '_blank')}
+                    >
+                      <Instagram className="mr-2 h-4 w-4" />
+                      Instagram
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-secondary font-inter col-span-2"
+                      onClick={() => window.open('https://www.youtube.com/@moldovapro', '_blank')}
+                    >
+                      <Youtube className="mr-2 h-4 w-4" />
+                      YouTube
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
