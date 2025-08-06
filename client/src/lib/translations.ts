@@ -234,8 +234,8 @@ export const translations: TranslationDictionary = {
     ru: "HATOR CUP - ROPL x MPL"
   },
   "hero.slider.subtitle": {
-    ro: "23-24 August 2025 • 5500 RON Prize Pool",
-    ru: "23-24 Август 2025 • 5500 RON Prize Pool"
+    ro: "23-24 August 2025",
+    ru: "23-24 Август 2025"
   },
   "hero.slider.button": {
     ro: "Înscrie Echipa",
