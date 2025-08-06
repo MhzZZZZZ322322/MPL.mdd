@@ -87,14 +87,6 @@ const HatorCupROPLxMPL = () => {
                   <ExternalLink className="mr-2 h-4 w-4" />
                   Vizitează ROPL
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="border-secondary/50 text-secondary hover:bg-secondary/10 font-rajdhani"
-                  onClick={() => window.open('https://moldovapro.com/', '_blank')}
-                >
-                  <ExternalLink className="mr-2 h-4 w-4" />
-                  Vizitează MPL
-                </Button>
               </div>
 
           </motion.div>
