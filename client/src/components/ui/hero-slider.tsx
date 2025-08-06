@@ -46,7 +46,7 @@ export const HeroSlider = () => {
         <img 
           src={heroContent.image} 
           alt="HATOR CUP - ROPL x MPL" 
-          className="w-full max-w-5xl h-auto object-contain"
+          className="w-full max-w-7xl h-auto object-contain"
         />
       </motion.div>
       
