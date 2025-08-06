@@ -50,7 +50,7 @@ const HatorCupROPLxMPL = () => {
               data-aos="fade-up"
             >
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-rajdhani">
-                🔥 <span className="text-primary">HATOR CUP</span> 🔥
+                <span className="text-primary">HATOR CUP</span>
               </h1>
               <h2 className="text-2xl md:text-4xl font-bold text-secondary mb-4 font-rajdhani">
                 ROPL x MPL
