@@ -304,7 +304,6 @@ const HatorCupROPLxMPL = () => {
                     <p>• Anticheat: FACEIT Anti-Cheat obligatoriu</p>
                     
                     <p>• Overtime: MR3 (max 6 runde OT)</p>
-                    <p>• Disconnect: Jucătorul are 5 minute pentru reconectare</p>
                   </div>
                 </CardContent>
               </Card>
