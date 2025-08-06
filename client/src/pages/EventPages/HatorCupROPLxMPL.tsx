@@ -610,7 +610,7 @@ const HatorCupROPLxMPL = () => {
               <a 
                 href="https://moldovapro.com" 
                 target="_blank" 
-                className="text-secondary font-bold text-xl md:text-2xl font-rajdhani hover:text-secondary/80 transition-colors duration-300"
+                className="text-primary font-bold text-xl md:text-2xl font-rajdhani hover:text-primary/80 transition-colors duration-300"
               >
                 MPL
               </a>
