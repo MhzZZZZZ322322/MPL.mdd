@@ -238,8 +238,8 @@ export const translations: TranslationDictionary = {
     ru: "23-24 Август 2025"
   },
   "hero.slider.button": {
-    ro: "Înscrie Echipa",
-    ru: "Записать Команду"
+    ro: "Vezi Detalii",
+    ru: "Посмотреть Детали"
   },
   
   // Secțiunea CS Server Status
