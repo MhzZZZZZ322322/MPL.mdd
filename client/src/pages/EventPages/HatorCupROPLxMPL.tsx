@@ -324,7 +324,7 @@ const HatorCupROPLxMPL = () => {
                         <span className="text-primary font-rajdhani font-bold">🥇 Locul 1</span>
                       </div>
                       <div className="text-sm text-gray-300 font-inter space-y-1">
-                        <p>• 5X Keyboard HATOR Rockfall 3 TKL Wireless</p>
+                        <p>• 5X <a href="https://hator.com/collections/keyboards/products/rockfall-3-tkl-wireless" target="_blank" className="text-primary hover:text-primary/80 underline">Keyboard HATOR Rockfall 3 TKL Wireless</a></p>
                         <p>• 5X 40€ SkinBaron Voucher</p>
                       </div>
                     </div>
@@ -333,7 +333,7 @@ const HatorCupROPLxMPL = () => {
                         <span className="text-secondary font-rajdhani font-bold">🥈 Locul 2</span>
                       </div>
                       <div className="text-sm text-gray-300 font-inter">
-                        <p>• 5X Mouse HATOR Pulsar 3 PRO Wireless</p>
+                        <p>• 5X <a href="https://hator.com/collections/mice/products/pulsar-3-pro-wireless" target="_blank" className="text-secondary hover:text-secondary/80 underline">Mouse HATOR Pulsar 3 PRO Wireless</a></p>
                       </div>
                     </div>
                     <div className="border-b border-gray-600 pb-3">
@@ -341,7 +341,7 @@ const HatorCupROPLxMPL = () => {
                         <span className="text-primary font-rajdhani font-bold">🥉 Locul 3</span>
                       </div>
                       <div className="text-sm text-gray-300 font-inter">
-                        <p>• 5X Headset HATOR Hyperpunk 3 USB Black</p>
+                        <p>• 5X <a href="https://hator.com/collections/headsets/products/hyperpunk-3-usb" target="_blank" className="text-primary hover:text-primary/80 underline">Headset HATOR Hyperpunk 3 USB Black</a></p>
                       </div>
                     </div>
                   </div>
