@@ -58,7 +58,7 @@ export const HeroSlider = () => {
       
       {/* Content */}
       {isLoaded && (
-        <div className="relative h-full flex flex-col justify-end items-start px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-10 pb-16">
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-10 pb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
