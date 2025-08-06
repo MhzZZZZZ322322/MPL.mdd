@@ -514,10 +514,10 @@ const HatorCupROPLxMPL = () => {
                       variant="ghost" 
                       size="sm"
                       className="justify-start text-white hover:text-primary font-inter"
-                      onClick={() => window.open('https://www.facebook.com/moldovapro', '_blank')}
+                      onClick={() => window.open('https://www.twitch.tv/MoldovaProLeague', '_blank')}
                     >
-                      <Facebook className="mr-2 h-4 w-4" />
-                      Facebook
+                      <FaTwitch className="mr-2 h-4 w-4" />
+                      Twitch
                     </Button>
                     <Button 
                       variant="ghost" 
