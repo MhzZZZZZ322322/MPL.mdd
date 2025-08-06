@@ -564,7 +564,7 @@ const HatorCupROPLxMPL = () => {
               </h3>
               <p className="text-xl text-gray-300 mb-8 font-inter">
                 Fii parte din primul eveniment ROPL x MPL.<br />
-                Let's show them ce înseamnă true skill from the East! 🇷🇴🇲🇩
+                Let's show them ce înseamnă true skill from the East! 🇷🇴🤝🇲🇩
               </p>
               <Button 
                 size="lg"
