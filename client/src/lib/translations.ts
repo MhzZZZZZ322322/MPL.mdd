@@ -230,16 +230,16 @@ export const translations: TranslationDictionary = {
   
   // HeroSlider
   "hero.slider.title": {
-    ro: "HATOR CS2 LEAGUE MOLDOVA",
-    ru: "HATOR CS2 LEAGUE MOLDOVA"
+    ro: "🔥 HATOR CUP - ROPL x MPL 🔥",
+    ru: "🔥 HATOR CUP - ROPL x MPL 🔥"
   },
   "hero.slider.subtitle": {
-    ro: "Sezonul 1 - Mai-Iunie 2025",
-    ru: "Сезон 1 - Май-Июнь 2025"
+    ro: "23-24 August 2025 • 5500 RON Prize Pool",
+    ru: "23-24 Август 2025 • 5500 RON Prize Pool"
   },
   "hero.slider.button": {
-    ro: "Detalii Turneu",
-    ru: "Детали Турнира"
+    ro: "Înscrie Echipa",
+    ru: "Записать Команду"
   },
   
   // Secțiunea CS Server Status

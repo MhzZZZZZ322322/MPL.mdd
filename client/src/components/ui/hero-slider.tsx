@@ -29,7 +29,7 @@ export const HeroSlider = () => {
     subtitle: t('hero.slider.subtitle'),
     primaryBtn: {
       text: t('hero.slider.button'),
-      link: '/events/hator-cs-league',
+      link: '/events/hator-cup-ropl-mpl',
     }
   };
 
@@ -44,7 +44,7 @@ export const HeroSlider = () => {
       >
         <img 
           src={heroContent.image} 
-          alt="HATOR CS2 LEAGUE MOLDOVA" 
+          alt="HATOR CUP - ROPL x MPL" 
           className="h-full w-full object-cover"
         />
       </motion.div>
