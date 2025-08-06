@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import hatorCupImage from '@assets/{C0A4ABE4-AB40-49A7-A746-DFD2755C095B}_1754479244338.png';
 
 interface HeroContent {
   image: string;
@@ -24,7 +25,7 @@ export const HeroSlider = () => {
   }, []);
 
   const heroContent: HeroContent = {
-    image: '@assets/{C0A4ABE4-AB40-49A7-A746-DFD2755C095B}_1754479244338.png',
+    image: hatorCupImage,
     title: t('hero.slider.title'),
     subtitle: t('hero.slider.subtitle'),
     primaryBtn: {
