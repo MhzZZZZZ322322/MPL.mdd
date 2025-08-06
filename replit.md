@@ -5,6 +5,7 @@ Moldova Pro League (MPL) is a web application for a Moldovan esports organizatio
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
+Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes
 - August 6, 2025: **NEW_MAJOR_EVENT** - Creat noul eveniment principal HATOR CUP - ROPL x MPL (23-24 August, 5500 RON prize pool). Mutat HATOR CS2 LEAGUE MOLDOVA doar în cronologia MPL.
