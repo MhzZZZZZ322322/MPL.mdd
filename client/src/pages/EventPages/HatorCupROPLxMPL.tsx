@@ -612,9 +612,7 @@ const HatorCupROPLxMPL = () => {
                 MPL
               </a>
             </div>
-            <p className="text-gray-400 text-center mt-6 font-inter" data-aos="fade-up" data-aos-delay="400">
-              Un eveniment realizat în parteneriat cu cele mai importante organizații de esports din România și Moldova
-            </p>
+            <p className="text-gray-400 text-center mt-6 font-inter" data-aos="fade-up" data-aos-delay="400">Un eveniment realizat în parteneriat cu cele mai importante asa numite organizații de esports din România și Moldova</p>
           </div>
         </section>
       </div>
