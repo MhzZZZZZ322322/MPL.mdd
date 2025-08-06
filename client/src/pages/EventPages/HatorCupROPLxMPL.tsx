@@ -217,9 +217,9 @@ const HatorCupROPLxMPL = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-left">
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-left">
                 <CardHeader>
-                  <CardTitle className="text-secondary font-rajdhani">Cum să participi</CardTitle>
+                  <CardTitle className="text-primary font-rajdhani">Cum să participi</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
@@ -228,7 +228,7 @@ const HatorCupROPLxMPL = () => {
                       <p className="text-gray-300 font-inter">Accesează link-ul de înscriere: ropl.ro/hatorcup</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-black text-sm font-bold font-rajdhani">2</div>
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black text-sm font-bold font-rajdhani">2</div>
                       <p className="text-gray-300 font-inter">Completează datele echipei (5 jucători titulari + rezerve)</p>
                     </div>
                     <div className="flex items-start gap-3">
@@ -236,12 +236,12 @@ const HatorCupROPLxMPL = () => {
                       <p className="text-gray-300 font-inter">Verifică eligibilitatea (doar jucători din RO/MD)</p>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-black text-sm font-bold font-rajdhani">4</div>
+                      <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black text-sm font-bold font-rajdhani">4</div>
                       <p className="text-gray-300 font-inter">Confirmă participarea și pregătește-te pentru luptă!</p>
                     </div>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-secondary/20">
-                    <h4 className="text-secondary font-rajdhani font-bold mb-3">Linkuri utile:</h4>
+                  <div className="mt-6 pt-4 border-t border-primary/20">
+                    <h4 className="text-primary font-rajdhani font-bold mb-3">Linkuri utile:</h4>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <ExternalLink className="h-4 w-4 text-primary" />
@@ -254,11 +254,11 @@ const HatorCupROPLxMPL = () => {
                         </a>
                       </div>
                       <div className="flex items-center gap-2">
-                        <ExternalLink className="h-4 w-4 text-secondary" />
+                        <ExternalLink className="h-4 w-4 text-primary" />
                         <a 
                           href="https://discord.gg/ropl" 
                           target="_blank" 
-                          className="text-secondary hover:text-secondary/80 font-inter underline"
+                          className="text-primary hover:text-primary/80 font-inter underline"
                         >
                           Discord ROPL pentru suport
                         </a>
@@ -266,7 +266,7 @@ const HatorCupROPLxMPL = () => {
                       <div className="flex items-center gap-2">
                         <ExternalLink className="h-4 w-4 text-primary" />
                         <a 
-                          href="https://moldovapro.com/discord" 
+                          href="https://discord.gg/Ek4qvWE5qB" 
                           target="_blank" 
                           className="text-primary hover:text-primary/80 font-inter underline"
                         >
