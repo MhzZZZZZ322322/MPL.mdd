@@ -302,7 +302,7 @@ const HatorCupROPLxMPL = () => {
                     <p>• Format: Single Elimination (BO1 preliminarii, BO3 finale)</p>
                     <p>• Mappool: Active Duty CS2</p>
                     <p>• Anticheat: FACEIT Anti-Cheat obligatoriu</p>
-                    <p>• Substitute: Maximum 2 jucători de rezervă</p>
+                    
                     <p>• Overtime: MR3 (max 6 runde OT)</p>
                     <p>• Disconnect: Jucătorul are 5 minute pentru reconectare</p>
                   </div>
