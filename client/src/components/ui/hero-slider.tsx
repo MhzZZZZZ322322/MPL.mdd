@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import roplMplImage from '@assets/{4584A2D5-BBB4-47CE-B4E7-228C10C403AF}_1754482401650.png';
 
 interface HeroContent {
   image: string;
@@ -24,7 +25,7 @@ export const HeroSlider = () => {
   }, []);
 
   const heroContent: HeroContent = {
-    image: '/upscalemedia-transformed.jpeg',
+    image: roplMplImage,
     title: t('hero.slider.title'),
     subtitle: t('hero.slider.subtitle'),
     primaryBtn: {
