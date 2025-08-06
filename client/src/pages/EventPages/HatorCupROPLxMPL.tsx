@@ -505,15 +505,6 @@ const HatorCupROPLxMPL = () => {
                       variant="ghost" 
                       size="sm"
                       className="justify-start text-white hover:text-primary font-inter"
-                      onClick={() => window.open('https://moldovapro.com/', '_blank')}
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Site oficial
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      className="justify-start text-white hover:text-primary font-inter"
                       onClick={() => window.open('https://discord.gg/Ek4qvWE5qB', '_blank')}
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
@@ -536,6 +527,15 @@ const HatorCupROPLxMPL = () => {
                     >
                       <Instagram className="mr-2 h-4 w-4" />
                       Instagram
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="justify-start text-white hover:text-primary font-inter"
+                      onClick={() => window.open('https://www.tiktok.com/@moldova.pro.league', '_blank')}
+                    >
+                      <FaTiktok className="mr-2 h-4 w-4" />
+                      TikTok
                     </Button>
                     <Button 
                       variant="ghost" 
