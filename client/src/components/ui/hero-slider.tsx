@@ -41,24 +41,24 @@ export const HeroSlider = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute top-0 left-0 right-0 h-2/3 flex items-center justify-center"
       >
         <img 
           src={heroContent.image} 
           alt="HATOR CUP - ROPL x MPL" 
-          className="w-full max-w-6xl h-auto object-contain"
+          className="w-full max-w-5xl h-auto object-contain"
         />
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="absolute inset-0 bg-black opacity-20"></div>
       
       {/* Gradient overlay bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent"></div>
       
       {/* Content */}
       {isLoaded && (
-        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-10 pb-8">
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-20 pb-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
