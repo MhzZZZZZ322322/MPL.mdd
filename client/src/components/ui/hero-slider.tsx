@@ -39,19 +39,23 @@ export const HeroSlider = () => {
       {/* Background Image */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.45 }}
+        animate={{ opacity: 0.8 }}
         transition={{ duration: 1 }}
         className="absolute inset-0"
       >
         <img 
           src={heroContent.image} 
           alt="HATOR CUP - ROPL x MPL" 
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-center"
+          style={{ 
+            filter: 'brightness(0.7) contrast(1.1)',
+            transform: 'scale(1.05)'
+          }}
         />
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-black opacity-65"></div>
+      <div className="absolute inset-0 bg-black opacity-40"></div>
       
       {/* Gradient overlay bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
