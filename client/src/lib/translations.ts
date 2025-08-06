@@ -230,8 +230,8 @@ export const translations: TranslationDictionary = {
   
   // HeroSlider
   "hero.slider.title": {
-    ro: "🔥 HATOR CUP - ROPL x MPL 🔥",
-    ru: "🔥 HATOR CUP - ROPL x MPL 🔥"
+    ro: "HATOR CUP - ROPL x MPL",
+    ru: "HATOR CUP - ROPL x MPL"
   },
   "hero.slider.subtitle": {
     ro: "23-24 August 2025 • 5500 RON Prize Pool",
