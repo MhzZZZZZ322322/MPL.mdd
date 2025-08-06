@@ -4,7 +4,7 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
-import hatorCupImage from '@assets/image_1754482590402.png';
+import hatorCupImage from '@assets/image_1754482998242.png';
 
 interface HeroContent {
   image: string;
@@ -39,19 +39,19 @@ export const HeroSlider = () => {
       {/* Background Image */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
+        animate={{ opacity: 0.8 }}
         transition={{ duration: 1 }}
         className="absolute inset-0 flex items-center justify-center"
       >
         <img 
           src={heroContent.image} 
           alt="HATOR CUP - ROPL x MPL" 
-          className="max-h-[70%] max-w-[90%] object-contain"
+          className="w-full max-w-6xl h-auto object-contain"
         />
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-30"></div>
       
       {/* Gradient overlay bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
