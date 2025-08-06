@@ -310,9 +310,9 @@ const HatorCupROPLxMPL = () => {
               </Card>
 
               {/* Prize Distribution */}
-              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                 <CardHeader>
-                  <CardTitle className="text-secondary font-rajdhani flex items-center">
+                  <CardTitle className="text-primary font-rajdhani flex items-center">
                     <Trophy className="mr-2" />
                     Distribuția Premiilor
                   </CardTitle>
@@ -330,10 +330,10 @@ const HatorCupROPLxMPL = () => {
                     </div>
                     <div className="border-b border-gray-600 pb-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-secondary font-rajdhani font-bold">🥈 Locul 2</span>
+                        <span className="text-primary font-rajdhani font-bold">🥈 Locul 2</span>
                       </div>
                       <div className="text-sm text-gray-300 font-inter">
-                        <p>• 5X <a href="https://hator.com/collections/mice/products/pulsar-3-pro-wireless" target="_blank" className="text-secondary hover:text-secondary/80 underline">Mouse HATOR Pulsar 3 PRO Wireless</a></p>
+                        <p>• 5X <a href="https://hator.com/collections/mice/products/pulsar-3-pro-wireless" target="_blank" className="text-primary hover:text-primary/80 underline">Mouse HATOR Pulsar 3 PRO Wireless</a></p>
                       </div>
                     </div>
                     <div className="border-b border-gray-600 pb-3">
@@ -359,12 +359,12 @@ const HatorCupROPLxMPL = () => {
                 <CardContent className="space-y-3">
                   <div className="space-y-3">
                     <div className="border-b border-gray-600 pb-2">
-                      <p className="text-secondary font-rajdhani font-bold">Vineri, 23 August</p>
+                      <p className="text-primary font-rajdhani font-bold">Vineri, 23 August</p>
                       <p className="text-sm text-gray-300 font-inter">18:00 - Deschiderea oficială</p>
                       <p className="text-sm text-gray-300 font-inter">19:00 - Meciuri preliminarii</p>
                     </div>
                     <div className="border-b border-gray-600 pb-2">
-                      <p className="text-secondary font-rajdhani font-bold">Sâmbătă, 24 August</p>
+                      <p className="text-primary font-rajdhani font-bold">Sâmbătă, 24 August</p>
                       <p className="text-sm text-gray-300 font-inter">16:00 - Semifinale</p>
                       <p className="text-sm text-gray-300 font-inter">20:00 - Finala mare</p>
                     </div>
@@ -411,9 +411,9 @@ const HatorCupROPLxMPL = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-left">
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-left">
                 <CardHeader>
-                  <CardTitle className="text-secondary font-rajdhani flex items-center">
+                  <CardTitle className="text-primary font-rajdhani flex items-center">
                     <FaTwitch className="mr-2 text-2xl" />
                     Stream în Rusă
                   </CardTitle>
@@ -424,7 +424,7 @@ const HatorCupROPLxMPL = () => {
                   </p>
                   <Button 
                     variant="outline" 
-                    className="w-full border-secondary/50 text-secondary hover:bg-secondary/10 font-rajdhani"
+                    className="w-full border-primary/50 text-primary hover:bg-primary/10 font-rajdhani"
                     onClick={() => window.open('https://www.twitch.tv/MoldovaProLeague', '_blank')}
                   >
                     <FaTwitch className="mr-2" />
@@ -493,9 +493,9 @@ const HatorCupROPLxMPL = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                 <CardHeader>
-                  <CardTitle className="text-secondary font-rajdhani">
+                  <CardTitle className="text-primary font-rajdhani">
                     Urmărește MPL
                   </CardTitle>
                 </CardHeader>
@@ -504,7 +504,7 @@ const HatorCupROPLxMPL = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="justify-start text-white hover:text-secondary font-inter"
+                      className="justify-start text-white hover:text-primary font-inter"
                       onClick={() => window.open('https://moldovapro.com/', '_blank')}
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
@@ -513,7 +513,7 @@ const HatorCupROPLxMPL = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="justify-start text-white hover:text-secondary font-inter"
+                      className="justify-start text-white hover:text-primary font-inter"
                       onClick={() => window.open('https://moldovapro.com/discord', '_blank')}
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
@@ -522,7 +522,7 @@ const HatorCupROPLxMPL = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="justify-start text-white hover:text-secondary font-inter"
+                      className="justify-start text-white hover:text-primary font-inter"
                       onClick={() => window.open('https://www.facebook.com/moldovapro', '_blank')}
                     >
                       <Facebook className="mr-2 h-4 w-4" />
@@ -531,7 +531,7 @@ const HatorCupROPLxMPL = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="justify-start text-white hover:text-secondary font-inter"
+                      className="justify-start text-white hover:text-primary font-inter"
                       onClick={() => window.open('https://www.instagram.com/moldovapro/', '_blank')}
                     >
                       <Instagram className="mr-2 h-4 w-4" />
@@ -540,7 +540,7 @@ const HatorCupROPLxMPL = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="justify-start text-white hover:text-secondary font-inter col-span-2"
+                      className="justify-start text-white hover:text-primary font-inter col-span-2"
                       onClick={() => window.open('https://www.youtube.com/@moldovapro', '_blank')}
                     >
                       <Youtube className="mr-2 h-4 w-4" />
