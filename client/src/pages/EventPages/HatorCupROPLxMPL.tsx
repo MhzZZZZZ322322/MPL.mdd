@@ -514,7 +514,7 @@ const HatorCupROPLxMPL = () => {
                       variant="ghost" 
                       size="sm"
                       className="justify-start text-white hover:text-primary font-inter"
-                      onClick={() => window.open('https://moldovapro.com/discord', '_blank')}
+                      onClick={() => window.open('https://discord.gg/Ek4qvWE5qB', '_blank')}
                     >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Discord
@@ -541,7 +541,7 @@ const HatorCupROPLxMPL = () => {
                       variant="ghost" 
                       size="sm"
                       className="justify-start text-white hover:text-primary font-inter col-span-2"
-                      onClick={() => window.open('https://www.youtube.com/@moldovapro', '_blank')}
+                      onClick={() => window.open('https://www.youtube.com/@MoldovaProLeague', '_blank')}
                     >
                       <Youtube className="mr-2 h-4 w-4" />
                       YouTube
