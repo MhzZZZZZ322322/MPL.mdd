@@ -54,9 +54,26 @@ const HatorCupROPLxMPL = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-rajdhani">
                 <span className="text-primary">HATOR CUP</span>
               </h1>
-              <h2 className="text-2xl md:text-4xl font-bold text-secondary mb-4 font-rajdhani">
+              <h2 className="text-2xl md:text-4xl font-bold text-secondary mb-8 font-rajdhani">
                 ROPL x MPL
               </h2>
+
+              {/* Main Event Image - moved up */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mb-8"
+                data-aos="zoom-in"
+                data-aos-delay="200"
+              >
+                <img 
+                  src={hatorCupImage} 
+                  alt="HATOR CUP - ROPL x MPL" 
+                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl border-2 border-primary/30 hover:border-primary/50 transition-all duration-300"
+                />
+              </motion.div>
+
               <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto font-inter">
                 Pentru prima dată ROPL și MPL își unesc forțele într-un super turneu de CS2, powered by HATOR și SkinBaron. 
                 Un eveniment istoric care va aduce împreună cele mai bune echipe din România și Moldova într-o competiție de nivel înalt.
@@ -79,22 +96,7 @@ const HatorCupROPLxMPL = () => {
                   Vizitează MPL
                 </Button>
               </div>
-            
-              {/* Main Event Image */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="mb-12"
-                data-aos="zoom-in"
-                data-aos-delay="200"
-              >
-                <img 
-                  src={hatorCupImage} 
-                  alt="HATOR CUP - ROPL x MPL" 
-                  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl border-2 border-primary/30 hover:border-primary/50 transition-all duration-300"
-                />
-              </motion.div>
+
           </motion.div>
 
             {/* Countdown Timer */}
