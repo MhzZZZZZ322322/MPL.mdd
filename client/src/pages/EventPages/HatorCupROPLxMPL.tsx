@@ -207,10 +207,7 @@ const HatorCupROPLxMPL = () => {
                     HATOR CUP reprezintă primul eveniment oficial de colaborare între ROPL (Romania Pro League) 
                     și MPL (Moldova Pro League), aducând împreună cele mai bune echipe din ambele țări într-o competiție unică.
                   </p>
-                  <p className="text-gray-300 font-inter">
-                    Turneul este powered by HATOR și SkinBaron, oferind nu doar premii în bani substanțiale, ci și 
-                    o platformă pentru jucătorii din regiune să-și demonstreze abilitățile la cel mai înalt nivel.
-                  </p>
+                  <p className="text-gray-300 font-inter">Turneul este powered by HATOR și SkinBaron, oferind nu doar premii, ci și o platformă pentru jucătorii din regiune să-și demonstreze abilitățile la cel mai înalt nivel.</p>
                   <p className="text-gray-300 font-inter">
                     Evenimentul va fi transmis live cu comentatori profesioniști, oferind spectatorilor o experiență 
                     completă de esports. Echipele câștigătoare vor primi recunoaștere internațională și oportunități 
