@@ -319,21 +319,30 @@ const HatorCupROPLxMPL = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center border-b border-gray-600 pb-2">
-                      <span className="text-primary font-rajdhani font-bold">🥇 Locul 1</span>
-                      <span className="text-white font-bold font-rajdhani">2500 RON</span>
+                    <div className="border-b border-gray-600 pb-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-primary font-rajdhani font-bold">🥇 Locul 1</span>
+                      </div>
+                      <div className="text-sm text-gray-300 font-inter space-y-1">
+                        <p>• 5X Keyboard HATOR Rockfall 3 TKL Wireless</p>
+                        <p>• 5X 40€ SkinBaron Voucher</p>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-600 pb-2">
-                      <span className="text-secondary font-rajdhani font-bold">🥈 Locul 2</span>
-                      <span className="text-white font-bold font-rajdhani">1500 RON</span>
+                    <div className="border-b border-gray-600 pb-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-secondary font-rajdhani font-bold">🥈 Locul 2</span>
+                      </div>
+                      <div className="text-sm text-gray-300 font-inter">
+                        <p>• 5X Mouse HATOR Pulsar 3 PRO Wireless</p>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center border-b border-gray-600 pb-2">
-                      <span className="text-primary font-rajdhani font-bold">🥉 Locul 3</span>
-                      <span className="text-white font-bold font-rajdhani">1000 RON</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-secondary font-rajdhani font-bold">🏆 Locul 4</span>
-                      <span className="text-white font-bold font-rajdhani">500 RON</span>
+                    <div className="border-b border-gray-600 pb-3">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-primary font-rajdhani font-bold">🥉 Locul 3</span>
+                      </div>
+                      <div className="text-sm text-gray-300 font-inter">
+                        <p>• 5X Headset HATOR Hyperpunk 3 USB Black</p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
