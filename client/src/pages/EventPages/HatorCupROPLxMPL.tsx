@@ -357,17 +357,17 @@ const HatorCupROPLxMPL = () => {
                   <div className="space-y-3">
                     <div className="border-b border-gray-600 pb-2">
                       <p className="text-primary font-rajdhani font-bold">Vineri, 23 August</p>
-                      <p className="text-sm text-gray-300 font-inter">18:00 - Deschiderea oficială</p>
-                      <p className="text-sm text-gray-300 font-inter">19:00 - Meciuri preliminarii</p>
+                      <p className="text-sm text-gray-300 font-inter">Deschiderea oficială</p>
+                      <p className="text-sm text-gray-300 font-inter">Meciuri preliminarii</p>
                     </div>
                     <div className="border-b border-gray-600 pb-2">
                       <p className="text-primary font-rajdhani font-bold">Sâmbătă, 24 August</p>
-                      <p className="text-sm text-gray-300 font-inter">16:00 - Semifinale</p>
-                      <p className="text-sm text-gray-300 font-inter">20:00 - Finala mare</p>
+                      <p className="text-sm text-gray-300 font-inter">Semifinale</p>
+                      <p className="text-sm text-gray-300 font-inter">Finala mare</p>
                     </div>
                     <div>
                       <p className="text-xs text-gray-400 font-inter italic">
-                        *Programul poate fi ajustat în funcție de numărul de echipe înscrise
+                        *Orele exacte vor fi anunțate mai târziu în funcție de numărul de echipe înscrise
                       </p>
                     </div>
                   </div>
