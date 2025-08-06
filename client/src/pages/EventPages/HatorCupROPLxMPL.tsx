@@ -589,14 +589,14 @@ const HatorCupROPLxMPL = () => {
               <a 
                 href="https://hator.gg" 
                 target="_blank" 
-                className="text-white font-bold text-xl md:text-2xl font-rajdhani hover:text-primary transition-colors duration-300"
+                className="text-primary font-bold text-xl md:text-2xl font-rajdhani hover:text-primary/80 transition-colors duration-300"
               >
                 HATOR
               </a>
               <a 
                 href="https://skinbaron.de" 
                 target="_blank" 
-                className="text-white font-bold text-xl md:text-2xl font-rajdhani hover:text-secondary transition-colors duration-300"
+                className="text-primary font-bold text-xl md:text-2xl font-rajdhani hover:text-primary/80 transition-colors duration-300"
               >
                 SkinBaron
               </a>
