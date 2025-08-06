@@ -213,12 +213,7 @@ const HatorCupROPLxMPL = () => {
                     completă de esports. Echipele câștigătoare vor primi recunoaștere internațională și oportunități 
                     de dezvoltare în scena competitivă.
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="bg-primary/20 text-primary font-rajdhani">CS2</Badge>
-                    <Badge variant="secondary" className="bg-secondary/20 text-secondary font-rajdhani">5vs5</Badge>
-                    <Badge variant="secondary" className="bg-primary/20 text-primary font-rajdhani">Single Elimination</Badge>
-                    <Badge variant="secondary" className="bg-secondary/20 text-secondary font-rajdhani">International</Badge>
-                  </div>
+                  
                 </CardContent>
               </Card>
 
