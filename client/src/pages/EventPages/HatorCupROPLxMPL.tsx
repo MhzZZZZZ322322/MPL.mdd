@@ -56,8 +56,27 @@ const HatorCupROPLxMPL = () => {
                 ROPL x MPL
               </h2>
               <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto font-inter">
-                Pentru prima dată ROPL și MPL își unesc forțele într-un super turneu de CS2, powered by HATOR și SkinBaron
+                Pentru prima dată ROPL și MPL își unesc forțele într-un super turneu de CS2, powered by HATOR și SkinBaron. 
+                Un eveniment istoric care va aduce împreună cele mai bune echipe din România și Moldova într-o competiție de nivel înalt.
               </p>
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <Button 
+                  variant="outline" 
+                  className="border-primary/50 text-primary hover:bg-primary/10 font-rajdhani"
+                  onClick={() => window.open('https://www.ropl.ro/', '_blank')}
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Vizitează ROPL
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="border-secondary/50 text-secondary hover:bg-secondary/10 font-rajdhani"
+                  onClick={() => window.open('https://moldovapro.com/', '_blank')}
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Vizitează MPL
+                </Button>
+              </div>
             
               {/* Main Event Image */}
               <motion.div
@@ -190,11 +209,16 @@ const HatorCupROPLxMPL = () => {
                 <CardContent className="space-y-4">
                   <p className="text-gray-300 font-inter">
                     HATOR CUP reprezintă primul eveniment oficial de colaborare între ROPL (Romania Pro League) 
-                    și MPL (Moldova Pro League), aducând împreună cele mai bune echipe din ambele țări.
+                    și MPL (Moldova Pro League), aducând împreună cele mai bune echipe din ambele țări într-o competiție unică.
                   </p>
                   <p className="text-gray-300 font-inter">
-                    Turneul este powered by HATOR și SkinBaron, oferind o experiență competitivă de 
-                    înaltă calitate pentru toate echipele participante.
+                    Turneul este powered by HATOR și SkinBaron, oferind nu doar premii în bani substanțiale, ci și 
+                    o platformă pentru jucătorii din regiune să-și demonstreze abilitățile la cel mai înalt nivel.
+                  </p>
+                  <p className="text-gray-300 font-inter">
+                    Evenimentul va fi transmis live cu comentatori profesioniști, oferind spectatorilor o experiență 
+                    completă de esports. Echipele câștigătoare vor primi recunoaștere internațională și oportunități 
+                    de dezvoltare în scena competitivă.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="secondary" className="bg-primary/20 text-primary font-rajdhani">CS2</Badge>
@@ -226,6 +250,131 @@ const HatorCupROPLxMPL = () => {
                     <div className="flex items-start gap-3">
                       <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center text-black text-sm font-bold font-rajdhani">4</div>
                       <p className="text-gray-300 font-inter">Confirmă participarea și pregătește-te pentru luptă!</p>
+                    </div>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-secondary/20">
+                    <h4 className="text-secondary font-rajdhani font-bold mb-3">Linkuri utile:</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <ExternalLink className="h-4 w-4 text-primary" />
+                        <a 
+                          href="https://www.ropl.ro/hatorcup" 
+                          target="_blank" 
+                          className="text-primary hover:text-primary/80 font-inter underline"
+                        >
+                          Formularul oficial de înscriere
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <ExternalLink className="h-4 w-4 text-secondary" />
+                        <a 
+                          href="https://discord.gg/ropl" 
+                          target="_blank" 
+                          className="text-secondary hover:text-secondary/80 font-inter underline"
+                        >
+                          Discord ROPL pentru suport
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <ExternalLink className="h-4 w-4 text-primary" />
+                        <a 
+                          href="https://moldovapro.com/discord" 
+                          target="_blank" 
+                          className="text-primary hover:text-primary/80 font-inter underline"
+                        >
+                          Discord MPL pentru întrebări
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Tournament Rules & Prizes */}
+        <section className="px-4 py-16 bg-darkBg">
+          <div className="container mx-auto max-w-6xl">
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center font-rajdhani" data-aos="fade-up">
+              Reguli & Premii
+            </h3>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              
+              {/* Tournament Rules */}
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <CardHeader>
+                  <CardTitle className="text-primary font-rajdhani flex items-center">
+                    <Trophy className="mr-2" />
+                    Reguli Turneu
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="text-sm text-gray-300 space-y-2 font-inter">
+                    <p>• Format: Single Elimination (BO1 preliminarii, BO3 finale)</p>
+                    <p>• Mappool: Active Duty CS2</p>
+                    <p>• Anticheat: FACEIT Anti-Cheat obligatoriu</p>
+                    <p>• Substitute: Maximum 2 jucători de rezervă</p>
+                    <p>• Overtime: MR3 (max 6 runde OT)</p>
+                    <p>• Disconnect: Jucătorul are 5 minute pentru reconectare</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Prize Distribution */}
+              <Card className="bg-darkGray/60 border-secondary/30 hover:border-secondary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <CardHeader>
+                  <CardTitle className="text-secondary font-rajdhani flex items-center">
+                    <Trophy className="mr-2" />
+                    Distribuția Premiilor
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center border-b border-gray-600 pb-2">
+                      <span className="text-primary font-rajdhani font-bold">🥇 Locul 1</span>
+                      <span className="text-white font-bold font-rajdhani">2500 RON</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-600 pb-2">
+                      <span className="text-secondary font-rajdhani font-bold">🥈 Locul 2</span>
+                      <span className="text-white font-bold font-rajdhani">1500 RON</span>
+                    </div>
+                    <div className="flex justify-between items-center border-b border-gray-600 pb-2">
+                      <span className="text-primary font-rajdhani font-bold">🥉 Locul 3</span>
+                      <span className="text-white font-bold font-rajdhani">1000 RON</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-secondary font-rajdhani font-bold">🏆 Locul 4</span>
+                      <span className="text-white font-bold font-rajdhani">500 RON</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Schedule */}
+              <Card className="bg-darkGray/60 border-primary/30 hover:border-primary/50 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                <CardHeader>
+                  <CardTitle className="text-primary font-rajdhani flex items-center">
+                    <Calendar className="mr-2" />
+                    Program Preliminar
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="space-y-3">
+                    <div className="border-b border-gray-600 pb-2">
+                      <p className="text-secondary font-rajdhani font-bold">Vineri, 23 August</p>
+                      <p className="text-sm text-gray-300 font-inter">18:00 - Deschiderea oficială</p>
+                      <p className="text-sm text-gray-300 font-inter">19:00 - Meciuri preliminarii</p>
+                    </div>
+                    <div className="border-b border-gray-600 pb-2">
+                      <p className="text-secondary font-rajdhani font-bold">Sâmbătă, 24 August</p>
+                      <p className="text-sm text-gray-300 font-inter">16:00 - Semifinale</p>
+                      <p className="text-sm text-gray-300 font-inter">20:00 - Finala mare</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-400 font-inter italic">
+                        *Programul poate fi ajustat în funcție de numărul de echipe înscrise
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -267,11 +416,38 @@ const HatorCupROPLxMPL = () => {
           <div className="container mx-auto max-w-4xl text-center">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 font-rajdhani" data-aos="fade-up">Powered by</h3>
             <div className="flex justify-center items-center gap-8 md:gap-12" data-aos="fade-up" data-aos-delay="200">
-              <div className="text-white font-bold text-xl md:text-2xl font-rajdhani hover:text-primary transition-colors duration-300">HATOR</div>
-              <div className="text-white font-bold text-xl md:text-2xl font-rajdhani hover:text-secondary transition-colors duration-300">SkinBaron</div>
-              <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">ROPL</div>
-              <div className="text-secondary font-bold text-xl md:text-2xl font-rajdhani">MPL</div>
+              <a 
+                href="https://hator.gg" 
+                target="_blank" 
+                className="text-white font-bold text-xl md:text-2xl font-rajdhani hover:text-primary transition-colors duration-300"
+              >
+                HATOR
+              </a>
+              <a 
+                href="https://skinbaron.de" 
+                target="_blank" 
+                className="text-white font-bold text-xl md:text-2xl font-rajdhani hover:text-secondary transition-colors duration-300"
+              >
+                SkinBaron
+              </a>
+              <a 
+                href="https://www.ropl.ro" 
+                target="_blank" 
+                className="text-primary font-bold text-xl md:text-2xl font-rajdhani hover:text-primary/80 transition-colors duration-300"
+              >
+                ROPL
+              </a>
+              <a 
+                href="https://moldovapro.com" 
+                target="_blank" 
+                className="text-secondary font-bold text-xl md:text-2xl font-rajdhani hover:text-secondary/80 transition-colors duration-300"
+              >
+                MPL
+              </a>
             </div>
+            <p className="text-gray-400 text-center mt-6 font-inter" data-aos="fade-up" data-aos-delay="400">
+              Un eveniment realizat în parteneriat cu cele mai importante organizații de esports din România și Moldova
+            </p>
           </div>
         </section>
       </div>
