@@ -24,7 +24,7 @@ export const HeroSlider = () => {
   }, []);
 
   const heroContent: HeroContent = {
-    image: '/upscalemedia-transformed.jpeg',
+    image: '@assets/{C0A4ABE4-AB40-49A7-A746-DFD2755C095B}_1754479244338.png',
     title: t('hero.slider.title'),
     subtitle: t('hero.slider.subtitle'),
     primaryBtn: {
