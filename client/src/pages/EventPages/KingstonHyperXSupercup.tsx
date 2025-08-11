@@ -484,7 +484,7 @@ const KingstonHyperXSupercup = () => {
                                     {team.name}
                                   </h3>
                                   <p className="text-gray-400 text-sm truncate">
-                                    Kingston x HyperX Team
+                                    {team.tournament || 'Echipă participantă'}
                                   </p>
                                 </div>
                               </div>
@@ -525,7 +525,7 @@ const KingstonHyperXSupercup = () => {
                                 <div>
                                   <p className="text-white font-medium">{member.nickname}</p>
                                   <p className="text-gray-400 text-sm">
-                                    Kingston Player
+                                    {member.faceitProfile || 'Profil jucător'}
                                   </p>
                                 </div>
                                 <div className="text-right">
