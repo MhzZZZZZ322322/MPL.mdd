@@ -8,6 +8,41 @@ import { registerSimpleGroupsAPI } from "./simple-groups-api";
 import { registerTournamentDatabaseAPI } from "./tournament-database";
 import { verifyAdminCredentials } from "./auth-config";
 import { fromZodError } from "zod-validation-error";
+import multer from 'multer';
+import fs from 'fs';
+import path from 'path';
+
+// Configure multer for file uploads
+const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'logos');
+
+// Ensure uploads directory exists
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadsDir);
+  },
+  filename: (req, file, cb) => {
+    const timestamp = Date.now();
+    const ext = path.extname(file.originalname);
+    cb(null, `team_${timestamp}${ext}`);
+  }
+});
+
+const upload = multer({ 
+  storage: multerStorage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only JPEG, PNG, and WebP images are allowed'));
+    }
+  }
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Teams routes
@@ -1461,17 +1496,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Upload Team Logo
-  app.post("/api/upload/team-logo", async (req, res) => {
+  // Upload Team Logo - Real implementation with multer
+  app.post("/api/upload/team-logo", upload.single('logo'), async (req, res) => {
     try {
-      // Simple file upload simulation - în realitate ai folosi multer sau similar
-      // Pentru demonstrație, vom returna un URL simulat
-      const timestamp = Date.now();
-      const simulatedUrl = `/uploads/logos/team_${timestamp}.png`;
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+      
+      const logoUrl = `/uploads/logos/${req.file.filename}`;
       
       res.json({ 
-        url: simulatedUrl,
-        message: "Logo uploaded successfully" 
+        url: logoUrl,
+        message: "Logo uploaded successfully",
+        filename: req.file.filename
       });
     } catch (error) {
       console.error("Error uploading logo:", error);

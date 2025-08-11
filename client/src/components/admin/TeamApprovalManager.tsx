@@ -148,9 +148,10 @@ export default function TeamApprovalManager() {
                         <img
                           src={team.logoUrl}
                           alt={team.name}
-                          className="w-12 h-12 rounded object-cover"
+                          className="w-12 h-12 rounded object-cover bg-slate-600"
                           onError={(e) => {
-                            e.currentTarget.src = '/placeholder-team-logo.png';
+                            console.error('Logo failed to load:', team.logoUrl);
+                            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzMzNDE1NSIvPgo8Y2lyY2xlIGN4PSIyNCIgY3k9IjE4IiByPSI4IiBzdHJva2U9IiM5Q0E1QkYiIHN0cm9rZS13aWR0aD0iMiIvPgo8cGF0aCBkPSJNMTIgMzZWMzRDMTIgMjguNDc3MiAxNi40NzcyIDI0IDIyIDI0SDI2QzMxLjUyMjggMjQgMzYgMjguNDc3MiAzNiAzNFYzNiIgc3Ryb2tlPSIjOUNBNUJGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K';
                           }}
                         />
                         <div>
@@ -184,7 +185,10 @@ export default function TeamApprovalManager() {
                                 <img
                                   src={team.logoUrl}
                                   alt={team.name}
-                                  className="w-6 h-6 rounded"
+                                  className="w-6 h-6 rounded bg-slate-600"
+                                  onError={(e) => {
+                                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iIzMzNDE1NSIvPgo8Y2lyY2xlIGN4PSIxMiIgY3k9IjkiIHI9IjQiIHN0cm9rZT0iIzlDQTVCRiIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxwYXRoIGQ9Ik02IDE4VjE3QzYgMTQuMjM4NiA4LjIzODU3IDEyIDExIDEySDEzQzE1Ljc2MTQgMTIgMTggMTQuMjM4NiAxOCAxN1YxOCIgc3Ryb2tlPSIjOUNBNUJGIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K';
+                                  }}
                                 />
                                 {team.name} - Detalii echipă
                               </DialogTitle>
