@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trophy, Settings, Calendar, AlertTriangle, Lock, Users } from "lucide-react";
+import { Trophy, Settings, Calendar, AlertTriangle, Lock, Users, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
@@ -15,6 +15,7 @@ import Stage4PlayoffManager from "@/components/admin/Stage4PlayoffManager";
 import TeamRegistration from "@/components/admin/TeamRegistration";
 import TeamApprovalManager from "@/components/admin/TeamApprovalManager";
 import RegisteredTeamsManager from "@/components/admin/RegisteredTeamsManager";
+import BlogManager from "@/components/admin/BlogManager";
 
 // Context pentru turneul selectat
 interface TournamentContextType {
@@ -105,7 +106,7 @@ export default function TournamentAdmin() {
             </div>
           
             <Tabs defaultValue="team-approval" className="w-full">
-              <TabsList className="grid w-full grid-cols-9 bg-slate-800/50">
+              <TabsList className="grid w-full grid-cols-10 bg-slate-800/50">
                 <TabsTrigger value="team-approval" className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   Aprobare Echipe
@@ -141,6 +142,10 @@ export default function TournamentAdmin() {
                 <TabsTrigger value="stage4-playoff" className="flex items-center gap-2 opacity-50" disabled>
                   <Trophy className="w-4 h-4" />
                   Stage 4 (Reserved)
+                </TabsTrigger>
+                <TabsTrigger value="blog-manager" className="flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Blog/Știri
                 </TabsTrigger>
               </TabsList>
               
@@ -178,6 +183,10 @@ export default function TournamentAdmin() {
               
               <TabsContent value="stage4-playoff" className="mt-6">
                 <Stage4PlayoffManager />
+              </TabsContent>
+              
+              <TabsContent value="blog-manager" className="mt-6">
+                <BlogManager />
               </TabsContent>
             </Tabs>
           </div>

@@ -52,6 +52,14 @@ function Router() {
           <TournamentAdmin />
         </AdminProtectedRoute>
       )} />
+      <Route path="/blog" component={() => {
+        const BlogPage = lazy(() => import("@/pages/BlogPage"));
+        return <BlogPage />;
+      }} />
+      <Route path="/blog/:slug" component={() => {
+        const BlogArticlePage = lazy(() => import("@/pages/BlogArticlePage"));
+        return <BlogArticlePage />;
+      }} />
       <Route path="/cronologia-mpl" component={() => {
         window.location.replace('/');
         return null;

@@ -1875,6 +1875,170 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===========================
+  // BLOG/NEWS API ROUTES
+  // ===========================
+
+  // Get all blog articles (public)
+  app.get("/api/blog/articles", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { blogArticles } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const articles = await db.select().from(blogArticles)
+        .orderBy(desc(blogArticles.publishedAt), desc(blogArticles.createdAt));
+      
+      res.json(articles);
+    } catch (error) {
+      console.error("Error fetching blog articles:", error);
+      res.status(500).json({ error: "Failed to fetch blog articles" });
+    }
+  });
+
+  // Get published articles only (public)
+  app.get("/api/blog/articles/published", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { blogArticles } = await import("@shared/schema");
+      const { desc, eq } = await import("drizzle-orm");
+      
+      const articles = await db.select().from(blogArticles)
+        .where(eq(blogArticles.status, "published"))
+        .orderBy(desc(blogArticles.publishedAt));
+      
+      res.json(articles);
+    } catch (error) {
+      console.error("Error fetching published blog articles:", error);
+      res.status(500).json({ error: "Failed to fetch published blog articles" });
+    }
+  });
+
+  // Get single article by slug (public)
+  app.get("/api/blog/articles/slug/:slug", async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const { db } = await import("./db");
+      const { blogArticles } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const [article] = await db.select().from(blogArticles)
+        .where(eq(blogArticles.slug, slug));
+      
+      if (!article) {
+        return res.status(404).json({ error: "Article not found" });
+      }
+
+      // Increment view count
+      await db.update(blogArticles)
+        .set({ viewCount: article.viewCount + 1 })
+        .where(eq(blogArticles.id, article.id));
+
+      res.json({ ...article, viewCount: article.viewCount + 1 });
+    } catch (error) {
+      console.error("Error fetching blog article by slug:", error);
+      res.status(500).json({ error: "Failed to fetch blog article" });
+    }
+  });
+
+  // Create new article (admin)
+  app.post("/api/blog/articles", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { blogArticles, insertBlogArticleSchema } = await import("@shared/schema");
+      
+      const validationResult = insertBlogArticleSchema.safeParse(req.body);
+      if (!validationResult.success) {
+        const errorMessage = fromZodError(validationResult.error).message;
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const articleData = validationResult.data;
+      
+      // Auto-publish if status is published and no publishedAt date
+      if (articleData.status === 'published' && !articleData.publishedAt) {
+        articleData.publishedAt = new Date();
+      }
+
+      const [article] = await db.insert(blogArticles).values(articleData).returning();
+      res.status(201).json(article);
+    } catch (error) {
+      console.error("Error creating blog article:", error);
+      res.status(500).json({ error: "Failed to create blog article" });
+    }
+  });
+
+  // Update article (admin)
+  app.patch("/api/blog/articles/:id", async (req, res) => {
+    try {
+      const articleId = parseInt(req.params.id);
+      if (isNaN(articleId)) {
+        return res.status(400).json({ error: "Invalid article ID" });
+      }
+
+      const { db } = await import("./db");
+      const { blogArticles, insertBlogArticleSchema } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const validationResult = insertBlogArticleSchema.safeParse(req.body);
+      if (!validationResult.success) {
+        const errorMessage = fromZodError(validationResult.error).message;
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const articleData = {
+        ...validationResult.data,
+        updatedAt: new Date()
+      };
+
+      // Auto-set publishedAt if changing to published status
+      if (articleData.status === 'published' && !articleData.publishedAt) {
+        articleData.publishedAt = new Date();
+      }
+
+      const [updatedArticle] = await db.update(blogArticles)
+        .set(articleData)
+        .where(eq(blogArticles.id, articleId))
+        .returning();
+
+      if (!updatedArticle) {
+        return res.status(404).json({ error: "Article not found" });
+      }
+
+      res.json(updatedArticle);
+    } catch (error) {
+      console.error("Error updating blog article:", error);
+      res.status(500).json({ error: "Failed to update blog article" });
+    }
+  });
+
+  // Delete article (admin)
+  app.delete("/api/blog/articles/:id", async (req, res) => {
+    try {
+      const articleId = parseInt(req.params.id);
+      if (isNaN(articleId)) {
+        return res.status(400).json({ error: "Invalid article ID" });
+      }
+
+      const { db } = await import("./db");
+      const { blogArticles } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+
+      const deletedArticles = await db.delete(blogArticles)
+        .where(eq(blogArticles.id, articleId))
+        .returning();
+
+      if (deletedArticles.length === 0) {
+        return res.status(404).json({ error: "Article not found" });
+      }
+
+      res.json({ message: "Article deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting blog article:", error);
+      res.status(500).json({ error: "Failed to delete blog article" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 

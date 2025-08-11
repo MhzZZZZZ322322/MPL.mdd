@@ -489,6 +489,46 @@ export const insertV0r4ynCounterSchema = createInsertSchema(var4unCounter).omit(
 export type InsertV0r4ynCounter = z.infer<typeof insertV0r4ynCounterSchema>;
 export type V0r4ynCounter = typeof var4unCounter.$inferSelect;
 
+// Blog/News Articles - Sistem de blog pentru site
+export const blogArticles = pgTable("blog_articles", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  slug: text("slug").notNull().unique(), // URL-friendly version of title
+  excerpt: text("excerpt").notNull(), // Scurtă descriere/preview
+  content: text("content").notNull(), // Conținutul complet al articolului (HTML)
+  featuredImageUrl: text("featured_image_url"), // Imaginea principală
+  featuredImageData: text("featured_image_data"), // Base64 encoded image data
+  tags: text("tags").default(""), // Tags separate prin virgulă
+  status: text("status").notNull().default("draft"), // draft, published, archived
+  viewCount: integer("view_count").notNull().default(0), // Numărul de vizualizări
+  publishedAt: timestamp("published_at"), // Data publicării
+  authorName: text("author_name").notNull().default("MPL Admin"), // Numele autorului
+  authorEmail: text("author_email").default("admin@moldovapro.md"), // Email autor
+  metaTitle: text("meta_title"), // SEO meta title
+  metaDescription: text("meta_description"), // SEO meta description
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertBlogArticleSchema = createInsertSchema(blogArticles).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  viewCount: true,
+}).extend({
+  publishedAt: z.union([z.string(), z.date(), z.null()]).optional().transform(val => {
+    if (!val || val === '' || val === null) return null;
+    if (typeof val === 'string') {
+      if (val.trim() === '') return null;
+      return new Date(val);
+    }
+    return val;
+  })
+});
+
+export type InsertBlogArticle = z.infer<typeof insertBlogArticleSchema>;
+export type BlogArticle = typeof blogArticles.$inferSelect;
+
 // ===========================
 // KINGSTON x HYPERX SUPERCUP DATABASE TABLES
 // Separate database structure for Kingston x HyperX tournament
