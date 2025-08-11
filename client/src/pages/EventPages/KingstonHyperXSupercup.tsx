@@ -122,10 +122,12 @@ const KingstonHyperXSupercup = () => {
 
   // Team logo mapping - uses actual team logos from database
   const getTeamLogo = (team: Team) => {
-    if (team.logoUrl) {
+    // Use logoData (base64) first, then fallback to logoUrl
+    const logoSrc = (team as any).logoData || team.logoUrl;
+    if (logoSrc) {
       return {
-        icon: <img src={team.logoUrl} alt={team.name} className="w-full h-full object-contain rounded" onError={(e) => {
-          console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
+        icon: <img src={logoSrc} alt={team.name} className="w-full h-full object-contain rounded" onError={(e) => {
+          console.error(`Failed to load logo for ${team.name}: ${logoSrc}`);
           e.currentTarget.style.display = 'none';
         }} />,
         gradient: "from-primary to-primary/80"

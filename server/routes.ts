@@ -1662,7 +1662,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { kingstonTeams } = await import("@shared/schema");
       const { eq } = await import("drizzle-orm");
       
-      const teams = await db.select().from(kingstonTeams)
+      const teams = await db.select({
+        id: kingstonTeams.id,
+        name: kingstonTeams.name,
+        logoUrl: kingstonTeams.logoUrl,
+        logoData: kingstonTeams.logoData, // Include logoData for frontend
+        tournament: kingstonTeams.tournament,
+        status: kingstonTeams.status,
+        isActive: kingstonTeams.isActive,
+        submittedAt: kingstonTeams.submittedAt,
+        reviewedAt: kingstonTeams.reviewedAt,
+        reviewedBy: kingstonTeams.reviewedBy,
+        rejectionReason: kingstonTeams.rejectionReason,
+        createdAt: kingstonTeams.createdAt
+      }).from(kingstonTeams)
         .where(eq(kingstonTeams.status, "approved"));
       res.json(teams);
     } catch (error) {
