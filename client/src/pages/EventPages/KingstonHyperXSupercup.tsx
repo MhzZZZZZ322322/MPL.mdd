@@ -652,25 +652,31 @@ const KingstonHyperXSupercup = () => {
 
                   
                   {/* Product Images */}
-                  <div className="space-y-4">
-                    <div className="flex justify-center">
-                      <img 
-                        src="/hyperx-cloud-iii-s.png"
-                        alt="HyperX Cloud III S Wireless"
-                        className="w-32 h-32 object-contain"
-                      />
+                  <div className="space-y-6">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/hyperx-cloud-iii-s.png"
+                          alt="HyperX Cloud III S Wireless"
+                          className="w-32 h-32 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-yellow-300/90 font-medium">
+                        5x HyperX Cloud III S Wireless
+                      </p>
                     </div>
-                    <div className="flex justify-center">
-                      <img 
-                        src="/kingston-fury-renegade-transparent.png"
-                        alt="Kingston FURY Renegade DDR5 RGB"
-                        className="w-44 h-24 object-contain"
-                      />
-                    </div>
-                    <div className="text-sm text-yellow-300/90 space-y-1">
-                      <p className="font-medium">5x HyperX Cloud III S Wireless
-                      &</p>
-                      <p className="font-medium">5x Kingston FURY Renegade RGB 48GB DDR5</p>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/kingston-fury-renegade-transparent.png"
+                          alt="Kingston FURY Renegade DDR5 RGB"
+                          className="w-44 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-yellow-300/90 font-medium">
+                        5x Kingston FURY Renegade RGB 48GB DDR5
+                      </p>
                     </div>
                   </div>
                 </div>
