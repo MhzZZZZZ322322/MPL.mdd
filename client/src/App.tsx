@@ -83,6 +83,11 @@ function App() {
     const adminKeys = ['m', 'p', 'l'];
     
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Nu activează secvența admin pe pagina de înregistrare echipe
+      if (window.location.pathname === '/register-team') {
+        return;
+      }
+      
       // Adaugă tasta apăsată în array
       keys.push(e.key.toLowerCase());
       
