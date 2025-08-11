@@ -1418,6 +1418,144 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Public Team Registration for Kingston
+  app.post("/api/kingston/register-team", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      
+      const { name, logoUrl, members } = req.body;
+      
+      if (!name || !logoUrl || !members || members.length < 5) {
+        return res.status(400).json({ error: "Date incomplete - echipa trebuie să aibă nume, logo și minimum 5 membri" });
+      }
+
+      // Create team with pending status
+      const [team] = await db.insert(kingstonTeams).values({
+        name,
+        logoUrl,
+        status: "pending"
+      }).returning();
+
+      // Create team members
+      for (const member of members) {
+        if (member.nickname && member.faceitProfile && member.discordAccount) {
+          await db.insert(kingstonTeamMembers).values({
+            teamId: team.id,
+            nickname: member.nickname,
+            faceitProfile: member.faceitProfile,
+            discordAccount: member.discordAccount,
+            role: member.role || "player",
+            position: member.position || "main"
+          });
+        }
+      }
+
+      res.status(201).json({ 
+        message: "Echipa a fost înregistrată cu succes și urmează să fie verificată",
+        teamId: team.id 
+      });
+    } catch (error) {
+      console.error("Error registering team:", error);
+      res.status(500).json({ error: "Failed to register team" });
+    }
+  });
+
+  // Upload Team Logo
+  app.post("/api/upload/team-logo", async (req, res) => {
+    try {
+      // Simple file upload simulation - în realitate ai folosi multer sau similar
+      // Pentru demonstrație, vom returna un URL simulat
+      const timestamp = Date.now();
+      const simulatedUrl = `/uploads/logos/team_${timestamp}.png`;
+      
+      res.json({ 
+        url: simulatedUrl,
+        message: "Logo uploaded successfully" 
+      });
+    } catch (error) {
+      console.error("Error uploading logo:", error);
+      res.status(500).json({ error: "Failed to upload logo" });
+    }
+  });
+
+  // Kingston Admin: Get Pending Teams
+  app.get("/api/kingston/admin/pending-teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const pendingTeams = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.status, "pending"));
+      
+      // Get members for each team
+      const teamsWithMembers = await Promise.all(
+        pendingTeams.map(async (team) => {
+          const members = await db.select().from(kingstonTeamMembers)
+            .where(eq(kingstonTeamMembers.teamId, team.id));
+          return { ...team, members };
+        })
+      );
+      
+      res.json(teamsWithMembers);
+    } catch (error) {
+      console.error("Error fetching pending teams:", error);
+      res.status(500).json({ error: "Failed to fetch pending teams" });
+    }
+  });
+
+  // Kingston Admin: Approve/Reject Team
+  app.patch("/api/kingston/admin/teams/:teamId/review", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.teamId);
+      const { status, rejectionReason } = req.body;
+      
+      if (!["approved", "rejected"].includes(status)) {
+        return res.status(400).json({ error: "Status invalid" });
+      }
+
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const updateData: any = {
+        status,
+        reviewedAt: new Date(),
+        reviewedBy: "admin", // În viitor poți adăuga sistem de autentificare
+      };
+      
+      if (status === "rejected" && rejectionReason) {
+        updateData.rejectionReason = rejectionReason;
+      }
+
+      await db.update(kingstonTeams)
+        .set(updateData)
+        .where(eq(kingstonTeams.id, teamId));
+
+      res.json({ message: `Echipa a fost ${status === "approved" ? "aprobată" : "respinsă"}` });
+    } catch (error) {
+      console.error("Error reviewing team:", error);
+      res.status(500).json({ error: "Failed to review team" });
+    }
+  });
+
+  // Kingston Public: Get Approved Teams
+  app.get("/api/kingston/teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const teams = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.status, "approved"));
+      res.json(teams);
+    } catch (error) {
+      console.error("Error fetching Kingston teams:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston teams" });
+    }
+  });
+
   // Kingston Admin: Create Match Result
   app.post("/api/kingston/admin/match-results", async (req, res) => {
     try {

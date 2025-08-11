@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trophy, Settings, Calendar, AlertTriangle, Lock } from "lucide-react";
+import { Trophy, Settings, Calendar, AlertTriangle, Lock, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
@@ -13,6 +13,7 @@ import { Stage2BracketManager } from "@/components/admin/Stage2BracketManager";
 import { Stage3SwissRoundsManager } from "@/components/admin/Stage3SwissRoundsManager";
 import Stage4PlayoffManager from "@/components/admin/Stage4PlayoffManager";
 import TeamRegistration from "@/components/admin/TeamRegistration";
+import TeamApprovalManager from "@/components/admin/TeamApprovalManager";
 
 // Context pentru turneul selectat
 interface TournamentContextType {
@@ -102,11 +103,15 @@ export default function TournamentAdmin() {
               </h2>
             </div>
           
-            <Tabs defaultValue="teams" className="w-full">
-              <TabsList className="grid w-full grid-cols-7 bg-slate-800/50">
+            <Tabs defaultValue="team-approval" className="w-full">
+              <TabsList className="grid w-full grid-cols-8 bg-slate-800/50">
+                <TabsTrigger value="team-approval" className="flex items-center gap-2">
+                  <Users className="w-4 h-4" />
+                  Aprobare Echipe
+                </TabsTrigger>
                 <TabsTrigger value="teams" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
-                  Înregistrare Echipe
+                  Adăugare Echipe
                 </TabsTrigger>
                 <TabsTrigger value="management" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
@@ -133,6 +138,10 @@ export default function TournamentAdmin() {
                   Stage 4 (Reserved)
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="team-approval" className="mt-6">
+                <TeamApprovalManager />
+              </TabsContent>
               
               <TabsContent value="teams" className="mt-6">
                 <TeamRegistration />

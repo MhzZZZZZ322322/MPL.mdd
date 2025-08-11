@@ -391,6 +391,37 @@ const KingstonHyperXSupercup = () => {
                 )}
               </NeonBorder>
 
+              {/* Registration Call to Action */}
+              <NeonBorder className="bg-gradient-to-r from-primary/20 to-pink-500/20 border-primary/50">
+                <div className="p-6 text-center">
+                  <h3 className="text-2xl font-bold text-white mb-4 font-rajdhani">
+                    Participă la cel mai mare turneu CS2!
+                  </h3>
+                  <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+                    Înregistrează-ți echipa acum pentru Kingston x HyperX Supercup Season 1. 
+                    Numai 32 de locuri disponibile!
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Link href="/register-team">
+                      <Button 
+                        size="lg" 
+                        className="bg-gradient-to-r from-primary to-pink-500 hover:from-primary/80 hover:to-pink-500/80 text-white font-bold px-8 py-3 text-lg"
+                      >
+                        Înscrie-te acum
+                      </Button>
+                    </Link>
+                    <div className="text-center">
+                      <p className="text-sm text-gray-400">
+                        Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        Locuri disponibile: <span className="text-white font-bold">{32 - teams.length} / 32</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
               {/* Teams Section */}
               <NeonBorder className="bg-darkGray/60">
                 <Button

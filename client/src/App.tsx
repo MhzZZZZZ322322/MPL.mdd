@@ -17,6 +17,7 @@ import HatorCupROPLxMPL from "@/pages/EventPages/HatorCupROPLxMPL";
 import KingstonHyperXSupercup from "@/pages/EventPages/KingstonHyperXSupercup";
 import MefPage from "@/pages/MefPage";
 import V0R4yn from "@/pages/Var4un";
+import TeamRegistration from "@/pages/TeamRegistration";
 import { LanguageProvider } from "@/lib/LanguageContext";
 
 // Importăm paginile de administrare
@@ -24,7 +25,7 @@ import EventManager from "@/pages/EventManager";
 import SeoManager from "@/pages/SeoManager";
 import TournamentAdmin from "@/pages/TournamentAdminFixed";
 import AdminProtectedRoute from "@/components/AdminProtectedRoute";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 
 function Router() {
   return (
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/events/hator-cs-league" component={HatorCSLeague} />
       <Route path="/events/hator-cup-ropl-mpl" component={HatorCupROPLxMPL} />
       <Route path="/events/kingston-hyperx-supercup" component={KingstonHyperXSupercup} />
+      <Route path="/register-team" component={TeamRegistration} />
       <Route path="/rankings" component={AllRankings} />
       <Route path="/community" component={CommunityPage} />
       <Route path="/mef" component={MefPage} />

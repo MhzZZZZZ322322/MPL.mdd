@@ -500,7 +500,12 @@ export const kingstonTeams = pgTable("kingston_teams", {
   name: text("name").notNull(),
   logoUrl: text("logo_url").notNull(),
   tournament: text("tournament").notNull().default("kingston-hyperx-supercup"),
+  status: text("status").notNull().default("pending"), // pending, approved, rejected
   isActive: boolean("is_active").notNull().default(true),
+  submittedAt: timestamp("submitted_at").defaultNow(),
+  reviewedAt: timestamp("reviewed_at"),
+  reviewedBy: text("reviewed_by"), // admin username care a făcut review
+  rejectionReason: text("rejection_reason"), // motivul respingerii
   createdAt: timestamp("created_at").defaultNow(),
 });
 
