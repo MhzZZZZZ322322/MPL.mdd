@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Glitch from '@/components/animations/Glitch';
 import HeroSlider from '@/components/ui/hero-slider';
+import BlogSection from '@/components/BlogSection';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const Hero = () => {
@@ -21,6 +22,9 @@ const Hero = () => {
     <section id="hero" className="overflow-hidden">
       {/* New Hero with Swiper Slider */}
       <HeroSlider />
+      
+      {/* Blog/News Section - positioned right after HATOR CUP slider */}
+      <BlogSection />
       
       {/* Additional Content Section with AOS animations */}
       <div className="bg-darkBg border-b border-primary/10 py-10 relative">

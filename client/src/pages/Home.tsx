@@ -47,7 +47,6 @@ const Home = () => {
       </Helmet>
       <Hero />
       <About />
-      <BlogSection />
       <CsServerStatus />
       <Partners />
       <FAQ />
