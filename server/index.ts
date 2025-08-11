@@ -4,8 +4,9 @@ import { setupVite, serveStatic, log } from "./vite";
 import { startCsServerChecker } from "./cs-server-checker";
 
 const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// Mărește limita pentru corpul cererii pentru a permite imaginile mari în blog
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: false, limit: '50mb' }));
 
 // Serve static files from public directory
 app.use(express.static('public'));
