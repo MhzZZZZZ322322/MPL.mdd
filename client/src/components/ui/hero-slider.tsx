@@ -35,13 +35,13 @@ export const HeroSlider = () => {
   };
 
   return (
-    <div className="relative h-[80vh] overflow-hidden bg-black">
+    <div className="relative h-[65vh] overflow-hidden bg-black">
       {/* Background Image */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
         transition={{ duration: 1 }}
-        className="absolute top-0 left-0 right-0 h-3/5 flex items-center justify-center"
+        className="absolute top-0 left-0 right-0 h-1/2 flex items-center justify-center"
       >
         <img 
           src={heroContent.image} 
@@ -54,11 +54,11 @@ export const HeroSlider = () => {
       <div className="absolute inset-0 bg-black opacity-20"></div>
       
       {/* Gradient overlay bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent"></div>
       
       {/* Content */}
       {isLoaded && (
-        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-20 pb-6">
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-20 pb-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
