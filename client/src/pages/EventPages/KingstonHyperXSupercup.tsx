@@ -795,6 +795,42 @@ const KingstonHyperXSupercup = () => {
                     Ace of Aces
                   </h3>
 
+                  {/* Product Images */}
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/kingston-fury-renegade-limited-edition.png"
+                          alt="Kingston FURY Renegade 48GB DDR5 RGB Limited Edition"
+                          className="w-44 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-purple-400/90 font-medium">
+                        1x FURY Renegade 48GB 8000MT/s DDR5 RGB Limited Edition
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/hyperx-alloy-rise-75-wireless.png"
+                          alt="HyperX Alloy Rise 75 Wireless"
+                          className="w-44 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-purple-400/90 font-medium">
+                        1x HyperX Alloy Rise 75 Wireless
+                      </p>
+                      <p className="text-xs text-purple-400/70 italic mt-1">
+                        sau 1x HyperX Cloud III S Wireless
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </NeonBorder>
             </div>
