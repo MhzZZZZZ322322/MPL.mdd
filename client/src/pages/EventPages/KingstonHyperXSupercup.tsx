@@ -649,9 +649,31 @@ const KingstonHyperXSupercup = () => {
                   <h3 className="text-2xl font-bold text-yellow-400 font-rajdhani mb-2">
                     Locul 1
                   </h3>
-                  <p className="text-3xl font-bold text-white font-rajdhani">
+                  <p className="text-3xl font-bold text-white font-rajdhani mb-4">
                     70,000 LEI
                   </p>
+                  
+                  {/* Product Images */}
+                  <div className="space-y-3">
+                    <div className="flex justify-center">
+                      <img 
+                        src="/attached_assets/image_1754930541401.png"
+                        alt="HyperX Cloud III S Wireless"
+                        className="w-24 h-24 object-contain"
+                      />
+                    </div>
+                    <div className="flex justify-center">
+                      <img 
+                        src="/attached_assets/image_1754930585215.png"
+                        alt="Kingston FURY Renegade DDR5 RGB"
+                        className="w-28 h-16 object-contain"
+                      />
+                    </div>
+                    <div className="text-xs text-yellow-300/80 space-y-1">
+                      <p>HyperX Cloud III S Wireless</p>
+                      <p>Kingston FURY Renegade RGB</p>
+                    </div>
+                  </div>
                 </div>
               </NeonBorder>
 
