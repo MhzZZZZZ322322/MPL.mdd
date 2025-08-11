@@ -342,7 +342,7 @@ const KingstonHyperXSupercup = () => {
                           <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, jocuri BO1
                           <br />• <strong>Stage 2:</strong> Swiss System cu 16 echipe, jocuri BO1
                           <br />• <strong>Stage 3:</strong> Playoff cu dublă eliminare (Upper/Lower Bracket)
-                          <br />• <strong>Total:</strong> ~32 echipe participante
+                          <br />• <strong>Total:</strong> 32 echipe (16 selectate + 16 prin calificare)
                         </p>
                       </div>
                       <div>
@@ -387,6 +387,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
+                          <strong>Selecție:</strong> 16 echipe selectate direct + 16 prin calificare<br />
                           <strong>Stage 1:</strong> Primele 2 echipe din fiecare grupă avansează<br />
                           <strong>Stage 2:</strong> De la 16 la 8 echipe prin Swiss<br />
                           <strong>Stage 3:</strong> Double Elimination (Upper/Lower Bracket)<br />
@@ -405,8 +406,8 @@ const KingstonHyperXSupercup = () => {
                     Participă la cel mai mare turneu CS2!
                   </h3>
                   <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                    Înregistrează-ți echipa acum pentru Kingston x HyperX Supercup Season 1. 
-                    Numai 32 de locuri disponibile!
+                    Înregistrează-ți echipa pentru Kingston x HyperX Supercup Season 1. 
+                    32 locuri: 16 echipe selectate direct + 16 prin calificare!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href="/register-team">
@@ -422,7 +423,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Locuri disponibile: <span className="text-white font-bold">{32 - teams.length} / 32</span>
+                        Total echipe: <span className="text-white font-bold">{teams.length} / 32</span> (16 selectate + 16 calificare)
                       </p>
                     </div>
                   </div>
