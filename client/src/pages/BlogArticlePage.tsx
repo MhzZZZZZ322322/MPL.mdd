@@ -108,22 +108,24 @@ export default function BlogArticlePage() {
 
   if (error?.message === "ARTICLE_NOT_FOUND") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <div className="container mx-auto px-4 py-16">
+      <div className="min-h-screen bg-black">
+        <div className="container mx-auto px-4 py-20">
           <div className="max-w-2xl mx-auto text-center">
-            <FileText className="mx-auto h-16 w-16 text-gray-400 mb-6" />
-            <h1 className="text-4xl font-bold text-white mb-4">
-              Articol negăsit
-            </h1>
-            <p className="text-xl text-gray-300 mb-8">
-              Articolul pe care îl cauți nu există sau a fost eliminat.
-            </p>
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-              <Link href="/blog">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Înapoi la blog
-              </Link>
-            </Button>
+            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-12 backdrop-blur-sm">
+              <FileText className="mx-auto h-16 w-16 text-purple-400 mb-6" />
+              <h1 className="text-4xl font-bold text-white mb-4">
+                Articol negăsit
+              </h1>
+              <p className="text-xl text-gray-300 mb-8">
+                Articolul pe care îl cauți nu există sau a fost eliminat.
+              </p>
+              <Button asChild size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0">
+                <Link href="/blog">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Înapoi la blog
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -165,15 +167,15 @@ export default function BlogArticlePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-black">
       {/* Breadcrumb */}
-      <div className="bg-slate-900/50 py-6">
+      <div className="bg-black/80 py-6 border-b border-gray-800">
         <div className="container mx-auto px-4">
           <Button
             variant="ghost"
             size="sm"
             asChild
-            className="text-gray-300 hover:text-white"
+            className="text-gray-400 hover:text-purple-400 transition-colors duration-300"
           >
             <Link href="/blog">
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -183,8 +185,13 @@ export default function BlogArticlePage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
-        <article className="max-w-4xl mx-auto">
+      <div className="container mx-auto px-4 py-8 bg-black relative">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent pointer-events-none"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl"></div>
+        
+        <article className="max-w-4xl mx-auto relative z-10">
           {/* Article Header */}
           <header className="mb-8">
             {/* Meta Info */}
@@ -208,7 +215,7 @@ export default function BlogArticlePage() {
                 variant="outline"
                 size="sm"
                 onClick={handleShare}
-                className="text-gray-300 border-gray-600 hover:bg-gray-700"
+                className="bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-purple-600 hover:border-purple-500 hover:text-white transition-all duration-300"
               >
                 <Share2 className="w-4 h-4 mr-2" />
                 Distribuie
@@ -216,7 +223,7 @@ export default function BlogArticlePage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight bg-gradient-to-r from-white via-purple-100 to-white bg-clip-text text-transparent">
               {article.title}
             </h1>
 
@@ -232,7 +239,7 @@ export default function BlogArticlePage() {
                   <Badge 
                     key={index} 
                     variant="secondary" 
-                    className="bg-slate-700 text-gray-300 hover:bg-slate-600"
+                    className="bg-purple-900/40 text-purple-200 border border-purple-500/30 hover:bg-purple-800/60 transition-colors duration-300"
                   >
                     {tag.trim()}
                   </Badge>
@@ -253,7 +260,7 @@ export default function BlogArticlePage() {
           )}
 
           {/* Article Content */}
-          <div className="bg-slate-800/30 rounded-lg p-8 mb-8">
+          <div className="bg-gray-900/30 border border-gray-800/50 rounded-lg p-8 mb-8 backdrop-blur-sm">
             <div 
               className="prose prose-lg prose-invert max-w-none
                 prose-headings:text-white 
@@ -270,7 +277,7 @@ export default function BlogArticlePage() {
           </div>
 
           {/* Article Footer */}
-          <footer className="border-t border-slate-700 pt-8">
+          <footer className="border-t border-gray-800 pt-8">
             <div className="flex items-center justify-between">
               <div className="text-sm text-gray-400">
                 <p>Ultima actualizare: {formatDate(article.updatedAt)}</p>
@@ -278,7 +285,7 @@ export default function BlogArticlePage() {
                   <p>Contact autor: 
                     <a 
                       href={`mailto:${article.authorEmail}`}
-                      className="text-primary hover:underline ml-1"
+                      className="text-purple-400 hover:underline ml-1 transition-colors duration-300"
                     >
                       {article.authorEmail}
                     </a>
@@ -289,7 +296,7 @@ export default function BlogArticlePage() {
               <Button
                 variant="outline"
                 onClick={handleShare}
-                className="text-gray-300 border-gray-600 hover:bg-gray-700"
+                className="bg-gray-900/50 border-gray-700 text-gray-300 hover:bg-purple-600 hover:border-purple-500 hover:text-white transition-all duration-300"
               >
                 <Share2 className="w-4 h-4 mr-2" />
                 Distribuie articolul
