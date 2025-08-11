@@ -743,6 +743,61 @@ const KingstonHyperXSupercup = () => {
                     Locul 3
                   </h3>
 
+                  {/* Product Images */}
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/hyperx-pulsefire-haste-2.png"
+                          alt="HyperX Pulsefire Haste 2"
+                          className="w-32 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-xs text-orange-400/90 font-medium">
+                        5x HyperX Pulsefire Haste 2
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/kingston-datatraveler-exodia.png"
+                          alt="DataTraveler Exodia S USB 256GB"
+                          className="w-24 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-xs text-orange-400/90 font-medium">
+                        5x DataTraveler Exodia S USB 256GB
+                      </p>
+                    </div>
+
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-xl font-bold text-white">+</div>
+                    </div>
+
+                    <div className="text-center">
+                      <p className="text-xs text-orange-400/90 font-medium">
+                        5x T-shirts Kingston Fury
+                      </p>
+                    </div>
+
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-xl font-bold text-white">+</div>
+                    </div>
+
+                    <div className="text-center">
+                      <p className="text-xs text-orange-400/90 font-medium">
+                        5x Termo bag Kingston Fury
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </NeonBorder>
 
