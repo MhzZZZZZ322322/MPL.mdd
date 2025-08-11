@@ -21,6 +21,10 @@ export const translations: TranslationDictionary = {
     ro: "Acasă",
     ru: "Главная"
   },
+  "nav.news": {
+    ro: "Știri & Actualizări",
+    ru: "Новости и Обновления"
+  },
   "nav.about": {
     ro: "Despre",
     ru: "О нас"
@@ -443,6 +447,10 @@ export const translations: TranslationDictionary = {
   "footer.home": {
     ro: "Acasă",
     ru: "Главная"
+  },
+  "footer.news": {
+    ro: "Știri & Actualizări",
+    ru: "Новости и Обновления"
   },
   "footer.about": {
     ro: "Despre noi",

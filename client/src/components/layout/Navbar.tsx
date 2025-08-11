@@ -23,6 +23,7 @@ interface NavItem {
 // Aceste etichete vor fi traduse la afișare folosind funcția t()
 const navItems: NavItem[] = [
   { label: "nav.home", href: "/" },
+  { label: "nav.news", href: "/stiri" },
   { label: "nav.about", href: "/#about" },
   { label: "nav.partners", href: "/#partners" },
   { label: "nav.faq", href: "/#faq" },

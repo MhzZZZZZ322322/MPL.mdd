@@ -29,6 +29,7 @@ import AdminProtectedRoute from "@/components/AdminProtectedRoute";
 import { useState, useEffect } from "react";
 import BlogPage from "@/pages/BlogPage";
 import BlogArticlePage from "@/pages/BlogArticlePage";
+import NewsPage from "@/pages/NewsPage";
 
 function Router() {
   return (
@@ -58,6 +59,7 @@ function Router() {
       )} />
       <Route path="/blog" component={BlogPage} />
       <Route path="/blog/:slug" component={BlogArticlePage} />
+      <Route path="/stiri" component={NewsPage} />
       <Route path="/cronologia-mpl" component={() => {
         window.location.replace('/');
         return null;

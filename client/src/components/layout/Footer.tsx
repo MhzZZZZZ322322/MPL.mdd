@@ -95,6 +95,7 @@ const Footer = () => {
           <FooterSection title={t('footer.quick.links')}>
             <ul className="space-y-2 text-sm">
               <FooterLink href="/">{t('footer.home')}</FooterLink>
+              <FooterLink href="/stiri">{t('footer.news')}</FooterLink>
               <FooterLink href="#about">{t('footer.about')}</FooterLink>
               <FooterLink href="/cronologia-mpl">{t('footer.timeline')}</FooterLink>
               <FooterLink href="#events">{t('footer.events')}</FooterLink>
