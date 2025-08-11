@@ -8,12 +8,13 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes  
+- August 11, 2025: **MPL_KEYBOARD_SHORTCUT_REMOVAL** - Eliminat complet funcționalitatea de secvență tastatură "mpl" din toate componentele (App.tsx și ComingSoon.tsx). Nu mai există restart/redirect automat la tastarea acestor caractere.
 - August 11, 2025: **BLOG_SYSTEM_ADVANCED_IMPLEMENTATION** - Extins schema blog cu câmpuri pentru alt text, caption, licență imagine, categorii (principală/secundare), programare automată, și token preview. Implementat Media Manager cu procesare imagini, categorii predefinite, autori multipli, tag-uri sugerite, și funcționalitate de scheduling pentru publicare automată.
 - August 11, 2025: **BLOG_SYSTEM_STYLING_COMPLETE** - Integrat sistemul de blog în stilistica oficială a site-ului (fundal negru, efecte purple/blue, design consistent). Mutat blog management din interfața de turneu în panoul principal admin la `/admin/blog`. Rezolvat PayloadTooLargeError prin mărirea limitelor serverului la 50MB pentru încărcarea imaginilor mari în blog.
 - August 11, 2025: **BLOG_SYSTEM_COMPLETE** - Implementat sistemul complet de blog/știri cu editor admin rich text, upload poze, stocare în PostgreSQL, afișare cronologică pe site. Inclus SEO metadata, tags, view counter și sistem complet CRUD.
 - August 11, 2025: **KINGSTON_TEAM_EDITING_COMPLETE** - Implementat editarea completă echipelor înregistrate: nume, logo, membri cu toate detaliile (nickname, FACEIT, Discord, rol, poziție). Sistem de tranzacții pentru integritatea datelor.
 - August 11, 2025: **KINGSTON_LOGO_SYSTEM_COMPLETE** - Implementat sistemul complet de logo-uri cu persistență în baza de date PostgreSQL. Logo-urile se salvează ca base64 în coloana logoData și se afișează din DB. Eliminat textele generice "Kingston Player" și "kingston-hyperx-supercup" pentru un aspect mai curat.
-- August 11, 2025: **KINGSTON_CLEAN_RESET** - Curățat complet turneul Kingston de toate datele vechi (echipe, meciuri, rezultate). Dezactivat accesul admin prin secvența "mpl" pe pagina de înregistrare. Sistem complet funcțional pentru înregistrare publică echipe cu drag-and-drop upload logo.
+- August 11, 2025: **KINGSTON_CLEAN_RESET** - Curățat complet turneul Kingston de toate datele vechi (echipe, meciuri, rezultate). Eliminat complet accesul admin prin secvența "mpl" de pe tot site-ul. Sistem complet funcțional pentru înregistrare publică echipe cu drag-and-drop upload logo.
 - August 11, 2025: **KINGSTON_HYPERX_SECRET_PAGE** - Creat pagina secretă "Kingston x HyperX - Supercup Season 1" (rută: /events/kingston-hyperx-supercup). Format nou: 32 echipe, 3 etape (Grupe + Swiss + Double Elimination), 15 august - 28 septembrie 2025.
 
 ## System Architecture

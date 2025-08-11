@@ -13,30 +13,7 @@ const ComingSoon = ({ enabled }: ComingSoonProps) => {
   if (!enabled || isAdminPage) return null;
   
   // Easter Egg pentru accesare secretă admin
-  const [keys, setKeys] = useState<string[]>([]);
-  
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      setKeys(prevKeys => {
-        const newKeys = [...prevKeys, e.key.toLowerCase()];
-        // Păstrăm doar ultimele 3 taste apăsate
-        if (newKeys.length > 3) {
-          return newKeys.slice(newKeys.length - 3);
-        }
-        return newKeys;
-      });
-    };
-    
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
-  
-  // Verificăm dacă s-a tastat secvența "mpl"
-  useEffect(() => {
-    if (keys.length === 3 && keys.join('') === 'mpl') {
-      window.location.href = '/admin';
-    }
-  }, [keys]);
+  // Removed admin keyboard shortcut per user request
   
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black">

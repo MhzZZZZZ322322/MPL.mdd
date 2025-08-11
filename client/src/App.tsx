@@ -83,37 +83,7 @@ function App() {
   }, []);
   
   // Adăugăm o metodă de acces la pagina de admin prin tastarea secvenței 'mpl'
-  useEffect(() => {
-    // Secvența de taste pentru acces admin: 'mpl' ('m', 'p', 'l')
-    let keys: string[] = [];
-    const adminKeys = ['m', 'p', 'l'];
-    
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Nu activează secvența admin pe pagina de înregistrare echipe
-      if (window.location.pathname === '/register-team') {
-        return;
-      }
-      
-      // Adaugă tasta apăsată în array
-      keys.push(e.key.toLowerCase());
-      
-      // Păstrăm doar ultimele 3 taste apăsate
-      if (keys.length > 3) {
-        keys = keys.slice(-3);
-      }
-      
-      // Verificăm dacă ultimele 3 taste apăsate sunt 'm', 'p', 'l'
-      if (keys.join('') === adminKeys.join('')) {
-        window.location.href = '/admin';
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyDown);
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [comingSoonEnabled]);
+  // Removed admin keyboard shortcut per user request
   
   // Actualizăm atributul lang al HTML pe baza schimbărilor de rută
   useEffect(() => {
