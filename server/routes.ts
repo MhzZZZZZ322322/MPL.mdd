@@ -1684,6 +1684,104 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston Admin: Get All Registered (Approved) Teams
+  app.get("/api/kingston/admin/registered-teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const teams = await db.select({
+        id: kingstonTeams.id,
+        name: kingstonTeams.name,
+        logoUrl: kingstonTeams.logoUrl,
+        logoData: kingstonTeams.logoData,
+        tournament: kingstonTeams.tournament,
+        status: kingstonTeams.status,
+        isActive: kingstonTeams.isActive,
+        submittedAt: kingstonTeams.submittedAt,
+        reviewedAt: kingstonTeams.reviewedAt,
+        reviewedBy: kingstonTeams.reviewedBy,
+        rejectionReason: kingstonTeams.rejectionReason,
+        createdAt: kingstonTeams.createdAt
+      }).from(kingstonTeams)
+        .where(eq(kingstonTeams.status, "approved"));
+      res.json(teams);
+    } catch (error) {
+      console.error("Error fetching registered Kingston teams:", error);
+      res.status(500).json({ error: "Failed to fetch registered Kingston teams" });
+    }
+  });
+
+  // Kingston Admin: Update Team
+  app.patch("/api/kingston/admin/teams/:id", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      if (isNaN(teamId)) {
+        return res.status(400).json({ error: "Invalid team ID" });
+      }
+
+      const { name } = req.body;
+      if (!name || typeof name !== 'string' || name.trim().length === 0) {
+        return res.status(400).json({ error: "Valid team name is required" });
+      }
+
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+
+      const [updatedTeam] = await db.update(kingstonTeams)
+        .set({ 
+          name: name.trim(),
+          reviewedAt: new Date(),
+          reviewedBy: "admin" // În viitor poți adăuga sistem de autentificare
+        })
+        .where(eq(kingstonTeams.id, teamId))
+        .returning();
+
+      if (!updatedTeam) {
+        return res.status(404).json({ error: "Team not found" });
+      }
+
+      res.json(updatedTeam);
+    } catch (error) {
+      console.error("Error updating Kingston team:", error);
+      res.status(500).json({ error: "Failed to update Kingston team" });
+    }
+  });
+
+  // Kingston Admin: Delete Team
+  app.delete("/api/kingston/admin/teams/:id", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      if (isNaN(teamId)) {
+        return res.status(400).json({ error: "Invalid team ID" });
+      }
+
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+
+      // Delete team members first (foreign key constraint)
+      await db.delete(kingstonTeamMembers)
+        .where(eq(kingstonTeamMembers.teamId, teamId));
+
+      // Delete the team
+      const deletedTeams = await db.delete(kingstonTeams)
+        .where(eq(kingstonTeams.id, teamId))
+        .returning();
+
+      if (deletedTeams.length === 0) {
+        return res.status(404).json({ error: "Team not found" });
+      }
+
+      res.json({ message: "Team and all members deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting Kingston team:", error);
+      res.status(500).json({ error: "Failed to delete Kingston team" });
+    }
+  });
+
   // Kingston Admin: Create Match Result
   app.post("/api/kingston/admin/match-results", async (req, res) => {
     try {

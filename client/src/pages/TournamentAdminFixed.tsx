@@ -14,6 +14,7 @@ import { Stage3SwissRoundsManager } from "@/components/admin/Stage3SwissRoundsMa
 import Stage4PlayoffManager from "@/components/admin/Stage4PlayoffManager";
 import TeamRegistration from "@/components/admin/TeamRegistration";
 import TeamApprovalManager from "@/components/admin/TeamApprovalManager";
+import RegisteredTeamsManager from "@/components/admin/RegisteredTeamsManager";
 
 // Context pentru turneul selectat
 interface TournamentContextType {
@@ -104,10 +105,14 @@ export default function TournamentAdmin() {
             </div>
           
             <Tabs defaultValue="team-approval" className="w-full">
-              <TabsList className="grid w-full grid-cols-8 bg-slate-800/50">
+              <TabsList className="grid w-full grid-cols-9 bg-slate-800/50">
                 <TabsTrigger value="team-approval" className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   Aprobare Echipe
+                </TabsTrigger>
+                <TabsTrigger value="registered-teams" className="flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Echipe Înregistrate
                 </TabsTrigger>
                 <TabsTrigger value="teams" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
@@ -141,6 +146,10 @@ export default function TournamentAdmin() {
               
               <TabsContent value="team-approval" className="mt-6">
                 <TeamApprovalManager />
+              </TabsContent>
+              
+              <TabsContent value="registered-teams" className="mt-6">
+                <RegisteredTeamsManager />
               </TabsContent>
               
               <TabsContent value="teams" className="mt-6">
