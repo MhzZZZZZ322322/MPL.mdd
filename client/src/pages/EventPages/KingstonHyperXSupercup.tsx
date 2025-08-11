@@ -654,24 +654,24 @@ const KingstonHyperXSupercup = () => {
                   </p>
                   
                   {/* Product Images */}
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     <div className="flex justify-center">
                       <img 
                         src="/hyperx-cloud-iii-s.png"
                         alt="HyperX Cloud III S Wireless"
-                        className="w-24 h-24 object-contain"
+                        className="w-32 h-32 object-contain"
                       />
                     </div>
                     <div className="flex justify-center">
                       <img 
                         src="/kingston-fury-renegade.png"
                         alt="Kingston FURY Renegade DDR5 RGB"
-                        className="w-28 h-16 object-contain"
+                        className="w-36 h-20 object-contain"
                       />
                     </div>
-                    <div className="text-xs text-yellow-300/80 space-y-1">
-                      <p>HyperX Cloud III S Wireless</p>
-                      <p>Kingston FURY Renegade RGB</p>
+                    <div className="text-sm text-yellow-300/90 space-y-1">
+                      <p className="font-medium">HyperX Cloud III S Wireless</p>
+                      <p className="font-medium">Kingston FURY Renegade RGB</p>
                     </div>
                   </div>
                 </div>
