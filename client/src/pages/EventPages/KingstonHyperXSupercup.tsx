@@ -231,17 +231,23 @@ const KingstonHyperXSupercup = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3 text-lg"
-                >
-                  <Gift className="mr-2 h-5 w-5" />
-                  Înscrie-te acum
-                </Button>
+                <Link href="/register-team">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3 text-lg"
+                  >
+                    <Gift className="mr-2 h-5 w-5" />
+                    Înscrie-te acum
+                  </Button>
+                </Link>
                 <Button 
                   variant="outline" 
                   size="lg" 
                   className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg"
+                  onClick={() => {
+                    const rulesSection = document.querySelector('#tournament-rules');
+                    rulesSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   <Eye className="mr-2 h-5 w-5" />
                   Vezi regulamentul
@@ -291,7 +297,7 @@ const KingstonHyperXSupercup = () => {
         </section>
 
         {/* Tournament Rules */}
-        <section className="py-16 px-4 bg-darkGray/20">
+        <section id="tournament-rules" className="py-16 px-4 bg-darkGray/20">
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
