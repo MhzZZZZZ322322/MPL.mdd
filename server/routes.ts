@@ -2041,6 +2041,155 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===========================
+  // KINGSTON TOURNAMENT REPORT GENERATION
+  // ===========================
+  
+  // Kingston Tournament Report - Similar to Google Sheets format
+  app.get("/api/kingston/tournament-report", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { 
+        kingstonTeams, 
+        kingstonTeamMembers, 
+        kingstonGroupStandings,
+        kingstonMatchResults,
+        kingstonStage2Swiss,
+        kingstonStage2SwissMatches,
+        kingstonStage3Playoff
+      } = await import("@shared/schema");
+      const { eq, desc, sql } = await import("drizzle-orm");
+
+      // Get all approved teams with members
+      const teams = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.status, "approved"));
+        
+      const teamsWithMembers = await Promise.all(
+        teams.map(async (team) => {
+          const members = await db.select().from(kingstonTeamMembers)
+            .where(eq(kingstonTeamMembers.teamId, team.id));
+          return { ...team, members };
+        })
+      );
+
+      // Get group standings
+      const groupStandings = await db.select().from(kingstonGroupStandings)
+        .orderBy(kingstonGroupStandings.groupName, desc(kingstonGroupStandings.points));
+
+      // Get match results
+      const matchResults = await db.select().from(kingstonMatchResults)
+        .orderBy(desc(kingstonMatchResults.createdAt));
+
+      // Get Stage 2 Swiss results
+      const stage2Swiss = await db.select().from(kingstonStage2Swiss)
+        .orderBy(desc(kingstonStage2Swiss.wins), desc(kingstonStage2Swiss.roundsWon));
+        
+      const stage2Matches = await db.select().from(kingstonStage2SwissMatches)
+        .orderBy(kingstonStage2SwissMatches.roundNumber);
+
+      // Get Stage 3 Playoff results
+      const stage3Playoff = await db.select().from(kingstonStage3Playoff)
+        .orderBy(kingstonStage3Playoff.bracketPosition);
+
+      // Calculate tournament statistics
+      const tournamentStats = {
+        totalTeams: teams.length,
+        totalPlayers: teamsWithMembers.reduce((acc, team) => acc + team.members.length, 0),
+        totalMatches: matchResults.length + stage2Matches.length + stage3Playoff.filter(m => m.isPlayed).length,
+        completedMatches: matchResults.filter(m => m.team1Score !== null && m.team2Score !== null).length + 
+                         stage2Matches.filter(m => m.isPlayed).length + 
+                         stage3Playoff.filter(m => m.isPlayed).length,
+        tournamentStartDate: "15 august 2025",
+        tournamentEndDate: "28 septembrie 2025",
+        prizePool: "HyperX + Kingston Gaming Gear",
+        reportGeneratedAt: new Date().toISOString()
+      };
+
+      // Identify top performers (MVP candidates)
+      const mvpCandidates = teamsWithMembers
+        .flatMap(team => 
+          team.members.map(member => ({
+            nickname: member.nickname,
+            teamName: team.name,
+            faceitProfile: member.faceitProfile,
+            role: member.role,
+            position: member.position
+          }))
+        )
+        .slice(0, 10); // Top 10 players for MVP consideration
+
+      // Generate comprehensive report
+      const tournamentReport = {
+        metadata: {
+          tournamentName: "Kingston x HyperX - Supercup Season 1",
+          format: "32 Teams - 3 Stages (Groups + Swiss + Double Elimination)",
+          organizerInfo: {
+            name: "Moldova Pro League (MPL)",
+            contact: "admin@moldovapro.gg",
+            website: "https://moldovapro.gg"
+          },
+          sponsors: ["Kingston", "HyperX"],
+          ...tournamentStats
+        },
+        
+        teams: {
+          registered: teamsWithMembers,
+          summary: teamsWithMembers.map(team => ({
+            id: team.id,
+            name: team.name,
+            membersCount: team.members.length,
+            registrationDate: team.submittedAt,
+            approvalDate: team.reviewedAt,
+            captain: team.members.find(m => m.role === "captain")?.nickname || team.members[0]?.nickname
+          }))
+        },
+        
+        results: {
+          stage1Groups: {
+            standings: groupStandings,
+            matches: matchResults
+          },
+          stage2Swiss: {
+            standings: stage2Swiss,
+            matches: stage2Matches
+          },
+          stage3Playoff: {
+            matches: stage3Playoff
+          }
+        },
+        
+        awards: {
+          prizes: {
+            firstPlace: {
+              description: "5x HyperX Cloud III S Wireless + 5x Kingston FURY Renegade DDR5 RGB",
+              recipients: stage3Playoff.find(m => m.bracketRound === "final" && m.isPlayed)?.winnerName || "TBD"
+            },
+            secondPlace: {
+              description: "5x HyperX Alloy Rise 75 Keyboard + 5x Kingston FURY Beast DDR5 RGB", 
+              recipients: stage3Playoff.find(m => m.bracketRound === "final" && m.isPlayed)?.loserName || "TBD"
+            },
+            thirdPlace: {
+              description: "5x HyperX Pulsefire Haste 2 Wireless + 5x Kingston DT Exodia S 256GB + Merchandise",
+              recipients: "TBD"
+            },
+            aceOfAces: {
+              description: "Kingston FURY Renegade 48GB DDR5 Limited Edition",
+              recipient: "TBD" // To be determined by tournament admin
+            }
+          },
+          mvpCandidates: mvpCandidates
+        },
+        
+        statistics: tournamentStats
+      };
+
+      res.json(tournamentReport);
+    } catch (error) {
+      console.error("Error generating Kingston tournament report:", error);
+      res.status(500).json({ error: "Failed to generate tournament report" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 

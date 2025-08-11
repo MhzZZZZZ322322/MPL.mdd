@@ -365,13 +365,28 @@ const KingstonHyperXSupercup = () => {
                         </p>
                       </div>
                       <div>
-                        <h4 className="text-primary font-bold mb-2">🏆 Premii</h4>
-                        <p className="text-sm leading-relaxed">
-                          <strong>Locul 1:</strong> $5,000 + Kingston gaming gear<br />
-                          <strong>Locul 2:</strong> $3,000 + HyperX peripherals<br />
-                          <strong>Locul 3:</strong> $2,000 + Gaming setup<br />
-                          <strong>MVP:</strong> Gaming monitor premium
-                        </p>
+                        <h4 className="text-primary font-bold mb-2">🏆 Premii Confirmate</h4>
+                        <div className="text-sm leading-relaxed space-y-2">
+                          <div className="bg-yellow-500/10 border-l-4 border-yellow-500 p-2 rounded">
+                            <strong className="text-yellow-400">LOCUL 1 (5 premii):</strong><br />
+                            • 5x HyperX Cloud III S Wireless (căști)<br />
+                            • 5x Kingston FURY Renegade DDR5 (memorie RGB)
+                          </div>
+                          <div className="bg-gray-500/10 border-l-4 border-gray-400 p-2 rounded">
+                            <strong className="text-gray-300">LOCUL 2 (5 premii):</strong><br />
+                            • 5x HyperX Alloy Rise 75 (tastatură)<br />
+                            • 5x Kingston FURY Beast DDR5 (memorie RGB)
+                          </div>
+                          <div className="bg-orange-500/10 border-l-4 border-orange-500 p-2 rounded">
+                            <strong className="text-orange-400">LOCUL 3 (5 premii):</strong><br />
+                            • 5x HyperX Pulsefire Haste 2 Wireless<br />
+                            • 5x Kingston DT Exodia S 256GB + Merchandise
+                          </div>
+                          <div className="bg-purple-500/10 border-l-4 border-purple-500 p-2 rounded">
+                            <strong className="text-purple-400">ACE OF ACES:</strong><br />
+                            • Kingston FURY Renegade 48GB DDR5 Limited Edition
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
