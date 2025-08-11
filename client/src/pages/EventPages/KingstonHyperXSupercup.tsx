@@ -4,16 +4,110 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
 import CountdownTimer from "@/components/ui/countdown-timer";
-import TournamentGroups from "@/components/sections/TournamentGroups";
-import { Stage2Bracket } from "@/components/sections/Stage2Bracket";
-import { Stage3Swiss } from "@/components/sections/Stage3Swiss";
-import Stage4Playoff from "@/components/sections/Stage4Playoff";
-
-
 import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Team, TeamMember } from "@shared/schema";
+
+// Kingston Tournament Components using dedicated API routes
+const KingstonTournamentGroups = () => {
+  const { data: standings = [] } = useQuery({
+    queryKey: ["/api/kingston/group-standings"],
+    queryFn: async () => {
+      const response = await fetch("/api/kingston/group-standings");
+      if (!response.ok) throw new Error("Failed to fetch Kingston group standings");
+      return response.json();
+    }
+  });
+
+  if (standings.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+        <h3 className="text-xl font-semibold text-gray-300 mb-2">Grupele vor fi disponibile în curând</h3>
+        <p className="text-gray-400">
+          Organizarea în 8 grupe de câte 4 echipe va începe odată cu înregistrările.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <p className="text-gray-300 text-center">Clasamentele grupelor Kingston x HyperX Supercup</p>
+      {/* Group standings would be rendered here */}
+    </div>
+  );
+};
+
+const KingstonStage2Swiss = () => {
+  const { data: standings = [] } = useQuery({
+    queryKey: ["/api/kingston/stage2-swiss-standings"],
+    queryFn: async () => {
+      const response = await fetch("/api/kingston/stage2-swiss-standings");
+      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 standings");
+      return response.json();
+    }
+  });
+
+  const { data: matches = [] } = useQuery({
+    queryKey: ["/api/kingston/stage2-swiss-matches"],
+    queryFn: async () => {
+      const response = await fetch("/api/kingston/stage2-swiss-matches");
+      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 matches");
+      return response.json();
+    }
+  });
+
+  if (standings.length === 0 && matches.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <Trophy className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+        <h3 className="text-xl font-semibold text-gray-300 mb-2">Swiss System Stage va începe în curând</h3>
+        <p className="text-gray-400">
+          16 echipe calificate din Stage 1 vor concura în format Swiss System.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <p className="text-gray-300 text-center">Kingston Stage 2: Swiss System (16→8 echipe)</p>
+      {/* Swiss standings and matches would be rendered here */}
+    </div>
+  );
+};
+
+const KingstonStage3Playoff = () => {
+  const { data: matches = [] } = useQuery({
+    queryKey: ["/api/kingston/stage3-playoff"],
+    queryFn: async () => {
+      const response = await fetch("/api/kingston/stage3-playoff");
+      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 3 playoff");
+      return response.json();
+    }
+  });
+
+  if (matches.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <Zap className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+        <h3 className="text-xl font-semibold text-gray-300 mb-2">Playoff Double Elimination va începe în curând</h3>
+        <p className="text-gray-400">
+          8 echipe calificate din Stage 2 vor concura pentru marele premiu.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <p className="text-gray-300 text-center">Kingston Stage 3: Double Elimination Playoff</p>
+      {/* Playoff bracket would be rendered here */}
+    </div>
+  );
+};
 
 const KingstonHyperXSupercup = () => {
   const { t } = useLanguage();
@@ -43,12 +137,12 @@ const KingstonHyperXSupercup = () => {
     };
   };
 
-  // Fetch teams for this tournament
+  // Fetch teams for Kingston tournament
   const { data: rawTeams = [], isLoading: teamsLoading } = useQuery<Team[]>({
-    queryKey: ["/api/teams", "kingston-hyperx-supercup"],
+    queryKey: ["/api/kingston/teams"],
     queryFn: async () => {
-      const response = await fetch("/api/teams?tournament=kingston-hyperx-supercup");
-      if (!response.ok) throw new Error("Failed to fetch teams");
+      const response = await fetch("/api/kingston/teams");
+      if (!response.ok) throw new Error("Failed to fetch Kingston teams");
       return response.json();
     }
   });
@@ -58,11 +152,11 @@ const KingstonHyperXSupercup = () => {
 
   // Fetch members for selected team
   const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
-    queryKey: ["/api/teams", selectedTeam?.id, "members"],
+    queryKey: ["/api/kingston/teams", selectedTeam?.id, "members"],
     queryFn: async () => {
       if (!selectedTeam) return [];
-      const response = await fetch(`/api/teams/${selectedTeam.id}/members`);
-      if (!response.ok) throw new Error("Failed to fetch team members");
+      const response = await fetch(`/api/kingston/teams/${selectedTeam.id}/members`);
+      if (!response.ok) throw new Error("Failed to fetch Kingston team members");
       return response.json();
     },
     enabled: !!selectedTeam
@@ -436,7 +530,7 @@ const KingstonHyperXSupercup = () => {
                 
                 {isGroupsExpanded && (
                   <div className="px-6 pb-6">
-                    <TournamentGroups isExpanded={isGroupsExpanded} onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)} />
+                    <KingstonTournamentGroups />
                   </div>
                 )}
               </NeonBorder>
@@ -460,7 +554,7 @@ const KingstonHyperXSupercup = () => {
                 
                 {isStage2Expanded && (
                   <div className="px-6 pb-6">
-                    <Stage2Bracket isExpanded={isStage2Expanded} onToggle={() => setIsStage2Expanded(!isStage2Expanded)} />
+                    <KingstonStage2Swiss />
                   </div>
                 )}
               </NeonBorder>
@@ -484,7 +578,7 @@ const KingstonHyperXSupercup = () => {
                 
                 {isStage3Expanded && (
                   <div className="px-6 pb-6">
-                    <Stage3Swiss isExpanded={isStage3Expanded} onToggle={() => setIsStage3Expanded(!isStage3Expanded)} />
+                    <KingstonStage3Playoff />
                   </div>
                 )}
               </NeonBorder>

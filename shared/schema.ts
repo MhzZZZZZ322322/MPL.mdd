@@ -488,3 +488,278 @@ export const insertV0r4ynCounterSchema = createInsertSchema(var4unCounter).omit(
 
 export type InsertV0r4ynCounter = z.infer<typeof insertV0r4ynCounterSchema>;
 export type V0r4ynCounter = typeof var4unCounter.$inferSelect;
+
+// ===========================
+// KINGSTON x HYPERX SUPERCUP DATABASE TABLES
+// Separate database structure for Kingston x HyperX tournament
+// ===========================
+
+// Kingston Teams
+export const kingstonTeams = pgTable("kingston_teams", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  logoUrl: text("logo_url").notNull(),
+  tournament: text("tournament").notNull().default("kingston-hyperx-supercup"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Kingston Team Members
+export const kingstonTeamMembers = pgTable("kingston_team_members", {
+  id: serial("id").primaryKey(),
+  teamId: integer("team_id").notNull(),
+  nickname: text("nickname").notNull(),
+  faceitProfile: text("faceit_profile").notNull(),
+  role: text("role").notNull().default("player"), // player, captain, coach
+  position: text("position").notNull().default("main"), // main, reserve
+  isActive: boolean("is_active").notNull().default(true),
+});
+
+// Kingston Tournament Groups
+export const kingstonTournamentGroups = pgTable("kingston_tournament_groups", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  groupDisplayName: text("group_display_name").notNull(), // Group A, Group B, etc.
+  tournament: text("tournament").notNull().default("kingston-hyperx-supercup"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Kingston Group Teams
+export const kingstonGroupTeams = pgTable("kingston_group_teams", {
+  id: serial("id").primaryKey(),
+  groupId: integer("group_id").notNull(),
+  teamId: integer("team_id").notNull(),
+  matchesPlayed: integer("matches_played").notNull().default(0),
+  wins: integer("wins").notNull().default(0),
+  draws: integer("draws").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  roundsWon: integer("rounds_won").notNull().default(0),
+  roundsLost: integer("rounds_lost").notNull().default(0),
+  roundDifference: integer("round_difference").notNull().default(0),
+  points: integer("points").notNull().default(0),
+  position: integer("position").notNull().default(1),
+  lastUpdated: timestamp("last_updated").defaultNow(),
+});
+
+// Kingston Scheduled Matches
+export const kingstonScheduledMatches = pgTable("kingston_scheduled_matches", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  faceitUrl: text("faceit_url"), // Link-ul către room-ul Faceit
+  matchDate: timestamp("match_date").notNull(),
+  matchTime: text("match_time").notNull(), // "18:00", "18:45", etc.
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  isPlayed: boolean("is_played").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Kingston Match Results
+export const kingstonMatchResults = pgTable("kingston_match_results", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score").notNull(),
+  team2Score: integer("team2_score").notNull(),
+  winnerId: integer("winner_id"), // ID-ul echipei câștigătoare
+  streamUrl: text("stream_url"), // Link-ul către stream
+  technicalWin: boolean("technical_win").notNull().default(false), // Câștig tehnic
+  technicalWinner: text("technical_winner"), // Numele echipei care a câștigat tehnic
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  matchDate: timestamp("match_date").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Kingston Group Configuration
+export const kingstonGroupConfiguration = pgTable("kingston_group_configuration", {
+  id: serial("id").primaryKey(),
+  groupName: text("group_name").notNull(), // A, B, C, etc.
+  displayName: text("display_name").notNull(), // Group A, Group B, etc.
+  teamIds: text("team_ids").notNull(), // JSON array cu ID-urile echipelor
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Kingston Group Standings
+export const kingstonGroupStandings = pgTable("kingston_group_standings", {
+  id: serial("id").primaryKey(),
+  teamName: text("team_name").notNull(),
+  groupName: text("group_name").notNull(),
+  matchesPlayed: integer("matches_played").notNull().default(0),
+  wins: integer("wins").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  roundsWon: integer("rounds_won").notNull().default(0),
+  roundsLost: integer("rounds_lost").notNull().default(0),
+  roundDifference: integer("round_difference").notNull().default(0),
+  points: integer("points").notNull().default(0),
+  position: integer("position").notNull().default(1),
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  lastUpdated: timestamp("last_updated").defaultNow(),
+});
+
+// Kingston Stage 2 Swiss System (16 echipe din Stage 1)
+export const kingstonStage2Swiss = pgTable("kingston_stage2_swiss", {
+  id: serial("id").primaryKey(),
+  teamName: text("team_name").notNull(),
+  wins: integer("wins").notNull().default(0),
+  losses: integer("losses").notNull().default(0),
+  roundsWon: integer("rounds_won").notNull().default(0),
+  roundsLost: integer("rounds_lost").notNull().default(0),
+  status: text("status").notNull().default("active"), // active, qualified, eliminated
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Kingston Stage 2 Swiss Matches
+export const kingstonStage2SwissMatches = pgTable("kingston_stage2_swiss_matches", {
+  id: serial("id").primaryKey(),
+  roundNumber: integer("round_number").notNull(), // runda 1-8
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score"), // null dacă meciul nu a fost jucat
+  team2Score: integer("team2_score"), // null dacă meciul nu a fost jucat
+  winnerName: text("winner_name"), // numele echipei câștigătoare
+  isPlayed: boolean("is_played").notNull().default(false),
+  streamUrl: text("stream_url"), // link către stream/faceit
+  technicalWin: boolean("technical_win").notNull().default(false),
+  technicalWinner: text("technical_winner"),
+  matchType: text("match_type").notNull().default("BO1"), // BO1 pentru stage 2
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  matchDate: timestamp("match_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Kingston Stage 3 Double Elimination Playoff (8 echipe calificate din Stage 2)
+export const kingstonStage3Playoff = pgTable("kingston_stage3_playoff", {
+  id: serial("id").primaryKey(),
+  team1Name: text("team1_name").notNull(),
+  team2Name: text("team2_name").notNull(),
+  team1Score: integer("team1_score"), // null dacă meciul nu a fost jucat
+  team2Score: integer("team2_score"), // null dacă meciul nu a fost jucat
+  winnerName: text("winner_name"), // numele echipei câștigătoare
+  loserName: text("loser_name"), // numele echipei învingătoare (pentru lower bracket)
+  bracketType: text("bracket_type").notNull(), // 'upper', 'lower'
+  bracketRound: text("bracket_round").notNull(), // 'quarterfinals', 'semifinals', 'final', 'grand_final'
+  bracketPosition: integer("bracket_position").notNull(), // poziția în plasă
+  isPlayed: boolean("is_played").notNull().default(false),
+  streamUrl: text("stream_url"), // link către stream/faceit
+  technicalWin: boolean("technical_win").notNull().default(false),
+  technicalWinner: text("technical_winner"),
+  matchType: text("match_type").notNull().default("BO3"), // BO3 pentru playoff
+  playDate: text("play_date"), // "27.09.2025", "28.09.2025"
+  tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
+  matchDate: timestamp("match_date"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Insert schemas pentru Kingston tables
+export const insertKingstonTeamSchema = createInsertSchema(kingstonTeams).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertKingstonTeamMemberSchema = createInsertSchema(kingstonTeamMembers).omit({
+  id: true,
+});
+
+export const insertKingstonScheduledMatchSchema = createInsertSchema(kingstonScheduledMatches).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertKingstonMatchResultSchema = createInsertSchema(kingstonMatchResults).omit({
+  id: true,
+  createdAt: true,
+  matchDate: true,
+}).extend({
+  team1Score: z.number().min(0),
+  team2Score: z.number().min(0),
+});
+
+export const insertKingstonGroupConfigurationSchema = createInsertSchema(kingstonGroupConfiguration).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertKingstonGroupStandingsSchema = createInsertSchema(kingstonGroupStandings).omit({
+  id: true,
+  lastUpdated: true,
+});
+
+export const insertKingstonStage2SwissSchema = createInsertSchema(kingstonStage2Swiss).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertKingstonStage2SwissMatchSchema = createInsertSchema(kingstonStage2SwissMatches).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  matchDate: true,
+}).extend({
+  matchDate: z.union([z.string(), z.date(), z.null()]).optional().transform(val => {
+    if (!val || val === '' || val === null) return null;
+    if (typeof val === 'string') {
+      if (val.trim() === '') return null;
+      return new Date(val);
+    }
+    return val;
+  })
+});
+
+export const insertKingstonStage3PlayoffSchema = createInsertSchema(kingstonStage3Playoff).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+}).extend({
+  bracketPosition: z.union([z.string(), z.number()]).transform(val => {
+    if (typeof val === 'string') return parseInt(val, 10);
+    return val;
+  }),
+  matchDate: z.union([z.string(), z.date(), z.null()]).optional().transform(val => {
+    if (!val || val === '' || val === null) return null;
+    if (typeof val === 'string') {
+      if (val.trim() === '') return null;
+      return new Date(val);
+    }
+    return val;
+  })
+});
+
+// Export types pentru Kingston
+export type InsertKingstonTeam = z.infer<typeof insertKingstonTeamSchema>;
+export type KingstonTeam = typeof kingstonTeams.$inferSelect;
+
+export type InsertKingstonTeamMember = z.infer<typeof insertKingstonTeamMemberSchema>;
+export type KingstonTeamMember = typeof kingstonTeamMembers.$inferSelect;
+
+export type InsertKingstonScheduledMatch = z.infer<typeof insertKingstonScheduledMatchSchema>;
+export type KingstonScheduledMatch = typeof kingstonScheduledMatches.$inferSelect;
+
+export type InsertKingstonMatchResult = z.infer<typeof insertKingstonMatchResultSchema>;
+export type KingstonMatchResult = typeof kingstonMatchResults.$inferSelect;
+
+export type InsertKingstonGroupConfiguration = z.infer<typeof insertKingstonGroupConfigurationSchema>;
+export type KingstonGroupConfiguration = typeof kingstonGroupConfiguration.$inferSelect;
+
+export type InsertKingstonGroupStandings = z.infer<typeof insertKingstonGroupStandingsSchema>;
+export type KingstonGroupStandings = typeof kingstonGroupStandings.$inferSelect;
+
+export type InsertKingstonStage2Swiss = z.infer<typeof insertKingstonStage2SwissSchema>;
+export type KingstonStage2Swiss = typeof kingstonStage2Swiss.$inferSelect;
+
+export type InsertKingstonStage2SwissMatch = z.infer<typeof insertKingstonStage2SwissMatchSchema>;
+export type KingstonStage2SwissMatch = typeof kingstonStage2SwissMatches.$inferSelect;
+
+export type InsertKingstonStage3Playoff = z.infer<typeof insertKingstonStage3PlayoffSchema>;
+export type KingstonStage3Playoff = typeof kingstonStage3Playoff.$inferSelect;

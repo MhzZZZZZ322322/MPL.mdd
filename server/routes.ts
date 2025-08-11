@@ -1078,6 +1078,118 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===========================
+  // KINGSTON x HYPERX SUPERCUP API ROUTES
+  // Separate API routes for Kingston x HyperX tournament
+  // ===========================
+
+  // Kingston Teams routes
+  app.get("/api/kingston/teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      
+      const teams = await db.select().from(kingstonTeams);
+      res.json(teams);
+    } catch (error) {
+      console.error("Error fetching Kingston teams:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston teams" });
+    }
+  });
+
+  app.get("/api/kingston/teams/:id/members", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      const { db } = await import("./db");
+      const { kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const members = await db.select().from(kingstonTeamMembers).where(eq(kingstonTeamMembers.teamId, teamId));
+      res.json(members);
+    } catch (error) {
+      console.error("Error fetching Kingston team members:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston team members" });
+    }
+  });
+
+  // Kingston Group Standings
+  app.get("/api/kingston/group-standings", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonGroupStandings } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const standings = await db.select().from(kingstonGroupStandings)
+        .orderBy(kingstonGroupStandings.groupName, desc(kingstonGroupStandings.points), desc(kingstonGroupStandings.roundDifference));
+      res.json(standings);
+    } catch (error) {
+      console.error("Error fetching Kingston group standings:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston group standings" });
+    }
+  });
+
+  // Kingston Match Results
+  app.get("/api/kingston/match-results", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonMatchResults } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const results = await db.select().from(kingstonMatchResults)
+        .orderBy(desc(kingstonMatchResults.createdAt));
+      res.json(results);
+    } catch (error) {
+      console.error("Error fetching Kingston match results:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston match results" });
+    }
+  });
+
+  // Kingston Stage 2 Swiss routes
+  app.get("/api/kingston/stage2-swiss-standings", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonStage2Swiss } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const standings = await db.select().from(kingstonStage2Swiss)
+        .orderBy(desc(kingstonStage2Swiss.wins), desc(kingstonStage2Swiss.roundsWon));
+      res.json(standings);
+    } catch (error) {
+      console.error("Error fetching Kingston Stage 2 Swiss standings:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston Stage 2 Swiss standings" });
+    }
+  });
+
+  app.get("/api/kingston/stage2-swiss-matches", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonStage2SwissMatches } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const matches = await db.select().from(kingstonStage2SwissMatches)
+        .orderBy(kingstonStage2SwissMatches.roundNumber, desc(kingstonStage2SwissMatches.createdAt));
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching Kingston Stage 2 Swiss matches:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston Stage 2 Swiss matches" });
+    }
+  });
+
+  // Kingston Stage 3 Playoff routes  
+  app.get("/api/kingston/stage3-playoff", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonStage3Playoff } = await import("@shared/schema");
+      
+      const matches = await db.select().from(kingstonStage3Playoff)
+        .orderBy(kingstonStage3Playoff.bracketPosition);
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching Kingston Stage 3 Playoff matches:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston Stage 3 Playoff matches" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 
