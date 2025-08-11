@@ -774,25 +774,9 @@ const KingstonHyperXSupercup = () => {
                       <p className="text-xs text-orange-400/90 font-medium">
                         5x DataTraveler Exodia S USB 256GB
                       </p>
-                    </div>
-
-                    {/* Plus Sign */}
-                    <div className="flex justify-center">
-                      <div className="text-xl font-bold text-white">+</div>
-                    </div>
-
-                    <div className="text-center">
-                      <p className="text-xs text-orange-400/90 font-medium">
+                      <p className="text-xs text-orange-400/90 font-medium mt-2">
                         5x T-shirts Kingston Fury
                       </p>
-                    </div>
-
-                    {/* Plus Sign */}
-                    <div className="flex justify-center">
-                      <div className="text-xl font-bold text-white">+</div>
-                    </div>
-
-                    <div className="text-center">
                       <p className="text-xs text-orange-400/90 font-medium">
                         5x Termo bag Kingston Fury
                       </p>
