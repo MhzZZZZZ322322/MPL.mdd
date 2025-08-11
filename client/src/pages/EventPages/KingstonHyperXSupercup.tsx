@@ -663,6 +663,9 @@ const KingstonHyperXSupercup = () => {
                       <p className="text-sm text-yellow-300/90 font-medium">
                         5x HyperX Cloud III S Wireless
                       </p>
+                      <p className="text-xs text-yellow-300/70 mt-1">
+                        Căști gaming premium wireless
+                      </p>
                     </div>
                     
                     {/* Plus Sign */}
@@ -680,6 +683,9 @@ const KingstonHyperXSupercup = () => {
                       </div>
                       <p className="text-sm text-yellow-300/90 font-medium">
                         5x Kingston FURY Renegade RGB 48GB DDR5
+                      </p>
+                      <p className="text-xs text-yellow-300/70 mt-1">
+                        Memorie RAM premium 6000MT/s
                       </p>
                     </div>
                   </div>
@@ -709,6 +715,9 @@ const KingstonHyperXSupercup = () => {
                       <p className="text-sm text-gray-300/90 font-medium">
                         5x Kingston FURY Beast 32GB DDR5
                       </p>
+                      <p className="text-xs text-gray-300/70 mt-1">
+                        Memorie RAM gaming 5600MT/s
+                      </p>
                     </div>
                     
                     {/* Plus Sign */}
@@ -726,6 +735,9 @@ const KingstonHyperXSupercup = () => {
                       </div>
                       <p className="text-sm text-gray-300/90 font-medium">
                         5x Tastatură HyperX Alloy Rise 75 Black
+                      </p>
+                      <p className="text-xs text-gray-300/70 mt-1">
+                        Tastatură mecanică RGB gaming
                       </p>
                     </div>
                   </div>
@@ -755,6 +767,9 @@ const KingstonHyperXSupercup = () => {
                       <p className="text-sm text-orange-400/90 font-medium">
                         5x HyperX Pulsefire Haste 2
                       </p>
+                      <p className="text-xs text-orange-400/70 mt-1">
+                        Mouse gaming ultralight
+                      </p>
                     </div>
                     
                     {/* Plus Sign */}
@@ -770,14 +785,17 @@ const KingstonHyperXSupercup = () => {
                           className="w-16 h-16 object-contain"
                         />
                       </div>
-                      <p className="text-xs text-orange-400/90 font-medium">
-                        5x DataTraveler Exodia S USB 256GB
+                      <p className="text-sm text-orange-400/90 font-medium">
+                        5x Kingston Bundle Premium:
                       </p>
-                      <p className="text-xs text-orange-400/90 font-medium mt-1">
-                        5x T-shirts Kingston Fury
+                      <p className="text-xs text-orange-400/90 mt-1">
+                        • DataTraveler Exodia S USB 256GB
                       </p>
-                      <p className="text-xs text-orange-400/90 font-medium">
-                        5x Termo bag Kingston Fury
+                      <p className="text-xs text-orange-400/90">
+                        • T-shirt Kingston Fury branded
+                      </p>
+                      <p className="text-xs text-orange-400/90">
+                        • Termo bag Kingston Fury premium
                       </p>
                     </div>
                   </div>
@@ -805,7 +823,10 @@ const KingstonHyperXSupercup = () => {
                         />
                       </div>
                       <p className="text-sm text-purple-400/90 font-medium">
-                        1x FURY Renegade 48GB 8000MT/s DDR5 RGB Limited Edition
+                        1x FURY Renegade 48GB DDR5 RGB Limited Edition
+                      </p>
+                      <p className="text-xs text-purple-400/70 mt-1">
+                        Memorie RAM exclusivă 8000MT/s
                       </p>
                     </div>
                     
@@ -823,10 +844,13 @@ const KingstonHyperXSupercup = () => {
                         />
                       </div>
                       <p className="text-sm text-purple-400/90 font-medium">
-                        1x HyperX Alloy Rise 75 Wireless
+                        1x HyperX Premium Choice:
                       </p>
-                      <p className="text-xs text-purple-400/70 italic mt-1">
-                        sau 1x HyperX Cloud III S Wireless
+                      <p className="text-xs text-purple-400/90 mt-1">
+                        • HyperX Alloy Rise 75 Wireless
+                      </p>
+                      <p className="text-xs text-purple-400/70 italic">
+                        sau HyperX Cloud III S Wireless
                       </p>
                     </div>
                   </div>
