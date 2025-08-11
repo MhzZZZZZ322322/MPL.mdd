@@ -4,8 +4,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Plus, Minus, Save, RotateCcw, Users, ArrowUpDown } from "lucide-react";
+import { Plus, Minus, Save, RotateCcw, Users, ArrowUpDown, Lock, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTournamentContext } from "@/pages/TournamentAdminFixed";
 
 interface Team {
   id: number;
@@ -20,6 +21,7 @@ interface GroupConfig {
 }
 
 export default function GroupManagement() {
+  const { selectedTournament, isReadonly } = useTournamentContext();
   const [groups, setGroups] = useState<GroupConfig[]>([
     { groupName: 'A', displayName: 'Group A', teams: [] },
     { groupName: 'B', displayName: 'Group B', teams: [] },
@@ -36,14 +38,26 @@ export default function GroupManagement() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
-  // Fetch all teams
+  // Fetch all teams based on selected tournament
   const { data: allTeams = [] } = useQuery<Team[]>({
-    queryKey: ['/api/teams'],
+    queryKey: [`/api/${selectedTournament === 'kingston' ? 'kingston/' : ''}teams`],
+    queryFn: async () => {
+      const url = selectedTournament === 'kingston' ? '/api/kingston/teams' : '/api/teams';
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Failed to fetch teams");
+      return response.json();
+    }
   });
 
-  // Fetch current group configuration
+  // Fetch current group configuration based on selected tournament
   const { data: currentConfig, refetch: refetchConfig } = useQuery({
-    queryKey: ['/api/admin/group-config'],
+    queryKey: [`/api/${selectedTournament === 'kingston' ? 'kingston/' : ''}admin/group-config`],
+    queryFn: async () => {
+      const url = selectedTournament === 'kingston' ? '/api/kingston/admin/group-config' : '/api/admin/group-config';
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Failed to fetch group config");
+      return response.json();
+    },
     refetchInterval: 10000,
   });
 
@@ -57,7 +71,13 @@ export default function GroupManagement() {
   // Save group configuration mutation
   const saveConfigMutation = useMutation({
     mutationFn: async (groupConfig: GroupConfig[]) => {
-      const response = await fetch('/api/admin/save-group-config', {
+      // Nu permite salvarea pentru HATOR (readonly)
+      if (isReadonly) {
+        throw new Error("Turneul HATOR este înghețat și nu poate fi modificat");
+      }
+      
+      const url = selectedTournament === 'kingston' ? '/api/kingston/admin/save-group-config' : '/api/admin/save-group-config';
+      const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ groups: groupConfig }),
@@ -69,9 +89,10 @@ export default function GroupManagement() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-standings'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/tournament-groups'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
+      const baseKey = selectedTournament === 'kingston' ? '/api/kingston/' : '/api/';
+      queryClient.invalidateQueries({ queryKey: [`${baseKey}admin/group-standings`] });
+      queryClient.invalidateQueries({ queryKey: [`${baseKey}tournament-groups`] });
+      queryClient.invalidateQueries({ queryKey: [`${baseKey}admin/group-config`] });
       toast({
         title: "Configurație salvată",
         description: "Grupele au fost actualizate cu succes",
@@ -89,7 +110,13 @@ export default function GroupManagement() {
   // Auto-distribute teams mutation
   const autoDistributeMutation = useMutation({
     mutationFn: async () => {
-      const response = await fetch('/api/admin/auto-distribute-teams', {
+      // Nu permite auto-distribuția pentru HATOR (readonly)
+      if (isReadonly) {
+        throw new Error("Turneul HATOR este înghețat și nu poate fi modificat");
+      }
+      
+      const url = selectedTournament === 'kingston' ? '/api/kingston/admin/auto-distribute-teams' : '/api/admin/auto-distribute-teams';
+      const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -101,7 +128,8 @@ export default function GroupManagement() {
     },
     onSuccess: (data) => {
       setGroups(data.groups);
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/group-config'] });
+      const baseKey = selectedTournament === 'kingston' ? '/api/kingston/' : '/api/';
+      queryClient.invalidateQueries({ queryKey: [`${baseKey}admin/group-config`] });
       toast({
         title: "Distribuție automată completă",
         description: `${data.teamsDistributed} echipe au fost distribuite în ${data.groupsCount} grupe`,
@@ -124,6 +152,15 @@ export default function GroupManagement() {
 
   // Add team to group
   const addTeamToGroup = () => {
+    if (isReadonly) {
+      toast({
+        title: "Acțiune restricționată",
+        description: "Turneul HATOR este înghețat și nu poate fi modificat",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     if (!selectedTeam || !selectedGroup) return;
 
     const team = (allTeams as any[]).find(t => t.id === parseInt(selectedTeam));
@@ -145,6 +182,15 @@ export default function GroupManagement() {
 
   // Remove team from group
   const removeTeamFromGroup = (groupName: string, teamId: number) => {
+    if (isReadonly) {
+      toast({
+        title: "Acțiune restricționată",
+        description: "Turneul HATOR este înghețat și nu poate fi modificat",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     const updatedGroups = groups.map(group => {
       if (group.groupName === groupName) {
         return {
@@ -202,9 +248,26 @@ export default function GroupManagement() {
           <CardTitle className="flex items-center gap-2">
             <Users className="w-5 h-5" />
             Configurare Grupe Turneu
+            {isReadonly && (
+              <div className="flex items-center gap-2 ml-4 px-3 py-1 bg-amber-900/30 border border-amber-500/30 rounded-lg">
+                <Lock className="w-4 h-4 text-amber-500" />
+                <span className="text-amber-200 text-sm font-medium">Readonly Mode</span>
+              </div>
+            )}
           </CardTitle>
         </CardHeader>
         <CardContent>
+          {/* Avertisment pentru readonly */}
+          {isReadonly && (
+            <div className="flex items-center space-x-2 p-4 mb-4 bg-amber-900/20 border border-amber-500/30 rounded-lg">
+              <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />
+              <div>
+                <p className="text-amber-200 font-medium">Vizualizare fără editare</p>
+                <p className="text-amber-300/80 text-sm">Turneul HATOR este înghețat. Pentru editare, selectează turneul Kingston.</p>
+              </div>
+            </div>
+          )}
+          
           <div className="flex flex-wrap gap-4 items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="text-sm">
@@ -224,24 +287,25 @@ export default function GroupManagement() {
             <div className="flex gap-2">
               <Button
                 onClick={() => autoDistributeMutation.mutate()}
-                disabled={autoDistributeMutation.isPending}
-                className="bg-blue-600 hover:bg-blue-700"
+                disabled={autoDistributeMutation.isPending || isReadonly}
+                className={`${isReadonly ? 'bg-gray-600 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
               >
                 <ArrowUpDown className="w-4 h-4 mr-2" />
                 Distribuție automată
               </Button>
               <Button
                 onClick={resetGroups}
+                disabled={isReadonly}
                 variant="outline"
-                className="border-slate-600"
+                className={`border-slate-600 ${isReadonly ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <RotateCcw className="w-4 h-4 mr-2" />
                 Reset
               </Button>
               <Button
                 onClick={() => saveConfigMutation.mutate(groups)}
-                disabled={saveConfigMutation.isPending}
-                className="bg-green-600 hover:bg-green-700"
+                disabled={saveConfigMutation.isPending || isReadonly}
+                className={`${isReadonly ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
               >
                 <Save className="w-4 h-4 mr-2" />
                 Salvează
@@ -250,45 +314,47 @@ export default function GroupManagement() {
           </div>
 
           {/* Add Team Controls */}
-          <div className="mt-4 p-4 bg-slate-700/50 rounded-lg">
-            <h4 className="text-sm font-medium mb-3">Adaugă echipă în grupă</h4>
-            <div className="flex gap-3">
-              <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-                <SelectTrigger className="w-32 bg-slate-600 border-slate-500">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {groups.map(group => (
-                    <SelectItem key={group.groupName} value={group.groupName}>
-                      Grupa {group.groupName}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+          {!isReadonly && (
+            <div className="mt-4 p-4 bg-slate-700/50 rounded-lg">
+              <h4 className="text-sm font-medium mb-3">Adaugă echipă în grupă</h4>
+              <div className="flex gap-3">
+                <Select value={selectedGroup} onValueChange={setSelectedGroup}>
+                  <SelectTrigger className="w-32 bg-slate-600 border-slate-500">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {groups.map(group => (
+                      <SelectItem key={group.groupName} value={group.groupName}>
+                        Grupa {group.groupName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-              <Select value={selectedTeam} onValueChange={setSelectedTeam}>
-                <SelectTrigger className="flex-1 bg-slate-600 border-slate-500">
-                  <SelectValue placeholder="Selectează echipa" />
-                </SelectTrigger>
-                <SelectContent>
-                  {availableTeams.map((team: any) => (
-                    <SelectItem key={team.id} value={team.id.toString()}>
-                      {team.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                <Select value={selectedTeam} onValueChange={setSelectedTeam}>
+                  <SelectTrigger className="flex-1 bg-slate-600 border-slate-500">
+                    <SelectValue placeholder="Selectează echipa" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableTeams.map((team: any) => (
+                      <SelectItem key={team.id} value={team.id.toString()}>
+                        {team.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-              <Button
-                onClick={addTeamToGroup}
-                disabled={!selectedTeam || !selectedGroup}
-                className="bg-primary hover:bg-primary/90"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Adaugă
-              </Button>
+                <Button
+                  onClick={addTeamToGroup}
+                  disabled={!selectedTeam || !selectedGroup}
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Adaugă
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
         </CardContent>
       </Card>
 
@@ -334,31 +400,33 @@ export default function GroupManagement() {
                         <span className="text-sm truncate">{team.name}</span>
                       </div>
                       
-                      <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Select onValueChange={(toGroup) => moveTeam(group.groupName, toGroup, team.id)}>
-                          <SelectTrigger className="w-12 h-6 text-xs bg-slate-600 border-slate-500">
-                            <ArrowUpDown className="w-3 h-3" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {groups
-                              .filter(g => g.groupName !== group.groupName)
-                              .map(g => (
-                              <SelectItem key={g.groupName} value={g.groupName}>
-                                {g.groupName}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => removeTeamFromGroup(group.groupName, team.id)}
-                          className="h-6 w-6 p-0 hover:bg-red-600/20"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </Button>
-                      </div>
+                      {!isReadonly && (
+                        <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Select onValueChange={(toGroup) => moveTeam(group.groupName, toGroup, team.id)}>
+                            <SelectTrigger className="w-12 h-6 text-xs bg-slate-600 border-slate-500">
+                              <ArrowUpDown className="w-3 h-3" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {groups
+                                .filter(g => g.groupName !== group.groupName)
+                                .map(g => (
+                                <SelectItem key={g.groupName} value={g.groupName}>
+                                  {g.groupName}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => removeTeamFromGroup(group.groupName, team.id)}
+                            className="h-6 w-6 p-0 hover:bg-red-600/20"
+                          >
+                            <Minus className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   ))
                 )}

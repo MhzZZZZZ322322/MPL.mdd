@@ -1190,6 +1190,195 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // ===========================
+  // KINGSTON ADMIN API ROUTES
+  // Administrative routes for Kingston tournament management
+  // ===========================
+
+  // Kingston Admin: Get Group Configuration
+  app.get("/api/kingston/admin/group-config", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonGroupConfiguration } = await import("@shared/schema");
+      
+      const config = await db.select().from(kingstonGroupConfiguration);
+      res.json(config);
+    } catch (error) {
+      console.error("Error fetching Kingston group config:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston group configuration" });
+    }
+  });
+
+  // Kingston Admin: Save Group Configuration
+  app.post("/api/kingston/admin/save-group-config", async (req, res) => {
+    try {
+      const { groups } = req.body;
+      const { db } = await import("./db");
+      const { kingstonGroupConfiguration } = await import("@shared/schema");
+      
+      // Clear existing configuration
+      await db.delete(kingstonGroupConfiguration);
+      
+      // Insert new configuration
+      for (const group of groups) {
+        for (const team of group.teams) {
+          await db.insert(kingstonGroupConfiguration).values({
+            groupName: group.groupName,
+            teamId: team.id,
+            teamName: team.name
+          });
+        }
+      }
+      
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error saving Kingston group config:", error);
+      res.status(500).json({ error: "Failed to save Kingston group configuration" });
+    }
+  });
+
+  // Kingston Admin: Create Team
+  app.post("/api/kingston/admin/teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams, insertKingstonTeamSchema } = await import("@shared/schema");
+      
+      const result = insertKingstonTeamSchema.safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const [team] = await db.insert(kingstonTeams).values(result.data).returning();
+      res.status(201).json(team);
+    } catch (error) {
+      console.error("Error creating Kingston team:", error);
+      res.status(500).json({ error: "Failed to create Kingston team" });
+    }
+  });
+
+  // Kingston Admin: Update Team
+  app.put("/api/kingston/admin/teams/:id", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      const { db } = await import("./db");
+      const { kingstonTeams, insertKingstonTeamSchema } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const result = insertKingstonTeamSchema.partial().safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const [updatedTeam] = await db.update(kingstonTeams)
+        .set(result.data)
+        .where(eq(kingstonTeams.id, teamId))
+        .returning();
+        
+      if (!updatedTeam) {
+        return res.status(404).json({ error: "Kingston team not found" });
+      }
+      
+      res.json(updatedTeam);
+    } catch (error) {
+      console.error("Error updating Kingston team:", error);
+      res.status(500).json({ error: "Failed to update Kingston team" });
+    }
+  });
+
+  // Kingston Admin: Delete Team
+  app.delete("/api/kingston/admin/teams/:id", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      await db.delete(kingstonTeams).where(eq(kingstonTeams.id, teamId));
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting Kingston team:", error);
+      res.status(500).json({ error: "Failed to delete Kingston team" });
+    }
+  });
+
+  // Kingston Admin: Auto-distribute teams
+  app.post("/api/kingston/admin/auto-distribute-teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonGroupConfiguration } = await import("@shared/schema");
+      
+      // Fetch all Kingston teams
+      const teams = await db.select().from(kingstonTeams);
+      
+      if (teams.length === 0) {
+        return res.status(400).json({ error: "No Kingston teams available for distribution" });
+      }
+
+      // Clear existing configuration
+      await db.delete(kingstonGroupConfiguration);
+
+      // Define groups (A to H for 32 teams)
+      const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+      const groupsData = groups.map(name => ({ 
+        groupName: name, 
+        displayName: `Group ${name}`, 
+        teams: [] as any[]
+      }));
+
+      // Shuffle teams randomly
+      const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+      
+      // Distribute teams evenly across groups
+      shuffledTeams.forEach((team, index) => {
+        const groupIndex = index % groups.length;
+        groupsData[groupIndex].teams.push(team);
+      });
+
+      // Save to database
+      for (const group of groupsData) {
+        for (const team of group.teams) {
+          await db.insert(kingstonGroupConfiguration).values({
+            groupName: group.groupName,
+            teamId: team.id,
+            teamName: team.name
+          });
+        }
+      }
+
+      res.json({
+        success: true,
+        groups: groupsData,
+        teamsDistributed: teams.length,
+        groupsCount: groups.length
+      });
+    } catch (error) {
+      console.error("Error auto-distributing Kingston teams:", error);
+      res.status(500).json({ error: "Failed to auto-distribute Kingston teams" });
+    }
+  });
+
+  // Kingston Admin: Create Match Result
+  app.post("/api/kingston/admin/match-results", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonMatchResults, insertKingstonMatchResultSchema } = await import("@shared/schema");
+      
+      const result = insertKingstonMatchResultSchema.safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const [matchResult] = await db.insert(kingstonMatchResults).values(result.data).returning();
+      res.status(201).json(matchResult);
+    } catch (error) {
+      console.error("Error creating Kingston match result:", error);
+      res.status(500).json({ error: "Failed to create Kingston match result" });
+    }
+  });
+
   // Use CS Servers router
   app.use(csServersRouter);
 
