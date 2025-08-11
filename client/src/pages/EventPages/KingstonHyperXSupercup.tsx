@@ -369,22 +369,22 @@ const KingstonHyperXSupercup = () => {
                         <div className="text-sm leading-relaxed space-y-2">
                           <div className="bg-yellow-500/10 border-l-4 border-yellow-500 p-2 rounded">
                             <strong className="text-yellow-400">LOCUL 1 (5 premii):</strong><br />
-                            • 5x HyperX Cloud III S Wireless (căști)<br />
-                            • 5x Kingston FURY Renegade DDR5 (memorie RGB)
+                            • 5x <a href="https://hyperx.com/products/hyperx-cloud-iii-s-wireless-gaming-headset" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">HyperX Cloud III S Wireless</a> (căști)<br />
+                            • 5x <a href="https://www.kingston.com/en/memory/gaming/kingston-fury-renegade-ddr5-rgb-memory" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston FURY Renegade DDR5 RGB</a> (memorie)
                           </div>
                           <div className="bg-gray-500/10 border-l-4 border-gray-400 p-2 rounded">
                             <strong className="text-gray-300">LOCUL 2 (5 premii):</strong><br />
-                            • 5x HyperX Alloy Rise 75 (tastatură)<br />
-                            • 5x Kingston FURY Beast DDR5 (memorie RGB)
+                            • 5x <a href="https://hyperx.com/products/hyperx-alloy-rise-75-mechanical-gaming-keyboard" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">HyperX Alloy Rise 75</a> (tastatură)<br />
+                            • 5x <a href="https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-rgb-memory" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston FURY Beast DDR5 RGB</a> (memorie)
                           </div>
                           <div className="bg-orange-500/10 border-l-4 border-orange-500 p-2 rounded">
                             <strong className="text-orange-400">LOCUL 3 (5 premii):</strong><br />
-                            • 5x HyperX Pulsefire Haste 2 Wireless<br />
-                            • 5x Kingston DT Exodia S 256GB + Merchandise
+                            • 5x <a href="https://hyperx.com/products/hyperx-pulsefire-haste-2-wireless-gaming-mouse" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">HyperX Pulsefire Haste 2 Wireless</a><br />
+                            • 5x <a href="https://www.kingston.com/en/usb-flash-drives/datatraveler-exodia" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston DT Exodia S 256GB</a> + Merchandise
                           </div>
                           <div className="bg-purple-500/10 border-l-4 border-purple-500 p-2 rounded">
                             <strong className="text-purple-400">ACE OF ACES:</strong><br />
-                            • Kingston FURY Renegade 48GB DDR5 Limited Edition
+                            • <a href="https://www.kingston.com/en/memory/gaming/kingston-fury-renegade-ddr5-rgb-memory" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston FURY Renegade 48GB DDR5 Limited Edition</a>
                           </div>
                         </div>
                       </div>
