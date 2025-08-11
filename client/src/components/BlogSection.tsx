@@ -40,7 +40,7 @@ export default function BlogSection() {
 
   if (isLoading) {
     return (
-      <section className="py-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <section className="py-10 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">
@@ -60,14 +60,14 @@ export default function BlogSection() {
 
   if (articles.length === 0) {
     return (
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="py-12 bg-black relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20"></div>
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-5xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 via-white to-blue-400 bg-clip-text text-transparent">
               Știri & Actualizări
             </h2>
@@ -75,7 +75,7 @@ export default function BlogSection() {
               Rămâi la curent cu ultimele evenimente din esports
             </p>
           </div>
-          <div className="text-center py-16">
+          <div className="text-center py-12">
             <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-12 max-w-md mx-auto backdrop-blur-sm">
               <FileText className="mx-auto h-16 w-16 text-purple-400 mb-6" />
               <p className="text-gray-300 text-lg">
@@ -89,14 +89,14 @@ export default function BlogSection() {
   }
 
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
+    <section className="py-12 bg-black relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-5xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 via-white to-blue-400 bg-clip-text text-transparent">
             Știri & Actualizări
           </h2>
@@ -105,7 +105,7 @@ export default function BlogSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {articles.slice(0, 6).map((article: BlogArticle) => (
             <Card 
               key={article.id} 
