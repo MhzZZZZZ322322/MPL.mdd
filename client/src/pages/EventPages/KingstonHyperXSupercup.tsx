@@ -668,7 +668,7 @@ const KingstonHyperXSupercup = () => {
                     
                     {/* Plus Sign */}
                     <div className="flex justify-center">
-                      <div className="text-2xl font-bold text-yellow-400">+</div>
+                      <div className="text-2xl font-bold text-white">+</div>
                     </div>
                     
                     <div className="text-center">
