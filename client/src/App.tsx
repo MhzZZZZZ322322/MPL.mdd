@@ -14,6 +14,7 @@ import ComingSoon from "@/pages/ComingSoon";
 import MPLPilotCup from "@/pages/EventPages/MPLPilotCup";
 import HatorCSLeague from "@/pages/EventPages/HatorCSLeague";
 import HatorCupROPLxMPL from "@/pages/EventPages/HatorCupROPLxMPL";
+import KingstonHyperXSupercup from "@/pages/EventPages/KingstonHyperXSupercup";
 import MefPage from "@/pages/MefPage";
 import V0R4yn from "@/pages/Var4un";
 import { LanguageProvider } from "@/lib/LanguageContext";
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/events/mpl-pilot-cup" component={MPLPilotCup} />
       <Route path="/events/hator-cs-league" component={HatorCSLeague} />
       <Route path="/events/hator-cup-ropl-mpl" component={HatorCupROPLxMPL} />
+      <Route path="/events/kingston-hyperx-supercup" component={KingstonHyperXSupercup} />
       <Route path="/rankings" component={AllRankings} />
       <Route path="/community" component={CommunityPage} />
       <Route path="/mef" component={MefPage} />
