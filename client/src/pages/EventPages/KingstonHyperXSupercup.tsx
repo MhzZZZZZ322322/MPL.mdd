@@ -649,9 +649,7 @@ const KingstonHyperXSupercup = () => {
                   <h3 className="text-2xl font-bold text-yellow-400 font-rajdhani mb-2">
                     Locul 1
                   </h3>
-                  <p className="text-3xl font-bold text-white font-rajdhani mb-4">
-                    70,000 LEI
-                  </p>
+
                   
                   {/* Product Images */}
                   <div className="space-y-4">
@@ -687,9 +685,7 @@ const KingstonHyperXSupercup = () => {
                   <h3 className="text-2xl font-bold text-gray-300 font-rajdhani mb-2">
                     Locul 2
                   </h3>
-                  <p className="text-3xl font-bold text-white font-rajdhani">
-                    30,000 LEI
-                  </p>
+
                 </div>
               </NeonBorder>
 
@@ -702,9 +698,7 @@ const KingstonHyperXSupercup = () => {
                   <h3 className="text-2xl font-bold text-orange-400 font-rajdhani mb-2">
                     Locul 3
                   </h3>
-                  <p className="text-3xl font-bold text-white font-rajdhani">
-                    12,000 LEI
-                  </p>
+
                 </div>
               </NeonBorder>
 
@@ -717,9 +711,7 @@ const KingstonHyperXSupercup = () => {
                   <h3 className="text-2xl font-bold text-purple-400 font-rajdhani mb-2">
                     Ace of Aces
                   </h3>
-                  <p className="text-3xl font-bold text-white font-rajdhani">
-                    18,000 LEI
-                  </p>
+
                 </div>
               </NeonBorder>
             </div>
