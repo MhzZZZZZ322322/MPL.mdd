@@ -484,7 +484,7 @@ const KingstonHyperXSupercup = () => {
                                     {team.name}
                                   </h3>
                                   <p className="text-gray-400 text-sm truncate">
-                                    {team.tournament || 'Echipă participantă'}
+                                    Echipă participantă
                                   </p>
                                 </div>
                               </div>
