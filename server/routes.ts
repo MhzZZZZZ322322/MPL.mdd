@@ -1359,6 +1359,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston Admin: Reset all results
+  app.post("/api/kingston/admin/reset-results", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonMatchResults, kingstonGroupConfiguration, kingstonStage2Swiss, kingstonStage3Playoff } = await import("@shared/schema");
+      
+      // Reset toate tabelele de rezultate Kingston
+      await db.delete(kingstonMatchResults);
+      await db.delete(kingstonGroupConfiguration);
+      await db.delete(kingstonStage2Swiss);
+      await db.delete(kingstonStage3Playoff);
+      
+      res.json({ 
+        success: true, 
+        message: "Toate rezultatele și configurațiile Kingston au fost resetate" 
+      });
+    } catch (error) {
+      console.error("Error resetting Kingston results:", error);
+      res.status(500).json({ error: "Failed to reset Kingston results" });
+    }
+  });
+
+  // Kingston Admin: Create Team Member
+  app.post("/api/kingston/admin/team-members", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeamMembers, insertKingstonTeamMemberSchema } = await import("@shared/schema");
+      
+      const result = insertKingstonTeamMemberSchema.safeParse(req.body);
+      if (!result.success) {
+        const errorMessage = fromZodError(result.error).message;
+        return res.status(400).json({ message: errorMessage });
+      }
+
+      const [teamMember] = await db.insert(kingstonTeamMembers).values(result.data).returning();
+      res.status(201).json(teamMember);
+    } catch (error) {
+      console.error("Error creating Kingston team member:", error);
+      res.status(500).json({ error: "Failed to create Kingston team member" });
+    }
+  });
+
+  // Kingston Admin: Get Team Members
+  app.get("/api/kingston/admin/team-members/:teamId", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.teamId);
+      const { db } = await import("./db");
+      const { kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const members = await db.select().from(kingstonTeamMembers)
+        .where(eq(kingstonTeamMembers.teamId, teamId));
+      res.json(members);
+    } catch (error) {
+      console.error("Error fetching Kingston team members:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston team members" });
+    }
+  });
+
   // Kingston Admin: Create Match Result
   app.post("/api/kingston/admin/match-results", async (req, res) => {
     try {

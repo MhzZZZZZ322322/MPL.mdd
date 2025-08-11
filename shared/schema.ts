@@ -510,6 +510,7 @@ export const kingstonTeamMembers = pgTable("kingston_team_members", {
   teamId: integer("team_id").notNull(),
   nickname: text("nickname").notNull(),
   faceitProfile: text("faceit_profile").notNull(),
+  discordAccount: text("discord_account").notNull(),
   role: text("role").notNull().default("player"), // player, captain, coach
   position: text("position").notNull().default("main"), // main, reserve
   isActive: boolean("is_active").notNull().default(true),

@@ -12,6 +12,7 @@ import ScheduleManager from "@/components/admin/ScheduleManager";
 import { Stage2BracketManager } from "@/components/admin/Stage2BracketManager";
 import { Stage3SwissRoundsManager } from "@/components/admin/Stage3SwissRoundsManager";
 import Stage4PlayoffManager from "@/components/admin/Stage4PlayoffManager";
+import TeamRegistration from "@/components/admin/TeamRegistration";
 
 // Context pentru turneul selectat
 interface TournamentContextType {
@@ -101,8 +102,12 @@ export default function TournamentAdmin() {
               </h2>
             </div>
           
-            <Tabs defaultValue="management" className="w-full">
-              <TabsList className="grid w-full grid-cols-6 bg-slate-800/50">
+            <Tabs defaultValue="teams" className="w-full">
+              <TabsList className="grid w-full grid-cols-7 bg-slate-800/50">
+                <TabsTrigger value="teams" className="flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Înregistrare Echipe
+                </TabsTrigger>
                 <TabsTrigger value="management" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   Configurare Grupe
@@ -128,6 +133,10 @@ export default function TournamentAdmin() {
                   Stage 4 (Reserved)
                 </TabsTrigger>
               </TabsList>
+              
+              <TabsContent value="teams" className="mt-6">
+                <TeamRegistration />
+              </TabsContent>
               
               <TabsContent value="management" className="mt-6">
                 <GroupManagement />
