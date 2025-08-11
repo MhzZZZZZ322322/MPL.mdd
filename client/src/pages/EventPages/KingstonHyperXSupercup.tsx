@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye, Flag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
@@ -118,6 +118,7 @@ const KingstonHyperXSupercup = () => {
   const [isStage2Expanded, setIsStage2Expanded] = useState(false);
   const [isStage3Expanded, setIsStage3Expanded] = useState(false);
   const [isStage4Expanded, setIsStage4Expanded] = useState(false);
+  const [isStage0Expanded, setIsStage0Expanded] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
   // Team logo mapping - uses actual team logos from database
@@ -338,7 +339,8 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">📝 Format Turneu</h4>
                         <p className="text-sm leading-relaxed">
-                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 3 etape:
+                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 4 etape:
+                          <br />• <strong>Stage 0:</strong> Calificarea - toate echipele înregistrate
                           <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, jocuri BO1
                           <br />• <strong>Stage 2:</strong> Swiss System cu 16 echipe, jocuri BO1
                           <br />• <strong>Stage 3:</strong> Playoff cu dublă eliminare (Upper/Lower Bracket)
@@ -362,8 +364,9 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">📅 Cronograma Turneului</h4>
                         <p className="text-sm leading-relaxed">
                           <strong>Înregistrări:</strong> 15 august - 10 septembrie<br />
-                          <strong>Stage 1 (Grupe):</strong> 10 - 14 septembrie<br />
-                          <strong>Stage 2 (Swiss):</strong> 17 - 21 septembrie<br />
+                          <strong>Stage 0 (Calificarea):</strong> 11 - 13 septembrie<br />
+                          <strong>Stage 1 (Grupe):</strong> 14 - 18 septembrie<br />
+                          <strong>Stage 2 (Swiss):</strong> 20 - 24 septembrie<br />
                           <strong>Stage 3 (Playoff):</strong> 27 - 28 septembrie<br />
                           <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
                         </p>
@@ -387,7 +390,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Selecție:</strong> 16 echipe selectate direct + 16 prin calificare<br />
+                          <strong>Stage 0:</strong> 16 echipe selectate direct + toate celelalte în calificare<br />
                           <strong>Stage 1:</strong> Primele 2 echipe din fiecare grupă avansează<br />
                           <strong>Stage 2:</strong> De la 16 la 8 echipe prin Swiss<br />
                           <strong>Stage 3:</strong> Double Elimination (Upper/Lower Bracket)<br />
@@ -546,6 +549,57 @@ const KingstonHyperXSupercup = () => {
                         )}
                       </div>
                     )}
+                  </div>
+                )}
+              </NeonBorder>
+
+              {/* Stage 0 - Qualifiers */}
+              <NeonBorder className="bg-darkGray/60">
+                <Button
+                  variant="ghost"
+                  className="w-full p-6 justify-between text-left hover:bg-transparent"
+                  onClick={() => setIsStage0Expanded(!isStage0Expanded)}
+                >
+                  <div className="flex items-center">
+                    <Flag className="mr-3 h-5 w-5 text-primary" />
+                    <span className="text-lg font-semibold text-white">Stage 0: Calificarea (16 locuri disponibile)</span>
+                  </div>
+                  {isStage0Expanded ? 
+                    <ChevronUp className="h-5 w-5 text-primary" /> : 
+                    <ChevronDown className="h-5 w-5 text-primary" />
+                  }
+                </Button>
+                
+                {isStage0Expanded && (
+                  <div className="px-6 pb-6">
+                    <div className="text-center py-8">
+                      <Flag className="h-16 w-16 text-primary mx-auto mb-4 opacity-60" />
+                      <h3 className="text-xl font-bold text-white mb-3">Calificarea pentru turneu</h3>
+                      <p className="text-gray-300 mb-4 max-w-2xl mx-auto">
+                        16 echipe vor fi selectate direct, iar toate celelalte echipe înregistrate vor participa la 
+                        calificare pentru a ocupa celelalte 16 locuri disponibile în turneul principal.
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div className="bg-black/40 rounded-lg p-4">
+                          <h4 className="text-primary font-bold mb-2">📋 Format Calificare</h4>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• Sistem eliminare directă</li>
+                            <li>• Meciuri BO1</li>
+                            <li>• 16 echipe calificate</li>
+                            <li>• Servere FACEIT EU East</li>
+                          </ul>
+                        </div>
+                        <div className="bg-black/40 rounded-lg p-4">
+                          <h4 className="text-primary font-bold mb-2">⏰ Program Calificare</h4>
+                          <ul className="text-sm text-gray-300 space-y-2">
+                            <li>• <strong>Perioada:</strong> 11-13 septembrie</li>
+                            <li>• <strong>Începere:</strong> 18:00 (ora Moldovei)</li>
+                            <li>• <strong>Durata:</strong> 2-3 zile</li>
+                            <li>• <strong>Stream:</strong> Live pe platformele MPL</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </NeonBorder>
