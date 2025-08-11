@@ -657,14 +657,14 @@ const KingstonHyperXSupercup = () => {
                   <div className="space-y-3">
                     <div className="flex justify-center">
                       <img 
-                        src="/attached_assets/image_1754930541401.png"
+                        src="/hyperx-cloud-iii-s.png"
                         alt="HyperX Cloud III S Wireless"
                         className="w-24 h-24 object-contain"
                       />
                     </div>
                     <div className="flex justify-center">
                       <img 
-                        src="/attached_assets/image_1754930585215.png"
+                        src="/kingston-fury-renegade.png"
                         alt="Kingston FURY Renegade DDR5 RGB"
                         className="w-28 h-16 object-contain"
                       />
