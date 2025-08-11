@@ -267,7 +267,7 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
-                <p className="text-2xl font-bold text-primary">130,000 LEI</p>
+                <p className="text-2xl font-bold text-primary">100,000 LEI</p>
                 <div className="text-sm text-gray-400 space-y-1">
                   <a href="https://www.kingston.com/en/gaming" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">Kingston Gaming</a>
                   <span className="text-gray-400">&</span>
