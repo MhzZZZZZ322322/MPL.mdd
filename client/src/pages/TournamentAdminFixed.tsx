@@ -15,7 +15,6 @@ import Stage4PlayoffManager from "@/components/admin/Stage4PlayoffManager";
 import TeamRegistration from "@/components/admin/TeamRegistration";
 import TeamApprovalManager from "@/components/admin/TeamApprovalManager";
 import RegisteredTeamsManager from "@/components/admin/RegisteredTeamsManager";
-import BlogManager from "@/components/admin/BlogManager";
 
 // Context pentru turneul selectat
 interface TournamentContextType {
@@ -143,10 +142,7 @@ export default function TournamentAdmin() {
                   <Trophy className="w-4 h-4" />
                   Stage 4 (Reserved)
                 </TabsTrigger>
-                <TabsTrigger value="blog-manager" className="flex items-center gap-2">
-                  <FileText className="w-4 h-4" />
-                  Blog/Știri
-                </TabsTrigger>
+
               </TabsList>
               
               <TabsContent value="team-approval" className="mt-6">
@@ -185,9 +181,7 @@ export default function TournamentAdmin() {
                 <Stage4PlayoffManager />
               </TabsContent>
               
-              <TabsContent value="blog-manager" className="mt-6">
-                <BlogManager />
-              </TabsContent>
+
             </Tabs>
           </div>
         </div>

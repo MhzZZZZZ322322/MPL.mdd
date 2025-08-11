@@ -24,6 +24,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import EventManager from "@/pages/EventManager";
 import SeoManager from "@/pages/SeoManager";
 import TournamentAdmin from "@/pages/TournamentAdminFixed";
+import AdminBlog from "@/pages/AdminBlog";
 import AdminProtectedRoute from "@/components/AdminProtectedRoute";
 import { useState, useEffect, lazy } from "react";
 
@@ -46,6 +47,7 @@ function Router() {
       <Route path="/admin" component={Admin} />
       <Route path="/admin/content" component={ContentEditor} />
       <Route path="/admin/events" component={EventManager} />
+      <Route path="/admin/blog" component={AdminBlog} />
       <Route path="/admin/seo" component={SeoManager} />
       <Route path="/admin/tournament" component={() => (
         <AdminProtectedRoute>

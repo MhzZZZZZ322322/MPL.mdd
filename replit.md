@@ -8,6 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes
+- August 11, 2025: **BLOG_SYSTEM_STYLING_COMPLETE** - Integrat sistemul de blog în stilistica oficială a site-ului (fundal negru, efecte purple/blue, design consistent). Mutat blog management din interfața de turneu în panoul principal admin la `/admin/blog`.
 - August 11, 2025: **BLOG_SYSTEM_COMPLETE** - Implementat sistemul complet de blog/știri cu editor admin rich text, upload poze, stocare în PostgreSQL, afișare cronologică pe site. Inclus SEO metadata, tags, view counter și sistem complet CRUD.
 - August 11, 2025: **KINGSTON_TEAM_EDITING_COMPLETE** - Implementat editarea completă echipelor înregistrate: nume, logo, membri cu toate detaliile (nickname, FACEIT, Discord, rol, poziție). Sistem de tranzacții pentru integritatea datelor.
 - August 11, 2025: **KINGSTON_LOGO_SYSTEM_COMPLETE** - Implementat sistemul complet de logo-uri cu persistență în baza de date PostgreSQL. Logo-urile se salvează ca base64 în coloana logoData și se afișează din DB. Eliminat textele generice "Kingston Player" și "kingston-hyperx-supercup" pentru un aspect mai curat.
