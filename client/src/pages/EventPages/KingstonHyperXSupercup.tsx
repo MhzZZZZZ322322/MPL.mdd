@@ -794,9 +794,7 @@ const KingstonHyperXSupercup = () => {
                       <p className="text-xs text-orange-400/90">
                         • T-shirt Kingston Fury branded
                       </p>
-                      <p className="text-xs text-orange-400/90">
-                        • Termo bag Kingston Fury premium
-                      </p>
+                      <p className="text-xs text-orange-400/90">• Termo bag Kingston Fury branded</p>
                     </div>
                   </div>
                 </div>
