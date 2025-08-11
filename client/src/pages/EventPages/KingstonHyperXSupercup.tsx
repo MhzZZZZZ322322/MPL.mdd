@@ -652,36 +652,36 @@ const KingstonHyperXSupercup = () => {
 
                   
                   {/* Product Images */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="text-center">
-                        <div className="flex justify-center mb-1">
-                          <img 
-                            src="/hyperx-cloud-iii-s.png"
-                            alt="HyperX Cloud III S Wireless"
-                            className="w-20 h-20 object-contain"
-                          />
-                        </div>
-                        <p className="text-xs text-yellow-300/90 font-medium">
-                          5x HyperX Cloud III S
-                        </p>
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/hyperx-cloud-iii-s.png"
+                          alt="HyperX Cloud III S Wireless"
+                          className="w-32 h-32 object-contain"
+                        />
                       </div>
-                      
-                      {/* Plus Sign */}
-                      <div className="text-xl font-bold text-white">+</div>
-                      
-                      <div className="text-center">
-                        <div className="flex justify-center mb-1">
-                          <img 
-                            src="/kingston-fury-renegade-transparent.png"
-                            alt="Kingston FURY Renegade DDR5 RGB"
-                            className="w-28 h-16 object-contain"
-                          />
-                        </div>
-                        <p className="text-xs text-yellow-300/90 font-medium">
-                          5x Kingston FURY DDR5
-                        </p>
+                      <p className="text-sm text-yellow-300/90 font-medium">
+                        5x HyperX Cloud III S Wireless
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/kingston-fury-renegade-transparent.png"
+                          alt="Kingston FURY Renegade DDR5 RGB"
+                          className="w-44 h-24 object-contain"
+                        />
                       </div>
+                      <p className="text-sm text-yellow-300/90 font-medium">
+                        5x Kingston FURY Renegade RGB 48GB DDR5
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -698,36 +698,36 @@ const KingstonHyperXSupercup = () => {
                   </h3>
 
                   {/* Product Images */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-center gap-3">
-                      <div className="text-center">
-                        <div className="flex justify-center mb-1">
-                          <img 
-                            src="/kingston-fury-beast-32gb.png"
-                            alt="Kingston FURY Beast 32GB DDR5"
-                            className="w-28 h-16 object-contain"
-                          />
-                        </div>
-                        <p className="text-xs text-gray-300/90 font-medium">
-                          5x Kingston FURY Beast
-                        </p>
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/kingston-fury-beast-32gb.png"
+                          alt="Kingston FURY Beast 32GB DDR5"
+                          className="w-44 h-24 object-contain"
+                        />
                       </div>
-                      
-                      {/* Plus Sign */}
-                      <div className="text-xl font-bold text-white">+</div>
-                      
-                      <div className="text-center">
-                        <div className="flex justify-center mb-1">
-                          <img 
-                            src="/hyperx-alloy-rise-75.png"
-                            alt="Tastatură HyperX Alloy Rise 75 Black"
-                            className="w-28 h-16 object-contain"
-                          />
-                        </div>
-                        <p className="text-xs text-gray-300/90 font-medium">
-                          5x HyperX Alloy Rise 75
-                        </p>
+                      <p className="text-sm text-gray-300/90 font-medium">
+                        5x Kingston FURY Beast 32GB DDR5
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/hyperx-alloy-rise-75.png"
+                          alt="Tastatură HyperX Alloy Rise 75 Black"
+                          className="w-44 h-24 object-contain"
+                        />
                       </div>
+                      <p className="text-sm text-gray-300/90 font-medium">
+                        5x Tastatură HyperX Alloy Rise 75 Black
+                      </p>
                     </div>
                   </div>
                 </div>
