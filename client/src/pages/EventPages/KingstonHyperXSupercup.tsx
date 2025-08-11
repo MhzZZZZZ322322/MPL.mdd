@@ -638,18 +638,64 @@ const KingstonHyperXSupercup = () => {
               </p>
             </div>
 
-            {/* Single Prize Card - 1st Place */}
-            <div className="max-w-2xl mx-auto">
+            {/* Prize Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* 1st Place */}
               <NeonBorder className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border-yellow-400/50">
-                <div className="p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-yellow-500/20 border border-yellow-400/50 mb-6">
-                    <Trophy className="w-10 h-10 text-yellow-400" />
+                <div className="p-6 text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500/20 border border-yellow-400/50 mb-4">
+                    <Trophy className="w-8 h-8 text-yellow-400" />
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-yellow-400 font-rajdhani mb-2">
+                  <h3 className="text-2xl font-bold text-yellow-400 font-rajdhani mb-2">
                     Locul 1
                   </h3>
-                  <p className="text-4xl md:text-5xl font-bold text-white font-rajdhani">
+                  <p className="text-3xl font-bold text-white font-rajdhani">
                     70,000 LEI
+                  </p>
+                </div>
+              </NeonBorder>
+
+              {/* 2nd Place */}
+              <NeonBorder className="bg-gradient-to-br from-gray-400/20 to-gray-500/10 border-gray-300/50">
+                <div className="p-6 text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-400/20 border border-gray-300/50 mb-4">
+                    <Award className="w-8 h-8 text-gray-300" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-300 font-rajdhani mb-2">
+                    Locul 2
+                  </h3>
+                  <p className="text-3xl font-bold text-white font-rajdhani">
+                    30,000 LEI
+                  </p>
+                </div>
+              </NeonBorder>
+
+              {/* 3rd Place */}
+              <NeonBorder className="bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-400/50">
+                <div className="p-6 text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/20 border border-orange-400/50 mb-4">
+                    <Award className="w-8 h-8 text-orange-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-orange-400 font-rajdhani mb-2">
+                    Locul 3
+                  </h3>
+                  <p className="text-3xl font-bold text-white font-rajdhani">
+                    12,000 LEI
+                  </p>
+                </div>
+              </NeonBorder>
+
+              {/* Ace of Aces */}
+              <NeonBorder className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-purple-400/50">
+                <div className="p-6 text-center">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border border-purple-400/50 mb-4">
+                    <Sparkles className="w-8 h-8 text-purple-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-purple-400 font-rajdhani mb-2">
+                    Ace of Aces
+                  </h3>
+                  <p className="text-3xl font-bold text-white font-rajdhani">
+                    18,000 LEI
                   </p>
                 </div>
               </NeonBorder>
