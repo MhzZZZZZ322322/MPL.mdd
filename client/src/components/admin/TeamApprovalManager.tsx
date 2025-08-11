@@ -21,6 +21,7 @@ interface PendingTeam {
   id: number;
   name: string;
   logoUrl: string;
+  logoData?: string;
   status: string;
   submittedAt: string;
   members: TeamMember[];
@@ -146,7 +147,7 @@ export default function TeamApprovalManager() {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center space-x-4">
                         <img
-                          src={team.logoUrl}
+                          src={team.logoData || team.logoUrl}
                           alt={team.name}
                           className="w-12 h-12 rounded object-cover bg-slate-600"
                           onError={(e) => {

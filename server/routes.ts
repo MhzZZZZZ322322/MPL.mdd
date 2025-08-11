@@ -1469,6 +1469,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const [team] = await db.insert(kingstonTeams).values({
         name,
         logoUrl,
+        logoData: null, // Will be updated when logo is uploaded
         status: "pending"
       }).returning();
 
@@ -1496,23 +1497,100 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Upload Team Logo - Real implementation with multer
+  // Upload Team Logo - Save as base64 in database
   app.post("/api/upload/team-logo", upload.single('logo'), async (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
       }
       
-      const logoUrl = `/uploads/logos/${req.file.filename}`;
+      // Convert file to base64
+      const fileBuffer = fs.readFileSync(req.file.path);
+      const base64Data = fileBuffer.toString('base64');
+      const mimeType = req.file.mimetype;
+      const dataUrl = `data:${mimeType};base64,${base64Data}`;
+      
+      // Clean up the temporary file
+      fs.unlinkSync(req.file.path);
+      
+      // Generate unique identifier for the logo
+      const logoId = `logo_${Date.now()}`;
+      const logoUrl = `/api/team-logo/${logoId}`;
       
       res.json({ 
         url: logoUrl,
-        message: "Logo uploaded successfully",
-        filename: req.file.filename
+        logoData: dataUrl, // Send base64 data for immediate use
+        logoId: logoId,
+        message: "Logo uploaded successfully"
       });
     } catch (error) {
       console.error("Error uploading logo:", error);
       res.status(500).json({ error: "Failed to upload logo" });
+    }
+  });
+
+  // Update team with logo data after registration
+  app.post("/api/kingston/update-team-logo", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const { teamId, logoUrl, logoData } = req.body;
+      
+      if (!teamId || !logoUrl || !logoData) {
+        return res.status(400).json({ error: "teamId, logoUrl and logoData are required" });
+      }
+
+      await db.update(kingstonTeams)
+        .set({ logoUrl, logoData })
+        .where(eq(kingstonTeams.id, teamId));
+
+      res.json({ 
+        success: true, 
+        message: "Logo updated successfully" 
+      });
+    } catch (error) {
+      console.error("Error updating team logo:", error);
+      res.status(500).json({ error: "Failed to update team logo" });
+    }
+  });
+
+  // Serve team logos from database
+  app.get("/api/team-logo/:logoId", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      // Find team by logo_url containing the logoId
+      const team = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.logoUrl, `/api/team-logo/${req.params.logoId}`))
+        .limit(1);
+        
+      if (team.length === 0 || !team[0].logoData) {
+        return res.status(404).json({ error: "Logo not found" });
+      }
+      
+      // Extract base64 data and mime type
+      const logoData = team[0].logoData;
+      const matches = logoData.match(/^data:([^;]+);base64,(.+)$/);
+      
+      if (!matches) {
+        return res.status(400).json({ error: "Invalid logo data format" });
+      }
+      
+      const mimeType = matches[1];
+      const base64Data = matches[2];
+      const buffer = Buffer.from(base64Data, 'base64');
+      
+      res.set('Content-Type', mimeType);
+      res.set('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+      res.send(buffer);
+      
+    } catch (error) {
+      console.error("Error serving logo:", error);
+      res.status(500).json({ error: "Failed to serve logo" });
     }
   });
 

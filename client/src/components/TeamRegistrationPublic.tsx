@@ -65,11 +65,13 @@ export default function TeamRegistrationPublic() {
   const submitTeamMutation = useMutation({
     mutationFn: async (teamData: TeamFormData) => {
       let logoUrl = teamData.logoUrl;
+      let logoData = null;
 
       // Upload logo if file is provided
       if (teamData.logoFile) {
         const uploadResult = await uploadLogoMutation.mutateAsync(teamData.logoFile);
         logoUrl = uploadResult.url;
+        logoData = uploadResult.logoData;
       }
 
       // Create team registration
@@ -88,7 +90,22 @@ export default function TeamRegistrationPublic() {
         throw new Error(error);
       }
 
-      return teamResponse.json();
+      const teamResult = await teamResponse.json();
+
+      // Update team with logo data if we have it
+      if (logoData && teamResult.teamId) {
+        await fetch('/api/kingston/update-team-logo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            teamId: teamResult.teamId,
+            logoUrl: logoUrl,
+            logoData: logoData
+          }),
+        });
+      }
+
+      return teamResult;
     },
     onSuccess: () => {
       setIsSubmitted(true);

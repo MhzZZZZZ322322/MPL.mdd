@@ -499,6 +499,7 @@ export const kingstonTeams = pgTable("kingston_teams", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   logoUrl: text("logo_url").notNull(),
+  logoData: text("logo_data"), // Base64 encoded logo data
   tournament: text("tournament").notNull().default("kingston-hyperx-supercup"),
   status: text("status").notNull().default("pending"), // pending, approved, rejected
   isActive: boolean("is_active").notNull().default(true),
