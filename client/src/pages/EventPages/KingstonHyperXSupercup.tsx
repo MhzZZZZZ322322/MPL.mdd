@@ -670,8 +670,8 @@ const KingstonHyperXSupercup = () => {
                       />
                     </div>
                     <div className="text-sm text-yellow-300/90 space-y-1">
-                      <p className="font-medium">HyperX Cloud III S Wireless</p>
-                      <p className="font-medium">Kingston FURY Renegade RGB</p>
+                      <p className="font-medium">5x HyperX Cloud III S Wireless</p>
+                      <p className="font-medium">5x Kingston FURY Renegade RGB</p>
                     </div>
                   </div>
                 </div>
