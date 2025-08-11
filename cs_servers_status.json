@@ -2,14 +2,14 @@
   {
     "id": 1,
     "status": true,
-    "players": 5,
+    "players": 3,
     "name": "Retake 1",
     "maxplayers": 16
   },
   {
     "id": 2,
     "status": true,
-    "players": 1,
+    "players": 3,
     "name": "Retake 2",
     "maxplayers": 16
   },
