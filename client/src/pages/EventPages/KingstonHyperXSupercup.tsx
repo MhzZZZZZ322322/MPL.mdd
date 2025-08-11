@@ -687,6 +687,9 @@ const KingstonHyperXSupercup = () => {
                 </div>
               </NeonBorder>
 
+              {/* Separator between 1st and 2nd place */}
+              <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-8"></div>
+
               {/* 2nd Place */}
               <NeonBorder className="bg-gradient-to-br from-gray-400/20 to-gray-500/10 border-gray-300/50">
                 <div className="p-6 text-center">
