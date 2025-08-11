@@ -539,7 +539,7 @@ export default function BlogManager() {
               <Label htmlFor="content">Conținut articol *</Label>
               <div className="mt-2">
                 {/* Toolbar */}
-                <div className="flex items-center space-x-2 p-2 border rounded-t-md bg-gray-50">
+                <div className="flex items-center space-x-2 p-3 border rounded-t-md bg-gray-100 border-b-2 border-b-primary/20">
                   <Button
                     type="button"
                     variant="ghost"
@@ -609,9 +609,18 @@ export default function BlogManager() {
                   ref={contentTextareaRef}
                   value={formData.content}
                   onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                  placeholder="Scrie conținutul articolului aici. Poți folosi HTML basic pentru formatare..."
+                  placeholder="Scrie conținutul articolului aici. Poți folosi HTML basic pentru formatare...
+
+Exemplu formatare:
+<strong>Text bold</strong>
+<em>Text italic</em>
+<h2>Titlu mare</h2>
+<h3>Subtitlu</h3>
+<a href='url'>Link</a>
+<ul><li>Item listă</li></ul>"
                   rows={15}
-                  className="rounded-t-none border-t-0"
+                  className="rounded-t-none border-t-0 bg-white text-gray-900 font-mono text-sm leading-relaxed"
+                  style={{ minHeight: '350px', resize: 'vertical' }}
                 />
               </div>
             </div>
