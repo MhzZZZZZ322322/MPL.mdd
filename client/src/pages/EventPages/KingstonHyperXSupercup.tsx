@@ -368,29 +368,9 @@ const KingstonHyperXSupercup = () => {
                           <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
                         </p>
                       </div>
-                      <div>
-                        <h4 className="text-primary font-bold mb-2">🏆 Premii Confirmate</h4>
-                        <div className="text-sm leading-relaxed space-y-2">
-                          <div className="bg-yellow-500/10 border-l-4 border-yellow-500 p-2 rounded">
-                            <strong className="text-yellow-400">LOCUL 1 (5 premii):</strong><br />
-                            • 5x <a href="https://hyperx.com/products/hyperx-cloud-iii-s-wireless-gaming-headset" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">HyperX Cloud III S Wireless</a> (căști)<br />
-                            • 5x <a href="https://www.kingston.com/en/memory/gaming/kingston-fury-renegade-ddr5-rgb-memory" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston FURY Renegade DDR5 RGB</a> (memorie)
-                          </div>
-                          <div className="bg-gray-500/10 border-l-4 border-gray-400 p-2 rounded">
-                            <strong className="text-gray-300">LOCUL 2 (5 premii):</strong><br />
-                            • 5x <a href="https://hyperx.com/products/hyperx-alloy-rise-75-mechanical-gaming-keyboard" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">HyperX Alloy Rise 75</a> (tastatură)<br />
-                            • 5x <a href="https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-rgb-memory" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston FURY Beast DDR5 RGB</a> (memorie)
-                          </div>
-                          <div className="bg-orange-500/10 border-l-4 border-orange-500 p-2 rounded">
-                            <strong className="text-orange-400">LOCUL 3 (5 premii):</strong><br />
-                            • 5x <a href="https://hyperx.com/products/hyperx-pulsefire-haste-2-wireless-gaming-mouse" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">HyperX Pulsefire Haste 2 Wireless</a><br />
-                            • 5x <a href="https://www.kingston.com/en/usb-flash-drives/datatraveler-exodia" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston DT Exodia S 256GB</a> + Merchandise
-                          </div>
-                          <div className="bg-purple-500/10 border-l-4 border-purple-500 p-2 rounded">
-                            <strong className="text-purple-400">ACE OF ACES:</strong><br />
-                            • <a href="https://www.kingston.com/en/memory/gaming/kingston-fury-renegade-ddr5-rgb-memory" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline">Kingston FURY Renegade 48GB DDR5 Limited Edition</a>
-                          </div>
-                        </div>
+                      <div className="col-span-2">
+                        <h4 className="text-primary font-bold mb-4 text-center">🏆 Premii Detaliate - 130,000 LEI</h4>
+                        <p className="text-xs text-gray-400 text-center mb-4">Click pe produse pentru a vedea specificații complete</p>
                       </div>
                     </div>
                     
@@ -642,6 +622,242 @@ const KingstonHyperXSupercup = () => {
               </NeonBorder>
 
 
+            </div>
+          </div>
+        </section>
+
+        {/* Detailed Prizes Section - Similar to HATOR Cup */}
+        <section className="py-16 px-4 bg-darkGray/20">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+                Premii Detaliate - 130,000 LEI
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Echipamente premium de gaming oferite de Kingston și HyperX
+              </p>
+              <p className="text-sm text-gray-400 mt-2">
+                Click pe produse pentru specificații complete și prețuri
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {/* 1st Place - Golden */}
+              <NeonBorder className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border-yellow-400/50">
+                <div className="p-8">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500/20 border border-yellow-400/50 mb-4">
+                      <Trophy className="w-8 h-8 text-yellow-400" />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-yellow-400 font-rajdhani">
+                      LOCUL 1 - 69,500 LEI în premii
+                    </h3>
+                    <p className="text-yellow-300/80 font-medium">5 jucători primesc echipamente premium</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* HyperX Headsets */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-yellow-400/20">
+                      <h4 className="text-yellow-300 font-bold text-lg mb-3">🎧 HyperX Cloud III S Wireless</h4>
+                      <p className="text-gray-300 text-sm mb-3">5x căști gaming premium wireless</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-yellow-400 font-bold text-lg">3,300 LEI/buc</span>
+                        <a 
+                          href="https://darwin.md/ru/naushniki-hyperx-cloud-iii-s-besprovodnye-red-chernyi.html" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Vezi produs →
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Kingston Memory Kits */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-yellow-400/20">
+                      <h4 className="text-yellow-300 font-bold text-lg mb-3">💾 Kingston FURY Renegade RGB</h4>
+                      <p className="text-gray-300 text-sm mb-1">• 1x KF584CU40RSAK2-48 (48GB DDR5 8400MT/s Silver) - 8,700 LEI</p>
+                      <p className="text-gray-300 text-sm mb-1">• 2x KF584CU40RWAK2-48 (48GB DDR5 8400MT/s White) - 8,700 LEI/buc</p>
+                      <p className="text-gray-300 text-sm mb-3">• 2x KF580C38RWAK2-48 (48GB DDR5 8000MT/s White) - 8,700 LEI/buc</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-yellow-400 font-bold text-lg">43,500 LEI total</span>
+                        <a 
+                          href="https://xstore.md/componente-pc/memorii-ram/kingston-fury-renegade-silver-rgb-kf584cu40rsak2-48" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Vezi produse →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* 2nd Place - Silver */}
+              <NeonBorder className="bg-gradient-to-br from-gray-400/20 to-gray-500/10 border-gray-300/50">
+                <div className="p-8">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-400/20 border border-gray-300/50 mb-4">
+                      <Award className="w-8 h-8 text-gray-300" />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-300 font-rajdhani">
+                      LOCUL 2 - 30,500 LEI în premii
+                    </h3>
+                    <p className="text-gray-400 font-medium">5 jucători primesc echipamente de gaming</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* HyperX Keyboards */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-gray-300/20">
+                      <h4 className="text-gray-200 font-bold text-lg mb-3">⌨️ HyperX Alloy Rise 75 Wired</h4>
+                      <p className="text-gray-300 text-sm mb-3">5x tastaturi mecanice gaming</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300 font-bold text-lg">2,800 LEI/buc</span>
+                        <a 
+                          href="https://darwin.md/ru/klaviatura-hyperx-alloy-rise-75-provodnaya-linear-switches-chernyi.html" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-gray-400/20 hover:bg-gray-400/30 text-gray-200 px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Vezi produs →
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Kingston Memory */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-gray-300/20">
+                      <h4 className="text-gray-200 font-bold text-lg mb-3">💾 Kingston FURY Beast RGB</h4>
+                      <p className="text-gray-300 text-sm mb-1">• 1x KF560C36BWE2AK2-32 (32GB DDR5 White EXPO) - 3,300 LEI</p>
+                      <p className="text-gray-300 text-sm mb-1">• 2x KF560C36BBE2K2-32 (32GB DDR5 Black EXPO) - 3,300 LEI/buc</p>
+                      <p className="text-gray-300 text-sm mb-3">• 2x KF560C36BWE2K2-32 (32GB DDR5 White EXPO) - 3,300 LEI/buc</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-300 font-bold text-lg">16,500 LEI total</span>
+                        <a 
+                          href="https://smadshop.md/ro/calculatoare/kingston-fury-beast-expo-ddr5-32gb-2x16gb-6000mhz-cl36-kf560c36bwe2ak2-memorie-operativa-32.html" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-gray-400/20 hover:bg-gray-400/30 text-gray-200 px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Vezi produse →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* 3rd Place - Bronze */}
+              <NeonBorder className="bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-400/50">
+                <div className="p-8">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/20 border border-orange-400/50 mb-4">
+                      <Award className="w-8 h-8 text-orange-400" />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-orange-400 font-rajdhani">
+                      LOCUL 3 - 13,595 LEI în premii
+                    </h3>
+                    <p className="text-orange-300/80 font-medium">5 jucători primesc echipamente și merchandise</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* HyperX Mouse */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-orange-400/20">
+                      <h4 className="text-orange-300 font-bold text-lg mb-3">🖱️ HyperX Pulsefire Haste 2</h4>
+                      <p className="text-gray-300 text-sm mb-3">5x mouse gaming wireless</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-orange-400 font-bold text-lg">2,300 LEI/buc</span>
+                        <a 
+                          href="https://darwin.md/ru/mys-kingston-hyperx-pulsefire-haste-2-wireless-cernyi.html" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Vezi →
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Kingston USB */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-orange-400/20">
+                      <h4 className="text-orange-300 font-bold text-lg mb-3">💾 Kingston DT Exodia S</h4>
+                      <p className="text-gray-300 text-sm mb-3">5x USB 3.2 256GB</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-orange-400 font-bold text-lg">419 LEI/buc</span>
+                        <a 
+                          href="https://accent.md/storage---stocare/flash-usb-drives/usb-flash-drive-kingston-datatraveler-exodia-s-256gb-black-orange-99524" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 px-4 py-2 rounded-lg text-sm transition-colors"
+                        >
+                          Vezi →
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Merchandise */}
+                    <div className="bg-black/30 rounded-lg p-6 border border-orange-400/20">
+                      <h4 className="text-orange-300 font-bold text-lg mb-3">🎁 Kingston Merchandise</h4>
+                      <p className="text-gray-300 text-sm mb-1">• 5x Tricouri Kingston FURY</p>
+                      <p className="text-gray-300 text-sm mb-3">• 5x Termosaci branded</p>
+                      <div className="text-center">
+                        <span className="text-orange-400 font-bold text-lg">Cadouri exclusive</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* Ace of Aces - Special Purple */}
+              <NeonBorder className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-purple-400/50">
+                <div className="p-8">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border border-purple-400/50 mb-4">
+                      <Sparkles className="w-8 h-8 text-purple-400" />
+                    </div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-purple-400 font-rajdhani">
+                      ACE OF ACES - 15,085 LEI
+                    </h3>
+                    <p className="text-purple-300/80 font-medium">Premiu special pentru cel mai bun jucător din turneu</p>
+                  </div>
+                  
+                  <div className="max-w-2xl mx-auto">
+                    <div className="bg-black/30 rounded-lg p-6 border border-purple-400/20">
+                      <h4 className="text-purple-300 font-bold text-xl mb-3">👑 HyperX Alloy Rise 75 Wireless sau Cloud III S</h4>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Dacă câștigătorul este din echipa de pe locul 2, va primi HyperX Cloud III S Wireless (3,300 LEI).
+                        <br />
+                        Altfel, va primi HyperX Alloy Rise 75 Wireless (4,800 LEI).
+                      </p>
+                      <p className="text-purple-300 font-bold text-lg mb-4">
+                        + Kingston FURY Renegade 48GB DDR5 Limited Edition (15,085 LEI)
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-purple-400 font-bold text-xl">Până la 19,885 LEI total</span>
+                        <div className="space-x-2">
+                          <a 
+                            href="https://www.smart.md/ru/hyperx-alloy-rise-75-wireless-rgb-mechanical-gaming-keyboard-without-numlock-ru-mechanical-keys-hyperx-linear-switches-backlight-rgb-tri-mode-connectivity-wired-bt-24ghz-ultra-cust" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 px-4 py-2 rounded-lg text-sm transition-colors inline-block"
+                          >
+                            Tastatură →
+                          </a>
+                          <a 
+                            href="https://www.amazon.com/Kingston-Technology-Fury-8000-Renegade/dp/B0D8S75H3L" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 px-4 py-2 rounded-lg text-sm transition-colors inline-block"
+                          >
+                            Memorie →
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
             </div>
           </div>
         </section>
