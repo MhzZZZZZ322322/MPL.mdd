@@ -944,7 +944,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const qualifiedTeams = await db
         .select({ teamName: stage3Swiss.teamName })
         .from(stage3Swiss)
-        .orderBy(desc(stage3Swiss.wins), desc(stage3Swiss.roundDifference))
+        .orderBy(desc(stage3Swiss.wins))
         .limit(8);
       
       const teamNames = qualifiedTeams.map(team => team.teamName);
@@ -1260,7 +1260,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await db.insert(kingstonGroupConfiguration).values({
             groupName: group.groupName,
             teamId: team.id,
-            teamName: team.name
+            teamName: team.name,
+            displayName: `${group.groupName} - ${team.name}`
           });
         }
       }
@@ -1371,13 +1372,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         groupsData[groupIndex].teams.push(team);
       });
 
-      // Save to database
+      // Save to database  
       for (const group of groupsData) {
         for (const team of group.teams) {
           await db.insert(kingstonGroupConfiguration).values({
             groupName: group.groupName,
             teamId: team.id,
-            teamName: team.name
+            teamName: team.name,
+            displayName: `${group.groupName} - ${team.name}`
           });
         }
       }

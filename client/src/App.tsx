@@ -26,7 +26,9 @@ import SeoManager from "@/pages/SeoManager";
 import TournamentAdmin from "@/pages/TournamentAdminFixed";
 import AdminBlog from "@/pages/AdminBlog";
 import AdminProtectedRoute from "@/components/AdminProtectedRoute";
-import { useState, useEffect, lazy } from "react";
+import { useState, useEffect } from "react";
+import BlogPage from "@/pages/BlogPage";
+import BlogArticlePage from "@/pages/BlogArticlePage";
 
 function Router() {
   return (
@@ -54,14 +56,8 @@ function Router() {
           <TournamentAdmin />
         </AdminProtectedRoute>
       )} />
-      <Route path="/blog" component={() => {
-        const BlogPage = lazy(() => import("@/pages/BlogPage"));
-        return <BlogPage />;
-      }} />
-      <Route path="/blog/:slug" component={() => {
-        const BlogArticlePage = lazy(() => import("@/pages/BlogArticlePage"));
-        return <BlogArticlePage />;
-      }} />
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/blog/:slug" component={BlogArticlePage} />
       <Route path="/cronologia-mpl" component={() => {
         window.location.replace('/');
         return null;
