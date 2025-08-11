@@ -54,6 +54,54 @@ export default function BlogArticlePage() {
     });
   };
 
+  const processArticleContent = (content: string): string => {
+    // Process HTML and JavaScript raw content
+    let processedContent = content;
+    
+    // Allow script tags to be executed
+    processedContent = processedContent.replace(
+      /<script>([\s\S]*?)<\/script>/gi,
+      (match, scriptContent) => {
+        // Create a unique script tag that will be executed
+        const scriptId = `article-script-${Math.random().toString(36).substr(2, 9)}`;
+        setTimeout(() => {
+          try {
+            const scriptElement = document.createElement('script');
+            scriptElement.textContent = scriptContent;
+            scriptElement.id = scriptId;
+            document.head.appendChild(scriptElement);
+          } catch (error) {
+            console.warn('Script execution error:', error);
+          }
+        }, 100);
+        
+        return `<div class="script-placeholder bg-gray-800 border border-gray-600 p-4 rounded-lg my-4">
+          <div class="flex items-center text-yellow-400 text-sm font-mono mb-2">
+            <span class="mr-2">⚡</span>
+            JavaScript Code Executed
+          </div>
+          <pre class="text-gray-300 text-sm overflow-x-auto"><code>${scriptContent.trim()}</code></pre>
+        </div>`;
+      }
+    );
+    
+    // Style HTML code blocks
+    processedContent = processedContent.replace(
+      /<div class="html-code">([\s\S]*?)<\/div>/gi,
+      (match, htmlContent) => {
+        return `<div class="html-code-container bg-blue-900/20 border border-blue-600/30 p-4 rounded-lg my-4">
+          <div class="flex items-center text-blue-400 text-sm font-mono mb-3">
+            <span class="mr-2">🔧</span>
+            HTML Raw Content
+          </div>
+          ${htmlContent}
+        </div>`;
+      }
+    );
+    
+    return processedContent;
+  };
+
   const handleShare = async () => {
     const url = window.location.href;
     const title = article?.title || 'MPL Blog';
@@ -272,7 +320,7 @@ export default function BlogArticlePage() {
                 prose-blockquote:border-primary prose-blockquote:text-gray-300
                 prose-code:text-primary prose-code:bg-slate-700 prose-code:px-1 prose-code:rounded
                 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-600"
-              dangerouslySetInnerHTML={{ __html: article.content }}
+              dangerouslySetInnerHTML={{ __html: processArticleContent(article.content) }}
             />
           </div>
 

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit, Trash2, Plus, Eye, Calendar, FileText, Image, Upload, X, Bold, Italic, Underline, Link, Save, Globe } from "lucide-react";
+import { Edit, Trash2, Plus, Eye, Calendar, FileText, Image, Upload, X, Bold, Italic, Underline, Link, Save, Globe, Code, Terminal } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface BlogArticle {
@@ -611,20 +611,51 @@ export default function BlogManager() {
                   >
                     Lista
                   </Button>
+                  <div className="h-6 w-px bg-gray-400 mx-1" />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => insertText('<div class="html-code">\n', '\n</div>')}
+                    title="Inserează HTML Raw"
+                    className="h-8 px-2 bg-blue-50 border-blue-300 text-blue-700 hover:bg-blue-100 hover:text-blue-900"
+                  >
+                    <Code className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => insertText('<script>\n', '\n</script>')}
+                    title="Inserează JavaScript Raw"
+                    className="h-8 px-2 bg-yellow-50 border-yellow-300 text-yellow-700 hover:bg-yellow-100 hover:text-yellow-900"
+                  >
+                    <Terminal className="w-4 h-4" />
+                  </Button>
                 </div>
                 <Textarea
                   ref={contentTextareaRef}
                   value={formData.content}
                   onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                  placeholder="Scrie conținutul articolului aici. Poți folosi HTML basic pentru formatare...
+                  placeholder="Scrie conținutul articolului aici. Poți folosi HTML și JavaScript:
 
-Exemplu formatare:
+FORMATARE HTML:
 <strong>Text bold</strong>
 <em>Text italic</em>
 <h2>Titlu mare</h2>
 <h3>Subtitlu</h3>
 <a href='url'>Link</a>
-<ul><li>Item listă</li></ul>"
+<ul><li>Item listă</li></ul>
+
+COD HTML RAW:
+<div class='html-code'>
+  <p>HTML personalizat aici...</p>
+</div>
+
+JAVASCRIPT RAW:
+<script>
+  console.log('JavaScript personalizat aici...');
+</script>"
                   rows={15}
                   className="rounded-t-none border-t-0 bg-white text-gray-900 font-mono text-sm leading-relaxed"
                   style={{ minHeight: '350px', resize: 'vertical' }}
