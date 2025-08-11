@@ -652,7 +652,7 @@ const KingstonHyperXSupercup = () => {
 
                   
                   {/* Product Images */}
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     <div className="text-center">
                       <div className="flex justify-center mb-2">
                         <img 
@@ -664,6 +664,11 @@ const KingstonHyperXSupercup = () => {
                       <p className="text-sm text-yellow-300/90 font-medium">
                         5x HyperX Cloud III S Wireless
                       </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold text-yellow-400">+</div>
                     </div>
                     
                     <div className="text-center">
