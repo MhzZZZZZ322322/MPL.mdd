@@ -8,6 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes  
+- August 11, 2025: **KINGSTON_PRIZE_POOL_UPDATED** - Actualizat suma totală a premiilor turneului Kingston de la 130,000 LEI la 100,000 LEI în toate locurile din platformă (client, server, raport turneu).
 - August 11, 2025: **KINGSTON_TOURNAMENT_PRIZES_CONFIRMED** - Actualizat pagina turneului Kingston cu premiile oficiale confirmate de HyperX și Kingston. Implementat endpoint `/api/kingston/tournament-report` pentru generarea raportului complet de turneu similar cu exemplul Google Sheets. Premii detaliate: Locul 1 (HyperX Cloud III S Wireless + Kingston FURY Renegade DDR5), Locul 2 (HyperX Alloy Rise 75 + Kingston FURY Beast DDR5), Locul 3 (HyperX Pulsefire Haste 2 + Kingston merchandising), Ace of Aces (Kingston FURY Renegade 48GB DDR5 Limited Edition).
 - August 11, 2025: **HOMEPAGE_LAYOUT_OPTIMIZATION** - Optimizat spațierea pe pagina principală: redus înălțimea hero slider de la h-screen la h-[65vh], redus padding-ul BlogSection de la py-20 la py-12, mutat modulul "Știri & Actualizări" între slideshow și cardurile "Turnee Regulate" pentru layout mai compact și profesional.
 - August 11, 2025: **MPL_KEYBOARD_SHORTCUT_REMOVAL** - Eliminat complet funcționalitatea de secvență tastatură "mpl" din toate componentele (App.tsx și ComingSoon.tsx). Nu mai există restart/redirect automat la tastarea acestor caractere.

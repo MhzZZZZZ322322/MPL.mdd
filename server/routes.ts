@@ -2101,7 +2101,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                          stage3Playoff.filter(m => m.isPlayed).length,
         tournamentStartDate: "15 august 2025",
         tournamentEndDate: "28 septembrie 2025",
-        prizePool: "130,000 LEI în produse HyperX + Kingston Gaming Gear",
+        prizePool: "100,000 LEI în produse HyperX + Kingston Gaming Gear",
         reportGeneratedAt: new Date().toISOString()
       };
 

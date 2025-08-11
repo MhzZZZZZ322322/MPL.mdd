@@ -369,7 +369,7 @@ const KingstonHyperXSupercup = () => {
                         </p>
                       </div>
                       <div className="col-span-2">
-                        <h4 className="text-primary font-bold mb-4 text-center">🏆 Premii Detaliate - 130,000 LEI</h4>
+                        <h4 className="text-primary font-bold mb-4 text-center">🏆 Premii Detaliate - 100,000 LEI</h4>
                         <p className="text-xs text-gray-400 text-center mb-4">Click pe produse pentru a vedea specificații complete</p>
                       </div>
                     </div>
