@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Plus, Edit, Trash2, Trophy, Calendar } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { MatchResult } from '@shared/schema';
+import { useTournamentContext } from '@/pages/TournamentAdminFixed';
 
 interface Team {
   id: number;
@@ -32,6 +33,7 @@ interface MatchFormData {
 export default function MatchResultsManager() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { selectedTournament, isReadonly } = useTournamentContext();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingMatch, setEditingMatch] = useState<MatchResult | null>(null);
   const [formData, setFormData] = useState<MatchFormData>({
@@ -46,20 +48,29 @@ export default function MatchResultsManager() {
     tournamentId: 'hator-cs-league'
   });
 
+  // Determină API endpoint în funcție de turneul selectat
+  const getApiEndpoint = (endpoint: string) => {
+    return selectedTournament === 'kingston' ? `/api/kingston/admin${endpoint}` : `/api/admin${endpoint}`;
+  };
+
+  const getTeamsEndpoint = () => {
+    return selectedTournament === 'kingston' ? '/api/kingston/teams' : '/api/teams';
+  };
+
   // Fetch match results
   const { data: matchResults = [], isLoading: resultsLoading } = useQuery<MatchResult[]>({
-    queryKey: ['/api/admin/match-results'],
+    queryKey: [getApiEndpoint('/match-results'), selectedTournament],
     refetchInterval: 30000,
   });
 
   // Fetch teams for dropdowns
   const { data: teams = [] } = useQuery<Team[]>({
-    queryKey: ['/api/teams'],
+    queryKey: [getTeamsEndpoint(), selectedTournament],
   });
 
   // Fetch group configuration
   const { data: groupConfig = [] } = useQuery<any[]>({
-    queryKey: ['/api/admin/group-config'],
+    queryKey: [getApiEndpoint('/group-config'), selectedTournament],
   });
 
   // Get teams for selected group
@@ -76,7 +87,7 @@ export default function MatchResultsManager() {
   // Create match mutation
   const createMatchMutation = useMutation({
     mutationFn: async (data: MatchFormData) => {
-      const response = await fetch('/api/admin/match-results', {
+      const response = await fetch(getApiEndpoint('/match-results'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -85,8 +96,8 @@ export default function MatchResultsManager() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/match-results'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/match-results'] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/match-results'), selectedTournament] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/match-results').replace('/admin', ''), selectedTournament] });
       setIsCreateDialogOpen(false);
       resetForm();
       toast({
@@ -106,7 +117,7 @@ export default function MatchResultsManager() {
   // Update match mutation
   const updateMatchMutation = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: Partial<MatchFormData> }) => {
-      const response = await fetch(`/api/admin/match-results/${id}`, {
+      const response = await fetch(`${getApiEndpoint('/match-results')}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -115,8 +126,8 @@ export default function MatchResultsManager() {
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/match-results'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/match-results'] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/match-results'), selectedTournament] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/match-results').replace('/admin', ''), selectedTournament] });
       setEditingMatch(null);
       resetForm();
       toast({
@@ -136,15 +147,15 @@ export default function MatchResultsManager() {
   // Delete match mutation
   const deleteMatchMutation = useMutation({
     mutationFn: async (id: number) => {
-      const response = await fetch(`/api/admin/match-results/${id}`, {
+      const response = await fetch(`${getApiEndpoint('/match-results')}/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Failed to delete match result');
       return response.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/match-results'] });
-      queryClient.invalidateQueries({ queryKey: ['/api/match-results'] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/match-results'), selectedTournament] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/match-results').replace('/admin', ''), selectedTournament] });
       toast({
         title: "Succes",
         description: "Rezultatul meciului a fost șters cu succes!",
@@ -257,14 +268,22 @@ export default function MatchResultsManager() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-white">Gestionare Rezultate Meciuri</h2>
-        <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-green-600 hover:bg-green-700">
-              <Plus className="w-4 h-4 mr-2" />
-              Adaugă Rezultat
-            </Button>
-          </DialogTrigger>
+        <div className="flex items-center space-x-3">
+          <h2 className="text-2xl font-bold text-white">Gestionare Rezultate Meciuri</h2>
+          {isReadonly && (
+            <Badge variant="outline" className="bg-amber-100 text-amber-800 border-amber-300">
+              READONLY
+            </Badge>
+          )}
+        </div>
+        {!isReadonly && (
+          <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-green-600 hover:bg-green-700">
+                <Plus className="w-4 h-4 mr-2" />
+                Adaugă Rezultat
+              </Button>
+            </DialogTrigger>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>Adaugă Rezultat Meci</DialogTitle>
@@ -431,6 +450,7 @@ export default function MatchResultsManager() {
             </form>
           </DialogContent>
         </Dialog>
+        )}
       </div>
 
       {/* Edit Match Dialog */}
