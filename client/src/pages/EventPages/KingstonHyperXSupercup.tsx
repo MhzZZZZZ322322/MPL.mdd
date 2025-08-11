@@ -697,6 +697,39 @@ const KingstonHyperXSupercup = () => {
                     Locul 2
                   </h3>
 
+                  {/* Product Images */}
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/kingston-fury-beast-32gb.png"
+                          alt="Kingston FURY Beast 32GB DDR5"
+                          className="w-44 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-300/90 font-medium">
+                        5x Kingston FURY Beast 32GB DDR5
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2">
+                        <img 
+                          src="/hyperx-alloy-rise-75.png"
+                          alt="Tastatură HyperX Alloy Rise 75 Black"
+                          className="w-44 h-24 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-300/90 font-medium">
+                        5x Tastatură HyperX Alloy Rise 75 Black
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </NeonBorder>
 
