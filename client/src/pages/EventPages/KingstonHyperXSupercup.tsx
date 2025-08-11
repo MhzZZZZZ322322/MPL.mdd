@@ -117,7 +117,7 @@ const KingstonHyperXSupercup = () => {
 
               <div className="flex items-center mb-6 text-gray-300">
                 <Calendar className="mr-2 h-4 w-4 text-primary" />
-                <span className="mr-4">Septembrie 2025</span>
+                <span className="mr-4">10 septembrie - 28 septembrie 2025</span>
 
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
                 <span>Online (Moldova & România)</span>
@@ -131,7 +131,7 @@ const KingstonHyperXSupercup = () => {
               {/* Live Countdown Timer */}
               <div className="mb-8">
                 <CountdownTimer 
-                  targetDate="2025-09-15T18:00:00Z" 
+                  targetDate="2025-08-15T18:00:00Z" 
                 />
               </div>
 
@@ -173,24 +173,24 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Users className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Echipe</h3>
-                <p className="text-2xl font-bold text-primary">{teams.length}</p>
-                <p className="text-sm text-gray-400">Echipe înregistrate</p>
+                <p className="text-2xl font-bold text-primary">32</p>
+                <p className="text-sm text-gray-400">Echipe planificate</p>
               </NeonBorder>
 
               {/* Format */}
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Award className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Format</h3>
-                <p className="text-lg font-bold text-primary">Swiss + Playoff</p>
-                <p className="text-sm text-gray-400">Multi-stage</p>
+                <p className="text-lg font-bold text-primary">Grupe + Swiss + Double Elimination</p>
+                <p className="text-sm text-gray-400">3 etape</p>
               </NeonBorder>
 
               {/* Duration */}
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Durată</h3>
-                <p className="text-lg font-bold text-primary">4 săptămâni</p>
-                <p className="text-sm text-gray-400">Sept-Oct 2025</p>
+                <p className="text-lg font-bold text-primary">3 săptămâni</p>
+                <p className="text-sm text-gray-400">10-28 septembrie</p>
               </NeonBorder>
             </div>
           </div>
@@ -232,11 +232,11 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">📝 Format Turneu</h4>
                         <p className="text-sm leading-relaxed">
-                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în format multi-stage:
-                          <br />• <strong>Stage 1:</strong> Grupe Swiss cu 8 echipe
-                          <br />• <strong>Stage 2:</strong> Single Elimination Bracket 
-                          <br />• <strong>Stage 3:</strong> Swiss System avansat
-                          <br />• <strong>Stage 4:</strong> Playoff final
+                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 3 etape:
+                          <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, jocuri BO1
+                          <br />• <strong>Stage 2:</strong> Swiss System cu 16 echipe, jocuri BO1
+                          <br />• <strong>Stage 3:</strong> Playoff cu dublă eliminare (Upper/Lower Bracket)
+                          <br />• <strong>Total:</strong> ~32 echipe participante
                         </p>
                       </div>
                       <div>
@@ -253,12 +253,13 @@ const KingstonHyperXSupercup = () => {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="text-primary font-bold mb-2">👥 Echipe și Jucători</h4>
+                        <h4 className="text-primary font-bold mb-2">📅 Cronograma Turneului</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Jucători per echipă:</strong> 5 titulari + 2 rezerve<br />
-                          <strong>Eligibilitate:</strong> Cetățeni români și moldoveni<br />
-                          <strong>Vârstă minimă:</strong> 16 ani<br />
-                          <strong>FACEIT Level:</strong> Minim Level 4
+                          <strong>Înregistrări:</strong> 15 august - 10 septembrie<br />
+                          <strong>Stage 1 (Grupe):</strong> 10 - 14 septembrie<br />
+                          <strong>Stage 2 (Swiss):</strong> 17 - 21 septembrie<br />
+                          <strong>Stage 3 (Playoff):</strong> 27 - 28 septembrie<br />
+                          <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
                         </p>
                       </div>
                       <div>
@@ -268,6 +269,27 @@ const KingstonHyperXSupercup = () => {
                           <strong>Locul 2:</strong> $3,000 + HyperX peripherals<br />
                           <strong>Locul 3:</strong> $2,000 + Gaming setup<br />
                           <strong>MVP:</strong> Gaming monitor premium
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="text-primary font-bold mb-2">👥 Echipe și Jucători</h4>
+                        <p className="text-sm leading-relaxed">
+                          <strong>Jucători per echipă:</strong> 5 titulari + 2 rezerve<br />
+                          <strong>Eligibilitate:</strong> Cetățeni români și moldoveni<br />
+                          <strong>Vârstă minimă:</strong> 16 ani<br />
+                          <strong>FACEIT Level:</strong> Minim Level 4
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
+                        <p className="text-sm leading-relaxed">
+                          <strong>Stage 1:</strong> Primele 2 echipe din fiecare grupă avansează<br />
+                          <strong>Stage 2:</strong> De la 16 la 8 echipe prin Swiss<br />
+                          <strong>Stage 3:</strong> Double Elimination (Upper/Lower Bracket)<br />
+                          <strong>Toate meciurile:</strong> Format BO1 până la playoff
                         </p>
                       </div>
                     </div>
@@ -404,7 +426,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Users className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 1: Grupe (Swiss Format)</span>
+                    <span className="text-lg font-semibold text-white">Stage 1: 8 Grupe (4 echipe fiecare)</span>
                   </div>
                   {isGroupsExpanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -414,7 +436,7 @@ const KingstonHyperXSupercup = () => {
                 
                 {isGroupsExpanded && (
                   <div className="px-6 pb-6">
-                    <TournamentGroups />
+                    <TournamentGroups isExpanded={isGroupsExpanded} onToggle={() => setIsGroupsExpanded(!isGroupsExpanded)} />
                   </div>
                 )}
               </NeonBorder>
@@ -428,7 +450,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Trophy className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 2: Single Elimination</span>
+                    <span className="text-lg font-semibold text-white">Stage 2: Swiss System (16 echipe)</span>
                   </div>
                   {isStage2Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -438,7 +460,7 @@ const KingstonHyperXSupercup = () => {
                 
                 {isStage2Expanded && (
                   <div className="px-6 pb-6">
-                    <Stage2Bracket />
+                    <Stage2Bracket isExpanded={isStage2Expanded} onToggle={() => setIsStage2Expanded(!isStage2Expanded)} />
                   </div>
                 )}
               </NeonBorder>
@@ -452,7 +474,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Zap className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 3: Swiss System</span>
+                    <span className="text-lg font-semibold text-white">Stage 3: Playoff Double Elimination</span>
                   </div>
                   {isStage3Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -462,34 +484,12 @@ const KingstonHyperXSupercup = () => {
                 
                 {isStage3Expanded && (
                   <div className="px-6 pb-6">
-                    <Stage3Swiss />
+                    <Stage3Swiss isExpanded={isStage3Expanded} onToggle={() => setIsStage3Expanded(!isStage3Expanded)} />
                   </div>
                 )}
               </NeonBorder>
 
-              {/* Stage 4 - Playoff */}
-              <NeonBorder className="bg-darkGray/60">
-                <Button
-                  variant="ghost"
-                  className="w-full p-6 justify-between text-left hover:bg-transparent"
-                  onClick={() => setIsStage4Expanded(!isStage4Expanded)}
-                >
-                  <div className="flex items-center">
-                    <Sparkles className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 4: Playoff Final</span>
-                  </div>
-                  {isStage4Expanded ? 
-                    <ChevronUp className="h-5 w-5 text-primary" /> : 
-                    <ChevronDown className="h-5 w-5 text-primary" />
-                  }
-                </Button>
-                
-                {isStage4Expanded && (
-                  <div className="px-6 pb-6">
-                    <Stage4Playoff />
-                  </div>
-                )}
-              </NeonBorder>
+
             </div>
           </div>
         </section>
