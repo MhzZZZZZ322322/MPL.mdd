@@ -21,14 +21,21 @@ interface BlogArticle {
   content: string;
   featuredImageUrl?: string;
   featuredImageData?: string;
+  featuredImageAltText?: string;
+  featuredImageCaption?: string;
+  featuredImageLicense?: string;
   tags: string;
+  primaryCategory?: string;
+  secondaryCategories?: string;
   status: string;
   viewCount: number;
   publishedAt?: string;
+  scheduledAt?: string;
   authorName: string;
   authorEmail?: string;
   metaTitle?: string;
   metaDescription?: string;
+  previewToken?: string;
   createdAt: string;
   updatedAt: string;
 }
