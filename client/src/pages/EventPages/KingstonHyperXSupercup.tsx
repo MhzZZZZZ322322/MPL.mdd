@@ -268,7 +268,11 @@ const KingstonHyperXSupercup = () => {
                 <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
                 <p className="text-2xl font-bold text-primary">$10,000</p>
-                <p className="text-sm text-gray-400">Kingston & HyperX gear</p>
+                <div className="text-sm text-gray-400 space-y-1">
+                  <a href="https://www.kingston.com/en/gaming" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">Kingston Gaming</a>
+                  <span className="text-gray-400">&</span>
+                  <a href="https://hyperx.com" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">HyperX gear</a>
+                </div>
               </NeonBorder>
 
               {/* Teams */}
