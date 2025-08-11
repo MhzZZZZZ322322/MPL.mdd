@@ -8,6 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes
+- August 11, 2025: **KINGSTON_CLEAN_RESET** - Curățat complet turneul Kingston de toate datele vechi (echipe, meciuri, rezultate). Dezactivat accesul admin prin secvența "mpl" pe pagina de înregistrare. Sistem complet funcțional pentru înregistrare publică echipe cu drag-and-drop upload logo.
 - August 11, 2025: **KINGSTON_HYPERX_SECRET_PAGE** - Creat pagina secretă "Kingston x HyperX - Supercup Season 1" (rută: /events/kingston-hyperx-supercup). Format nou: 32 echipe, 3 etape (Grupe + Swiss + Double Elimination), 15 august - 28 septembrie 2025.
 - August 6, 2025: **NEW_MAJOR_EVENT** - Creat noul eveniment principal HATOR CUP - ROPL x MPL (23-24 August, 5500 RON prize pool). Mutat HATOR CS2 LEAGUE MOLDOVA doar în cronologia MPL.
 - August 6, 2025: **V0R4YN_COUNTER** - Sistem complet funcțional cu persistență PostgreSQL și sincronizare în timp real pentru pagina secretă V0R4YN.
