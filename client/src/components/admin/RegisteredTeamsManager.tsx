@@ -1,16 +1,28 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit, Trash2, Users, Eye, Calendar, Trophy } from "lucide-react";
+import { Edit, Trash2, Users, Eye, Calendar, Trophy, Upload, Plus, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface TeamMember {
   id: number;
+  teamId: number;
+  nickname: string;
+  faceitProfile: string;
+  discordAccount: string;
+  role: string;
+  position: string;
+}
+
+interface EditableTeamMember {
+  id?: number;
   nickname: string;
   faceitProfile: string;
   discordAccount: string;
@@ -37,6 +49,8 @@ export default function RegisteredTeamsManager() {
   const [selectedTeam, setSelectedTeam] = useState<RegisteredTeam | null>(null);
   const [editingTeam, setEditingTeam] = useState<RegisteredTeam | null>(null);
   const [editedName, setEditedName] = useState("");
+  const [editedLogo, setEditedLogo] = useState<string | null>(null);
+  const [editedMembers, setEditedMembers] = useState<EditableTeamMember[]>([]);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showMembersDialog, setShowMembersDialog] = useState(false);
 
@@ -62,13 +76,23 @@ export default function RegisteredTeamsManager() {
     enabled: !!selectedTeam && showMembersDialog
   });
 
-  // Update team mutation
+  // Update team mutation (comprehensive)
   const updateTeamMutation = useMutation({
-    mutationFn: async ({ teamId, name }: { teamId: number; name: string }) => {
-      const response = await fetch(`/api/kingston/admin/teams/${teamId}`, {
+    mutationFn: async ({ 
+      teamId, 
+      name, 
+      logoData, 
+      members 
+    }: { 
+      teamId: number; 
+      name: string; 
+      logoData?: string; 
+      members: EditableTeamMember[] 
+    }) => {
+      const response = await fetch(`/api/kingston/admin/teams/${teamId}/full-update`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, logoData, members }),
       });
 
       if (!response.ok) {
@@ -84,10 +108,12 @@ export default function RegisteredTeamsManager() {
       setShowEditDialog(false);
       setEditingTeam(null);
       setEditedName("");
+      setEditedLogo(null);
+      setEditedMembers([]);
       
       toast({
         title: "Echipa actualizată",
-        description: "Numele echipei a fost modificat cu succes.",
+        description: "Toate detaliile echipei au fost modificate cu succes.",
         variant: "default",
       });
     },
@@ -133,9 +159,32 @@ export default function RegisteredTeamsManager() {
     },
   });
 
-  const handleEdit = (team: RegisteredTeam) => {
+  const handleEdit = async (team: RegisteredTeam) => {
     setEditingTeam(team);
     setEditedName(team.name);
+    setEditedLogo(team.logoData || null);
+    
+    // Fetch current team members
+    try {
+      const response = await fetch(`/api/kingston/teams/${team.id}/members`);
+      if (response.ok) {
+        const members = await response.json();
+        setEditedMembers(members.map((member: TeamMember) => ({
+          id: member.id,
+          nickname: member.nickname,
+          faceitProfile: member.faceitProfile || '',
+          discordAccount: member.discordAccount || '',
+          role: member.role,
+          position: member.position
+        })));
+      } else {
+        setEditedMembers([]);
+      }
+    } catch (error) {
+      console.error('Error fetching team members:', error);
+      setEditedMembers([]);
+    }
+    
     setShowEditDialog(true);
   };
 
@@ -144,8 +193,61 @@ export default function RegisteredTeamsManager() {
     
     updateTeamMutation.mutate({
       teamId: editingTeam.id,
-      name: editedName.trim()
+      name: editedName.trim(),
+      logoData: editedLogo || undefined,
+      members: editedMembers
     });
+  };
+
+  const handleLogoUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Eroare",
+        description: "Vă rugăm să selectați un fișier imagine valid.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "Eroare",
+        description: "Imaginea este prea mare. Dimensiunea maximă este 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setEditedLogo(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  }, [toast]);
+
+  const handleAddMember = () => {
+    setEditedMembers(prev => [...prev, {
+      nickname: '',
+      faceitProfile: '',
+      discordAccount: '',
+      role: 'member',
+      position: 'main'
+    }]);
+  };
+
+  const handleRemoveMember = (index: number) => {
+    setEditedMembers(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleMemberChange = (index: number, field: keyof EditableTeamMember, value: string) => {
+    setEditedMembers(prev => prev.map((member, i) => 
+      i === index ? { ...member, [field]: value } : member
+    ));
   };
 
   const handleDelete = (teamId: number) => {
@@ -289,21 +391,172 @@ export default function RegisteredTeamsManager() {
 
       {/* Edit Team Dialog */}
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
-        <DialogContent>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Editează Echipa</DialogTitle>
+            <DialogTitle>Editează Echipa - {editingTeam?.name}</DialogTitle>
           </DialogHeader>
-          <div className="space-y-4">
+          <div className="space-y-6">
+            {/* Team Name */}
             <div>
-              <label className="block text-sm font-medium mb-2">Nume echipă</label>
+              <Label htmlFor="team-name" className="text-sm font-medium">
+                Nume echipă
+              </Label>
               <Input
+                id="team-name"
                 value={editedName}
                 onChange={(e) => setEditedName(e.target.value)}
                 placeholder="Introduceți numele echipei"
-                className="w-full"
+                className="mt-1"
               />
             </div>
-            <div className="flex justify-end space-x-2">
+
+            {/* Team Logo */}
+            <div>
+              <Label className="text-sm font-medium">Logo echipă</Label>
+              <div className="mt-2 space-y-3">
+                {editedLogo && (
+                  <div className="flex items-center space-x-3">
+                    <img 
+                      src={editedLogo} 
+                      alt="Logo preview" 
+                      className="w-16 h-16 object-contain rounded border"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setEditedLogo(null)}
+                    >
+                      <X className="w-4 h-4 mr-1" />
+                      Șterge logo
+                    </Button>
+                  </div>
+                )}
+                <div>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Formate acceptate: JPG, PNG, GIF. Mărime maximă: 5MB
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Team Members */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <Label className="text-sm font-medium">Membri echipei</Label>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleAddMember}
+                >
+                  <Plus className="w-4 h-4 mr-1" />
+                  Adaugă membru
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                {editedMembers.map((member, index) => (
+                  <div key={index} className="border rounded-lg p-4 bg-card/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="font-medium">Membru #{index + 1}</h4>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleRemoveMember(index)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div>
+                        <Label className="text-xs text-gray-500">Nickname</Label>
+                        <Input
+                          value={member.nickname}
+                          onChange={(e) => handleMemberChange(index, 'nickname', e.target.value)}
+                          placeholder="Nickname jucător"
+                          className="mt-1"
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label className="text-xs text-gray-500">FACEIT Profile</Label>
+                        <Input
+                          value={member.faceitProfile}
+                          onChange={(e) => handleMemberChange(index, 'faceitProfile', e.target.value)}
+                          placeholder="https://www.faceit.com/..."
+                          className="mt-1"
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label className="text-xs text-gray-500">Discord Account</Label>
+                        <Input
+                          value={member.discordAccount}
+                          onChange={(e) => handleMemberChange(index, 'discordAccount', e.target.value)}
+                          placeholder="nume#1234"
+                          className="mt-1"
+                        />
+                      </div>
+                      
+                      <div className="flex space-x-2">
+                        <div className="flex-1">
+                          <Label className="text-xs text-gray-500">Rol</Label>
+                          <Select 
+                            value={member.role} 
+                            onValueChange={(value) => handleMemberChange(index, 'role', value)}
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="captain">Căpitan</SelectItem>
+                              <SelectItem value="member">Membru</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="flex-1">
+                          <Label className="text-xs text-gray-500">Poziție</Label>
+                          <Select 
+                            value={member.position} 
+                            onValueChange={(value) => handleMemberChange(index, 'position', value)}
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="main">Titular</SelectItem>
+                              <SelectItem value="substitute">Rezervă</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                
+                {editedMembers.length === 0 && (
+                  <div className="text-center py-6 text-gray-500">
+                    <Users className="mx-auto h-8 w-8 mb-2" />
+                    <p>Nu sunt membri adăugați încă.</p>
+                    <p className="text-sm">Folosește butonul "Adaugă membru" pentru a începe.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end space-x-2 pt-4 border-t">
               <Button
                 variant="outline"
                 onClick={() => setShowEditDialog(false)}
@@ -315,7 +568,7 @@ export default function RegisteredTeamsManager() {
                 onClick={handleSaveEdit}
                 disabled={!editedName.trim() || updateTeamMutation.isPending}
               >
-                {updateTeamMutation.isPending ? "Se salvează..." : "Salvează"}
+                {updateTeamMutation.isPending ? "Se salvează..." : "Salvează toate modificările"}
               </Button>
             </div>
           </div>

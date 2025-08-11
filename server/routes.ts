@@ -1750,6 +1750,79 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston Admin: Full Update Team (name, logo, members)
+  app.patch("/api/kingston/admin/teams/:id/full-update", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.id);
+      if (isNaN(teamId)) {
+        return res.status(400).json({ error: "Invalid team ID" });
+      }
+
+      const { name, logoData, members } = req.body;
+      
+      if (!name || typeof name !== 'string' || name.trim().length === 0) {
+        return res.status(400).json({ error: "Valid team name is required" });
+      }
+
+      if (!Array.isArray(members)) {
+        return res.status(400).json({ error: "Members must be an array" });
+      }
+
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+
+      // Start transaction
+      await db.transaction(async (tx) => {
+        // Update team details
+        const updateData: any = {
+          name: name.trim(),
+          reviewedAt: new Date(),
+          reviewedBy: "admin"
+        };
+
+        if (logoData) {
+          updateData.logoData = logoData;
+          updateData.logoUrl = `/api/kingston/teams/${teamId}/logo`;
+        }
+
+        await tx.update(kingstonTeams)
+          .set(updateData)
+          .where(eq(kingstonTeams.id, teamId));
+
+        // Delete existing members
+        await tx.delete(kingstonTeamMembers)
+          .where(eq(kingstonTeamMembers.teamId, teamId));
+
+        // Insert new members
+        if (members.length > 0) {
+          const validMembers = members.filter((member: any) => 
+            member.nickname && member.nickname.trim().length > 0
+          );
+
+          if (validMembers.length > 0) {
+            const membersToInsert = validMembers.map((member: any) => ({
+              teamId: teamId,
+              nickname: member.nickname.trim(),
+              faceitProfile: member.faceitProfile?.trim() || '',
+              discordAccount: member.discordAccount?.trim() || '',
+              role: member.role || 'member',
+              position: member.position || 'main'
+            }));
+
+            await tx.insert(kingstonTeamMembers)
+              .values(membersToInsert);
+          }
+        }
+      });
+
+      res.json({ message: "Team updated successfully with all details" });
+    } catch (error) {
+      console.error("Error updating Kingston team fully:", error);
+      res.status(500).json({ error: "Failed to update Kingston team" });
+    }
+  });
+
   // Kingston Admin: Delete Team
   app.delete("/api/kingston/admin/teams/:id", async (req, res) => {
     try {
