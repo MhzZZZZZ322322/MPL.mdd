@@ -9,7 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit, Trash2, Plus, Eye, Calendar, FileText, Image, Upload, X, Bold, Italic, Underline, Link, Save, Globe, Code, Terminal } from "lucide-react";
+import { Edit, Trash2, Plus, Eye, Calendar, FileText, Image, Upload, X, Bold, Italic, Underline, Link, Save, Globe, Code, Terminal, Clock, ExternalLink, Settings, Tags } from "lucide-react";
+import { MediaManager } from "./MediaManager";
 import { useToast } from "@/hooks/use-toast";
 
 interface BlogArticle {
@@ -38,13 +39,20 @@ interface ArticleFormData {
   excerpt: string;
   content: string;
   featuredImageData?: string;
+  featuredImageAltText?: string;
+  featuredImageCaption?: string;
+  featuredImageLicense?: string;
   tags: string;
+  primaryCategory: string;
+  secondaryCategories: string;
   status: string;
   publishedAt?: string;
+  scheduledAt?: string;
   authorName: string;
   authorEmail: string;
   metaTitle: string;
   metaDescription: string;
+  previewToken?: string;
 }
 
 export default function BlogManager() {
@@ -60,12 +68,30 @@ export default function BlogManager() {
     excerpt: "",
     content: "",
     tags: "",
+    primaryCategory: "",
+    secondaryCategories: "",
     status: "draft",
     authorName: "MPL Admin",
     authorEmail: "admin@moldovapro.md",
     metaTitle: "",
     metaDescription: ""
   });
+
+  const [showMediaManager, setShowMediaManager] = useState(false);
+  const [availableAuthors] = useState([
+    { name: "MPL Admin", email: "admin@moldovapro.md" },
+    { name: "Tournament Director", email: "tournament@moldovapro.md" },
+    { name: "Community Manager", email: "community@moldovapro.md" }
+  ]);
+
+  const [availableCategories] = useState([
+    "Turnee", "Știri", "Anunțuri", "Echipe", "Jucători", "Analiza", "Interviu", "Event"
+  ]);
+
+  const [availableTags] = useState([
+    "CS2", "Counter-Strike", "HATOR Cup", "Kingston SuperCup", "MPL", "Moldova", 
+    "Esports", "Gaming", "Tournament", "Championship", "Players", "Teams"
+  ]);
 
   const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -161,6 +187,8 @@ export default function BlogManager() {
       excerpt: "",
       content: "",
       tags: "",
+      primaryCategory: "",
+      secondaryCategories: "",
       status: "draft",
       authorName: "MPL Admin",
       authorEmail: "admin@moldovapro.md",
@@ -184,6 +212,8 @@ export default function BlogManager() {
       content: article.content,
       featuredImageData: article.featuredImageData,
       tags: article.tags || "",
+      primaryCategory: "",
+      secondaryCategories: "",
       status: article.status,
       publishedAt: article.publishedAt || "",
       authorName: article.authorName,
@@ -503,33 +533,226 @@ export default function BlogManager() {
               />
             </div>
 
-            {/* Featured Image */}
+            {/* Featured Image & Media Manager */}
             <div>
               <Label>Imagine principală</Label>
               <div className="mt-2 space-y-3">
                 {formData.featuredImageData && (
-                  <div className="flex items-center space-x-3">
-                    <img 
-                      src={formData.featuredImageData} 
-                      alt="Preview" 
-                      className="w-32 h-24 object-cover rounded border"
-                    />
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <img 
+                        src={formData.featuredImageData} 
+                        alt={formData.featuredImageAltText || "Preview"} 
+                        className="w-32 h-24 object-cover rounded border"
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setFormData(prev => ({ 
+                          ...prev, 
+                          featuredImageData: undefined,
+                          featuredImageAltText: undefined,
+                          featuredImageCaption: undefined,
+                          featuredImageLicense: undefined
+                        }))}
+                      >
+                        <X className="w-4 h-4 mr-1" />
+                        Șterge imagine
+                      </Button>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-3">
+                      <div>
+                        <Label htmlFor="alt-text">Alt Text (obligatoriu)</Label>
+                        <Input
+                          id="alt-text"
+                          value={formData.featuredImageAltText || ""}
+                          onChange={(e) => setFormData(prev => ({ ...prev, featuredImageAltText: e.target.value }))}
+                          placeholder="Descriere pentru accessibility..."
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="caption">Caption</Label>
+                        <Input
+                          id="caption"
+                          value={formData.featuredImageCaption || ""}
+                          onChange={(e) => setFormData(prev => ({ ...prev, featuredImageCaption: e.target.value }))}
+                          placeholder="Caption pentru imagine..."
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="license">Licență/Sursă</Label>
+                      <Input
+                        id="license"
+                        value={formData.featuredImageLicense || ""}
+                        onChange={(e) => setFormData(prev => ({ ...prev, featuredImageLicense: e.target.value }))}
+                        placeholder="© Autor, CC BY 4.0, etc..."
+                      />
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex space-x-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowMediaManager(true)}
+                    className="flex-1"
+                  >
+                    <Settings className="w-4 h-4 mr-2" />
+                    Media Manager (recomandat)
+                  </Button>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="flex-1 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Categories & Tags Enhanced */}
+            <div className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="primary-category">Categoria principală</Label>
+                  <Select 
+                    value={formData.primaryCategory} 
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, primaryCategory: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selectează categoria..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {availableCategories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="secondary-categories">Categorii secundare</Label>
+                  <Input
+                    id="secondary-categories"
+                    value={formData.secondaryCategories}
+                    onChange={(e) => setFormData(prev => ({ ...prev, secondaryCategories: e.target.value }))}
+                    placeholder="Gaming, Review, etc. (separate prin virgulă)"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="tags">Tags</Label>
+                <Input
+                  id="tags"
+                  value={formData.tags}
+                  onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
+                  placeholder="CS2, Moldova, Tournament (separate prin virgulă)"
+                />
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <span className="text-sm text-gray-500">Sugestii:</span>
+                  {availableTags.slice(0, 6).map((tag) => (
                     <Button
+                      key={tag}
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => setFormData(prev => ({ ...prev, featuredImageData: undefined }))}
+                      className="text-xs"
+                      onClick={() => {
+                        const currentTags = formData.tags.split(',').map(t => t.trim()).filter(Boolean);
+                        if (!currentTags.includes(tag)) {
+                          setFormData(prev => ({ 
+                            ...prev, 
+                            tags: [...currentTags, tag].join(', ')
+                          }));
+                        }
+                      }}
                     >
-                      <X className="w-4 h-4 mr-1" />
-                      Șterge imagine
+                      + {tag}
                     </Button>
-                  </div>
-                )}
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Publishing & Scheduling */}
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <Label htmlFor="status">Status</Label>
+                <Select 
+                  value={formData.status} 
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, status: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="draft">Draft</SelectItem>
+                    <SelectItem value="scheduled">Programat</SelectItem>
+                    <SelectItem value="published">Publicat</SelectItem>
+                    <SelectItem value="archived">Arhivat</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="published-at">Data publicării</Label>
                 <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                  id="published-at"
+                  type="datetime-local"
+                  value={formData.publishedAt}
+                  onChange={(e) => setFormData(prev => ({ ...prev, publishedAt: e.target.value }))}
+                />
+              </div>
+              <div>
+                <Label htmlFor="scheduled-at">Programare automată</Label>
+                <Input
+                  id="scheduled-at"
+                  type="datetime-local"
+                  value={formData.scheduledAt || ""}
+                  onChange={(e) => setFormData(prev => ({ ...prev, scheduledAt: e.target.value }))}
+                />
+              </div>
+            </div>
+
+            {/* Author Selection */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="author-name">Autor</Label>
+                <Select 
+                  value={formData.authorName} 
+                  onValueChange={(value) => {
+                    const author = availableAuthors.find(a => a.name === value);
+                    setFormData(prev => ({ 
+                      ...prev, 
+                      authorName: value,
+                      authorEmail: author?.email || ""
+                    }));
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableAuthors.map((author) => (
+                      <SelectItem key={author.name} value={author.name}>
+                        {author.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="author-email">Email autor</Label>
+                <Input
+                  id="author-email"
+                  value={formData.authorEmail}
+                  onChange={(e) => setFormData(prev => ({ ...prev, authorEmail: e.target.value }))}
+                  placeholder="email@moldovapro.md"
                 />
               </div>
             </div>

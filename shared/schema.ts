@@ -498,14 +498,21 @@ export const blogArticles = pgTable("blog_articles", {
   content: text("content").notNull(), // Conținutul complet al articolului (HTML)
   featuredImageUrl: text("featured_image_url"), // Imaginea principală
   featuredImageData: text("featured_image_data"), // Base64 encoded image data
+  featuredImageAltText: text("featured_image_alt_text"), // Alt text pentru imaginea principală (obligatoriu)
+  featuredImageCaption: text("featured_image_caption"), // Caption pentru imagine
+  featuredImageLicense: text("featured_image_license"), // Licența/sursa imaginii
   tags: text("tags").default(""), // Tags separate prin virgulă
-  status: text("status").notNull().default("draft"), // draft, published, archived
+  primaryCategory: text("primary_category").default(""), // Categoria principală
+  secondaryCategories: text("secondary_categories").default(""), // Categorii secundare (separate prin virgulă)
+  status: text("status").notNull().default("draft"), // draft, scheduled, published, archived
   viewCount: integer("view_count").notNull().default(0), // Numărul de vizualizări
-  publishedAt: timestamp("published_at"), // Data publicării
+  publishedAt: timestamp("published_at"), // Data publicării (poate fi programată în viitor)
+  scheduledAt: timestamp("scheduled_at"), // Data programată pentru publicare automată
   authorName: text("author_name").notNull().default("MPL Admin"), // Numele autorului
   authorEmail: text("author_email").default("admin@moldovapro.md"), // Email autor
   metaTitle: text("meta_title"), // SEO meta title
   metaDescription: text("meta_description"), // SEO meta description
+  previewToken: text("preview_token"), // Token pentru previzualizare înainte de publicare
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -523,7 +530,16 @@ export const insertBlogArticleSchema = createInsertSchema(blogArticles).omit({
       return new Date(val);
     }
     return val;
-  })
+  }),
+  scheduledAt: z.union([z.string(), z.date(), z.null()]).optional().transform(val => {
+    if (!val || val === '' || val === null) return null;
+    if (typeof val === 'string') {
+      if (val.trim() === '') return null;
+      return new Date(val);
+    }
+    return val;
+  }),
+  featuredImageAltText: z.string().min(1, "Alt text este obligatoriu pentru imagine").optional()
 });
 
 export type InsertBlogArticle = z.infer<typeof insertBlogArticleSchema>;
