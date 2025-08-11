@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Edit2, Save, X, Trophy, Target, Link as LinkIcon, Trash2, Plus, Users } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useTournamentContext } from '@/pages/TournamentAdminFixed';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,25 +33,39 @@ interface Team {
 export function Stage2BracketManager() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { selectedTournament, isReadonly } = useTournamentContext();
   const [editingMatch, setEditingMatch] = useState<Stage2Match | null>(null);
   const [isCreating, setIsCreating] = useState(false);
 
+  // Determină API endpoint în funcție de turneul selectat
+  const getApiEndpoint = (endpoint: string) => {
+    return selectedTournament === 'kingston' ? `/api/kingston${endpoint}` : `/api${endpoint}`;
+  };
+
+  const getAdminEndpoint = (endpoint: string) => {
+    return selectedTournament === 'kingston' ? `/api/kingston/admin${endpoint}` : `/api/admin${endpoint}`;
+  };
+
+  const getTeamsEndpoint = () => {
+    return selectedTournament === 'kingston' ? '/api/kingston/teams' : '/api/teams';
+  };
+
   // Fetch bracket data
   const { data: bracket = [], isLoading } = useQuery({
-    queryKey: ["/api/stage2-bracket"],
+    queryKey: [getApiEndpoint('/stage2-bracket'), selectedTournament],
     refetchInterval: 5000,
   });
 
   // Fetch teams for dropdown
   const { data: teams = [] } = useQuery<Team[]>({
-    queryKey: ["/api/teams"],
+    queryKey: [getTeamsEndpoint(), selectedTournament],
   });
 
   // Create mutation
   const createMutation = useMutation({
-    mutationFn: (matchData: any) => apiRequest("POST", "/api/admin/stage2-bracket", matchData),
+    mutationFn: (matchData: any) => apiRequest("POST", getAdminEndpoint("/stage2-bracket"), matchData),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/stage2-bracket'), selectedTournament] });
       setIsCreating(false);
       toast({
         title: "Success",
@@ -68,9 +83,9 @@ export function Stage2BracketManager() {
 
   // Update mutation pentru actualizarea rezultatelor
   const updateMutation = useMutation({
-    mutationFn: ({ id, ...data }: any) => apiRequest("PUT", `/api/admin/stage2-bracket/${id}`, data),
+    mutationFn: ({ id, ...data }: any) => apiRequest("PUT", `${getAdminEndpoint("/stage2-bracket")}/${id}`, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/stage2-bracket"] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/stage2-bracket'), selectedTournament] });
       setEditingMatch(null);
       toast({
         title: "Success",

@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Save, Plus, Edit, Trash2, Target, Users, Trophy } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useTournamentContext } from '@/pages/TournamentAdminFixed';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -33,6 +34,7 @@ interface Team {
 export function Stage3SwissRoundsManager() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { selectedTournament, isReadonly } = useTournamentContext();
   const [editingMatch, setEditingMatch] = useState<Stage3SwissMatch | null>(null);
   const [newMatch, setNewMatch] = useState({
     roundNumber: 1,
@@ -48,21 +50,34 @@ export function Stage3SwissRoundsManager() {
     streamUrl: ""
   });
 
+  // Determină API endpoint în funcție de turneul selectat
+  const getApiEndpoint = (endpoint: string) => {
+    return selectedTournament === 'kingston' ? `/api/kingston${endpoint}` : `/api${endpoint}`;
+  };
+
+  const getAdminEndpoint = (endpoint: string) => {
+    return selectedTournament === 'kingston' ? `/api/kingston/admin${endpoint}` : `/api/admin${endpoint}`;
+  };
+
+  const getTeamsEndpoint = () => {
+    return selectedTournament === 'kingston' ? '/api/kingston/teams' : '/api/teams';
+  };
+
   // Fetch matches and teams
   const { data: matches = [] } = useQuery<Stage3SwissMatch[]>({
-    queryKey: ["/api/stage3-swiss-matches"],
+    queryKey: [getApiEndpoint("/stage3-swiss-matches"), selectedTournament],
     refetchInterval: 10000,
   });
 
   // Get qualified teams from calculation
   const { data: qualifiedTeamNames = [] } = useQuery<string[]>({
-    queryKey: ["/api/stage3-qualified-teams"],
+    queryKey: [getApiEndpoint("/stage3-qualified-teams"), selectedTournament],
     refetchInterval: 5000, // Refresh every 5 seconds to ensure fresh data
     staleTime: 0, // Always consider data stale to force refresh
   });
 
   const { data: allTeams = [] } = useQuery<Team[]>({
-    queryKey: ["/api/teams"],
+    queryKey: [getTeamsEndpoint(), selectedTournament],
   });
 
   // Use qualified team names directly for dropdowns

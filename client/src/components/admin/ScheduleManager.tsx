@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { useTournamentContext } from '@/pages/TournamentAdminFixed';
 
 interface ScheduleDay {
   date: string;
@@ -92,13 +93,19 @@ const scheduleData: ScheduleDay[] = [
 export default function ScheduleManager() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { selectedTournament, isReadonly } = useTournamentContext();
   const [isExpanded, setIsExpanded] = useState(true);
   const [editingMatch, setEditingMatch] = useState<ScheduleMatch | null>(null);
   const [faceitUrl, setFaceitUrl] = useState('');
 
+  // Determină API endpoint în funcție de turneul selectat
+  const getApiEndpoint = (endpoint: string) => {
+    return selectedTournament === 'kingston' ? `/api/kingston/admin${endpoint}` : `/api/admin${endpoint}`;
+  };
+
   // Fetch scheduled matches from database
   const { data: scheduledMatches = [], isLoading } = useQuery({
-    queryKey: ['/api/admin/scheduled-matches'],
+    queryKey: [getApiEndpoint('/scheduled-matches'), selectedTournament],
     refetchInterval: 30000,
   });
 
@@ -111,7 +118,7 @@ export default function ScheduleManager() {
   // Update Faceit URL mutation
   const updateFaceitUrlMutation = useMutation({
     mutationFn: async (data: { team1: string; team2: string; faceitUrl: string }) => {
-      const response = await fetch('/api/admin/scheduled-matches', {
+      const response = await fetch(getApiEndpoint('/scheduled-matches'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +133,7 @@ export default function ScheduleManager() {
         title: "Succes",
         description: "Link-ul meciului a fost actualizat cu succes",
       });
-      queryClient.invalidateQueries({ queryKey: ['/api/admin/scheduled-matches'] });
+      queryClient.invalidateQueries({ queryKey: [getApiEndpoint('/scheduled-matches'), selectedTournament] });
       setEditingMatch(null);
       setFaceitUrl('');
     },
