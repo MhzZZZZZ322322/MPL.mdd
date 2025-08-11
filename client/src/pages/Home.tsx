@@ -47,8 +47,8 @@ const Home = () => {
       </Helmet>
       <Hero />
       <About />
-      <CsServerStatus />
       <BlogSection />
+      <CsServerStatus />
       <Partners />
       <FAQ />
       <SimpleContactForm />
