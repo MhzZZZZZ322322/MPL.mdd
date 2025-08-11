@@ -539,68 +539,75 @@ export default function BlogManager() {
               <Label htmlFor="content">Conținut articol *</Label>
               <div className="mt-2">
                 {/* Toolbar */}
-                <div className="flex items-center space-x-2 p-3 border rounded-t-md bg-gray-100 border-b-2 border-b-primary/20">
+                <div className="flex items-center space-x-1 p-3 border rounded-t-md bg-gray-100 border-b-2 border-b-primary/20">
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('<strong>', '</strong>')}
                     title="Bold"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <Bold className="w-4 h-4" />
                   </Button>
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('<em>', '</em>')}
                     title="Italic"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <Italic className="w-4 h-4" />
                   </Button>
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('<u>', '</u>')}
                     title="Underline"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <Underline className="w-4 h-4" />
                   </Button>
-                  <div className="h-4 w-px bg-gray-300" />
+                  <div className="h-6 w-px bg-gray-400 mx-1" />
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('\n## ', '\n')}
                     title="Heading"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 text-xs font-bold"
                   >
                     H2
                   </Button>
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('\n### ', '\n')}
                     title="Subheading"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 text-xs font-bold"
                   >
                     H3
                   </Button>
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('<a href="', '">link text</a>')}
                     title="Link"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                   >
                     <Link className="w-4 h-4" />
                   </Button>
                   <Button
                     type="button"
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
                     onClick={() => insertText('\n- ', '\n')}
                     title="List"
+                    className="h-8 px-2 bg-white border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900 text-xs"
                   >
                     Lista
                   </Button>
