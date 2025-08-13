@@ -8,6 +8,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Team, TeamMember } from "@shared/schema";
+import supercupBgImage from "@assets/supercup season1 varianta 2_1755087776641.jpg";
 
 // Kingston Tournament Components using dedicated API routes
 const KingstonTournamentGroups = () => {
@@ -186,7 +187,7 @@ const KingstonHyperXSupercup = () => {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/upscalemedia-transformed.jpeg" 
+              src={supercupBgImage} 
               alt="Kingston x HyperX - Supercup Season 1" 
               className="w-full h-full object-cover opacity-45"
               loading="eager"

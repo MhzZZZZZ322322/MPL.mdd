@@ -8,6 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes  
+- August 13, 2025: **KINGSTON_BACKGROUND_IMAGE_UPDATED** - Actualizat imaginea de fundal a paginii turneului Kingston cu design-ul oficial "Supercup Season 1" care include logo-urile MPL, Kingston FURY și HyperX pe un fundal scenic cu arhitectură clasică.
 - August 11, 2025: **KINGSTON_STAGE0_QUALIFIERS_ADDED** - Adăugat Stage 0 - Calificarea în formatul turneului Kingston. Implementat secțiune completă cu detalii despre procesul de calificare (11-13 septembrie), format eliminare directă, și informații despre cele 16 locuri disponibile prin calificare.
 - August 11, 2025: **KINGSTON_FORMAT_SELECTION_UPDATED** - Actualizat formatul turneului Kingston: 32 echipe (16 selectate direct + 16 prin calificare) în loc de format generic. Modificat toate referințele în pagina turneului și descrierile de înregistrare.
 - August 11, 2025: **KINGSTON_PRIZE_POOL_UPDATED** - Actualizat suma totală a premiilor turneului Kingston de la 130,000 LEI la 100,000 LEI în toate locurile din platformă (client, server, raport turneu).
