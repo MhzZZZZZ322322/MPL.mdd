@@ -185,11 +185,11 @@ const KingstonHyperXSupercup = () => {
         {/* Hero Section */}
         <div className="relative min-h-[80vh] lg:h-[70vh] bg-gradient-to-b from-black to-darkBg overflow-hidden">
           {/* Background Image */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
             <img 
               src={supercupBgImage} 
               alt="Kingston x HyperX - Supercup Season 1" 
-              className="w-full h-full object-cover opacity-60"
+              className="w-3/4 h-3/4 object-contain opacity-40 mx-auto my-auto"
               loading="eager"
               width="1920"
               height="1080"
