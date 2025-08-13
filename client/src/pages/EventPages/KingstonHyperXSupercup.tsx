@@ -189,12 +189,12 @@ const KingstonHyperXSupercup = () => {
             <img 
               src={supercupBgImage} 
               alt="Kingston x HyperX - Supercup Season 1" 
-              className="w-full h-full object-cover opacity-45"
+              className="w-full h-full object-cover opacity-25"
               loading="eager"
               width="1920"
               height="1080"
             />
-            <div className="absolute inset-0 bg-black/70 z-0"></div>
+            <div className="absolute inset-0 bg-black/80 z-0"></div>
           </div>
 
           {/* Content */}
@@ -206,10 +206,10 @@ const KingstonHyperXSupercup = () => {
                 </Button>
               </Link>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 font-rajdhani">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 font-rajdhani drop-shadow-lg">
                 Kingston x HyperX
               </h1>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6 font-rajdhani">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6 font-rajdhani drop-shadow-lg">
                 Supercup Season 1
               </h2>
 
@@ -238,7 +238,7 @@ const KingstonHyperXSupercup = () => {
                 <Link href="/register-team">
                   <Button 
                     size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-black font-bold px-6 py-3 text-base sm:px-8 sm:text-lg w-full sm:w-auto"
+                    className="bg-primary hover:bg-primary/90 text-black font-bold px-6 py-3 text-base sm:px-8 sm:text-lg w-full sm:w-auto shadow-lg border-2 border-primary"
                   >
                     <Gift className="mr-2 h-5 w-5" />
                     Înscrie-te acum
@@ -247,7 +247,7 @@ const KingstonHyperXSupercup = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-primary text-primary hover:bg-primary/10 px-6 py-3 text-base sm:px-8 sm:text-lg w-full sm:w-auto"
+                  className="border-2 border-primary text-primary hover:bg-primary/20 px-6 py-3 text-base sm:px-8 sm:text-lg w-full sm:w-auto shadow-lg bg-black/60"
                   onClick={() => {
                     const rulesSection = document.querySelector('#tournament-rules');
                     rulesSection?.scrollIntoView({ behavior: 'smooth' });

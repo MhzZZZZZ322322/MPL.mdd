@@ -8,7 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes  
-- August 13, 2025: **KINGSTON_HERO_LAYOUT_OPTIMIZED** - Optimizat layout-ul hero section pentru turneul Kingston: mărit înălțimea minimă la 80vh pe ecrane mici, adăugat padding și spațiere responsivă pentru butoane pentru a fi vizibile la zoom 100%.
+- August 13, 2025: **KINGSTON_HERO_LAYOUT_OPTIMIZED** - Optimizat layout-ul hero section pentru turneul Kingston: mărit înălțimea minimă la 80vh pe ecrane mici, adăugat padding și spațiere responsivă pentru butoane pentru a fi vizibile la zoom 100%. Redus opacitatea imaginii de fundal la 25% cu overlay mai puternic (80%) pentru vizibilitate îmbunătățită a textului și butoanelor. Adăugat shadow și border la butoane pentru contrast.
 - August 13, 2025: **KINGSTON_BACKGROUND_IMAGE_UPDATED** - Actualizat imaginea de fundal a paginii turneului Kingston cu design-ul oficial "Supercup Season 1" care include logo-urile MPL, Kingston FURY și HyperX pe un fundal scenic cu arhitectură clasică.
 - August 11, 2025: **KINGSTON_STAGE0_QUALIFIERS_ADDED** - Adăugat Stage 0 - Calificarea în formatul turneului Kingston. Implementat secțiune completă cu detalii despre procesul de calificare (11-13 septembrie), format eliminare directă, și informații despre cele 16 locuri disponibile prin calificare.
 - August 11, 2025: **KINGSTON_FORMAT_SELECTION_UPDATED** - Actualizat formatul turneului Kingston: 32 echipe (16 selectate direct + 16 prin calificare) în loc de format generic. Modificat toate referințele în pagina turneului și descrierile de înregistrare.
