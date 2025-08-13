@@ -309,11 +309,11 @@ const KingstonHyperXSupercup = () => {
         <section id="tournament-rules" className="py-16 px-4 bg-darkGray/20">
           <div className="container mx-auto max-w-4xl">
             {/* Tournament Rules Header Image */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-8 -mx-4">
               <img 
                 src={supercupRulesImage} 
                 alt="Supercup Season 1 - Tournament Schedule" 
-                className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
+                className="w-full h-auto object-cover rounded-lg shadow-2xl"
               />
             </div>
             
