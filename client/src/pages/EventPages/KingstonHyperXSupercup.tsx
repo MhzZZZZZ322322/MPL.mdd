@@ -305,8 +305,240 @@ const KingstonHyperXSupercup = () => {
           </div>
         </section>
 
+        {/* Simple Prizes Section */}
+        <section className="py-16 px-4 bg-darkGray/20">
+          <div className="container mx-auto max-w-4xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+                Premii - 100,000 LEI
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Echipamente premium de gaming oferite de Kingston și HyperX
+              </p>
+            </div>
+
+            {/* Prize Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* 1st Place */}
+              <NeonBorder className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border-yellow-400/50">
+                <div className="p-6 text-center min-h-[480px] flex flex-col">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500/20 border border-yellow-400/50 mb-4">
+                    <Trophy className="w-8 h-8 text-yellow-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-yellow-400 font-rajdhani mb-6">
+                    Locul 1
+                  </h3>
+
+                  {/* Product Images */}
+                  <div className="flex-1 flex flex-col justify-center space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/hyperx-cloud-iii-s.png"
+                          alt="HyperX Cloud III S Wireless"
+                          className="w-20 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-yellow-300/90 font-medium">
+                        5x HyperX Cloud III S Wireless
+                      </p>
+                      <p className="text-xs text-yellow-300/70 mt-1">
+                        Căști gaming premium wireless
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/kingston-fury-renegade-transparent.png"
+                          alt="Kingston FURY Renegade DDR5 RGB"
+                          className="w-32 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-yellow-300/90 font-medium">
+                        5x Kingston FURY Renegade RGB 48GB DDR5
+                      </p>
+                      <p className="text-xs text-yellow-300/70 mt-1">
+                        Memorie RAM premium 6000MT/s
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* 2nd Place */}
+              <NeonBorder className="bg-gradient-to-br from-gray-400/20 to-gray-500/10 border-gray-300/50">
+                <div className="p-6 text-center min-h-[480px] flex flex-col">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-400/20 border border-gray-300/50 mb-4">
+                    <Award className="w-8 h-8 text-gray-300" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-300 font-rajdhani mb-6">
+                    Locul 2
+                  </h3>
+
+                  {/* Product Images */}
+                  <div className="flex-1 flex flex-col justify-center space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/kingston-fury-beast-32gb.png"
+                          alt="Kingston FURY Beast 32GB DDR5"
+                          className="w-32 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-300/90 font-medium">
+                        5x Kingston FURY Beast 32GB DDR5
+                      </p>
+                      <p className="text-xs text-gray-300/70 mt-1">
+                        Memorie RAM gaming 5600MT/s
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center py-2">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/hyperx-alloy-rise-75.png"
+                          alt="Tastatură HyperX Alloy Rise 75 Black"
+                          className="w-32 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-300/90 font-medium">
+                        5x Tastatură HyperX Alloy Rise 75 Black
+                      </p>
+                      <p className="text-xs text-gray-300/70 mt-1">
+                        Tastatură mecanică RGB gaming
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* 3rd Place */}
+              <NeonBorder className="bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-400/50">
+                <div className="p-6 text-center min-h-[480px] flex flex-col">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/20 border border-orange-400/50 mb-4">
+                    <Award className="w-8 h-8 text-orange-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-orange-400 font-rajdhani mb-6">
+                    Locul 3
+                  </h3>
+
+                  {/* Product Images */}
+                  <div className="flex-1 flex flex-col justify-center space-y-3">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/hyperx-pulsefire-haste-2.png"
+                          alt="HyperX Pulsefire Haste 2"
+                          className="w-20 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-orange-400/90 font-medium">
+                        5x HyperX Pulsefire Haste 2
+                      </p>
+                      <p className="text-xs text-orange-400/70 mt-1">
+                        Mouse gaming ultralight
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center py-1">
+                      <div className="text-xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-2 h-16">
+                        <img 
+                          src="/kingston-datatraveler-exodia.png"
+                          alt="DataTraveler Exodia S USB 256GB"
+                          className="w-16 h-16 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-orange-400/90 font-medium">
+                        5x Kingston Bundle Premium:
+                      </p>
+                      <p className="text-xs text-orange-400/90 mt-1">
+                        • DataTraveler Exodia S USB 256GB
+                      </p>
+                      <p className="text-xs text-orange-400/90">
+                        • T-shirt Kingston Fury branded
+                      </p>
+                      <p className="text-xs text-orange-400/90">• Termo bag Kingston Fury branded</p>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* Ace of Aces */}
+              <NeonBorder className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-purple-400/50">
+                <div className="p-6 text-center min-h-[480px] flex flex-col">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border border-purple-400/50 mb-4">
+                    <Sparkles className="w-8 h-8 text-purple-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-purple-400 font-rajdhani mb-6">
+                    Ace of Aces
+                  </h3>
+
+                  {/* Product Images */}
+                  <div className="flex-1 flex flex-col justify-center space-y-4">
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/kingston-fury-renegade-limited-edition.png"
+                          alt="Kingston FURY Renegade 48GB DDR5 RGB Limited Edition"
+                          className="w-32 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-purple-400/90 font-medium">
+                        1x FURY Renegade 48GB DDR5 RGB Limited Edition
+                      </p>
+                      <p className="text-xs text-purple-400/70 mt-1">
+                        Memorie RAM exclusivă 8000MT/s
+                      </p>
+                    </div>
+                    
+                    {/* Plus Sign */}
+                    <div className="flex justify-center py-2">
+                      <div className="text-2xl font-bold text-white">+</div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="flex justify-center mb-3 h-24">
+                        <img 
+                          src="/hyperx-alloy-rise-75-wireless.png"
+                          alt="HyperX Alloy Rise 75 Wireless"
+                          className="w-32 h-20 object-contain"
+                        />
+                      </div>
+                      <p className="text-sm text-purple-400/90 font-medium">
+                        1x HyperX Premium Choice:
+                      </p>
+                      <p className="text-xs text-purple-400/90 mt-1">
+                        • HyperX Alloy Rise 75 Wireless
+                      </p>
+                      <p className="text-xs text-purple-400/70 italic">
+                        sau HyperX Cloud III S Wireless
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </NeonBorder>
+            </div>
+          </div>
+        </section>
+
         {/* Tournament Rules */}
-        <section id="tournament-rules" className="py-16 px-4 bg-darkGray/20">
+        <section id="tournament-rules" className="py-16 px-4 bg-darkBg/20">
           <div className="container mx-auto max-w-4xl">
             {/* Tournament Rules Header Image */}
             <div className="text-center mb-8 -mx-4">
