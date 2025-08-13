@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Team, TeamMember } from "@shared/schema";
 import supercupBgImage from "@assets/Untitled_1755089452078.png";
+import supercupRulesImage from "@assets/supercup season1 varianta 1_1755089877102.png";
 
 // Kingston Tournament Components using dedicated API routes
 const KingstonTournamentGroups = () => {
@@ -307,6 +308,15 @@ const KingstonHyperXSupercup = () => {
         {/* Tournament Rules */}
         <section id="tournament-rules" className="py-16 px-4 bg-darkGray/20">
           <div className="container mx-auto max-w-4xl">
+            {/* Tournament Rules Header Image */}
+            <div className="text-center mb-8">
+              <img 
+                src={supercupRulesImage} 
+                alt="Supercup Season 1 - Tournament Schedule" 
+                className="w-full max-w-2xl mx-auto rounded-lg shadow-2xl"
+              />
+            </div>
+            
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
                 Regulamentul Turneului
