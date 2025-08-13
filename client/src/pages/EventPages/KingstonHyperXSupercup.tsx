@@ -262,49 +262,6 @@ const KingstonHyperXSupercup = () => {
           </div>
         </div>
 
-        {/* Tournament Info Cards */}
-        <section className="py-16 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Prize Pool */}
-              <NeonBorder className="bg-darkGray/60 p-6 text-center">
-                <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
-                <p className="text-2xl font-bold text-primary">100,000 LEI</p>
-                <div className="text-sm text-gray-400 space-y-1">
-                  <a href="https://www.kingston.com/en/gaming" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">Kingston Gaming</a>
-                  <span className="text-gray-400">&</span>
-                  <a href="https://hyperx.com" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">HyperX gear</a>
-                </div>
-              </NeonBorder>
-
-              {/* Teams */}
-              <NeonBorder className="bg-darkGray/60 p-6 text-center">
-                <Users className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Echipe</h3>
-                <p className="text-2xl font-bold text-primary">32</p>
-                <p className="text-sm text-gray-400">Echipe planificate</p>
-              </NeonBorder>
-
-              {/* Format */}
-              <NeonBorder className="bg-darkGray/60 p-6 text-center">
-                <Award className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Format</h3>
-                <p className="text-lg font-bold text-primary">Grupe + Swiss + Double Elimination</p>
-                <p className="text-sm text-gray-400">3 etape</p>
-              </NeonBorder>
-
-              {/* Duration */}
-              <NeonBorder className="bg-darkGray/60 p-6 text-center">
-                <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Durată</h3>
-                <p className="text-lg font-bold text-primary">3 săptămâni</p>
-                <p className="text-sm text-gray-400">10-28 septembrie</p>
-              </NeonBorder>
-            </div>
-          </div>
-        </section>
-
         {/* Simple Prizes Section */}
         <section className="py-16 px-4 bg-darkGray/20">
           <div className="container mx-auto max-w-4xl">
@@ -537,9 +494,52 @@ const KingstonHyperXSupercup = () => {
           </div>
         </section>
 
-        {/* Tournament Rules */}
-        <section id="tournament-rules" className="py-16 px-4 bg-darkBg/20">
-          <div className="container mx-auto max-w-4xl">
+        {/* Tournament Info Cards */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Prize Pool */}
+              <NeonBorder className="bg-darkGray/60 p-6 text-center">
+                <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
+                <p className="text-2xl font-bold text-primary">100,000 LEI</p>
+                <div className="text-sm text-gray-400 space-y-1">
+                  <a href="https://www.kingston.com/en/gaming" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">Kingston Gaming</a>
+                  <span className="text-gray-400">&</span>
+                  <a href="https://hyperx.com" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">HyperX gear</a>
+                </div>
+              </NeonBorder>
+
+              {/* Teams */}
+              <NeonBorder className="bg-darkGray/60 p-6 text-center">
+                <Users className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Echipe</h3>
+                <p className="text-2xl font-bold text-primary">32</p>
+                <p className="text-sm text-gray-400">Echipe planificate</p>
+              </NeonBorder>
+
+              {/* Format */}
+              <NeonBorder className="bg-darkGray/60 p-6 text-center">
+                <Award className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Format</h3>
+                <p className="text-lg font-bold text-primary">Grupe + Swiss + Double Elimination</p>
+                <p className="text-sm text-gray-400">3 etape</p>
+              </NeonBorder>
+
+              {/* Duration */}
+              <NeonBorder className="bg-darkGray/60 p-6 text-center">
+                <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Durată</h3>
+                <p className="text-lg font-bold text-primary">3 săptămâni</p>
+                <p className="text-sm text-gray-400">10-28 septembrie</p>
+              </NeonBorder>
+            </div>
+          </div>
+        </section>
+
+        {/* Schedule Image and Rules Section */}
+        <section className="py-16 px-4 bg-darkGray/40">
+          <div className="container mx-auto max-w-6xl">
             {/* Tournament Rules Header Image */}
             <div className="text-center mb-8 -mx-4">
               <img 
@@ -614,10 +614,6 @@ const KingstonHyperXSupercup = () => {
                           <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
                         </p>
                       </div>
-                      <div className="col-span-2">
-                        <h4 className="text-primary font-bold mb-4 text-center">🏆 Premii Detaliate - 100,000 LEI</h4>
-                        <p className="text-xs text-gray-400 text-center mb-4">Click pe produse pentru a vedea specificații complete</p>
-                      </div>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -675,128 +671,24 @@ const KingstonHyperXSupercup = () => {
                   </div>
                 </div>
               </NeonBorder>
+            </div>
+          </div>
+        </section>
 
-              {/* Teams Section */}
-              <NeonBorder className="bg-darkGray/60">
-                <Button
-                  variant="ghost"
-                  className="w-full p-6 justify-between text-left hover:bg-transparent"
-                  onClick={() => setIsTeamsExpanded(!isTeamsExpanded)}
-                >
-                  <div className="flex items-center">
-                    <Users className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">
-                      Echipe participante ({teams.length})
-                    </span>
-                    {teamsLoading && <span className="ml-2 text-sm text-gray-400">(Se încarcă...)</span>}
-                  </div>
-                  {isTeamsExpanded ? 
-                    <ChevronUp className="h-5 w-5 text-primary" /> : 
-                    <ChevronDown className="h-5 w-5 text-primary" />
-                  }
-                </Button>
-                
-                {isTeamsExpanded && (
-                  <div className="px-6 pb-6">
-                    {teamsLoading ? (
-                      <div className="text-center py-4">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                        <p className="text-gray-400 mt-2">Se încarcă echipele...</p>
-                      </div>
-                    ) : teams.length === 0 ? (
-                      <p className="text-gray-400 text-center py-4">
-                        Nu sunt echipe înregistrate încă pentru acest turneu.
-                      </p>
-                    ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {teams.map((team) => {
-                          const teamLogo = getTeamLogo(team);
-                          return (
-                            <div
-                              key={team.id}
-                              className={`p-4 rounded-lg border-2 cursor-pointer transition-all duration-300 ${
-                                selectedTeam?.id === team.id
-                                  ? 'border-primary bg-primary/10'
-                                  : 'border-gray-600 hover:border-primary/50 bg-black/30'
-                              }`}
-                              onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
-                            >
-                              <div className="flex items-center space-x-3">
-                                <div className="w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                                  {teamLogo.icon}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <h3 className="text-white font-bold font-rajdhani truncate">
-                                    {team.name}
-                                  </h3>
-                                  <p className="text-gray-400 text-sm truncate">
-                                    Echipă participantă
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    )}
+        {/* Tournament Format Section */}
+        <section className="py-16 px-4 bg-darkGray/20">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+                Format Turneu
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Structura completă a competiției Kingston x HyperX Supercup Season 1
+              </p>
+            </div>
 
-                    {/* Team Details Modal-like Section */}
-                    {selectedTeam && (
-                      <div className="mt-6 p-6 bg-black/40 rounded-lg border border-primary/30">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-xl font-bold text-white font-rajdhani">
-                            Detalii echipă: {selectedTeam.name}
-                          </h3>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setSelectedTeam(null)}
-                            className="text-gray-400 hover:text-white"
-                          >
-                            ✕
-                          </Button>
-                        </div>
-                        
-                        {membersLoading ? (
-                          <div className="text-center py-4">
-                            <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                            <p className="text-gray-400 mt-2">Se încarcă membrii echipei...</p>
-                          </div>
-                        ) : teamMembers.length === 0 ? (
-                          <p className="text-gray-400">Nu sunt membri înregistrați pentru această echipă.</p>
-                        ) : (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {teamMembers.map((member, index) => (
-                              <div key={index} className="flex items-center justify-between p-3 bg-darkGray/40 rounded-lg">
-                                <div>
-                                  <p className="text-white font-medium">{member.nickname}</p>
-                                  <p className="text-gray-400 text-sm">
-                                    {member.faceitProfile || 'Profil jucător'}
-                                  </p>
-                                </div>
-                                <div className="text-right">
-                                  <span className={`px-2 py-1 rounded text-xs font-medium ${
-                                    member.role === 'captain' 
-                                      ? 'bg-primary/20 text-primary' 
-                                      : 'bg-gray-600/20 text-gray-300'
-                                  }`}>
-                                    {member.role === 'captain' ? 'Căpitan' : 'Jucător'}
-                                  </span>
-                                  <p className="text-gray-400 text-xs mt-1">
-                                    {member.position === 'main' ? 'Titular' : 'Rezervă'}
-                                  </p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </NeonBorder>
-
-              {/* Stage 0 - Qualifiers */}
+            <div className="space-y-6">
+              {/* Stage 0 - Qualification */}
               <NeonBorder className="bg-darkGray/60">
                 <Button
                   variant="ghost"
@@ -804,8 +696,8 @@ const KingstonHyperXSupercup = () => {
                   onClick={() => setIsStage0Expanded(!isStage0Expanded)}
                 >
                   <div className="flex items-center">
-                    <Flag className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 0: Calificarea (16 locuri disponibile)</span>
+                    <Target className="mr-3 h-5 w-5 text-primary" />
+                    <span className="text-lg font-semibold text-white">Stage 0: Calificare (16 locuri disponibile)</span>
                   </div>
                   {isStage0Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -814,33 +706,80 @@ const KingstonHyperXSupercup = () => {
                 </Button>
                 
                 {isStage0Expanded && (
-                  <div className="px-6 pb-6">
-                    <div className="text-center py-8">
-                      <Flag className="h-16 w-16 text-primary mx-auto mb-4 opacity-60" />
-                      <h3 className="text-xl font-bold text-white mb-3">Calificarea pentru turneu</h3>
-                      <p className="text-gray-300 mb-4 max-w-2xl mx-auto">
-                        16 echipe vor fi selectate direct, iar toate celelalte echipe înregistrate vor participa la 
-                        calificare pentru a ocupa celelalte 16 locuri disponibile în turneul principal.
-                      </p>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <div className="bg-black/40 rounded-lg p-4">
-                          <h4 className="text-primary font-bold mb-2">📋 Format Calificare</h4>
-                          <ul className="text-sm text-gray-300 space-y-2">
-                            <li>• Sistem eliminare directă</li>
-                            <li>• Meciuri BO1</li>
-                            <li>• 16 echipe calificate</li>
-                            <li>• Servere FACEIT EU East</li>
-                          </ul>
+                  <div className="px-6 pb-6 text-gray-300 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="text-primary font-bold mb-2">🎯 Procesul de Calificare</h4>
+                        <p className="text-sm leading-relaxed">
+                          <strong>Perioada:</strong> 11 - 13 septembrie 2025<br />
+                          <strong>Format:</strong> Single Elimination Bracket<br />
+                          <strong>Locuri:</strong> 16 echipe calificare + 16 selecție directă = 32 total<br />
+                          <strong>Meciuri:</strong> Best of 1 (BO1)<br />
+                          <strong>Servere:</strong> FACEIT EU East
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-primary font-bold mb-2">📋 Eligibilitatea pentru Calificare</h4>
+                        <p className="text-sm leading-relaxed">
+                          <strong>Echipe eligible:</strong> Toate echipele înregistrate care nu sunt selectate direct<br />
+                          <strong>Criterii minime:</strong><br />
+                          • Minimul 5 jucători activi<br />
+                          • FACEIT Level 4+ pentru toți jucătorii<br />
+                          • Vârsta minimă 16 ani<br />
+                          • Cetățenie română sau moldoveană
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
+                      <h4 className="text-primary font-bold mb-2 text-center">📅 Programul Calificării</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div className="text-center">
+                          <strong className="text-white">11 septembrie</strong><br />
+                          <span className="text-gray-300">Prima rundă de calificare<br />
+                          Ora 18:00 - 22:00</span>
                         </div>
-                        <div className="bg-black/40 rounded-lg p-4">
-                          <h4 className="text-primary font-bold mb-2">⏰ Program Calificare</h4>
-                          <ul className="text-sm text-gray-300 space-y-2">
-                            <li>• <strong>Perioada:</strong> 11-13 septembrie</li>
-                            <li>• <strong>Începere:</strong> 18:00 (ora Moldovei)</li>
-                            <li>• <strong>Durata:</strong> 2-3 zile</li>
-                            <li>• <strong>Stream:</strong> Live pe platformele MPL</li>
-                          </ul>
+                        <div className="text-center">
+                          <strong className="text-white">12 septembrie</strong><br />
+                          <span className="text-gray-300">A doua rundă de calificare<br />
+                          Ora 18:00 - 22:00</span>
                         </div>
+                        <div className="text-center">
+                          <strong className="text-white">13 septembrie</strong><br />
+                          <span className="text-gray-300">Finala calificării<br />
+                          Ora 18:00 - 21:00</span>
+                        </div>
+                      </div>
+                      <div className="text-center mt-4">
+                        <p className="text-xs text-gray-400">
+                          <em>16 echipe vor fi selectate direct de organizatori și vor intra în Stage 1</em>
+                        </p>
+                        <p className="text-xs text-gray-400">
+                          <em>Restul echipelor participă la calificare pentru celelalte 16 locuri</em>
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="text-primary font-bold mb-2">🏆 Avantajele Calificării</h4>
+                        <p className="text-sm leading-relaxed">
+                          • Acces direct în Stage 1 (grupele principale)<br />
+                          • Șansa de a câștiga premii în valoare de 100,000 LEI<br />
+                          • Experiență competitivă contra echipelor de top<br />
+                          • Transmisiune live pe canalele MPL<br />
+                          • Statistici oficiale și recunoaștere în comunitate
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="text-primary font-bold mb-2">⚡ Informații Importante</h4>
+                        <p className="text-sm leading-relaxed">
+                          • Înregistrarea se închide pe 10 septembrie<br />
+                          • Check-in obligatoriu cu 30 min înainte<br />
+                          • Toate echipele trebuie să aibă Discord activ<br />
+                          • Anti-cheat: FACEIT AC obligatoriu<br />
+                          • Regulament complet pe site-ul MPL
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -917,240 +856,6 @@ const KingstonHyperXSupercup = () => {
                     <KingstonStage3Playoff />
                   </div>
                 )}
-              </NeonBorder>
-
-
-            </div>
-          </div>
-        </section>
-
-        {/* Simple Prizes Section */}
-        <section className="py-16 px-4 bg-darkGray/20">
-          <div className="container mx-auto max-w-4xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
-                Premii - 100,000 LEI
-              </h2>
-              <p className="text-gray-300 text-lg">
-                Echipamente premium de gaming oferite de Kingston și HyperX
-              </p>
-            </div>
-
-            {/* Prize Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* 1st Place */}
-              <NeonBorder className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border-yellow-400/50">
-                <div className="p-6 text-center min-h-[480px] flex flex-col">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-500/20 border border-yellow-400/50 mb-4">
-                    <Trophy className="w-8 h-8 text-yellow-400" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-yellow-400 font-rajdhani mb-6">
-                    Locul 1
-                  </h3>
-
-                  {/* Product Images */}
-                  <div className="flex-1 flex flex-col justify-center space-y-4">
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/hyperx-cloud-iii-s.png"
-                          alt="HyperX Cloud III S Wireless"
-                          className="w-20 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-yellow-300/90 font-medium">
-                        5x HyperX Cloud III S Wireless
-                      </p>
-                      <p className="text-xs text-yellow-300/70 mt-1">
-                        Căști gaming premium wireless
-                      </p>
-                    </div>
-                    
-                    {/* Plus Sign */}
-                    <div className="flex justify-center">
-                      <div className="text-2xl font-bold text-white">+</div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/kingston-fury-renegade-transparent.png"
-                          alt="Kingston FURY Renegade DDR5 RGB"
-                          className="w-32 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-yellow-300/90 font-medium">
-                        5x Kingston FURY Renegade RGB 48GB DDR5
-                      </p>
-                      <p className="text-xs text-yellow-300/70 mt-1">
-                        Memorie RAM premium 6000MT/s
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </NeonBorder>
-
-              {/* 2nd Place */}
-              <NeonBorder className="bg-gradient-to-br from-gray-400/20 to-gray-500/10 border-gray-300/50">
-                <div className="p-6 text-center min-h-[480px] flex flex-col">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-400/20 border border-gray-300/50 mb-4">
-                    <Award className="w-8 h-8 text-gray-300" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-300 font-rajdhani mb-6">
-                    Locul 2
-                  </h3>
-
-                  {/* Product Images */}
-                  <div className="flex-1 flex flex-col justify-center space-y-4">
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/kingston-fury-beast-32gb.png"
-                          alt="Kingston FURY Beast 32GB DDR5"
-                          className="w-32 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-gray-300/90 font-medium">
-                        5x Kingston FURY Beast 32GB DDR5
-                      </p>
-                      <p className="text-xs text-gray-300/70 mt-1">
-                        Memorie RAM gaming 5600MT/s
-                      </p>
-                    </div>
-                    
-                    {/* Plus Sign */}
-                    <div className="flex justify-center py-2">
-                      <div className="text-2xl font-bold text-white">+</div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/hyperx-alloy-rise-75.png"
-                          alt="Tastatură HyperX Alloy Rise 75 Black"
-                          className="w-32 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-gray-300/90 font-medium">
-                        5x Tastatură HyperX Alloy Rise 75 Black
-                      </p>
-                      <p className="text-xs text-gray-300/70 mt-1">
-                        Tastatură mecanică RGB gaming
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </NeonBorder>
-
-              {/* 3rd Place */}
-              <NeonBorder className="bg-gradient-to-br from-orange-500/20 to-orange-600/10 border-orange-400/50">
-                <div className="p-6 text-center min-h-[480px] flex flex-col">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/20 border border-orange-400/50 mb-4">
-                    <Award className="w-8 h-8 text-orange-400" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-orange-400 font-rajdhani mb-6">
-                    Locul 3
-                  </h3>
-
-                  {/* Product Images */}
-                  <div className="flex-1 flex flex-col justify-center space-y-3">
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/hyperx-pulsefire-haste-2.png"
-                          alt="HyperX Pulsefire Haste 2"
-                          className="w-20 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-orange-400/90 font-medium">
-                        5x HyperX Pulsefire Haste 2
-                      </p>
-                      <p className="text-xs text-orange-400/70 mt-1">
-                        Mouse gaming ultralight
-                      </p>
-                    </div>
-                    
-                    {/* Plus Sign */}
-                    <div className="flex justify-center py-1">
-                      <div className="text-xl font-bold text-white">+</div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="flex justify-center mb-2 h-16">
-                        <img 
-                          src="/kingston-datatraveler-exodia.png"
-                          alt="DataTraveler Exodia S USB 256GB"
-                          className="w-16 h-16 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-orange-400/90 font-medium">
-                        5x Kingston Bundle Premium:
-                      </p>
-                      <p className="text-xs text-orange-400/90 mt-1">
-                        • DataTraveler Exodia S USB 256GB
-                      </p>
-                      <p className="text-xs text-orange-400/90">
-                        • T-shirt Kingston Fury branded
-                      </p>
-                      <p className="text-xs text-orange-400/90">• Termo bag Kingston Fury branded</p>
-                    </div>
-                  </div>
-                </div>
-              </NeonBorder>
-
-              {/* Ace of Aces */}
-              <NeonBorder className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 border-purple-400/50">
-                <div className="p-6 text-center min-h-[480px] flex flex-col">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border border-purple-400/50 mb-4">
-                    <Sparkles className="w-8 h-8 text-purple-400" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-purple-400 font-rajdhani mb-6">
-                    Ace of Aces
-                  </h3>
-
-                  {/* Product Images */}
-                  <div className="flex-1 flex flex-col justify-center space-y-4">
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/kingston-fury-renegade-limited-edition.png"
-                          alt="Kingston FURY Renegade 48GB DDR5 RGB Limited Edition"
-                          className="w-32 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-purple-400/90 font-medium">
-                        1x FURY Renegade 48GB DDR5 RGB Limited Edition
-                      </p>
-                      <p className="text-xs text-purple-400/70 mt-1">
-                        Memorie RAM exclusivă 8000MT/s
-                      </p>
-                    </div>
-                    
-                    {/* Plus Sign */}
-                    <div className="flex justify-center py-2">
-                      <div className="text-2xl font-bold text-white">+</div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="flex justify-center mb-3 h-24">
-                        <img 
-                          src="/hyperx-alloy-rise-75-wireless.png"
-                          alt="HyperX Alloy Rise 75 Wireless"
-                          className="w-32 h-20 object-contain"
-                        />
-                      </div>
-                      <p className="text-sm text-purple-400/90 font-medium">
-                        1x HyperX Premium Choice:
-                      </p>
-                      <p className="text-xs text-purple-400/90 mt-1">
-                        • HyperX Alloy Rise 75 Wireless
-                      </p>
-                      <p className="text-xs text-purple-400/70 italic">
-                        sau HyperX Cloud III S Wireless
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </NeonBorder>
             </div>
           </div>
