@@ -183,7 +183,7 @@ const KingstonHyperXSupercup = () => {
       </Helmet>
       <div className="bg-black min-h-screen">
         {/* Hero Section */}
-        <div className="relative h-[70vh] bg-gradient-to-b from-black to-darkBg overflow-hidden">
+        <div className="relative min-h-[80vh] lg:h-[70vh] bg-gradient-to-b from-black to-darkBg overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img 
@@ -198,7 +198,7 @@ const KingstonHyperXSupercup = () => {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center">
+          <div className="relative z-10 container mx-auto px-4 py-8 h-full flex flex-col justify-center">
             <div className="max-w-4xl">
               <Link href="/#about">
                 <Button variant="ghost" className="mb-4 text-gray-300 hover:text-white">
@@ -221,24 +221,24 @@ const KingstonHyperXSupercup = () => {
                 <span>Online (Moldova & România)</span>
               </div>
 
-              <p className="text-lg text-gray-100 max-w-2xl mb-8">
+              <p className="text-lg text-gray-100 max-w-2xl mb-6">
                 Primul turneu Supercup powered by Kingston și HyperX. Competiție de elită cu echipamente gaming premium 
                 pentru cele mai bune echipe din Moldova și România.
               </p>
 
               {/* Live Countdown Timer */}
-              <div className="mb-8">
+              <div className="mb-6">
                 <CountdownTimer 
                   targetDate="2025-08-15T18:00:00Z" 
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 pb-8 pt-2">
                 <Link href="/register-team">
                   <Button 
                     size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-black font-bold px-8 py-3 text-lg"
+                    className="bg-primary hover:bg-primary/90 text-black font-bold px-6 py-3 text-base sm:px-8 sm:text-lg w-full sm:w-auto"
                   >
                     <Gift className="mr-2 h-5 w-5" />
                     Înscrie-te acum
@@ -247,7 +247,7 @@ const KingstonHyperXSupercup = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg"
+                  className="border-primary text-primary hover:bg-primary/10 px-6 py-3 text-base sm:px-8 sm:text-lg w-full sm:w-auto"
                   onClick={() => {
                     const rulesSection = document.querySelector('#tournament-rules');
                     rulesSection?.scrollIntoView({ behavior: 'smooth' });
