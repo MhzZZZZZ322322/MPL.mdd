@@ -464,8 +464,8 @@ export default function RegisteredTeamsManager() {
             </div>
 
             {/* Team Type Selection - Direct sau Calificare */}
-            <div className="border rounded-lg p-4 bg-yellow-50/30">
-              <Label className="text-sm font-medium">Tipul echipei în turneu</Label>
+            <div className="border-2 border-red-500 rounded-lg p-4 bg-red-50">
+              <Label className="text-lg font-bold text-red-600">TIPUL ECHIPEI ÎN TURNEU</Label>
               <div className="mt-2">
                 <Select 
                   value={editedIsDirectInvite ? "direct" : "qualification"} 
