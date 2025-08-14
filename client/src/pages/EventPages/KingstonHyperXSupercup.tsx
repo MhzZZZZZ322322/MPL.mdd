@@ -778,7 +778,7 @@ const KingstonHyperXSupercup = () => {
                           • Check-in obligatoriu cu 30 min înainte<br />
                           • Toate echipele trebuie să aibă Discord activ<br />
                           • Anti-cheat: FACEIT AC obligatoriu<br />
-                          • Regulament complet pe site-ul MPL
+                          • Vezi regulamentul complet mai jos
                         </p>
                       </div>
                     </div>
@@ -887,7 +887,7 @@ const KingstonHyperXSupercup = () => {
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <p>În fiecare echipă este permis un număr de până la <strong className="text-white">10 jucători</strong>: <span className="text-primary">5 în roster principal</span> și <span className="text-secondary">5 substitute</span>.</p>
+                    <p>În fiecare echipă este permis un număr de până la <strong className="text-white">10 jucători</strong>: <span className="text-primary">5 în roster</span> și <span className="text-secondary">5 în substitute</span>.</p>
                   </div>
                 </div>
               </NeonBorder>
@@ -905,11 +905,11 @@ const KingstonHyperXSupercup = () => {
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <p>Pentru probleme tehnice anunțate din timp: delay permis de <strong className="text-yellow-400">15-30 de minute</strong>.</p>
+                    <p>Această regulă nu este valabilă dacă echipa anunță din timp organizatorii și echipa oponentă că are probleme tehnice; în caz de probleme tehnice este permis un <strong className="text-yellow-400">delay de 15-30 de minute</strong>.</p>
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <p>Abuzul funcțiilor FACEIT (ban lent hărți) este <strong className="text-orange-400">interzis</strong> fără anunțarea oponentului și organizatorilor.</p>
+                    <p>Este interzis abuzul funcțiilor FACEIT, cum ar fi <strong className="text-orange-400">banarea lentă a hărților pentru întinderea timpului</strong>. Este permisă această funcție doar când este anunțată echipa oponentă și organizatorii.</p>
                   </div>
                 </div>
               </NeonBorder>
@@ -931,7 +931,7 @@ const KingstonHyperXSupercup = () => {
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <p>Critica evenimentului fără bază de argumentare = <strong className="text-yellow-400">warn</strong>, apoi <strong className="text-red-400">descalificare</strong></p>
+                    <p>Critica evenimentului fără bază de argumentare va fi sancționată cu <strong className="text-yellow-400">warn</strong>, apoi cu <strong className="text-red-400">descalificare</strong></p>
                   </div>
                 </div>
               </NeonBorder>
@@ -949,7 +949,7 @@ const KingstonHyperXSupercup = () => {
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <p>Cheat-urile și orice tip de exploit sunt <strong className="text-red-500">strict interzise</strong></p>
+                    <p>Cheat-urile și orice tip de exploit sunt, de asemenea, <strong className="text-red-500">interzise</strong></p>
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>

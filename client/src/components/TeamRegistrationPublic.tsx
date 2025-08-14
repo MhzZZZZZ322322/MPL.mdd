@@ -212,7 +212,7 @@ export default function TeamRegistrationPublic() {
     if (validMembers.length < 5) {
       toast({
         title: "Echipă incompletă",
-        description: "O echipă trebuie să aibă minimum 5 jucători cu toate datele complete",
+        description: "O echipă trebuie să aibă minimum 5 jucători (maximum 10: 5 roster + 5 substitute)",
         variant: "destructive",
       });
       return;

@@ -1033,8 +1033,8 @@ export const translations: TranslationDictionary = {
     ru: "Требования к участникам"
   },
   "event.eligibility.teams": {
-    ro: "Echipele trebuie să aibă minimum 5 jucători și maximum 7 (5 titulari + 2 rezerve)",
-    ru: "Команды должны иметь минимум 5 игроков и максимум 7 (5 основных + 2 запасных)"
+    ro: "Echipele trebuie să aibă minimum 5 jucători și maximum 10 (5 în roster + 5 substitute)",
+    ru: "Команды должны иметь минимум 5 игроков и максимум 10 (5 в ростере + 5 запасных)"
   },
   "event.eligibility.faceit": {
     ro: "Toți jucătorii trebuie să dețină un cont FACEIT verificat",
