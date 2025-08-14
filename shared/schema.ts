@@ -558,6 +558,7 @@ export const kingstonTeams = pgTable("kingston_teams", {
   logoData: text("logo_data"), // Base64 encoded logo data
   tournament: text("tournament").notNull().default("kingston-hyperx-supercup"),
   status: text("status").notNull().default("pending"), // pending, approved, rejected
+  isDirectInvite: boolean("is_direct_invite").notNull().default(false), // true pentru echipele cu invitație directă
   isActive: boolean("is_active").notNull().default(true),
   submittedAt: timestamp("submitted_at").defaultNow(),
   reviewedAt: timestamp("reviewed_at"),

@@ -144,8 +144,8 @@ const KingstonHyperXSupercup = () => {
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
   // Separate teams by type
-  const directInviteTeams = teams.filter(team => (team as any).isDirectInvite);
-  const qualificationTeams = teams.filter(team => !(team as any).isDirectInvite);
+  const directInviteTeams = teams.filter(team => team.isDirectInvite);
+  const qualificationTeams = teams.filter(team => !team.isDirectInvite);
 
   // Fetch members for selected team
   const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
@@ -739,8 +739,8 @@ const KingstonHyperXSupercup = () => {
 
             {/* Qualification Teams Grid - will show teams registered for qualification */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {/* For now showing placeholder - real teams will come from registration system */}
-              {teams.filter(team => !(team as any).isDirectInvite).length === 0 ? (
+              {/* Show teams that are NOT direct invites */}
+              {qualificationTeams.length === 0 ? (
                 <div className="col-span-full text-center py-12">
                   <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
                   <h3 className="text-xl font-semibold text-gray-300 mb-2">Înregistrările încep în curând</h3>
@@ -750,7 +750,7 @@ const KingstonHyperXSupercup = () => {
                   </p>
                 </div>
               ) : (
-                teams.filter(team => !(team as any).isDirectInvite).map((team, index) => (
+                qualificationTeams.map((team, index) => (
                   <NeonBorder key={team.id} className="bg-darkGray/60 p-4 text-center hover:bg-darkGray/80 transition-all duration-300">
                     <div className="flex flex-col items-center">
                       <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center mb-3">
