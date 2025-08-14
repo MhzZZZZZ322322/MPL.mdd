@@ -105,31 +105,31 @@ export default function TournamentAdmin() {
               </h2>
             </div>
           
-            <Tabs defaultValue="team-approval" className="w-full">
-              <TabsList className="grid w-full grid-cols-6 bg-slate-800/50">
-                <TabsTrigger value="team-approval" className="flex items-center gap-1 text-xs">
-                  <Users className="w-3 h-3" />
-                  Aprobare
-                </TabsTrigger>
-                <TabsTrigger value="team-types" className="flex items-center gap-1 text-xs bg-purple-900/30 border border-purple-500/50">
-                  <Trophy className="w-3 h-3" />
+            <Tabs defaultValue="team-types" className="w-full">
+              <TabsList className="flex w-full bg-slate-800/50 p-1">
+                <TabsTrigger value="team-types" className="flex-1 bg-purple-600 text-white border border-purple-500">
+                  <Trophy className="w-4 h-4 mr-2" />
                   🎯 TIPURI ECHIPE
                 </TabsTrigger>
-                <TabsTrigger value="registered-teams" className="flex items-center gap-1 text-xs">
-                  <Settings className="w-3 h-3" />
-                  Înregistrate
+                <TabsTrigger value="team-approval" className="flex-1">
+                  <Users className="w-4 h-4 mr-2" />
+                  Aprobare Echipe
                 </TabsTrigger>
-                <TabsTrigger value="teams" className="flex items-center gap-1 text-xs">
-                  <Settings className="w-3 h-3" />
-                  Adăugare
+                <TabsTrigger value="registered-teams" className="flex-1">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Echipe Înregistrate
                 </TabsTrigger>
-                <TabsTrigger value="management" className="flex items-center gap-1 text-xs">
-                  <Settings className="w-3 h-3" />
-                  Grupe
+                <TabsTrigger value="teams" className="flex-1">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Adăugare Echipe
                 </TabsTrigger>
-                <TabsTrigger value="stage2" className="flex items-center gap-1 text-xs">
-                  <Trophy className="w-3 h-3" />
-                  Stage 2
+                <TabsTrigger value="management" className="flex-1">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Configurare Grupe
+                </TabsTrigger>
+                <TabsTrigger value="stage2" className="flex-1">
+                  <Trophy className="w-4 h-4 mr-2" />
+                  Stage 2 Double Elim
                 </TabsTrigger>
 
               </TabsList>
