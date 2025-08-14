@@ -1048,13 +1048,15 @@ const KingstonHyperXSupercup = () => {
             <p className="text-xl text-gray-300 mb-8">
               Înscrie-te la Kingston x HyperX Supercup Season 1 și câștigă echipamente gaming premium.
             </p>
-            <Button 
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-black px-8 py-4 text-xl font-bold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
-            >
-              <Gift className="mr-2" />
-              ÎNSCRIE-TE ACUM!
-            </Button>
+            <Link href="/register-team">
+              <Button 
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-black px-8 py-4 text-xl font-bold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
+              >
+                <Gift className="mr-2" />
+                ÎNSCRIE-TE ACUM!
+              </Button>
+            </Link>
           </div>
         </section>
 
