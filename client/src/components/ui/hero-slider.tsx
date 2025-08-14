@@ -71,19 +71,19 @@ export const HeroSlider = () => {
       <motion.div 
         key={currentSlide}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute top-0 left-0 right-0 h-1/2 flex items-center justify-center"
+        className="absolute inset-0"
       >
         <img 
           src={currentContent.image} 
           alt={currentContent.title}
-          className="w-full max-w-7xl h-auto object-contain"
+          className="w-full h-full object-cover object-center"
         />
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-black opacity-20"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
       
       {/* Gradient overlay bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent"></div>
@@ -108,13 +108,13 @@ export const HeroSlider = () => {
       
       {/* Slide indicators */}
       {slides.length > 1 && (
-        <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-3">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-primary' : 'bg-white/50 hover:bg-white/80'
+              className={`w-4 h-4 rounded-full transition-all duration-300 shadow-lg ${
+                index === currentSlide ? 'bg-primary border-2 border-white' : 'bg-white/60 hover:bg-white/90 border border-white/30'
               }`}
             />
           ))}
@@ -123,36 +123,38 @@ export const HeroSlider = () => {
       
       {/* Content */}
       {isLoaded && (
-        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl mx-auto z-20 pb-4">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-4xl"
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 font-rajdhani [text-shadow:_0_1px_5px_rgb(0_0_0_/_50%)]">
-              {currentContent.title}
-            </h1>
-            <h2 className="text-xl sm:text-2xl text-primary font-semibold mb-4 max-w-xl [text-shadow:_0_1px_3px_rgb(0_0_0_/_80%)]">
-              {currentContent.subtitle}
-            </h2>
-            <div className="flex flex-wrap gap-4 mt-6">
-              {currentContent.primaryBtn.link.startsWith('http') ? (
-                <a href={currentContent.primaryBtn.link} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium">
-                    {currentContent.primaryBtn.text} <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </a>
-              ) : (
-                <Link href={currentContent.primaryBtn.link}>
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium">
-                    {currentContent.primaryBtn.text} <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </motion.div>
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-center max-w-4xl mx-auto"
+            >
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-rajdhani [text-shadow:_0_2px_10px_rgb(0_0_0_/_80%)]">
+                {currentContent.title}
+              </h1>
+              <h2 className="text-xl sm:text-2xl md:text-3xl text-primary font-semibold mb-8 max-w-3xl mx-auto [text-shadow:_0_2px_8px_rgb(0_0_0_/_90%)]">
+                {currentContent.subtitle}
+              </h2>
+              <div className="flex flex-wrap gap-4 justify-center mt-8">
+                {currentContent.primaryBtn.link.startsWith('http') ? (
+                  <a href={currentContent.primaryBtn.link} target="_blank" rel="noopener noreferrer">
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium px-8 py-4 text-lg shadow-2xl border border-primary/20">
+                      {currentContent.primaryBtn.text} <ChevronRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </a>
+                ) : (
+                  <Link href={currentContent.primaryBtn.link}>
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium px-8 py-4 text-lg shadow-2xl border border-primary/20">
+                      {currentContent.primaryBtn.text} <ChevronRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </motion.div>
+          </div>
         </div>
       )}
     </div>
