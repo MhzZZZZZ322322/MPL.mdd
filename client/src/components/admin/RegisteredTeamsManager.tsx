@@ -37,6 +37,7 @@ interface RegisteredTeam {
   logoData?: string;
   tournament: string;
   status: string;
+  isDirectInvite?: boolean;
   submittedAt: string;
   reviewedAt: string;
   reviewedBy: string;
@@ -325,6 +326,16 @@ export default function RegisteredTeamsManager() {
                           <Badge variant="outline" className="text-green-600 border-green-600">
                             Aprobată
                           </Badge>
+                          {team.isDirectInvite === true && (
+                            <Badge variant="outline" className="text-purple-600 border-purple-600 bg-purple-50/50">
+                              Invitație Directă
+                            </Badge>
+                          )}
+                          {team.isDirectInvite === false && (
+                            <Badge variant="outline" className="text-blue-600 border-blue-600 bg-blue-50/50">
+                              Calificare
+                            </Badge>
+                          )}
                         </div>
                       </div>
                     </div>
