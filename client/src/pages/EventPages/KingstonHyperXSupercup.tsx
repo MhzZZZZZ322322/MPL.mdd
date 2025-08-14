@@ -574,7 +574,7 @@ const KingstonHyperXSupercup = () => {
                           <br />• <strong>Stage 0:</strong> Calificarea - toate echipele înregistrate
                           <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, primele 2 avansează (32→16)
                           <br />• <strong>Stage 2:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)
-                          <br />• <strong>Total:</strong> 32 echipe (16 selectate + 16 prin calificare)
+                          <br />• <strong>Total:</strong> 32 echipe (12 selectate direct + 20 prin calificare)
                         </p>
                       </div>
                       <div>
@@ -618,7 +618,7 @@ const KingstonHyperXSupercup = () => {
                           <strong>Stage 0:</strong> Calificare - toate echipele înregistrate<br />
                           <strong>Stage 1:</strong> 8 Grupe cu 4 echipe, primele 2 avansează (32→16)<br />
                           <strong>Stage 2:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)<br />
-                          <strong>Total echipe:</strong> 32 (16 direct + 16 calificare)<br />
+                          <strong>Total echipe:</strong> 32 (12 selectate direct + 20 prin calificare)<br />
                           <strong>Toate meciurile:</strong> Format BO1 până la finală
                         </p>
                       </div>
@@ -635,7 +635,7 @@ const KingstonHyperXSupercup = () => {
                   </h3>
                   <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                     Înregistrează-ți echipa pentru Kingston x HyperX Supercup Season 1. 
-                    32 echipe totale: 16 selectate direct + 16 prin calificare!
+                    32 echipe totale: 12 selectate direct + 20 prin calificare!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href="/register-team">
@@ -651,7 +651,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Total echipe: <span className="text-white font-bold">{teams.length} / 32</span> (16 selectate + 16 calificare)
+                        Total echipe: <span className="text-white font-bold">{teams.length} / 32</span> (12 selectate direct + 20 calificare)
                       </p>
                     </div>
                   </div>
@@ -699,7 +699,7 @@ const KingstonHyperXSupercup = () => {
                         <p className="text-sm leading-relaxed">
                           <strong>Perioada:</strong> 11 - 13 septembrie 2025<br />
                           <strong>Format:</strong> Single Elimination Bracket<br />
-                          <strong>Locuri:</strong> Toate echipele înregistrate participă la calificare<br />
+                          <strong>Locuri:</strong> 20 locuri disponibile pentru Stage 1<br />
                           <strong>Meciuri:</strong> Best of 1 (BO1)<br />
                           <strong>Servere:</strong> FACEIT EU East
                         </p>
@@ -741,7 +741,7 @@ const KingstonHyperXSupercup = () => {
                           <em>Toate echipele înregistrate participă la Calificare</em>
                         </p>
                         <p className="text-xs text-gray-400">
-                          <em>16 echipe se califică pentru Stage 1 (+ 16 selectate direct = 32 total)</em>
+                          <em>20 echipe se califică pentru Stage 1 (+ 12 selectate direct = 32 total)</em>
                         </p>
                       </div>
                     </div>
