@@ -46,7 +46,7 @@ const About = () => {
       link: "/events/mpl-pilot-cup"
     },
     {
-      year: "August - Septembrie 2025",
+      year: "15 August - 28 Septembrie 2025",
       title: "Kingston x HyperX - Supercup Season 1",
       description: "Primul turneu major cu 32 echipe și premii în valoare de 100,000 LEI. Format: Calificare → Grupe → Playoff.",
       icon: <Sparkles />,
@@ -54,9 +54,9 @@ const About = () => {
       isActive: true
     },
     {
-      year: "Octombrie 2024 - Ianuarie 2025",
-      title: "ROPL - Romanian Open Pro League",
-      description: "Liga profesională româno-moldoveană cu echipe din ambele țări. Format competitiv cu meciuri regulate săptămânale.",
+      year: "23-24 August 2025",
+      title: "HATOR CUP - ROPL x MPL",
+      description: "Primul turneu de colaborare ROPL x MPL. Super turneu CS2 powered by HATOR și SkinBaron cu prize pool 5500 RON.",
       icon: <LucideTerminal />,
       link: "/events/hator-cup-ropl-mpl"
     },
