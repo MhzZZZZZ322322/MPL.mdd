@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye, Flag, Target, Clock, Shield, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye, Flag, Target, Clock, Shield, AlertTriangle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
@@ -657,6 +657,63 @@ const KingstonHyperXSupercup = () => {
                   </div>
                 </div>
               </NeonBorder>
+            </div>
+          </div>
+        </section>
+
+        {/* Direct Invites Section */}
+        <section className="py-16 px-4 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+                Echipe cu Invitație Directă
+              </h2>
+              <p className="text-gray-300 text-lg mb-2">
+                Următoarele 12 echipe sunt invitate direct în Stage 2 (Grupe)
+              </p>
+              <p className="text-primary font-semibold">
+                Aceste echipe nu participă la Stage 1 - Calificare
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+              {[
+                "Lit Energy",
+                "Cocojambo", 
+                "VGT",
+                "Golden Five",
+                "Ксго пиво",
+                "Cadian Team",
+                "4superlight",
+                "begrip",
+                "Muligambia",
+                "BiteMD",
+                "Legalize",
+                "Into the Beach"
+              ].map((teamName, index) => (
+                <NeonBorder key={index} className="bg-darkGray/60 p-4 text-center hover:bg-darkGray/80 transition-all duration-300">
+                  <div className="flex flex-col items-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mb-3">
+                      <Trophy className="w-6 h-6 text-black" />
+                    </div>
+                    <h3 className="text-white font-bold text-sm mb-1">{teamName}</h3>
+                    <span className="text-primary text-xs font-semibold">INVITE DIRECT</span>
+                  </div>
+                </NeonBorder>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/30 rounded-lg p-6 max-w-4xl mx-auto">
+                <div className="flex items-center justify-center mb-4">
+                  <Star className="mr-3 h-6 w-6 text-primary" />
+                  <h4 className="text-xl font-bold text-primary font-rajdhani">Echipe de Top</h4>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  Aceste echipe au fost selectate pe baza performanțelor și reputației lor în scena competitivă CS2 din Moldova. 
+                  Ele intră direct în etapa de grupe alături de cele 20 de echipe care se vor califica prin Stage 1.
+                </p>
+              </div>
             </div>
           </div>
         </section>
