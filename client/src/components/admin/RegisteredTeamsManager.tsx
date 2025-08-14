@@ -318,18 +318,19 @@ export default function RegisteredTeamsManager() {
   return (
     <>
       {/* Quick Team Type Manager Section */}
-      <Card className="mb-6">
+      <Card className="mb-6 border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center">
-              <Settings className="mr-2" />
-              Manager Tipuri Echipe - Direct vs Calificare
+              <Settings className="mr-2 text-purple-400" />
+              <span className="text-purple-300">🎯 INSTRUMENT RAPID: Manager Tipuri Echipe</span>
             </div>
             <Button 
-              variant="outline" 
+              variant={showTypeManager ? "secondary" : "default"} 
               onClick={() => setShowTypeManager(!showTypeManager)}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
             >
-              {showTypeManager ? 'Ascunde' : 'Arată'} Manager Tipuri
+              {showTypeManager ? '👁️ Ascunde Manager' : '⚡ Arată Manager Tipuri'}
             </Button>
           </CardTitle>
         </CardHeader>
