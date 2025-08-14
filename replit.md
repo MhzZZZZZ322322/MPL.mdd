@@ -8,6 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes  
+- August 14, 2025: **KINGSTON_DIRECT_INVITES_CONFIRMED** - Adăugate în sistem toate cele 12 echipe cu invite direct pentru turneul Kingston: Lit Energy, Cocojambo, VGT, Golden Five, Ксго пиво, Cadian Team, 4superlight, begrip, Muligambia, BiteMD, Legalize, Into the Beach. Statusul tuturor echipelor setat ca "confirmed".
 - August 14, 2025: **KINGSTON_TOURNAMENT_TIMING_UPDATED** - Actualizat complet cronograma turneului Kingston conform timingurilor oficiale: Stage 1 (10-14 septembrie), Stage 2 (17-21 septembrie), Playoff (27-28 septembrie). Perioada de înscriere și promovare rămâne 15 august - 10 septembrie.
 - August 14, 2025: **KINGSTON_MATCH_FORMAT_CLARIFIED** - Clarificat formatul meciurilor Kingston: "Format BO1 până la finală" → "Format BO1, meciurile decisive BO3" pentru a specifica că doar meciurile importante sunt Best of 3.
 - August 14, 2025: **KINGSTON_STAGE_NAMING_FINALIZED** - Actualizat denumirile etapelor Kingston conform formatului oficial: "Stage 0, Stage 1, Stage 2" → "Stage 1, Stage 2, Playoff". Toate referințele în pagină corecte cu noua nomenclatură: Stage 1 (Calificare), Stage 2 (8 Grupe), Playoff (Double Elimination).
