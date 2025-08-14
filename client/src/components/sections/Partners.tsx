@@ -139,7 +139,7 @@ const Partners = () => {
                   className="aspect-video bg-black/40 rounded flex items-center justify-center p-4 hover:bg-black/60 transition-colors"
                 >
                   <div className="h-16 flex items-center justify-center">
-                    <img src={kingstonLogo} alt="Kingston Fury Logo" className="h-full w-auto object-contain" />
+                    <img src={kingstonLogo} alt="Kingston FURY Logo" className="h-full w-auto object-contain" />
                   </div>
                 </a>
                 <a 

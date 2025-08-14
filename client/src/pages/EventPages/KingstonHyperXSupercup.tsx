@@ -415,15 +415,15 @@ const KingstonHyperXSupercup = () => {
                         />
                       </div>
                       <p className="text-sm text-orange-400/90 font-medium">
-                        5x Kingston Bundle Premium:
+                        5x Kingston FURY Bundle Premium:
                       </p>
                       <p className="text-xs text-orange-400/90 mt-1">
                         • DataTraveler Exodia S USB 256GB
                       </p>
                       <p className="text-xs text-orange-400/90">
-                        • T-shirt Kingston Fury branded
+                        • T-shirt Kingston FURY branded
                       </p>
-                      <p className="text-xs text-orange-400/90">• Termo bag Kingston Fury branded</p>
+                      <p className="text-xs text-orange-400/90">• Termo bag Kingston FURY branded</p>
                     </div>
                   </div>
                 </div>
@@ -577,7 +577,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">📝 Format Turneu</h4>
                         <p className="text-sm leading-relaxed">
-                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 3 etape:
+                          Turneul Kingston FURY x HyperX Supercup Season 1 se desfășoară în 3 etape:
                           <br />• <strong>Stage 1:</strong> Calificarea - toate echipele înregistrate
                           <br />• <strong>Stage 2:</strong> 8 grupe de câte 4 echipe, primele 2 avansează (32→16)
                           <br />• <strong>Playoff:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)
@@ -641,7 +641,7 @@ const KingstonHyperXSupercup = () => {
                     Participă la cel mai mare turneu CS2!
                   </h3>
                   <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-                    Înregistrează-ți echipa pentru Kingston x HyperX Supercup Season 1. 
+                    Înregistrează-ți echipa pentru Kingston FURY x HyperX Supercup Season 1. 
                     32 echipe totale: 12 selectate direct + 20 prin calificare!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -861,7 +861,7 @@ const KingstonHyperXSupercup = () => {
                 Format Turneu
               </h2>
               <p className="text-gray-300 text-sm md:text-lg px-2">
-                Structura completă a competiției Kingston x HyperX Supercup Season 1
+                Structura completă a competiției Kingston FURY x HyperX Supercup Season 1
               </p>
             </div>
 
@@ -1008,7 +1008,7 @@ const KingstonHyperXSupercup = () => {
                 Regulamentul Turneului
               </h2>
               <p className="text-sm md:text-xl text-gray-300 px-2">
-                Regulile oficiale pentru Kingston x HyperX Supercup Season 1
+                Regulile oficiale pentru Kingston FURY x HyperX Supercup Season 1
               </p>
             </div>
             

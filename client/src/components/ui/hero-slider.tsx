@@ -26,7 +26,7 @@ export const HeroSlider = () => {
   const slides: HeroContent[] = [
     {
       image: supercupMainImage,
-      title: "Kingston x HyperX",
+      title: "Kingston FURY x HyperX",
       subtitle: "Supercup Season 1 • 100,000 LEI premii • 15 august - 28 septembrie",
       primaryBtn: {
         text: "ÎNSCRIE-TE ACUM",

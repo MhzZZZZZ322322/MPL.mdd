@@ -96,7 +96,7 @@ export default function BlogManager() {
   ]);
 
   const [availableTags] = useState([
-    "CS2", "Counter-Strike", "HATOR Cup", "Kingston SuperCup", "MPL", "Moldova", 
+    "CS2", "Counter-Strike", "HATOR Cup", "Kingston FURY SuperCup", "MPL", "Moldova", 
     "Esports", "Gaming", "Tournament", "Championship", "Players", "Teams"
   ]);
 

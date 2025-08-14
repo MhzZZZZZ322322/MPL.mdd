@@ -263,7 +263,7 @@ export default function GroupManagement() {
               <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />
               <div>
                 <p className="text-amber-200 font-medium">Vizualizare fără editare</p>
-                <p className="text-amber-300/80 text-sm">Turneul HATOR este înghețat. Pentru editare, selectează turneul Kingston.</p>
+                <p className="text-amber-300/80 text-sm">Turneul HATOR este înghețat. Pentru editare, selectează turneul Kingston FURY.</p>
               </div>
             </div>
           )}

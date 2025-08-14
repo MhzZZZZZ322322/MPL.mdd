@@ -34,7 +34,7 @@ export default function TournamentAdmin() {
   const { toast } = useToast();
   const [selectedTournament, setSelectedTournament] = useState<'hator' | 'kingston'>('hator');
   
-  // HATOR este readonly (înghețat), Kingston este editabil
+  // HATOR este readonly (înghețat), Kingston FURY este editabil
   const isReadonly = selectedTournament === 'hator';
   
   const tournamentNames = {
@@ -83,17 +83,17 @@ export default function TournamentAdmin() {
                   <AlertTriangle className="w-5 h-5 text-amber-500" />
                   <div>
                     <p className="text-amber-200 font-medium">Turneul HATOR este înghețat (readonly)</p>
-                    <p className="text-amber-300/80 text-sm">Datele pot fi vizualizate dar nu pot fi modificate. Pentru editare, selectează turneul Kingston.</p>
+                    <p className="text-amber-300/80 text-sm">Datele pot fi vizualizate dar nu pot fi modificate. Pentru editare, selectează turneul Kingston FURY.</p>
                   </div>
                 </div>
               )}
               
-              {/* Info pentru Kingston */}
+              {/* Info pentru Kingston FURY */}
               {!isReadonly && (
                 <div className="flex items-center space-x-2 p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
                   <Settings className="w-5 h-5 text-green-500" />
                   <div>
-                    <p className="text-green-200 font-medium">Turneul Kingston x HyperX este editabil</p>
+                    <p className="text-green-200 font-medium">Turneul Kingston FURY x HyperX este editabil</p>
                     <p className="text-green-300/80 text-sm">Poți adăuga, modifica și șterge echipe, meciuri și rezultate pentru acest turneu.</p>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export default function TournamentAdmin() {
                       <Zap className="mx-auto h-16 w-16 text-amber-400 mb-4" />
                       <h3 className="text-xl font-semibold text-amber-300 mb-3">Format Actualizat</h3>
                       <p className="text-gray-300 leading-relaxed">
-                        Turneul Kingston a fost restructurat: <strong>nu mai folosește Swiss System</strong>. 
+                        Turneul Kingston FURY a fost restructurat: <strong>nu mai folosește Swiss System</strong>. 
                         Noul format: Stage 1 (8 grupe de 4 echipe) → Stage 2 (Double Elimination cu 16 echipe).
                       </p>
                       <p className="text-gray-400 text-sm mt-4">
@@ -202,7 +202,7 @@ export default function TournamentAdmin() {
                       <Zap className="mx-auto h-16 w-16 text-amber-400 mb-4" />
                       <h3 className="text-xl font-semibold text-amber-300 mb-3">Format Actualizat</h3>
                       <p className="text-gray-300 leading-relaxed">
-                        Turneul Kingston are acum doar <strong>2 stages</strong>. 
+                        Turneul Kingston FURY are acum doar <strong>2 stages</strong>. 
                         Stage 2 (Double Elimination) este etapa finală - nu mai există Stage 4 Playoff.
                       </p>
                       <p className="text-gray-400 text-sm mt-4">

@@ -243,7 +243,7 @@ export default function TeamRegistrationPublic() {
     <Card className="max-w-4xl mx-auto bg-slate-800/50 border-slate-700">
       <CardHeader>
         <CardTitle className="text-center text-2xl">
-          Înregistrare Echipă - Kingston x HyperX Supercup
+          Înregistrare Echipă - Kingston FURY x HyperX Supercup
         </CardTitle>
         <p className="text-center text-gray-400">
           Completează toate datele pentru a-ți înregistra echipa în turneu

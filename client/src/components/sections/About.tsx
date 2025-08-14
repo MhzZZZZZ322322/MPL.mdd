@@ -62,7 +62,7 @@ const About = () => {
     },
     {
       year: "15 August - 28 Septembrie 2025",
-      title: "Kingston x HyperX - Supercup Season 1",
+      title: "Kingston FURY x HyperX - Supercup Season 1",
       description: "Primul turneu major cu 32 echipe și premii în valoare de 100,000 LEI. Format: Calificare → Grupe → Playoff.",
       icon: <Sparkles />,
       link: "/events/kingston-hyperx-supercup",

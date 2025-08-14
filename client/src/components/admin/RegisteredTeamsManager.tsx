@@ -286,7 +286,7 @@ export default function RegisteredTeamsManager() {
               <Users className="mr-2" />
               Echipe Înregistrate ({teams.length})
             </div>
-            <Badge variant="secondary">Kingston Tournament</Badge>
+            <Badge variant="secondary">Kingston FURY Tournament</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>
