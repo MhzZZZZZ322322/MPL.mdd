@@ -43,12 +43,22 @@ const About = () => {
       title: t('about.timeline.event1.title'),
       description: t('about.timeline.event1.description'),
       icon: <Trophy />,
+      link: "/events/mpl-pilot-cup"
+    },
+    {
+      year: "August - Septembrie 2025",
+      title: "Kingston x HyperX - Supercup Season 1",
+      description: "Primul turneu major cu 32 echipe și premii în valoare de 100,000 LEI. Format: Calificare → Grupe → Playoff.",
+      icon: <Sparkles />,
+      link: "/events/kingston-hyperx-supercup",
+      isActive: true
     },
     {
       year: t('about.timeline.event2.date'),
       title: t('about.timeline.event2.title'),
       description: t('about.timeline.event2.description'),
       icon: <Medal />,
+      link: "/events/hator-cs-league"
     },
   ];
 
@@ -136,29 +146,43 @@ const About = () => {
 
             <div className="relative">
               {/* Timeline Items */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {timeline.map((item, index) => (
                   <div
                     key={index}
-                    className="relative flex md:justify-start text-left"
-                    data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
+                    className="relative flex md:justify-center text-center"
+                    data-aos="fade-up"
                     data-aos-delay={100 * (index + 1)}
                   >
-                    <div className="flex-1 md:max-w-sm bg-darkGray/50 p-6 rounded-lg border border-primary/10 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
-                      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-darkBg border-2 border-primary rounded-full z-10 flex items-center justify-center text-primary">
+                    <div className={`flex-1 md:max-w-sm p-6 rounded-lg border transition-all ${
+                      item.isActive 
+                        ? 'bg-gradient-to-br from-primary/20 to-secondary/20 border-primary shadow-[0_0_20px_rgba(139,92,246,0.4)]' 
+                        : 'bg-darkGray/50 border-primary/10 hover:shadow-[0_0_15px_rgba(139,92,246,0.2)]'
+                    }`}>
+                      <div className={`mx-auto mb-4 w-12 h-12 rounded-full z-10 flex items-center justify-center ${
+                        item.isActive ? 'bg-primary text-white' : 'bg-darkBg border-2 border-primary text-primary'
+                      }`}>
                         {item.icon}
                       </div>
-                      <div className="mb-2 text-secondary font-bold">
+                      <div className={`mb-2 font-bold ${item.isActive ? 'text-primary' : 'text-secondary'}`}>
                         {item.year}
                       </div>
                       <h4 className="text-lg font-bold text-white mb-2">
                         {item.title}
                       </h4>
-                      <p className="text-gray-400">{item.description}</p>
-                      <div className="mt-4">
-                        <Link href={index === 0 ? "/events/mpl-pilot-cup" : "/events/hator-cs-league"}>
-                          <Button variant="outline" size="sm" className="text-primary border-primary hover:bg-primary/10">
-                            {t('about.event.details')} <ChevronRight className="ml-1 h-4 w-4" />
+                      <p className="text-gray-400 mb-4">{item.description}</p>
+                      <div>
+                        <Link href={item.link}>
+                          <Button 
+                            variant={item.isActive ? "default" : "outline"} 
+                            size="sm" 
+                            className={item.isActive 
+                              ? "bg-primary hover:bg-primary/90 text-white" 
+                              : "text-primary border-primary hover:bg-primary/10"
+                            }
+                          >
+                            {item.isActive ? "ÎNSCRIE-TE ACUM" : t('about.event.details')} 
+                            <ChevronRight className="ml-1 h-4 w-4" />
                           </Button>
                         </Link>
                       </div>
