@@ -691,7 +691,7 @@ const KingstonHyperXSupercup = () => {
                     "Cocojambo", 
                     "VGT",
                     "Golden Five",
-                    "Ксго пиво",
+                    "Team 23",
                     "Cadian Team",
                     "4superlight",
                     "begrip",
