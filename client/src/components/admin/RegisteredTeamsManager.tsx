@@ -463,16 +463,16 @@ export default function RegisteredTeamsManager() {
               </div>
             </div>
 
-            {/* Team Type Selection */}
-            <div>
-              <Label className="text-sm font-medium">Tipul echipei</Label>
+            {/* Team Type Selection - Direct sau Calificare */}
+            <div className="border rounded-lg p-4 bg-yellow-50/30">
+              <Label className="text-sm font-medium">Tipul echipei în turneu</Label>
               <div className="mt-2">
                 <Select 
                   value={editedIsDirectInvite ? "direct" : "qualification"} 
                   onValueChange={(value) => setEditedIsDirectInvite(value === "direct")}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue />
+                    <SelectValue placeholder="Selectează tipul echipei" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="direct">
