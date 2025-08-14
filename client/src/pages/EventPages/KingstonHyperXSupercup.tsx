@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Team, TeamMember } from "@shared/schema";
 import supercupBgImage from "@assets/Untitled_1755089452078.png";
 import supercupRulesImage from "@assets/supercup season1 varianta 1_1755089877102.png";
-import supercupMainImage from "@assets/image_1755174669612.png";
+
 
 // Kingston Tournament Components using dedicated API routes
 const KingstonTournamentGroups = () => {

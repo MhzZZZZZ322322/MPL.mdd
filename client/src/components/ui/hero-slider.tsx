@@ -6,6 +6,7 @@ import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
 import hatorCupImage from '@assets/image_1754482998242.png';
 import kingstonImage from '@assets/supercup season1 varianta 1_1755089877102.png';
+import supercupMainImage from '@assets/image_1755174900402.png';
 
 interface HeroContent {
   image: string;
@@ -24,7 +25,7 @@ export const HeroSlider = () => {
 
   const slides: HeroContent[] = [
     {
-      image: kingstonImage,
+      image: supercupMainImage,
       title: "Kingston x HyperX",
       subtitle: "Supercup Season 1 • 100,000 LEI premii • 15 august - 28 septembrie",
       primaryBtn: {
