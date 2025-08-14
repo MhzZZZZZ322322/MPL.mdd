@@ -46,15 +46,16 @@ export default function TeamApprovalManager() {
 
   // Review team mutation
   const reviewTeamMutation = useMutation({
-    mutationFn: async ({ teamId, status, rejectionReason }: { 
+    mutationFn: async ({ teamId, status, rejectionReason, isDirectInvite }: { 
       teamId: number; 
       status: 'approved' | 'rejected'; 
-      rejectionReason?: string 
+      rejectionReason?: string;
+      isDirectInvite?: boolean 
     }) => {
       const response = await fetch(`/api/kingston/admin/teams/${teamId}/review`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status, rejectionReason }),
+        body: JSON.stringify({ status, rejectionReason, isDirectInvite }),
       });
 
       if (!response.ok) {
@@ -85,8 +86,8 @@ export default function TeamApprovalManager() {
     },
   });
 
-  const handleApprove = (teamId: number) => {
-    reviewTeamMutation.mutate({ teamId, status: 'approved' });
+  const handleApprove = (teamId: number, isDirectInvite: boolean = false) => {
+    reviewTeamMutation.mutate({ teamId, status: 'approved', isDirectInvite });
   };
 
   const handleReject = (team: PendingTeam) => {
@@ -253,15 +254,26 @@ export default function TeamApprovalManager() {
                           </DialogContent>
                         </Dialog>
                         
-                        <Button
-                          onClick={() => handleApprove(team.id)}
-                          disabled={reviewTeamMutation.isPending}
-                          className="bg-green-600 hover:bg-green-700"
-                          size="sm"
-                        >
-                          <Check className="w-4 h-4 mr-2" />
-                          Aprobă
-                        </Button>
+                        <div className="flex flex-col gap-2">
+                          <Button
+                            onClick={() => handleApprove(team.id, true)}
+                            disabled={reviewTeamMutation.isPending}
+                            className="bg-purple-600 hover:bg-purple-700"
+                            size="sm"
+                          >
+                            <Check className="w-4 h-4 mr-2" />
+                            Invitație Directă
+                          </Button>
+                          <Button
+                            onClick={() => handleApprove(team.id, false)}
+                            disabled={reviewTeamMutation.isPending}
+                            className="bg-green-600 hover:bg-green-700"
+                            size="sm"
+                          >
+                            <Check className="w-4 h-4 mr-2" />
+                            Calificare
+                          </Button>
+                        </div>
                         
                         <Button
                           onClick={() => handleReject(team)}

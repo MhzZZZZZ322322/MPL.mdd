@@ -1626,7 +1626,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.patch("/api/kingston/admin/teams/:teamId/review", async (req, res) => {
     try {
       const teamId = parseInt(req.params.teamId);
-      const { status, rejectionReason } = req.body;
+      const { status, rejectionReason, isDirectInvite } = req.body;
       
       if (!["approved", "rejected"].includes(status)) {
         return res.status(400).json({ error: "Status invalid" });
@@ -1641,6 +1641,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         reviewedAt: new Date(),
         reviewedBy: "admin", // În viitor poți adăuga sistem de autentificare
       };
+      
+      if (status === "approved" && typeof isDirectInvite === "boolean") {
+        updateData.isDirectInvite = isDirectInvite;
+      }
       
       if (status === "rejected" && rejectionReason) {
         updateData.rejectionReason = rejectionReason;
@@ -1672,6 +1676,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         tournament: kingstonTeams.tournament,
         status: kingstonTeams.status,
         isActive: kingstonTeams.isActive,
+        isDirectInvite: kingstonTeams.isDirectInvite,
         submittedAt: kingstonTeams.submittedAt,
         reviewedAt: kingstonTeams.reviewedAt,
         reviewedBy: kingstonTeams.reviewedBy,
