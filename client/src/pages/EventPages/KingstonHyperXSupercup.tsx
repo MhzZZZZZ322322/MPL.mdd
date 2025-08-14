@@ -486,7 +486,128 @@ const KingstonHyperXSupercup = () => {
           </div>
         </section>
 
-        
+        {/* Prize Details Disclaimer */}
+        <section className="py-16 px-4 bg-darkGray/30">
+          <div className="container mx-auto max-w-4xl">
+            <NeonBorder className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 border-amber-400/30">
+              <div className="p-8">
+                <div className="flex items-center justify-center mb-6">
+                  <AlertTriangle className="h-8 w-8 text-amber-400 mr-3" />
+                  <h3 className="text-2xl font-bold text-amber-400 font-rajdhani">
+                    Informații importante despre premii
+                  </h3>
+                </div>
+                
+                <div className="bg-amber-500/10 border border-amber-400/20 rounded-lg p-6 mb-8">
+                  <p className="text-amber-200 text-center font-medium">
+                    <strong>Suma de 100,000 LEI este calculată conform prețurilor retail găsite online.</strong>
+                  </p>
+                </div>
+
+                <div className="space-y-8">
+                  <h4 className="text-xl font-bold text-white mb-4 font-rajdhani border-b border-primary/30 pb-2">
+                    Lista completă de produse pentru primele trei locuri:
+                  </h4>
+
+                  {/* 1st Place Detailed */}
+                  <div className="bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-400/30 rounded-lg p-6">
+                    <h5 className="text-lg font-bold text-yellow-400 mb-4 flex items-center">
+                      <Trophy className="h-5 w-5 mr-2" />
+                      Locul 1 - Produse Kingston:
+                    </h5>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                      <div>
+                        <p className="font-medium mb-2">Kingston FURY Renegade RGB:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 1x KF584CU40RSAK2-48 (48GB 8400MT/s DDR5 CL40 CUDIMM Silver)</li>
+                          <li>• 2x KF584CU40RWAK2-48 (48GB 8400MT/s DDR5 CL40 CUDIMM White)</li>
+                          <li>• 2x KF580C38RWAK2-48 (48GB 8000MT/s DDR5 CL38 White)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-medium mb-2">HyperX Gaming Gear:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 5x HyperX Cloud III S Wireless (căști gaming)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2nd Place Detailed */}
+                  <div className="bg-gradient-to-r from-gray-400/10 to-gray-500/10 border border-gray-400/30 rounded-lg p-6">
+                    <h5 className="text-lg font-bold text-gray-300 mb-4 flex items-center">
+                      <Award className="h-5 w-5 mr-2" />
+                      Locul 2 - Produse Kingston:
+                    </h5>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                      <div>
+                        <p className="font-medium mb-2">Kingston FURY Beast:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 1x KF560C36BWE2AK2-32 (32GB 6000MT/s DDR5 CL36 White RGB EXPO)</li>
+                          <li>• 2x KF560C36BBE2K2-32 (32GB 6000MT/s DDR5 CL36 Black EXPO)</li>
+                          <li>• 2x KF560C36BWE2K2-32 (32GB 6000MT/s DDR5 CL36 White EXPO)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-medium mb-2">HyperX Gaming Gear:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 5x HyperX Alloy Rise 75 (tastatură mecanică wired)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 3rd Place Detailed */}
+                  <div className="bg-gradient-to-r from-orange-500/10 to-orange-600/10 border border-orange-400/30 rounded-lg p-6">
+                    <h5 className="text-lg font-bold text-orange-400 mb-4 flex items-center">
+                      <Award className="h-5 w-5 mr-2" />
+                      Locul 3 - Kingston Bundle:
+                    </h5>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                      <div>
+                        <p className="font-medium mb-2">Kingston Premium Bundle (5 seturi):</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 5x Kingston DT Exodia S 256GB (DTXS/256GB)</li>
+                          <li>• 5x Tricou negru cu inscripție roșie "Kingston Fury"</li>
+                          <li>• 5x Geantă termică Kingston branded</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-medium mb-2">HyperX Gaming Gear:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 5x HyperX Pulsefire Haste 2 Wireless (mouse gaming)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Ace of Aces Detailed */}
+                  <div className="bg-gradient-to-r from-purple-500/10 to-purple-600/10 border border-purple-400/30 rounded-lg p-6">
+                    <h5 className="text-lg font-bold text-purple-400 mb-4 flex items-center">
+                      <Sparkles className="h-5 w-5 mr-2" />
+                      Premiul special Ace of Aces:
+                    </h5>
+                    <div className="text-sm text-gray-300 space-y-3">
+                      <div>
+                        <p className="font-medium mb-2">Kingston FURY Renegade Limited Edition:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 1x KF580C36RLAK2-48 (FURY Renegade 48GB 2x24GB 8000MT/s DDR5 RGB Limited Edition)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="font-medium mb-2">HyperX Premium Choice:</p>
+                        <ul className="space-y-1 text-xs">
+                          <li>• 1x HyperX Alloy Rise 75 Wireless (tastatură wireless)</li>
+                          <li className="italic text-purple-300">* Dacă câștigătorul Ace of Aces este din echipa locul 2, va primi HyperX Cloud III S Wireless</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </NeonBorder>
+          </div>
+        </section>
 
         {/* Tournament Info Cards */}
         <section className="py-16 px-4">
