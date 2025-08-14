@@ -717,34 +717,7 @@ const KingstonHyperXSupercup = () => {
                       </div>
                     </div>
                     
-                    <div className="bg-primary/10 border border-primary/30 rounded-lg p-4">
-                      <h4 className="text-primary font-bold mb-2 text-center">📅 Programul Calificării</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div className="text-center">
-                          <strong className="text-white">11 septembrie</strong><br />
-                          <span className="text-gray-300">Prima rundă de calificare<br />
-                          Ora 18:00 - 22:00</span>
-                        </div>
-                        <div className="text-center">
-                          <strong className="text-white">12 septembrie</strong><br />
-                          <span className="text-gray-300">A doua rundă de calificare<br />
-                          Ora 18:00 - 22:00</span>
-                        </div>
-                        <div className="text-center">
-                          <strong className="text-white">14 septembrie</strong><br />
-                          <span className="text-gray-300">Finala calificării<br />
-                          Ora 18:00 - 21:00</span>
-                        </div>
-                      </div>
-                      <div className="text-center mt-4">
-                        <p className="text-xs text-gray-400">
-                          <em>Toate echipele înregistrate participă la Calificare</em>
-                        </p>
-                        <p className="text-xs text-gray-400">
-                          <em>20 echipe se califică pentru Stage 2 (+ 12 selectate direct = 32 total)</em>
-                        </p>
-                      </div>
-                    </div>
+                    
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
