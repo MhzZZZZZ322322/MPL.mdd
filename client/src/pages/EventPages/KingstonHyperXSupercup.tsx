@@ -97,35 +97,7 @@ const KingstonStage2DoubleElim = () => {
   );
 };
 
-const KingstonStage3Playoff = () => {
-  const { data: matches = [] } = useQuery({
-    queryKey: ["/api/kingston/stage3-playoff"],
-    queryFn: async () => {
-      const response = await fetch("/api/kingston/stage3-playoff");
-      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 3 playoff");
-      return response.json();
-    }
-  });
-
-  if (matches.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <Zap className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-        <h3 className="text-xl font-semibold text-gray-300 mb-2">Playoff Double Elimination va începe în curând</h3>
-        <p className="text-gray-400">
-          8 echipe calificate din Stage 2 vor concura pentru marele premiu.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-6">
-      <p className="text-gray-300 text-center">Kingston Stage 3: Double Elimination Playoff</p>
-      {/* Playoff bracket would be rendered here */}
-    </div>
-  );
-};
+// Componenta KingstonStage3Playoff eliminată - nu mai există Stage 3 în noul format
 
 const KingstonHyperXSupercup = () => {
   const { t } = useLanguage();
@@ -538,8 +510,8 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Award className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Format</h3>
-                <p className="text-lg font-bold text-primary">Grupe + Swiss + Double Elimination</p>
-                <p className="text-sm text-gray-400">3 etape</p>
+                <p className="text-lg font-bold text-primary">Grupe + Double Elimination</p>
+                <p className="text-sm text-gray-400">2 etape principale</p>
               </NeonBorder>
 
               {/* Duration */}
@@ -598,11 +570,10 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">📝 Format Turneu</h4>
                         <p className="text-sm leading-relaxed">
-                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 4 etape:
+                          Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 3 etape:
                           <br />• <strong>Stage 0:</strong> Calificarea - toate echipele înregistrate
-                          <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, jocuri BO1
-                          <br />• <strong>Stage 2:</strong> Swiss System cu 16 echipe, jocuri BO1
-                          <br />• <strong>Stage 3:</strong> Playoff cu dublă eliminare (Upper/Lower Bracket)
+                          <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, primele 2 avansează (32→16)
+                          <br />• <strong>Stage 2:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)
                           <br />• <strong>Total:</strong> 32 echipe (16 selectate + 16 prin calificare)
                         </p>
                       </div>
@@ -624,9 +595,8 @@ const KingstonHyperXSupercup = () => {
                         <p className="text-sm leading-relaxed">
                           <strong>Înregistrări:</strong> 15 august - 10 septembrie<br />
                           <strong>Stage 0 (Calificarea):</strong> 11 - 13 septembrie<br />
-                          <strong>Stage 1 (Grupe):</strong> 14 - 18 septembrie<br />
-                          <strong>Stage 2 (Swiss):</strong> 20 - 24 septembrie<br />
-                          <strong>Stage 3 (Playoff):</strong> 27 - 28 septembrie<br />
+                          <strong>Stage 1 (Grupe):</strong> 14 - 20 septembrie<br />
+                          <strong>Stage 2 (Double Elimination):</strong> 21 - 28 septembrie<br />
                           <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
                         </p>
                       </div>
