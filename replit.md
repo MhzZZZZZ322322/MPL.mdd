@@ -8,6 +8,7 @@ Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
 
 ## Recent Changes  
+- August 14, 2025: **KINGSTON_SCHEDULE_MINOR_ADJUSTMENTS** - Actualizat data finală a calificării de la "13 septembrie" la "14 septembrie" și eliminat secțiunea detaliată cu programul calificării pentru o prezentare mai curată.
 - August 14, 2025: **KINGSTON_MATCH_FORMAT_CLARIFIED** - Clarificat formatul meciurilor Kingston: "Format BO1 până la finală" → "Format BO1, meciurile decisive BO3" pentru a specifica că doar meciurile importante sunt Best of 3.
 - August 14, 2025: **KINGSTON_STAGE_NAMING_FINALIZED** - Actualizat denumirile etapelor Kingston conform formatului oficial: "Stage 0, Stage 1, Stage 2" → "Stage 1, Stage 2, Playoff". Toate referințele în pagină corecte cu noua nomenclatură: Stage 1 (Calificare), Stage 2 (8 Grupe), Playoff (Double Elimination).
 - August 14, 2025: **KINGSTON_TEAM_DISTRIBUTION_UPDATED** - Actualizat distribuția echipelor Kingston de la "16 direct + 16 calificare" la "12 selectate direct + 20 prin calificare" în toată pagina. Corectat toate textele și numerotarea pentru a reflecta noul format cu 20 locuri prin calificare.

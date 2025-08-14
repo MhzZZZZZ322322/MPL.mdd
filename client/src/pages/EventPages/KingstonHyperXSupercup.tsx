@@ -697,7 +697,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🎯 Procesul de Calificare</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Perioada:</strong> 11 - 13 septembrie 2025<br />
+                          <strong>Perioada:</strong> 11 - 14 septembrie 2025<br />
                           <strong>Format:</strong> Single Elimination Bracket<br />
                           <strong>Locuri:</strong> 20 locuri disponibile pentru Stage 2<br />
                           <strong>Meciuri:</strong> Best of 1 (BO1)<br />
