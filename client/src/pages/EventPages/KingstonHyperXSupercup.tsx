@@ -680,31 +680,30 @@ const KingstonHyperXSupercup = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-              {[
-                "Lit Energy",
-                "Cocojambo", 
-                "VGT",
-                "Golden Five",
-                "Ксго пиво",
-                "Cadian Team",
-                "4superlight",
-                "begrip",
-                "Muligambia",
-                "BiteMD",
-                "Legalize",
-                "Into the Beach"
-              ].map((teamName, index) => (
-                <div key={index} className="bg-gray-800/60 rounded-lg p-4 text-center hover:bg-gray-700/60 transition-all duration-300 border border-purple-500/20">
-                  <div className="flex flex-col items-center">
-                    <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mb-3">
-                      <Trophy className="w-6 h-6 text-white" />
+            <div className="max-w-3xl mx-auto">
+              <div className="bg-gray-800/40 rounded-lg p-6 border border-purple-500/20">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    "Lit Energy",
+                    "Cocojambo", 
+                    "VGT",
+                    "Golden Five",
+                    "Ксго пиво",
+                    "Cadian Team",
+                    "4superlight",
+                    "begrip",
+                    "Muligambia",
+                    "BiteMD",
+                    "Legalize",
+                    "Into the Beach"
+                  ].map((teamName, index) => (
+                    <div key={index} className="flex items-center space-x-3 py-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <span className="text-white font-medium">{teamName}</span>
                     </div>
-                    <h3 className="text-white font-bold text-sm mb-1">{teamName}</h3>
-                    <span className="text-purple-400 text-xs font-semibold">INVITE DIRECT</span>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
 
             <div className="mt-8 text-center">
