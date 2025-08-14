@@ -94,7 +94,10 @@ export default function RegisteredTeamsManager() {
       return response.json();
     },
     onSuccess: () => {
+      // Invalidate all related queries to update all components
       queryClient.invalidateQueries({ queryKey: ['/api/kingston/admin/registered-teams'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/kingston/teams'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/kingston/admin/pending-teams'] });
       toast({
         title: "Tipul echipei actualizat",
         description: "Tipul echipei a fost modificat cu succes.",
