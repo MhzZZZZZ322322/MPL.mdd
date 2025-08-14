@@ -52,6 +52,7 @@ export default function RegisteredTeamsManager() {
   const [editedName, setEditedName] = useState("");
   const [editedLogo, setEditedLogo] = useState<string | null>(null);
   const [editedMembers, setEditedMembers] = useState<EditableTeamMember[]>([]);
+  const [editedIsDirectInvite, setEditedIsDirectInvite] = useState<boolean>(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showMembersDialog, setShowMembersDialog] = useState(false);
 
@@ -83,17 +84,19 @@ export default function RegisteredTeamsManager() {
       teamId, 
       name, 
       logoData, 
-      members 
+      members,
+      isDirectInvite 
     }: { 
       teamId: number; 
       name: string; 
       logoData?: string; 
-      members: EditableTeamMember[] 
+      members: EditableTeamMember[];
+      isDirectInvite?: boolean 
     }) => {
       const response = await fetch(`/api/kingston/admin/teams/${teamId}/full-update`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, logoData, members }),
+        body: JSON.stringify({ name, logoData, members, isDirectInvite }),
       });
 
       if (!response.ok) {
@@ -111,6 +114,7 @@ export default function RegisteredTeamsManager() {
       setEditedName("");
       setEditedLogo(null);
       setEditedMembers([]);
+      setEditedIsDirectInvite(false);
       
       toast({
         title: "Echipa actualizată",
@@ -164,6 +168,7 @@ export default function RegisteredTeamsManager() {
     setEditingTeam(team);
     setEditedName(team.name);
     setEditedLogo(team.logoData || null);
+    setEditedIsDirectInvite(team.isDirectInvite || false);
     
     // Fetch current team members
     try {
@@ -196,7 +201,8 @@ export default function RegisteredTeamsManager() {
       teamId: editingTeam.id,
       name: editedName.trim(),
       logoData: editedLogo || undefined,
-      members: editedMembers
+      members: editedMembers,
+      isDirectInvite: editedIsDirectInvite
     });
   };
 
@@ -454,6 +460,38 @@ export default function RegisteredTeamsManager() {
                     Formate acceptate: JPG, PNG, GIF. Mărime maximă: 5MB
                   </p>
                 </div>
+              </div>
+            </div>
+
+            {/* Team Type Selection */}
+            <div>
+              <Label className="text-sm font-medium">Tipul echipei</Label>
+              <div className="mt-2">
+                <Select 
+                  value={editedIsDirectInvite ? "direct" : "qualification"} 
+                  onValueChange={(value) => setEditedIsDirectInvite(value === "direct")}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="direct">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                        <span>Invitație Directă (12 locuri)</span>
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="qualification">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                        <span>Calificare (20 locuri)</span>
+                      </div>
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Alege tipul pentru această echipă în turneu
+                </p>
               </div>
             </div>
 

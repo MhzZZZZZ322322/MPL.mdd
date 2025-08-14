@@ -1661,6 +1661,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Admin: Full Update Team (name, logo, members, type)
+  app.patch("/api/kingston/admin/teams/:teamId/full-update", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.teamId);
+      const { name, logoData, members, isDirectInvite } = req.body;
+      
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      // Update team basic info
+      const updateData: any = {
+        name,
+        ...(logoData && { logoData }),
+        ...(typeof isDirectInvite === "boolean" && { isDirectInvite })
+      };
+      
+      await db.update(kingstonTeams)
+        .set(updateData)
+        .where(eq(kingstonTeams.id, teamId));
+      
+      // Update team members if provided
+      if (members && Array.isArray(members)) {
+        // Delete existing members
+        await db.delete(kingstonTeamMembers)
+          .where(eq(kingstonTeamMembers.teamId, teamId));
+        
+        // Insert new members
+        for (const member of members) {
+          if (member.nickname && member.faceitProfile && member.discordAccount) {
+            await db.insert(kingstonTeamMembers).values({
+              teamId: teamId,
+              nickname: member.nickname,
+              faceitProfile: member.faceitProfile,
+              discordAccount: member.discordAccount,
+              role: member.role || "player",
+              position: member.position || "main"
+            });
+          }
+        }
+      }
+
+      res.json({ message: "Echipa a fost actualizată cu succes" });
+    } catch (error) {
+      console.error("Error updating team:", error);
+      res.status(500).json({ error: "Failed to update team" });
+    }
+  });
+
   // Kingston Public: Get Approved Teams
   app.get("/api/kingston/teams", async (req, res) => {
     try {
