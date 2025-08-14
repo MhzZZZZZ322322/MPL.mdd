@@ -12,13 +12,13 @@ import supercupBgImage from "@assets/Untitled_1755089452078.png";
 import supercupRulesImage from "@assets/supercup season1 varianta 1_1755089877102.png";
 
 
-// Kingston Tournament Components using dedicated API routes
+// Kingston FURY Tournament Components using dedicated API routes
 const KingstonTournamentGroups = () => {
   const { data: standings = [] } = useQuery({
     queryKey: ["/api/kingston/group-standings"],
     queryFn: async () => {
       const response = await fetch("/api/kingston/group-standings");
-      if (!response.ok) throw new Error("Failed to fetch Kingston group standings");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY group standings");
       return response.json();
     }
   });
@@ -37,7 +37,7 @@ const KingstonTournamentGroups = () => {
 
   return (
     <div className="space-y-6">
-      <p className="text-gray-300 text-center">Clasamentele grupelor Kingston x HyperX Supercup</p>
+      <p className="text-gray-300 text-center">Clasamentele grupelor Kingston FURY x HyperX Supercup</p>
       {/* Group standings would be rendered here */}
     </div>
   );
@@ -48,7 +48,7 @@ const KingstonStage2DoubleElim = () => {
     queryKey: ["/api/kingston/stage2-upper-bracket"],
     queryFn: async () => {
       const response = await fetch("/api/kingston/stage2-upper-bracket");
-      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 upper bracket");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY Stage 2 upper bracket");
       return response.json();
     }
   });
@@ -57,7 +57,7 @@ const KingstonStage2DoubleElim = () => {
     queryKey: ["/api/kingston/stage2-lower-bracket"],
     queryFn: async () => {
       const response = await fetch("/api/kingston/stage2-lower-bracket");
-      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 lower bracket");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY Stage 2 lower bracket");
       return response.json();
     }
   });
@@ -76,7 +76,7 @@ const KingstonStage2DoubleElim = () => {
 
   return (
     <div className="space-y-6">
-      <p className="text-gray-300 text-center">Kingston Stage 2: Double Elimination Bracket</p>
+      <p className="text-gray-300 text-center">Kingston FURY Stage 2: Double Elimination Bracket</p>
       {/* Upper Bracket */}
       <div className="bg-gradient-to-r from-green-900/20 to-green-800/10 border border-green-500/30 rounded-lg p-6">
         <h4 className="text-green-400 font-semibold mb-3">Upper Bracket</h4>
@@ -132,12 +132,12 @@ const KingstonHyperXSupercup = () => {
     };
   };
 
-  // Fetch teams for Kingston tournament
+  // Fetch teams for Kingston FURY tournament
   const { data: rawTeams = [], isLoading: teamsLoading } = useQuery<Team[]>({
     queryKey: ["/api/kingston/teams"],
     queryFn: async () => {
       const response = await fetch("/api/kingston/teams");
-      if (!response.ok) throw new Error("Failed to fetch Kingston teams");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY teams");
       return response.json();
     }
   });
@@ -154,7 +154,7 @@ const KingstonHyperXSupercup = () => {
     queryFn: async () => {
       if (!selectedTeam) return [];
       const response = await fetch(`/api/kingston/teams/${selectedTeam.id}/members`);
-      if (!response.ok) throw new Error("Failed to fetch Kingston team members");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY team members");
       return response.json();
     },
     enabled: !!selectedTeam
@@ -171,8 +171,8 @@ const KingstonHyperXSupercup = () => {
   return (
     <>
       <Helmet>
-        <title>Kingston x HyperX - Supercup Season 1 | Moldova Pro League</title>
-        <meta name="description" content="Kingston x HyperX - Supercup Season 1 - Cel mai mare turneu de Counter-Strike 2 din Moldova, powered by Kingston și HyperX gaming gear." />
+        <title>Kingston FURY x HyperX - Supercup Season 1 | Moldova Pro League</title>
+        <meta name="description" content="Kingston FURY x HyperX - Supercup Season 1 - Cel mai mare turneu de Counter-Strike 2 din Moldova, powered by Kingston FURY și HyperX gaming gear." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="bg-black min-h-screen">
@@ -182,7 +182,7 @@ const KingstonHyperXSupercup = () => {
           <div className="absolute inset-0 z-0 flex items-center justify-center">
             <img 
               src={supercupBgImage} 
-              alt="Kingston x HyperX - Supercup Season 1" 
+              alt="Kingston FURY x HyperX - Supercup Season 1" 
               className="w-3/4 h-3/4 object-contain opacity-40 mx-auto my-auto"
               loading="eager"
               width="1920"
@@ -201,7 +201,7 @@ const KingstonHyperXSupercup = () => {
               </Link>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-3 font-rajdhani drop-shadow-lg">
-                Kingston x HyperX
+                Kingston FURY x HyperX
               </h1>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-6 font-rajdhani drop-shadow-lg">
                 Supercup Season 1
@@ -216,7 +216,7 @@ const KingstonHyperXSupercup = () => {
               </div>
 
               <p className="text-lg text-gray-100 max-w-2xl mb-6">
-                Primul turneu Supercup powered by Kingston și HyperX. Competiție de elită cu echipamente gaming premium 
+                Primul turneu Supercup powered by Kingston FURY și HyperX. Competiție de elită cu echipamente gaming premium 
                 pentru cele mai bune echipe din Moldova.
               </p>
 
@@ -263,7 +263,7 @@ const KingstonHyperXSupercup = () => {
                 Premii - 100,000 LEI
               </h2>
               <p className="text-gray-300 text-lg">
-                Echipamente premium de gaming oferite de Kingston și HyperX
+                Echipamente premium de gaming oferite de Kingston FURY și HyperX
               </p>
             </div>
 
@@ -1121,7 +1121,7 @@ const KingstonHyperXSupercup = () => {
               Alătură-te competiției!
             </h2>
             <p className="text-sm md:text-xl text-gray-300 mb-6 md:mb-8 px-2">
-              Înscrie-te la Kingston x HyperX Supercup Season 1 și câștigă echipamente gaming premium.
+              Înscrie-te la Kingston FURY x HyperX Supercup Season 1 și câștigă echipamente gaming premium.
             </p>
             <Link href="/register-team">
               <Button 
@@ -1141,7 +1141,7 @@ const KingstonHyperXSupercup = () => {
             <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6 md:mb-8 font-rajdhani">Powered by</h3>
             <div className="flex justify-center items-center gap-4 md:gap-6 lg:gap-8 flex-wrap">
               <div className="text-primary font-bold text-lg md:text-xl lg:text-2xl font-rajdhani">
-                Kingston
+                Kingston FURY
               </div>
               <div className="text-primary font-bold text-lg md:text-xl lg:text-2xl font-rajdhani">
                 HyperX
@@ -1193,7 +1193,7 @@ const KingstonHyperXSupercup = () => {
                     <div className="bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-400/30 rounded-lg p-4">
                       <h5 className="text-sm font-bold text-yellow-400 mb-3 flex items-center">
                         <Trophy className="h-4 w-4 mr-2" />
-                        Locul 1 - Produse Kingston:
+                        Locul 1 - Produse Kingston FURY:
                       </h5>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-300">
                         <div>
@@ -1217,7 +1217,7 @@ const KingstonHyperXSupercup = () => {
                     <div className="bg-gradient-to-r from-gray-400/10 to-gray-500/10 border border-gray-400/30 rounded-lg p-4">
                       <h5 className="text-sm font-bold text-gray-300 mb-3 flex items-center">
                         <Award className="h-4 w-4 mr-2" />
-                        Locul 2 - Produse Kingston:
+                        Locul 2 - Produse Kingston FURY:
                       </h5>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-300">
                         <div>
@@ -1241,15 +1241,15 @@ const KingstonHyperXSupercup = () => {
                     <div className="bg-gradient-to-r from-orange-500/10 to-orange-600/10 border border-orange-400/30 rounded-lg p-4">
                       <h5 className="text-sm font-bold text-orange-400 mb-3 flex items-center">
                         <Award className="h-4 w-4 mr-2" />
-                        Locul 3 - Kingston Bundle:
+                        Locul 3 - Kingston FURY Bundle:
                       </h5>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-300">
                         <div>
-                          <p className="font-medium mb-2">Kingston Premium Bundle (5 seturi):</p>
+                          <p className="font-medium mb-2">Kingston FURY Premium Bundle (5 seturi):</p>
                           <ul className="space-y-1 text-xs">
-                            <li>• 5x Kingston DT Exodia S 256GB (DTXS/256GB)</li>
-                            <li>• 5x Tricou negru cu inscripție roșie "Kingston Fury"</li>
-                            <li>• 5x Geantă termică Kingston branded</li>
+                            <li>• 5x Kingston FURY DT Exodia S 256GB (DTXS/256GB)</li>
+                            <li>• 5x Tricou negru cu inscripție roșie "Kingston FURY"</li>
+                            <li>• 5x Geantă termică Kingston FURY branded</li>
                           </ul>
                         </div>
                         <div>

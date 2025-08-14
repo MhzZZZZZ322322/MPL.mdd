@@ -547,11 +547,11 @@ export type InsertBlogArticle = z.infer<typeof insertBlogArticleSchema>;
 export type BlogArticle = typeof blogArticles.$inferSelect;
 
 // ===========================
-// KINGSTON x HYPERX SUPERCUP DATABASE TABLES
-// Separate database structure for Kingston x HyperX tournament
+// KINGSTON FURY x HYPERX SUPERCUP DATABASE TABLES
+// Separate database structure for Kingston FURY x HyperX tournament
 // ===========================
 
-// Kingston Teams
+// Kingston FURY Teams
 export const kingstonTeams = pgTable("kingston_teams", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -568,7 +568,7 @@ export const kingstonTeams = pgTable("kingston_teams", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// Kingston Team Members
+// Kingston FURY Team Members
 export const kingstonTeamMembers = pgTable("kingston_team_members", {
   id: serial("id").primaryKey(),
   teamId: integer("team_id").notNull(),

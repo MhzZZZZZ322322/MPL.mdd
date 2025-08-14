@@ -39,7 +39,7 @@ export default function TournamentAdmin() {
   
   const tournamentNames = {
     hator: 'HATOR CS2 LEAGUE MOLDOVA',
-    kingston: 'Kingston x HyperX - Supercup Season 1'
+    kingston: 'Kingston FURY x HyperX - Supercup Season 1'
   };
 
   return (
@@ -70,7 +70,7 @@ export default function TournamentAdmin() {
                     <SelectItem value="kingston">
                       <div className="flex items-center space-x-2">
                         <Settings className="w-4 h-4 text-green-500" />
-                        <span>Kingston x HyperX Supercup (Editabil)</span>
+                        <span>Kingston FURY x HyperX Supercup (Editabil)</span>
                       </div>
                     </SelectItem>
                   </SelectContent>

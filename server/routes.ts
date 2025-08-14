@@ -1114,11 +1114,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // ===========================
-  // KINGSTON x HYPERX SUPERCUP API ROUTES
-  // Separate API routes for Kingston x HyperX tournament
+  // KINGSTON FURY x HYPERX SUPERCUP API ROUTES
+  // Separate API routes for Kingston FURY x HyperX tournament
   // ===========================
 
-  // Kingston Teams routes
+  // Kingston FURY Teams routes
   app.get("/api/kingston/teams", async (req, res) => {
     try {
       const { db } = await import("./db");
@@ -1127,8 +1127,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const teams = await db.select().from(kingstonTeams);
       res.json(teams);
     } catch (error) {
-      console.error("Error fetching Kingston teams:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston teams" });
+      console.error("Error fetching Kingston FURY teams:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY teams" });
     }
   });
 
@@ -1142,12 +1142,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const members = await db.select().from(kingstonTeamMembers).where(eq(kingstonTeamMembers.teamId, teamId));
       res.json(members);
     } catch (error) {
-      console.error("Error fetching Kingston team members:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston team members" });
+      console.error("Error fetching Kingston FURY team members:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY team members" });
     }
   });
 
-  // Kingston Group Standings
+  // Kingston FURY Group Standings
   app.get("/api/kingston/group-standings", async (req, res) => {
     try {
       const { db } = await import("./db");
@@ -1158,12 +1158,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .orderBy(kingstonGroupStandings.groupName, desc(kingstonGroupStandings.points), desc(kingstonGroupStandings.roundDifference));
       res.json(standings);
     } catch (error) {
-      console.error("Error fetching Kingston group standings:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston group standings" });
+      console.error("Error fetching Kingston FURY group standings:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY group standings" });
     }
   });
 
-  // Kingston Match Results
+  // Kingston FURY Match Results
   app.get("/api/kingston/match-results", async (req, res) => {
     try {
       const { db } = await import("./db");
@@ -1174,12 +1174,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .orderBy(desc(kingstonMatchResults.createdAt));
       res.json(results);
     } catch (error) {
-      console.error("Error fetching Kingston match results:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston match results" });
+      console.error("Error fetching Kingston FURY match results:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY match results" });
     }
   });
 
-  // Kingston Stage 2 Swiss routes
+  // Kingston FURY Stage 2 Swiss routes
   app.get("/api/kingston/stage2-swiss-standings", async (req, res) => {
     try {
       const { db } = await import("./db");
@@ -1190,8 +1190,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .orderBy(desc(kingstonStage2Swiss.wins), desc(kingstonStage2Swiss.roundsWon));
       res.json(standings);
     } catch (error) {
-      console.error("Error fetching Kingston Stage 2 Swiss standings:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston Stage 2 Swiss standings" });
+      console.error("Error fetching Kingston FURY Stage 2 Swiss standings:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY Stage 2 Swiss standings" });
     }
   });
 
@@ -1205,12 +1205,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .orderBy(kingstonStage2SwissMatches.roundNumber, desc(kingstonStage2SwissMatches.createdAt));
       res.json(matches);
     } catch (error) {
-      console.error("Error fetching Kingston Stage 2 Swiss matches:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston Stage 2 Swiss matches" });
+      console.error("Error fetching Kingston FURY Stage 2 Swiss matches:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY Stage 2 Swiss matches" });
     }
   });
 
-  // Kingston Stage 3 Playoff routes  
+  // Kingston FURY Stage 3 Playoff routes  
   app.get("/api/kingston/stage3-playoff", async (req, res) => {
     try {
       const { db } = await import("./db");
@@ -1220,8 +1220,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .orderBy(kingstonStage3Playoff.bracketPosition);
       res.json(matches);
     } catch (error) {
-      console.error("Error fetching Kingston Stage 3 Playoff matches:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston Stage 3 Playoff matches" });
+      console.error("Error fetching Kingston FURY Stage 3 Playoff matches:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY Stage 3 Playoff matches" });
     }
   });
 
@@ -1268,12 +1268,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json({ success: true });
     } catch (error) {
-      console.error("Error saving Kingston group config:", error);
-      res.status(500).json({ error: "Failed to save Kingston group configuration" });
+      console.error("Error saving Kingston FURY group config:", error);
+      res.status(500).json({ error: "Failed to save Kingston FURY group configuration" });
     }
   });
 
-  // Kingston Admin: Create Team
+  // Kingston FURY Admin: Create Team
   app.post("/api/kingston/admin/teams", async (req, res) => {
     try {
       const { db } = await import("./db");
@@ -1288,12 +1288,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const [team] = await db.insert(kingstonTeams).values(result.data).returning();
       res.status(201).json(team);
     } catch (error) {
-      console.error("Error creating Kingston team:", error);
-      res.status(500).json({ error: "Failed to create Kingston team" });
+      console.error("Error creating Kingston FURY team:", error);
+      res.status(500).json({ error: "Failed to create Kingston FURY team" });
     }
   });
 
-  // Kingston Admin: Update Team
+  // Kingston FURY Admin: Update Team
   app.put("/api/kingston/admin/teams/:id", async (req, res) => {
     try {
       const teamId = parseInt(req.params.id);
@@ -1313,13 +1313,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         .returning();
         
       if (!updatedTeam) {
-        return res.status(404).json({ error: "Kingston team not found" });
+        return res.status(404).json({ error: "Kingston FURY team not found" });
       }
       
       res.json(updatedTeam);
     } catch (error) {
-      console.error("Error updating Kingston team:", error);
-      res.status(500).json({ error: "Failed to update Kingston team" });
+      console.error("Error updating Kingston FURY team:", error);
+      res.status(500).json({ error: "Failed to update Kingston FURY team" });
     }
   });
 
@@ -2128,7 +2128,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             contact: "admin@moldovapro.gg",
             website: "https://moldovapro.gg"
           },
-          sponsors: ["Kingston", "HyperX"],
+          sponsors: ["Kingston FURY", "HyperX"],
           ...tournamentStats
         },
         
