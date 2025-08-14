@@ -619,7 +619,7 @@ const KingstonHyperXSupercup = () => {
                           <strong>Stage 2:</strong> 8 Grupe cu 4 echipe, primele 2 avansează (32→16)<br />
                           <strong>Playoff:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)<br />
                           <strong>Total echipe:</strong> 32 (12 selectate direct + 20 prin calificare)<br />
-                          <strong>Toate meciurile:</strong> Format BO1 până la finală
+                          <strong>Toate meciurile:</strong> Format BO1, meciurile decisive BO3
                         </p>
                       </div>
                     </div>
