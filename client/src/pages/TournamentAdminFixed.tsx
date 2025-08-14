@@ -106,46 +106,30 @@ export default function TournamentAdmin() {
             </div>
           
             <Tabs defaultValue="team-approval" className="w-full">
-              <TabsList className="grid w-full grid-cols-11 bg-slate-800/50">
-                <TabsTrigger value="team-approval" className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  Aprobare Echipe
+              <TabsList className="grid w-full grid-cols-6 bg-slate-800/50">
+                <TabsTrigger value="team-approval" className="flex items-center gap-1 text-xs">
+                  <Users className="w-3 h-3" />
+                  Aprobare
                 </TabsTrigger>
-                <TabsTrigger value="registered-teams" className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
-                  Echipe Înregistrate
+                <TabsTrigger value="team-types" className="flex items-center gap-1 text-xs bg-purple-900/30 border border-purple-500/50">
+                  <Trophy className="w-3 h-3" />
+                  🎯 TIPURI ECHIPE
                 </TabsTrigger>
-                <TabsTrigger value="team-types" className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4" />
-                  Tipuri Echipe
+                <TabsTrigger value="registered-teams" className="flex items-center gap-1 text-xs">
+                  <Settings className="w-3 h-3" />
+                  Înregistrate
                 </TabsTrigger>
-                <TabsTrigger value="teams" className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
-                  Adăugare Echipe
+                <TabsTrigger value="teams" className="flex items-center gap-1 text-xs">
+                  <Settings className="w-3 h-3" />
+                  Adăugare
                 </TabsTrigger>
-                <TabsTrigger value="management" className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
-                  Configurare Grupe
+                <TabsTrigger value="management" className="flex items-center gap-1 text-xs">
+                  <Settings className="w-3 h-3" />
+                  Grupe
                 </TabsTrigger>
-                <TabsTrigger value="results" className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4" />
-                  Rezultate Meciuri
-                </TabsTrigger>
-                <TabsTrigger value="schedule" className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  Program Meciuri
-                </TabsTrigger>
-                <TabsTrigger value="stage2" className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4" />
-                  Stage 2 Double Elim
-                </TabsTrigger>
-                <TabsTrigger value="stage3-rounds" className="flex items-center gap-2 opacity-50" disabled>
-                  <Settings className="w-4 h-4" />
-                  Stage 3 (Eliminat)
-                </TabsTrigger>
-                <TabsTrigger value="stage4-playoff" className="flex items-center gap-2 opacity-50" disabled>
-                  <Trophy className="w-4 h-4" />
-                  Stage 4 (Eliminat)
+                <TabsTrigger value="stage2" className="flex items-center gap-1 text-xs">
+                  <Trophy className="w-3 h-3" />
+                  Stage 2
                 </TabsTrigger>
 
               </TabsList>
