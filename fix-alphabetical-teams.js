@@ -6,7 +6,7 @@ const alphabeticalTeams = [
   "Auratix", "Barbosii", "Bloody", "Bobb3rs", "BPSP",
   "Brigada", "Brigada Meteor", "Cadian Team", "Ciocana Esports", "Ciocălău Team",
   "Cipok", "Coli", "Crasat", "Cucumba", "Flux Line",
-  "Golden Five", "Into the Beach", "Japon", "K9 Team", "Killuminaty",
+  "Golden Five", "Team Prodigy", "Japon", "K9 Team", "Killuminaty",
   "KostiujeniKlinik", "La Passion", "Lean Vision", "Legalize", "LitEnergy",
   "LYSQ", "Muligambia", "Neo Egoist League", "Onyx", "RCBVR",
   "Robotaim", "Rumina", "Shashlik", "Trigger", "VeryGoodTeam",
@@ -17,7 +17,7 @@ const alphabeticalTeams = [
 const originalTeams = [
   "XPlosion", "Robotaim", "Lean Vision", "Coli", "Japon",
   "Flux Line", "Cipok", "La Passion", "LYSQ", "RCBVR",
-  "Crasat", "Neo Egoist League", "LitEnergy", "Into the Beach", "VeryGoodTeam",
+  "Crasat", "Neo Egoist League", "LitEnergy", "Team Prodigy", "VeryGoodTeam",
   "KostiujeniKlinik", "Muligambia", "Legalize", "Trigger", "WenDeagle",
   "X-one", "Cucumba", "Cadian Team", "Onyx", "Barbosii",
   "Wenzo", "Golden Five", "Auratix", "Rumina", "K9 Team",

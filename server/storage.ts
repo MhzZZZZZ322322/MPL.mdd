@@ -864,7 +864,7 @@ export class MemStorage implements IStorage {
       { name: "Cucumba", logoUrl: "/team-logos/Cucumba.png" },
       { name: "Flux Line", logoUrl: "/team-logos/Flux Line.png" },
       { name: "Golden Five", logoUrl: "/team-logos/Golden Five.png" },
-      { name: "Into the Beach", logoUrl: "/team-logos/Into the Beach.png" },
+      { name: "Team Prodigy", logoUrl: "/team-logos/Team Prodigy.png" },
       { name: "Japon", logoUrl: "/team-logos/Japon.png" },
       { name: "K9 Team", logoUrl: "/team-logos/K9 Team.png" },
       { name: "Killuminaty", logoUrl: "/team-logos/Killuminaty.png" },
@@ -1032,7 +1032,7 @@ export class MemStorage implements IStorage {
       { teamId: 16, nickname: "RONI1337", role: "player", position: "main" },
       { teamId: 16, nickname: "IOneTapI", role: "player", position: "main" },
       
-      // Team 17: Into the Beach (chazya captain)
+      // Team 17: Team Prodigy (chazya captain)
       { teamId: 17, nickname: "chazya", role: "captain", position: "main" },
       { teamId: 17, nickname: "SWAGTEAR", role: "player", position: "main" },
       { teamId: 17, nickname: "DediDR", role: "player", position: "main" },
@@ -1538,17 +1538,17 @@ export class MemStorage implements IStorage {
       // 25.06.2025 - GRUPA D
       { date: "25.06.2025", time: "18:00", team1: "Coli", team2: "Rumina", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "18:00", team1: "K9 Team", team2: "Shashlik", group: "D", stage: "Grupe", faceitUrl: "" },
-      { date: "25.06.2025", time: "18:00", team1: "Into the Beach", team2: "WenDeagle", group: "D", stage: "Grupe", faceitUrl: "" },
+      { date: "25.06.2025", time: "18:00", team1: "Team Prodigy", team2: "WenDeagle", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "18:45", team1: "WenDeagle", team2: "Rumina", group: "D", stage: "Grupe", faceitUrl: "" },
-      { date: "25.06.2025", time: "18:45", team1: "Into the Beach", team2: "Shashlik", group: "D", stage: "Grupe", faceitUrl: "" },
+      { date: "25.06.2025", time: "18:45", team1: "Team Prodigy", team2: "Shashlik", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "18:45", team1: "Coli", team2: "K9 Team", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "19:30", team1: "K9 Team", team2: "Rumina", group: "D", stage: "Grupe", faceitUrl: "" },
-      { date: "25.06.2025", time: "19:30", team1: "Coli", team2: "Into the Beach", group: "D", stage: "Grupe", faceitUrl: "" },
+      { date: "25.06.2025", time: "19:30", team1: "Coli", team2: "Team Prodigy", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "19:30", team1: "WenDeagle", team2: "Shashlik", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "20:15", team1: "Shashlik", team2: "Rumina", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "20:15", team1: "Coli", team2: "WenDeagle", group: "D", stage: "Grupe", faceitUrl: "" },
-      { date: "25.06.2025", time: "20:15", team1: "K9 Team", team2: "Into the Beach", group: "D", stage: "Grupe", faceitUrl: "" },
-      { date: "25.06.2025", time: "21:00", team1: "Into the Beach", team2: "Rumina", group: "D", stage: "Grupe", faceitUrl: "" },
+      { date: "25.06.2025", time: "20:15", team1: "K9 Team", team2: "Team Prodigy", group: "D", stage: "Grupe", faceitUrl: "" },
+      { date: "25.06.2025", time: "21:00", team1: "Team Prodigy", team2: "Rumina", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "21:00", team1: "K9 Team", team2: "WenDeagle", group: "D", stage: "Grupe", faceitUrl: "" },
       { date: "25.06.2025", time: "21:00", team1: "Coli", team2: "Shashlik", group: "D", stage: "Grupe", faceitUrl: "" },
       
@@ -2064,7 +2064,7 @@ export class DatabaseStorage implements IStorage {
     const qualifiedTeams = [
       // 11 teams directly qualified from groups
       "Saponel", "LitEnergy", "La Passion", "K9 Team", "XPlosion", 
-      "Wenzo", "VeryGoodTeam", "Legalize", "Bobb3rs", "Into the Beach", "Cadian Team",
+      "Wenzo", "VeryGoodTeam", "Legalize", "Bobb3rs", "Team Prodigy", "Cadian Team",
       
       // 5 teams from Stage 2 bracket winners (confirmed results)
       "BaitMD", "Muligambia", "Killuminaty", "Xtreme Players", "Golden Five"
