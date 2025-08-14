@@ -1278,7 +1278,7 @@ const KingstonHyperXSupercup = () => {
                           <p className="font-medium mb-2">HyperX Premium Choice:</p>
                           <ul className="space-y-1 text-xs">
                             <li>• 1x HyperX Alloy Rise 75 Wireless (tastatură wireless)</li>
-                            <li className="italic text-purple-300">* Dacă câștigătorul Ace of Aces este din echipa locul 2, va primi HyperX Cloud III S Wireless</li>
+                            <li className="italic text-purple-300">* Dacă câștigătorul Ace of Aces va alege HyperX Cloud III S Wireless</li>
                           </ul>
                         </div>
                       </div>
