@@ -1698,13 +1698,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Kingston Public: Get Approved and Confirmed Teams
+  // Kingston Public: Get Only Manually Approved Teams (Real Registrations)
   app.get("/api/kingston/teams", async (req, res) => {
     try {
       const { db } = await import("./db");
       const { kingstonTeams } = await import("@shared/schema");
-      const { eq, or } = await import("drizzle-orm");
+      const { eq } = await import("drizzle-orm");
       
+      // Return ONLY teams with status "approved" - these are real registrations that admin manually approved
       const teams = await db.select({
         id: kingstonTeams.id,
         name: kingstonTeams.name,
@@ -1720,10 +1721,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         rejectionReason: kingstonTeams.rejectionReason,
         createdAt: kingstonTeams.createdAt
       }).from(kingstonTeams)
-        .where(or(
-          eq(kingstonTeams.status, "approved"),
-          eq(kingstonTeams.status, "confirmed")
-        ));
+        .where(eq(kingstonTeams.status, "approved")); // Only manually approved teams
       res.json(teams);
     } catch (error) {
       console.error("Error fetching Kingston FURY teams:", error);
