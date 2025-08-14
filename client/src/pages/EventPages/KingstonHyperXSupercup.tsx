@@ -594,9 +594,9 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">📅 Cronograma Turneului</h4>
                         <p className="text-sm leading-relaxed">
                           <strong>Înregistrări:</strong> 15 august - 10 septembrie<br />
-                          <strong>Stage 0 (Calificarea):</strong> 11 - 13 septembrie<br />
-                          <strong>Stage 1 (Grupe):</strong> 14 - 20 septembrie<br />
-                          <strong>Stage 2 (Double Elimination):</strong> 21 - 28 septembrie<br />
+                          <strong>Stage 1 (Calificare):</strong> 10 - 14 septembrie<br />
+                          <strong>Stage 2 (Grupe):</strong> 17 - 21 septembrie<br />
+                          <strong>Playoff (Double Elimination):</strong> 27 - 28 septembrie<br />
                           <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
                         </p>
                       </div>
@@ -615,9 +615,9 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Stage 1:</strong> Calificare - toate echipele înregistrate<br />
-                          <strong>Stage 2:</strong> 8 Grupe cu 4 echipe, primele 2 avansează (32→16)<br />
-                          <strong>Playoff:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)<br />
+                          <strong>Stage 1:</strong> 10-14 septembrie - Calificare<br />
+                          <strong>Stage 2:</strong> 17-21 septembrie - 8 Grupe cu 4 echipe (32→16)<br />
+                          <strong>Playoff:</strong> 27-28 septembrie - Double Elimination (16 echipe)<br />
                           <strong>Total echipe:</strong> 32 (12 selectate direct + 20 prin calificare)<br />
                           <strong>Toate meciurile:</strong> Format BO1, meciurile decisive BO3
                         </p>
@@ -697,7 +697,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🎯 Procesul de Calificare</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Perioada:</strong> 11 - 14 septembrie 2025<br />
+                          <strong>Perioada:</strong> 10 - 14 septembrie 2025<br />
                           <strong>Format:</strong> Single Elimination Bracket<br />
                           <strong>Locuri:</strong> 20 locuri disponibile pentru Stage 2<br />
                           <strong>Meciuri:</strong> Best of 1 (BO1)<br />
