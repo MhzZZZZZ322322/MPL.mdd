@@ -179,7 +179,7 @@ const KingstonHyperXSupercup = () => {
     <>
       <Helmet>
         <title>Kingston x HyperX - Supercup Season 1 | Moldova Pro League</title>
-        <meta name="description" content="Kingston x HyperX - Supercup Season 1 - Cel mai mare turneu de Counter-Strike 2 din Moldova și România, powered by Kingston și HyperX gaming gear." />
+        <meta name="description" content="Kingston x HyperX - Supercup Season 1 - Cel mai mare turneu de Counter-Strike 2 din Moldova, powered by Kingston și HyperX gaming gear." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="bg-black min-h-screen">
@@ -219,12 +219,12 @@ const KingstonHyperXSupercup = () => {
                 <span className="mr-4">10 septembrie - 28 septembrie 2025</span>
 
                 <MapPin className="mr-2 h-4 w-4 text-primary" />
-                <span>Online (Moldova & România)</span>
+                <span>Online (Moldova)</span>
               </div>
 
               <p className="text-lg text-gray-100 max-w-2xl mb-6">
                 Primul turneu Supercup powered by Kingston și HyperX. Competiție de elită cu echipamente gaming premium 
-                pentru cele mai bune echipe din Moldova și România.
+                pentru cele mai bune echipe din Moldova.
               </p>
 
               {/* Live Countdown Timer */}
@@ -621,7 +621,7 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">👥 Echipe și Jucători</h4>
                         <p className="text-sm leading-relaxed">
                           <strong>Jucători per echipă:</strong> 5 titulari + 2 rezerve<br />
-                          <strong>Eligibilitate:</strong> Cetățeni români și moldoveni<br />
+                          <strong>Eligibilitate:</strong> Cetățeni moldoveni<br />
                           <strong>Vârstă minimă:</strong> 16 ani<br />
                           <strong>FACEIT Level:</strong> Minim Level 4
                         </p>

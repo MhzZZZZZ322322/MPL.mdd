@@ -167,7 +167,7 @@ const EventDetails = () => {
               <div className="mt-8">
                 <h3 className="text-xl font-semibold mb-4 text-white">Descriere Detaliată</h3>
                 <p className="text-gray-300 mb-4">
-                  {event.description} Acest turneu oferă o experiență competitivă de top pentru toți jucătorii pasionați din Moldova și România.
+                  {event.description} Acest turneu oferă o experiență competitivă de top pentru toți jucătorii pasionați din Moldova.
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mb-8">

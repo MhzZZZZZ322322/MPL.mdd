@@ -76,7 +76,7 @@ const HatorCupROPLxMPL = () => {
 
               <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto font-inter">
                 Pentru prima dată ROPL și MPL își unesc forțele într-un super turneu de CS2, powered by HATOR și SkinBaron. 
-                Un eveniment istoric care va aduce împreună cele mai bune echipe din România și Moldova într-o competiție de nivel înalt.
+                Un eveniment istoric care va aduce împreună cele mai bune echipe din Moldova într-o competiție de nivel înalt.
               </p>
               <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <Button 
@@ -190,7 +190,7 @@ const HatorCupROPLxMPL = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-lg font-bold text-white font-rajdhani">România 🇷🇴</p>
+                  <p className="text-lg font-bold text-white font-rajdhani">Moldova 🇲🇩</p>
                   <p className="text-lg font-bold text-white font-rajdhani">Moldova 🇲🇩</p>
                 </CardContent>
               </Card>
@@ -612,7 +612,7 @@ const HatorCupROPLxMPL = () => {
                 MPL
               </a>
             </div>
-            <p className="text-gray-400 text-center mt-6 font-inter" data-aos="fade-up" data-aos-delay="400">Un eveniment realizat în parteneriat cu cele mai importante asa numite organizații de esports din România și Moldova</p>
+            <p className="text-gray-400 text-center mt-6 font-inter" data-aos="fade-up" data-aos-delay="400">Un eveniment realizat în parteneriat cu cele mai importante organizații de esports din Moldova</p>
           </div>
         </section>
       </div>

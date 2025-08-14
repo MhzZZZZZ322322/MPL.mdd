@@ -17,7 +17,7 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
             <span className="text-primary">#</span>MPL în cifre
           </h2>
           <p className="text-gray-400 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            Comunitatea Moldova Pro League continuă să crească și să aducă împreună cei mai pasionați jucători din Moldova și România.
+            Comunitatea Moldova Pro League continuă să crească și să aducă împreună cei mai pasionați jucători din Moldova.
           </p>
         </div>
         
@@ -84,7 +84,7 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
               <ul className="space-y-2 text-gray-300">
                 <li className="flex items-start">
                   <span className="text-primary mr-2">•</span>
-                  <span>Cel mai mare turneu online de Counter-Strike 2 din Moldova și România</span>
+                  <span>Cel mai mare turneu online de Counter-Strike 2 din Moldova</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">•</span>
@@ -92,7 +92,7 @@ const Stats: React.FC<StatsProps> = ({ className }) => {
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">•</span>
-                  <span>Participare gratuită pentru toate echipele din Moldova și România</span>
+                  <span>Participare gratuită pentru toate echipele din Moldova</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-primary mr-2">•</span>

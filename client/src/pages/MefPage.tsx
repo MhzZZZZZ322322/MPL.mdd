@@ -51,7 +51,7 @@ export default function MefPage() {
             <div className="w-full md:w-1/2">
               <h2 className="text-xl font-bold text-primary mb-4">Ce înseamnă MEF?</h2>
               <p className="text-gray-300 mb-4">
-                MEF (Macedonian Electronic Force) este un meme popular în comunitatea esports din Moldova și România.
+                MEF (Macedonian Electronic Force) este un meme popular în comunitatea esports din Moldova.
               </p>
               <p className="text-gray-300 mb-4">
                 "Gotta count on someone else man, cuz Gerara here!"

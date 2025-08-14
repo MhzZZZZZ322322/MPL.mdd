@@ -1241,7 +1241,7 @@ export class MemStorage implements IStorage {
     // Add events
     this.createEvent({
       title: "HATOR CS2 LEAGUE MOLDOVA - SEZONUL 1",
-      description: "Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de MPL în parteneriat cu HATOR și susținut de Darwin.",
+      description: "Cel mai tare turneu online de Counter-Strike 2 din Moldova, organizat de MPL în parteneriat cu HATOR și susținut de Darwin.",
       date: "Mai - Iunie 2025",
       platform: "FACEIT",
       teamSize: "5v5 Clasic",

@@ -543,7 +543,7 @@ export const translations: TranslationDictionary = {
     ru: "MPL Pilot Cup"
   },
   "about.timeline.event1.description": {
-    ro: "Turneul inaugural dedicat jucătorilor din Moldova și România cu susținerea oferită de Darwin și HATOR.",
+    ro: "Turneul inaugural dedicat jucătorilor din Moldova cu susținerea oferită de Darwin și HATOR.",
     ru: "Инаугурационный турнир, посвященный игрокам из Молдовы и Румынии при поддержке Darwin и HATOR."
   },
   "about.timeline.event2.date": {
@@ -755,7 +755,7 @@ export const translations: TranslationDictionary = {
     ru: "Онлайн (FACEIT)"
   },
   "event.hator.description": {
-    ro: "Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de comunitatea MPL în parteneriat cu HATOR.",
+    ro: "Cel mai tare turneu online de Counter-Strike 2 din Moldova, organizat de comunitatea MPL în parteneriat cu HATOR.",
     ru: "Самый крутой онлайн-турнир по Counter-Strike 2 в Молдове и Румынии, организованный сообществом MPL в партнерстве с HATOR."
   },
   "event.countdown": {
@@ -837,7 +837,7 @@ export const translations: TranslationDictionary = {
     ru: "Максимальная вместимость"
   },
   "event.format.teams.number": {
-    ro: "Până la 40 echipe din Moldova și România",
+    ro: "Până la 40 echipe din Moldova",
     ru: "До 40 команд из Молдовы и Румынии"
   },
   "event.format.structure": {

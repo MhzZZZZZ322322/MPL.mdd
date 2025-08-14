@@ -22,7 +22,7 @@ export default function TeamRegistration() {
             Înregistrare Echipă
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Alătură-te celei mai mari competiții CS2 din Moldova și România
+            Alătură-te celei mai mari competiții CS2 din Moldova
           </p>
         </div>
 

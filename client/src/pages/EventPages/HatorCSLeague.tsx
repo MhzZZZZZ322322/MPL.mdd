@@ -80,7 +80,7 @@ const HatorCSLeague = () => {
     <>
       <Helmet>
         <title>HATOR CS2 LEAGUE MOLDOVA | Moldova Pro League</title>
-        <meta name="description" content="HATOR CS2 LEAGUE MOLDOVA - Cel mai tare turneu online de Counter-Strike 2 din Moldova și România, organizat de comunitatea MPL în parteneriat cu HATOR." />
+        <meta name="description" content="HATOR CS2 LEAGUE MOLDOVA - Cel mai tare turneu online de Counter-Strike 2 din Moldova, organizat de comunitatea MPL în parteneriat cu HATOR." />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <div className="bg-black min-h-screen">
