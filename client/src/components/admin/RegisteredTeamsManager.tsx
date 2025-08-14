@@ -55,7 +55,7 @@ export default function RegisteredTeamsManager() {
   const [editedIsDirectInvite, setEditedIsDirectInvite] = useState<boolean>(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showMembersDialog, setShowMembersDialog] = useState(false);
-  const [showTypeManager, setShowTypeManager] = useState(false);
+  const [showTypeManager, setShowTypeManager] = useState(true); // Start visible by default
 
   // Fetch registered teams
   const { data: teams = [], isLoading } = useQuery({
@@ -315,10 +315,13 @@ export default function RegisteredTeamsManager() {
     );
   }
 
+  console.log("RegisteredTeamsManager rendering, teams count:", teams.length);
+  
   return (
     <>
-      {/* Quick Team Type Manager Section */}
-      <Card className="mb-6 border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+      {/* Quick Team Type Manager Section - ALWAYS VISIBLE */}
+      <Card className="mb-6 border-2 border-purple-500/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20"
+            style={{ display: 'block', visibility: 'visible', minHeight: '100px' }}>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <div className="flex items-center">
