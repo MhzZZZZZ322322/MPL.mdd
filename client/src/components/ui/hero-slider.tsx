@@ -66,32 +66,27 @@ export const HeroSlider = () => {
   const currentContent = slides[currentSlide];
 
   return (
-    <div className="relative h-[65vh] min-h-[500px] overflow-hidden bg-black">
-      {/* Background Image */}
+    <div className="relative h-[50vh] min-h-[400px] overflow-hidden bg-black">
+      {/* Background Image Container */}
       <motion.div 
         key={currentSlide}
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="absolute inset-0"
+        className="absolute inset-0 flex items-center justify-center"
       >
         <img 
           src={currentContent.image} 
           alt={currentContent.title}
-          className="w-full h-full object-cover object-center"
+          className="max-w-4xl max-h-[80%] w-auto h-auto object-contain"
           style={{
-            objectPosition: currentSlide === 0 ? 'center 40%' : 'center center',
-            filter: 'brightness(0.85) contrast(1.15) saturate(1.1)',
-            transform: 'scale(1.02)'
+            filter: 'brightness(0.9) contrast(1.1) saturate(1.05)'
           }}
         />
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
-      
-      {/* Gradient overlay pentru text */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
       
       {/* Navigation arrows */}
       {slides.length > 1 && (
@@ -128,14 +123,14 @@ export const HeroSlider = () => {
       
       {/* Content */}
       {isLoaded && (
-        <div className="absolute inset-0 flex items-end justify-center z-20 pb-12">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-6xl">
+        <div className="absolute bottom-0 left-0 right-0 z-20 pb-8">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-4xl">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-center max-w-2xl mx-auto"
+              className="text-center max-w-xl mx-auto"
             >
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 font-rajdhani [text-shadow:_0_2px_10px_rgb(0_0_0_/_80%)] leading-tight">
                 {currentContent.title}
