@@ -136,19 +136,16 @@ const KingstonHyperXSupercup = () => {
     queryFn: async () => {
       const response = await fetch("/api/kingston/teams");
       if (!response.ok) throw new Error("Failed to fetch Kingston teams");
-      const data = await response.json();
-      console.log('Debug: API response:', data.length, 'teams from API');
-      return data;
-    },
-    staleTime: 0, // Force fresh data
-    cacheTime: 0 // Disable caching for debugging
+      return response.json();
+    }
   });
 
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
-  // Debug: Log teams count
-  console.log('Debug: teams count:', teams.length, 'teams:', teams.map(t => t.name));
+  // Separate teams by type
+  const directInviteTeams = teams.filter(team => (team as any).isDirectInvite);
+  const qualificationTeams = teams.filter(team => !(team as any).isDirectInvite);
 
   // Fetch members for selected team
   const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
@@ -658,7 +655,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Total echipe: <span className="text-white font-bold">{teams.length} / 32</span> (12 selectate direct + 20 calificare)
+                        Echipe pentru calificare: <span className="text-white font-bold">{qualificationTeams.length} / 20</span> • Direct: 12/12
                       </p>
                     </div>
                   </div>
@@ -719,6 +716,63 @@ const KingstonHyperXSupercup = () => {
                 <p className="text-gray-300 leading-relaxed">
                   Aceste echipe au fost selectate pe baza performanțelor, stabilității și contribuției la dezvoltarea scenei competitive CS2 din Moldova. 
                   Ele intră direct în etapa de grupe alături de cele 20 de echipe care se vor califica prin Stage 1.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Registered Teams for Qualification Section */}
+        <section className="py-16 px-4 bg-gradient-to-r from-green-900/20 to-teal-900/20">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+                Echipe Înregistrate pentru Calificare
+              </h2>
+              <p className="text-gray-300 text-lg mb-2">
+                Echipele care luptă pentru cele 20 de locuri în Stage 2
+              </p>
+              <p className="text-green-400 font-semibold">
+                Aceste echipe vor participa la Stage 1 - Calificare (10-14 septembrie)
+              </p>
+            </div>
+
+            {/* Qualification Teams Grid - will show teams registered for qualification */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+              {/* For now showing placeholder - real teams will come from registration system */}
+              {teams.filter(team => !(team as any).isDirectInvite).length === 0 ? (
+                <div className="col-span-full text-center py-12">
+                  <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+                  <h3 className="text-xl font-semibold text-gray-300 mb-2">Înregistrările încep în curând</h3>
+                  <p className="text-gray-400 max-w-md mx-auto">
+                    Echipele care se vor înregistra pentru calificare vor apărea aici. 
+                    Înregistrările încep pe 15 august 2025.
+                  </p>
+                </div>
+              ) : (
+                teams.filter(team => !(team as any).isDirectInvite).map((team, index) => (
+                  <NeonBorder key={team.id} className="bg-darkGray/60 p-4 text-center hover:bg-darkGray/80 transition-all duration-300">
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center mb-3">
+                        <Target className="w-6 h-6 text-black" />
+                      </div>
+                      <h3 className="text-white font-bold text-sm mb-1">{team.name}</h3>
+                      <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
+                    </div>
+                  </NeonBorder>
+                ))
+              )}
+            </div>
+
+            <div className="mt-8 text-center">
+              <div className="bg-gradient-to-r from-green-500/10 to-teal-500/10 border border-green-500/30 rounded-lg p-6 max-w-4xl mx-auto">
+                <div className="flex items-center justify-center mb-4">
+                  <Target className="mr-3 h-6 w-6 text-green-400" />
+                  <h4 className="text-xl font-bold text-green-400 font-rajdhani">Locuri prin Calificare</h4>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  Toate echipele înregistrate (exceptând cele cu invitație directă) vor participa la Stage 1 - Calificare. 
+                  Doar primele 20 echipe se vor califica pentru Stage 2 (Grupe) alături de cele 12 echipe cu invitație directă.
                 </p>
               </div>
             </div>
