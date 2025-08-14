@@ -417,9 +417,9 @@ export default function RegisteredTeamsManager() {
 
       {/* Edit Team Dialog */}
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
-        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto" style={{zIndex: 9999}}>
           <DialogHeader>
-            <DialogTitle>Editează Echipa - {editingTeam?.name}</DialogTitle>
+            <DialogTitle>🔴 DIALOGUL CORECT - Editează Echipa - {editingTeam?.name} - DEBUG: {String(editedIsDirectInvite)}</DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
             {/* Debug Info */}
