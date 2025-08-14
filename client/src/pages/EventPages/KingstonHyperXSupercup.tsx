@@ -136,12 +136,19 @@ const KingstonHyperXSupercup = () => {
     queryFn: async () => {
       const response = await fetch("/api/kingston/teams");
       if (!response.ok) throw new Error("Failed to fetch Kingston teams");
-      return response.json();
-    }
+      const data = await response.json();
+      console.log('Debug: API response:', data.length, 'teams from API');
+      return data;
+    },
+    staleTime: 0, // Force fresh data
+    cacheTime: 0 // Disable caching for debugging
   });
 
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
+  
+  // Debug: Log teams count
+  console.log('Debug: teams count:', teams.length, 'teams:', teams.map(t => t.name));
 
   // Fetch members for selected team
   const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
