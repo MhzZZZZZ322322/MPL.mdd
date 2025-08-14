@@ -145,11 +145,12 @@ const KingstonHyperXSupercup = () => {
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
-  // Debug: Log team data to see only approved teams
+  // Debug: Log team data to see only approved teams and their logos
   console.log('Kingston approved teams only:', teams.map(t => ({
     name: t.name,
     isDirectInvite: t.isDirectInvite,
-    status: t.status
+    status: t.status,
+    logoUrl: t.logoUrl
   })));
   
   // All registered teams (both direct invites and qualification teams)

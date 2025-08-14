@@ -1584,6 +1584,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Serve Kingston team logos by team ID
+  app.get("/api/kingston/teams/:id/logo", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const teamId = parseInt(req.params.id);
+      if (isNaN(teamId)) {
+        return res.status(400).json({ error: "Invalid team ID" });
+      }
+      
+      // Find team by ID
+      const [team] = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.id, teamId))
+        .limit(1);
+        
+      if (!team || !team.logoData) {
+        return res.status(404).json({ error: "Logo not found" });
+      }
+      
+      // Extract base64 data and mime type
+      const logoData = team.logoData;
+      const matches = logoData.match(/^data:([^;]+);base64,(.+)$/);
+      
+      if (!matches) {
+        return res.status(400).json({ error: "Invalid logo data format" });
+      }
+      
+      const mimeType = matches[1];
+      const base64Data = matches[2];
+      const buffer = Buffer.from(base64Data, 'base64');
+      
+      res.set('Content-Type', mimeType);
+      res.set('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+      res.send(buffer);
+      
+    } catch (error) {
+      console.error("Error serving Kingston team logo:", error);
+      res.status(500).json({ error: "Failed to serve logo" });
+    }
+  });
+
   // Kingston FURY Admin: Get Pending Teams
   app.get("/api/kingston/admin/pending-teams", async (req, res) => {
     try {
