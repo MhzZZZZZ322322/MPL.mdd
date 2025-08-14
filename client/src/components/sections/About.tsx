@@ -46,12 +46,11 @@ const About = () => {
       link: "/events/mpl-pilot-cup"
     },
     {
-      year: "15 August - 28 Septembrie 2025",
-      title: "Kingston x HyperX - Supercup Season 1",
-      description: "Primul turneu major cu 32 echipe și premii în valoare de 100,000 LEI. Format: Calificare → Grupe → Playoff.",
-      icon: <Sparkles />,
-      link: "/events/kingston-hyperx-supercup",
-      isActive: true
+      year: t('about.timeline.event2.date'),
+      title: t('about.timeline.event2.title'),
+      description: t('about.timeline.event2.description'),
+      icon: <Medal />,
+      link: "/events/hator-cs-league"
     },
     {
       year: "23-24 August 2025",
@@ -61,11 +60,12 @@ const About = () => {
       link: "/events/hator-cup-ropl-mpl"
     },
     {
-      year: t('about.timeline.event2.date'),
-      title: t('about.timeline.event2.title'),
-      description: t('about.timeline.event2.description'),
-      icon: <Medal />,
-      link: "/events/hator-cs-league"
+      year: "15 August - 28 Septembrie 2025",
+      title: "Kingston x HyperX - Supercup Season 1",
+      description: "Primul turneu major cu 32 echipe și premii în valoare de 100,000 LEI. Format: Calificare → Grupe → Playoff.",
+      icon: <Sparkles />,
+      link: "/events/kingston-hyperx-supercup",
+      isActive: true
     },
   ];
 
