@@ -618,7 +618,7 @@ const KingstonHyperXSupercup = () => {
                           <strong>Stage 1:</strong> 10-14 septembrie - Calificare<br />
                           <strong>Stage 2:</strong> 17-21 septembrie - 8 Grupe cu 4 echipe (32→16)<br />
                           <strong>Playoff:</strong> 27-28 septembrie - Double Elimination (16 echipe)<br />
-                          <strong>Total echipe:</strong> 32 (12 selectate direct + 20 prin calificare)<br />
+                          <strong>Total echipe:</strong> 32 (12 cu invitație directă + 20 prin calificare)<br />
                           <strong>Toate meciurile:</strong> Format BO1, meciurile decisive BO3
                         </p>
                       </div>
@@ -705,9 +705,19 @@ const KingstonHyperXSupercup = () => {
                         </p>
                       </div>
                       <div>
+                        <h4 className="text-primary font-bold mb-2">🎯 Echipe cu Invitație Directă</h4>
+                        <p className="text-sm leading-relaxed">
+                          <strong>12 echipe invite direct în Stage 2:</strong><br />
+                          • Se înregistrează pe platformă ca toate echipele<br />
+                          • Nu participă la Stage 1 (Calificare)<br />
+                          • Sunt plasate direct în Stage 2 (Grupe)<br />
+                          • Lista echipelor cu invite va fi anunțată separat
+                        </p>
+                      </div>
+                      <div>
                         <h4 className="text-primary font-bold mb-2">📋 Eligibilitatea pentru Calificare</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Echipe eligible:</strong> Toate echipele înregistrate pe platformă<br />
+                          <strong>Echipe eligible pentru Stage 1:</strong> Toate echipele înregistrate (exceptând cele cu invitație directă)<br />
                           <strong>Criterii minime:</strong><br />
                           • Minimum 5 jucători activi în roster<br />
                           • Roster complet cu toate datele FACEIT<br />
