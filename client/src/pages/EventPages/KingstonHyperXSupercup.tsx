@@ -145,7 +145,11 @@ const KingstonHyperXSupercup = () => {
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
-  // Show only teams registered for qualification (exclude direct invites)
+  // All registered teams (both direct invites and qualification teams)
+  const allRegisteredTeams = teams;
+  
+  // Separate direct invites and qualification teams for statistics
+  const directInviteTeams = teams.filter(team => team.isDirectInvite);
   const qualificationTeams = teams.filter(team => !team.isDirectInvite);
 
   // Fetch members for selected team
@@ -724,35 +728,35 @@ const KingstonHyperXSupercup = () => {
           </div>
         </section>
 
-        {/* Registered Teams for Qualification Section */}
-        <section className="py-16 px-4 bg-gradient-to-r from-green-900/20 to-teal-900/20">
+        {/* All Registered Teams Section */}
+        <section className="py-16 px-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
-                Echipe Înregistrate pentru Calificare
+                Echipe Înregistrate
               </h2>
               <p className="text-gray-300 text-lg mb-2">
-                Echipele care luptă pentru cele 20 de locuri în Stage 2
+                Toate echipele participante la Kingston FURY x HyperX Supercup
               </p>
-              <p className="text-green-400 font-semibold">
-                Aceste echipe vor participa la Stage 1 - Calificare (10-14 septembrie)
+              <p className="text-blue-400 font-semibold">
+                <span className="text-purple-400">Invitații Directe:</span> {directInviteTeams.length} • <span className="text-green-400">Calificare:</span> {qualificationTeams.length}
               </p>
             </div>
 
-            {/* Qualification Teams Grid - will show teams registered for qualification */}
+            {/* All Teams Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {/* Show teams that are NOT direct invites */}
-              {qualificationTeams.length === 0 ? (
+              {/* Show ALL teams */}
+              {allRegisteredTeams.length === 0 ? (
                 <div className="col-span-full text-center py-12">
                   <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
                   <h3 className="text-xl font-semibold text-gray-300 mb-2">Înregistrările încep în curând</h3>
                   <p className="text-gray-400 max-w-md mx-auto">
-                    Echipele care se vor înregistra pentru calificare vor apărea aici. 
+                    Echipele înregistrate vor apărea aici. 
                     Înregistrările încep pe 15 august 2025.
                   </p>
                 </div>
               ) : (
-                qualificationTeams.map((team, index) => (
+                allRegisteredTeams.map((team, index) => (
                   <div key={team.id} className="relative perspective-1000">
                     <div 
                       className={`relative w-full h-64 md:h-80 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
@@ -763,7 +767,7 @@ const KingstonHyperXSupercup = () => {
                       {/* Front of card - Team Logo */}
                       <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
                         <div className="text-center h-full flex flex-col justify-between">
-                          <div className="mx-auto bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center overflow-hidden border-2 border-green-500/30 shadow-lg w-full h-48 md:h-60">
+                          <div className={`mx-auto bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center overflow-hidden border-2 ${team.isDirectInvite ? 'border-purple-500/30' : 'border-green-500/30'} shadow-lg w-full h-48 md:h-60`}>
                             <div className="relative w-full h-full p-3 flex items-center justify-center bg-slate-800/90 rounded">
                               {team.logoUrl ? (
                                 <img 
@@ -782,7 +786,9 @@ const KingstonHyperXSupercup = () => {
                           </div>
                           <div>
                             <h3 className="text-sm md:text-base font-bold text-white font-rajdhani py-1">{team.name}</h3>
-                            <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
+                            <span className={`text-xs font-semibold ${team.isDirectInvite ? 'text-purple-400' : 'text-green-400'}`}>
+                              {team.isDirectInvite ? 'INVITAȚIE DIRECTĂ' : 'CALIFICARE'}
+                            </span>
                           </div>
                         </div>
                       </NeonBorder>
@@ -828,7 +834,9 @@ const KingstonHyperXSupercup = () => {
                             </div>
                           )}
                           <div className="text-center mt-2 flex-shrink-0">
-                            <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
+                            <span className={`text-xs font-semibold ${team.isDirectInvite ? 'text-purple-400' : 'text-green-400'}`}>
+                              {team.isDirectInvite ? 'INVITAȚIE DIRECTĂ' : 'CALIFICARE'}
+                            </span>
                           </div>
                         </div>
                       </NeonBorder>
