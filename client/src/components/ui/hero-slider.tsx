@@ -124,21 +124,21 @@ export const HeroSlider = () => {
       {/* Content */}
       {isLoaded && (
         <div className="absolute bottom-0 left-0 right-0 z-20 pb-8">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-4xl">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-6xl">
             <motion.div
               key={currentSlide}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-center max-w-xl mx-auto"
+              className="text-left max-w-2xl"
             >
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 font-rajdhani [text-shadow:_0_2px_10px_rgb(0_0_0_/_80%)] leading-tight">
                 {currentContent.title}
               </h1>
-              <h2 className="text-sm sm:text-base md:text-lg text-primary font-semibold mb-5 max-w-xl mx-auto [text-shadow:_0_2px_8px_rgb(0_0_0_/_90%)] leading-snug px-2">
+              <h2 className="text-sm sm:text-base md:text-lg text-primary font-semibold mb-5 max-w-xl [text-shadow:_0_2px_8px_rgb(0_0_0_/_90%)] leading-snug">
                 {currentContent.subtitle}
               </h2>
-              <div className="flex flex-wrap gap-2 justify-center mt-4">
+              <div className="flex flex-wrap gap-2 justify-start mt-4">
                 {currentContent.primaryBtn.link.startsWith('http') ? (
                   <a href={currentContent.primaryBtn.link} target="_blank" rel="noopener noreferrer">
                     <Button size="sm" className="bg-primary hover:bg-primary/90 font-medium px-4 py-1.5 text-xs shadow-lg border border-primary/20">
