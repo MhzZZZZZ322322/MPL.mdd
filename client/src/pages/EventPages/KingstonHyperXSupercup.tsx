@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Team, TeamMember } from "@shared/schema";
 import supercupBgImage from "@assets/Untitled_1755089452078.png";
 import supercupRulesImage from "@assets/supercup season1 varianta 1_1755089877102.png";
+import supercupMainImage from "@assets/image_1755174669612.png";
 
 // Kingston Tournament Components using dedicated API routes
 const KingstonTournamentGroups = () => {
@@ -481,6 +482,20 @@ const KingstonHyperXSupercup = () => {
                   </div>
                 </div>
               </NeonBorder>
+            </div>
+          </div>
+        </section>
+
+        {/* Supercup Season 1 Main Image */}
+        <section className="py-12 px-4 bg-gradient-to-b from-darkBg to-darkGray/30">
+          <div className="container mx-auto max-w-5xl">
+            <div className="text-center mb-8">
+              <img 
+                src={supercupMainImage} 
+                alt="Supercup Season 1 - 10/28 Septembrie" 
+                className="w-full h-auto object-contain rounded-lg shadow-2xl max-h-80 mx-auto"
+                loading="eager"
+              />
             </div>
           </div>
         </section>
