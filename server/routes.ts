@@ -1118,19 +1118,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Separate API routes for Kingston FURY x HyperX tournament
   // ===========================
 
-  // Kingston FURY Teams routes
-  app.get("/api/kingston/teams", async (req, res) => {
-    try {
-      const { db } = await import("./db");
-      const { kingstonTeams } = await import("@shared/schema");
-      
-      const teams = await db.select().from(kingstonTeams);
-      res.json(teams);
-    } catch (error) {
-      console.error("Error fetching Kingston FURY teams:", error);
-      res.status(500).json({ error: "Failed to fetch Kingston FURY teams" });
-    }
-  });
+  // Kingston FURY Teams routes (removed duplicate endpoint - using the one that filters by approved status below)
 
   app.get("/api/kingston/teams/:id/members", async (req, res) => {
     try {
@@ -1710,12 +1698,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Kingston Public: Get Approved Teams
+  // Kingston Public: Get Approved and Confirmed Teams
   app.get("/api/kingston/teams", async (req, res) => {
     try {
       const { db } = await import("./db");
       const { kingstonTeams } = await import("@shared/schema");
-      const { eq } = await import("drizzle-orm");
+      const { eq, or } = await import("drizzle-orm");
       
       const teams = await db.select({
         id: kingstonTeams.id,
@@ -1732,11 +1720,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         rejectionReason: kingstonTeams.rejectionReason,
         createdAt: kingstonTeams.createdAt
       }).from(kingstonTeams)
-        .where(eq(kingstonTeams.status, "approved"));
+        .where(or(
+          eq(kingstonTeams.status, "approved"),
+          eq(kingstonTeams.status, "confirmed")
+        ));
       res.json(teams);
     } catch (error) {
-      console.error("Error deleting Kingston FURY teams:", error);
-      res.status(500).json({ error: "Failed to delete Kingston FURY teams" });
+      console.error("Error fetching Kingston FURY teams:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY teams" });
     }
   });
 
