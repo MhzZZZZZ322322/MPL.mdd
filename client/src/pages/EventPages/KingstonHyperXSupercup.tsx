@@ -654,7 +654,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Echipe pentru calificare: <span className="text-white font-bold">{qualificationTeams.length} / 20</span> • Direct: 12/12
+                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: 12
                       </p>
                     </div>
                   </div>
