@@ -693,7 +693,7 @@ const KingstonHyperXSupercup = () => {
                     "Golden Five",
                     "Team 23",
                     "Cadian Team",
-                    "4superlight",
+                    "1HP team",
                     "begrip",
                     "Muligambia",
                     "BiteMD",
