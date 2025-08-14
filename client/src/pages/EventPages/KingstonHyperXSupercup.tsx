@@ -571,9 +571,9 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">📝 Format Turneu</h4>
                         <p className="text-sm leading-relaxed">
                           Turneul Kingston x HyperX Supercup Season 1 se desfășoară în 3 etape:
-                          <br />• <strong>Stage 0:</strong> Calificarea - toate echipele înregistrate
-                          <br />• <strong>Stage 1:</strong> 8 grupe de câte 4 echipe, primele 2 avansează (32→16)
-                          <br />• <strong>Stage 2:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)
+                          <br />• <strong>Stage 1:</strong> Calificarea - toate echipele înregistrate
+                          <br />• <strong>Stage 2:</strong> 8 grupe de câte 4 echipe, primele 2 avansează (32→16)
+                          <br />• <strong>Playoff:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)
                           <br />• <strong>Total:</strong> 32 echipe (12 selectate direct + 20 prin calificare)
                         </p>
                       </div>
@@ -615,9 +615,9 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Stage 0:</strong> Calificare - toate echipele înregistrate<br />
-                          <strong>Stage 1:</strong> 8 Grupe cu 4 echipe, primele 2 avansează (32→16)<br />
-                          <strong>Stage 2:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)<br />
+                          <strong>Stage 1:</strong> Calificare - toate echipele înregistrate<br />
+                          <strong>Stage 2:</strong> 8 Grupe cu 4 echipe, primele 2 avansează (32→16)<br />
+                          <strong>Playoff:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)<br />
                           <strong>Total echipe:</strong> 32 (12 selectate direct + 20 prin calificare)<br />
                           <strong>Toate meciurile:</strong> Format BO1 până la finală
                         </p>
@@ -683,7 +683,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Target className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 0: Calificare (toate echipele înregistrate)</span>
+                    <span className="text-lg font-semibold text-white">Stage 1: Calificare (toate echipele înregistrate)</span>
                   </div>
                   {isStage0Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -699,7 +699,7 @@ const KingstonHyperXSupercup = () => {
                         <p className="text-sm leading-relaxed">
                           <strong>Perioada:</strong> 11 - 13 septembrie 2025<br />
                           <strong>Format:</strong> Single Elimination Bracket<br />
-                          <strong>Locuri:</strong> 20 locuri disponibile pentru Stage 1<br />
+                          <strong>Locuri:</strong> 20 locuri disponibile pentru Stage 2<br />
                           <strong>Meciuri:</strong> Best of 1 (BO1)<br />
                           <strong>Servere:</strong> FACEIT EU East
                         </p>
@@ -741,7 +741,7 @@ const KingstonHyperXSupercup = () => {
                           <em>Toate echipele înregistrate participă la Calificare</em>
                         </p>
                         <p className="text-xs text-gray-400">
-                          <em>20 echipe se califică pentru Stage 1 (+ 12 selectate direct = 32 total)</em>
+                          <em>20 echipe se califică pentru Stage 2 (+ 12 selectate direct = 32 total)</em>
                         </p>
                       </div>
                     </div>
@@ -781,7 +781,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Users className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 1: 8 Grupe (4 echipe fiecare)</span>
+                    <span className="text-lg font-semibold text-white">Stage 2: 8 Grupe (4 echipe fiecare)</span>
                   </div>
                   {isGroupsExpanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -805,7 +805,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Trophy className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 2: Double Elimination (16 echipe)</span>
+                    <span className="text-lg font-semibold text-white">Playoff: Double Elimination (16 echipe)</span>
                   </div>
                   {isStage2Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
