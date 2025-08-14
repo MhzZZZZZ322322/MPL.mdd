@@ -620,10 +620,10 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">👥 Echipe și Jucători</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Jucători per echipă:</strong> 5 titulari + 2 rezerve<br />
+                          <strong>Jucători per echipă:</strong> 5 în roster + 5 substitute<br />
                           <strong>Eligibilitate:</strong> Cetățeni moldoveni<br />
-                          <strong>Vârstă minimă:</strong> 16 ani<br />
-                          <strong>FACEIT Level:</strong> Minim Level 4
+                          <strong>Format echipe:</strong> Roster fix pe durata turneului<br />
+                          <strong>Platformă:</strong> FACEIT cu anti-cheat activ
                         </p>
                       </div>
                       <div>
@@ -723,10 +723,10 @@ const KingstonHyperXSupercup = () => {
                         <p className="text-sm leading-relaxed">
                           <strong>Echipe eligible:</strong> Toate echipele înregistrate care nu sunt selectate direct<br />
                           <strong>Criterii minime:</strong><br />
-                          • Minimul 5 jucători activi<br />
-                          • FACEIT Level 4+ pentru toți jucătorii<br />
-                          • Vârsta minimă 16 ani<br />
-                          • Cetățenie română sau moldoveană
+                          • Minimum 5 jucători activi în roster<br />
+                          • Roster complet cu toate datele FACEIT<br />
+                          • Respectarea regulamentului turneului<br />
+                          • Cetățenie moldoveană
                         </p>
                       </div>
                     </div>
