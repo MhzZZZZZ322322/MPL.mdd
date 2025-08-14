@@ -731,7 +731,7 @@ const KingstonHyperXSupercup = () => {
                           Ora 18:00 - 22:00</span>
                         </div>
                         <div className="text-center">
-                          <strong className="text-white">13 septembrie</strong><br />
+                          <strong className="text-white">14 septembrie</strong><br />
                           <span className="text-gray-300">Finala calificării<br />
                           Ora 18:00 - 21:00</span>
                         </div>
