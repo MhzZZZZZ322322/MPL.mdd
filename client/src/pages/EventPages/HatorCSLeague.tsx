@@ -469,7 +469,10 @@ const HatorCSLeague = () => {
           
           {isStage4Expanded && (
             <div className="mt-8">
-              <Stage4Playoff />
+              <Stage4Playoff 
+                isExpanded={isStage4Expanded}
+                onToggle={() => setIsStage4Expanded(!isStage4Expanded)}
+              />
             </div>
           )}
         </div>
