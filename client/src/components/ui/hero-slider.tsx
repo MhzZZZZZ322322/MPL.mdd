@@ -66,27 +66,32 @@ export const HeroSlider = () => {
   const currentContent = slides[currentSlide];
 
   return (
-    <div className="relative h-[65vh] overflow-hidden bg-black">
+    <div className="relative h-[65vh] min-h-[500px] overflow-hidden bg-black">
       {/* Background Image */}
       <motion.div 
         key={currentSlide}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         className="absolute inset-0"
       >
         <img 
           src={currentContent.image} 
           alt={currentContent.title}
           className="w-full h-full object-cover object-center"
+          style={{
+            objectPosition: currentSlide === 0 ? 'center 40%' : 'center center',
+            filter: 'brightness(0.85) contrast(1.15) saturate(1.1)',
+            transform: 'scale(1.02)'
+          }}
         />
       </motion.div>
       
       {/* Overlay pentru contrast */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
       
-      {/* Gradient overlay bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent"></div>
+      {/* Gradient overlay pentru text */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
       
       {/* Navigation arrows */}
       {slides.length > 1 && (
