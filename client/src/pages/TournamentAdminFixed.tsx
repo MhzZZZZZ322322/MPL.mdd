@@ -15,6 +15,7 @@ import Stage4PlayoffManager from "@/components/admin/Stage4PlayoffManager";
 import TeamRegistration from "@/components/admin/TeamRegistration";
 import TeamApprovalManager from "@/components/admin/TeamApprovalManager";
 import RegisteredTeamsManager from "@/components/admin/RegisteredTeamsManager";
+import TeamTypeManager from "@/components/admin/TeamTypeManager";
 
 // Context pentru turneul selectat
 interface TournamentContextType {
@@ -105,7 +106,7 @@ export default function TournamentAdmin() {
             </div>
           
             <Tabs defaultValue="team-approval" className="w-full">
-              <TabsList className="grid w-full grid-cols-10 bg-slate-800/50">
+              <TabsList className="grid w-full grid-cols-11 bg-slate-800/50">
                 <TabsTrigger value="team-approval" className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   Aprobare Echipe
@@ -113,6 +114,10 @@ export default function TournamentAdmin() {
                 <TabsTrigger value="registered-teams" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   Echipe Înregistrate
+                </TabsTrigger>
+                <TabsTrigger value="team-types" className="flex items-center gap-2">
+                  <Trophy className="w-4 h-4" />
+                  Tipuri Echipe
                 </TabsTrigger>
                 <TabsTrigger value="teams" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
@@ -151,6 +156,10 @@ export default function TournamentAdmin() {
               
               <TabsContent value="registered-teams" className="mt-6">
                 <RegisteredTeamsManager />
+              </TabsContent>
+              
+              <TabsContent value="team-types" className="mt-6">
+                <TeamTypeManager />
               </TabsContent>
               
               <TabsContent value="teams" className="mt-6">
