@@ -132,15 +132,15 @@ export default function TournamentAdmin() {
                 </TabsTrigger>
                 <TabsTrigger value="stage2" className="flex items-center gap-2">
                   <Trophy className="w-4 h-4" />
-                  Stage 2 Swiss
+                  Stage 2 Double Elim
                 </TabsTrigger>
-                <TabsTrigger value="stage3-rounds" className="flex items-center gap-2">
+                <TabsTrigger value="stage3-rounds" className="flex items-center gap-2 opacity-50" disabled>
                   <Settings className="w-4 h-4" />
-                  Stage 3 Playoff
+                  Stage 3 (Eliminat)
                 </TabsTrigger>
                 <TabsTrigger value="stage4-playoff" className="flex items-center gap-2 opacity-50" disabled>
                   <Trophy className="w-4 h-4" />
-                  Stage 4 (Reserved)
+                  Stage 4 (Eliminat)
                 </TabsTrigger>
 
               </TabsList>
@@ -174,11 +174,35 @@ export default function TournamentAdmin() {
               </TabsContent>
               
               <TabsContent value="stage3-rounds" className="mt-6">
-                <Stage3SwissRoundsManager />
+                <div className="text-center py-12">
+                  <div className="bg-gradient-to-r from-amber-900/20 to-amber-800/10 border border-amber-500/30 rounded-lg p-8 max-w-2xl mx-auto">
+                    <Zap className="mx-auto h-16 w-16 text-amber-400 mb-4" />
+                    <h3 className="text-xl font-semibold text-amber-300 mb-3">Format Actualizat</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      Turneul Kingston a fost restructurat: <strong>nu mai folosește Swiss System</strong>. 
+                      Noul format: Stage 1 (8 grupe de 4 echipe) → Stage 2 (Double Elimination cu 16 echipe).
+                    </p>
+                    <p className="text-gray-400 text-sm mt-4">
+                      Stage 3 Swiss a fost eliminat din formatul oficial al turneului.
+                    </p>
+                  </div>
+                </div>
               </TabsContent>
               
               <TabsContent value="stage4-playoff" className="mt-6">
-                <Stage4PlayoffManager />
+                <div className="text-center py-12">
+                  <div className="bg-gradient-to-r from-amber-900/20 to-amber-800/10 border border-amber-500/30 rounded-lg p-8 max-w-2xl mx-auto">
+                    <Zap className="mx-auto h-16 w-16 text-amber-400 mb-4" />
+                    <h3 className="text-xl font-semibold text-amber-300 mb-3">Format Actualizat</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      Turneul Kingston are acum doar <strong>2 stages</strong>. 
+                      Stage 2 (Double Elimination) este etapa finală - nu mai există Stage 4 Playoff.
+                    </p>
+                    <p className="text-gray-400 text-sm mt-4">
+                      Toate finalizările se desfășoară în Stage 2 Double Elimination.
+                    </p>
+                  </div>
+                </div>
               </TabsContent>
               
 

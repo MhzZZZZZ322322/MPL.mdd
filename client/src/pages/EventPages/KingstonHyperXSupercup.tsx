@@ -42,32 +42,32 @@ const KingstonTournamentGroups = () => {
   );
 };
 
-const KingstonStage2Swiss = () => {
-  const { data: standings = [] } = useQuery({
-    queryKey: ["/api/kingston/stage2-swiss-standings"],
+const KingstonStage2DoubleElim = () => {
+  const { data: upperBracket = [] } = useQuery({
+    queryKey: ["/api/kingston/stage2-upper-bracket"],
     queryFn: async () => {
-      const response = await fetch("/api/kingston/stage2-swiss-standings");
-      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 standings");
+      const response = await fetch("/api/kingston/stage2-upper-bracket");
+      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 upper bracket");
       return response.json();
     }
   });
 
-  const { data: matches = [] } = useQuery({
-    queryKey: ["/api/kingston/stage2-swiss-matches"],
+  const { data: lowerBracket = [] } = useQuery({
+    queryKey: ["/api/kingston/stage2-lower-bracket"],
     queryFn: async () => {
-      const response = await fetch("/api/kingston/stage2-swiss-matches");
-      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 matches");
+      const response = await fetch("/api/kingston/stage2-lower-bracket");
+      if (!response.ok) throw new Error("Failed to fetch Kingston Stage 2 lower bracket");
       return response.json();
     }
   });
 
-  if (standings.length === 0 && matches.length === 0) {
+  if (upperBracket.length === 0 && lowerBracket.length === 0) {
     return (
       <div className="text-center py-8">
         <Trophy className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-        <h3 className="text-xl font-semibold text-gray-300 mb-2">Swiss System Stage va începe în curând</h3>
+        <h3 className="text-xl font-semibold text-gray-300 mb-2">Double Elimination va începe în curând</h3>
         <p className="text-gray-400">
-          16 echipe calificate din Stage 1 vor concura în format Swiss System.
+          16 echipe calificate din Stage 1 vor concura în format Double Elimination (Upper/Lower Bracket).
         </p>
       </div>
     );
@@ -75,8 +75,24 @@ const KingstonStage2Swiss = () => {
 
   return (
     <div className="space-y-6">
-      <p className="text-gray-300 text-center">Kingston Stage 2: Swiss System (16→8 echipe)</p>
-      {/* Swiss standings and matches would be rendered here */}
+      <p className="text-gray-300 text-center">Kingston Stage 2: Double Elimination Bracket</p>
+      {/* Upper Bracket */}
+      <div className="bg-gradient-to-r from-green-900/20 to-green-800/10 border border-green-500/30 rounded-lg p-6">
+        <h4 className="text-green-400 font-semibold mb-3">Upper Bracket</h4>
+        <p className="text-gray-400 text-sm">Winners bracket - nu poți fi eliminat la prima înfrângere</p>
+      </div>
+      
+      {/* Lower Bracket */}
+      <div className="bg-gradient-to-r from-red-900/20 to-red-800/10 border border-red-500/30 rounded-lg p-6">
+        <h4 className="text-red-400 font-semibold mb-3">Lower Bracket</h4>
+        <p className="text-gray-400 text-sm">Losers bracket - o singură înfrângere înseamnă eliminare</p>
+      </div>
+      
+      {/* Grand Final */}
+      <div className="bg-gradient-to-r from-yellow-900/20 to-yellow-800/10 border border-yellow-500/30 rounded-lg p-6">
+        <h4 className="text-yellow-400 font-semibold mb-3">Grand Final</h4>
+        <p className="text-gray-400 text-sm">Câștigătorul Upper Bracket vs Câștigătorul Lower Bracket</p>
+      </div>
     </div>
   );
 };
@@ -629,11 +645,11 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Stage 0:</strong> 16 echipe selectate direct + toate celelalte în calificare<br />
-                          <strong>Stage 1:</strong> Primele 2 echipe din fiecare grupă avansează<br />
-                          <strong>Stage 2:</strong> De la 16 la 8 echipe prin Swiss<br />
-                          <strong>Stage 3:</strong> Double Elimination (Upper/Lower Bracket)<br />
-                          <strong>Toate meciurile:</strong> Format BO1 până la playoff
+                          <strong>Stage 0:</strong> Calificare - toate echipele înregistrate<br />
+                          <strong>Stage 1:</strong> 8 Grupe cu 4 echipe, primele 2 avansează (32→16)<br />
+                          <strong>Stage 2:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)<br />
+                          <strong>Total echipe:</strong> 32 (16 direct + 16 calificare)<br />
+                          <strong>Toate meciurile:</strong> Format BO1 până la finală
                         </p>
                       </div>
                     </div>
@@ -649,7 +665,7 @@ const KingstonHyperXSupercup = () => {
                   </h3>
                   <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                     Înregistrează-ți echipa pentru Kingston x HyperX Supercup Season 1. 
-                    32 locuri: 16 echipe selectate direct + 16 prin calificare!
+                    32 echipe totale: 16 selectate direct + 16 prin calificare!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href="/register-team">
@@ -697,7 +713,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Target className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 0: Calificare (16 locuri disponibile)</span>
+                    <span className="text-lg font-semibold text-white">Stage 0: Calificare (toate echipele înregistrate)</span>
                   </div>
                   {isStage0Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -713,7 +729,7 @@ const KingstonHyperXSupercup = () => {
                         <p className="text-sm leading-relaxed">
                           <strong>Perioada:</strong> 11 - 13 septembrie 2025<br />
                           <strong>Format:</strong> Single Elimination Bracket<br />
-                          <strong>Locuri:</strong> 16 echipe calificare + 16 selecție directă = 32 total<br />
+                          <strong>Locuri:</strong> Toate echipele înregistrate participă la calificare<br />
                           <strong>Meciuri:</strong> Best of 1 (BO1)<br />
                           <strong>Servere:</strong> FACEIT EU East
                         </p>
@@ -721,7 +737,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">📋 Eligibilitatea pentru Calificare</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Echipe eligible:</strong> Toate echipele înregistrate care nu sunt selectate direct<br />
+                          <strong>Echipe eligible:</strong> Toate echipele înregistrate pe platformă<br />
                           <strong>Criterii minime:</strong><br />
                           • Minimum 5 jucători activi în roster<br />
                           • Roster complet cu toate datele FACEIT<br />
@@ -752,10 +768,10 @@ const KingstonHyperXSupercup = () => {
                       </div>
                       <div className="text-center mt-4">
                         <p className="text-xs text-gray-400">
-                          <em>16 echipe vor fi selectate direct de organizatori și vor intra în Stage 1</em>
+                          <em>Toate echipele înregistrate participă la Calificare</em>
                         </p>
                         <p className="text-xs text-gray-400">
-                          <em>Restul echipelor participă la calificare pentru celelalte 16 locuri</em>
+                          <em>16 echipe se califică pentru Stage 1 (+ 16 selectate direct = 32 total)</em>
                         </p>
                       </div>
                     </div>
@@ -764,7 +780,7 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🏆 Avantajele Calificării</h4>
                         <p className="text-sm leading-relaxed">
-                          • Acces direct în Stage 1 (grupele principale)<br />
+                          • Intrare în grupele de 32 echipe<br />
                           • Șansa de a câștiga premii în valoare de 100,000 LEI<br />
                           • Experiență competitivă contra echipelor de top<br />
                           • Transmisiune live pe canalele MPL<br />
@@ -819,7 +835,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Trophy className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 2: Swiss System (16 echipe)</span>
+                    <span className="text-lg font-semibold text-white">Stage 2: Double Elimination (16 echipe)</span>
                   </div>
                   {isStage2Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -829,34 +845,12 @@ const KingstonHyperXSupercup = () => {
                 
                 {isStage2Expanded && (
                   <div className="px-6 pb-6">
-                    <KingstonStage2Swiss />
+                    <KingstonStage2DoubleElim />
                   </div>
                 )}
               </NeonBorder>
 
-              {/* Stage 3 - Swiss */}
-              <NeonBorder className="bg-darkGray/60">
-                <Button
-                  variant="ghost"
-                  className="w-full p-6 justify-between text-left hover:bg-transparent"
-                  onClick={() => setIsStage3Expanded(!isStage3Expanded)}
-                >
-                  <div className="flex items-center">
-                    <Zap className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 3: Playoff Double Elimination</span>
-                  </div>
-                  {isStage3Expanded ? 
-                    <ChevronUp className="h-5 w-5 text-primary" /> : 
-                    <ChevronDown className="h-5 w-5 text-primary" />
-                  }
-                </Button>
-                
-                {isStage3Expanded && (
-                  <div className="px-6 pb-6">
-                    <KingstonStage3Playoff />
-                  </div>
-                )}
-              </NeonBorder>
+
             </div>
           </div>
         </section>
