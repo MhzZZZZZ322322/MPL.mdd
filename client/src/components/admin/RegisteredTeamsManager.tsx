@@ -318,9 +318,18 @@ export default function RegisteredTeamsManager() {
                             alt={team.name} 
                             className="w-full h-full object-contain rounded"
                           />
-                        ) : (
-                          <Trophy className="w-6 h-6 text-primary" />
-                        )}
+                        ) : team.logoUrl ? (
+                          <img 
+                            src={`/api/kingston/teams/${team.id}/logo`} 
+                            alt={team.name} 
+                            className="w-full h-full object-contain rounded"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              e.currentTarget.nextElementSibling?.setAttribute('style', 'display: flex');
+                            }}
+                          />
+                        ) : null}
+                        <Trophy className="w-6 h-6 text-primary" style={{ display: team.logoData || team.logoUrl ? 'none' : 'flex' }} />
                       </div>
                       <div>
                         <h3 className="font-semibold text-lg">{team.name}</h3>
@@ -408,11 +417,16 @@ export default function RegisteredTeamsManager() {
 
       {/* Edit Team Dialog */}
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Editează Echipa - {editingTeam?.name}</DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
+            {/* Debug Info */}
+            <div className="bg-blue-100 p-2 text-xs">
+              DEBUG: isDirectInvite = {String(editedIsDirectInvite)}
+            </div>
+            
             {/* Team Name */}
             <div>
               <Label htmlFor="team-name" className="text-sm font-medium">
