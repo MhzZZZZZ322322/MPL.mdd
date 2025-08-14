@@ -1064,12 +1064,15 @@ const KingstonHyperXSupercup = () => {
         <section className="py-16 px-4 bg-darkGray/40 border-t border-primary/10">
           <div className="container mx-auto max-w-4xl text-center">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 font-rajdhani">Powered by</h3>
-            <div className="flex justify-center items-center gap-8 md:gap-12">
+            <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
               <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
                 Kingston
               </div>
               <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
                 HyperX
+              </div>
+              <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
+                Darwin
               </div>
               <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
                 MPL
