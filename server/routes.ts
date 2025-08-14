@@ -1806,6 +1806,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Admin: Update Team Type Only (quick update)
+  app.patch("/api/kingston/admin/teams/:teamId/type", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.teamId);
+      if (isNaN(teamId)) {
+        return res.status(400).json({ error: "Invalid team ID" });
+      }
+
+      const { isDirectInvite } = req.body;
+      
+      if (typeof isDirectInvite !== 'boolean') {
+        return res.status(400).json({ error: "isDirectInvite must be a boolean" });
+      }
+
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      // Update only the team type
+      const [updatedTeam] = await db.update(kingstonTeams)
+        .set({ isDirectInvite })
+        .where(eq(kingstonTeams.id, teamId))
+        .returning();
+
+      if (!updatedTeam) {
+        return res.status(404).json({ error: "Team not found" });
+      }
+
+      res.json(updatedTeam);
+    } catch (error) {
+      console.error("Error updating team type:", error);
+      res.status(500).json({ error: "Failed to update team type" });
+    }
+  });
+
   // Kingston FURY Admin: Full Update Team (name, logo, members)
   app.patch("/api/kingston/admin/teams/:id/full-update", async (req, res) => {
     try {

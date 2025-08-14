@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit, Trash2, Users, Eye, Calendar, Trophy, Upload, Plus, X } from "lucide-react";
+import { Edit, Trash2, Users, Eye, Calendar, Trophy, Upload, Plus, X, Settings } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface TeamMember {
@@ -55,6 +55,7 @@ export default function RegisteredTeamsManager() {
   const [editedIsDirectInvite, setEditedIsDirectInvite] = useState<boolean>(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showMembersDialog, setShowMembersDialog] = useState(false);
+  const [showTypeManager, setShowTypeManager] = useState(false);
 
   // Fetch registered teams
   const { data: teams = [], isLoading } = useQuery({
@@ -76,6 +77,36 @@ export default function RegisteredTeamsManager() {
       return response.json();
     },
     enabled: !!selectedTeam && showMembersDialog
+  });
+
+  // Update team type only (quick mutation)
+  const updateTeamTypeMutation = useMutation({
+    mutationFn: async ({ teamId, isDirectInvite }: {
+      teamId: number;
+      isDirectInvite: boolean;
+    }) => {
+      const response = await fetch(`/api/kingston/admin/teams/${teamId}/type`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isDirectInvite })
+      });
+      if (!response.ok) throw new Error('Failed to update team type');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/kingston/admin/registered-teams'] });
+      toast({
+        title: "Tipul echipei actualizat",
+        description: "Tipul echipei a fost modificat cu succes.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Eroare",
+        description: "Nu s-a putut actualiza tipul echipei.",
+        variant: "destructive",
+      });
+    }
   });
 
   // Update team mutation (comprehensive)
@@ -286,6 +317,115 @@ export default function RegisteredTeamsManager() {
 
   return (
     <>
+      {/* Quick Team Type Manager Section */}
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Settings className="mr-2" />
+              Manager Tipuri Echipe - Direct vs Calificare
+            </div>
+            <Button 
+              variant="outline" 
+              onClick={() => setShowTypeManager(!showTypeManager)}
+            >
+              {showTypeManager ? 'Ascunde' : 'Arată'} Manager Tipuri
+            </Button>
+          </CardTitle>
+        </CardHeader>
+        
+        {showTypeManager && (
+          <CardContent>
+            <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-blue-500/30 rounded-lg p-6 mb-4">
+              <h3 className="text-lg font-semibold text-blue-300 mb-2">
+                Schimbă rapid tipul echipelor
+              </h3>
+              <p className="text-gray-300 text-sm mb-4">
+                Folosește această secțiune pentru a schimba rapid echipele între "Invitație Directă" și "Calificare"
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {teams.map((team: RegisteredTeam) => (
+                <div
+                  key={team.id}
+                  className="border rounded-lg p-4 bg-card/30 hover:bg-card/50 transition-colors"
+                >
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="w-10 h-10 rounded-lg overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      {team.logoData ? (
+                        <img 
+                          src={team.logoData} 
+                          alt={team.name} 
+                          className="w-full h-full object-contain rounded"
+                        />
+                      ) : team.logoUrl ? (
+                        <img 
+                          src={`/api/kingston/teams/${team.id}/logo`} 
+                          alt={team.name} 
+                          className="w-full h-full object-contain rounded"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling?.setAttribute('style', 'display: flex');
+                          }}
+                        />
+                      ) : null}
+                      <Trophy className="w-5 h-5 text-primary" style={{ display: team.logoData || team.logoUrl ? 'none' : 'flex' }} />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-sm">{team.name}</h4>
+                      <div className="flex items-center space-x-2 mt-1">
+                        {team.isDirectInvite === true && (
+                          <Badge variant="outline" className="text-purple-600 border-purple-600 bg-purple-50/20 text-xs">
+                            Direct
+                          </Badge>
+                        )}
+                        {team.isDirectInvite === false && (
+                          <Badge variant="outline" className="text-blue-600 border-blue-600 bg-blue-50/20 text-xs">
+                            Calificare
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Select 
+                      value={team.isDirectInvite ? "direct" : "qualification"} 
+                      onValueChange={(value) => {
+                        updateTeamTypeMutation.mutate({
+                          teamId: team.id,
+                          isDirectInvite: value === "direct"
+                        });
+                      }}
+                      disabled={updateTeamTypeMutation.isPending}
+                    >
+                      <SelectTrigger className="w-full h-8 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="direct">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                            <span>Invitație Directă</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value="qualification">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                            <span>Calificare</span>
+                          </div>
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        )}
+      </Card>
+
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
