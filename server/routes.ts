@@ -1786,6 +1786,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         logoData: kingstonTeams.logoData,
         tournament: kingstonTeams.tournament,
         status: kingstonTeams.status,
+        isDirectInvite: kingstonTeams.isDirectInvite,
         isActive: kingstonTeams.isActive,
         submittedAt: kingstonTeams.submittedAt,
         reviewedAt: kingstonTeams.reviewedAt,
