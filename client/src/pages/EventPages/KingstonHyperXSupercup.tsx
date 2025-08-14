@@ -779,13 +779,13 @@ const KingstonHyperXSupercup = () => {
         </section>
 
         {/* Tournament Format Section */}
-        <section className="py-16 px-4 bg-darkGray/20">
+        <section className="py-8 md:py-16 px-4 bg-darkGray/20">
           <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+            <div className="text-center mb-6 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4 font-rajdhani">
                 Format Turneu
               </h2>
-              <p className="text-gray-300 text-lg">
+              <p className="text-gray-300 text-sm md:text-lg px-2">
                 Structura completă a competiției Kingston x HyperX Supercup Season 1
               </p>
             </div>
@@ -795,12 +795,12 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60">
                 <Button
                   variant="ghost"
-                  className="w-full p-6 justify-between text-left hover:bg-transparent"
+                  className="w-full p-4 md:p-6 justify-between text-left hover:bg-transparent"
                   onClick={() => setIsStage0Expanded(!isStage0Expanded)}
                 >
                   <div className="flex items-center">
-                    <Target className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 1: Calificare (toate echipele înregistrate)</span>
+                    <Target className="mr-2 md:mr-3 h-4 md:h-5 w-4 md:w-5 text-primary" />
+                    <span className="text-sm md:text-lg font-semibold text-white">Stage 1: Calificare (toate echipele înregistrate)</span>
                   </div>
                   {isStage0Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -926,23 +926,23 @@ const KingstonHyperXSupercup = () => {
         </section>
 
         {/* Tournament Rules */}
-        <section className="py-16 px-4 bg-darkGray/30">
+        <section className="py-8 md:py-16 px-4 bg-darkGray/30">
           <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+            <div className="text-center mb-6 md:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4 font-rajdhani">
                 Regulamentul Turneului
               </h2>
-              <p className="text-xl text-gray-300">
+              <p className="text-sm md:text-xl text-gray-300 px-2">
                 Regulile oficiale pentru Kingston x HyperX Supercup Season 1
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               {/* Roster Rules */}
-              <NeonBorder className="bg-darkGray/60 p-6">
+              <NeonBorder className="bg-darkGray/60 p-4 md:p-6">
                 <div className="flex items-center mb-4">
-                  <Users className="mr-3 h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold text-white font-rajdhani">Regulile Rosterului</h3>
+                  <Users className="mr-3 h-5 md:h-6 w-5 md:w-6 text-primary" />
+                  <h3 className="text-lg md:text-xl font-bold text-white font-rajdhani">Regulile Rosterului</h3>
                 </div>
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
@@ -957,10 +957,10 @@ const KingstonHyperXSupercup = () => {
               </NeonBorder>
 
               {/* Match Conduct */}
-              <NeonBorder className="bg-darkGray/60 p-6">
+              <NeonBorder className="bg-darkGray/60 p-4 md:p-6">
                 <div className="flex items-center mb-4">
-                  <Clock className="mr-3 h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold text-white font-rajdhani">Conduita în Meci</h3>
+                  <Clock className="mr-3 h-5 md:h-6 w-5 md:w-6 text-primary" />
+                  <h3 className="text-lg md:text-xl font-bold text-white font-rajdhani">Conduita în Meci</h3>
                 </div>
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
@@ -979,10 +979,10 @@ const KingstonHyperXSupercup = () => {
               </NeonBorder>
 
               {/* Behavior Rules */}
-              <NeonBorder className="bg-darkGray/60 p-6">
+              <NeonBorder className="bg-darkGray/60 p-4 md:p-6">
                 <div className="flex items-center mb-4">
-                  <Shield className="mr-3 h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold text-white font-rajdhani">Reguli de Comportament</h3>
+                  <Shield className="mr-3 h-5 md:h-6 w-5 md:w-6 text-primary" />
+                  <h3 className="text-lg md:text-xl font-bold text-white font-rajdhani">Reguli de Comportament</h3>
                 </div>
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
@@ -1001,10 +1001,10 @@ const KingstonHyperXSupercup = () => {
               </NeonBorder>
 
               {/* Anti-Cheat & Fair Play */}
-              <NeonBorder className="bg-darkGray/60 p-6">
+              <NeonBorder className="bg-darkGray/60 p-4 md:p-6">
                 <div className="flex items-center mb-4">
-                  <AlertTriangle className="mr-3 h-6 w-6 text-primary" />
-                  <h3 className="text-xl font-bold text-white font-rajdhani">Anti-Cheat & Fair Play</h3>
+                  <AlertTriangle className="mr-3 h-5 md:h-6 w-5 md:w-6 text-primary" />
+                  <h3 className="text-lg md:text-xl font-bold text-white font-rajdhani">Anti-Cheat & Fair Play</h3>
                 </div>
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-start">
@@ -1023,13 +1023,13 @@ const KingstonHyperXSupercup = () => {
               </NeonBorder>
             </div>
 
-            <div className="mt-12 text-center">
-              <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg p-6 max-w-4xl mx-auto">
-                <div className="flex items-center justify-center mb-4">
-                  <AlertTriangle className="mr-3 h-6 w-6 text-red-400" />
-                  <h4 className="text-xl font-bold text-red-400 font-rajdhani">IMPORTANT</h4>
+            <div className="mt-6 md:mt-12 text-center">
+              <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg p-4 md:p-6 max-w-4xl mx-auto">
+                <div className="flex items-center justify-center mb-3 md:mb-4">
+                  <AlertTriangle className="mr-2 md:mr-3 h-5 md:h-6 w-5 md:w-6 text-red-400" />
+                  <h4 className="text-lg md:text-xl font-bold text-red-400 font-rajdhani">IMPORTANT</h4>
                 </div>
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
                   Încălcarea acestor reguli va rezulta în sancțiuni severe, inclusiv descalificare din turneu. 
                   Organizatorii MPL își rezervă dreptul de a lua decizii finale în toate situațiile disputate. 
                   Participarea în turneu implică acceptarea completă a acestui regulament.
@@ -1040,18 +1040,18 @@ const KingstonHyperXSupercup = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="py-16 px-4 bg-gradient-to-r from-primary/20 to-secondary/20">
+        <section className="py-8 md:py-16 px-4 bg-gradient-to-r from-primary/20 to-secondary/20">
           <div className="container mx-auto max-w-4xl text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 md:mb-4 font-rajdhani">
               Alătură-te competiției!
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-sm md:text-xl text-gray-300 mb-6 md:mb-8 px-2">
               Înscrie-te la Kingston x HyperX Supercup Season 1 și câștigă echipamente gaming premium.
             </p>
             <Link href="/register-team">
               <Button 
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-black px-8 py-4 text-xl font-bold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
+                className="bg-primary hover:bg-primary/90 text-black px-6 md:px-8 py-3 md:py-4 text-lg md:text-xl font-bold rounded-full shadow-lg transform hover:scale-105 transition-all duration-300"
               >
                 <Gift className="mr-2" />
                 ÎNSCRIE-TE ACUM!
@@ -1061,24 +1061,24 @@ const KingstonHyperXSupercup = () => {
         </section>
 
         {/* Partners */}
-        <section className="py-16 px-4 bg-darkGray/40 border-t border-primary/10">
+        <section className="py-8 md:py-16 px-4 bg-darkGray/40 border-t border-primary/10">
           <div className="container mx-auto max-w-4xl text-center">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 font-rajdhani">Powered by</h3>
-            <div className="flex justify-center items-center gap-6 md:gap-8 flex-wrap">
-              <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6 md:mb-8 font-rajdhani">Powered by</h3>
+            <div className="flex justify-center items-center gap-4 md:gap-6 lg:gap-8 flex-wrap">
+              <div className="text-primary font-bold text-lg md:text-xl lg:text-2xl font-rajdhani">
                 Kingston
               </div>
-              <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
+              <div className="text-primary font-bold text-lg md:text-xl lg:text-2xl font-rajdhani">
                 HyperX
               </div>
-              <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
+              <div className="text-primary font-bold text-lg md:text-xl lg:text-2xl font-rajdhani">
                 Darwin
               </div>
-              <div className="text-primary font-bold text-xl md:text-2xl font-rajdhani">
+              <div className="text-primary font-bold text-lg md:text-xl lg:text-2xl font-rajdhani">
                 MPL
               </div>
             </div>
-            <p className="text-gray-400 text-center mt-6">
+            <p className="text-gray-400 text-center mt-4 md:mt-6 text-sm md:text-base px-2">
               Un eveniment realizat în parteneriat cu cele mai importante branduri de gaming gear
             </p>
           </div>
