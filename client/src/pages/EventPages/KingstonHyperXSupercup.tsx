@@ -143,8 +143,8 @@ const KingstonHyperXSupercup = () => {
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
-  // Show only teams registered for qualification (all registered teams currently)
-  const qualificationTeams = teams;
+  // Show only teams registered for qualification (exclude direct invites)
+  const qualificationTeams = teams.filter(team => !team.isDirectInvite);
 
   // Fetch members for selected team
   const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
