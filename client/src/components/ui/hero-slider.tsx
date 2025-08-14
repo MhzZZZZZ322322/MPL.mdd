@@ -128,32 +128,32 @@ export const HeroSlider = () => {
       
       {/* Content */}
       {isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="absolute inset-0 flex items-end justify-center z-20 pb-16">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 max-w-screen-xl">
             <motion.div
               key={currentSlide}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-center max-w-4xl mx-auto"
+              className="text-center max-w-3xl mx-auto"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-rajdhani [text-shadow:_0_2px_10px_rgb(0_0_0_/_80%)]">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-rajdhani [text-shadow:_0_2px_10px_rgb(0_0_0_/_80%)]">
                 {currentContent.title}
               </h1>
-              <h2 className="text-xl sm:text-2xl md:text-3xl text-primary font-semibold mb-8 max-w-3xl mx-auto [text-shadow:_0_2px_8px_rgb(0_0_0_/_90%)]">
+              <h2 className="text-base sm:text-lg md:text-xl text-primary font-semibold mb-6 max-w-2xl mx-auto [text-shadow:_0_2px_8px_rgb(0_0_0_/_90%)]">
                 {currentContent.subtitle}
               </h2>
-              <div className="flex flex-wrap gap-4 justify-center mt-8">
+              <div className="flex flex-wrap gap-3 justify-center mt-6">
                 {currentContent.primaryBtn.link.startsWith('http') ? (
                   <a href={currentContent.primaryBtn.link} target="_blank" rel="noopener noreferrer">
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium px-8 py-4 text-lg shadow-2xl border border-primary/20">
-                      {currentContent.primaryBtn.text} <ChevronRight className="ml-2 h-5 w-5" />
+                    <Button size="default" className="bg-primary hover:bg-primary/90 font-medium px-6 py-2 text-sm shadow-xl border border-primary/20">
+                      {currentContent.primaryBtn.text} <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
                   </a>
                 ) : (
                   <Link href={currentContent.primaryBtn.link}>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 font-medium px-8 py-4 text-lg shadow-2xl border border-primary/20">
-                      {currentContent.primaryBtn.text} <ChevronRight className="ml-2 h-5 w-5" />
+                    <Button size="default" className="bg-primary hover:bg-primary/90 font-medium px-6 py-2 text-sm shadow-xl border border-primary/20">
+                      {currentContent.primaryBtn.text} <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
                   </Link>
                 )}
