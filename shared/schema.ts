@@ -144,6 +144,7 @@ export const teams = pgTable("teams", {
   logoUrl: text("logo_url").notNull(),
   tournament: text("tournament").notNull().default("hator-cs-league"),
   isActive: boolean("is_active").notNull().default(true),
+  isDirectInvite: boolean("is_direct_invite").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow(),
 });
 

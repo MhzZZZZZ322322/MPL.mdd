@@ -143,9 +143,8 @@ const KingstonHyperXSupercup = () => {
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
-  // Separate teams by type
-  const directInviteTeams = teams.filter(team => team.isDirectInvite);
-  const qualificationTeams = teams.filter(team => !team.isDirectInvite);
+  // Show only teams registered for qualification (all registered teams currently)
+  const qualificationTeams = teams;
 
   // Fetch members for selected team
   const { data: rawTeamMembers = [], isLoading: membersLoading } = useQuery<TeamMember[]>({
@@ -750,13 +749,85 @@ const KingstonHyperXSupercup = () => {
                 </div>
               ) : (
                 qualificationTeams.map((team, index) => (
-                  <div key={team.id} className="bg-gray-800/60 rounded-lg p-4 text-center hover:bg-gray-700/60 transition-all duration-300 border border-green-500/20">
-                    <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-3">
-                        <Target className="w-6 h-6 text-white" />
-                      </div>
-                      <h3 className="text-white font-bold text-sm mb-1">{team.name}</h3>
-                      <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
+                  <div key={team.id} className="relative perspective-1000">
+                    <div 
+                      className={`relative w-full h-64 md:h-80 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                        selectedTeam?.id === team.id ? 'rotate-y-180' : ''
+                      }`}
+                      onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
+                    >
+                      {/* Front of card - Team Logo */}
+                      <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
+                        <div className="text-center h-full flex flex-col justify-between">
+                          <div className="mx-auto bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center overflow-hidden border-2 border-green-500/30 shadow-lg w-full h-48 md:h-60">
+                            <div className="relative w-full h-full p-3 flex items-center justify-center bg-slate-800/90 rounded">
+                              {team.logoUrl ? (
+                                <img 
+                                  src={team.logoUrl} 
+                                  alt={team.name} 
+                                  className="w-full h-full object-contain filter brightness-110 contrast-110" 
+                                  onError={(e) => {
+                                    console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
+                                    e.currentTarget.style.display = 'none';
+                                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                  }}
+                                />
+                              ) : null}
+                              <Target className="w-12 h-12 text-green-400 hidden" />
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="text-sm md:text-base font-bold text-white font-rajdhani py-1">{team.name}</h3>
+                            <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
+                          </div>
+                        </div>
+                      </NeonBorder>
+
+                      {/* Back of card - Team Members */}
+                      <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                        <div className="h-full flex flex-col">
+                          <h4 className="text-sm md:text-base font-bold text-white mb-2 text-center flex-shrink-0">Membrii</h4>
+                          {membersLoading ? (
+                            <div className="flex justify-center py-4 flex-1">
+                              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                            </div>
+                          ) : (
+                            <div className="space-y-1 flex-1 overflow-y-auto">
+                              {teamMembers.filter(member => member.teamId === team.id).map((member) => (
+                                <a
+                                  key={member.id}
+                                  href={member.faceitProfile}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block bg-black/30 p-1.5 rounded border border-gray-700 hover:bg-black/50 transition-colors"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <div className="text-xs flex items-center justify-between">
+                                    <div className="font-semibold text-white truncate pr-2">{member.nickname}</div>
+                                    <div className="flex gap-1 flex-shrink-0">
+                                      {member.role === "captain" && (
+                                        <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
+                                          C
+                                        </span>
+                                      )}
+                                      <span className={`px-1 py-0.5 text-xs rounded font-semibold ${
+                                        member.position === "main" 
+                                          ? "bg-green-600 text-white" 
+                                          : "bg-orange-600 text-white"
+                                      }`}>
+                                        {member.position === "main" ? "M" : "R"}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                          <div className="text-center mt-2 flex-shrink-0">
+                            <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
+                          </div>
+                        </div>
+                      </NeonBorder>
                     </div>
                   </div>
                 ))
