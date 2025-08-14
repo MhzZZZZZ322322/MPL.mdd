@@ -54,6 +54,13 @@ const About = () => {
       isActive: true
     },
     {
+      year: "Octombrie 2024 - Ianuarie 2025",
+      title: "ROPL - Romanian Open Pro League",
+      description: "Liga profesională româno-moldoveană cu echipe din ambele țări. Format competitiv cu meciuri regulate săptămânale.",
+      icon: <LucideTerminal />,
+      link: "/events/hator-cup-ropl-mpl"
+    },
+    {
       year: t('about.timeline.event2.date'),
       title: t('about.timeline.event2.title'),
       description: t('about.timeline.event2.description'),
@@ -146,7 +153,7 @@ const About = () => {
 
             <div className="relative">
               {/* Timeline Items */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {timeline.map((item, index) => (
                   <div
                     key={index}
