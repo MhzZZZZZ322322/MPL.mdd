@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trophy, Settings, Calendar, AlertTriangle, Lock, Users, FileText } from "lucide-react";
+import { Trophy, Settings, Calendar, AlertTriangle, Lock, Users, FileText, Zap } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import GroupManagement from "@/components/GroupManagement";
 import MatchResultsManager from "@/components/admin/MatchResultsManager";
