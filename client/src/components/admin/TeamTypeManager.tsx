@@ -69,8 +69,21 @@ export default function TeamTypeManager() {
   });
 
   // Count teams by type
+  console.log("TeamTypeManager - Debug teams data:", teams.map(t => ({
+    id: t.id,
+    name: t.name,
+    isDirectInvite: t.isDirectInvite,
+    status: t.status
+  })));
+  
   const directInviteCount = teams.filter((team: RegisteredTeam) => team.isDirectInvite === true).length;
   const qualificationCount = teams.filter((team: RegisteredTeam) => team.isDirectInvite === false).length;
+  
+  console.log("TeamTypeManager - Counts:", {
+    total: teams.length,
+    directInvite: directInviteCount,
+    qualification: qualificationCount
+  });
 
   if (isLoading) {
     return (
