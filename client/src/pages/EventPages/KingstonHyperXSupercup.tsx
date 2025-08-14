@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye, Flag, Target } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Trophy, Users, Award, Gift, Sparkles, FileText as FileIcon, ChevronDown, ChevronUp, Flame, Zap, Eye, Flag, Target, Clock, Shield, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import NeonBorder from "@/components/animations/NeonBorder";
@@ -857,6 +857,120 @@ const KingstonHyperXSupercup = () => {
                   </div>
                 )}
               </NeonBorder>
+            </div>
+          </div>
+        </section>
+
+        {/* Tournament Rules */}
+        <section className="py-16 px-4 bg-darkGray/30">
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-rajdhani">
+                Regulamentul Turneului
+              </h2>
+              <p className="text-xl text-gray-300">
+                Regulile oficiale pentru Kingston x HyperX Supercup Season 1
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Roster Rules */}
+              <NeonBorder className="bg-darkGray/60 p-6">
+                <div className="flex items-center mb-4">
+                  <Users className="mr-3 h-6 w-6 text-primary" />
+                  <h3 className="text-xl font-bold text-white font-rajdhani">Regulile Rosterului</h3>
+                </div>
+                <div className="space-y-3 text-gray-300">
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Rosterul înregistrat inițial la începutul turneului este valabil pe parcursul întregului turneu și <strong className="text-white">nu poate fi schimbat</strong>.</p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>În fiecare echipă este permis un număr de până la <strong className="text-white">10 jucători</strong>: <span className="text-primary">5 în roster principal</span> și <span className="text-secondary">5 substitute</span>.</p>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* Match Conduct */}
+              <NeonBorder className="bg-darkGray/60 p-6">
+                <div className="flex items-center mb-4">
+                  <Clock className="mr-3 h-6 w-6 text-primary" />
+                  <h3 className="text-xl font-bold text-white font-rajdhani">Conduita în Meci</h3>
+                </div>
+                <div className="space-y-3 text-gray-300">
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Dacă echipa nu s-a prezentat la meci, este sancționată cu un <strong className="text-red-400">tech lose</strong> sau <strong className="text-red-400">descalificare</strong>.</p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Pentru probleme tehnice anunțate din timp: delay permis de <strong className="text-yellow-400">15-30 de minute</strong>.</p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Abuzul funcțiilor FACEIT (ban lent hărți) este <strong className="text-orange-400">interzis</strong> fără anunțarea oponentului și organizatorilor.</p>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* Behavior Rules */}
+              <NeonBorder className="bg-darkGray/60 p-6">
+                <div className="flex items-center mb-4">
+                  <Shield className="mr-3 h-6 w-6 text-primary" />
+                  <h3 className="text-xl font-bold text-white font-rajdhani">Reguli de Comportament</h3>
+                </div>
+                <div className="space-y-3 text-gray-300">
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Insulta față de alți jucători = <strong className="text-yellow-400">warn</strong></p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Insulta sau lipsa de respect față de organizatori = <strong className="text-yellow-400">warn</strong>, apoi <strong className="text-red-400">ban pe termen nedeterminat</strong></p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Critica evenimentului fără bază de argumentare = <strong className="text-yellow-400">warn</strong>, apoi <strong className="text-red-400">descalificare</strong></p>
+                  </div>
+                </div>
+              </NeonBorder>
+
+              {/* Anti-Cheat & Fair Play */}
+              <NeonBorder className="bg-darkGray/60 p-6">
+                <div className="flex items-center mb-4">
+                  <AlertTriangle className="mr-3 h-6 w-6 text-primary" />
+                  <h3 className="text-xl font-bold text-white font-rajdhani">Anti-Cheat & Fair Play</h3>
+                </div>
+                <div className="space-y-3 text-gray-300">
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Folosirea bugurilor cu scop de avantaj vizibil este <strong className="text-red-500">strict interzisă</strong></p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Cheat-urile și orice tip de exploit sunt <strong className="text-red-500">strict interzise</strong></p>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Toate meciurile se desfășoară pe <strong className="text-primary">FACEIT</strong> cu anti-cheat activ</p>
+                  </div>
+                </div>
+              </NeonBorder>
+            </div>
+
+            <div className="mt-12 text-center">
+              <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border border-red-500/30 rounded-lg p-6 max-w-4xl mx-auto">
+                <div className="flex items-center justify-center mb-4">
+                  <AlertTriangle className="mr-3 h-6 w-6 text-red-400" />
+                  <h4 className="text-xl font-bold text-red-400 font-rajdhani">IMPORTANT</h4>
+                </div>
+                <p className="text-gray-300 leading-relaxed">
+                  Încălcarea acestor reguli va rezulta în sancțiuni severe, inclusiv descalificare din turneu. 
+                  Organizatorii MPL își rezervă dreptul de a lua decizii finale în toate situațiile disputate. 
+                  Participarea în turneu implică acceptarea completă a acestui regulament.
+                </p>
+              </div>
             </div>
           </div>
         </section>
