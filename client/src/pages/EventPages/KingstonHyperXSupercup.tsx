@@ -710,7 +710,7 @@ const KingstonHyperXSupercup = () => {
                   <h4 className="text-xl font-bold text-primary font-rajdhani">Echipe de Top</h4>
                 </div>
                 <p className="text-gray-300 leading-relaxed">
-                  Aceste echipe au fost selectate pe baza performanțelor și reputației lor în scena competitivă CS2 din Moldova. 
+                  Aceste echipe au fost selectate pe baza performanțelor, stabilității și contribuției la dezvoltarea scenei competitive CS2 din Moldova. 
                   Ele intră direct în etapa de grupe alături de cele 20 de echipe care se vor califica prin Stage 1.
                 </p>
               </div>
