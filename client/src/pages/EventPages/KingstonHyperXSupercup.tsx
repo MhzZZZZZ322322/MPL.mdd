@@ -145,6 +145,13 @@ const KingstonHyperXSupercup = () => {
   // Sort teams alphabetically by name
   const teams = rawTeams.sort((a, b) => a.name.localeCompare(b.name));
   
+  // Debug: Log team data to see the isDirectInvite values
+  console.log('Kingston teams data:', teams.map(t => ({
+    name: t.name,
+    isDirectInvite: t.isDirectInvite,
+    status: t.status
+  })));
+  
   // All registered teams (both direct invites and qualification teams)
   const allRegisteredTeams = teams;
   
