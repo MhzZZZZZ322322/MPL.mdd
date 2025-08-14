@@ -680,7 +680,7 @@ const KingstonHyperXSupercup = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
               {[
                 "Lit Energy",
                 "Cocojambo", 
@@ -695,15 +695,15 @@ const KingstonHyperXSupercup = () => {
                 "Legalize",
                 "Into the Beach"
               ].map((teamName, index) => (
-                <NeonBorder key={index} className="bg-darkGray/60 p-4 text-center hover:bg-darkGray/80 transition-all duration-300">
+                <div key={index} className="bg-gray-800/60 rounded-lg p-4 text-center hover:bg-gray-700/60 transition-all duration-300 border border-purple-500/20">
                   <div className="flex flex-col items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mb-3">
-                      <Trophy className="w-6 h-6 text-black" />
+                    <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mb-3">
+                      <Trophy className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-white font-bold text-sm mb-1">{teamName}</h3>
-                    <span className="text-primary text-xs font-semibold">INVITE DIRECT</span>
+                    <span className="text-purple-400 text-xs font-semibold">INVITE DIRECT</span>
                   </div>
-                </NeonBorder>
+                </div>
               ))}
             </div>
 
@@ -751,15 +751,15 @@ const KingstonHyperXSupercup = () => {
                 </div>
               ) : (
                 qualificationTeams.map((team, index) => (
-                  <NeonBorder key={team.id} className="bg-darkGray/60 p-4 text-center hover:bg-darkGray/80 transition-all duration-300">
+                  <div key={team.id} className="bg-gray-800/60 rounded-lg p-4 text-center hover:bg-gray-700/60 transition-all duration-300 border border-green-500/20">
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center mb-3">
-                        <Target className="w-6 h-6 text-black" />
+                      <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mb-3">
+                        <Target className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-white font-bold text-sm mb-1">{team.name}</h3>
                       <span className="text-green-400 text-xs font-semibold">CALIFICARE</span>
                     </div>
-                  </NeonBorder>
+                  </div>
                 ))
               )}
             </div>
