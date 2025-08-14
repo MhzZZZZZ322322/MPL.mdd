@@ -486,19 +486,7 @@ const KingstonHyperXSupercup = () => {
           </div>
         </section>
 
-        {/* Supercup Season 1 Main Image */}
-        <section className="py-12 px-4 bg-gradient-to-b from-darkBg to-darkGray/30">
-          <div className="container mx-auto max-w-5xl">
-            <div className="text-center mb-8">
-              <img 
-                src={supercupMainImage} 
-                alt="Supercup Season 1 - 10/28 Septembrie" 
-                className="w-full h-auto object-contain rounded-lg shadow-2xl max-h-80 mx-auto"
-                loading="eager"
-              />
-            </div>
-          </div>
-        </section>
+        
 
         {/* Tournament Info Cards */}
         <section className="py-16 px-4">
