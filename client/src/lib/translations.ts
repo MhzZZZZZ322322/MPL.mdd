@@ -821,12 +821,12 @@ export const translations: TranslationDictionary = {
     ru: "Официальный формат турнира"
   },
   "event.format.stage1": {
-    ro: "Etapa 1: Grupe (Swiss Format)",
-    ru: "Этап 1: Группы (Швейцарская система)"
+    ro: "Etapa 1: Grupe (8 grupe de 4 echipe)",
+    ru: "Этап 1: Группы (8 групп по 4 команды)"
   },
   "event.format.stage2": {
-    ro: "Etapa 2: Play-off (Eliminatoriu)",
-    ru: "Этап 2: Плей-офф (На выбывание)"
+    ro: "Etapa 2: Double Elimination (16 echipe)",
+    ru: "Этап 2: Двойное исключение (16 команд)"
   },
   "event.format.matches.format": {
     ro: "Format Meciuri",
@@ -852,9 +852,9 @@ export const translations: TranslationDictionary = {
     ro: "Sistem",
     ru: "Система"
   },
-  "event.format.swiss.description": {
-    ro: "Swiss Style Bo1 - echipele joacă meciuri până acumulează:",
-    ru: "Swiss Style Bo1 - команды играют матчи до накопления:"
+  "event.format.groups.description": {
+    ro: "Grupe Clasice - echipele joacă în grupe de 4 până la calificare:",
+    ru: "Классические группы - команды играют в группах по 4 до квалификации:"
   },
   "event.format.wins.qualification": {
     ro: "2 victorii - se califică automat în play-off",
@@ -1004,9 +1004,9 @@ export const translations: TranslationDictionary = {
     ro: "Start turneu",
     ru: "Начало турнира"
   },
-  "event.swiss.format": {
-    ro: "Swiss Format",
-    ru: "Швейцарская система"
+  "event.groups.format": {
+    ro: "Format Grupe",
+    ru: "Групповой формат"
   },
   "event.playoff": {
     ro: "Play-off",

@@ -1,352 +1,60 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useQuery } from '@tanstack/react-query';
-import { Skeleton } from "@/components/ui/skeleton";
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Zap } from 'lucide-react';
 
-interface Stage4PlayoffMatch {
-  id: number;
-  bracketPosition: string;
-  team1Name: string | null;
-  team2Name: string | null;
-  team1Score: number | null;
-  team2Score: number | null;
-  winnerName: string | null;
-  matchDate: string | null;
-  matchTime: string | null;
-  isPlayed: boolean;
-  faceitUrl: string | null;
-  createdAt: string;
-  updatedAt: string;
+interface Stage4PlayoffProps {
+  isExpanded: boolean;
+  onToggle: () => void;
 }
 
-const getBracketPositionInfo = (bracketRound: string, bracketPosition: number) => {
-  const roundInfo: Record<string, { stage: string; color: string }> = {
-    'quarterfinals': { stage: 'Sferturile de finală', color: 'bg-blue-500' },
-    'semifinals': { stage: 'Semifinalele', color: 'bg-orange-500' },
-    'final': { stage: 'Finala', color: 'bg-red-500' },
-    'third_place': { stage: 'Locul 3', color: 'bg-yellow-500' }
-  };
-  
-  const info = roundInfo[bracketRound] || { stage: 'Necunoscut', color: 'bg-gray-500' };
-  
-  return {
-    stage: info.stage,
-    match: `Meciul ${bracketPosition}`,
-    color: info.color
-  };
-};
-
-const getDayFromPosition = (bracketRound: string): string => {
-  // Day 1 (18 iulie): Quarter-finals
-  if (bracketRound === 'quarterfinals') return '18 iulie 2025';
-  // Day 2 (19 iulie): Semi-finals  
-  if (bracketRound === 'semifinals') return '19 iulie 2025';
-  // Day 3 (20 iulie): Final
-  if (bracketRound === 'final') return '20 iulie 2025';
-  return 'Data necunoscută';
-};
-
-export default function Stage4Playoff() {
-  const { data: matches = [], isLoading } = useQuery<Stage4PlayoffMatch[]>({
-    queryKey: ['/api/stage4-playoff'],
-    refetchInterval: 10000, // Refresh every 10 seconds
-  });
-
-  if (isLoading) {
-    return (
-      <Card className="w-full border-primary/20 bg-gradient-to-br from-gray-900 to-gray-800">
-        <CardHeader>
-          <CardTitle className="text-2xl text-white text-center">
-            🏆 Stage 4 - Playoff (8 echipe)
-          </CardTitle>
-          <p className="text-gray-300 text-center text-sm">
-            Sistemul de eliminare directă - 3 zile de competiție intensă
-          </p>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {[...Array(7)].map((_, i) => (
-            <Skeleton key={i} className="h-20 w-full" />
-          ))}
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // Group matches by day
-  const matchesByDay = matches.reduce((acc, match) => {
-    const day = getDayFromPosition(match.bracketRound);
-    if (!acc[day]) acc[day] = [];
-    acc[day].push(match);
-    return acc;
-  }, {} as Record<string, Stage4PlayoffMatch[]>);
-
-  // Sort days chronologically
-  const sortedDays = Object.keys(matchesByDay).sort((a, b) => {
-    const order = ['18 iulie 2025', '19 iulie 2025', '20 iulie 2025'];
-    return order.indexOf(a) - order.indexOf(b);
-  });
-
+export default function Stage4Playoff({ isExpanded, onToggle }: Stage4PlayoffProps) {
   return (
-    <Card className="w-full border-primary/20 bg-gradient-to-br from-gray-900 to-gray-800">
-      <CardHeader>
-        <CardTitle className="text-2xl text-white text-center">
-          🏆 Stage 4 - Playoff (8 echipe)
-        </CardTitle>
-        <p className="text-gray-300 text-center text-sm">
-          Sistemul de eliminare directă - Cei mai buni 8 din Stage 3 Swiss se luptă pentru titlu
-        </p>
-        <div className="flex justify-center gap-4 mt-4">
-          <Badge variant="outline" className="bg-blue-500/20 text-blue-300 border-blue-500/50">
-            18 iulie - Sferturi
-          </Badge>
-          <Badge variant="outline" className="bg-orange-500/20 text-orange-300 border-orange-500/50">
-            19 iulie - Semifinale
-          </Badge>
-          <Badge variant="outline" className="bg-red-500/20 text-red-300 border-red-500/50">
-            20 iulie - Finala
-          </Badge>
+    <div className="bg-gradient-to-r from-zinc-900/95 to-black/90 border border-primary/30 rounded-lg shadow-xl">
+      <button
+        onClick={onToggle}
+        className="w-full p-6 text-left hover:bg-primary/5 transition-colors rounded-lg"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-gradient-to-r from-amber-600 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-lg">4</span>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">Stage 4 - Format Actualizat</h2>
+              <p className="text-gray-300 text-sm">Playoff eliminat - nu mai există Stage 4</p>
+            </div>
+          </div>
+          <ChevronDown 
+            className={`w-6 h-6 text-primary transition-transform duration-200 ${
+              isExpanded ? 'rotate-180' : ''
+            }`}
+          />
         </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {matches.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-lg mb-2">🔄 Echipele calificate se calculează automat</p>
-            <p className="text-gray-500 text-sm">
-              Stage 4 Playoff va începe după finalizarea Stage 3 Swiss System
-            </p>
-            <p className="text-gray-500 text-sm mt-2">
-              Top 8 echipe din Stage 3 se vor califica în acest bracket de eliminare
-            </p>
-          </div>
-        ) : (
-          <div className="w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              
-              {/* Quarter-finals */}
-              <div>
-                <h3 className="text-lg font-bold text-blue-400 mb-4 text-center">Sferturi de finală</h3>
-                <div className="space-y-4">
-                  {matches
-                    .filter(m => m.bracketRound === 'quarterfinals')
-                    .sort((a, b) => a.bracketPosition - b.bracketPosition)
-                    .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-blue-900/60 to-blue-800/60 border-blue-400/50 hover:border-blue-300 transition-all">
-                        <CardContent className="p-3">
-                          <div className="text-xs text-blue-300 mb-2 font-semibold text-center">
-                            QF{match.bracketPosition} • 18 iulie
-                          </div>
-                          <div className="space-y-1">
-                            <div className={`text-sm px-2 py-1 rounded transition-colors ${
-                              match.winnerName === match.team1Name 
-                                ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                : 'text-white bg-slate-800/80 border border-slate-600/50'
-                            }`}>
-                              {match.winnerName === match.team1Name && '👑 '}
-                              {match.team1Name}
-                              {match.isPlayed && match.team1Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
-                              )}
-                            </div>
-                            <div className="text-center text-gray-400 text-xs">VS</div>
-                            <div className={`text-sm px-2 py-1 rounded transition-colors ${
-                              match.winnerName === match.team2Name 
-                                ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                : 'text-white bg-slate-800/80 border border-slate-600/50'
-                            }`}>
-                              {match.winnerName === match.team2Name && '👑 '}
-                              {match.team2Name}
-                              {match.isPlayed && match.team2Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
-                              )}
-                            </div>
-                          </div>
-                          <div className="text-xs text-blue-200 mt-2 text-center font-medium">BO3</div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
+      </button>
 
-              {/* Semi-finals */}
-              <div className="relative">
-                <h3 className="text-lg font-bold text-orange-400 mb-4 text-center">Semifinale</h3>
-                <div className="relative min-h-96">
-                  {matches
-                    .filter(m => m.bracketRound === 'semifinals')
-                    .sort((a, b) => a.bracketPosition - b.bracketPosition)
-                    .map((match) => (
-                      <div 
-                        key={match.id} 
-                        className={`absolute w-full ${
-                          match.bracketPosition === 1 ? 'top-20' : 'top-[27rem]'
-                        }`}
-                      >
-                        <Card className="bg-gradient-to-r from-orange-900/60 to-orange-800/60 border-orange-400/50 hover:border-orange-300 transition-all">
-                          <CardContent className="p-3">
-                            <div className="text-xs text-orange-300 mb-2 font-semibold text-center">
-                              SF{match.bracketPosition} • 19 iulie
-                            </div>
-                            <div className="space-y-1">
-                              <div className={`text-sm px-2 py-1 rounded transition-colors ${
-                                match.winnerName === match.team1Name 
-                                  ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                  : 'text-white bg-slate-800/80 border border-slate-600/50'
-                              }`}>
-                                {match.winnerName === match.team1Name && '👑 '}
-                                {match.team1Name || (match.bracketPosition === 1 ? `Câștigător QF1` : `Câștigător QF3`)}
-                                {match.isPlayed && match.team1Score !== null && (
-                                  <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
-                                )}
-                              </div>
-                              <div className="text-center text-gray-400 text-xs">VS</div>
-                              <div className={`text-sm px-2 py-1 rounded transition-colors ${
-                                match.winnerName === match.team2Name 
-                                  ? 'bg-green-600/50 text-green-200 font-bold border border-green-400/50' 
-                                  : 'text-white bg-slate-800/80 border border-slate-600/50'
-                              }`}>
-                                {match.winnerName === match.team2Name && '👑 '}
-                                {match.team2Name || (match.bracketPosition === 1 ? `Câștigător QF2` : `Câștigător QF4`)}
-                                {match.isPlayed && match.team2Score !== null && (
-                                  <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
-                                )}
-                              </div>
-                            </div>
-                            <div className="text-xs text-orange-200 mt-2 text-center font-medium">BO3</div>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    ))}
-                </div>
-              </div>
-
-              {/* Final & Third Place */}
-              <div className="relative">
-                <h3 className="text-lg font-bold text-red-400 mb-4 text-center">Marea Finală</h3>
-                
-                {/* Final Match - Enlarged and highlighted */}
-                <div className="absolute top-[200px] w-full px-4">
-                  {matches
-                    .filter(m => m.bracketRound === 'final')
-                    .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-red-900/80 to-red-800/80 border-2 border-red-400/80 hover:border-red-300 transition-all w-full shadow-2xl shadow-red-500/20 scale-110">
-                        <CardContent className="p-6">
-                          <div className="text-lg text-red-300 mb-4 font-bold text-center bg-red-900/30 py-2 px-4 rounded-lg border border-red-400/50">
-                            🏆 FINALA • 20 iulie
-                          </div>
-                          <div className="space-y-3">
-                            <div className={`text-lg px-4 py-3 rounded-lg font-semibold transition-colors ${
-                              match.winnerName === match.team1Name 
-                                ? 'bg-yellow-600/60 text-yellow-200 font-bold border-2 border-yellow-400/70 shadow-lg shadow-yellow-500/20' 
-                                : 'text-white bg-slate-800/90 border-2 border-slate-600/70'
-                            }`}>
-                              {match.winnerName === match.team1Name && '🏆 '}
-                              {match.team1Name || 'TBD'}
-                              {match.isPlayed && match.team1Score !== null && (
-                                <span className="ml-3 text-sm bg-gray-600 px-2 py-1 rounded font-bold">{match.team1Score}</span>
-                              )}
-                            </div>
-                            <div className="text-center text-gray-400 text-lg font-bold py-2">VS</div>
-                            <div className={`text-lg px-4 py-3 rounded-lg font-semibold transition-colors ${
-                              match.winnerName === match.team2Name 
-                                ? 'bg-yellow-600/60 text-yellow-200 font-bold border-2 border-yellow-400/70 shadow-lg shadow-yellow-500/20' 
-                                : 'text-white bg-slate-800/90 border-2 border-slate-600/70'
-                            }`}>
-                              {match.winnerName === match.team2Name && '🏆 '}
-                              {match.team2Name || 'TBD'}
-                              {match.isPlayed && match.team2Score !== null && (
-                                <span className="ml-3 text-sm bg-gray-600 px-2 py-1 rounded font-bold">{match.team2Score}</span>
-                              )}
-                            </div>
-                          </div>
-                          {match.winnerName && (
-                            <div className="mt-4 text-center">
-                              <Badge className="bg-yellow-600 text-white font-bold text-lg px-6 py-2 shadow-lg shadow-yellow-500/30">
-                                🏆 CAMPIONUL: {match.winnerName}
-                              </Badge>
-                            </div>
-                          )}
-                          <div className="text-sm text-red-200 mt-4 text-center font-bold bg-red-900/30 py-2 px-4 rounded-lg">
-                            BO3 • MECIUL DECISIV
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-
-                {/* Third Place Match */}
-                <div className="absolute top-[580px] w-full">
-                  <h3 className="text-lg font-bold text-amber-400 mb-4 text-center">Meciul pentru locul 3</h3>
-                  {matches
-                    .filter(m => m.bracketRound === 'third_place')
-                    .map((match) => (
-                      <Card key={match.id} className="bg-gradient-to-r from-amber-900/60 to-amber-800/60 border-amber-400/50 hover:border-amber-300 transition-all w-full">
-                        <CardContent className="p-3">
-                          <div className="text-xs text-amber-300 mb-2 font-semibold text-center">🥉 LOCUL 3 • 20 iulie</div>
-                          <div className="space-y-1">
-                            <div className={`text-sm px-2 py-1 rounded transition-colors ${
-                              match.winnerName === match.team1Name 
-                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-slate-800/80 border border-slate-600/50'
-                            }`}>
-                              {match.winnerName === match.team1Name && '🥉 '}
-                              {match.team1Name || 'TBD'}
-                              {match.isPlayed && match.team1Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team1Score}</span>
-                              )}
-                            </div>
-                            <div className="text-center text-gray-400 text-xs">VS</div>
-                            <div className={`text-sm px-2 py-1 rounded transition-colors ${
-                              match.winnerName === match.team2Name 
-                                ? 'bg-amber-600/50 text-amber-200 font-bold border border-amber-400/50' 
-                                : 'text-white bg-slate-800/80 border border-slate-600/50'
-                            }`}>
-                              {match.winnerName === match.team2Name && '🥉 '}
-                              {match.team2Name || 'TBD'}
-                              {match.isPlayed && match.team2Score !== null && (
-                                <span className="ml-2 text-xs bg-gray-600 px-1 py-0.5 rounded">{match.team2Score}</span>
-                              )}
-                            </div>
-                          </div>
-                          {match.winnerName && (
-                            <div className="mt-2 text-center">
-                              <Badge className="bg-amber-600 text-white font-bold text-xs px-2 py-1">
-                                🥉 LOCUL 3: {match.winnerName}
-                              </Badge>
-                            </div>
-                          )}
-                          <div className="text-xs text-amber-200 mt-2 text-center font-medium">BO3</div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                </div>
-              </div>
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-6 pb-6"
+          >
+            <div className="bg-gradient-to-r from-amber-900/20 to-amber-800/10 border border-amber-500/30 rounded-lg p-8 text-center">
+              <Zap className="mx-auto h-16 w-16 text-amber-400 mb-4" />
+              <h3 className="text-xl font-semibold text-amber-300 mb-3">Format Simplificat</h3>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                Turneul Kingston are acum doar <strong>2 stages principale</strong>. 
+                Stage 2 (Double Elimination) este etapa finală - nu mai există Stage 4 Playoff separat.
+              </p>
+              <p className="text-gray-400 text-sm">
+                Toate finalizările și playoff-urile se desfășoară în cadrul Stage 2 Double Elimination.
+              </p>
             </div>
-
-            {/* Legend */}
-            <div className="mt-20 text-center">
-              <div className="flex justify-center gap-4 text-sm text-gray-400 flex-wrap">
-                <span className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                  Sferturi (18 iulie)
-                </span>
-                <span className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-orange-500 rounded"></div>
-                  Semifinale (19 iulie)
-                </span>
-                <span className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-amber-500 rounded"></div>
-                  Locul 3 (20 iulie)
-                </span>
-                <span className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-red-500 rounded"></div>
-                  Finala (20 iulie)
-                </span>
-              </div>
-              <p className="text-gray-500 text-sm mt-2">👑 = Câștigător • 🏆 = Campion • 🥉 = Locul 3 • Toate meciurile sunt BO3</p>
-            </div>
-          </div>
+          </motion.div>
         )}
-      </CardContent>
-    </Card>
+      </AnimatePresence>
+    </div>
   );
 }
