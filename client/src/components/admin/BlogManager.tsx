@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit, Trash2, Plus, Eye, Calendar, FileText, Image, Upload, X, Bold, Italic, Underline, Link, Save, Globe, Code, Terminal, Clock, ExternalLink, Settings, Tags } from "lucide-react";
+import { Edit, Trash2, Plus, Eye, Calendar, FileText, Image, Upload, X, Bold, Italic, Underline, Link, Save, Globe, Code, Terminal, Clock, ExternalLink, Settings, Tags, ImageIcon } from "lucide-react";
 import { MediaManager } from "./MediaManager";
 import { useToast } from "@/hooks/use-toast";
 
@@ -69,6 +69,7 @@ export default function BlogManager() {
   const [editingArticle, setEditingArticle] = useState<BlogArticle | null>(null);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showViewDialog, setShowViewDialog] = useState(false);
+  const [showImageInserter, setShowImageInserter] = useState(false);
   const [formData, setFormData] = useState<ArticleFormData>({
     title: "",
     slug: "",
@@ -862,6 +863,17 @@ export default function BlogManager() {
                   >
                     <Terminal className="w-4 h-4" />
                   </Button>
+                  <div className="h-6 w-px bg-gray-400 mx-1" />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowImageInserter(true)}
+                    title="Inserează Imagine în Conținut"
+                    className="h-8 px-2 bg-green-50 border-green-300 text-green-700 hover:bg-green-100 hover:text-green-900"
+                  >
+                    <ImageIcon className="w-4 h-4" />
+                  </Button>
                 </div>
                 <Textarea
                   ref={contentTextareaRef}
@@ -1040,6 +1052,244 @@ JAVASCRIPT RAW:
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Image Inserter Dialog */}
+      <ImageInserterDialog 
+        open={showImageInserter}
+        onOpenChange={setShowImageInserter}
+        onInsertImage={(imageHtml) => {
+          insertText(imageHtml, '');
+          setShowImageInserter(false);
+        }}
+      />
     </>
+  );
+}
+
+// Component pentru inserarea imaginilor în conținut
+interface ImageInserterDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onInsertImage: (imageHtml: string) => void;
+}
+
+function ImageInserterDialog({ open, onOpenChange, onInsertImage }: ImageInserterDialogProps) {
+  const [imageData, setImageData] = useState<string>("");
+  const [altText, setAltText] = useState<string>("");
+  const [caption, setCaption] = useState<string>("");
+  const [alignment, setAlignment] = useState<string>("center");
+  const [size, setSize] = useState<string>("medium");
+  const { toast } = useToast();
+
+  const handleImageUpload = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "Fișierul este prea mare",
+        description: "Te rog alege o imagine mai mică de 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      setImageData(result);
+    };
+    reader.readAsDataURL(file);
+  }, [toast]);
+
+  const generateImageHtml = () => {
+    if (!imageData || !altText.trim()) {
+      toast({
+        title: "Date incomplete",
+        description: "Te rog adaugă o imagine și textul alt obligatoriu.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const sizeClass = {
+      small: "max-w-xs",
+      medium: "max-w-md", 
+      large: "max-w-lg",
+      full: "w-full"
+    }[size];
+
+    const alignmentClass = {
+      left: "float-left mr-4 mb-4",
+      center: "mx-auto mb-4 block",
+      right: "float-right ml-4 mb-4"
+    }[alignment];
+
+    let imageHtml = `
+<div class="image-container ${alignment === 'center' ? 'text-center' : ''} mb-6">
+  <img 
+    src="${imageData}" 
+    alt="${altText}" 
+    class="${sizeClass} ${alignmentClass} rounded-lg shadow-sm"
+    style="height: auto;"
+  />`;
+
+    if (caption.trim()) {
+      imageHtml += `
+  <figcaption class="text-sm text-gray-600 italic mt-2 ${alignment === 'center' ? 'text-center' : ''}">${caption}</figcaption>`;
+    }
+
+    imageHtml += `
+</div>
+
+`;
+
+    onInsertImage(imageHtml);
+    
+    // Reset form
+    setImageData("");
+    setAltText("");
+    setCaption("");
+    setAlignment("center");
+    setSize("medium");
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle className="flex items-center">
+            <ImageIcon className="mr-2" />
+            Inserează Imagine în Articol
+          </DialogTitle>
+        </DialogHeader>
+        
+        <div className="space-y-4">
+          {/* Image Upload */}
+          <div>
+            <Label>Alege imaginea</Label>
+            <Input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="mt-2"
+            />
+            {imageData && (
+              <div className="mt-4 text-center">
+                <img 
+                  src={imageData} 
+                  alt="Preview" 
+                  className="max-w-full max-h-48 mx-auto rounded border"
+                />
+              </div>
+            )}
+          </div>
+
+          {/* Alt Text (Required) */}
+          <div>
+            <Label htmlFor="alt-text">Text Alt (obligatoriu) *</Label>
+            <Input
+              id="alt-text"
+              value={altText}
+              onChange={(e) => setAltText(e.target.value)}
+              placeholder="Descriere pentru accessibility..."
+              className="mt-1"
+            />
+          </div>
+
+          {/* Caption (Optional) */}
+          <div>
+            <Label htmlFor="caption">Caption (opțional)</Label>
+            <Input
+              id="caption"
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+              placeholder="Text sub imagine..."
+              className="mt-1"
+            />
+          </div>
+
+          {/* Size Selection */}
+          <div>
+            <Label>Mărimea imaginii</Label>
+            <Select value={size} onValueChange={setSize}>
+              <SelectTrigger className="mt-1">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="small">Mică (max 320px)</SelectItem>
+                <SelectItem value="medium">Medie (max 448px)</SelectItem>
+                <SelectItem value="large">Mare (max 512px)</SelectItem>
+                <SelectItem value="full">Toată lățimea</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Alignment Selection */}
+          <div>
+            <Label>Poziționa imaginii</Label>
+            <Select value={alignment} onValueChange={setAlignment}>
+              <SelectTrigger className="mt-1">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="left">Stânga (textul se înfășoară pe dreapta)</SelectItem>
+                <SelectItem value="center">Centru (pe propria linie)</SelectItem>
+                <SelectItem value="right">Dreapta (textul se înfășoară pe stânga)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Preview Section */}
+          {imageData && altText && (
+            <div className="p-4 border rounded-lg bg-gray-50">
+              <Label className="text-sm font-medium text-gray-700">Preview poziționare:</Label>
+              <div className="mt-2">
+                <div 
+                  className="prose max-w-none text-sm"
+                  dangerouslySetInnerHTML={{ 
+                    __html: `
+                      <p>Acesta este un exemplu de text care arată cum va fi poziționată imaginea în articol.</p>
+                      <div class="image-container ${alignment === 'center' ? 'text-center' : ''} mb-6">
+                        <img 
+                          src="${imageData}" 
+                          alt="${altText}" 
+                          class="${{
+                            small: "max-w-xs",
+                            medium: "max-w-md", 
+                            large: "max-w-lg",
+                            full: "w-full"
+                          }[size]} ${alignment === 'left' ? 'float-left mr-4 mb-4' : alignment === 'right' ? 'float-right ml-4 mb-4' : 'mx-auto mb-4 block'} rounded-lg shadow-sm"
+                          style="height: auto;"
+                        />
+                        ${caption.trim() ? `<figcaption class="text-sm text-gray-600 italic mt-2 ${alignment === 'center' ? 'text-center' : ''}">${caption}</figcaption>` : ''}
+                      </div>
+                      <p>Continuarea textului articolului se va derula în jurul imaginii dacă aceasta este aliniată la stânga sau dreapta.</p>
+                    ` 
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Action Buttons */}
+          <div className="flex justify-end space-x-2 pt-4 border-t">
+            <Button
+              variant="outline"
+              onClick={() => onOpenChange(false)}
+            >
+              Anulează
+            </Button>
+            <Button
+              onClick={generateImageHtml}
+              disabled={!imageData || !altText.trim()}
+            >
+              <ImageIcon className="w-4 h-4 mr-2" />
+              Inserează Imaginea
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
