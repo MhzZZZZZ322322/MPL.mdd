@@ -12,6 +12,139 @@ import multer from 'multer';
 import fs from 'fs';
 import path from 'path';
 
+// Discord Webhook Functions
+async function sendDiscordNotification(teamName: string, memberCount: number, logoUrl: string) {
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) {
+      console.warn("DISCORD_WEBHOOK_URL not configured");
+      return;
+    }
+
+    const embed = {
+      title: "🎯 Nouă Echipă Înregistrată!",
+      description: `O echipă nouă s-a înregistrat pentru Kingston FURY x HyperX Supercup`,
+      color: 0x7C3AED,
+      fields: [
+        {
+          name: "Numele Echipei",
+          value: teamName,
+          inline: true
+        },
+        {
+          name: "Numărul de Membri",
+          value: `${memberCount} jucători`,
+          inline: true
+        },
+        {
+          name: "Status",
+          value: "În așteptarea aprobării",
+          inline: true
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Moldova Pro League"
+      }
+    };
+
+    const payload = {
+      username: "MPL Tournament Bot",
+      embeds: [embed]
+    };
+
+    // Removed debug logging for production
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to send Discord notification:", response.status, response.statusText, errorText);
+    } else {
+      console.log(`Discord notification sent for team: ${teamName}`);
+    }
+  } catch (error) {
+    console.error("Error sending Discord notification:", error);
+  }
+}
+
+async function sendDiscordReviewNotification(teamName: string, status: 'approved' | 'rejected', isDirectInvite?: boolean, rejectionReason?: string) {
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) {
+      console.warn("DISCORD_WEBHOOK_URL not configured");
+      return;
+    }
+
+    const isApproved = status === 'approved';
+    const embed = {
+      title: isApproved ? "✅ Echipă Aprobată!" : "❌ Echipă Respinsă",
+      description: `Echipa **${teamName}** a fost ${isApproved ? 'aprobată' : 'respinsă'} pentru Kingston FURY x HyperX Supercup`,
+      color: isApproved ? 0x22C55E : 0xEF4444,
+      fields: [
+        {
+          name: "Numele Echipei",
+          value: teamName,
+          inline: true
+        },
+        {
+          name: "Status Final",
+          value: isApproved ? "Aprobată" : "Respinsă",
+          inline: true
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Moldova Pro League"
+      }
+    };
+
+    if (isApproved && typeof isDirectInvite === 'boolean') {
+      embed.fields.push({
+        name: "🎯 Tip Invitație",
+        value: isDirectInvite ? "🟣 Invitație Directă" : "🔵 Prin Calificare",
+        inline: true
+      });
+    }
+
+    if (!isApproved && rejectionReason) {
+      embed.fields.push({
+        name: "📝 Motivul Respingerii",
+        value: rejectionReason,
+        inline: false
+      });
+    }
+
+    const payload = {
+      username: "MPL Admin Bot",
+      embeds: [embed]
+    };
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to send Discord review notification:", response.status, response.statusText, errorText);
+    } else {
+      console.log(`Discord review notification sent for team: ${teamName} (${status})`);
+    }
+  } catch (error) {
+    console.error("Error sending Discord review notification:", error);
+  }
+}
+
 // Configure multer for file uploads
 const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'logos');
 
@@ -1477,6 +1610,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
+      // Send Discord notification
+      try {
+        await sendDiscordNotification(name, members.length, logoUrl);
+      } catch (discordError) {
+        console.warn("Discord notification failed, but team registration succeeded:", discordError);
+      }
+
       res.status(201).json({ 
         message: "Echipa a fost înregistrată cu succes și urmează să fie verificată",
         teamId: team.id 
@@ -1681,9 +1821,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
         updateData.rejectionReason = rejectionReason;
       }
 
+      // Get team name before updating for Discord notification
+      const [team] = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.id, teamId))
+        .limit(1);
+
       await db.update(kingstonTeams)
         .set(updateData)
         .where(eq(kingstonTeams.id, teamId));
+
+      // Send Discord notification for review result
+      if (team) {
+        try {
+          await sendDiscordReviewNotification(
+            team.name, 
+            status as 'approved' | 'rejected',
+            isDirectInvite,
+            rejectionReason
+          );
+        } catch (discordError) {
+          console.warn("Discord review notification failed:", discordError);
+        }
+      }
 
       res.json({ message: `Echipa a fost ${status === "approved" ? "aprobată" : "respinsă"}` });
     } catch (error) {
