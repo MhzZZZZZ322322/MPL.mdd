@@ -74,6 +74,59 @@ async function sendDiscordNotification(teamName: string, memberCount: number, lo
   }
 }
 
+async function sendDiscordNewsNotification(title: string, excerpt: string, slug: string) {
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL_NEWS;
+    if (!webhookUrl) {
+      console.warn("DISCORD_WEBHOOK_URL_NEWS not configured");
+      return;
+    }
+
+    const newsUrl = `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/blog/${slug}`;
+    
+    const embed = {
+      title: "📰 BREAKING NEWS pe scena CS2 din Moldova! 🔥",
+      description: `${excerpt || title}`,
+      color: 0xFF6B35, // Orange color for news
+      fields: [
+        {
+          name: "📖 Citește toată știrea aici:",
+          value: `[${title}](${newsUrl})`,
+          inline: false
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Moldova Pro League | Esports din inima Moldovei",
+        icon_url: "https://mpl.md/logo.png"
+      }
+    };
+
+    const payload = {
+      username: "MPL News Bot",
+      content: "🔥 **BREAKING NEWS pe scena CS2 din Moldova!** 🔥",
+      embeds: [embed]
+    };
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to send Discord news notification:", response.status, response.statusText, errorText);
+    } else {
+      console.log(`Discord news notification sent for article: ${title}`);
+    }
+  } catch (error) {
+    console.error("Error sending Discord news notification:", error);
+  }
+}
+
 async function sendDiscordReviewNotification(teamName: string, status: 'approved' | 'rejected', isDirectInvite?: boolean, rejectionReason?: string) {
   try {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
@@ -2332,6 +2385,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const [article] = await db.insert(blogArticles).values(articleData).returning();
+      
+      // Send Discord notification if article is published
+      if (article.status === 'published') {
+        try {
+          await sendDiscordNewsNotification(article.title, article.excerpt, article.slug);
+        } catch (discordError) {
+          console.warn("Discord news notification failed, but article creation succeeded:", discordError);
+        }
+      }
+      
       res.status(201).json(article);
     } catch (error) {
       console.error("Error creating blog article:", error);
@@ -2362,6 +2425,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         updatedAt: new Date()
       };
 
+      // Get the original article to check if status is changing to published
+      const [originalArticle] = await db.select().from(blogArticles)
+        .where(eq(blogArticles.id, articleId));
+
+      if (!originalArticle) {
+        return res.status(404).json({ error: "Article not found" });
+      }
+
       // Auto-set publishedAt if changing to published status
       if (articleData.status === 'published' && !articleData.publishedAt) {
         articleData.publishedAt = new Date();
@@ -2374,6 +2445,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (!updatedArticle) {
         return res.status(404).json({ error: "Article not found" });
+      }
+
+      // Send Discord notification if article is being published for the first time
+      if (updatedArticle.status === 'published' && originalArticle.status !== 'published') {
+        try {
+          await sendDiscordNewsNotification(updatedArticle.title, updatedArticle.excerpt, updatedArticle.slug);
+        } catch (discordError) {
+          console.warn("Discord news notification failed, but article update succeeded:", discordError);
+        }
       }
 
       res.json(updatedArticle);
