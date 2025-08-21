@@ -185,7 +185,7 @@ export default function BlogPage() {
                           <Badge 
                             key={index} 
                             variant="secondary" 
-                            className="text-xs bg-purple-900/40 text-purple-200 border border-purple-500/30 hover:bg-purple-800/60 transition-colors duration-300"
+                            className="text-xs bg-purple-900/40 text-purple-200 border border-purple-500/30 hover:bg-purple-800/60 transition-colors duration-300 px-2 py-1 inline-block whitespace-nowrap"
                           >
                             {tag.trim()}
                           </Badge>
