@@ -1961,6 +1961,94 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Send Discord notification for existing pending teams
+  app.post("/api/kingston/admin/notify-pending-teams", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const pendingTeams = await db.select().from(kingstonTeams).where(eq(kingstonTeams.status, "pending"));
+      
+      if (pendingTeams.length === 0) {
+        return res.json({ message: 'Nu există echipe în așteptare', notificationsSent: 0 });
+      }
+
+      let successCount = 0;
+      const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+      
+      if (!webhookUrl) {
+        return res.status(400).json({ error: 'Discord webhook nu este configurat' });
+      }
+
+      for (const team of pendingTeams) {
+        try {
+          const embed = {
+            title: "📋 Echipă în Așteptare (Notificare Retroactivă)",
+            description: `Echipa **${team.name}** așteaptă aprobare pentru Kingston FURY x HyperX Supercup`,
+            color: 0xF59E0B, // Orange color for retrospective notifications
+            fields: [
+              {
+                name: "Numele Echipei",
+                value: team.name,
+                inline: true
+              },
+              {
+                name: "Data Înregistrării",
+                value: new Date(team.createdAt).toLocaleDateString('ro-RO'),
+                inline: true
+              },
+              {
+                name: "Status",
+                value: "În așteptarea aprobării",
+                inline: true
+              }
+            ],
+            timestamp: new Date().toISOString(),
+            footer: {
+              text: "Moldova Pro League • Notificare Retroactivă"
+            }
+          };
+
+          const payload = {
+            username: "MPL Tournament Bot",
+            embeds: [embed]
+          };
+
+          const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.ok) {
+            successCount++;
+            console.log(`Retroactive Discord notification sent for team: ${team.name}`);
+          } else {
+            const errorText = await response.text();
+            console.error(`Failed to send retroactive Discord notification for ${team.name}:`, response.status, response.statusText, errorText);
+          }
+
+          // Small delay between notifications to avoid rate limits
+          await new Promise(resolve => setTimeout(resolve, 500));
+        } catch (error) {
+          console.error(`Error sending notification for team ${team.name}:`, error);
+        }
+      }
+
+      res.json({ 
+        message: `Notificări trimise pentru ${successCount} din ${pendingTeams.length} echipe în așteptare`,
+        notificationsSent: successCount,
+        totalPendingTeams: pendingTeams.length
+      });
+    } catch (error) {
+      console.error('Error sending retrospective notifications:', error);
+      res.status(500).json({ error: 'Failed to send notifications' });
+    }
+  });
+
   // Kingston FURY Admin: Update Team
   app.patch("/api/kingston/admin/teams/:id", async (req, res) => {
     try {

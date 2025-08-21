@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Edit, Trash2, Users, Eye, Calendar, Trophy, Upload, Plus, X, Settings } from "lucide-react";
+import { Edit, Trash2, Users, Eye, Calendar, Trophy, Upload, Plus, X, Settings, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface TeamMember {
@@ -56,6 +56,38 @@ export default function RegisteredTeamsManager() {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showMembersDialog, setShowMembersDialog] = useState(false);
   const [showTypeManager, setShowTypeManager] = useState(true); // Start visible by default
+
+  // Discord notification mutation for pending teams
+  const notifyPendingTeamsMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/kingston/admin/notify-pending-teams', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error);
+      }
+
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Notificări Discord trimise",
+        description: `${data.notificationsSent} notificări trimise cu succes în Discord pentru echipele în așteptare.`,
+        variant: "default",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Eroare notificare Discord",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
 
   // Fetch registered teams
   const { data: teams = [], isLoading } = useQuery({
@@ -440,7 +472,20 @@ export default function RegisteredTeamsManager() {
               <Users className="mr-2" />
               Echipe Înregistrate ({teams.length})
             </div>
-            <Badge variant="secondary">Kingston FURY Tournament</Badge>
+            <div className="flex items-center space-x-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => notifyPendingTeamsMutation.mutate()}
+                disabled={notifyPendingTeamsMutation.isPending}
+                className="text-purple-600 border-purple-600 hover:bg-purple-600 hover:text-white"
+                title="Trimite notificări Discord pentru echipele în așteptare"
+              >
+                <MessageSquare className="w-4 h-4 mr-1" />
+                {notifyPendingTeamsMutation.isPending ? "Se trimite..." : "Notificare Discord"}
+              </Button>
+              <Badge variant="secondary">Kingston FURY Tournament</Badge>
+            </div>
           </CardTitle>
         </CardHeader>
         <CardContent>
