@@ -82,6 +82,7 @@ async function sendDiscordNewsNotification(title: string, excerpt: string, slug:
       return;
     }
 
+    // Generate proper URL - using the actual Replit domain
     const newsUrl = `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/blog/${slug}`;
     
     const embed = {
