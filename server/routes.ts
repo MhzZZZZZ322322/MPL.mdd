@@ -82,8 +82,8 @@ async function sendDiscordNewsNotification(title: string, excerpt: string, slug:
       return;
     }
 
-    // Generate proper URL - using the actual Replit domain
-    const newsUrl = `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.repl.co/blog/${slug}`;
+    // Use the actual site URL where the article is published
+    const newsUrl = `https://mpl.md/blog/${slug}`;
     
     const embed = {
       title: "📰 BREAKING NEWS pe scena CS2 din Moldova! 🔥",
