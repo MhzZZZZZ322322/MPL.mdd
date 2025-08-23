@@ -6,6 +6,9 @@ Moldova Pro League (MPL) is a web application for a Moldovan esports organizatio
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 Design preference: Eliminate all fire symbols (🔥) from the entire site for a clean, professional look.
+Discord Notifications: Automated Discord webhook notifications configured for:
+- Team registrations (DISCORD_WEBHOOK_URL)
+- Blog article publishing (DISCORD_WEBHOOK_URL_NEWS with link to https://mpl.md/blog/[slug])
 
 ## System Architecture
 
@@ -32,7 +35,7 @@ Design preference: Eliminate all fire symbols (🔥) from the entire site for a 
 - **Game Server Integration**: Real-time CS2 server monitoring and background status checks.
 - **Content Management**: Admin authentication for dynamic content editing, event management, SEO settings, and player ranking.
 - **Tournament Management**: Comprehensive system for multi-stage tournaments, real-time standings, automatic progression logic, CRUD operations for matches, teams, and stages, score validation, and dynamic group configuration.
-- **Discord Integration**: Automated webhook notifications for team registrations, approvals, and rejections with rich embed formatting.
+- **Discord Integration**: Automated webhook notifications for team registrations, approvals, and rejections with rich embed formatting. Blog article publishing notifications automatically sent to Discord with direct links to published articles on mpl.md.
 - **Data Flow**: Frontend communicates with the Express backend, which handles business logic, database interactions via Drizzle ORM, and external service integrations.
 - **File Structure**: Organized into `client/`, `server/`, `shared/`, and `public/`.
 
