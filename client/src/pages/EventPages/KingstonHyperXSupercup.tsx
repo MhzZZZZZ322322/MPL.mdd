@@ -751,118 +751,236 @@ const KingstonHyperXSupercup = () => {
               </p>
             </div>
 
-            {/* All Teams Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {/* Show ALL teams */}
-              {allRegisteredTeams.length === 0 ? (
-                <div className="col-span-full text-center py-12">
-                  <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-300 mb-2">Înregistrările încep în curând</h3>
-                  <p className="text-gray-400 max-w-md mx-auto">
-                    Echipele înregistrate vor apărea aici. 
-                    Înregistrările încep pe 15 august 2025.
-                  </p>
-                </div>
-              ) : (
-                allRegisteredTeams.map((team, index) => (
-                  <div key={team.id} className="relative perspective-1000">
-                    <div 
-                      className={`relative w-full h-64 md:h-80 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
-                        selectedTeam?.id === team.id ? 'rotate-y-180' : ''
-                      }`}
-                      onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
-                    >
-                      {/* Front of card - Team Logo */}
-                      <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
-                        <div className="text-center h-full flex flex-col justify-between">
-                          <div className={`mx-auto bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center overflow-hidden border-2 ${team.isDirectInvite ? 'border-purple-500/30' : 'border-green-500/30'} shadow-lg w-full h-48 md:h-60`}>
-                            <div className="relative w-full h-full p-3 flex items-center justify-center bg-slate-800/90 rounded">
-                              {team.logoUrl ? (
-                                <img 
-                                  src={team.logoUrl} 
-                                  alt={team.name} 
-                                  className="w-full h-full object-contain filter brightness-110 contrast-110" 
-                                  onError={(e) => {
-                                    console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
-                                    e.currentTarget.style.display = 'none';
-                                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                                  }}
-                                />
-                              ) : null}
-                              <Target className="w-12 h-12 text-green-400 hidden" />
-                            </div>
-                          </div>
-                          <div>
-                            <h3 className="text-sm md:text-base font-bold text-white font-rajdhani py-1">{team.name}</h3>
-                            <span className={`text-xs font-semibold ${team.isDirectInvite ? 'text-purple-400' : 'text-green-400'}`}>
-                              {team.isDirectInvite ? 'INVITAȚIE DIRECTĂ' : 'CALIFICARE'}
-                            </span>
-                          </div>
-                        </div>
-                      </NeonBorder>
-
-                      {/* Back of card - Team Members */}
-                      <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
-                        <div className="h-full flex flex-col">
-                          <h4 className="text-sm md:text-base font-bold text-white mb-2 text-center flex-shrink-0">Membrii</h4>
-                          {membersLoading ? (
-                            <div className="flex justify-center py-4 flex-1">
-                              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
-                            </div>
-                          ) : (
-                            <div className="space-y-1 flex-1 overflow-y-auto">
-                              {teamMembers.filter(member => member.teamId === team.id).map((member) => (
-                                <a
-                                  key={member.id}
-                                  href={member.faceitProfile}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="block bg-black/30 p-1.5 rounded border border-gray-700 hover:bg-black/50 transition-colors"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <div className="text-xs flex items-center justify-between">
-                                    <div className="font-semibold text-white truncate pr-2">{member.nickname}</div>
-                                    <div className="flex gap-1 flex-shrink-0">
-                                      {member.role === "captain" && (
-                                        <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
-                                          C
-                                        </span>
-                                      )}
-                                      <span className={`px-1 py-0.5 text-xs rounded font-semibold ${
-                                        member.position === "main" 
-                                          ? "bg-green-600 text-white" 
-                                          : "bg-orange-600 text-white"
-                                      }`}>
-                                        {member.position === "main" ? "M" : "R"}
-                                      </span>
-                                    </div>
+            {allRegisteredTeams.length === 0 ? (
+              <div className="text-center py-12">
+                <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+                <h3 className="text-xl font-semibold text-gray-300 mb-2">Înregistrările încep în curând</h3>
+                <p className="text-gray-400 max-w-md mx-auto">
+                  Echipele înregistrate vor apărea aici. 
+                  Înregistrările încep pe 15 august 2025.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-16">
+                {/* Direct Invites Section */}
+                {directInviteTeams.length > 0 && (
+                  <div>
+                    <div className="text-center mb-8">
+                      <h3 className="text-2xl md:text-3xl font-bold text-purple-400 mb-2 font-rajdhani">
+                        Echipe cu Invitație Directă
+                      </h3>
+                      <p className="text-gray-300 text-sm">
+                        Aceste echipe intră direct în Stage 2 (Grupe)
+                      </p>
+                      <div className="inline-flex items-center mt-2 px-3 py-1 bg-purple-500/20 border border-purple-500/30 rounded-full">
+                        <Star className="mr-2 h-4 w-4 text-purple-400" />
+                        <span className="text-purple-400 font-semibold text-sm">{directInviteTeams.length} echipe</span>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                      {directInviteTeams.map((team, index) => (
+                        <div key={team.id} className="relative perspective-1000">
+                          <div 
+                            className={`relative w-full h-64 md:h-80 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                              selectedTeam?.id === team.id ? 'rotate-y-180' : ''
+                            }`}
+                            onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
+                          >
+                            {/* Front of card - Team Logo */}
+                            <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
+                              <div className="text-center h-full flex flex-col justify-between">
+                                <div className="mx-auto bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center overflow-hidden border-2 border-purple-500/30 shadow-lg w-full h-48 md:h-60">
+                                  <div className="relative w-full h-full p-3 flex items-center justify-center bg-slate-800/90 rounded">
+                                    {team.logoUrl ? (
+                                      <img 
+                                        src={team.logoUrl} 
+                                        alt={team.name} 
+                                        className="w-full h-full object-contain filter brightness-110 contrast-110" 
+                                        onError={(e) => {
+                                          console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
+                                          e.currentTarget.style.display = 'none';
+                                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                        }}
+                                      />
+                                    ) : null}
+                                    <Star className="w-12 h-12 text-purple-400 hidden" />
                                   </div>
-                                </a>
-                              ))}
-                            </div>
-                          )}
-                          <div className="text-center mt-2 flex-shrink-0">
-                            <span className={`text-xs font-semibold ${team.isDirectInvite ? 'text-purple-400' : 'text-green-400'}`}>
-                              {team.isDirectInvite ? 'INVITAȚIE DIRECTĂ' : 'CALIFICARE'}
-                            </span>
+                                </div>
+                                <div>
+                                  <h3 className="text-sm md:text-base font-bold text-white font-rajdhani py-1">{team.name}</h3>
+                                  <span className="text-xs font-semibold text-purple-400">INVITAȚIE DIRECTĂ</span>
+                                </div>
+                              </div>
+                            </NeonBorder>
+
+                            {/* Back of card - Team Members */}
+                            <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                              <div className="h-full flex flex-col">
+                                <h4 className="text-sm md:text-base font-bold text-white mb-2 text-center flex-shrink-0">Membrii</h4>
+                                {membersLoading ? (
+                                  <div className="flex justify-center py-4 flex-1">
+                                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                                  </div>
+                                ) : (
+                                  <div className="space-y-1 flex-1 overflow-y-auto">
+                                    {teamMembers.filter(member => member.teamId === team.id).map((member) => (
+                                      <a
+                                        key={member.id}
+                                        href={member.faceitProfile}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block bg-black/30 p-1.5 rounded border border-gray-700 hover:bg-black/50 transition-colors"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <div className="text-xs flex items-center justify-between">
+                                          <div className="font-semibold text-white truncate pr-2">{member.nickname}</div>
+                                          <div className="flex gap-1 flex-shrink-0">
+                                            {member.role === "captain" && (
+                                              <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
+                                                C
+                                              </span>
+                                            )}
+                                            <span className={`px-1 py-0.5 text-xs rounded font-semibold ${
+                                              member.position === "main" 
+                                                ? "bg-green-600 text-white" 
+                                                : "bg-orange-600 text-white"
+                                            }`}>
+                                              {member.position === "main" ? "M" : "R"}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    ))}
+                                  </div>
+                                )}
+                                <div className="text-center mt-2 flex-shrink-0">
+                                  <span className="text-xs font-semibold text-purple-400">INVITAȚIE DIRECTĂ</span>
+                                </div>
+                              </div>
+                            </NeonBorder>
                           </div>
                         </div>
-                      </NeonBorder>
+                      ))}
                     </div>
                   </div>
-                ))
-              )}
-            </div>
+                )}
 
-            <div className="mt-8 text-center">
+                {/* Qualification Teams Section */}
+                {qualificationTeams.length > 0 && (
+                  <div>
+                    <div className="text-center mb-8">
+                      <h3 className="text-2xl md:text-3xl font-bold text-green-400 mb-2 font-rajdhani">
+                        Echipe prin Calificare
+                      </h3>
+                      <p className="text-gray-300 text-sm">
+                        Aceste echipe vor participa la Stage 1 pentru calificare
+                      </p>
+                      <div className="inline-flex items-center mt-2 px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full">
+                        <Target className="mr-2 h-4 w-4 text-green-400" />
+                        <span className="text-green-400 font-semibold text-sm">{qualificationTeams.length} echipe</span>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                      {qualificationTeams.map((team, index) => (
+                        <div key={team.id} className="relative perspective-1000">
+                          <div 
+                            className={`relative w-full h-64 md:h-80 transform-style-preserve-3d transition-transform duration-700 cursor-pointer ${
+                              selectedTeam?.id === team.id ? 'rotate-y-180' : ''
+                            }`}
+                            onClick={() => setSelectedTeam(selectedTeam?.id === team.id ? null : team)}
+                          >
+                            {/* Front of card - Team Logo */}
+                            <NeonBorder className="absolute inset-0 p-2 bg-darkGray/30 rounded-lg hover:bg-darkGray/50 transition-colors duration-300 backface-hidden">
+                              <div className="text-center h-full flex flex-col justify-between">
+                                <div className="mx-auto bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center overflow-hidden border-2 border-green-500/30 shadow-lg w-full h-48 md:h-60">
+                                  <div className="relative w-full h-full p-3 flex items-center justify-center bg-slate-800/90 rounded">
+                                    {team.logoUrl ? (
+                                      <img 
+                                        src={team.logoUrl} 
+                                        alt={team.name} 
+                                        className="w-full h-full object-contain filter brightness-110 contrast-110" 
+                                        onError={(e) => {
+                                          console.error(`Failed to load logo for ${team.name}: ${team.logoUrl}`);
+                                          e.currentTarget.style.display = 'none';
+                                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                                        }}
+                                      />
+                                    ) : null}
+                                    <Target className="w-12 h-12 text-green-400 hidden" />
+                                  </div>
+                                </div>
+                                <div>
+                                  <h3 className="text-sm md:text-base font-bold text-white font-rajdhani py-1">{team.name}</h3>
+                                  <span className="text-xs font-semibold text-green-400">CALIFICARE</span>
+                                </div>
+                              </div>
+                            </NeonBorder>
+
+                            {/* Back of card - Team Members */}
+                            <NeonBorder className="absolute inset-0 p-3 bg-darkGray/50 rounded-lg backface-hidden rotate-y-180">
+                              <div className="h-full flex flex-col">
+                                <h4 className="text-sm md:text-base font-bold text-white mb-2 text-center flex-shrink-0">Membrii</h4>
+                                {membersLoading ? (
+                                  <div className="flex justify-center py-4 flex-1">
+                                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+                                  </div>
+                                ) : (
+                                  <div className="space-y-1 flex-1 overflow-y-auto">
+                                    {teamMembers.filter(member => member.teamId === team.id).map((member) => (
+                                      <a
+                                        key={member.id}
+                                        href={member.faceitProfile}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block bg-black/30 p-1.5 rounded border border-gray-700 hover:bg-black/50 transition-colors"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <div className="text-xs flex items-center justify-between">
+                                          <div className="font-semibold text-white truncate pr-2">{member.nickname}</div>
+                                          <div className="flex gap-1 flex-shrink-0">
+                                            {member.role === "captain" && (
+                                              <span className="bg-primary text-black px-1 py-0.5 text-xs rounded font-semibold">
+                                                C
+                                              </span>
+                                            )}
+                                            <span className={`px-1 py-0.5 text-xs rounded font-semibold ${
+                                              member.position === "main" 
+                                                ? "bg-green-600 text-white" 
+                                                : "bg-orange-600 text-white"
+                                            }`}>
+                                              {member.position === "main" ? "M" : "R"}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </a>
+                                    ))}
+                                  </div>
+                                )}
+                                <div className="text-center mt-2 flex-shrink-0">
+                                  <span className="text-xs font-semibold text-green-400">CALIFICARE</span>
+                                </div>
+                              </div>
+                            </NeonBorder>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="mt-12 text-center">
               <div className="bg-gradient-to-r from-green-500/10 to-teal-500/10 border border-green-500/30 rounded-lg p-6 max-w-4xl mx-auto">
                 <div className="flex items-center justify-center mb-4">
                   <Target className="mr-3 h-6 w-6 text-green-400" />
-                  <h4 className="text-xl font-bold text-green-400 font-rajdhani">Locuri prin Calificare</h4>
+                  <h4 className="text-xl font-bold text-green-400 font-rajdhani">Procesul de Calificare</h4>
                 </div>
                 <p className="text-gray-300 leading-relaxed">
-                  Toate echipele înregistrate (exceptând cele cu invitație directă) vor participa la Stage 1 - Calificare. 
-                  Doar primele 20 echipe se vor califica pentru Stage 2 (Grupe) alături de cele 12 echipe cu invitație directă.
+                  Echipele prin calificare vor participa la Stage 1 - Calificare (10-14 septembrie). 
+                  Doar primele 20 echipe se vor califica pentru Stage 2 (Grupe) alături de cele {directInviteTeams.length} echipe cu invitație directă.
                 </p>
               </div>
             </div>
