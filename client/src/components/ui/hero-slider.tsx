@@ -4,8 +4,6 @@ import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
-import hatorCupImage from '@assets/image_1754482998242.png';
-import kingstonImage from '@assets/supercup season1 varianta 1_1755089877102.png';
 import supercupMainImage from '@assets/image_1755174900402.png';
 
 interface HeroContent {
@@ -31,15 +29,6 @@ export const HeroSlider = () => {
       primaryBtn: {
         text: "ÎNSCRIE-TE ACUM",
         link: '/events/kingston-hyperx-supercup',
-      }
-    },
-    {
-      image: hatorCupImage,
-      title: t('hero.slider.title'),
-      subtitle: t('hero.slider.subtitle'),
-      primaryBtn: {
-        text: t('hero.slider.button'),
-        link: '/events/hator-cup-ropl-mpl',
       }
     }
   ];
