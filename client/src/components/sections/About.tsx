@@ -57,8 +57,7 @@ const About = () => {
       title: "HATOR CUP - ROPL x MPL",
       description: "Primul turneu de colaborare ROPL x MPL. Super turneu CS2 powered by HATOR și SkinBaron cu prize pool 5500 RON.",
       icon: <LucideTerminal />,
-      link: "/events/hator-cup-ropl-mpl",
-      isActive: true
+      link: "/events/hator-cup-ropl-mpl"
     },
     {
       year: "15 August - 28 Septembrie 2025",
