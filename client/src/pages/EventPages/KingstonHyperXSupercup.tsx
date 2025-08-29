@@ -969,18 +969,7 @@ const KingstonHyperXSupercup = () => {
               </div>
             )}
 
-            <div className="mt-12 text-center">
-              <div className="bg-gradient-to-r from-green-500/10 to-teal-500/10 border border-green-500/30 rounded-lg p-6 max-w-4xl mx-auto">
-                <div className="flex items-center justify-center mb-4">
-                  <Target className="mr-3 h-6 w-6 text-green-400" />
-                  <h4 className="text-xl font-bold text-green-400 font-rajdhani">Procesul de Calificare</h4>
-                </div>
-                <p className="text-gray-300 leading-relaxed">
-                  Echipele prin calificare vor participa la Stage 1 - Calificare (10-14 septembrie). 
-                  Doar primele 20 echipe se vor califica pentru Stage 2 (Grupe) alături de cele {directInviteTeams.length} echipe cu invitație directă.
-                </p>
-              </div>
-            </div>
+
           </div>
         </section>
 
