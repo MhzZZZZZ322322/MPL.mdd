@@ -1367,7 +1367,7 @@ const KingstonHyperXSupercup = () => {
                         <div>
                           <p className="font-medium mb-2">Kingston FURY Premium Bundle (5 seturi):</p>
                           <ul className="space-y-1 text-xs">
-                            <li>• 5x Kingston FURY DT Exodia S 256GB (DTXS/256GB)</li>
+                            
                             <li>• 5x Tricou negru cu inscripție roșie "Kingston FURY"</li>
                             <li>• 5x Geantă termică Kingston FURY branded</li>
                           </ul>
