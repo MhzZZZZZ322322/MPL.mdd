@@ -430,9 +430,6 @@ const KingstonHyperXSupercup = () => {
                         5x Kingston FURY Bundle Premium:
                       </p>
                       <p className="text-xs text-orange-400/90 mt-1">
-                        • DataTraveler Exodia S USB 256GB
-                      </p>
-                      <p className="text-xs text-orange-400/90">
                         • T-shirt Kingston FURY branded
                       </p>
                       <p className="text-xs text-orange-400/90">• Termo bag Kingston FURY branded</p>
