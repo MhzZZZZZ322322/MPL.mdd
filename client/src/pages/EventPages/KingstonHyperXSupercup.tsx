@@ -705,7 +705,7 @@ const KingstonHyperXSupercup = () => {
                     "Team 1HP",
                     "begrip",
                     "Muligambia",
-                    "BiteMD",
+                    "BaitMD",
                     "Legalize",
                     "Team Prodigy"
                   ].map((teamName, index) => (
@@ -1369,7 +1369,7 @@ const KingstonHyperXSupercup = () => {
                           <ul className="space-y-1 text-xs">
                             
                             <li>• 5x Tricou negru cu inscripție roșie "Kingston FURY"</li>
-                            <li>• 4x Geantă termică Kingston FURY branded</li>
+                            <li>• 5x Geantă termică Kingston FURY branded</li>
                           </ul>
                         </div>
                         <div>
