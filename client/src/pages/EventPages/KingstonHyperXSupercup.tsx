@@ -696,7 +696,7 @@ const KingstonHyperXSupercup = () => {
               <div className="bg-gray-800/40 rounded-lg p-6 border border-purple-500/20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    "Lit Energy",
+                    "Virtuoso Squad",
                     "WE-OWN", 
                     "VGT",
                     "Golden Five",
