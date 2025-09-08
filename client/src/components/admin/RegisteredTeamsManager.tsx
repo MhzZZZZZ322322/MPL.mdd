@@ -630,7 +630,7 @@ export default function RegisteredTeamsManager() {
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selectează tipul echipei" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent style={{zIndex: 10000}}>
                     <SelectItem value="direct">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 rounded-full bg-purple-500"></div>
@@ -712,7 +712,7 @@ export default function RegisteredTeamsManager() {
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selectează tipul echipei" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent style={{zIndex: 10000}}>
                     <SelectItem value="direct">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 rounded-full bg-purple-500"></div>
@@ -805,7 +805,7 @@ export default function RegisteredTeamsManager() {
                             <SelectTrigger className="mt-1">
                               <SelectValue />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent style={{zIndex: 10000}}>
                               <SelectItem value="captain">Căpitan</SelectItem>
                               <SelectItem value="member">Membru</SelectItem>
                             </SelectContent>
@@ -821,7 +821,7 @@ export default function RegisteredTeamsManager() {
                             <SelectTrigger className="mt-1">
                               <SelectValue />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent style={{zIndex: 10000}}>
                               <SelectItem value="main">Titular</SelectItem>
                               <SelectItem value="substitute">Rezervă</SelectItem>
                             </SelectContent>
