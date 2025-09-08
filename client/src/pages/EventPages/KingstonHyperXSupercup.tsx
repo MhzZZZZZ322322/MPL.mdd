@@ -1148,6 +1148,10 @@ const KingstonHyperXSupercup = () => {
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
                     <p>În fiecare echipă este permis un număr de până la <strong className="text-white">10 jucători</strong>: <span className="text-primary">5 în roster</span> și <span className="text-secondary">5 în substitute</span>.</p>
                   </div>
+                  <div className="flex items-start">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <p>Toți jucătorii trebuie să fie <strong className="text-white">cetățeni ai Republicii Moldova</strong>.</p>
+                  </div>
                 </div>
               </NeonBorder>
 
