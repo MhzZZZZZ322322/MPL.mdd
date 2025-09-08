@@ -611,45 +611,9 @@ export default function RegisteredTeamsManager() {
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
         <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto" style={{zIndex: 9999}}>
           <DialogHeader>
-            <DialogTitle>🔴 DIALOGUL CORECT - Editează Echipa - {editingTeam?.name} - DEBUG: {String(editedIsDirectInvite)}</DialogTitle>
+            <DialogTitle>Editează Echipa - {editingTeam?.name}</DialogTitle>
           </DialogHeader>
           <div className="space-y-6">
-            {/* Debug Info */}
-            <div className="bg-blue-100 p-2 text-xs">
-              DEBUG: isDirectInvite = {String(editedIsDirectInvite)}
-            </div>
-            
-            {/* Team Type Selection - MOVED TO TOP FOR TESTING */}
-            <div className="border-4 border-green-500 rounded-lg p-4 bg-green-50">
-              <Label className="text-xl font-bold text-green-600">SELECTOR TIP ECHIPĂ (TOP)</Label>
-              <div className="mt-2">
-                <Select 
-                  value={editedIsDirectInvite ? "direct" : "qualification"} 
-                  onValueChange={(value) => setEditedIsDirectInvite(value === "direct")}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selectează tipul echipei" />
-                  </SelectTrigger>
-                  <SelectContent style={{zIndex: 10000}}>
-                    <SelectItem value="direct">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                        <span>Invitație Directă (12 locuri)</span>
-                      </div>
-                    </SelectItem>
-                    <SelectItem value="qualification">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                        <span>Calificare (20 locuri)</span>
-                      </div>
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-                <p className="text-xs text-gray-500 mt-1">
-                  Alege tipul pentru această echipă în turneu
-                </p>
-              </div>
-            </div>
             
             {/* Team Name */}
             <div>
@@ -701,9 +665,9 @@ export default function RegisteredTeamsManager() {
               </div>
             </div>
 
-            {/* Team Type Selection - Direct sau Calificare */}
-            <div className="border-2 border-red-500 rounded-lg p-4 bg-red-50">
-              <Label className="text-lg font-bold text-red-600">TIPUL ECHIPEI ÎN TURNEU</Label>
+            {/* Team Type Selection */}
+            <div>
+              <Label className="text-sm font-medium">Tipul echipei în turneu</Label>
               <div className="mt-2">
                 <Select 
                   value={editedIsDirectInvite ? "direct" : "qualification"} 
