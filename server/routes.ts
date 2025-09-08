@@ -1769,7 +1769,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const buffer = Buffer.from(base64Data, 'base64');
       
       res.set('Content-Type', mimeType);
-      res.set('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+      res.set('Cache-Control', 'public, max-age=300'); // Cache for 5 minutes
       res.send(buffer);
       
     } catch (error) {
@@ -1812,7 +1812,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const buffer = Buffer.from(base64Data, 'base64');
       
       res.set('Content-Type', mimeType);
-      res.set('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+      res.set('Cache-Control', 'public, max-age=300'); // Cache for 5 minutes
       res.send(buffer);
       
     } catch (error) {
@@ -1905,54 +1905,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Kingston FURY Admin: Full Update Team (name, logo, members, type)
-  app.patch("/api/kingston/admin/teams/:teamId/full-update", async (req, res) => {
-    try {
-      const teamId = parseInt(req.params.teamId);
-      const { name, logoData, members, isDirectInvite } = req.body;
-      
-      const { db } = await import("./db");
-      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
-      const { eq } = await import("drizzle-orm");
-      
-      // Update team basic info
-      const updateData: any = {
-        name,
-        ...(logoData && { logoData }),
-        ...(typeof isDirectInvite === "boolean" && { isDirectInvite })
-      };
-      
-      await db.update(kingstonTeams)
-        .set(updateData)
-        .where(eq(kingstonTeams.id, teamId));
-      
-      // Update team members if provided
-      if (members && Array.isArray(members)) {
-        // Delete existing members
-        await db.delete(kingstonTeamMembers)
-          .where(eq(kingstonTeamMembers.teamId, teamId));
-        
-        // Insert new members
-        for (const member of members) {
-          if (member.nickname && member.faceitProfile && member.discordAccount) {
-            await db.insert(kingstonTeamMembers).values({
-              teamId: teamId,
-              nickname: member.nickname,
-              faceitProfile: member.faceitProfile,
-              discordAccount: member.discordAccount,
-              role: member.role || "player",
-              position: member.position || "main"
-            });
-          }
-        }
-      }
-
-      res.json({ message: "Echipa a fost actualizată cu succes" });
-    } catch (error) {
-      console.error("Error updating team:", error);
-      res.status(500).json({ error: "Failed to update team" });
-    }
-  });
 
   // Kingston Public: Get Only Manually Approved Teams (Real Registrations)
   app.get("/api/kingston/teams", async (req, res) => {
@@ -2175,15 +2127,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Kingston FURY Admin: Full Update Team (name, logo, members)
-  app.patch("/api/kingston/admin/teams/:id/full-update", async (req, res) => {
+  // Kingston FURY Admin: Full Update Team (name, logo, members, type)
+  app.patch("/api/kingston/admin/teams/:teamId/full-update", async (req, res) => {
     try {
-      const teamId = parseInt(req.params.id);
+      const teamId = parseInt(req.params.teamId);
       if (isNaN(teamId)) {
         return res.status(400).json({ error: "Invalid team ID" });
       }
 
-      const { name, logoData, members } = req.body;
+      const { name, logoData, members, isDirectInvite } = req.body;
       
       if (!name || typeof name !== 'string' || name.trim().length === 0) {
         return res.status(400).json({ error: "Valid team name is required" });
@@ -2209,6 +2161,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (logoData) {
           updateData.logoData = logoData;
           updateData.logoUrl = `/api/kingston/teams/${teamId}/logo`;
+        }
+
+        if (typeof isDirectInvite === "boolean") {
+          updateData.isDirectInvite = isDirectInvite;
         }
 
         await tx.update(kingstonTeams)
@@ -2243,8 +2199,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json({ message: "Team updated successfully with all details" });
     } catch (error) {
-      console.error("Error deleting Kingston FURY team fully:", error);
-      res.status(500).json({ error: "Failed to delete Kingston FURY team" });
+      console.error("Error updating Kingston FURY team:", error);
+      res.status(500).json({ error: "Failed to update Kingston FURY team" });
     }
   });
 
