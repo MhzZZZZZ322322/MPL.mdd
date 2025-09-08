@@ -701,7 +701,7 @@ const KingstonHyperXSupercup = () => {
                     "VGT",
                     "Golden Five",
                     "Team 23",
-                    "Darwin.md",
+                    "Darwin.md (cadian team)",
                     "Team 1HP",
                     "begrip",
                     "Muligambia",
