@@ -210,35 +210,82 @@ async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
       return;
     }
 
-    // Simplificăm mesajul pentru a testa
-    const embed = {
+    // Preparăm logo-ul echipei pentru embed
+    let logoUrl = null;
+    if (team.logoData) {
+      // Convertim logoData în URL pentru Discord
+      logoUrl = `https://${process.env.REPLIT_DOMAINS?.split(',')[0] || 'localhost:5000'}/api/kingston/teams/${team.id}/logo`;
+    }
+
+    // Construim lista de membri - împărțită în bucăți pentru a evita limitarea Discord
+    const membersChunks = [];
+    for (let i = 0; i < members.length; i += 5) {
+      const chunk = members.slice(i, i + 5);
+      const membersList = chunk.map((member, index) => {
+        const actualIndex = i + index + 1;
+        const roleIcon = member.role === 'captain' ? '👑' : '🎮';
+        const positionIcon = member.position === 'main' ? '🟢' : '🟡';
+        const faceitText = member.faceitProfile ? `[FACEIT](${member.faceitProfile})` : 'Nu este specificat';
+        const discordText = member.discordAccount || 'Nu este specificat';
+        
+        return `${actualIndex}. ${roleIcon} ${positionIcon} **${member.nickname}**\n   └ ${faceitText} | \`${discordText}\``;
+      }).join('\n\n');
+      
+      membersChunks.push({
+        name: `🎮 Jucători ${i + 1}-${Math.min(i + 5, members.length)}`,
+        value: membersList,
+        inline: false
+      });
+    }
+
+    const embed: any = {
       title: `🏆 ${team.name}`,
-      description: `Echipa participantă la **Kingston FURY x HyperX Supercup**`,
-      color: 0x7C3AED,
+      description: `Informații complete despre echipa participantă la **Kingston FURY x HyperX Supercup**`,
+      color: team.isDirectInvite ? 0x7C3AED : 0x3B82F6, // Violet pentru direct invite, albastru pentru calificare
       fields: [
+        {
+          name: "🎯 Tip Participare",
+          value: team.isDirectInvite ? "🟣 **Invitație Directă**" : "🔵 **Prin Calificare**",
+          inline: true
+        },
         {
           name: "👥 Numărul de Jucători",
           value: `${members.length} jucători`,
           inline: true
         },
         {
-          name: "🎯 Tip Participare", 
-          value: team.isDirectInvite ? "🟣 Invitație Directă" : "🔵 Prin Calificare",
+          name: "📅 Data Înregistrării",
+          value: new Date(team.submittedAt).toLocaleDateString('ro-RO'),
           inline: true
-        }
+        },
+        ...membersChunks
       ],
       timestamp: new Date().toISOString(),
       footer: {
-        text: "Moldova Pro League"
+        text: "Moldova Pro League • Kingston FURY x HyperX Supercup"
       }
     };
 
+    // Adăugăm logo-ul ca thumbnail dacă există
+    if (logoUrl) {
+      embed.thumbnail = { url: logoUrl };
+    }
+
+    // Adăugăm informații suplimentare despre tipul echipei
+    if (team.isDirectInvite) {
+      embed.fields.splice(3, 0, {
+        name: "⭐ Status Special",
+        value: "Echipă invitată direct datorită performanțelor excepționale",
+        inline: false
+      });
+    }
+
     const payload = {
-      username: "MPL Bot Test",
+      username: "Kingston FURY Tournament Bot",
       embeds: [embed]
     };
 
-    console.log("🔍 Sending simplified test message...");
+    console.log(`🔍 Sending detailed notification for ${team.name} with ${members.length} members...`);
 
     const response = await fetch(webhookUrl, {
       method: 'POST',
