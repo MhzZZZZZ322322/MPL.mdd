@@ -2077,6 +2077,56 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Admin: Trimite mesaj Discord pentru o echipă specifică (retroactiv)
+  app.post("/api/kingston/admin/send-team-notification/:teamId", async (req, res) => {
+    try {
+      const teamId = parseInt(req.params.teamId);
+      if (isNaN(teamId)) {
+        return res.status(400).json({ error: "ID echipă invalid" });
+      }
+
+      console.log(`🚀 Starting Discord notification for team ID: ${teamId}...`);
+      
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      // Obținem echipa specifică
+      const [team] = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.id, teamId));
+      
+      if (!team) {
+        return res.status(404).json({ error: "Echipa nu a fost găsită" });
+      }
+
+      if (team.status !== 'approved') {
+        return res.status(400).json({ error: `Echipa ${team.name} nu este aprobată (status: ${team.status})` });
+      }
+
+      console.log(`📧 Processing team: ${team.name} (ID: ${team.id})`);
+      
+      // Obținem membrii echipei
+      const members = await db.select().from(kingstonTeamMembers)
+        .where(eq(kingstonTeamMembers.teamId, team.id));
+      
+      console.log(`👥 Found ${members.length} members for team ${team.name}`);
+      
+      // Trimitem mesajul detaliat
+      await sendDetailedTeamDiscordNotification(team, members);
+      console.log(`✅ Successfully sent notification for team: ${team.name}`);
+      
+      res.json({ 
+        message: `Mesaj Discord trimis cu succes pentru echipa ${team.name}`,
+        teamId: team.id,
+        teamName: team.name,
+        memberCount: members.length
+      });
+    } catch (error) {
+      console.error("Error sending individual team notification:", error);
+      res.status(500).json({ error: "Failed to send team notification" });
+    }
+  });
+
   // Kingston Public: Get Only Manually Approved Teams (Real Registrations)
   app.get("/api/kingston/teams", async (req, res) => {
     try {
