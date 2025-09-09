@@ -207,6 +207,8 @@ async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
       console.warn("DISCORD_WEBHOOK_URL322 not configured");
       return;
     }
+    
+    console.log(`📧 Starting detailed Discord notification for team: ${team.name}`);
 
     // Preparăm logo-ul echipei pentru embed
     let logoUrl = null;
@@ -273,7 +275,6 @@ async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
 
     const payload = {
       username: "Kingston FURY Tournament Bot",
-      avatar_url: "https://cdn.discordapp.com/attachments/1234567890123456789/1234567890123456789/kingston_logo.png",
       embeds: [embed]
     };
 
@@ -287,9 +288,10 @@ async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Failed to send detailed Discord notification:", response.status, response.statusText, errorText);
+      console.error("❌ Failed to send detailed Discord notification:", response.status, response.statusText, errorText);
+      throw new Error(`Discord API returned ${response.status}: ${errorText}`);
     } else {
-      console.log(`Detailed Discord notification sent for team: ${team.name}`);
+      console.log(`✅ Detailed Discord notification sent successfully for team: ${team.name}`);
     }
   } catch (error) {
     console.error("Error sending detailed Discord notification:", error);
@@ -2014,6 +2016,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Kingston FURY Admin: Trimite mesaje Discord pentru toate echipele aprobate (retroactiv)
   app.post("/api/kingston/admin/send-all-team-notifications", async (req, res) => {
     try {
+      console.log("🚀 Starting retroactive Discord notifications for all approved teams...");
+      
       const { db } = await import("./db");
       const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
       const { eq } = await import("drizzle-orm");
@@ -2021,6 +2025,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Obținem toate echipele aprobate
       const approvedTeams = await db.select().from(kingstonTeams)
         .where(eq(kingstonTeams.status, "approved"));
+      
+      console.log(`📊 Found ${approvedTeams.length} approved teams to notify`);
       
       if (approvedTeams.length === 0) {
         return res.json({ 
@@ -2035,28 +2041,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Trimitem mesaje pentru fiecare echipă
       for (const team of approvedTeams) {
         try {
+          console.log(`📧 Processing team: ${team.name} (ID: ${team.id})`);
+          
           // Obținem membrii echipei
           const members = await db.select().from(kingstonTeamMembers)
             .where(eq(kingstonTeamMembers.teamId, team.id));
           
+          console.log(`👥 Found ${members.length} members for team ${team.name}`);
+          
           // Trimitem mesajul detaliat
           await sendDetailedTeamDiscordNotification(team, members);
           sentCount++;
+          console.log(`✅ Successfully sent notification for team: ${team.name}`);
           
           // Pauză mică între mesaje pentru a nu suprasolicita Discord
           await new Promise(resolve => setTimeout(resolve, 1000));
         } catch (error) {
-          console.error(`Error sending notification for team ${team.name}:`, error);
+          console.error(`❌ Error sending notification for team ${team.name}:`, error);
           errors.push(`${team.name}: ${error.message}`);
         }
       }
 
-      res.json({ 
+      const responseData = { 
         message: `Mesaje trimise pentru ${sentCount} din ${approvedTeams.length} echipe`,
         sentCount,
         totalTeams: approvedTeams.length,
         errors: errors.length > 0 ? errors : undefined
-      });
+      };
+      
+      console.log("📊 Final result:", responseData);
+      res.json(responseData);
     } catch (error) {
       console.error("Error sending team notifications:", error);
       res.status(500).json({ error: "Failed to send team notifications" });
