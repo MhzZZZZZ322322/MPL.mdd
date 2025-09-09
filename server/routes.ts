@@ -199,6 +199,103 @@ async function sendDiscordReviewNotification(teamName: string, status: 'approved
   }
 }
 
+// Funcție pentru trimiterea mesajelor detaliate cu toate informațiile echipei
+async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL322;
+    if (!webhookUrl) {
+      console.warn("DISCORD_WEBHOOK_URL322 not configured");
+      return;
+    }
+
+    // Preparăm logo-ul echipei pentru embed
+    let logoUrl = null;
+    if (team.logoData) {
+      // Convertim logoData în URL pentru Discord
+      logoUrl = `https://${process.env.REPLIT_DOMAINS?.split(',')[0] || 'localhost:5000'}/api/kingston/teams/${team.id}/logo`;
+    }
+
+    // Construim lista de membri
+    const membersList = members.map((member, index) => {
+      const roleIcon = member.role === 'captain' ? '👑' : '🎮';
+      const positionIcon = member.position === 'main' ? '🟢' : '🟡';
+      const faceitLink = member.faceitProfile ? `[FACEIT](${member.faceitProfile})` : 'Nu este specificat';
+      
+      return `${index + 1}. ${roleIcon} ${positionIcon} **${member.nickname}**\n` +
+             `   └ ${faceitLink} | Discord: \`${member.discordAccount || 'Nu este specificat'}\``;
+    }).join('\n\n');
+
+    const embed = {
+      title: `🏆 ${team.name}`,
+      description: `Informații complete despre echipa participantă la **Kingston FURY x HyperX Supercup**`,
+      color: team.isDirectInvite ? 0x7C3AED : 0x3B82F6, // Violet pentru direct invite, albastru pentru calificare
+      fields: [
+        {
+          name: "🎯 Tip Participare",
+          value: team.isDirectInvite ? "🟣 **Invitație Directă**" : "🔵 **Prin Calificare**",
+          inline: true
+        },
+        {
+          name: "👥 Numărul de Jucători",
+          value: `${members.length} jucători`,
+          inline: true
+        },
+        {
+          name: "📅 Data Înregistrării",
+          value: new Date(team.submittedAt).toLocaleDateString('ro-RO'),
+          inline: true
+        },
+        {
+          name: "🎮 Componența Echipei",
+          value: membersList || "Nu sunt membri înregistrați",
+          inline: false
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "Moldova Pro League • Kingston FURY x HyperX Supercup"
+      }
+    };
+
+    // Adăugăm logo-ul ca thumbnail dacă există
+    if (logoUrl) {
+      embed.thumbnail = { url: logoUrl };
+    }
+
+    // Adăugăm informații suplimentare despre tipul echipei
+    if (team.isDirectInvite) {
+      embed.fields.splice(3, 0, {
+        name: "⭐ Status Special",
+        value: "Echipă invitată direct datorită performanțelor excepționale",
+        inline: false
+      });
+    }
+
+    const payload = {
+      username: "Kingston FURY Tournament Bot",
+      avatar_url: "https://cdn.discordapp.com/attachments/1234567890123456789/1234567890123456789/kingston_logo.png",
+      embeds: [embed]
+    };
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Failed to send detailed Discord notification:", response.status, response.statusText, errorText);
+    } else {
+      console.log(`Detailed Discord notification sent for team: ${team.name}`);
+    }
+  } catch (error) {
+    console.error("Error sending detailed Discord notification:", error);
+  }
+}
+
 // Configure multer for file uploads
 const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'logos');
 
@@ -1893,6 +1990,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
             isDirectInvite,
             rejectionReason
           );
+
+          // Dacă echipa a fost aprobată, trimitem și mesajul detaliat
+          if (status === 'approved') {
+            const { kingstonTeamMembers } = await import("@shared/schema");
+            const members = await db.select().from(kingstonTeamMembers)
+              .where(eq(kingstonTeamMembers.teamId, teamId));
+            
+            await sendDetailedTeamDiscordNotification(team, members);
+          }
         } catch (discordError) {
           console.warn("Discord review notification failed:", discordError);
         }
@@ -1905,6 +2011,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Admin: Trimite mesaje Discord pentru toate echipele aprobate (retroactiv)
+  app.post("/api/kingston/admin/send-all-team-notifications", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonTeams, kingstonTeamMembers } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      // Obținem toate echipele aprobate
+      const approvedTeams = await db.select().from(kingstonTeams)
+        .where(eq(kingstonTeams.status, "approved"));
+      
+      if (approvedTeams.length === 0) {
+        return res.json({ 
+          message: "Nu sunt echipe aprobate pentru a trimite notificări",
+          sentCount: 0 
+        });
+      }
+
+      let sentCount = 0;
+      let errors = [];
+
+      // Trimitem mesaje pentru fiecare echipă
+      for (const team of approvedTeams) {
+        try {
+          // Obținem membrii echipei
+          const members = await db.select().from(kingstonTeamMembers)
+            .where(eq(kingstonTeamMembers.teamId, team.id));
+          
+          // Trimitem mesajul detaliat
+          await sendDetailedTeamDiscordNotification(team, members);
+          sentCount++;
+          
+          // Pauză mică între mesaje pentru a nu suprasolicita Discord
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        } catch (error) {
+          console.error(`Error sending notification for team ${team.name}:`, error);
+          errors.push(`${team.name}: ${error.message}`);
+        }
+      }
+
+      res.json({ 
+        message: `Mesaje trimise pentru ${sentCount} din ${approvedTeams.length} echipe`,
+        sentCount,
+        totalTeams: approvedTeams.length,
+        errors: errors.length > 0 ? errors : undefined
+      });
+    } catch (error) {
+      console.error("Error sending team notifications:", error);
+      res.status(500).json({ error: "Failed to send team notifications" });
+    }
+  });
 
   // Kingston Public: Get Only Manually Approved Teams (Real Registrations)
   app.get("/api/kingston/teams", async (req, res) => {
