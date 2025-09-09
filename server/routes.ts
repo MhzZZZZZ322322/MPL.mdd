@@ -202,81 +202,43 @@ async function sendDiscordReviewNotification(teamName: string, status: 'approved
 // Funcție pentru trimiterea mesajelor detaliate cu toate informațiile echipei
 async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
   try {
+    console.log(`📧 Starting detailed Discord notification for team: ${team.name}`);
+    
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL322;
     if (!webhookUrl) {
       console.warn("DISCORD_WEBHOOK_URL322 not configured");
       return;
     }
-    
-    console.log(`📧 Starting detailed Discord notification for team: ${team.name}`);
 
-    // Preparăm logo-ul echipei pentru embed
-    let logoUrl = null;
-    if (team.logoData) {
-      // Convertim logoData în URL pentru Discord
-      logoUrl = `https://${process.env.REPLIT_DOMAINS?.split(',')[0] || 'localhost:5000'}/api/kingston/teams/${team.id}/logo`;
-    }
-
-    // Construim lista de membri
-    const membersList = members.map((member, index) => {
-      const roleIcon = member.role === 'captain' ? '👑' : '🎮';
-      const positionIcon = member.position === 'main' ? '🟢' : '🟡';
-      const faceitLink = member.faceitProfile ? `[FACEIT](${member.faceitProfile})` : 'Nu este specificat';
-      
-      return `${index + 1}. ${roleIcon} ${positionIcon} **${member.nickname}**\n` +
-             `   └ ${faceitLink} | Discord: \`${member.discordAccount || 'Nu este specificat'}\``;
-    }).join('\n\n');
-
+    // Simplificăm mesajul pentru a testa
     const embed = {
       title: `🏆 ${team.name}`,
-      description: `Informații complete despre echipa participantă la **Kingston FURY x HyperX Supercup**`,
-      color: team.isDirectInvite ? 0x7C3AED : 0x3B82F6, // Violet pentru direct invite, albastru pentru calificare
+      description: `Echipa participantă la **Kingston FURY x HyperX Supercup**`,
+      color: 0x7C3AED,
       fields: [
-        {
-          name: "🎯 Tip Participare",
-          value: team.isDirectInvite ? "🟣 **Invitație Directă**" : "🔵 **Prin Calificare**",
-          inline: true
-        },
         {
           name: "👥 Numărul de Jucători",
           value: `${members.length} jucători`,
           inline: true
         },
         {
-          name: "📅 Data Înregistrării",
-          value: new Date(team.submittedAt).toLocaleDateString('ro-RO'),
+          name: "🎯 Tip Participare", 
+          value: team.isDirectInvite ? "🟣 Invitație Directă" : "🔵 Prin Calificare",
           inline: true
-        },
-        {
-          name: "🎮 Componența Echipei",
-          value: membersList || "Nu sunt membri înregistrați",
-          inline: false
         }
       ],
       timestamp: new Date().toISOString(),
       footer: {
-        text: "Moldova Pro League • Kingston FURY x HyperX Supercup"
+        text: "Moldova Pro League"
       }
     };
 
-    // Adăugăm logo-ul ca thumbnail dacă există
-    if (logoUrl) {
-      embed.thumbnail = { url: logoUrl };
-    }
-
-    // Adăugăm informații suplimentare despre tipul echipei
-    if (team.isDirectInvite) {
-      embed.fields.splice(3, 0, {
-        name: "⭐ Status Special",
-        value: "Echipă invitată direct datorită performanțelor excepționale",
-        inline: false
-      });
-    }
-
     const payload = {
-      username: "Kingston FURY Tournament Bot",
+      username: "MPL Bot Test",
       embeds: [embed]
     };
+
+    console.log("🔍 Sending simplified test message...");
 
     const response = await fetch(webhookUrl, {
       method: 'POST',
@@ -288,13 +250,14 @@ async function sendDetailedTeamDiscordNotification(team: any, members: any[]) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("❌ Failed to send detailed Discord notification:", response.status, response.statusText, errorText);
+      console.error("❌ Failed to send Discord notification:", response.status, response.statusText, errorText);
       throw new Error(`Discord API returned ${response.status}: ${errorText}`);
     } else {
-      console.log(`✅ Detailed Discord notification sent successfully for team: ${team.name}`);
+      console.log(`✅ Discord notification sent successfully for team: ${team.name}`);
     }
   } catch (error) {
-    console.error("Error sending detailed Discord notification:", error);
+    console.error("Error sending Discord notification:", error);
+    throw error;
   }
 }
 
