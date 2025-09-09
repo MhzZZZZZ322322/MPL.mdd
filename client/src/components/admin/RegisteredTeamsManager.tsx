@@ -89,6 +89,38 @@ export default function RegisteredTeamsManager() {
     },
   });
 
+  // Discord notification mutation for sending detailed notifications for all approved teams (retroactive)
+  const sendAllTeamNotificationsMutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch('/api/kingston/admin/send-all-team-notifications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error);
+      }
+
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Mesaje Discord trimise",
+        description: `${data.message}. Verifică canalul Discord pentru confirmări.`,
+        variant: "default",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Eroare la trimiterea mesajelor",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   // Fetch registered teams
   const { data: teams = [], isLoading } = useQuery({
     queryKey: ['/api/kingston/admin/registered-teams'],
@@ -483,6 +515,17 @@ export default function RegisteredTeamsManager() {
               >
                 <MessageSquare className="w-4 h-4 mr-1" />
                 {notifyPendingTeamsMutation.isPending ? "Se trimite..." : "Notificare Discord"}
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => sendAllTeamNotificationsMutation.mutate()}
+                disabled={sendAllTeamNotificationsMutation.isPending}
+                className="text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
+                title="Trimite mesaje detaliate Discord pentru toate echipele aprobate (retroactiv)"
+              >
+                <MessageSquare className="w-4 h-4 mr-1" />
+                {sendAllTeamNotificationsMutation.isPending ? "Se trimit..." : "Mesaje Echipe (Toate)"}
               </Button>
               <Badge variant="secondary">Kingston FURY Tournament</Badge>
             </div>
