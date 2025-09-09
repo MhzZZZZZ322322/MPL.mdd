@@ -1150,7 +1150,7 @@ const KingstonHyperXSupercup = () => {
                   </div>
                   <div className="flex items-start">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <p>Toți jucătorii trebuie să fie <strong className="text-white">cetățeni ai Republicii Moldova</strong>.</p>
+                    <p>Toți jucătorii trebuie să fie <strong className="text-white">cetățeni ai Republicii Moldova si Romania</strong>.</p>
                   </div>
                 </div>
               </NeonBorder>
