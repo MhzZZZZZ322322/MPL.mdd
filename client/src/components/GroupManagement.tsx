@@ -342,15 +342,6 @@ export default function GroupManagement() {
                 Distribuție automată
               </Button>
               <Button
-                onClick={resetGroups}
-                disabled={isReadonly}
-                variant="outline"
-                className={`border-slate-600 ${isReadonly ? 'opacity-50 cursor-not-allowed' : ''}`}
-              >
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Reset
-              </Button>
-              <Button
                 onClick={() => saveConfigMutation.mutate(groups)}
                 disabled={saveConfigMutation.isPending || isReadonly}
                 className={`${isReadonly ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
