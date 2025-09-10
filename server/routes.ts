@@ -1509,6 +1509,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Stage 2 Double Elimination: Upper Bracket
+  app.get("/api/kingston/stage2-upper-bracket", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonStage3Playoff } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const upperBracketMatches = await db.select().from(kingstonStage3Playoff)
+        .where(eq(kingstonStage3Playoff.bracketType, "upper"))
+        .orderBy(kingstonStage3Playoff.bracketRound, kingstonStage3Playoff.bracketPosition);
+      
+      res.json(upperBracketMatches);
+    } catch (error) {
+      console.error("Error fetching Kingston FURY Stage 2 upper bracket:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY Stage 2 upper bracket" });
+    }
+  });
+
+  // Kingston FURY Stage 2 Double Elimination: Lower Bracket
+  app.get("/api/kingston/stage2-lower-bracket", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonStage3Playoff } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const lowerBracketMatches = await db.select().from(kingstonStage3Playoff)
+        .where(eq(kingstonStage3Playoff.bracketType, "lower"))
+        .orderBy(kingstonStage3Playoff.bracketRound, kingstonStage3Playoff.bracketPosition);
+      
+      res.json(lowerBracketMatches);
+    } catch (error) {
+      console.error("Error fetching Kingston FURY Stage 2 lower bracket:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY Stage 2 lower bracket" });
+    }
+  });
+
   // ===========================
   // KINGSTON ADMIN API ROUTES
   // Administrative routes for Kingston FURY tournament management
@@ -2679,6 +2715,141 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error generating Kingston FURY group schedule:", error);
       res.status(500).json({ error: "Failed to generate Kingston FURY group schedule" });
+    }
+  });
+
+  // Kingston FURY Admin: Generate Double Elimination Bracket
+  app.post("/api/kingston/admin/generate-double-elimination", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonStage3Playoff, kingstonGroupStandings } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      // Clear existing playoff matches
+      await db.delete(kingstonStage3Playoff);
+
+      // Get top 2 teams from each group (8 teams total)
+      const standings = await db.select().from(kingstonGroupStandings)
+        .orderBy(kingstonGroupStandings.groupName, desc(kingstonGroupStandings.points), desc(kingstonGroupStandings.roundDifference));
+      
+      // Get qualified teams (top 2 from each group)
+      const qualifiedTeams: string[] = [];
+      const groupTeams: { [key: string]: string[] } = {};
+      
+      for (const standing of standings) {
+        if (!groupTeams[standing.groupName]) {
+          groupTeams[standing.groupName] = [];
+        }
+        if (groupTeams[standing.groupName].length < 2) {
+          groupTeams[standing.groupName].push(standing.teamName);
+          qualifiedTeams.push(standing.teamName);
+        }
+      }
+
+      if (qualifiedTeams.length < 8) {
+        return res.status(400).json({ 
+          error: "Nu sunt suficiente echipe calificate. Sunt necesare 8 echipe (primele 2 din fiecare grupă).",
+          qualifiedTeams: qualifiedTeams.length
+        });
+      }
+
+      // Generate Upper Bracket (Quarterfinals)
+      const upperBracketMatches = [
+        { teams: [qualifiedTeams[0], qualifiedTeams[7]], position: 1, date: "20 septembrie", time: "19:00" },
+        { teams: [qualifiedTeams[1], qualifiedTeams[6]], position: 2, date: "20 septembrie", time: "20:30" },
+        { teams: [qualifiedTeams[2], qualifiedTeams[5]], position: 3, date: "21 septembrie", time: "19:00" },
+        { teams: [qualifiedTeams[3], qualifiedTeams[4]], position: 4, date: "21 septembrie", time: "20:30" }
+      ];
+
+      let matchesCreated = 0;
+
+      // Create Upper Bracket Quarterfinals
+      for (const match of upperBracketMatches) {
+        await db.insert(kingstonStage3Playoff).values({
+          team1Name: match.teams[0],
+          team2Name: match.teams[1],
+          bracketType: "upper",
+          bracketRound: "quarterfinals",
+          bracketPosition: match.position,
+          matchType: "BO3",
+          playDate: match.date,
+          isPlayed: false
+        });
+        matchesCreated++;
+      }
+
+      // Create Upper Bracket Semifinals (placeholders)
+      await db.insert(kingstonStage3Playoff).values({
+        team1Name: "Câștigătorul QF1",
+        team2Name: "Câștigătorul QF2",
+        bracketType: "upper",
+        bracketRound: "semifinals",
+        bracketPosition: 1,
+        matchType: "BO3",
+        playDate: "26 septembrie",
+        isPlayed: false
+      });
+      matchesCreated++;
+
+      await db.insert(kingstonStage3Playoff).values({
+        team1Name: "Câștigătorul QF3",
+        team2Name: "Câștigătorul QF4",
+        bracketType: "upper",
+        bracketRound: "semifinals",
+        bracketPosition: 2,
+        matchType: "BO3",
+        playDate: "26 septembrie",
+        isPlayed: false
+      });
+      matchesCreated++;
+
+      // Create Lower Bracket Round 1 (placeholders)
+      await db.insert(kingstonStage3Playoff).values({
+        team1Name: "Învinsul QF1",
+        team2Name: "Învinsul QF2",
+        bracketType: "lower",
+        bracketRound: "round1",
+        bracketPosition: 1,
+        matchType: "BO3",
+        playDate: "22 septembrie",
+        isPlayed: false
+      });
+      matchesCreated++;
+
+      await db.insert(kingstonStage3Playoff).values({
+        team1Name: "Învinsul QF3",
+        team2Name: "Învinsul QF4",
+        bracketType: "lower",
+        bracketRound: "round1",
+        bracketPosition: 2,
+        matchType: "BO3",
+        playDate: "22 septembrie",
+        isPlayed: false
+      });
+      matchesCreated++;
+
+      // Create Grand Final (placeholder)
+      await db.insert(kingstonStage3Playoff).values({
+        team1Name: "Câștigătorul Upper Final",
+        team2Name: "Câștigătorul Lower Final",
+        bracketType: "final",
+        bracketRound: "grand_final",
+        bracketPosition: 1,
+        matchType: "BO5",
+        playDate: "28 septembrie",
+        isPlayed: false
+      });
+      matchesCreated++;
+
+      res.json({
+        message: "Double Elimination bracket generat cu succes pentru ETAPA 2 - PLAYOFF",
+        matchesCreated,
+        qualifiedTeams,
+        schedule: "20-28 septembrie"
+      });
+    } catch (error) {
+      console.error("Error generating Kingston FURY double elimination bracket:", error);
+      res.status(500).json({ error: "Failed to generate Kingston FURY double elimination bracket" });
     }
   });
 
