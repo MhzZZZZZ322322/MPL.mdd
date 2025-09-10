@@ -700,11 +700,7 @@ const KingstonHyperXSupercup = () => {
                     "darwin.md",
                     "Team 23",
                     "Golden Five",
-                    "Virtuoso Squad",
-                    "Phoenix Gaming",
-                    "Elite Moldova",
-                    "Thunder Strike",
-                    "Pro Vision"
+                    "Virtuoso Squad"
                   ].map((teamName, index) => (
                     <div key={index} className="flex items-center space-x-3 py-2">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
