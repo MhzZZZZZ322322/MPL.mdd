@@ -505,10 +505,10 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
-                <p className="text-2xl font-bold text-primary">$1,750 Total</p>
+                <p className="text-2xl font-bold text-primary">TBD</p>
                 <div className="text-sm text-gray-400 space-y-1">
-                  <div>🥇 $1,000 • 🥈 $500 • 🥉 $250</div>
-                  <span className="text-xs text-gray-500">Plus Kingston Gaming & HyperX gear</span>
+                  <div>Kingston Gaming & HyperX gear</div>
+                  <span className="text-xs text-gray-500">Prize pool va fi anunțat</span>
                 </div>
               </NeonBorder>
 
@@ -516,8 +516,8 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Users className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Echipe</h3>
-                <p className="text-2xl font-bold text-primary">16</p>
-                <p className="text-sm text-gray-400">Echipe totale</p>
+                <p className="text-2xl font-bold text-primary">18</p>
+                <p className="text-sm text-gray-400">Echipe în playoff</p>
               </NeonBorder>
 
               {/* Format */}
