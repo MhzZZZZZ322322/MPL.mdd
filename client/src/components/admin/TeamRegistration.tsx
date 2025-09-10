@@ -132,40 +132,6 @@ export default function TeamRegistration() {
     },
   });
 
-  // Reset results mutation (only for Kingston FURY)
-  const resetResultsMutation = useMutation({
-    mutationFn: async () => {
-      if (selectedTournament !== 'kingston') {
-        throw new Error("Resetarea este disponibilă doar pentru turneul Kingston FURY");
-      }
-
-      const response = await fetch('/api/kingston/admin/reset-results', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error);
-      }
-
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/kingston/'] });
-      toast({
-        title: "Rezultate resetate",
-        description: "Toate rezultatele Kingston FURY au fost șterse cu succes",
-      });
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Eroare",
-        description: error.message,
-        variant: "destructive",
-      });
-    },
-  });
 
   const addMember = () => {
     setFormData(prev => ({
@@ -228,32 +194,6 @@ export default function TeamRegistration() {
 
   return (
     <div className="space-y-6">
-      {/* Reset Results Button for Kingston FURY */}
-      {selectedTournament === 'kingston' && !isReadonly && (
-        <Card className="bg-red-900/20 border-red-500/30">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-400">
-              <AlertCircle className="w-5 h-5" />
-              Zona Periculoasă - Reset Rezultate Kingston FURY
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-red-300 mb-4">
-              Acest buton va șterge TOATE rezultatele, configurațiile și datele turneului Kingston FURY. 
-              Turneul HATOR NU va fi afectat.
-            </p>
-            <Button
-              onClick={() => resetResultsMutation.mutate()}
-              disabled={resetResultsMutation.isPending}
-              variant="destructive"
-              className="bg-red-600 hover:bg-red-700"
-            >
-              <Trash2 className="w-4 h-4 mr-2" />
-              Resetează toate rezultatele Kingston FURY
-            </Button>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Team Registration Form */}
       <Card className="bg-slate-800/50 border-slate-700">
