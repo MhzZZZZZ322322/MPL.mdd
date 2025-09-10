@@ -147,7 +147,9 @@ export default function GroupManagement() {
   // Get available teams (not assigned to any group)
   const getAvailableTeams = () => {
     if (!groups || groups.length === 0) return allTeams as any[];
-    const assignedTeamIds = groups.flatMap(group => group.teams.map(team => team.id));
+    const assignedTeamIds = groups.flatMap(group => 
+      (group.teams && Array.isArray(group.teams)) ? group.teams.map(team => team.id) : []
+    );
     return (allTeams as any[]).filter(team => !assignedTeamIds.includes(team.id));
   };
 
@@ -173,7 +175,7 @@ export default function GroupManagement() {
       if (group.groupName === selectedGroup) {
         return {
           ...group,
-          teams: [...group.teams, team]
+          teams: (group.teams && Array.isArray(group.teams)) ? [...group.teams, team] : [team]
         };
       }
       return group;
@@ -198,7 +200,7 @@ export default function GroupManagement() {
       if (group.groupName === groupName) {
         return {
           ...group,
-          teams: group.teams.filter(team => team.id !== teamId)
+          teams: (group.teams && Array.isArray(group.teams)) ? group.teams.filter(team => team.id !== teamId) : []
         };
       }
       return group;
@@ -209,7 +211,10 @@ export default function GroupManagement() {
 
   // Move team between groups
   const moveTeam = (fromGroup: string, toGroup: string, teamId: number) => {
-    const team = groups.find(g => g.groupName === fromGroup)?.teams.find(t => t.id === teamId);
+    const fromGroupObj = groups.find(g => g.groupName === fromGroup);
+    const team = fromGroupObj?.teams && Array.isArray(fromGroupObj.teams) 
+      ? fromGroupObj.teams.find(t => t.id === teamId) 
+      : undefined;
     if (!team) return;
 
     removeTeamFromGroup(fromGroup, teamId);
@@ -218,7 +223,7 @@ export default function GroupManagement() {
       if (group.groupName === toGroup) {
         return {
           ...group,
-          teams: [...group.teams, team]
+          teams: (group.teams && Array.isArray(group.teams)) ? [...group.teams, team] : [team]
         };
       }
       return group;
@@ -241,7 +246,9 @@ export default function GroupManagement() {
   };
 
   const availableTeams = getAvailableTeams();
-  const totalAssigned = groups.reduce((sum, group) => sum + group.teams.length, 0);
+  const totalAssigned = groups.reduce((sum, group) => 
+    sum + ((group.teams && Array.isArray(group.teams)) ? group.teams.length : 0), 0
+  );
 
   return (
     <div className="space-y-6">
@@ -369,13 +376,13 @@ export default function GroupManagement() {
               <CardTitle className="text-center text-primary">
                 {group.displayName}
                 <Badge variant="secondary" className="ml-2">
-                  {group.teams.length} echipe
+                  {(group.teams && Array.isArray(group.teams)) ? group.teams.length : 0} echipe
                 </Badge>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2 min-h-[200px]">
-                {group.teams.length === 0 ? (
+                {(!group.teams || !Array.isArray(group.teams) || group.teams.length === 0) ? (
                   <div className="text-center text-gray-400 py-8">
                     <Users className="w-8 h-8 mx-auto mb-2 opacity-50" />
                     <p className="text-sm">Nu există echipe</p>
