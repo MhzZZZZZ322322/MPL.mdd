@@ -1996,6 +1996,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Admin: Reset groups only
+  app.post("/api/kingston/admin/reset-groups", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonGroupConfiguration } = await import("@shared/schema");
+      
+      // Clear only group configuration (not all results)
+      await db.delete(kingstonGroupConfiguration);
+      
+      console.log("🗑️ Cleared all Kingston group configuration");
+
+      res.json({ 
+        success: true, 
+        message: "Configurația grupelor Kingston a fost resetată" 
+      });
+    } catch (error) {
+      console.error("Error resetting Kingston groups:", error);
+      res.status(500).json({ error: "Failed to reset Kingston groups" });
+    }
+  });
+
   // Kingston FURY Admin: Reset all results
   app.post("/api/kingston/admin/reset-results", async (req, res) => {
     try {

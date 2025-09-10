@@ -172,6 +172,42 @@ export default function GroupManagement() {
     },
   });
 
+  // Reset groups mutation
+  const resetGroupsMutation = useMutation({
+    mutationFn: async () => {
+      if (isReadonly) {
+        throw new Error("Turneul HATOR este înghețat și nu poate fi modificat");
+      }
+      
+      const url = selectedTournament === 'kingston' ? '/api/kingston/admin/reset-groups' : '/api/admin/reset-groups';
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error);
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      setGroups([]); // Clear local state
+      const baseKey = selectedTournament === 'kingston' ? '/api/kingston/' : '/api/';
+      queryClient.invalidateQueries({ queryKey: [`${baseKey}admin/group-config`] });
+      toast({
+        title: "Grupele au fost resetate",
+        description: "Toate configurațiile grupelor au fost șterse",
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Eroare",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
   // Get available teams (not assigned to any group)
   const getAvailableTeams = () => {
     if (!groups || groups.length === 0) return allTeams as any[];
@@ -506,6 +542,22 @@ export default function GroupManagement() {
             </div>
           </CardContent>
         </Card>
+      )}
+      
+      {/* Reset Button - Small, placed at bottom */}
+      {!isReadonly && (
+        <div className="mt-8 flex justify-center">
+          <Button
+            onClick={() => resetGroupsMutation.mutate()}
+            disabled={resetGroupsMutation.isPending}
+            variant="outline"
+            size="sm"
+            className="text-red-400 border-red-500/30 hover:bg-red-900/20 hover:border-red-500"
+          >
+            <RotateCcw className="w-3 h-3 mr-2" />
+            Resetează grupele
+          </Button>
+        </div>
       )}
     </div>
   );
