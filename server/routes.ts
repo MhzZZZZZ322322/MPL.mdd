@@ -1694,9 +1694,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         teams: [] as any[]
       }));
 
-      // Shuffle teams randomly for fair distribution
-      const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
-      console.log(`🔀 Shuffled ${shuffledTeams.length} teams for distribution`);
+      // Shuffle teams randomly using Fisher-Yates algorithm for true randomization
+      const shuffledTeams = [...teams];
+      for (let i = shuffledTeams.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledTeams[i], shuffledTeams[j]] = [shuffledTeams[j], shuffledTeams[i]];
+      }
+      console.log(`🔀 Shuffled ${shuffledTeams.length} teams for distribution (Fisher-Yates algorithm)`);
       
       // Distribute teams evenly across 4 groups
       shuffledTeams.forEach((team, index) => {
