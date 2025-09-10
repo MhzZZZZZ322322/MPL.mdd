@@ -586,11 +586,11 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">📝 Format Turneu</h4>
                         <p className="text-sm leading-relaxed">
-                          Turneul Kingston FURY x HyperX Supercup Season 1 se desfășoară în 3 etape:
-                          <br />• <strong>Stage 1:</strong> Calificarea - toate echipele înregistrate
-                          <br />• <strong>Stage 2:</strong> 8 grupe de câte 4 echipe, primele 2 avansează (32→16)
-                          <br />• <strong>Playoff:</strong> Double Elimination cu 16 echipe (Upper/Lower Bracket)
-                          <br />• <strong>Total:</strong> 32 echipe (12 selectate direct + 20 prin calificare)
+                          Turneul Kingston FURY x HyperX Supercup Season 1 se desfășoară în 2 etape:
+                          <br />• <strong>ETAPA 1 - GRUPE:</strong> 4 grupe de câte 4 echipe, primele 2 din fiecare grupă avansează (16→8)
+                          <br />• <strong>ETAPA 2 - PLAYOFF:</strong> Double Elimination cu 8 echipe calificate (BO3/BO5)
+                          <br />• <strong>Total:</strong> 16 echipe (6 cu invitație directă + 10 prin calificare)
+                          <br />• <strong>Premii:</strong> $1000 locul 1, $500 locul 2, $250 locul 3-4
                         </p>
                       </div>
                       <div>
@@ -610,10 +610,10 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">📅 Cronograma Turneului</h4>
                         <p className="text-sm leading-relaxed">
                           <strong>Înregistrări:</strong> 15 august - 10 septembrie<br />
-                          <strong>Stage 1 (Calificare):</strong> 10 - 14 septembrie<br />
-                          <strong>Stage 2 (Grupe):</strong> 17 - 21 septembrie<br />
-                          <strong>Playoff (Double Elimination):</strong> 27 - 28 septembrie<br />
-                          <em className="text-gray-400">*Datele pot fi ajustate în funcție de necesități</em>
+                          <strong>ETAPA 1 - GRUPE:</strong> 11 - 14 septembrie (BO1)<br />
+                          <strong>ETAPA 2 - PLAYOFF:</strong> 20 - 28 septembrie (BO3/BO5)<br />
+                          <strong>Format final:</strong> Double Elimination cu 8 echipe calificate<br />
+                          <em className="text-gray-400">*Conform infograficii oficiale Kingston FURY</em>
                         </p>
                       </div>
                     </div>
@@ -631,11 +631,11 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Stage 1:</strong> 10-14 septembrie - Calificare<br />
-                          <strong>Stage 2:</strong> 17-21 septembrie - 8 Grupe cu 4 echipe (32→16)<br />
-                          <strong>Playoff:</strong> 27-28 septembrie - Double Elimination (16 echipe)<br />
-                          <strong>Total echipe:</strong> 32 (12 cu invitație directă + 20 prin calificare)<br />
-                          <strong>Toate meciurile:</strong> Format BO1, meciurile decisive BO3
+                          <strong>ETAPA 1 - GRUPE:</strong> 11-14 septembrie - 4 Grupe (A, B, C, D) cu 4 echipe<br />
+                          <strong>ETAPA 2 - PLAYOFF:</strong> 20-28 septembrie - Double Elimination cu 8 echipe<br />
+                          <strong>Total echipe:</strong> 16 (6 cu invitație directă + 10 prin calificare)<br />
+                          <strong>Format meciuri:</strong> ETAPA 1 - BO1, ETAPA 2 - BO3/BO5<br />
+                          <strong>Calificare:</strong> Primele 2 echipe din fiecare grupă avansează în playoff
                         </p>
                       </div>
                     </div>
@@ -651,7 +651,7 @@ const KingstonHyperXSupercup = () => {
                   </h3>
                   <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                     Înregistrează-ți echipa pentru Kingston FURY x HyperX Supercup Season 1. 
-                    32 echipe totale: 12 selectate direct + 20 prin calificare!
+                    16 echipe totale: 6 cu invitație directă + 10 prin calificare!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href="/register-team">
@@ -667,7 +667,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: 12
+                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: 6
                       </p>
                     </div>
                   </div>
@@ -685,10 +685,10 @@ const KingstonHyperXSupercup = () => {
                 Echipe cu Invitație Directă
               </h2>
               <p className="text-gray-300 text-lg mb-2">
-                Următoarele 12 echipe sunt invitate direct în Stage 2 (Grupe)
+                Următoarele 6 echipe sunt invitate direct în ETAPA 1 - GRUPE
               </p>
               <p className="text-primary font-semibold">
-                Aceste echipe nu participă la Stage 1 - Calificare
+                Aceste echipe nu participă la calificările preliminare
               </p>
             </div>
 
@@ -696,18 +696,12 @@ const KingstonHyperXSupercup = () => {
               <div className="bg-gray-800/40 rounded-lg p-6 border border-purple-500/20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    "Virtuoso Squad",
-                    "WE-OWN", 
-                    "VGT",
-                    "Golden Five",
+                    "1HP",
+                    "BaitMD", 
+                    "darwin.md",
                     "Team 23",
-                    "Darwin.md (cadian team)",
-                    "Team 1HP",
-                    "begrip",
-                    "Muligambia",
-                    "BaitMD",
-                    "Legalize",
-                    "Team Prodigy"
+                    "Golden Five",
+                    "Virtuoso Squad"
                   ].map((teamName, index) => (
                     <div key={index} className="flex items-center space-x-3 py-2">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
