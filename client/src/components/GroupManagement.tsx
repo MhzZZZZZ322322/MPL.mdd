@@ -73,7 +73,7 @@ export default function GroupManagement() {
           if (!groupMap.has(entry.groupName)) {
             groupMap.set(entry.groupName, {
               groupName: entry.groupName,
-              displayName: entry.displayName,
+              displayName: `Grupa ${entry.groupName}`, // Forțează denumirea corectă indiferent de ce e în database
               teams: []
             });
           }
