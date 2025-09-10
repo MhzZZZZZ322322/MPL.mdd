@@ -610,12 +610,15 @@ export const kingstonGroupTeams = pgTable("kingston_group_teams", {
 // Kingston Scheduled Matches
 export const kingstonScheduledMatches = pgTable("kingston_scheduled_matches", {
   id: serial("id").primaryKey(),
-  groupName: text("group_name").notNull(), // A, B, C, etc.
+  groupName: text("group_name").notNull(), // A, B, C, D
   team1Name: text("team1_name").notNull(),
   team2Name: text("team2_name").notNull(),
   faceitUrl: text("faceit_url"), // Link-ul către room-ul Faceit
-  matchDate: timestamp("match_date").notNull(),
-  matchTime: text("match_time").notNull(), // "18:00", "18:45", etc.
+  matchDate: text("match_date").notNull(), // "11 septembrie", "12 septembrie", etc.
+  matchTime: text("match_time").notNull(), // "19:00", "20:10", "21:20"
+  dayOfWeek: text("day_of_week").notNull(), // "Joi", "Vineri", "Sâmbătă", "Duminică"
+  stage: text("stage").notNull().default("groups"), // "groups", "playoff"
+  matchFormat: text("match_format").notNull().default("BO1"), // "BO1", "BO3", "BO5"
   tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
   isPlayed: boolean("is_played").notNull().default(false),
   createdAt: timestamp("created_at").defaultNow(),
@@ -638,12 +641,13 @@ export const kingstonMatchResults = pgTable("kingston_match_results", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-// Kingston Group Configuration
+// Kingston Group Configuration - Now tracks individual team assignments
 export const kingstonGroupConfiguration = pgTable("kingston_group_configuration", {
   id: serial("id").primaryKey(),
-  groupName: text("group_name").notNull(), // A, B, C, etc.
+  groupName: text("group_name").notNull(), // A, B, C, D (doar 4 grupe)
   displayName: text("display_name").notNull(), // Group A, Group B, etc.
-  teamIds: text("team_ids").notNull(), // JSON array cu ID-urile echipelor
+  teamId: integer("team_id").notNull(), // ID-ul echipei
+  teamName: text("team_name").notNull(), // Numele echipei
   tournamentId: text("tournament_id").notNull().default("kingston-hyperx-supercup"),
   isActive: boolean("is_active").notNull().default(true),
   createdAt: timestamp("created_at").defaultNow(),

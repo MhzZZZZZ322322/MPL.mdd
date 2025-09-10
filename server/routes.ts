@@ -1628,51 +1628,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { db } = await import("./db");
       const { kingstonTeams, kingstonGroupConfiguration } = await import("@shared/schema");
+      const { eq, and } = await import("drizzle-orm");
       
-      // Fetch all Kingston FURY teams
-      const teams = await db.select().from(kingstonTeams);
+      // Fetch only APPROVED teams that are NOT Direct Invite (calificare only)
+      const teams = await db.select().from(kingstonTeams)
+        .where(and(
+          eq(kingstonTeams.status, "approved"),
+          eq(kingstonTeams.isDirectInvite, false) // Exclude Direct Invite teams
+        ));
+      
+      console.log(`🎯 Found ${teams.length} qualification teams for group distribution`);
       
       if (teams.length === 0) {
-        return res.status(400).json({ error: "No Kingston FURY teams available for distribution" });
+        return res.status(400).json({ 
+          error: "No qualification teams available for distribution",
+          message: "Doar echipele prin calificare (nu Direct Invite) pot fi distribuite în grupe"
+        });
       }
 
       // Clear existing configuration
       await db.delete(kingstonGroupConfiguration);
+      console.log("🗑️ Cleared existing group configuration");
 
-      // Define groups (A to H for 32 teams)
-      const groups = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+      // Define only 4 groups for ETAPA 1 - GRUPE (A, B, C, D)
+      const groups = ['A', 'B', 'C', 'D'];
       const groupsData = groups.map(name => ({ 
         groupName: name, 
-        displayName: `Group ${name}`, 
+        displayName: `Grupa ${name}`, 
         teams: [] as any[]
       }));
 
-      // Shuffle teams randomly
+      // Shuffle teams randomly for fair distribution
       const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
+      console.log(`🔀 Shuffled ${shuffledTeams.length} teams for distribution`);
       
-      // Distribute teams evenly across groups
+      // Distribute teams evenly across 4 groups
       shuffledTeams.forEach((team, index) => {
         const groupIndex = index % groups.length;
         groupsData[groupIndex].teams.push(team);
       });
 
-      // Save to database  
+      // Save to database with new structure
       for (const group of groupsData) {
+        console.log(`📝 Saving group ${group.groupName} with ${group.teams.length} teams`);
         for (const team of group.teams) {
           await db.insert(kingstonGroupConfiguration).values({
             groupName: group.groupName,
+            displayName: group.displayName,
             teamId: team.id,
-            teamName: team.name,
-            displayName: `${group.groupName} - ${team.name}`
+            teamName: team.name
           });
         }
       }
 
+      console.log(`✅ Successfully distributed ${teams.length} teams across ${groups.length} groups`);
+
       res.json({
         success: true,
+        message: "Echipele prin calificare au fost distribuite cu succes în grupe",
         groups: groupsData,
         teamsDistributed: teams.length,
-        groupsCount: groups.length
+        groupsCount: groups.length,
+        excludedDirectInviteTeams: true
       });
     } catch (error) {
       console.error("Error auto-distributing Kingston FURY teams:", error);
