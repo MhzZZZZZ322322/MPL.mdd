@@ -544,18 +544,18 @@ export default function GroupManagement() {
         </Card>
       )}
       
-      {/* Reset Button - Small, placed at bottom */}
+      {/* Reset Button - Hidden far below, very small */}
       {!isReadonly && (
-        <div className="mt-8 flex justify-center">
+        <div className="mt-96 pt-96 flex justify-center">
           <Button
             onClick={() => resetGroupsMutation.mutate()}
             disabled={resetGroupsMutation.isPending}
-            variant="outline"
+            variant="ghost"
             size="sm"
-            className="text-red-400 border-red-500/30 hover:bg-red-900/20 hover:border-red-500"
+            className="text-xs text-red-400/40 hover:text-red-400 border-none hover:bg-red-900/10 px-2 py-1 h-6"
           >
-            <RotateCcw className="w-3 h-3 mr-2" />
-            Resetează grupele
+            <RotateCcw className="w-2 h-2 mr-1" />
+            reset
           </Button>
         </div>
       )}
