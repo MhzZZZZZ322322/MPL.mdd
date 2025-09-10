@@ -149,7 +149,6 @@ const KingstonHyperXSupercup = () => {
   console.log('Kingston approved teams only:', teams.map(t => ({
     name: t.name,
     isDirectInvite: t.isDirectInvite,
-    status: t.status,
     logoUrl: t.logoUrl
   })));
   
@@ -506,11 +505,10 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
-                <p className="text-2xl font-bold text-primary">100,000 LEI</p>
+                <p className="text-2xl font-bold text-primary">$1,750 Total</p>
                 <div className="text-sm text-gray-400 space-y-1">
-                  <a href="https://www.kingston.com/en/gaming" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">Kingston Gaming</a>
-                  <span className="text-gray-400">&</span>
-                  <a href="https://hyperx.com" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">HyperX gear</a>
+                  <div>🥇 $1,000 • 🥈 $500 • 🥉 $250</div>
+                  <span className="text-xs text-gray-500">Plus Kingston Gaming & HyperX gear</span>
                 </div>
               </NeonBorder>
 
@@ -518,8 +516,8 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Users className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Echipe</h3>
-                <p className="text-2xl font-bold text-primary">32</p>
-                <p className="text-sm text-gray-400">Echipe planificate</p>
+                <p className="text-2xl font-bold text-primary">16</p>
+                <p className="text-sm text-gray-400">Echipe totale</p>
               </NeonBorder>
 
               {/* Format */}
@@ -534,8 +532,8 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Durată</h3>
-                <p className="text-lg font-bold text-primary">3 săptămâni</p>
-                <p className="text-sm text-gray-400">10-28 septembrie</p>
+                <p className="text-lg font-bold text-primary">18 zile</p>
+                <p className="text-sm text-gray-400">11-28 septembrie</p>
               </NeonBorder>
             </div>
           </div>
