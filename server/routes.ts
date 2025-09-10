@@ -1946,7 +1946,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Fixed distribution configuration based on image provided by user
       const fixedDistribution = {
         'A': ['DE_AIROPORT', 'Carpe Diem', 'Arhanghel Team', 'ColdDreams'],
-        'B': ['Bloody', 'Payback', 'GLORY', 'ALIVE'],
+        'B': ['Bloody', 'PayBack', 'GLORY', 'ALIVE'],
         'C': ['Altiora Esports', 'Team Edge', 'CYBORG', 'K-700'],
         'D': ['MERCENARY', 'Oblivion', 'KEK-9', 'LYSQ TEAM']
       };
