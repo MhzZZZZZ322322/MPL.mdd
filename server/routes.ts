@@ -2085,7 +2085,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await new Promise(resolve => setTimeout(resolve, 1000));
         } catch (error) {
           console.error(`❌ Error sending notification for team ${team.name}:`, error);
-          errors.push(`${team.name}: ${error.message}`);
+          errors.push(`${team.name}: ${String(error)}`);
         }
       }
 
@@ -2249,7 +2249,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               },
               {
                 name: "Data Înregistrării",
-                value: new Date(team.createdAt).toLocaleDateString('ro-RO'),
+                value: team.createdAt ? new Date(team.createdAt).toLocaleDateString('ro-RO') : 'Nu este specificat',
                 inline: true
               },
               {
@@ -2501,6 +2501,184 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error creating Kingston FURY match result:", error);
       res.status(500).json({ error: "Failed to create Kingston FURY match result" });
+    }
+  });
+
+  // Kingston FURY Group Matches (Scheduled Matches)
+  app.get("/api/kingston/group-matches", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonScheduledMatches } = await import("@shared/schema");
+      
+      const matches = await db.select().from(kingstonScheduledMatches)
+        .orderBy(kingstonScheduledMatches.matchDate, kingstonScheduledMatches.matchTime);
+      
+      res.json(matches);
+    } catch (error) {
+      console.error("Error fetching Kingston FURY group matches:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY group matches" });
+    }
+  });
+
+  // Kingston FURY Admin: Create Group Match
+  app.post("/api/kingston/admin/group-matches", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonScheduledMatches } = await import("@shared/schema");
+      
+      const matchData = {
+        groupName: req.body.groupName,
+        team1Name: req.body.team1Name,
+        team2Name: req.body.team2Name,
+        matchDate: req.body.matchDate,
+        matchTime: req.body.matchTime,
+        dayOfWeek: req.body.dayOfWeek,
+        faceitUrl: req.body.faceitUrl || null,
+        stage: "groups",
+        matchFormat: "BO1",
+        isPlayed: false
+      };
+
+      const [match] = await db.insert(kingstonScheduledMatches).values(matchData).returning();
+      res.status(201).json(match);
+    } catch (error) {
+      console.error("Error creating Kingston FURY group match:", error);
+      res.status(500).json({ error: "Failed to create Kingston FURY group match" });
+    }
+  });
+
+  // Kingston FURY Admin: Update Group Match Result
+  app.put("/api/kingston/admin/group-matches/:id", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonScheduledMatches, kingstonMatchResults } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const matchId = parseInt(req.params.id);
+      if (isNaN(matchId)) {
+        return res.status(400).json({ error: "Invalid match ID" });
+      }
+
+      // Get the match first
+      const [match] = await db.select().from(kingstonScheduledMatches)
+        .where(eq(kingstonScheduledMatches.id, matchId));
+      
+      if (!match) {
+        return res.status(404).json({ error: "Match not found" });
+      }
+
+      // Update the match as played
+      await db.update(kingstonScheduledMatches)
+        .set({ isPlayed: true })
+        .where(eq(kingstonScheduledMatches.id, matchId));
+
+      // Create match result
+      const resultData = {
+        groupName: match.groupName,
+        team1Name: match.team1Name,
+        team2Name: match.team2Name,
+        team1Score: req.body.team1Score || 0,
+        team2Score: req.body.team2Score || 0,
+        winnerId: req.body.winnerId,
+        streamUrl: req.body.streamUrl,
+        technicalWin: req.body.technicalWin || false,
+        technicalWinner: req.body.technicalWinner
+      };
+
+      await db.insert(kingstonMatchResults).values(resultData);
+      res.json({ message: "Match result updated successfully" });
+    } catch (error) {
+      console.error("Error updating Kingston FURY group match:", error);
+      res.status(500).json({ error: "Failed to update Kingston FURY group match" });
+    }
+  });
+
+  // Kingston FURY Admin: Generate Group Schedule
+  app.post("/api/kingston/admin/generate-group-schedule", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonScheduledMatches, kingstonGroupConfiguration } = await import("@shared/schema");
+      
+      // Clear existing scheduled matches
+      await db.delete(kingstonScheduledMatches);
+
+      // Get group configurations
+      const groupConfigs = await db.select().from(kingstonGroupConfiguration);
+      
+      // Organize teams by group
+      const groupTeams: { [key: string]: string[] } = {};
+      for (const config of groupConfigs) {
+        if (!groupTeams[config.groupName]) {
+          groupTeams[config.groupName] = [];
+        }
+        groupTeams[config.groupName].push(config.teamName);
+      }
+
+      // Schedule template from infographic
+      const scheduleTemplate = [
+        // 11 septembrie (Joi)
+        { date: "11 septembrie", dayOfWeek: "Joi", time: "19:00", group: "A" },
+        { date: "11 septembrie", dayOfWeek: "Joi", time: "20:10", group: "A" },
+        { date: "11 septembrie", dayOfWeek: "Joi", time: "21:20", group: "A" },
+        
+        // 12 septembrie (Vineri)
+        { date: "12 septembrie", dayOfWeek: "Vineri", time: "19:00", group: "B" },
+        { date: "12 septembrie", dayOfWeek: "Vineri", time: "20:10", group: "B" },
+        { date: "12 septembrie", dayOfWeek: "Vineri", time: "21:20", group: "B" },
+        
+        // 13 septembrie (Sâmbătă)
+        { date: "13 septembrie", dayOfWeek: "Sâmbătă", time: "16:00", group: "C" },
+        { date: "13 septembrie", dayOfWeek: "Sâmbătă", time: "17:10", group: "C" },
+        { date: "13 septembrie", dayOfWeek: "Sâmbătă", time: "18:20", group: "C" },
+        
+        // 14 septembrie (Duminică)
+        { date: "14 septembrie", dayOfWeek: "Duminică", time: "16:00", group: "D" },
+        { date: "14 septembrie", dayOfWeek: "Duminică", time: "17:10", group: "D" },
+        { date: "14 septembrie", dayOfWeek: "Duminică", time: "18:20", group: "D" },
+      ];
+
+      let scheduledMatches = 0;
+
+      // Generate matches for each group
+      for (const [groupName, teams] of Object.entries(groupTeams)) {
+        if (teams.length >= 2) {
+          const groupSchedule = scheduleTemplate.filter(s => s.group === groupName);
+          let scheduleIndex = 0;
+
+          // Generate round-robin matches
+          for (let i = 0; i < teams.length; i++) {
+            for (let j = i + 1; j < teams.length; j++) {
+              if (scheduleIndex < groupSchedule.length) {
+                const schedule = groupSchedule[scheduleIndex];
+                
+                await db.insert(kingstonScheduledMatches).values({
+                  groupName,
+                  team1Name: teams[i],
+                  team2Name: teams[j],
+                  matchDate: schedule.date,
+                  matchTime: schedule.time,
+                  dayOfWeek: schedule.dayOfWeek,
+                  stage: "groups",
+                  matchFormat: "BO1",
+                  isPlayed: false
+                });
+                
+                scheduledMatches++;
+                scheduleIndex++;
+              }
+            }
+          }
+        }
+      }
+
+      res.json({
+        message: "Program ETAPA 1 - GRUPE generat cu succes",
+        scheduledMatches,
+        groupsProcessed: Object.keys(groupTeams).length
+      });
+    } catch (error) {
+      console.error("Error generating Kingston FURY group schedule:", error);
+      res.status(500).json({ error: "Failed to generate Kingston FURY group schedule" });
     }
   });
 
