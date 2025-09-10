@@ -64,9 +64,37 @@ export default function GroupManagement() {
   // Load current configuration when available
   useEffect(() => {
     if (currentConfig && Array.isArray(currentConfig)) {
-      setGroups(currentConfig);
+      // Pentru Kingston, transform datele din formatul "plat" în format grupat
+      if (selectedTournament === 'kingston' && currentConfig.length > 0 && currentConfig[0].teamId) {
+        // Transform din format plat în format grupat
+        const groupMap = new Map();
+        
+        currentConfig.forEach((entry: any) => {
+          if (!groupMap.has(entry.groupName)) {
+            groupMap.set(entry.groupName, {
+              groupName: entry.groupName,
+              displayName: entry.displayName,
+              teams: []
+            });
+          }
+          
+          if (entry.teamId && entry.teamName) {
+            groupMap.get(entry.groupName).teams.push({
+              id: entry.teamId,
+              name: entry.teamName,
+              logoUrl: `/api/kingston/teams/${entry.teamId}/logo`
+            });
+          }
+        });
+        
+        const transformedGroups = Array.from(groupMap.values());
+        setGroups(transformedGroups);
+      } else {
+        // Pentru alte turnee, folosește datele direct
+        setGroups(currentConfig);
+      }
     }
-  }, [currentConfig]);
+  }, [currentConfig, selectedTournament]);
 
   // Save group configuration mutation
   const saveConfigMutation = useMutation({
