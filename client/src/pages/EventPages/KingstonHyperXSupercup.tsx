@@ -36,32 +36,109 @@ const KingstonTournamentGroups = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <p className="text-gray-300 text-center mb-6">Structura grupelor Kingston FURY x HyperX Supercup</p>
-      <div className="grid md:grid-cols-2 gap-6">
-        {groups.map((group: any) => (
-          <div key={group.groupName} className="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
-            <h3 className="text-xl font-bold text-purple-400 mb-4 text-center">
-              {group.displayName}
-            </h3>
-            <div className="space-y-3">
-              {group.teams?.map((team: any) => (
-                <div key={team.id} className="flex items-center space-x-3 p-3 bg-gray-900/50 rounded-lg">
-                  <img 
-                    src={team.logoUrl} 
-                    alt={`${team.name} logo`} 
-                    className="w-8 h-8 object-contain rounded" 
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/default-team-logo.png';
-                    }}
-                  />
-                  <span className="text-gray-200 font-medium">{team.name}</span>
-                </div>
-              ))}
+    <div className="space-y-8">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
+          Structura Grupelor
+        </h2>
+        <p className="text-gray-400">Kingston FURY x HyperX Supercup Season 1</p>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-8">
+        {groups.map((group: any, index: number) => {
+          const gradients = [
+            'from-purple-600/20 via-purple-500/10 to-pink-600/20',
+            'from-blue-600/20 via-blue-500/10 to-cyan-600/20', 
+            'from-green-600/20 via-green-500/10 to-emerald-600/20',
+            'from-orange-600/20 via-yellow-500/10 to-red-600/20'
+          ];
+          const borderColors = [
+            'border-purple-500/30 hover:border-purple-400/50',
+            'border-blue-500/30 hover:border-blue-400/50',
+            'border-green-500/30 hover:border-green-400/50', 
+            'border-orange-500/30 hover:border-orange-400/50'
+          ];
+          const headerColors = [
+            'text-purple-400',
+            'text-blue-400',
+            'text-green-400',
+            'text-orange-400'
+          ];
+          
+          return (
+            <div 
+              key={group.groupName} 
+              className={`relative bg-gradient-to-br ${gradients[index]} backdrop-blur-sm border-2 ${borderColors[index]} rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 hover:scale-[1.02] group`}
+            >
+              {/* Glow effect pentru header */}
+              <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent rounded-full opacity-60"></div>
+              
+              <div className="text-center mb-6">
+                <h3 className={`text-2xl font-bold ${headerColors[index]} mb-1 tracking-wide`}>
+                  {group.displayName}
+                </h3>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-500 to-transparent mx-auto"></div>
+              </div>
+              
+              <div className="space-y-4">
+                {group.teams?.map((team: any, teamIndex: number) => (
+                  <div 
+                    key={team.id} 
+                    className="flex items-center space-x-4 p-4 bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-lg transition-all duration-200 hover:bg-gray-800/60 hover:border-gray-600/50 hover:shadow-md group/team"
+                  >
+                    <div className="relative">
+                      <img 
+                        src={team.logoUrl} 
+                        alt={`${team.name} logo`} 
+                        className="w-10 h-10 object-contain rounded-lg transition-transform duration-200 group-hover/team:scale-110" 
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/default-team-logo.png';
+                        }}
+                      />
+                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg opacity-0 group-hover/team:opacity-100 transition-opacity duration-200 -z-10"></div>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <span className="text-gray-100 font-semibold text-lg group-hover/team:text-white transition-colors duration-200">
+                        {team.name}
+                      </span>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-gray-500">Înregistrată</span>
+                      </div>
+                    </div>
+                    
+                    <div className="text-gray-400 font-mono text-sm opacity-60 group-hover/team:opacity-100 transition-opacity duration-200">
+                      #{teamIndex + 1}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Footer decoration */}
+              <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-gray-600/50 to-transparent rounded-full"></div>
             </div>
+          );
+        })}
+      </div>
+      
+      {/* Stats footer */}
+      <div className="text-center py-6 bg-gray-900/30 backdrop-blur-sm rounded-lg border border-gray-700/30">
+        <div className="flex justify-center space-x-8 text-sm">
+          <div className="flex items-center space-x-2">
+            <Trophy className="w-4 h-4 text-yellow-400" />
+            <span className="text-gray-300">4 Grupe</span>
           </div>
-        ))}
+          <div className="flex items-center space-x-2">
+            <Users className="w-4 h-4 text-blue-400" />
+            <span className="text-gray-300">16 Echipe</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Target className="w-4 h-4 text-green-400" />
+            <span className="text-gray-300">8 se califică</span>
+          </div>
+        </div>
       </div>
     </div>
   );
