@@ -505,10 +505,11 @@ const KingstonHyperXSupercup = () => {
               <NeonBorder className="bg-darkGray/60 p-6 text-center">
                 <Trophy className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-2 font-rajdhani">Prize Pool</h3>
-                <p className="text-2xl font-bold text-primary">TBD</p>
+                <p className="text-2xl font-bold text-primary">100,000 LEI</p>
                 <div className="text-sm text-gray-400 space-y-1">
-                  <div>Kingston Gaming & HyperX gear</div>
-                  <span className="text-xs text-gray-500">Prize pool va fi anunțat</span>
+                  <a href="https://www.kingston.com/en/gaming" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">Kingston Gaming</a>
+                  <span className="text-gray-400">&</span>
+                  <a href="https://hyperx.com" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-200 underline block">HyperX gear</a>
                 </div>
               </NeonBorder>
 
@@ -1042,7 +1043,7 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">🏆 Avantajele Calificării</h4>
                         <p className="text-sm leading-relaxed">
                           • Intrare în ETAPA 1 - GRUPE cu 16 echipe<br />
-                          • Șansa de a câștiga premii în valoare de $1,750 Total<br />
+                          • Șansa de a câștiga premii în valoare de 100,000 LEI<br />
                           • Experiență competitivă contra echipelor de top<br />
                           • Transmisiune live pe canalele MPL<br />
                           • Statistici oficiale și recunoaștere în comunitate
