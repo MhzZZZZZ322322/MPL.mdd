@@ -1447,6 +1447,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Tournament Groups (Public)
+  app.get("/api/kingston/tournament-groups", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonGroupConfiguration } = await import("@shared/schema");
+      
+      const config = await db.select().from(kingstonGroupConfiguration)
+        .orderBy(kingstonGroupConfiguration.groupName, kingstonGroupConfiguration.teamId);
+      
+      // Transform din formatul "plat" în format grupat pentru frontend
+      const groupMap = new Map();
+      
+      config.forEach((entry: any) => {
+        if (!groupMap.has(entry.groupName)) {
+          groupMap.set(entry.groupName, {
+            groupName: entry.groupName,
+            displayName: `Grupa ${entry.groupName}`, // Forțează denumirea corectă
+            teams: []
+          });
+        }
+        
+        if (entry.teamId && entry.teamName) {
+          groupMap.get(entry.groupName).teams.push({
+            id: entry.teamId,
+            name: entry.teamName,
+            logoUrl: `/api/kingston/teams/${entry.teamId}/logo`
+          });
+        }
+      });
+      
+      const transformedGroups = Array.from(groupMap.values());
+      res.json(transformedGroups);
+    } catch (error) {
+      console.error("Error fetching Kingston FURY tournament groups:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY tournament groups" });
+    }
+  });
+
   // Kingston FURY Match Results
   app.get("/api/kingston/match-results", async (req, res) => {
     try {
