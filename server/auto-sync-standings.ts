@@ -69,29 +69,29 @@ async function syncGroupStandings(groupName: string) {
         team2Stats.roundsWon += match.team2Score;
         team2Stats.roundsLost += match.team1Score;
         
-        // Update wins/losses and points (CS2 BO1: 3 points for win, 0 for loss)
+        // Update wins/losses and points (1 point for win, 0 for loss)
         // Check for technical wins first, then regular score-based wins
         if (match.technicalWin && match.technicalWinner) {
           // Technical win - winner determined by technicalWinner field
           if (match.technicalWinner === match.team1Name) {
             team1Stats.wins++;
             team2Stats.losses++;
-            team1Stats.points += 3;
+            team1Stats.points += 1;
           } else if (match.technicalWinner === match.team2Name) {
             team2Stats.wins++;
             team1Stats.losses++;
-            team2Stats.points += 3;
+            team2Stats.points += 1;
           }
         } else {
           // Regular win - winner determined by score
           if (match.team1Score > match.team2Score) {
             team1Stats.wins++;
             team2Stats.losses++;
-            team1Stats.points += 3;
+            team1Stats.points += 1;
           } else {
             team2Stats.wins++;
             team1Stats.losses++;
-            team2Stats.points += 3;
+            team2Stats.points += 1;
           }
         }
       }
