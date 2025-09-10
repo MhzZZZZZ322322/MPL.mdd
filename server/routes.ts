@@ -3493,9 +3493,9 @@ async function updateKingstonGroupStandings(
     team2Won = (team2Score > team1Score);
   }
   
-  // Points system: 3 points for win, 0 for loss
-  const team1Points = team1Won ? 3 : 0;
-  const team2Points = team2Won ? 3 : 0;
+  // Points system: 1 point for win, 0 for loss
+  const team1Points = team1Won ? 1 : 0;
+  const team2Points = team2Won ? 1 : 0;
   
   // Update or create team1 standings
   if (team1Standing.length > 0) {
@@ -3618,9 +3618,9 @@ async function reverseKingstonMatchFromStandings(
     team2Won = (team2Score > team1Score);
   }
   
-  // Points system: 3 points for win, 0 for loss
-  const team1Points = team1Won ? 3 : 0;
-  const team2Points = team2Won ? 3 : 0;
+  // Points system: 1 point for win, 0 for loss
+  const team1Points = team1Won ? 1 : 0;
+  const team2Points = team2Won ? 1 : 0;
   
   // Reverse team1 standings
   if (team1Standing.length > 0) {

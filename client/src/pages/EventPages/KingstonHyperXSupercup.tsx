@@ -101,67 +101,49 @@ const KingstonTournamentGroups = () => {
               <div className="space-y-3">
                 {/* Clasament Header */}
                 <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-600/30">
-                  <div className="grid grid-cols-6 gap-2 text-xs font-medium text-gray-400 uppercase tracking-wide">
+                  <div className="grid grid-cols-5 gap-2 text-xs font-medium text-gray-400 uppercase tracking-wide">
                     <div className="col-span-2">Echipa</div>
                     <div className="text-center">M</div>
                     <div className="text-center">V-Î</div>
-                    <div className="text-center">RD</div>
                     <div className="text-center">Pct</div>
                   </div>
                 </div>
                 
-                {/* Clasament */}
+                {/* Clasament - Afișăm toate echipele */}
                 {(() => {
-                  const groupStandings = standings
+                  // Creăm un map al clasamentelor pentru acces rapid
+                  const standingsMap = new Map();
+                  standings
                     .filter((s: any) => s.groupName === group.groupName)
-                    .sort((a: any, b: any) => {
-                      if (b.points !== a.points) return b.points - a.points;
-                      if (b.roundDifference !== a.roundDifference) return b.roundDifference - a.roundDifference;
-                      return b.roundsWon - a.roundsWon;
-                    });
+                    .forEach((s: any) => standingsMap.set(s.teamName, s));
                   
-                  if (groupStandings.length === 0) {
-                    // Afișam echipele fără clasament dacă nu sunt meciuri încă
-                    return group.teams?.map((team: any, teamIndex: number) => (
-                      <div 
-                        key={team.id} 
-                        className="flex items-center space-x-4 p-3 bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-lg transition-all duration-200 hover:bg-gray-800/60 hover:border-gray-600/50"
-                      >
-                        <div className="relative">
-                          <img 
-                            src={team.logoUrl} 
-                            alt={`${team.name} logo`} 
-                            className="w-8 h-8 object-contain rounded-lg" 
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = '/default-team-logo.png';
-                            }}
-                          />
-                        </div>
-                        
-                        <div className="flex-1">
-                          <span className="text-gray-100 font-semibold text-sm">
-                            {team.name}
-                          </span>
-                          <div className="flex items-center space-x-2 mt-1">
-                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                            <span className="text-xs text-gray-500">Înregistrată</span>
-                          </div>
-                        </div>
-                        
-                        <div className="text-gray-400 font-mono text-sm opacity-60">
-                          #{teamIndex + 1}
-                        </div>
-                      </div>
-                    ));
-                  }
+                  // Afișăm toate echipele din grupă
+                  const allTeams = (group.teams || []).map((team: any) => {
+                    const standing = standingsMap.get(team.name);
+                    return {
+                      name: team.name,
+                      logoUrl: team.logoUrl,
+                      id: team.id,
+                      matchesPlayed: standing?.matchesPlayed || 0,
+                      wins: standing?.wins || 0,
+                      losses: standing?.losses || 0,
+                      points: standing?.points || 0
+                    };
+                  });
                   
-                  return groupStandings.map((standing: any, index: number) => {
+                  // Sortăm după puncte, apoi după numărul de victorii
+                  allTeams.sort((a, b) => {
+                    if (b.points !== a.points) return b.points - a.points;
+                    if (b.wins !== a.wins) return b.wins - a.wins;
+                    return a.losses - b.losses; // Cine are mai puține înfrângeri
+                  });
+                  
+                  return allTeams.map((team: any, index: number) => {
                     const isQualified = index < 2; // Primele 2 se califică
                     return (
                       <div 
-                        key={standing.teamName} 
-                        className={`grid grid-cols-6 gap-2 p-3 rounded-lg border transition-all duration-200 hover:shadow-md ${
+                        key={team.name} 
+                        className={`grid grid-cols-5 gap-2 p-3 rounded-lg border transition-all duration-200 hover:shadow-md ${
                           isQualified 
                             ? 'bg-green-900/20 border-green-500/30 hover:bg-green-800/30' 
                             : 'bg-gray-900/40 border-gray-700/50 hover:bg-gray-800/60'
@@ -175,8 +157,8 @@ const KingstonTournamentGroups = () => {
                           </div>
                           <div className="flex items-center space-x-2 min-w-0">
                             <img 
-                              src={group.teams?.find((t: any) => t.name === standing.teamName)?.logoUrl || '/default-team-logo.png'} 
-                              alt={`${standing.teamName} logo`} 
+                              src={team.logoUrl || '/default-team-logo.png'} 
+                              alt={`${team.name} logo`} 
                               className="w-6 h-6 object-contain rounded flex-shrink-0" 
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
@@ -184,30 +166,23 @@ const KingstonTournamentGroups = () => {
                               }}
                             />
                             <span className="text-gray-100 font-medium text-sm truncate">
-                              {standing.teamName}
+                              {team.name}
                             </span>
                           </div>
                         </div>
                         
                         <div className="text-center text-gray-300 text-sm">
-                          {standing.matchesPlayed}
+                          {team.matchesPlayed}
                         </div>
                         
                         <div className="text-center text-sm">
-                          <span className="text-green-400 font-medium">{standing.wins}</span>
+                          <span className="text-green-400 font-medium">{team.wins}</span>
                           <span className="text-gray-500 mx-1">-</span>
-                          <span className="text-red-400 font-medium">{standing.losses}</span>
-                        </div>
-                        
-                        <div className={`text-center text-sm font-medium ${
-                          standing.roundDifference > 0 ? 'text-green-400' : 
-                          standing.roundDifference < 0 ? 'text-red-400' : 'text-gray-400'
-                        }`}>
-                          {standing.roundDifference > 0 ? '+' : ''}{standing.roundDifference}
+                          <span className="text-red-400 font-medium">{team.losses}</span>
                         </div>
                         
                         <div className="text-center text-white font-bold text-sm">
-                          {standing.points}
+                          {team.points}
                         </div>
                       </div>
                     );
