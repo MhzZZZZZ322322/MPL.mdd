@@ -146,6 +146,7 @@ export default function GroupManagement() {
 
   // Get available teams (not assigned to any group)
   const getAvailableTeams = () => {
+    if (!groups || groups.length === 0) return allTeams as any[];
     const assignedTeamIds = groups.flatMap(group => group.teams.map(team => team.id));
     return (allTeams as any[]).filter(team => !assignedTeamIds.includes(team.id));
   };
@@ -166,6 +167,8 @@ export default function GroupManagement() {
     const team = (allTeams as any[]).find(t => t.id === parseInt(selectedTeam));
     if (!team) return;
 
+    if (!groups) return;
+    
     const updatedGroups = groups.map(group => {
       if (group.groupName === selectedGroup) {
         return {
@@ -360,7 +363,7 @@ export default function GroupManagement() {
 
       {/* Groups Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {groups.map(group => (
+        {groups && groups.map(group => (
           <Card key={group.groupName} className="bg-slate-800/50 border-slate-700">
             <CardHeader className="pb-3">
               <CardTitle className="text-center text-primary">
@@ -407,7 +410,7 @@ export default function GroupManagement() {
                               <ArrowUpDown className="w-3 h-3" />
                             </SelectTrigger>
                             <SelectContent>
-                              {groups
+                              {groups && groups
                                 .filter(g => g.groupName !== group.groupName)
                                 .map(g => (
                                 <SelectItem key={g.groupName} value={g.groupName}>
