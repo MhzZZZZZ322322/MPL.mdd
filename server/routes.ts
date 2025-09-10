@@ -1943,19 +1943,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
         teams: [] as any[]
       }));
 
-      // Shuffle teams randomly using Fisher-Yates algorithm for true randomization
-      const shuffledTeams = [...teams];
-      for (let i = shuffledTeams.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledTeams[i], shuffledTeams[j]] = [shuffledTeams[j], shuffledTeams[i]];
-      }
-      console.log(`🔀 Shuffled ${shuffledTeams.length} teams for distribution (Fisher-Yates algorithm)`);
+      // Fixed distribution configuration based on image provided by user
+      const fixedDistribution = {
+        'A': ['DE_AIROPORT', 'Carpe Diem', 'Arhanghel Team', 'ColdDreams'],
+        'B': ['Bloody', 'Payback', 'GLORY', 'ALIVE'],
+        'C': ['Altiora Esports', 'Team Edge', 'CYBORG', 'K-700'],
+        'D': ['MERCENARY', 'Oblivion', 'KEK-9', 'LYSQ TEAM']
+      };
       
-      // Distribute teams evenly across 4 groups
-      shuffledTeams.forEach((team, index) => {
-        const groupIndex = index % groups.length;
-        groupsData[groupIndex].teams.push(team);
-      });
+      console.log(`🎯 Using fixed distribution configuration for ${teams.length} teams`);
+      
+      // Distribute teams according to fixed configuration
+      for (const groupName of groups) {
+        const targetTeamNames = fixedDistribution[groupName as keyof typeof fixedDistribution] || [];
+        for (const teamName of targetTeamNames) {
+          const team = teams.find(t => t.name === teamName);
+          if (team) {
+            groupsData.find(g => g.groupName === groupName)?.teams.push(team);
+            console.log(`✅ Assigned ${teamName} to Group ${groupName}`);
+          } else {
+            console.log(`⚠️  Team "${teamName}" not found in approved teams for Group ${groupName}`);
+          }
+        }
+      }
 
       // Save to database with new structure
       for (const group of groupsData) {
