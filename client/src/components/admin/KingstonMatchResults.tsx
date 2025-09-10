@@ -386,10 +386,10 @@ const KingstonMatchResults = () => {
                 </div>
               )}
 
-              {/* Stream URL */}
+              {/* Stream URL / Faceit Link */}
               <div className="space-y-2">
                 <Label htmlFor="stream-url" className="text-gray-200">
-                  Link Stream (opțional)
+                  Link Stream/Faceit (opțional)
                 </Label>
                 <Input
                   id="stream-url"
@@ -397,8 +397,11 @@ const KingstonMatchResults = () => {
                   value={streamUrl}
                   onChange={(e) => setStreamUrl(e.target.value)}
                   className="bg-gray-900 border-gray-600 text-gray-100"
-                  placeholder="https://twitch.tv/..."
+                  placeholder="https://www.faceit.com/... sau https://twitch.tv/..."
                 />
+                <p className="text-xs text-gray-500">
+                  Poți adăuga link către meciul Faceit sau stream-ul pentru vizualizare
+                </p>
               </div>
 
               <Button 
@@ -658,10 +661,10 @@ const KingstonMatchResults = () => {
                 </div>
               )}
 
-              {/* Stream URL */}
+              {/* Stream URL / Faceit Link */}
               <div className="space-y-2">
                 <Label htmlFor="edit-stream-url" className="text-gray-200">
-                  Link Stream (opțional)
+                  Link Stream/Faceit (opțional)
                 </Label>
                 <Input
                   id="edit-stream-url"
@@ -671,8 +674,11 @@ const KingstonMatchResults = () => {
                     setEditingMatch({ ...editingMatch, streamUrl: e.target.value })
                   }
                   className="bg-gray-900 border-gray-600 text-gray-100"
-                  placeholder="https://twitch.tv/..."
+                  placeholder="https://www.faceit.com/... sau https://twitch.tv/..."
                 />
+                <p className="text-xs text-gray-500">
+                  Poți adăuga link către meciul Faceit sau stream-ul pentru vizualizare
+                </p>
               </div>
 
               <div className="flex justify-end space-x-2">

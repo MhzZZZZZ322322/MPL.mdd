@@ -1588,6 +1588,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Administrative routes for Kingston FURY tournament management
   // ===========================
 
+  // Kingston FURY - Get Group Standings
+  app.get("/api/kingston/group-standings", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonGroupStandings } = await import("@shared/schema");
+      const { desc, asc } = await import("drizzle-orm");
+      
+      const standings = await db.select().from(kingstonGroupStandings)
+        .orderBy(
+          asc(kingstonGroupStandings.groupName),
+          desc(kingstonGroupStandings.points),
+          desc(kingstonGroupStandings.roundDifference),
+          desc(kingstonGroupStandings.roundsWon)
+        );
+      
+      res.json(standings);
+    } catch (error) {
+      console.error("Error fetching Kingston FURY group standings:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY group standings" });
+    }
+  });
+
   // Kingston FURY - Get Match Results
   app.get("/api/kingston/match-results", async (req, res) => {
     try {
@@ -1668,8 +1690,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           team2Score: team2Score || 0,
           streamUrl: streamUrl || null,
           technicalWin: technicalWin || false,
-          technicalWinner: technicalWinner || null,
-          lastUpdated: new Date()
+          technicalWinner: technicalWinner || null
         })
         .where(eq(kingstonMatchResults.id, parseInt(id)))
         .returning();
@@ -3487,8 +3508,7 @@ async function updateKingstonGroupStandings(
         roundsWon: current.roundsWon + team1Score,
         roundsLost: current.roundsLost + team2Score,
         roundDifference: (current.roundsWon + team1Score) - (current.roundsLost + team2Score),
-        points: current.points + team1Points,
-        lastUpdated: new Date()
+        points: current.points + team1Points
       })
       .where(eq(kingstonGroupStandings.id, current.id));
   } else {
@@ -3519,8 +3539,7 @@ async function updateKingstonGroupStandings(
         roundsWon: current.roundsWon + team2Score,
         roundsLost: current.roundsLost + team1Score,
         roundDifference: (current.roundsWon + team2Score) - (current.roundsLost + team1Score),
-        points: current.points + team2Points,
-        lastUpdated: new Date()
+        points: current.points + team2Points
       })
       .where(eq(kingstonGroupStandings.id, current.id));
   } else {
@@ -3614,8 +3633,7 @@ async function reverseKingstonMatchFromStandings(
         roundsWon: Math.max(0, current.roundsWon - team1Score),
         roundsLost: Math.max(0, current.roundsLost - team2Score),
         roundDifference: (current.roundsWon - team1Score) - (current.roundsLost - team2Score),
-        points: Math.max(0, current.points - team1Points),
-        lastUpdated: new Date()
+        points: Math.max(0, current.points - team1Points)
       })
       .where(eq(kingstonGroupStandings.id, current.id));
   }
@@ -3631,8 +3649,7 @@ async function reverseKingstonMatchFromStandings(
         roundsWon: Math.max(0, current.roundsWon - team2Score),
         roundsLost: Math.max(0, current.roundsLost - team1Score),
         roundDifference: (current.roundsWon - team2Score) - (current.roundsLost - team1Score),
-        points: Math.max(0, current.points - team2Points),
-        lastUpdated: new Date()
+        points: Math.max(0, current.points - team2Points)
       })
       .where(eq(kingstonGroupStandings.id, current.id));
   }

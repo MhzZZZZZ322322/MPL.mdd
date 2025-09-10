@@ -23,6 +23,24 @@ const KingstonTournamentGroups = () => {
     }
   });
 
+  const { data: standings = [] } = useQuery({
+    queryKey: ["/api/kingston/group-standings"],
+    queryFn: async () => {
+      const response = await fetch("/api/kingston/group-standings");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY group standings");
+      return response.json();
+    }
+  });
+
+  const { data: matchResults = [] } = useQuery({
+    queryKey: ["/api/kingston/match-results"],
+    queryFn: async () => {
+      const response = await fetch("/api/kingston/match-results");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY match results");
+      return response.json();
+    }
+  });
+
   if (groups.length === 0) {
     return (
       <div className="text-center py-8">
@@ -80,40 +98,121 @@ const KingstonTournamentGroups = () => {
                 <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gray-500 to-transparent mx-auto"></div>
               </div>
               
-              <div className="space-y-4">
-                {group.teams?.map((team: any, teamIndex: number) => (
-                  <div 
-                    key={team.id} 
-                    className="flex items-center space-x-4 p-4 bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-lg transition-all duration-200 hover:bg-gray-800/60 hover:border-gray-600/50 hover:shadow-md group/team"
-                  >
-                    <div className="relative">
-                      <img 
-                        src={team.logoUrl} 
-                        alt={`${team.name} logo`} 
-                        className="w-10 h-10 object-contain rounded-lg transition-transform duration-200 group-hover/team:scale-110" 
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = '/default-team-logo.png';
-                        }}
-                      />
-                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-lg opacity-0 group-hover/team:opacity-100 transition-opacity duration-200 -z-10"></div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <span className="text-gray-100 font-semibold text-lg group-hover/team:text-white transition-colors duration-200">
-                        {team.name}
-                      </span>
-                      <div className="flex items-center space-x-2 mt-1">
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span className="text-xs text-gray-500">Înregistrată</span>
-                      </div>
-                    </div>
-                    
-                    <div className="text-gray-400 font-mono text-sm opacity-60 group-hover/team:opacity-100 transition-opacity duration-200">
-                      #{teamIndex + 1}
-                    </div>
+              <div className="space-y-3">
+                {/* Clasament Header */}
+                <div className="bg-gray-800/50 rounded-lg p-3 border border-gray-600/30">
+                  <div className="grid grid-cols-6 gap-2 text-xs font-medium text-gray-400 uppercase tracking-wide">
+                    <div className="col-span-2">Echipa</div>
+                    <div className="text-center">M</div>
+                    <div className="text-center">V-Î</div>
+                    <div className="text-center">RD</div>
+                    <div className="text-center">Pct</div>
                   </div>
-                ))}
+                </div>
+                
+                {/* Clasament */}
+                {(() => {
+                  const groupStandings = standings
+                    .filter((s: any) => s.groupName === group.groupName)
+                    .sort((a: any, b: any) => {
+                      if (b.points !== a.points) return b.points - a.points;
+                      if (b.roundDifference !== a.roundDifference) return b.roundDifference - a.roundDifference;
+                      return b.roundsWon - a.roundsWon;
+                    });
+                  
+                  if (groupStandings.length === 0) {
+                    // Afișam echipele fără clasament dacă nu sunt meciuri încă
+                    return group.teams?.map((team: any, teamIndex: number) => (
+                      <div 
+                        key={team.id} 
+                        className="flex items-center space-x-4 p-3 bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-lg transition-all duration-200 hover:bg-gray-800/60 hover:border-gray-600/50"
+                      >
+                        <div className="relative">
+                          <img 
+                            src={team.logoUrl} 
+                            alt={`${team.name} logo`} 
+                            className="w-8 h-8 object-contain rounded-lg" 
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = '/default-team-logo.png';
+                            }}
+                          />
+                        </div>
+                        
+                        <div className="flex-1">
+                          <span className="text-gray-100 font-semibold text-sm">
+                            {team.name}
+                          </span>
+                          <div className="flex items-center space-x-2 mt-1">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span className="text-xs text-gray-500">Înregistrată</span>
+                          </div>
+                        </div>
+                        
+                        <div className="text-gray-400 font-mono text-sm opacity-60">
+                          #{teamIndex + 1}
+                        </div>
+                      </div>
+                    ));
+                  }
+                  
+                  return groupStandings.map((standing: any, index: number) => {
+                    const isQualified = index < 2; // Primele 2 se califică
+                    return (
+                      <div 
+                        key={standing.teamName} 
+                        className={`grid grid-cols-6 gap-2 p-3 rounded-lg border transition-all duration-200 hover:shadow-md ${
+                          isQualified 
+                            ? 'bg-green-900/20 border-green-500/30 hover:bg-green-800/30' 
+                            : 'bg-gray-900/40 border-gray-700/50 hover:bg-gray-800/60'
+                        }`}
+                      >
+                        <div className="col-span-2 flex items-center space-x-3">
+                          <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                            isQualified ? 'bg-green-500/20 text-green-400' : 'bg-gray-600/20 text-gray-400'
+                          }`}>
+                            {index + 1}
+                          </div>
+                          <div className="flex items-center space-x-2 min-w-0">
+                            <img 
+                              src={group.teams?.find((t: any) => t.name === standing.teamName)?.logoUrl || '/default-team-logo.png'} 
+                              alt={`${standing.teamName} logo`} 
+                              className="w-6 h-6 object-contain rounded flex-shrink-0" 
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = '/default-team-logo.png';
+                              }}
+                            />
+                            <span className="text-gray-100 font-medium text-sm truncate">
+                              {standing.teamName}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="text-center text-gray-300 text-sm">
+                          {standing.matchesPlayed}
+                        </div>
+                        
+                        <div className="text-center text-sm">
+                          <span className="text-green-400 font-medium">{standing.wins}</span>
+                          <span className="text-gray-500 mx-1">-</span>
+                          <span className="text-red-400 font-medium">{standing.losses}</span>
+                        </div>
+                        
+                        <div className={`text-center text-sm font-medium ${
+                          standing.roundDifference > 0 ? 'text-green-400' : 
+                          standing.roundDifference < 0 ? 'text-red-400' : 'text-gray-400'
+                        }`}>
+                          {standing.roundDifference > 0 ? '+' : ''}{standing.roundDifference}
+                        </div>
+                        
+                        <div className="text-center text-white font-bold text-sm">
+                          {standing.points}
+                        </div>
+                      </div>
+                    );
+                  });
+                })()}
               </div>
               
               {/* Footer decoration */}
@@ -123,8 +222,101 @@ const KingstonTournamentGroups = () => {
         })}
       </div>
       
+      {/* Match History Section */}
+      {matchResults.length > 0 && (
+        <div className="mt-12">
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+              Istoric Meciuri
+            </h3>
+            <p className="text-gray-400">Rezultatele recente din grupele turneului</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {['A', 'B', 'C', 'D'].map((groupName, index) => {
+              const groupMatches = matchResults.filter((match: any) => match.groupName === groupName);
+              
+              if (groupMatches.length === 0) return null;
+              
+              const headerColors = [
+                'text-purple-400',
+                'text-blue-400', 
+                'text-green-400',
+                'text-orange-400'
+              ];
+              
+              return (
+                <div key={groupName} className="bg-gray-900/40 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6">
+                  <h4 className={`text-lg font-bold ${headerColors[index]} mb-4 text-center`}>
+                    Grupa {groupName}
+                  </h4>
+                  
+                  <div className="space-y-3">
+                    {groupMatches.slice(0, 5).map((match: any) => {
+                      const team1Won = match.technicalWin 
+                        ? match.technicalWinner === match.team1Name
+                        : match.team1Score > match.team2Score;
+                      
+                      return (
+                        <div key={match.id} className="bg-gray-800/40 rounded-lg p-4 border border-gray-600/30">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center space-x-3">
+                              <span className={`font-medium ${team1Won ? 'text-green-400' : 'text-gray-300'}`}>
+                                {match.team1Name}
+                              </span>
+                              <span className="text-gray-500 text-sm">vs</span>
+                              <span className={`font-medium ${!team1Won ? 'text-green-400' : 'text-gray-300'}`}>
+                                {match.team2Name}
+                              </span>
+                            </div>
+                            
+                            <div className="flex items-center space-x-2">
+                              {match.technicalWin ? (
+                                <span className="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">
+                                  Tehnic: {match.technicalWinner}
+                                </span>
+                              ) : (
+                                <span className="font-mono text-lg">
+                                  {match.team1Score} - {match.team2Score}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span>{new Date(match.matchDate).toLocaleDateString('ro-RO')}</span>
+                            {match.streamUrl && (
+                              <a 
+                                href={match.streamUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-400 hover:text-blue-300 underline"
+                              >
+                                Vezi Meciul
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                    
+                    {groupMatches.length > 5 && (
+                      <div className="text-center">
+                        <span className="text-gray-500 text-sm">
+                          +{groupMatches.length - 5} meciuri mai multe
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Stats footer */}
-      <div className="text-center py-6 bg-gray-900/30 backdrop-blur-sm rounded-lg border border-gray-700/30">
+      <div className="text-center py-6 bg-gray-900/30 backdrop-blur-sm rounded-lg border border-gray-700/30 mt-8">
         <div className="flex justify-center space-x-8 text-sm">
           <div className="flex items-center space-x-2">
             <Trophy className="w-4 h-4 text-yellow-400" />
