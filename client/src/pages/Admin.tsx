@@ -195,6 +195,14 @@ const Admin = () => {
             href="/admin/tournament"
           />
           
+          {/* Kingston FURY Results Management */}
+          <AdminCard 
+            title="Kingston FURY Rezultate" 
+            description="Adaugă rezultate meciuri Kingston FURY Supercup" 
+            icon={Trophy} 
+            href="/admin/kingston-results"
+          />
+          
           {/* Blog Management */}
           <AdminCard 
             title="Blog & Știri" 

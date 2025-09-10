@@ -26,6 +26,7 @@ import SeoManager from "@/pages/SeoManager";
 import TournamentAdmin from "@/pages/TournamentAdminFixed";
 import AdminBlog from "@/pages/AdminBlog";
 import AdminProtectedRoute from "@/components/AdminProtectedRoute";
+import KingstonMatchResults from "@/components/admin/KingstonMatchResults";
 import { useState, useEffect } from "react";
 import BlogPage from "@/pages/BlogPage";
 import BlogArticlePage from "@/pages/BlogArticlePage";
@@ -55,6 +56,13 @@ function Router() {
       <Route path="/admin/tournament" component={() => (
         <AdminProtectedRoute>
           <TournamentAdmin />
+        </AdminProtectedRoute>
+      )} />
+      <Route path="/admin/kingston-results" component={() => (
+        <AdminProtectedRoute>
+          <div className="min-h-screen bg-gradient-to-br from-darkBg via-darkGray to-darkBg p-6">
+            <KingstonMatchResults />
+          </div>
         </AdminProtectedRoute>
       )} />
       <Route path="/blog" component={BlogPage} />

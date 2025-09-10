@@ -1588,6 +1588,86 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Administrative routes for Kingston FURY tournament management
   // ===========================
 
+  // Kingston FURY - Get Match Results
+  app.get("/api/kingston/match-results", async (req, res) => {
+    try {
+      const { db } = await import("./db");
+      const { kingstonMatchResults } = await import("@shared/schema");
+      const { desc } = await import("drizzle-orm");
+      
+      const matchResults = await db.select().from(kingstonMatchResults)
+        .orderBy(desc(kingstonMatchResults.createdAt));
+      
+      res.json(matchResults);
+    } catch (error) {
+      console.error("Error fetching Kingston FURY match results:", error);
+      res.status(500).json({ error: "Failed to fetch Kingston FURY match results" });
+    }
+  });
+
+  // Kingston FURY Admin - Add Match Result
+  app.post("/api/kingston/admin/add-match-result", async (req, res) => {
+    try {
+      const { team1Name, team2Name, team1Score, team2Score, groupName, streamUrl, technicalWin, technicalWinner } = req.body;
+
+      // Validate input
+      if (!team1Name || !team2Name || team1Name === team2Name) {
+        return res.status(400).json({ error: "Invalid team selection" });
+      }
+
+      if (!groupName || !['A', 'B', 'C', 'D'].includes(groupName)) {
+        return res.status(400).json({ error: "Invalid group name" });
+      }
+
+      // Validate scores only if not technical win
+      if (!technicalWin) {
+        if (team1Score < 0 || team2Score < 0) {
+          return res.status(400).json({ error: "Scores cannot be negative" });
+        }
+        
+        if (team1Score === team2Score) {
+          return res.status(400).json({ error: "În CS2 BO1 nu pot fi egaluri. O echipă trebuie să câștige" });
+        }
+      }
+
+      const { db } = await import("./db");
+      const { kingstonMatchResults, kingstonGroupStandings, kingstonGroupConfiguration } = await import("@shared/schema");
+      const { eq, and } = await import("drizzle-orm");
+
+      // Check if teams exist in the group configuration
+      const team1Config = await db.select().from(kingstonGroupConfiguration)
+        .where(and(eq(kingstonGroupConfiguration.teamName, team1Name), eq(kingstonGroupConfiguration.groupName, groupName)));
+      
+      const team2Config = await db.select().from(kingstonGroupConfiguration)
+        .where(and(eq(kingstonGroupConfiguration.teamName, team2Name), eq(kingstonGroupConfiguration.groupName, groupName)));
+
+      if (!team1Config.length || !team2Config.length) {
+        return res.status(404).json({ error: "One or both teams not found in the specified group" });
+      }
+
+      // Insert match result
+      const matchResult = await db.insert(kingstonMatchResults).values({
+        groupName,
+        team1Name,
+        team2Name,
+        team1Score: team1Score || 0,
+        team2Score: team2Score || 0,
+        streamUrl: streamUrl || null,
+        technicalWin: technicalWin || false,
+        technicalWinner: technicalWinner || null,
+        tournamentId: "kingston-hyperx-supercup"
+      }).returning();
+
+      // Update standings for both teams
+      await updateKingstonGroupStandings(groupName, team1Name, team2Name, team1Score || 0, team2Score || 0, technicalWin, technicalWinner);
+
+      res.json({ success: true, matchResult: matchResult[0] });
+    } catch (error) {
+      console.error("Error adding Kingston FURY match result:", error);
+      res.status(500).json({ error: "Failed to add Kingston FURY match result" });
+    }
+  });
+
   // Kingston FURY Admin: Get Group Configuration
   app.get("/api/kingston/admin/group-config", async (req, res) => {
     try {
@@ -3247,4 +3327,131 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
 
   return httpServer;
+}
+
+// Helper function to update Kingston FURY group standings
+async function updateKingstonGroupStandings(
+  groupName: string, 
+  team1Name: string, 
+  team2Name: string, 
+  team1Score: number, 
+  team2Score: number, 
+  technicalWin: boolean = false, 
+  technicalWinner: string | null = null
+) {
+  const { db } = await import("./db");
+  const { kingstonGroupStandings } = await import("@shared/schema");
+  const { eq, and } = await import("drizzle-orm");
+  
+  // Find existing standings for both teams
+  const team1Standing = await db.select().from(kingstonGroupStandings)
+    .where(and(eq(kingstonGroupStandings.teamName, team1Name), eq(kingstonGroupStandings.groupName, groupName)));
+  
+  const team2Standing = await db.select().from(kingstonGroupStandings)
+    .where(and(eq(kingstonGroupStandings.teamName, team2Name), eq(kingstonGroupStandings.groupName, groupName)));
+  
+  // Determine winner
+  let team1Won = false;
+  let team2Won = false;
+  
+  if (technicalWin && technicalWinner) {
+    team1Won = (technicalWinner === team1Name);
+    team2Won = (technicalWinner === team2Name);
+  } else {
+    team1Won = (team1Score > team2Score);
+    team2Won = (team2Score > team1Score);
+  }
+  
+  // Points system: 3 points for win, 0 for loss
+  const team1Points = team1Won ? 3 : 0;
+  const team2Points = team2Won ? 3 : 0;
+  
+  // Update or create team1 standings
+  if (team1Standing.length > 0) {
+    const current = team1Standing[0];
+    await db.update(kingstonGroupStandings)
+      .set({
+        matchesPlayed: current.matchesPlayed + 1,
+        wins: current.wins + (team1Won ? 1 : 0),
+        losses: current.losses + (team1Won ? 0 : 1),
+        roundsWon: current.roundsWon + team1Score,
+        roundsLost: current.roundsLost + team2Score,
+        roundDifference: (current.roundsWon + team1Score) - (current.roundsLost + team2Score),
+        points: current.points + team1Points,
+        lastUpdated: new Date()
+      })
+      .where(eq(kingstonGroupStandings.id, current.id));
+  } else {
+    // Create new standing for team1
+    await db.insert(kingstonGroupStandings).values({
+      teamName: team1Name,
+      groupName: groupName,
+      matchesPlayed: 1,
+      wins: team1Won ? 1 : 0,
+      losses: team1Won ? 0 : 1,
+      roundsWon: team1Score,
+      roundsLost: team2Score,
+      roundDifference: team1Score - team2Score,
+      points: team1Points,
+      position: 1,
+      tournamentId: "kingston-hyperx-supercup"
+    });
+  }
+  
+  // Update or create team2 standings
+  if (team2Standing.length > 0) {
+    const current = team2Standing[0];
+    await db.update(kingstonGroupStandings)
+      .set({
+        matchesPlayed: current.matchesPlayed + 1,
+        wins: current.wins + (team2Won ? 1 : 0),
+        losses: current.losses + (team2Won ? 0 : 1),
+        roundsWon: current.roundsWon + team2Score,
+        roundsLost: current.roundsLost + team1Score,
+        roundDifference: (current.roundsWon + team2Score) - (current.roundsLost + team1Score),
+        points: current.points + team2Points,
+        lastUpdated: new Date()
+      })
+      .where(eq(kingstonGroupStandings.id, current.id));
+  } else {
+    // Create new standing for team2
+    await db.insert(kingstonGroupStandings).values({
+      teamName: team2Name,
+      groupName: groupName,
+      matchesPlayed: 1,
+      wins: team2Won ? 1 : 0,
+      losses: team2Won ? 0 : 1,
+      roundsWon: team2Score,
+      roundsLost: team1Score,
+      roundDifference: team2Score - team1Score,
+      points: team2Points,
+      position: 1,
+      tournamentId: "kingston-hyperx-supercup"
+    });
+  }
+  
+  // Recalculate positions for the group
+  await recalculateKingstonGroupPositions(groupName);
+}
+
+// Helper function to recalculate group positions
+async function recalculateKingstonGroupPositions(groupName: string) {
+  const { db } = await import("./db");
+  const { kingstonGroupStandings } = await import("@shared/schema");
+  const { eq, desc } = await import("drizzle-orm");
+  
+  const standings = await db.select().from(kingstonGroupStandings)
+    .where(eq(kingstonGroupStandings.groupName, groupName))
+    .orderBy(
+      desc(kingstonGroupStandings.points),
+      desc(kingstonGroupStandings.roundDifference),
+      desc(kingstonGroupStandings.roundsWon)
+    );
+  
+  // Update positions
+  for (let i = 0; i < standings.length; i++) {
+    await db.update(kingstonGroupStandings)
+      .set({ position: i + 1 })
+      .where(eq(kingstonGroupStandings.id, standings[i].id));
+  }
 }
