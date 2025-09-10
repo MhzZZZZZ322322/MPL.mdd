@@ -73,10 +73,7 @@ const KingstonMatchResults = () => {
   // Add match result mutation
   const addMatchResultMutation = useMutation({
     mutationFn: async (data: any) => {
-      return await apiRequest("/api/kingston/admin/add-match-result", {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
+      return await apiRequest("POST", "/api/kingston/admin/add-match-result", data);
     },
     onSuccess: () => {
       toast({
