@@ -9,7 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Trophy, Plus, Calendar, Users, Target } from "lucide-react";
+import { Trophy, Plus, Calendar, Users, Target, Edit, Trash2, X } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 interface MatchResult {
   id: number;
@@ -49,6 +51,10 @@ const KingstonMatchResults = () => {
   const [streamUrl, setStreamUrl] = useState("");
   const [technicalWin, setTechnicalWin] = useState(false);
   const [technicalWinner, setTechnicalWinner] = useState("");
+  
+  // Edit form state
+  const [editingMatch, setEditingMatch] = useState<MatchResult | null>(null);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
 
   // Fetch tournament groups
   const { data: groups = [] } = useQuery<TournamentGroup[]>({
@@ -97,6 +103,54 @@ const KingstonMatchResults = () => {
       toast({
         title: "Eroare",
         description: error.message || "Nu s-a putut adăuga rezultatul meciului",
+        variant: "destructive",
+      });
+    }
+  });
+
+  // Update match result mutation
+  const updateMatchResultMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: number; data: any }) => {
+      return await apiRequest("PUT", `/api/kingston/admin/update-match-result/${id}`, data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Succes",
+        description: "Rezultatul meciului a fost actualizat cu succes!",
+      });
+      setEditingMatch(null);
+      setEditDialogOpen(false);
+      // Refresh data
+      queryClient.invalidateQueries({ queryKey: ["/api/kingston/match-results"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/kingston/group-standings"] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Eroare",
+        description: error.message || "Nu s-a putut actualiza rezultatul meciului",
+        variant: "destructive",
+      });
+    }
+  });
+
+  // Delete match result mutation
+  const deleteMatchResultMutation = useMutation({
+    mutationFn: async (id: number) => {
+      return await apiRequest("DELETE", `/api/kingston/admin/delete-match-result/${id}`);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Succes",
+        description: "Rezultatul meciului a fost șters cu succes!",
+      });
+      // Refresh data
+      queryClient.invalidateQueries({ queryKey: ["/api/kingston/match-results"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/kingston/group-standings"] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Eroare",
+        description: error.message || "Nu s-a putut șterge rezultatul meciului",
         variant: "destructive",
       });
     }
@@ -158,6 +212,32 @@ const KingstonMatchResults = () => {
     };
 
     addMatchResultMutation.mutate(matchData);
+  };
+
+  const handleEdit = (match: MatchResult) => {
+    setEditingMatch(match);
+    setEditDialogOpen(true);
+  };
+
+  const handleEditSubmit = () => {
+    if (!editingMatch) return;
+
+    const editData = {
+      groupName: editingMatch.groupName,
+      team1Name: editingMatch.team1Name,
+      team2Name: editingMatch.team2Name,
+      team1Score: editingMatch.technicalWin ? 0 : editingMatch.team1Score,
+      team2Score: editingMatch.technicalWin ? 0 : editingMatch.team2Score,
+      streamUrl: editingMatch.streamUrl || null,
+      technicalWin: editingMatch.technicalWin,
+      technicalWinner: editingMatch.technicalWin ? editingMatch.technicalWinner : null
+    };
+
+    updateMatchResultMutation.mutate({ id: editingMatch.id, data: editData });
+  };
+
+  const handleDelete = (id: number) => {
+    deleteMatchResultMutation.mutate(id);
   };
 
   const selectedGroupData = groups.find(g => g.groupName === selectedGroup);
@@ -372,16 +452,63 @@ const KingstonMatchResults = () => {
                         </span>
                       </div>
                       
-                      <div className="text-right">
-                        {match.technicalWin ? (
-                          <Badge variant="secondary" className="text-xs">
-                            Tehnic: {match.technicalWinner}
-                          </Badge>
-                        ) : (
-                          <span className="font-mono text-lg">
-                            {match.team1Score} - {match.team2Score}
-                          </span>
-                        )}
+                      <div className="flex items-center space-x-3">
+                        <div className="text-right">
+                          {match.technicalWin ? (
+                            <Badge variant="secondary" className="text-xs">
+                              Tehnic: {match.technicalWinner}
+                            </Badge>
+                          ) : (
+                            <span className="font-mono text-lg">
+                              {match.team1Score} - {match.team2Score}
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="flex items-center space-x-1">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleEdit(match)}
+                            className="h-6 w-6 p-0 text-blue-400 hover:text-blue-300"
+                          >
+                            <Edit className="h-3 w-3" />
+                          </Button>
+                          
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-6 w-6 p-0 text-red-400 hover:text-red-300"
+                              >
+                                <Trash2 className="h-3 w-3" />
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent className="bg-gray-800 border-gray-700">
+                              <AlertDialogHeader>
+                                <AlertDialogTitle className="text-gray-100">
+                                  Confirmare ștergere
+                                </AlertDialogTitle>
+                                <AlertDialogDescription className="text-gray-400">
+                                  Ești sigur că vrei să ștergi rezultatul meciului {match.team1Name} vs {match.team2Name}? 
+                                  Această acțiune va actualiza clasamentele și nu poate fi anulată.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel className="bg-gray-700 text-gray-300 border-gray-600">
+                                  Anulează
+                                </AlertDialogCancel>
+                                <AlertDialogAction 
+                                  onClick={() => handleDelete(match.id)}
+                                  className="bg-red-600 hover:bg-red-700"
+                                >
+                                  Șterge
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -432,6 +559,142 @@ const KingstonMatchResults = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Edit Match Dialog */}
+      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+        <DialogContent className="bg-gray-800 border-gray-700 text-gray-100">
+          <DialogHeader>
+            <DialogTitle className="flex items-center space-x-2">
+              <Edit className="h-5 w-5" />
+              <span>Editează Rezultat Meci</span>
+            </DialogTitle>
+            <DialogDescription className="text-gray-400">
+              Modifică rezultatul meciului {editingMatch?.team1Name} vs {editingMatch?.team2Name}
+            </DialogDescription>
+          </DialogHeader>
+
+          {editingMatch && (
+            <div className="space-y-4">
+              {/* Technical Win Toggle */}
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="edit-technical-win"
+                  checked={editingMatch.technicalWin}
+                  onCheckedChange={(checked) => 
+                    setEditingMatch({ ...editingMatch, technicalWin: checked })
+                  }
+                />
+                <Label htmlFor="edit-technical-win" className="text-gray-200">
+                  Câștig tehnic
+                </Label>
+              </div>
+
+              {editingMatch.technicalWin ? (
+                /* Technical Winner Selection */
+                <div className="space-y-2">
+                  <Label htmlFor="edit-technical-winner" className="text-gray-200">
+                    Câștigătorul tehnic *
+                  </Label>
+                  <Select 
+                    value={editingMatch.technicalWinner || ""} 
+                    onValueChange={(value) => 
+                      setEditingMatch({ ...editingMatch, technicalWinner: value })
+                    }
+                  >
+                    <SelectTrigger className="bg-gray-900 border-gray-600 text-gray-100">
+                      <SelectValue placeholder="Selectează câștigătorul" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-gray-800 border-gray-600">
+                      <SelectItem value={editingMatch.team1Name} className="text-gray-100">
+                        {editingMatch.team1Name}
+                      </SelectItem>
+                      <SelectItem value={editingMatch.team2Name} className="text-gray-100">
+                        {editingMatch.team2Name}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              ) : (
+                /* Score Inputs */
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="edit-team1-score" className="text-gray-200">
+                      Scor {editingMatch.team1Name} *
+                    </Label>
+                    <Input
+                      id="edit-team1-score"
+                      type="number"
+                      min="0"
+                      max="30"
+                      value={editingMatch.team1Score}
+                      onChange={(e) => 
+                        setEditingMatch({ 
+                          ...editingMatch, 
+                          team1Score: parseInt(e.target.value) || 0 
+                        })
+                      }
+                      className="bg-gray-900 border-gray-600 text-gray-100"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="edit-team2-score" className="text-gray-200">
+                      Scor {editingMatch.team2Name} *
+                    </Label>
+                    <Input
+                      id="edit-team2-score"
+                      type="number"
+                      min="0"
+                      max="30"
+                      value={editingMatch.team2Score}
+                      onChange={(e) => 
+                        setEditingMatch({ 
+                          ...editingMatch, 
+                          team2Score: parseInt(e.target.value) || 0 
+                        })
+                      }
+                      className="bg-gray-900 border-gray-600 text-gray-100"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Stream URL */}
+              <div className="space-y-2">
+                <Label htmlFor="edit-stream-url" className="text-gray-200">
+                  Link Stream (opțional)
+                </Label>
+                <Input
+                  id="edit-stream-url"
+                  type="url"
+                  value={editingMatch.streamUrl || ""}
+                  onChange={(e) => 
+                    setEditingMatch({ ...editingMatch, streamUrl: e.target.value })
+                  }
+                  className="bg-gray-900 border-gray-600 text-gray-100"
+                  placeholder="https://twitch.tv/..."
+                />
+              </div>
+
+              <div className="flex justify-end space-x-2">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setEditDialogOpen(false)}
+                  className="border-gray-600 text-gray-300 hover:bg-gray-700"
+                >
+                  Anulează
+                </Button>
+                <Button 
+                  onClick={handleEditSubmit}
+                  disabled={updateMatchResultMutation.isPending}
+                  className="bg-blue-600 hover:bg-blue-700"
+                >
+                  {updateMatchResultMutation.isPending ? "Se salvează..." : "Salvează"}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

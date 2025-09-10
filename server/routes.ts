@@ -1605,6 +1605,116 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Kingston FURY Admin - Update Match Result
+  app.put("/api/kingston/admin/update-match-result/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { team1Name, team2Name, team1Score, team2Score, groupName, streamUrl, technicalWin, technicalWinner } = req.body;
+
+      // Validate input
+      if (!team1Name || !team2Name || team1Name === team2Name) {
+        return res.status(400).json({ error: "Invalid team selection" });
+      }
+
+      if (!groupName || !['A', 'B', 'C', 'D'].includes(groupName)) {
+        return res.status(400).json({ error: "Invalid group name" });
+      }
+
+      // Validate scores only if not technical win
+      if (!technicalWin) {
+        if (team1Score < 0 || team2Score < 0) {
+          return res.status(400).json({ error: "Scores cannot be negative" });
+        }
+        
+        if (team1Score === team2Score) {
+          return res.status(400).json({ error: "În CS2 BO1 nu pot fi egaluri. O echipă trebuie să câștige" });
+        }
+      }
+
+      const { db } = await import("./db");
+      const { kingstonMatchResults, kingstonGroupConfiguration } = await import("@shared/schema");
+      const { eq, and } = await import("drizzle-orm");
+
+      // Get old match result for standings reversal
+      const [oldMatch] = await db.select().from(kingstonMatchResults)
+        .where(eq(kingstonMatchResults.id, parseInt(id)));
+
+      if (!oldMatch) {
+        return res.status(404).json({ error: "Match not found" });
+      }
+
+      // Check if teams exist in the group configuration
+      const team1Config = await db.select().from(kingstonGroupConfiguration)
+        .where(and(eq(kingstonGroupConfiguration.teamName, team1Name), eq(kingstonGroupConfiguration.groupName, groupName)));
+      
+      const team2Config = await db.select().from(kingstonGroupConfiguration)
+        .where(and(eq(kingstonGroupConfiguration.teamName, team2Name), eq(kingstonGroupConfiguration.groupName, groupName)));
+
+      if (!team1Config.length || !team2Config.length) {
+        return res.status(404).json({ error: "One or both teams not found in the specified group" });
+      }
+
+      // Reverse old standings
+      await reverseKingstonMatchFromStandings(oldMatch.groupName, oldMatch.team1Name, oldMatch.team2Name, 
+        oldMatch.team1Score, oldMatch.team2Score, oldMatch.technicalWin, oldMatch.technicalWinner);
+
+      // Update match result
+      const [updatedMatch] = await db.update(kingstonMatchResults)
+        .set({
+          groupName,
+          team1Name,
+          team2Name,
+          team1Score: team1Score || 0,
+          team2Score: team2Score || 0,
+          streamUrl: streamUrl || null,
+          technicalWin: technicalWin || false,
+          technicalWinner: technicalWinner || null,
+          lastUpdated: new Date()
+        })
+        .where(eq(kingstonMatchResults.id, parseInt(id)))
+        .returning();
+
+      // Apply new standings
+      await updateKingstonGroupStandings(groupName, team1Name, team2Name, team1Score || 0, team2Score || 0, technicalWin, technicalWinner);
+
+      res.json({ success: true, matchResult: updatedMatch });
+    } catch (error) {
+      console.error("Error updating Kingston FURY match result:", error);
+      res.status(500).json({ error: "Failed to update Kingston FURY match result" });
+    }
+  });
+
+  // Kingston FURY Admin - Delete Match Result
+  app.delete("/api/kingston/admin/delete-match-result/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { db } = await import("./db");
+      const { kingstonMatchResults } = await import("@shared/schema");
+      const { eq } = await import("drizzle-orm");
+
+      // Get match result before deletion for standings reversal
+      const [matchToDelete] = await db.select().from(kingstonMatchResults)
+        .where(eq(kingstonMatchResults.id, parseInt(id)));
+
+      if (!matchToDelete) {
+        return res.status(404).json({ error: "Match not found" });
+      }
+
+      // Reverse standings
+      await reverseKingstonMatchFromStandings(matchToDelete.groupName, matchToDelete.team1Name, matchToDelete.team2Name, 
+        matchToDelete.team1Score, matchToDelete.team2Score, matchToDelete.technicalWin, matchToDelete.technicalWinner);
+
+      // Delete match result
+      await db.delete(kingstonMatchResults)
+        .where(eq(kingstonMatchResults.id, parseInt(id)));
+
+      res.json({ success: true, message: "Match result deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting Kingston FURY match result:", error);
+      res.status(500).json({ error: "Failed to delete Kingston FURY match result" });
+    }
+  });
+
   // Kingston FURY Admin - Add Match Result
   app.post("/api/kingston/admin/add-match-result", async (req, res) => {
     try {
@@ -3454,4 +3564,79 @@ async function recalculateKingstonGroupPositions(groupName: string) {
       .set({ position: i + 1 })
       .where(eq(kingstonGroupStandings.id, standings[i].id));
   }
+}
+
+// Helper function to reverse match result from standings
+async function reverseKingstonMatchFromStandings(
+  groupName: string, 
+  team1Name: string, 
+  team2Name: string, 
+  team1Score: number, 
+  team2Score: number, 
+  technicalWin: boolean = false, 
+  technicalWinner: string | null = null
+) {
+  const { db } = await import("./db");
+  const { kingstonGroupStandings } = await import("@shared/schema");
+  const { eq, and } = await import("drizzle-orm");
+  
+  // Find existing standings for both teams
+  const team1Standing = await db.select().from(kingstonGroupStandings)
+    .where(and(eq(kingstonGroupStandings.teamName, team1Name), eq(kingstonGroupStandings.groupName, groupName)));
+  
+  const team2Standing = await db.select().from(kingstonGroupStandings)
+    .where(and(eq(kingstonGroupStandings.teamName, team2Name), eq(kingstonGroupStandings.groupName, groupName)));
+  
+  // Determine winner (same logic as before)
+  let team1Won = false;
+  let team2Won = false;
+  
+  if (technicalWin && technicalWinner) {
+    team1Won = (technicalWinner === team1Name);
+    team2Won = (technicalWinner === team2Name);
+  } else {
+    team1Won = (team1Score > team2Score);
+    team2Won = (team2Score > team1Score);
+  }
+  
+  // Points system: 3 points for win, 0 for loss
+  const team1Points = team1Won ? 3 : 0;
+  const team2Points = team2Won ? 3 : 0;
+  
+  // Reverse team1 standings
+  if (team1Standing.length > 0) {
+    const current = team1Standing[0];
+    await db.update(kingstonGroupStandings)
+      .set({
+        matchesPlayed: Math.max(0, current.matchesPlayed - 1),
+        wins: Math.max(0, current.wins - (team1Won ? 1 : 0)),
+        losses: Math.max(0, current.losses - (team1Won ? 0 : 1)),
+        roundsWon: Math.max(0, current.roundsWon - team1Score),
+        roundsLost: Math.max(0, current.roundsLost - team2Score),
+        roundDifference: (current.roundsWon - team1Score) - (current.roundsLost - team2Score),
+        points: Math.max(0, current.points - team1Points),
+        lastUpdated: new Date()
+      })
+      .where(eq(kingstonGroupStandings.id, current.id));
+  }
+  
+  // Reverse team2 standings
+  if (team2Standing.length > 0) {
+    const current = team2Standing[0];
+    await db.update(kingstonGroupStandings)
+      .set({
+        matchesPlayed: Math.max(0, current.matchesPlayed - 1),
+        wins: Math.max(0, current.wins - (team2Won ? 1 : 0)),
+        losses: Math.max(0, current.losses - (team2Won ? 0 : 1)),
+        roundsWon: Math.max(0, current.roundsWon - team2Score),
+        roundsLost: Math.max(0, current.roundsLost - team1Score),
+        roundDifference: (current.roundsWon - team2Score) - (current.roundsLost - team1Score),
+        points: Math.max(0, current.points - team2Points),
+        lastUpdated: new Date()
+      })
+      .where(eq(kingstonGroupStandings.id, current.id));
+  }
+  
+  // Recalculate positions for the group
+  await recalculateKingstonGroupPositions(groupName);
 }
