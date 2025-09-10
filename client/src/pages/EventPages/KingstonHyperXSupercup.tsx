@@ -68,7 +68,7 @@ const KingstonStage2DoubleElim = () => {
         <Trophy className="mx-auto h-16 w-16 text-gray-400 mb-4" />
         <h3 className="text-xl font-semibold text-gray-300 mb-2">Double Elimination va începe în curând</h3>
         <p className="text-gray-400">
-          16 echipe calificate din Stage 1 vor concura în format Double Elimination (Upper/Lower Bracket).
+          18 echipe (10 cu invite direct + 8 calificate din grupe) vor concura în format Double Elimination (Upper/Lower Bracket).
         </p>
       </div>
     );
@@ -630,8 +630,8 @@ const KingstonHyperXSupercup = () => {
                         <h4 className="text-primary font-bold mb-2">🔄 Detalii Format</h4>
                         <p className="text-sm leading-relaxed">
                           <strong>ETAPA 1 - GRUPE:</strong> 11-14 septembrie - 4 Grupe (A, B, C, D) cu 4 echipe<br />
-                          <strong>ETAPA 2 - PLAYOFF:</strong> 20-28 septembrie - Double Elimination cu 8 echipe<br />
-                          <strong>Total echipe:</strong> 16 (6 cu invitație directă + 10 prin calificare)<br />
+                          <strong>ETAPA 2 - PLAYOFF:</strong> 20-28 septembrie - Double Elimination cu 18 echipe<br />
+                          <strong>Structură:</strong> 16 echipe în grupe, 10 cu invitație directă în playoff<br />
                           <strong>Format meciuri:</strong> ETAPA 1 - BO1, ETAPA 2 - BO3/BO5<br />
                           <strong>Calificare:</strong> Primele 2 echipe din fiecare grupă avansează în playoff
                         </p>
@@ -649,7 +649,7 @@ const KingstonHyperXSupercup = () => {
                   </h3>
                   <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
                     Înregistrează-ți echipa pentru Kingston FURY x HyperX Supercup Season 1. 
-                    16 echipe totale: 6 cu invitație directă + 10 prin calificare!
+                    ETAPA 1 - GRUPE: 16 echipe (4 grupe câte 4), ETAPA 2 - PLAYOFF: 18 echipe!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <Link href="/register-team">
@@ -665,7 +665,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: 6
+                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: 10
                       </p>
                     </div>
                   </div>
@@ -683,10 +683,10 @@ const KingstonHyperXSupercup = () => {
                 Echipe cu Invitație Directă
               </h2>
               <p className="text-gray-300 text-lg mb-2">
-                Următoarele 6 echipe sunt invitate direct în ETAPA 1 - GRUPE
+                Următoarele 10 echipe sunt invitate direct în ETAPA 2 - PLAYOFF
               </p>
               <p className="text-primary font-semibold">
-                Aceste echipe nu participă la calificările preliminare
+                Aceste echipe nu participă în ETAPA 1 - GRUPE
               </p>
             </div>
 
@@ -699,7 +699,11 @@ const KingstonHyperXSupercup = () => {
                     "darwin.md",
                     "Team 23",
                     "Golden Five",
-                    "Virtuoso Squad"
+                    "Virtuoso Squad",
+                    "Phoenix Gaming",
+                    "Elite Moldova",
+                    "Thunder Strike",
+                    "Pro Vision"
                   ].map((teamName, index) => (
                     <div key={index} className="flex items-center space-x-3 py-2">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
@@ -718,7 +722,7 @@ const KingstonHyperXSupercup = () => {
                 </div>
                 <p className="text-gray-300 leading-relaxed">
                   Aceste echipe au fost selectate pe baza performanțelor, stabilității și contribuției la dezvoltarea scenei competitive CS2 din Moldova. 
-                  Ele intră direct în etapa de grupe alături de cele 20 de echipe care se vor califica prin Stage 1.
+                  Ele intră direct în ETAPA 2 - PLAYOFF alături de cele 8 echipe care se vor califica din ETAPA 1 - GRUPE.
                 </p>
               </div>
             </div>
@@ -863,7 +867,7 @@ const KingstonHyperXSupercup = () => {
                         Echipe prin Calificare
                       </h3>
                       <p className="text-gray-300 text-sm">
-                        Aceste echipe vor participa la Stage 1 pentru calificare
+                        Aceste echipe vor participa la ETAPA 1 - GRUPE pentru calificare
                       </p>
                       <div className="inline-flex items-center mt-2 px-3 py-1 bg-green-500/20 border border-green-500/30 rounded-full">
                         <Target className="mr-2 h-4 w-4 text-green-400" />
@@ -1001,9 +1005,9 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🎯 Procesul de Calificare</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Perioada:</strong> 10 - 14 septembrie 2025<br />
-                          <strong>Format:</strong> Single Elimination Bracket<br />
-                          <strong>Locuri:</strong> 20 locuri disponibile pentru Stage 2<br />
+                          <strong>Perioada:</strong> 11 - 14 septembrie 2025<br />
+                          <strong>Format:</strong> 4 Grupe (A, B, C, D) câte 4 echipe<br />
+                          <strong>Calificare:</strong> 8 locuri în playoff (primele 2 din fiecare grupă)<br />
                           <strong>Meciuri:</strong> Best of 1 (BO1)<br />
                           <strong>Servere:</strong> FACEIT EU East
                         </p>
@@ -1011,17 +1015,17 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🎯 Echipe cu Invitație Directă</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>12 echipe invite direct în Stage 2:</strong><br />
+                          <strong>10 echipe invite direct în ETAPA 2 - PLAYOFF:</strong><br />
                           • Se înregistrează pe platformă ca toate echipele<br />
-                          • Nu participă la Stage 1 (Calificare)<br />
-                          • Sunt plasate direct în Stage 2 (Grupe)<br />
+                          • Nu participă în ETAPA 1 - GRUPE<br />
+                          • Sunt plasate direct în ETAPA 2 - PLAYOFF<br />
                           • Lista echipelor cu invite va fi anunțată separat
                         </p>
                       </div>
                       <div>
                         <h4 className="text-primary font-bold mb-2">📋 Eligibilitatea pentru Calificare</h4>
                         <p className="text-sm leading-relaxed">
-                          <strong>Echipe eligible pentru Stage 1:</strong> Toate echipele înregistrate (exceptând cele cu invitație directă)<br />
+                          <strong>Echipe eligible pentru ETAPA 1 - GRUPE:</strong> Toate echipele înregistrate (exceptând cele cu invitație directă)<br />
                           <strong>Criterii minime:</strong><br />
                           • Minimum 5 jucători activi în roster<br />
                           • Roster complet cu toate datele FACEIT<br />
@@ -1037,8 +1041,8 @@ const KingstonHyperXSupercup = () => {
                       <div>
                         <h4 className="text-primary font-bold mb-2">🏆 Avantajele Calificării</h4>
                         <p className="text-sm leading-relaxed">
-                          • Intrare în grupele de 32 echipe<br />
-                          • Șansa de a câștiga premii în valoare de 100,000 LEI<br />
+                          • Intrare în ETAPA 1 - GRUPE cu 16 echipe<br />
+                          • Șansa de a câștiga premii în valoare de $1,750 Total<br />
                           • Experiență competitivă contra echipelor de top<br />
                           • Transmisiune live pe canalele MPL<br />
                           • Statistici oficiale și recunoaștere în comunitate
@@ -1068,7 +1072,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Users className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Stage 2: 8 Grupe (4 echipe fiecare)</span>
+                    <span className="text-lg font-semibold text-white">ETAPA 1 - GRUPE: 4 Grupe (4 echipe fiecare)</span>
                   </div>
                   {isGroupsExpanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
@@ -1092,7 +1096,7 @@ const KingstonHyperXSupercup = () => {
                 >
                   <div className="flex items-center">
                     <Trophy className="mr-3 h-5 w-5 text-primary" />
-                    <span className="text-lg font-semibold text-white">Playoff: Double Elimination (16 echipe)</span>
+                    <span className="text-lg font-semibold text-white">ETAPA 2 - PLAYOFF: Double Elimination (18 echipe)</span>
                   </div>
                   {isStage2Expanded ? 
                     <ChevronUp className="h-5 w-5 text-primary" /> : 
