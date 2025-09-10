@@ -666,7 +666,7 @@ const KingstonHyperXSupercup = () => {
                         Deadline înregistrări: <span className="text-primary font-bold">10 septembrie 2025</span>
                       </p>
                       <p className="text-xs text-gray-500">
-                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: 10
+                        Echipe înregistrate: <span className="text-white font-bold">{qualificationTeams.length}</span> • Invitații directe: {directInviteTeams.length}
                       </p>
                     </div>
                   </div>
@@ -684,7 +684,7 @@ const KingstonHyperXSupercup = () => {
                 Echipe cu Invitație Directă
               </h2>
               <p className="text-gray-300 text-lg mb-2">
-                Următoarele 10 echipe sunt invitate direct în ETAPA 2 - PLAYOFF
+                Următoarele {directInviteTeams.length} echipe sunt invitate direct în ETAPA 2 - PLAYOFF
               </p>
               <p className="text-primary font-semibold">
                 Aceste echipe nu participă în ETAPA 1 - GRUPE
@@ -694,17 +694,10 @@ const KingstonHyperXSupercup = () => {
             <div className="max-w-3xl mx-auto">
               <div className="bg-gray-800/40 rounded-lg p-6 border border-purple-500/20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    "1HP",
-                    "BaitMD", 
-                    "darwin.md",
-                    "Team 23",
-                    "Golden Five",
-                    "Virtuoso Squad"
-                  ].map((teamName, index) => (
-                    <div key={index} className="flex items-center space-x-3 py-2">
+                  {directInviteTeams.map((team, index) => (
+                    <div key={team.id} className="flex items-center space-x-3 py-2">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                      <span className="text-white font-medium">{teamName}</span>
+                      <span className="text-white font-medium">{team.name}</span>
                     </div>
                   ))}
                 </div>
