@@ -232,17 +232,27 @@ export default function GroupManagement() {
     setGroups(updatedGroups);
   };
 
-  // Reset groups
+  // Reset groups - Kingston FURY: 4 grupe pentru 16 echipe
   const resetGroups = () => {
-    setGroups([
-      { groupName: 'A', displayName: 'Group A', teams: [] },
-      { groupName: 'B', displayName: 'Group B', teams: [] },
-      { groupName: 'C', displayName: 'Group C', teams: [] },
-      { groupName: 'D', displayName: 'Group D', teams: [] },
-      { groupName: 'E', displayName: 'Group E', teams: [] },
-      { groupName: 'F', displayName: 'Group F', teams: [] },
-      { groupName: 'G', displayName: 'Group G', teams: [] },
-    ]);
+    if (selectedTournament === 'kingston') {
+      setGroups([
+        { groupName: 'A', displayName: 'Grupa A', teams: [] },
+        { groupName: 'B', displayName: 'Grupa B', teams: [] },
+        { groupName: 'C', displayName: 'Grupa C', teams: [] },
+        { groupName: 'D', displayName: 'Grupa D', teams: [] },
+      ]);
+    } else {
+      // Pentru alte turnee (ex: HATOR)
+      setGroups([
+        { groupName: 'A', displayName: 'Group A', teams: [] },
+        { groupName: 'B', displayName: 'Group B', teams: [] },
+        { groupName: 'C', displayName: 'Group C', teams: [] },
+        { groupName: 'D', displayName: 'Group D', teams: [] },
+        { groupName: 'E', displayName: 'Group E', teams: [] },
+        { groupName: 'F', displayName: 'Group F', teams: [] },
+        { groupName: 'G', displayName: 'Group G', teams: [] },
+      ]);
+    }
   };
 
   const availableTeams = getAvailableTeams();
