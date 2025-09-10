@@ -1581,7 +1581,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             groupName: group.groupName,
             teamId: team.id,
             teamName: team.name,
-            displayName: `${group.groupName} - ${team.name}`
+            displayName: group.displayName // Folosește displayName-ul grupei, nu numele echipei
           });
         }
       }
