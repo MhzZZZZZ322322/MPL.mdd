@@ -14,22 +14,22 @@ import supercupRulesImage from "@assets/supercup season1 varianta 1_175508987710
 
 // Kingston FURY Tournament Components using dedicated API routes
 const KingstonTournamentGroups = () => {
-  const { data: standings = [] } = useQuery({
-    queryKey: ["/api/kingston/group-standings"],
+  const { data: groups = [] } = useQuery({
+    queryKey: ["/api/kingston/tournament-groups"],
     queryFn: async () => {
-      const response = await fetch("/api/kingston/group-standings");
-      if (!response.ok) throw new Error("Failed to fetch Kingston FURY group standings");
+      const response = await fetch("/api/kingston/tournament-groups");
+      if (!response.ok) throw new Error("Failed to fetch Kingston FURY tournament groups");
       return response.json();
     }
   });
 
-  if (standings.length === 0) {
+  if (groups.length === 0) {
     return (
       <div className="text-center py-8">
         <Users className="mx-auto h-16 w-16 text-gray-400 mb-4" />
         <h3 className="text-xl font-semibold text-gray-300 mb-2">Grupele vor fi disponibile în curând</h3>
         <p className="text-gray-400">
-          Organizarea în 8 grupe de câte 4 echipe va începe odată cu înregistrările.
+          Organizarea în 4 grupe de câte 4 echipe va începe odată cu înregistrările.
         </p>
       </div>
     );
@@ -37,8 +37,32 @@ const KingstonTournamentGroups = () => {
 
   return (
     <div className="space-y-6">
-      <p className="text-gray-300 text-center">Clasamentele grupelor Kingston FURY x HyperX Supercup</p>
-      {/* Group standings would be rendered here */}
+      <p className="text-gray-300 text-center mb-6">Structura grupelor Kingston FURY x HyperX Supercup</p>
+      <div className="grid md:grid-cols-2 gap-6">
+        {groups.map((group: any) => (
+          <div key={group.groupName} className="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+            <h3 className="text-xl font-bold text-purple-400 mb-4 text-center">
+              {group.displayName}
+            </h3>
+            <div className="space-y-3">
+              {group.teams?.map((team: any) => (
+                <div key={team.id} className="flex items-center space-x-3 p-3 bg-gray-900/50 rounded-lg">
+                  <img 
+                    src={team.logoUrl} 
+                    alt={`${team.name} logo`} 
+                    className="w-8 h-8 object-contain rounded" 
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/default-team-logo.png';
+                    }}
+                  />
+                  <span className="text-gray-200 font-medium">{team.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
