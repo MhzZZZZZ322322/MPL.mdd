@@ -227,7 +227,7 @@ const KingstonTournamentGroups = () => {
                   </h4>
                   
                   <div className="space-y-3">
-                    {groupMatches.slice(0, 5).map((match: any) => {
+                    {groupMatches.map((match: any) => {
                       const team1Won = match.technicalWin 
                         ? match.technicalWinner === match.team1Name
                         : match.team1Score > match.team2Score;
@@ -274,14 +274,6 @@ const KingstonTournamentGroups = () => {
                         </div>
                       );
                     })}
-                    
-                    {groupMatches.length > 5 && (
-                      <div className="text-center">
-                        <span className="text-gray-500 text-sm">
-                          +{groupMatches.length - 5} meciuri mai multe
-                        </span>
-                      </div>
-                    )}
                   </div>
                 </div>
               );
