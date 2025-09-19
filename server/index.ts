@@ -1,79 +1,41 @@
-import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
-import { startCsServerChecker } from "./cs-server-checker";
+// server/index.ts
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import apiRoutes from './routes.js';
 
 const app = express();
-// Mărește limita pentru corpul cererii pentru a permite imaginile mari în blog
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: false, limit: '50mb' }));
 
-// Serve static files from public directory
-app.use(express.static('public'));
+// --- MODIFICAREA CRITICĂ ---
+// Folosește portul din variabila de mediu (oferită de Cloud Run).
+// Dacă variabila nu există, folosește 8080 ca valoare implicită (pentru testare locală).
+const port = process.env.PORT || 8080;
 
-app.use((req, res, next) => {
-  const start = Date.now();
-  const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+// Obține calea corectă a directorului într-un modul ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
+// Procesul de build plasează frontend-ul în `dist/public`.
+// Construim calea relativ la locația scriptului care rulează.
+const publicPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicPath));
 
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
+// Rutele tale pentru API
+app.use('/api', apiRoutes);
 
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
-      }
-
-      log(logLine);
-    }
-  });
-
-  next();
+// Un endpoint pentru "health check", o practică bună pentru servicii ca Cloud Run
+app.get('/health', (req, res) => {
+  res.status(200).send('Server is healthy');
 });
 
-(async () => {
-  const server = await registerRoutes(app);
+// Pentru orice altă cerere, trimite fișierul principal `index.html`.
+// Acest lucru este esențial pentru aplicațiile de tip Single Page Application (SPA).
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+// Pornește serverul pe portul corect
+app.listen(port, () => {
+  console.log(`Server is running and listening on port ${port}`);
+});
 
-    res.status(status).json({ message });
-    throw err;
-  });
-
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
-
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 8080;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-    
-    // Pornește verificarea automată a stării reale a serverelor CS2
-    // Verifică la fiecare 1 minut pentru a nu suprasolicita serverele
-    startCsServerChecker(1);
-  });
-})();
