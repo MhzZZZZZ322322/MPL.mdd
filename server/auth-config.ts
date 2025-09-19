@@ -1,7 +1,7 @@
 // server/auth-config.ts
 
-// Definim tipurile pentru request, response și next pentru claritate
-// Poți instala @types/express (`npm install --save-dev @types/express`) pentru tipuri complete
+// Definim tipurile pentru request, response și next pentru claritate.
+// Poți instala @types/express (`npm install --save-dev @types/express`) pentru tipuri complete.
 interface Request {
   // Aici poți adăuga proprietăți specifice dacă este necesar
 }
